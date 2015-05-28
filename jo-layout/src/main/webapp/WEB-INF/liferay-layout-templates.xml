@@ -3,10 +3,15 @@
 
 <layout-templates>
 	<custom>
-		<layout-template id="jo-layout" name="jo-layout">
+		<layout-template id="jo-layout" name="Jo Layout">
 			<template-path>/jo-layout.tpl</template-path>
 			<wap-template-path>/jo-layout.wap.tpl</wap-template-path>
 			<thumbnail-path>/jo-layout.png</thumbnail-path>
+		</layout-template>
+		<layout-template id="geoplace-homepage" name="Jo homepage">
+			<template-path>/jo-homepage.tpl</template-path>
+			<wap-template-path>/jo-homepage.wap.tpl</wap-template-path>
+			<thumbnail-path>/jo-homepage.png</thumbnail-path>
 		</layout-template>
 	</custom>
 </layout-templates>

@@ -2,4 +2,14 @@
 <!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.2.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_2_0.dtd">
 
 <hook>
+	<portal-properties>portal.properties</portal-properties>
+	<language-properties>Language.properties</language-properties>
+    <custom-jsp-dir>/META-INF/custom_jsps/ROOT</custom-jsp-dir>
+<!-- 	<struts-action> -->
+<!-- 	    <struts-action-path>/asset_publisher/reorder</struts-action-path> -->
+<!-- 	    <struts-action-impl> -->
+<!-- 	    	com.geoplace.action.ReorderAction -->
+<!-- 	    </struts-action-impl> -->
+<!-- 	</struts-action> -->
+	
 </hook>
