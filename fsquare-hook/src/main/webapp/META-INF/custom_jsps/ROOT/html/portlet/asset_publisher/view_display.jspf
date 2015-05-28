@@ -23,8 +23,12 @@ if (!ArrayUtil.contains(PropsValues.ASSET_PUBLISHER_DISPLAY_STYLES, displayStyle
 <%
 }
 else {
+	if(displayStyle.equals("main-carousal-layout")) {
+		
+	}
 	for (String curDisplayStyle : PropsValues.ASSET_PUBLISHER_DISPLAY_STYLES) {
 		if (displayStyle.equals(curDisplayStyle)) {
+			//if(curDisplayStyle)
 			String displayStyleJsp = "/html/portlet/asset_publisher/display/" + TextFormatter.format(curDisplayStyle, TextFormatter.N) + ".jsp";
 %>
 
