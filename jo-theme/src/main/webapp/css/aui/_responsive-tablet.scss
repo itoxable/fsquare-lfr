@@ -1,0 +1,29 @@
+//
+// Responsive: Tablet to desktop
+// --------------------------------------------------
+
+@include respond-to(tablet){
+//@media (min-width: 1024px) and (max-width: 1279px) {
+
+  // Fixed grid
+  @include grid-core($gridColumnWidthTablet, $gridGutterWidthTablet);
+
+  // Fluid grid
+  @include grid-fluid($fluidGridColumnWidthTablet, $fluidGridGutterWidthTablet);
+  
+  // Fluid grid medium screen 'md'
+  @include grid-fluid-md($fluidGridColumnWidthTablet, $fluidGridGutterWidthTablet);
+
+  // Input grid
+  @include grid-input($gridColumnWidthTablet, $gridGutterWidthTablet);
+  
+  // No need to reset .thumbnails here since it's the same $gridGutterWidth
+  
+  // GRID & CONTAINERS
+  // -----------------
+  // Remove width from containers
+  .container {
+    width: auto;
+  }
+
+}

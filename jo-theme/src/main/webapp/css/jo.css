@@ -1,19 +1,70 @@
 @import url(slick/slick.css);
-
+@import url(slick/slick-theme.css);
+@import url(slick/jquery.cookiebar.css);
 .aui {
 	html{
-		paddind: 0;
+		padding: 0;
 		margin: 0;
 	}
 	body{
 		padding: 0;
 		margin: 0;
 		font-family: 'Roboto Condensed', sans-serif;
+		  background: url('../images/background.jpg');
+	}
+	form {
+	  	margin: 0;
+	}
+	.site-navigation {
+  		margin-bottom: 0;
 	}
 	#wrapper.container-fluid{
-			paddind: 0;
+		padding: 0;
+		margin: 0;
+	}
+	#navigation {
+		.navbar-inner {
+			padding: 0;
 			margin: 0;
+	  		background: none;
+	  		border-width: 0;
+	  		min-height: 36px;
+	  		li a {
+			  	color: #000;
+			  	font-size: 18px;
+			  	font-weight: 400;
+			}
+			.nav li.active>a {
+			 	 background: none;
+			}
 		}
 	}
-	#navigation {}
+	#breadcrumbs {
+  		margin-bottom: 0;
+	}
+	.portlet, .aui .portlet-borderless-container {
+  		margin-bottom: 0;
+	}
+	#main-content{
+
+	}
+	.container-fluid{
+		padding: 0;
+		margin: 0;
+	}
+	.portlet-column{
+
+	}
+	.portlet, .portlet-borderless-container {
+  		background: none;
+  	}
+	.yui3-dd-drop{
+		&.yui3-dd-drop-active-valid{
+			border: 1px dotted #ccc;
+		}
+		&.yui3-dd-drop-active-valid.yui3-dd-drop-over{
+			border: 1px dotted #000;
+		}
+	}
+	
 }

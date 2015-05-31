@@ -14,7 +14,12 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
 	
 	#js("$javascript_folder/vendor/jquery.js")
+	#js("$javascript_folder/vendor/jquery-ui.js")
 	#js("$javascript_folder/vendor/slick.js")
+	#js("$javascript_folder/vendor/isotope.pkgd.js")
+	
+	
+	
 </head>
 
 <body class="$css_class">
@@ -26,34 +31,46 @@ $theme.include($body_top_include)
 #dockbar()
 
 <div class="container-fluid" id="wrapper">
-	<header id="banner" role="banner">
-		<div id="heading">
-			<h1 class="site-title">
-				<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
-					<img alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" />
-
-					#if ($show_site_name)
-						<span class="site-name" title="#language_format ("go-to-x", [$site_name])">
-							$site_name
-						</span>
-					#end
-				</a>
-
-			</h1>
-
-			<h2 class="page-title">
-				<span>$the_title</span>
-			</h2>
+	
+	<div class="container">
+		<div class="row">
+			
+			<header id="banner" role="banner">
+				<div id="heading">
+					<h1 class="site-title">
+						<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
+							<img alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" />
+		
+							#if ($show_site_name)
+								<span class="site-name" title="#language_format ("go-to-x", [$site_name])">
+									$site_name
+								</span>
+							#end
+						</a>
+		
+					</h1>
+		
+					<h2 class="page-title">
+						<span>$the_title</span>
+					</h2>
+				</div>
+		
+				#if ($has_navigation || $is_signed_in)
+					#parse ("$full_templates_path/navigation.vm")
+				#end
+			</header>
+			
 		</div>
-
-		#if ($has_navigation || $is_signed_in)
-			#parse ("$full_templates_path/navigation.vm")
-		#end
-	</header>
-
+	</div>
+	
 	<div id="content">
-		<nav id="breadcrumbs">#breadcrumbs()</nav>
-
+		#if (false)
+		<div class="container">
+			<div class="row" style="border: 1px solid black">
+				<nav id="breadcrumbs">#breadcrumbs()</nav>
+			</div>
+		</div>
+		#end
 		#if ($selectable)
 			$theme.include($content_include)
 		#else
@@ -65,16 +82,27 @@ $theme.include($body_top_include)
 		#end
 	</div>
 
-	<footer id="footer" role="contentinfo">
-		<p class="powered-by">
-			#language ("powered-by") <a href="http://www.liferay.com" rel="external">Liferay</a>
-		</p>
-	</footer>
+	<div class="row-fluid">
+		<div class="container">
+			<div class="row">
+				<footer id="footer" role="contentinfo">
+				</footer>
+			</div>
+		</div>
+	</div>
+
+
+	
 </div>
+
+#js ("$javascript_folder/vendor/jquery.cookiebar.js")
 
 $theme.include($body_bottom_include)
 
 $theme.include($bottom_include)
+
+
+
 
 </body>
 

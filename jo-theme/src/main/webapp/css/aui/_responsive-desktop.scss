@@ -1,0 +1,28 @@
+//
+// Responsive: Large desktop and up
+// --------------------------------------------------
+
+@include respond-to(desktop){
+//@media (min-width: 1280px) {
+
+  // Fixed grid
+  @include grid-core($gridColumnWidthDesktop, $gridGutterWidthDesktop);
+
+  // Fluid grid
+  @include grid-fluid($fluidGridColumnWidthDesktop, $fluidGridGutterWidthDesktop);
+
+  // Input grid
+  @include grid-input($gridColumnWidthDesktop, $gridGutterWidthDesktop);
+
+  // Thumbnails
+  .thumbnails {
+    margin-left: -$gridGutterWidthDesktop;
+  }
+  .thumbnails > li {
+    margin-left: $gridGutterWidthDesktop;
+  }
+  .row-fluid .thumbnails {
+    margin-left: 0;
+  }
+
+}
