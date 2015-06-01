@@ -1,6 +1,6 @@
 @import url(slick/slick.css);
 @import url(slick/slick-theme.css);
-@import url(slick/jquery.cookiebar.css);
+@import url(jquery.cookiebar.css);
 .aui {
 	html{
 		padding: 0;
@@ -58,12 +58,22 @@
 	.portlet, .portlet-borderless-container {
   		background: none;
   	}
+  	.portlet-column-content.empty {
+  		padding: 0;
+	}
 	.yui3-dd-drop{
 		&.yui3-dd-drop-active-valid{
 			border: 1px dotted #ccc;
 		}
 		&.yui3-dd-drop-active-valid.yui3-dd-drop-over{
 			border: 1px dotted #000;
+		}
+	}
+	.free-layout-item{
+		background-color: #FFF;
+		margin-bottom: 30px;
+		.free-layout-item-wrapper{
+			margin: 3px;
 		}
 	}
 	

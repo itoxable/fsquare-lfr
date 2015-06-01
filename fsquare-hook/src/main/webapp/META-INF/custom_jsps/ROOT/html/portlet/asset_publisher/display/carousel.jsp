@@ -10,7 +10,8 @@
 <%@page import="com.liferay.portal.kernel.xml.Node" %>
 
 <%
-	List results = (List)request.getAttribute("view.jsp-results");
+
+List results = (List)request.getAttribute("view.jsp-results");
 
 int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 
@@ -50,7 +51,7 @@ try {
 			fieldContent = document
 					.selectSingleNode("//*/dynamic-element[@name='Text']/dynamic-content");
 			if (fieldContent != null) {
-				abstractText = fieldContent.getText();
+				text = fieldContent.getText();
 			}
 			
 						

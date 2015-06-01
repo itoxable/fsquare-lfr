@@ -17,6 +17,8 @@
 	#js("$javascript_folder/vendor/jquery-ui.js")
 	#js("$javascript_folder/vendor/slick.js")
 	#js("$javascript_folder/vendor/isotope.pkgd.js")
+	#js("$javascript_folder/vendor/fit-columns.js")
+	
 	
 	
 	

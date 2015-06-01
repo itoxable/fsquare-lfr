@@ -25,6 +25,7 @@ String title = (String)request.getAttribute("view.jsp-title");
 String text = "";
 String imagePath = "";
 String secondSection = "";
+
 if (Validator.isNull(title)) {
 	title = assetRenderer.getTitle(locale);
 }
@@ -47,13 +48,11 @@ try {
 				imagePath = fieldContent.getText();
 			}
 			
-			fieldContent = document
-					.selectSingleNode("//*/dynamic-element[@name='Text']/dynamic-content");
+			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Text']/dynamic-content");
 			if (fieldContent != null) {
-				abstractText = fieldContent.getText();
+				text = fieldContent.getText();
 			}
-			
-						
+				
 		}
 
 	} catch (PortalException e2) {
@@ -67,10 +66,12 @@ try {
 
 
 
-<div class="free-layout-item">
-    <img src="<%=imagePath %>" />
-	<c:if test='<%= text != null && !text.equals("") %>'>
-        <div class="free-layout-item-caption"><%=text %></div>
-    </c:if>
+<div class="free-layout-item span4">
+	<div class="free-layout-item-wrapper">
+	    <img src="<%=imagePath %>" />
+		<c:if test='<%= text != null && !text.equals("") %>'>
+	        <div class="free-layout-item-caption"><%=text %></div>
+	    </c:if>
+    </div>
 </div>
 
