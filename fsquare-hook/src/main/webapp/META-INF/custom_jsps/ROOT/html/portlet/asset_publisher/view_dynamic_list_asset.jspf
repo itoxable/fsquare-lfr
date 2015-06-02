@@ -19,7 +19,8 @@
 long elementId = System.currentTimeMillis();
 if(displayStyle.equals("carousel")) {
 %>
-		<div class="carousel carousel-<%=elementId %>" >
+		<div class="image-carousel image-carousel-<%=elementId %>" >
+		
 <% } else if(displayStyle.equals("free_layout")) {%>
 	
 	<div class="free-layout free-layout-<%=elementId %>">
@@ -88,7 +89,7 @@ if(displayStyle.equals("carousel")) {
 %>
 	</div>
 	<script type="text/javascript" charset="utf-8">
-	    jQuery('.carousel-<%=elementId%>').slick(<%=carouselSettings%>);
+	    jQuery('.image-carousel-<%=elementId%>').slick(<%=carouselSettings%>);
 	</script>
 <% } else if(displayStyle.equals("free_layout")) {%>
 	

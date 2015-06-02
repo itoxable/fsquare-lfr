@@ -35,26 +35,20 @@
 		/>
 	</div>
 	
-	<div class="show-free-layout-settings <%= (!displayStyle.equals("free-layout") ? "hide" : StringPool.BLANK) %>" id="<portlet:namespace />freeLayoutSettings">
 
-			<%
-			JSONObject freeLayoutSettingsJSONObject = JSONFactoryUtil.createJSONObject(freeLayoutSettings);
-			%>
+	<%
+	JSONObject freeLayoutSettingsJSONObject = JSONFactoryUtil.createJSONObject(freeLayoutSettings);
+	%>
+	<aui:input cssClass="configuration-text free-layout-settings hidden-field" style="width: 500px; height: 200px;"
+	helpMessage="free-layout-settings-help" id="<portlet:namespace />freeLayoutSettings"
+	name="preferences--freeLayoutSettings--" type="textarea" value="<%= freeLayoutSettingsJSONObject.toString(4) %>" />
 
-			<aui:input cssClass="configuration-text" 
-			helpMessage="show-free-layout-settings-help" 
-			name="preferences--freeLayoutSettings--" type="textarea" value="<%= freeLayoutSettingsJSONObject.toString(4) %>" />
-	</div>
-	
-	<div class="show-carousel-settings <%= (!displayStyle.equals("carousel") ? "hide" : StringPool.BLANK) %>" id="<portlet:namespace />carouselSettings">
-
-			<%
-			JSONObject carouselSettingsJSONObject = JSONFactoryUtil.createJSONObject(carouselSettings);
-			%>
-			<aui:input cssClass="configuration-text" 
-			helpMessage="show-carousel-settings-help" 
-			name="preferences--carouselSettings--" type="textarea" value="<%= carouselSettingsJSONObject.toString(4) %>" />
-	</div>
+	<%
+	JSONObject carouselSettingsJSONObject = JSONFactoryUtil.createJSONObject(carouselSettings);
+	%>
+	<aui:input cssClass="configuration-text carousel-settings hidden-field" style="width: 500px; height: 200px;"
+	helpMessage="carousel-settings-help" id="<portlet:namespace />carouselSettings"
+	name="preferences--carouselSettings--" type="textarea" value="<%= carouselSettingsJSONObject.toString(4) %>" />
 
 	<aui:select cssClass="hidden-field abstract-length" helpMessage="abstract-length-key-help" name="preferences--abstractLength--">
 		<aui:option label="100" selected="<%= abstractLength == 100 %>" />
@@ -236,21 +230,14 @@
 
 		if (selectDisplayStyle) {
 			var displayStyle = selectDisplayStyle.val();
+			
 			if (displayStyle == 'carousel') {
-				var carouselSettings = A.one('.show-carousel-settings');
-				carouselSettings.show();
-				
-				A.one('.show-asset-title').get('parentNode').hide();
-				A.one('.show-context-link').get('parentNode').hide();
-				A.one('.show-asset-title').get('parentNode').hide();
-				A.one('.show-asset-title').get('parentNode').hide();
-				A.one('.show-asset-title').get('parentNode').hide();
-				A.one('.show-asset-title').get('parentNode').hide();
-				
-			}else (displayStyle == 'free-layout') {
-				var freeLayoutSettings = A.one('.show-free-layout-settings');
-				freeLayoutSettings.show();
-				
+				var carouselSettings = A.one('.carousel-settings');
+				carouselSettings.get('parentNode').show();
+			
+			}else if(displayStyle == 'free-layout') {
+				var freeLayoutSettings = A.one('.free-layout-settings');
+				freeLayoutSettings.get('parentNode').show();
 				
 			}else if (displayStyle == 'full-content') {
 				var showAssetTitle = A.one('.show-asset-title');

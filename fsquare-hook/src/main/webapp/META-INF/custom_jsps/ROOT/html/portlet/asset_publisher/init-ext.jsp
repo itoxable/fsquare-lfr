@@ -15,12 +15,8 @@
 --%>
 <%
 
-String carouselSettings = GetterUtil.getString(portletPreferences.getValue("assetLinkBehavior", "carouselSettings"));
-if(carouselSettings == null && !carouselSettings.equals("")){
-	carouselSettings = "{autoplay: true,autoplaySpeed: 5000,dots: true,mobileFirst: true}";
-}
-String freeLayoutSettings = GetterUtil.getString(portletPreferences.getValue("assetLinkBehavior", "freeLayoutSettings"));
-if(freeLayoutSettings == null && !freeLayoutSettings.equals("")){
-	freeLayoutSettings = "{itemSelector: '.free-layout-item', masonry: {isFitWidth: true}}";
-}
+String carouselSettings = GetterUtil.getString(portletPreferences.getValue("carouselSettings", "{autoplay: true,autoplaySpeed: 5000,dots: true,mobileFirst: true}"));
+String freeLayoutSettings = GetterUtil.getString(portletPreferences.getValue("freeLayoutSettings", "{itemSelector: '.free-layout-item', masonry: {isFitWidth: true}}"));
+
+
 %>

@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.kernel.portlet.WindowStateFactory"%>
 <%@page import="com.liferay.portal.kernel.util.HtmlUtil"%>
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="com.liferay.portlet.asset.model.AssetRenderer"%>
@@ -34,19 +35,19 @@ if (Validator.isNull(title)) {
 }
 
 String editTitle = null;
-if(assetRenderer.hasEditPermission(themeDisplay..getPermissionChecker())){
+/*if(assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker())){
 	PortletURL portletURL = renderResponse.createRenderURL();
 	portletURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
-	portletURL.setWindowState("pop_up");
+	portletURL.setWindowState(LiferayWindowState.POP_UP);
 	//redirect = portletURL.toString();
-	PortletURL editPortletURL = assetRenderer.getURLEdit(renderRequest, renderResponse, windowStateFactory.getWindowState("pop_up"), redirectURL);
-	if (Validator.isNotNull(document)) {
+	PortletURL editPortletURL = assetRenderer.getURLEdit(renderRequest, renderResponse, WindowStateFactory.getWindowState("pop_up"), portletURL);
+	if (Validator.isNotNull(editPortletURL)) {
 		editTitle = LanguageUtil.format(locale, "edit-x", title);
 		
 	}
 }
 
-
+*/
 try {
         journalArticleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(assetEntry.getClassPK());
         journalArticle = JournalArticleLocalServiceUtil.getArticle(assetEntry.getGroupId(), journalArticleResource.getArticleId());
@@ -73,7 +74,6 @@ try {
 			
 						
 		}
-		System.out.println("text: "+text)
 
 	} catch (PortalException e2) {
 		// TODO Auto-generated catch block
@@ -86,7 +86,7 @@ try {
 
 
 
-<div>
+<div class="image-carousel-wrapper">
 	<c:if test='<%= editTitle != null && !editTitle.equals("") %>'>
 	<liferay-ui:icon image="edit" label="<%= true %>" message='Edit' 
    		url="javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'<%=renderResponse.getNamespace()%> editAsset', title: '<%= editTitle %>', uri:'<%= HtmlUtil.escapeURL(editPortletURL.toString())%>'});"
@@ -94,7 +94,7 @@ try {
     </c:if>
     <img src="<%=imagePath %>" />
 	<c:if test='<%= text != null && !text.equals("") %>'>
-        <div class="carousel-caption"><%=text %></div>
+        <div class="image-carousel-caption"><%=text %></div>
     </c:if>
 </div>
 
