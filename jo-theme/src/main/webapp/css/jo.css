@@ -10,7 +10,7 @@
 		padding: 0;
 		margin: 0;
 		font-family: 'Roboto Condensed', sans-serif;
-		  background: url('../images/background.jpg');
+		background: url('../images/background.jpg');
 	}
 	form {
 	  	margin: 0;
@@ -74,6 +74,40 @@
 		margin-bottom: 30px;
 		.free-layout-item-wrapper{
 			margin: 3px;
+		}
+	}
+	footer .social a {
+		display: inline-block;
+		padding: 8px 10px 12px;
+		margin: 0;
+		height: 40px;
+		position: relative;
+		transition: all .1s ease-out;
+		-webkit-transition: all .1s ease-out;
+		width: 40px;
+		img.hover {
+			background-color: #f8f8f8;
+			height: 40px;
+			width: 40px;
+			top: 0;
+			left: 0;
+			-webkit-border-radius: 20px;
+			-moz-border-radius: 20px;
+			border-radius: 20px;
+			opacity: 0;
+			position: absolute;
+		}
+		.hover{
+			-webkit-animation-name: Social;
+	  		-webkit-animation-iteration-count: infinite;
+			-webkit-animation-timing-function: ease-out;
+			-webkit-animation-duration: 8s;
+			-webkit-animation-delay: 0s;
+			animation-name: Social;
+			animation-iteration-count: infinite;
+			animation-timing-function: ease-out;
+			animation-duration: 8s;
+			animation-delay: 0s;
 		}
 	}
 	

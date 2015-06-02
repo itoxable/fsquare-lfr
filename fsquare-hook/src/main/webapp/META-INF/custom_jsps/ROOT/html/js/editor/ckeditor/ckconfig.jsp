@@ -42,12 +42,8 @@ if (!CKEDITOR.stylesSet.get('liferayStyles')) {
 		[
 
 		// Geoplace Styles
-		{name: 'Geoplace Highlight', element: 'p', attributes: {'class': 'geoplace-inner-highlight-text'}},
-		{name: 'Geoplace Normal', element: 'p', attributes: {'class': 'geoplace-inner-normal-text'}},
-		{name: 'Geoplace Title', element: 'h2', attributes: {'class': 'geoplace-inner-title-text'}},
-		{name: 'Geoplace Quote', element: 'p', attributes: {'class': 'geoplace-inner-quote-text'}},
-		{name: 'Geoplace Author', element: 'p', attributes: {'class': 'geoplace-inner-author-text'}},
-		{name: 'Geoplace Table', element: 'table', attributes: {'class': 'geoplace-inner-table'}},
+		{name: 'Carousel Title', element: 'h2', attributes: {'class': 'caroussel-title'}},
+		{name: 'Carousel text', element: 'p', attributes: {'class': 'caroussel-text'}},
 		
 		
 		// Block Styles
@@ -186,7 +182,7 @@ CKEDITOR.config.toolbar_tablet = [
 	['Font', 'Styles', 'FontSize', 'RemoveFormat']
 ];
 
-CKEDITOR.config.font_names="Avenir Light(Site Default)/Avenir Next W01 Light; Avenir Regular/AvenirNextLTW01-Regular; Avenir Medium/AvenirNextLTW01-Medium; Avenir Bold/Avenir Next LT W01 Bold; Avenir Demi/Avenir Next LT W01 Demi; Lato; Arial/Arial, Helvetica, sans-serif;Comic Sans MS/Comic Sans MS, cursive;Courier New/Courier New, Courier, monospace;Georgia/Georgia, serif;Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;Tahoma/Tahoma, Geneva, sans-serif;Times New Roman/Times New Roman, Times, serif;Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;Verdana/Verdana, Geneva, sans-serif",
+CKEDITOR.config.font_names="Roboto Condensed;Arial/Arial, Helvetica, sans-serif;Comic Sans MS/Comic Sans MS, cursive;Courier New/Courier New, Courier, monospace;Georgia/Georgia, serif;Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;Tahoma/Tahoma, Geneva, sans-serif;Times New Roman/Times New Roman, Times, serif;Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;Verdana/Verdana, Geneva, sans-serif",
 
 CKEDITOR.on(
 	'dialogDefinition',

@@ -1,3 +1,6 @@
+<%@page import="com.liferay.portal.kernel.util.HtmlUtil"%>
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
+<%@page import="com.liferay.portlet.asset.model.AssetRenderer"%>
 <%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 <%@page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>
 <%@page import="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil" %>
@@ -30,6 +33,20 @@ if (Validator.isNull(title)) {
 	title = assetRenderer.getTitle(locale);
 }
 
+String editTitle = null;
+if(assetRenderer.hasEditPermission(themeDisplay..getPermissionChecker())){
+	PortletURL portletURL = renderResponse.createRenderURL();
+	portletURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
+	portletURL.setWindowState("pop_up");
+	//redirect = portletURL.toString();
+	PortletURL editPortletURL = assetRenderer.getURLEdit(renderRequest, renderResponse, windowStateFactory.getWindowState("pop_up"), redirectURL);
+	if (Validator.isNotNull(document)) {
+		editTitle = LanguageUtil.format(locale, "edit-x", title);
+		
+	}
+}
+
+
 try {
         journalArticleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(assetEntry.getClassPK());
         journalArticle = JournalArticleLocalServiceUtil.getArticle(assetEntry.getGroupId(), journalArticleResource.getArticleId());
@@ -56,6 +73,7 @@ try {
 			
 						
 		}
+		System.out.println("text: "+text)
 
 	} catch (PortalException e2) {
 		// TODO Auto-generated catch block
@@ -69,6 +87,11 @@ try {
 
 
 <div>
+	<c:if test='<%= editTitle != null && !editTitle.equals("") %>'>
+	<liferay-ui:icon image="edit" label="<%= true %>" message='Edit' 
+   		url="javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'<%=renderResponse.getNamespace()%> editAsset', title: '<%= editTitle %>', uri:'<%= HtmlUtil.escapeURL(editPortletURL.toString())%>'});"
+	/>
+    </c:if>
     <img src="<%=imagePath %>" />
 	<c:if test='<%= text != null && !text.equals("") %>'>
         <div class="carousel-caption"><%=text %></div>

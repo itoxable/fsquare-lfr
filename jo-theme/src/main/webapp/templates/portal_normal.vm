@@ -88,6 +88,33 @@ $theme.include($body_top_include)
 		<div class="container">
 			<div class="row">
 				<footer id="footer" role="contentinfo">
+					<div class="social">
+						<a class="c0" href="//www.facebook.com/Withings" target="_blank">
+							<img width="20" src="/images/social/facebook.svg">
+							<img class="hover" width="20" src="/images/social/facebook-hover.svg">
+						</a>
+						<a class="c1" href="//twitter.com/WithingsUK" target="_blank">
+							<img width="20" src="//www-assets-cdn.withings.com/back//media/social/twitter.svg">
+							<img class="hover" width="20" src="//www-assets-cdn.withings.com/back//media/social/twitter-hover.svg">
+						</a>
+						<a class="c2" href="//plus.google.com/+withings" target="_blank">
+							<img width="20" src="/images/social/google-plus.svg">
+							<img class="hover" width="20" src="/images/social/google-plus-hover.svg">
+						</a>
+						<a class="c3" href="//youtube.com/user/withingsFR" target="_blank">
+							<img width="20" src="//www-assets-cdn.withings.com/back//media/social/youtube.svg">
+							<img class="hover" width="20" src="//www-assets-cdn.withings.com/back//media/social/youtube-hover.svg">
+						</a>
+						<a class="c4" href="//instagram.com/withings" target="_blank">
+							<img width="20" src="//www-assets-cdn.withings.com/back//media/social/instagram.png">
+							<img class="hover" width="20" src="//www-assets-cdn.withings.com/back//media/social/instagram-hover.svg">
+						</a>
+						<a class="c4" href="https://www.linkedin.com/company/withings" target="_blank">
+							<img width="20" src="//www-assets-cdn.withings.com/back//media/social/linkedin.png">
+							<img class="hover" width="20" src="//www-assets-cdn.withings.com/back//media/social/linkedin-hover.png">
+						</a>
+						<br><br>
+					</div>
 				</footer>
 			</div>
 		</div>

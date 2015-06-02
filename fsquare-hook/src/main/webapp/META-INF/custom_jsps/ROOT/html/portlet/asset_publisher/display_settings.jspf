@@ -34,6 +34,27 @@
 			refreshURL="<%= configurationRenderURL.toString() %>"
 		/>
 	</div>
+	
+	<div class="show-free-layout-settings <%= (!displayStyle.equals("free-layout") ? "hide" : StringPool.BLANK) %>" id="<portlet:namespace />freeLayoutSettings">
+
+			<%
+			JSONObject freeLayoutSettingsJSONObject = JSONFactoryUtil.createJSONObject(freeLayoutSettings);
+			%>
+
+			<aui:input cssClass="configuration-text" 
+			helpMessage="show-free-layout-settings-help" 
+			name="preferences--freeLayoutSettings--" type="textarea" value="<%= freeLayoutSettingsJSONObject.toString(4) %>" />
+	</div>
+	
+	<div class="show-carousel-settings <%= (!displayStyle.equals("carousel") ? "hide" : StringPool.BLANK) %>" id="<portlet:namespace />carouselSettings">
+
+			<%
+			JSONObject carouselSettingsJSONObject = JSONFactoryUtil.createJSONObject(carouselSettings);
+			%>
+			<aui:input cssClass="configuration-text" 
+			helpMessage="show-carousel-settings-help" 
+			name="preferences--carouselSettings--" type="textarea" value="<%= carouselSettingsJSONObject.toString(4) %>" />
+	</div>
 
 	<aui:select cssClass="hidden-field abstract-length" helpMessage="abstract-length-key-help" name="preferences--abstractLength--">
 		<aui:option label="100" selected="<%= abstractLength == 100 %>" />
@@ -55,7 +76,7 @@
 	<aui:select helpMessage="number-of-items-to-display-help" label="number-of-items-to-display" name="preferences--delta--">
 
 		<%
-		int[] deltas = {1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100};
+		int[] deltas = {1, 2, 3, 4, 5, 8, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100};
 
 		for (int currentDelta: deltas) {
 		%>
@@ -215,8 +236,23 @@
 
 		if (selectDisplayStyle) {
 			var displayStyle = selectDisplayStyle.val();
-
-			if (displayStyle == 'full-content') {
+			if (displayStyle == 'carousel') {
+				var carouselSettings = A.one('.show-carousel-settings');
+				carouselSettings.show();
+				
+				A.one('.show-asset-title').get('parentNode').hide();
+				A.one('.show-context-link').get('parentNode').hide();
+				A.one('.show-asset-title').get('parentNode').hide();
+				A.one('.show-asset-title').get('parentNode').hide();
+				A.one('.show-asset-title').get('parentNode').hide();
+				A.one('.show-asset-title').get('parentNode').hide();
+				
+			}else (displayStyle == 'free-layout') {
+				var freeLayoutSettings = A.one('.show-free-layout-settings');
+				freeLayoutSettings.show();
+				
+				
+			}else if (displayStyle == 'full-content') {
 				var showAssetTitle = A.one('.show-asset-title');
 				var showContextLink = A.one('.show-context-link');
 

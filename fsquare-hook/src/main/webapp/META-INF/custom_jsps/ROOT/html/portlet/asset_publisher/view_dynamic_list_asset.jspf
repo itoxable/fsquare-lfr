@@ -19,7 +19,7 @@
 long elementId = System.currentTimeMillis();
 if(displayStyle.equals("carousel")) {
 %>
-		<div class="carousel carousel-<%=elementId %>">
+		<div class="carousel carousel-<%=elementId %>" >
 <% } else if(displayStyle.equals("free_layout")) {%>
 	
 	<div class="free-layout free-layout-<%=elementId %>">
@@ -88,24 +88,13 @@ if(displayStyle.equals("carousel")) {
 %>
 	</div>
 	<script type="text/javascript" charset="utf-8">
-	    jQuery('.carousel-<%=elementId%>').slick({
-	        autoplay: true,
-	        autoplaySpeed: 5000,
-	        dots: true,
-	        mobileFirst: true
-	    });
+	    jQuery('.carousel-<%=elementId%>').slick(<%=carouselSettings%>);
 	</script>
 <% } else if(displayStyle.equals("free_layout")) {%>
 	
 	</div>
-	<script type="text/javascript" charset="utf-8">
-	    jQuery('.free-layout-<%=elementId%>').isotope({
-	        itemSelector: '.free-layout-item',
-	        masonry: {
-	          //columnWidth: 100,
-	          isFitWidth: true
-	        }
-	      });
+	<script type="text/javascript" charset="utf-8">freeLayoutSettings
+	    jQuery('.free-layout-<%=elementId%>').isotope(<%=freeLayoutSettings%>);
 	</script>
 
 <% } %>
