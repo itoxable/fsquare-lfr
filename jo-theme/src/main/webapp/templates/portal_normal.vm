@@ -4,135 +4,134 @@
 
 <html class="$root_css_class" dir="#language ("lang.dir")" lang="$w3c_language_id">
 
-<head>
-	<title>$the_title - $company_name</title>
-
-	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
-
-	$theme.include($top_head_include)
+	<head>
+		<title>$the_title - $company_name</title>
 	
-	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+		<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 	
-	#js("$javascript_folder/vendor/jquery-1.11.3.min.js")
-	#js("$javascript_folder/vendor/jquery-ui.js")
-	#js("$javascript_folder/vendor/slick.js")
-	#js("$javascript_folder/vendor/isotope.pkgd.js")
-	#js("$javascript_folder/vendor/fit-columns.js")
-	
-	
-	
-	
-</head>
-
-<body class="$css_class">
-
-<a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
-
-$theme.include($body_top_include)
-
-#dockbar()
-
-<div class="container-fluid" id="wrapper">
-	
-	<div class="container">
-		<div class="row">
-			
-			<header id="banner" role="banner">
-				<div id="heading">
-					<h1 class="site-title">
-						<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
-							<img alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" />
+		$theme.include($top_head_include)
 		
-							#if ($show_site_name)
-								<span class="site-name" title="#language_format ("go-to-x", [$site_name])">
-									$site_name
-								</span>
-							#end
-						</a>
+		<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
 		
-					</h1>
+		#js("$javascript_folder/vendor/jquery-1.11.3.min.js")
+		#js("$javascript_folder/vendor/jquery-ui.js")
+		#js("$javascript_folder/vendor/slick.js")
+		#js("$javascript_folder/vendor/isotope.pkgd.js")
+		#js("$javascript_folder/vendor/fit-columns.js")
 		
-					<h2 class="page-title">
-						<span>$the_title</span>
-					</h2>
+	</head>
+	
+	<body class="$css_class">
+
+		$theme.include($body_top_include)
+		#if ($is_signed_in)
+			#dockbar()
+		#end
+	
+		<div class="container-fluid" id="wrapper">
+		
+			<div class="container">
+				<div class="row">
+					
+					<header id="banner" role="banner">
+						<div id="heading">
+							<h1 class="site-title">
+								<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
+									<img alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" />
+				
+									#if ($show_site_name)
+										<span class="site-name" title="#language_format ("go-to-x", [$site_name])">
+											$site_name
+										</span>
+									#end
+								</a>
+				
+							</h1>
+				
+							<h2 class="page-title">
+								<span>$the_title</span>
+							</h2>
+						</div>
+				
+						#if ($has_navigation || $is_signed_in)
+							#parse ("$full_templates_path/navigation.vm")
+						#end
+					</header>
+					
 				</div>
-		
-				#if ($has_navigation || $is_signed_in)
-					#parse ("$full_templates_path/navigation.vm")
+			</div>
+			
+			<div id="content">
+				#if (false)
+				<div class="container">
+					<div class="row" style="border: 1px solid black">
+						<nav id="breadcrumbs">#breadcrumbs()</nav>
+					</div>
+				</div>
 				#end
-			</header>
+				#if ($selectable)
+					$theme.include($content_include)
+				#else
+					$portletDisplay.recycle()
+		
+					$portletDisplay.setTitle($the_title)
+		
+					$theme.wrapPortlet("portlet.vm", $content_include)
+				#end
+			</div>
+		
+			<div class="row-fluid" id="footer-wrapper">
+				<div class="container">
+					<div class="row">
+						<footer id="footer" role="contentinfo">
+							<div class="social">
+								<a class="c0" href="//www.facebook.com/Withings" target="_blank">
+									<img width="20" src="$images_folder/social/facebook.svg">
+									<img class="hover" width="20" src="$images_folder/social/facebook-hover.svg">
+								</a>
+								<a class="c1" href="//twitter.com/WithingsUK" target="_blank">
+									<img width="20" src="$images_folder/social/twitter.svg">
+									<img class="hover" width="20" src="$images_folder/social/twitter-hover.svg">
+								</a>
+								<a class="c2" href="//plus.google.com/+withings" target="_blank">
+									<img width="20" src="$images_folder/social/google-plus.svg">
+									<img class="hover" width="20" src="$images_folder/social/google-plus-hover.svg">
+								</a>
+								<a class="c3" href="//youtube.com/user/withingsFR" target="_blank">
+									<img width="20" src="$images_folder/social/youtube.svg">
+									<img class="hover" width="20" src="$images_folder/social/youtube-hover.svg">
+								</a>
+								<a class="c4" href="//instagram.com/withings" target="_blank">
+									<img width="20" src="$images_folder/social/instagram.png">
+									<img class="hover" width="20" src="$images_folder/social/instagram-hover.svg">
+								</a>
+								<a class="c4" href="https://www.linkedin.com/company/withings" target="_blank">
+									<img width="20" src="$images_folder/social/linkedin.png">
+									<img class="hover" width="20" src="$images_folder/social/linkedin-hover.png">
+								</a>
+								<br><br>
+							</div>
+							#if (!$is_signed_in)
+								<a onclick=" openPopUp('$loginPortletUrl')" rel="nofollow">$sign_in_text</a>
+							#end
+						</footer>
+					</div>
+				</div>
+			</div>
+		
+		
 			
 		</div>
-	</div>
+		
+		#js ("$javascript_folder/vendor/jquery.cookiebar.js")
+		
+		$theme.include($body_bottom_include)
+		
+		$theme.include($bottom_include)
+		
 	
-	<div id="content">
-		#if (false)
-		<div class="container">
-			<div class="row" style="border: 1px solid black">
-				<nav id="breadcrumbs">#breadcrumbs()</nav>
-			</div>
-		</div>
-		#end
-		#if ($selectable)
-			$theme.include($content_include)
-		#else
-			$portletDisplay.recycle()
-
-			$portletDisplay.setTitle($the_title)
-
-			$theme.wrapPortlet("portlet.vm", $content_include)
-		#end
-	</div>
-
-	<div class="row-fluid" id="footer-wrapper">
-		<div class="container">
-			<div class="row">
-				<footer id="footer" role="contentinfo">
-					<div class="social">
-						<a class="c0" href="//www.facebook.com/Withings" target="_blank">
-							<img width="20" src="$images_folder/social/facebook.svg">
-							<img class="hover" width="20" src="$images_folder/social/facebook-hover.svg">
-						</a>
-						<a class="c1" href="//twitter.com/WithingsUK" target="_blank">
-							<img width="20" src="$images_folder/social/twitter.svg">
-							<img class="hover" width="20" src="$images_folder/social/twitter-hover.svg">
-						</a>
-						<a class="c2" href="//plus.google.com/+withings" target="_blank">
-							<img width="20" src="$images_folder/social/google-plus.svg">
-							<img class="hover" width="20" src="$images_folder/social/google-plus-hover.svg">
-						</a>
-						<a class="c3" href="//youtube.com/user/withingsFR" target="_blank">
-							<img width="20" src="$images_folder/social/youtube.svg">
-							<img class="hover" width="20" src="$images_folder/social/youtube-hover.svg">
-						</a>
-						<a class="c4" href="//instagram.com/withings" target="_blank">
-							<img width="20" src="$images_folder/social/instagram.png">
-							<img class="hover" width="20" src="$images_folder/social/instagram-hover.svg">
-						</a>
-						<a class="c4" href="https://www.linkedin.com/company/withings" target="_blank">
-							<img width="20" src="$images_folder/social/linkedin.png">
-							<img class="hover" width="20" src="$images_folder/social/linkedin-hover.png">
-						</a>
-						<br><br>
-					</div>
-				</footer>
-			</div>
-		</div>
-	</div>
-
-
 	
-</div>
-
-#js ("$javascript_folder/vendor/jquery.cookiebar.js")
-
-$theme.include($body_bottom_include)
-
-$theme.include($bottom_include)
-
-
-
-
-</body>
+	
+	</body>
 
 </html>

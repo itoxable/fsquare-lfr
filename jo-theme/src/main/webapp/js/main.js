@@ -1,3 +1,39 @@
+function openPopUp(url, title, config){
+	
+	AUI().use('aui-base','liferay-util-window','aui-io-plugin-deprecated',function(A){
+		
+		var modalConfigDefault= {
+			centered: true,
+			constrain2view: true,
+			modal: true,
+			resizable: false
+		};
+
+		if(config){
+			var modalConfig = A.merge(modalConfigDefault, config);
+		}else{
+			var modalConfig = modalConfigDefault;
+		}
+		
+		
+		var login_popup= Liferay.Util.Window.getWindow(
+    		{
+				dialog: modalConfig
+    		}).plug(A.Plugin.DialogIframe,
+                {
+                 	autoLoad: true,
+                 	iframeCssClass: 'dialog-iframe',
+                 	uri:url
+                }).render();
+         login_popup.show();
+         if(title){
+        	 login_popup.titleNode.html(title);
+         }
+        	  
+     });
+}
+
+
 AUI().ready(
 
 	/*
