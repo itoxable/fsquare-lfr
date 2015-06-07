@@ -35,7 +35,7 @@ String value = ParamUtil.getString(request, name);
 %>
 
 <div class="<%= cssClass %>">
-	<input class="search-query span9" id="<%= namespace + id %>" name="<%= namespace + name %>" placeholder="<%= placeholder %>" title="<%= title %>" type="text" value="<%= HtmlUtil.escapeAttribute(value) %>" />
+	<input class="search-query" id="<%= namespace + id %>" name="<%= namespace + name %>" placeholder="<%= placeholder %>" title="<%= title %>" type="text" value="<%= HtmlUtil.escapeAttribute(value) %>" />
 
 	<c:if test="<%= showButton %>">
 		<button class="btn" type="submit">

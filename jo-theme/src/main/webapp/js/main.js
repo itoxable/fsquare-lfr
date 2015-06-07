@@ -1,3 +1,13 @@
+
+function openLogin(url){
+	openPopUp(url, "Login", {
+		width: 600,
+		height: 420
+	});
+}
+
+ width: 475
+
 function openPopUp(url, title, config){
 	
 	AUI().use('aui-base','liferay-util-window','aui-io-plugin-deprecated',function(A){
@@ -6,7 +16,8 @@ function openPopUp(url, title, config){
 			centered: true,
 			constrain2view: true,
 			modal: true,
-			resizable: false
+			resizable: false,
+			stack: true
 		};
 
 		if(config){
@@ -32,6 +43,9 @@ function openPopUp(url, title, config){
         	  
      });
 }
+
+
+
 
 
 AUI().ready(

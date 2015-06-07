@@ -1,5 +1,10 @@
-#set ($css_class = "${css_class} dockbar-split")
 
+#*
+#set ($css_class = "${css_class} dockbar-split")
+*#
+
+#set ($layout = $theme_display.getLayout())
+#set ($plid = $layout.getPlid())
 
 #set ($loginPortletUrl = $portletURLFactory.create($request, "58", $getterUtil.getLong($plid), "RENDER_PHASE"))
 $loginPortletUrl.setParameter("p_p_state", "exclusive")

@@ -13,11 +13,21 @@
  * details.
  */
 --%>
+
+<%@ include file="/html/portlet/login/init.jsp" %>
+
 <%
+String strutsAction = ParamUtil.getString(request, "struts_action");
 
-String carouselSettings = GetterUtil.getString(portletPreferences.getValue("carouselSettings", "{autoplay: true,autoplaySpeed: 5000,dots: true,mobileFirst: true}"));
-String freeLayoutSettings = GetterUtil.getString(portletPreferences.getValue("freeLayoutSettings", "{itemSelector: '.free-layout-item', masonry: {isFitWidth: true}}"));
-String freeLayoutColumns = GetterUtil.getString(portletPreferences.getValue("freeLayoutColumns", "span3"));
+boolean showCreateAccountIcon = false;
 
-
+if (!strutsAction.equals("/login/create_account") && company.isStrangers() && !portletName.equals(PortletKeys.FAST_LOGIN)) {
+	showCreateAccountIcon = true;
+}
 %>
+
+<c:if test="<%= showCreateAccountIcon %>">
+	<a class="create-account" href="<%=  PortalUtil.getCreateAccountURL(request, themeDisplay) %>">
+		<%= LanguageUtil.get(pageContext, "create-account") %>
+	</a>
+</c:if>

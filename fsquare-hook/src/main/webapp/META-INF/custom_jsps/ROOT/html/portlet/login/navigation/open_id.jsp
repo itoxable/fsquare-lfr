@@ -13,11 +13,26 @@
  * details.
  */
 --%>
+
+<%@ include file="/html/portlet/login/init.jsp" %>
+
 <%
+String strutsAction = ParamUtil.getString(request, "struts_action");
 
-String carouselSettings = GetterUtil.getString(portletPreferences.getValue("carouselSettings", "{autoplay: true,autoplaySpeed: 5000,dots: true,mobileFirst: true}"));
-String freeLayoutSettings = GetterUtil.getString(portletPreferences.getValue("freeLayoutSettings", "{itemSelector: '.free-layout-item', masonry: {isFitWidth: true}}"));
-String freeLayoutColumns = GetterUtil.getString(portletPreferences.getValue("freeLayoutColumns", "span3"));
+boolean showOpenIdIcon = false;
 
-
+if (!strutsAction.equals("/login/open_id") && OpenIdUtil.isEnabled(company.getCompanyId())) {
+	showOpenIdIcon = true;
+}
 %>
+
+<c:if test="<%= showOpenIdIcon %>">
+	<portlet:renderURL var="openIdURL">
+		<portlet:param name="struts_action" value="/login/open_id" />
+	</portlet:renderURL>
+
+	
+	<a data-no-instant="" class="btn openid" href="<%= openIdURL %>">
+		<i class="fa fa fa-openid"></i> <%= LanguageUtil.get(pageContext, "open-id") %>
+	</a>
+</c:if>

@@ -112,7 +112,7 @@
 								<br><br>
 							</div>
 							#if (!$is_signed_in)
-								<a onclick=" openPopUp('$loginPortletUrl')" rel="nofollow">$sign_in_text</a>
+								<a data-redirect="$is_login_redirect_required" href="$sign_in_url" rel="nofollow">$sign_in_text</a>
 							#end
 						</footer>
 					</div>

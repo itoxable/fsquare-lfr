@@ -14,6 +14,7 @@
  */
 --%>
 
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@ include file="/html/portlet/login/init.jsp" %>
 
 <c:choose>
@@ -51,12 +52,17 @@
 			authType = company.getAuthType();
 		}
 		%>
-
+		<h1><%= LanguageUtil.get(pageContext, "login-title") %></h1>
+		
+		<hr>
+		
+		<liferay-util:include page="/html/portlet/login/social.jsp" />
+			
 		<portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>" var="loginURL">
 			<portlet:param name="struts_action" value="/login/login" />
 		</portlet:actionURL>
 
-		<aui:form action="<%= loginURL %>" autocomplete='<%= PropsValues.COMPANY_SECURITY_LOGIN_FORM_AUTOCOMPLETE ? "on" : "off" %>' cssClass="sign-in-form" method="post" name="fm">
+		<aui:form action="<%= loginURL %>" autocomplete='<%= PropsValues.COMPANY_SECURITY_LOGIN_FORM_AUTOCOMPLETE ? "on" : "off" %>' cssClass="sign-in-form form-horizontal" method="post" name="fm">
 			<aui:input name="saveLastPath" type="hidden" value="<%= false %>" />
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 			<aui:input name="doActionAfterLogin" type="hidden" value="<%= portletName.equals(PortletKeys.FAST_LOGIN) ? true : false %>" />
@@ -137,12 +143,12 @@
 				<span id="<portlet:namespace />passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
 
 				<c:if test="<%= company.isAutoLogin() && !PropsValues.SESSION_DISABLED %>">
-					<aui:input checked="<%= rememberMe %>" name="rememberMe" type="checkbox" />
+					<aui:input checked="<%= rememberMe %>" name="rememberMe" type="checkbox" cssClass="xxxxx"/>
 				</c:if>
 			</aui:fieldset>
 
 			<aui:button-row>
-				<aui:button type="submit" value="sign-in" />
+				<aui:button type="submit" value="sign-in" cssClass="btn-large"/>
 			</aui:button-row>
 		</aui:form>
 

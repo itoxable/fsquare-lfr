@@ -92,7 +92,6 @@ if(displayStyle.equals("carousel")) {
 	    jQuery('.image-carousel-<%=elementId%>').slick(<%=carouselSettings%>);
 	</script>
 <% } else if(displayStyle.equals("free_layout")) {%>
-	
 	</div>
 	<script type="text/javascript" charset="utf-8">freeLayoutSettings
 	    jQuery('.free-layout-<%=elementId%>').isotope(<%=freeLayoutSettings%>);

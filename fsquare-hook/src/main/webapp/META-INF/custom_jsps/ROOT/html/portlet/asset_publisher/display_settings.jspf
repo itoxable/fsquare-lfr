@@ -43,6 +43,17 @@
 	helpMessage="free-layout-settings-help" id="<portlet:namespace />freeLayoutSettings"
 	name="preferences--freeLayoutSettings--" type="textarea" value="<%= freeLayoutSettingsJSONObject.toString(4) %>" />
 
+	<aui:select cssClass="hidden-field free-layout-columns" helpMessage="free-layout-columns-help" name="preferences--freeLayoutColumns--">
+		<aui:option label="1" value="span12" selected='<%= freeLayoutColumns.equals("span12") %>' />
+		<aui:option label="2" value="span6" selected='<%= freeLayoutColumns.equals("span6") %>' />
+		<aui:option label="3" value="span4" selected='<%= freeLayoutColumns.equals("span4") %>' />
+		<aui:option label="4" value="span3" selected='<%= freeLayoutColumns.equals("span3") %>' />
+		<aui:option label="6" value="span2" selected='<%= freeLayoutColumns.equals("span2") %>' />
+		<aui:option label="12" value="span1" selected='<%= freeLayoutColumns.equals("span1") %>' />
+	</aui:select>
+
+
+
 	<%
 	JSONObject carouselSettingsJSONObject = JSONFactoryUtil.createJSONObject(carouselSettings);
 	%>
@@ -237,6 +248,9 @@
 			
 			}else if(displayStyle == 'free-layout') {
 				var freeLayoutSettings = A.one('.free-layout-settings');
+				var freeLayoutColumns = A.one('.free-layout-columns');
+				
+				freeLayoutColumns.get('parentNode').show();
 				freeLayoutSettings.get('parentNode').show();
 				
 			}else if (displayStyle == 'full-content') {

@@ -30,6 +30,7 @@ if (Validator.isNull(title)) {
 	title = assetRenderer.getTitle(locale);
 }
 
+
 try {
         journalArticleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(assetEntry.getClassPK());
         journalArticle = JournalArticleLocalServiceUtil.getArticle(assetEntry.getGroupId(), journalArticleResource.getArticleId());
@@ -56,17 +57,17 @@ try {
 		}
 
 	} catch (PortalException e2) {
-		// TODO Auto-generated catch block
 		e2.printStackTrace();
 	} catch (SystemException e2) {
-		// TODO Auto-generated catch block
 		e2.printStackTrace();
 	}
 %>
 
 
-
-<div class="free-layout-item span4">
+<c:if test='<%= assetEntryIndex == 0 %>'>
+	<div class="row-fluid">
+</c:if>
+<div class="free-layout-item <%= freeLayoutColumns %>">
 	<div class="free-layout-item-wrapper">
 	    <img src="<%=imagePath %>" />
 		<c:if test='<%= text != null && !text.equals("") %>'>
@@ -74,4 +75,6 @@ try {
 	    </c:if>
     </div>
 </div>
-
+<c:if test='<%= assetEntryIndex == (results.size()-1) %>'>
+	</div>
+</c:if>

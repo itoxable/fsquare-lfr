@@ -15,10 +15,15 @@
 			<wap-template-path>/jo-layout.wap.tpl</wap-template-path>
 			<thumbnail-path>/jo-layout.png</thumbnail-path>
 		</layout-template>
-		<layout-template id="geoplace-homepage" name="Jo homepage">
+		<layout-template id="jo-homepage" name="Jo homepage">
 			<template-path>/jo-homepage.tpl</template-path>
 			<wap-template-path>/jo-homepage.wap.tpl</wap-template-path>
 			<thumbnail-path>/jo-homepage.png</thumbnail-path>
+		</layout-template>
+		<layout-template id="jo-blog" name="Jo Blog">
+			<template-path>/jo-blog.tpl</template-path>
+			<wap-template-path>/jo-blog.wap.tpl</wap-template-path>
+			<thumbnail-path>/jo-blog.png</thumbnail-path>
 		</layout-template>
 	</custom>
 </layout-templates>

@@ -1,7 +1,7 @@
 <div class="columns-max" id="main-content" role="main">
 
 #set ($containerClass = "")
-#if ($layout.getTheme().getName() == "GeoPlace Theme")
+#if ($layout.getTheme().getName() == "jo-theme")
 	#set ($containerClass = "container")
 #end
 
