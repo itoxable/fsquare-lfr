@@ -26,6 +26,9 @@ function openPopUp(url, title, config){
 			var modalConfig = modalConfigDefault;
 		}
 		
+		modalConfig.cssClass = modalConfig.cssClass?modalConfig.cssClass+"custom-modal":"custom-modal";
+		
+		
 		
 		var login_popup= Liferay.Util.Window.getWindow(
     		{
@@ -81,5 +84,11 @@ Liferay.on(
 	*/
 
 	function() {
+		$.cookieBar({
+			message:"This website uses cookies. By continuing to browse the site you are agreeing to our use of cookies.",
+			acceptText:"×",
+			policyButton: true,
+			policyText: 'Find out more here'
+		});
 	}
 );
