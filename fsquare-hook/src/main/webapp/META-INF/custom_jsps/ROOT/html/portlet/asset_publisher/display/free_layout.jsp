@@ -65,8 +65,9 @@ try {
 
 
 <c:if test='<%= assetEntryIndex == 0 %>'>
-	<div class="row-fluid">
+	<div class="row">
 </c:if>
+
 <div class="free-layout-item <%= freeLayoutColumns %>">
 	<div class="free-layout-item-wrapper">
 	    <img src="<%=imagePath %>" />
@@ -75,6 +76,7 @@ try {
 	    </c:if>
     </div>
 </div>
+
 <c:if test='<%= assetEntryIndex == (results.size()-1) %>'>
 	</div>
 </c:if>
