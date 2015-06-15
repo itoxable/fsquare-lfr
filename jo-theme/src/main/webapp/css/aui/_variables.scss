@@ -6,9 +6,9 @@ $breakpoint_phone: 1024px !default;
 $breakpoint_tablet: 1280px !default;
 */
 
-$breakpoint_phone: 1024px !default;
-$breakpoint_tablet: 1144px !default;
-//$breakpoint_small_desktop: 1254px !default;
+$breakpoint_phone: 768px !default;
+$breakpoint_tablet: 992px !default;
+$breakpoint_desktop: 1200px !default;
 
 // Global values
 // --------------------------------------------------
@@ -302,9 +302,9 @@ $gridGutterWidth:         20px !default;
 $gridRowWidth:            ($gridColumns * $gridColumnWidth) + ($gridGutterWidth * ($gridColumns - 1)) !default;
 
 // Desktop
-$gridColumnWidthDesktop:     77px !default;
+$gridColumnWidthDesktop:     67px !default;
 $gridGutterWidthDesktop:     30px !default;
-$gridRowWidthDesktop:        ($gridColumns * $gridColumnWidthDesktop) + ($gridGutterWidthDesktop * ($gridColumns - 1)) !default;//1254px
+$gridRowWidthDesktop:        ($gridColumns * $gridColumnWidthDesktop) + ($gridGutterWidthDesktop * $gridColumns) !default; //1200
 
 /*// Small Desktop/Tablet Landscape
 $gridColumnWidthSmlDesktop:     77px !default;
@@ -313,8 +313,8 @@ $gridRowWidthSmlDesktop:        ($gridColumns * $gridColumnWidthSmlDesktop) + ($
 */
 
 // Tablet
-$gridColumnWidthTablet:      67px !default;
-$gridGutterWidthTablet:      20px !default;
+$gridColumnWidthTablet:      51px !default;
+$gridGutterWidthTablet:      30px !default;
 $gridRowWidthTablet:         ($gridColumns * $gridColumnWidthTablet) + ($gridGutterWidthTablet * ($gridColumns - 1)) !default;//1024px
 
 

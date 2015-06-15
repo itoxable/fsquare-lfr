@@ -6,6 +6,21 @@
 @import url(slick/slick-theme.css);
 @import url(jquery.cookiebar.css);
 .aui {
+	/*@include respond-to(phone){
+		body{
+			background: blue;
+		}	
+	}
+	@include respond-to(tablet){
+		body{
+			background: red;
+		}
+	}
+	@include respond-to(desktop){
+		body{
+			background: #FFF;
+		}
+	}*/
 	html{
 		padding: 0;
 		margin: 0;

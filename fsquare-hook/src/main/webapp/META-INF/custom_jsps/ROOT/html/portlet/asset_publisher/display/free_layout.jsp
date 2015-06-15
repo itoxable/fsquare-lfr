@@ -67,16 +67,16 @@ try {
 <c:if test='<%= assetEntryIndex == 0 %>'>
 	<div class="row">
 </c:if>
-
-<div class="free-layout-item <%= freeLayoutColumns %>">
-	<div class="free-layout-item-wrapper">
-	    <img src="<%=imagePath %>" />
-		<c:if test='<%= text != null && !text.equals("") %>'>
-	        <div class="free-layout-item-caption"><%=text %></div>
-	    </c:if>
-    </div>
+<div class="<%= freeLayoutColumns %>">
+	<div class="free-layout-item">
+		<div class="free-layout-item-wrapper">
+		    <img src="<%=imagePath %>" />
+			<c:if test='<%= text != null && !text.equals("") %>'>
+		        <div class="free-layout-item-caption"><%=text %></div>
+		    </c:if>
+	    </div>
+	</div>
 </div>
-
 <c:if test='<%= assetEntryIndex == (results.size()-1) %>'>
 	</div>
 </c:if>

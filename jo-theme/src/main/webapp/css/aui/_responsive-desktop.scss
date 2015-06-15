@@ -3,8 +3,6 @@
 // --------------------------------------------------
 
 @include respond-to(desktop){
-//@media (min-width: 1280px) {
-
   // Fixed grid
   @include grid-core($gridColumnWidthDesktop, $gridGutterWidthDesktop);
 

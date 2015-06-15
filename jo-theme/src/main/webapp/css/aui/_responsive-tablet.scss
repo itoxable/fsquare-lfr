@@ -3,7 +3,6 @@
 // --------------------------------------------------
 
 @include respond-to(tablet){
-//@media (min-width: 1024px) and (max-width: 1279px) {
 
   // Fixed grid
   @include grid-core($gridColumnWidthTablet, $gridGutterWidthTablet);
