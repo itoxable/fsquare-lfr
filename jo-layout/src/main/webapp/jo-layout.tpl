@@ -5,12 +5,16 @@
 			$processor.processColumn("column-1", "portlet-column-content portlet-column-content-first")
 		</div>
 	</div>
-	
+		
 	<div class="portlet-layout container row-2">
-		<div class="portlet-column row" id="column-2">
-			$processor.processColumn("column-2", "portlet-column-content portlet-column-content-first")
+		<div class="row">
+			<div class="portlet-column span12" id="column-2">
+				$processor.processColumn("column-2", "portlet-column-content portlet-column-content-first")
+			</div>
 		</div>
 	</div>
+	
+	
 	
 	<div class="portlet-layout container-fluid">
 		<div class="portlet-column row-fluid" id="column-3">
@@ -19,8 +23,10 @@
 	</div>
 	
 	<div class="portlet-layout container">
-		<div class=" portlet-column row" id="column-4">
-			$processor.processColumn("column-4", "portlet-column-content portlet-column-content-first")
+		<div class="row">
+			<div class=" portlet-column span12" id="column-4">
+				$processor.processColumn("column-4", "portlet-column-content portlet-column-content-first")
+			</div>
 		</div>
 	</div>
 	

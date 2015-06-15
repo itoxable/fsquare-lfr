@@ -44,20 +44,12 @@ String referringPortletResource = ParamUtil.getString(request, "referringPortlet
 
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
-if(article != null){
-	System.out.println("***article.getFolderId(): "+article.getFolderId());
-	System.out.println("***article.getTreePath(): "+article.getTreePath());
-}
-
-
 long groupId = BeanParamUtil.getLong(article, request, "groupId", scopeGroupId);
 
-
 long folderId = ParamUtil.getLong(request, "folderId", JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-if(folderId == 0){
+if(folderId == 0 && article != null){
 	folderId = article.getFolderId();
 }
-System.out.println("***folderId: "+folderId);
 
 
 long classNameId = BeanParamUtil.getLong(article, request, "classNameId");

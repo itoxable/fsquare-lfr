@@ -572,7 +572,6 @@
 // The Grid
 @mixin grid-core($gridColumnWidth, $gridGutterWidth) {
   .row {
-    /*margin-left: $gridGutterWidth * -1;*/
     margin-left: $gridGutterWidth / -2;
     margin-right: $gridGutterWidth / -2;
     @include clearfix();
@@ -601,7 +600,7 @@
 
 @mixin grid-core-span-x($gridColumns, $gridColumnWidth, $gridGutterWidth) {
   @for $i from 1 through $gridColumns {
-    .span#{$i} { @include 	($i, $gridColumnWidth, $gridGutterWidth); }
+    .span#{$i} { @include grid-core-span($i, $gridColumnWidth, $gridGutterWidth); }
   }
 }
 
@@ -612,7 +611,7 @@
 }
 
 @mixin grid-core-span($columns, $gridColumnWidth, $gridGutterWidth) {
-  width: ($gridColumnWidth * $columns) + ($gridGutterWidth * $columns);
+  width: ($gridColumnWidth * $columns) + ($gridGutterWidth * ($columns - 1));
 }
 
 @mixin grid-core-offset($columns, $gridColumnWidth, $gridGutterWidth) {
