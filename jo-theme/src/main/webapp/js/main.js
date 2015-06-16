@@ -1,3 +1,7 @@
+function debug(x){
+	var xx;
+}
+
 
 function openLogin(url){
 	openPopUp(url, "Login", {
@@ -6,7 +10,6 @@ function openLogin(url){
 	});
 }
 
- width: 475
 
 function openPopUp(url, title, config){
 	
