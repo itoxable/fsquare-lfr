@@ -29,8 +29,9 @@
 		color: rgb(34, 34, 34);
 		padding: 0;
 		margin: 0;
-		font-family: 'Roboto Condensed', sans-serif;
-		background: url('../images/background.jpg');
+		font-family: 'Roboto Condensed', "Trebuchet MS",Trebuchet,"Liberation Sans",sans-serif;
+		background-color: #FFF;
+		/*background: url('../images/background.jpg');*/
 	}
 	form {
 	  	margin: 0;
@@ -128,7 +129,16 @@
 		background-color: #FFF;
 		margin-bottom: 30px;
 		.free-layout-item-wrapper{
-			margin: 3px;
+			 border: 1px solid #e6e6e6;
+			 box-sizing: border-box;
+			.free-layout-item-image{
+				display: block;
+			}
+			.free-layout-item-caption{
+			}
+			.free-layout-item-link{
+				  margin-top: 20px;
+			}
 		}
 	}
 	#footer-wrapper{
@@ -331,6 +341,23 @@
 		ul{
 			padding: 0;
 		}
+	}
+	
+	.panel-default {
+  		border-color: #ddd;
+	}
+	
+	.panel {
+		margin-bottom: 20px;
+		background-color: #fff;
+		border: 1px solid transparent;
+		border-radius: 4px;
+/* 		-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05); */
+/* 		box-shadow: 0 1px 1px rgba(0,0,0,.05); */
+	}
+	
+	.panel-body {
+  		padding: 15px;
 	}
 	
 }

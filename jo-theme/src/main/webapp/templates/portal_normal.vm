@@ -85,11 +85,11 @@
 					<div class="row">
 						<footer id="footer" role="contentinfo">
 							<div class="social">
-								<a class="c0" href="//www.facebook.com/Withings" target="_blank">
+								<a class="facebook" href="" target="_blank">
 									<img width="20" src="$images_folder/social/facebook.svg">
 									<img class="hover" width="20" src="$images_folder/social/facebook-hover.svg">
 								</a>
-								<a class="c1" href="//twitter.com/WithingsUK" target="_blank">
+								<a class="twitter" href="//twitter.com/WithingsUK" target="_blank">
 									<img width="20" src="$images_folder/social/twitter.svg">
 									<img class="hover" width="20" src="$images_folder/social/twitter-hover.svg">
 								</a>

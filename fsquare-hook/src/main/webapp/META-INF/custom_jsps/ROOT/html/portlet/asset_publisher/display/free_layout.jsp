@@ -12,26 +12,33 @@
 <%
 	List results = (List)request.getAttribute("view.jsp-results");
 
-int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
+	int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
+	
+	request.setAttribute("view.jsp-showIconLabel", true);
+	
+	AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
+	AssetRendererFactory assetRendererFactory = (AssetRendererFactory)request.getAttribute("view.jsp-assetRendererFactory");
+	AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
+	
+	JournalArticleResource journalArticleResource = null;
+	JournalArticle journalArticle = null;
+	
+	String title = (String)request.getAttribute("view.jsp-title");
+	String text = "";
+	String imagePath = "";
+	String secondSection = "";
+	
+	if (Validator.isNull(title)) {
+		title = assetRenderer.getTitle(locale);
+	}
+	
+	String viewURL = AssetPublisherHelperImpl.getAssetViewURL(liferayPortletRequest, liferayPortletResponse, assetEntry, viewInContext);
 
-AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
-AssetRendererFactory assetRendererFactory = (AssetRendererFactory)request.getAttribute("view.jsp-assetRendererFactory");
-AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
+	try {
+	
+	
 
-JournalArticleResource journalArticleResource = null;
-JournalArticle journalArticle = null;
-
-String title = (String)request.getAttribute("view.jsp-title");
-String text = "";
-String imagePath = "";
-String secondSection = "";
-
-if (Validator.isNull(title)) {
-	title = assetRenderer.getTitle(locale);
-}
-
-
-try {
+	
         journalArticleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(assetEntry.getClassPK());
         journalArticle = JournalArticleLocalServiceUtil.getArticle(assetEntry.getGroupId(), journalArticleResource.getArticleId());
             
@@ -61,6 +68,13 @@ try {
 	} catch (SystemException e2) {
 		e2.printStackTrace();
 	}
+
+	
+	String itemTemplate = GetterUtil.getString(portletPreferences.getValue("itemTemplate", "span3"));
+
+	String itemTemplate = "<a href='[VIEW_URL]' class='free-layout-item-image'><img src='[IMAGE_PATH]'/></a><div class='panel-body'><div class='free-layout-item-caption'>[TEXT]</div><a class='btn btn-small free-layout-item-link' href='[VIEW_URL]'>[VIEW_TEXT]</a></div>";
+	String itemDisplay = itemTemplate.replaceAll("\\[IMAGE_PATH\\]", imagePath).replaceAll("\\[VIEW_TEXT\\]", "view").replaceAll("\\[VIEW_URL\\]", viewURL).replaceAll("\\[TEXT\\]", text);
+
 %>
 
 
@@ -70,10 +84,9 @@ try {
 <div class="<%= freeLayoutColumns %>">
 	<div class="free-layout-item">
 		<div class="free-layout-item-wrapper">
-		    <img src="<%=imagePath %>" />
-			<c:if test='<%= text != null && !text.equals("") %>'>
-		        <div class="free-layout-item-caption"><%=text %></div>
-		    </c:if>
+			<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+			<%=itemDisplay %>
+
 	    </div>
 	</div>
 </div>
