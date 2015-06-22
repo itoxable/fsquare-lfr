@@ -1,8 +1,10 @@
 <div id="main-content">
 	
-	<div class="portlet-layout container-fluid row-1">
-		<div class="portlet-column row-fluid" id="column-1">
-			$processor.processColumn("column-1", "portlet-column-content portlet-column-content-first")
+	<div class="portlet-layout container row-1">
+		<div class="row">
+			<div class="portlet-column span12" id="column-1">
+				$processor.processColumn("column-1", "portlet-column-content portlet-column-content-first")
+			</div>
 		</div>
 	</div>
 	

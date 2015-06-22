@@ -14,6 +14,8 @@
  */
 --%>
 
+<%@page import="com.liferay.portal.kernel.util.FastDateFormatFactoryUtil"%>
+<%@page import="java.text.Format"%>
 <%@ include file="/html/portlet/blogs/init.jsp" %>
 
 <%!
@@ -26,6 +28,11 @@ SearchContainer searchContainer = (SearchContainer)request.getAttribute("view_en
 BlogsEntry entry = (BlogsEntry)request.getAttribute("view_entry_content.jsp-entry");
 
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp-assetEntry");
+
+
+//SimpleDateFormat dateFormatDateTime = new SimpleDateFormat("yyyy/MM/dd");
+
+
 %>
 
 <c:choose>
@@ -49,16 +56,16 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 					<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
 				</portlet:renderURL>
 
-				<c:if test='<%= !strutsAction.equals("/blogs/view_entry") %>'>
-					<div class="entry-title">
-						<h2><aui:a href="<%= viewEntryURL %>"><%= HtmlUtil.escape(entry.getTitle()) %></aui:a></h2>
-					</div>
-				</c:if>
+				
+				<div class="entry-title">
+					<h2><aui:a href="<%= viewEntryURL %>"><%= HtmlUtil.escape(entry.getTitle()) %></aui:a></h2>
+				</div>
+				
 
-				<div class="entry-date">
-					<span class="hide-accessible"><liferay-ui:message key="published-date" /></span>
-
+				<div class="entry-date-author">
 					<%= dateFormatDateTime.format(entry.getDisplayDate()) %>
+					<liferay-ui:message key="written-by" /> 
+					<%= HtmlUtil.escape(PortalUtil.getUserName(entry)) %>
 				</div>
 			</div>
 
@@ -206,10 +213,10 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 			</div>
 
 			<div class="entry-footer">
-				<div class="entry-author">
-					<liferay-ui:message key="written-by" /> <%= HtmlUtil.escape(PortalUtil.getUserName(entry)) %>
+				<div class="continue-reading">
+					<a class='btn btn-small' href='<%= viewEntryURL %>'><liferay-ui:message key="continue-reading" /> </a>
+					
 				</div>
-
 				<div class="stats">
 					<c:if test="<%= assetEntry != null %>">
 						<span class="view-count">

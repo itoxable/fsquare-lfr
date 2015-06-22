@@ -5,6 +5,10 @@
 @import url(slick/slick.css);
 @import url(slick/slick-theme.css);
 @import url(jquery.cookiebar.css);
+
+
+$darkerGray: #bbbcbc;
+$lightGray: #e6e6e6;
 .aui {
 	/*@include respond-to(phone){
 		body{
@@ -118,18 +122,19 @@
 		
 		&.yui3-dd-drop-active-valid{
 			border: 1px dotted #ccc;
+			padding-top: 10px;
+			padding-bottom: 10px;
 		}
 		&.yui3-dd-drop-active-valid.yui3-dd-drop-over{
 			border: 1px dotted #000;
-			padding-top: 10px;
-			padding-bottom: 10px;
+			
 		}
 	}
 	.free-layout-item{
 		background-color: #FFF;
 		margin-bottom: 30px;
 		.free-layout-item-wrapper{
-			 border: 1px solid #e6e6e6;
+			 border: 1px solid $lightGray;
 			 box-sizing: border-box;
 			.free-layout-item-image{
 				display: block;
@@ -144,7 +149,7 @@
 	#footer-wrapper{
 		background: #FFF;
 		padding: 20px 0;
-		border-top: 1px solid #e6e6e6;
+		border-top: 1px solid $darkerGray;
 	}
 	#footer {
   		text-align: center;
@@ -325,17 +330,39 @@
 		}
 	}
 	.portlet-blogs{
-		.entry{
+		.panel-body{
 			background-color: #FFF;
 			margin-bottom: 10px;
-			
+			border: 1px solid $darkerGray;
 		}
 		.entry-date, .entry-author{
 			background: none;
-			padding: 0;  
+			padding: 0; 
 		}
-		.entry-date{font-weight: 600;}
-		.entry-author{font-weight: 600;}
+		.entry-date-author{
+			font-weight: 400;
+		}
+		.entry-title{
+			margin-bottom: 0;
+		}
+		.entry-body{
+			border-top: 1px solid $lightGray;
+			border-bottom: 1px solid $lightGray;
+			padding: 20px 0;
+			margin: 20px 0;
+		}
+		.continue-reading{
+			float: left;
+		}
+	 	.stats {
+			float: right;
+	 	}
+		
+	}
+	a.back-link{
+		display: block;
+  		margin-bottom: 15px;
+		font-size: 18px;
 	}
 	.taglib-social-bookmarks{
 		background: transparent;
@@ -360,5 +387,9 @@
 	.panel-body {
   		padding: 15px;
 	}
-	
+	.page-header {
+  		/*padding-bottom: 9px;
+  		margin: 20px 0 30px;*/
+  		border: none;
+}
 }
