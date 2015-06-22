@@ -52,8 +52,10 @@
 		<aui:option label="12" value="span1" selected='<%= freeLayoutColumns.equals("span1") %>' />
 	</aui:select>
 
-
-
+	<aui:input cssClass="configuration-text free-layout-template hidden-field" style="width: 500px; height: 200px;"
+			helpMessage="free-layout-template-help" id="<portlet:namespace />freeLayoutItemTemplate"
+			name="preferences--freeLayoutItemTemplate--" type="textarea" value="<%= freeLayoutItemTemplate %>" />
+	
 	<%
 	JSONObject carouselSettingsJSONObject = JSONFactoryUtil.createJSONObject(carouselSettings);
 	%>
@@ -250,7 +252,9 @@
 			}else if(displayStyle == 'free-layout') {
 				var freeLayoutSettings = A.one('.free-layout-settings');
 				var freeLayoutColumns = A.one('.free-layout-columns');
+				var freeLayoutTemplate = A.one('.free-layout-template');
 				
+				freeLayoutTemplate.get('parentNode').show();
 				freeLayoutColumns.get('parentNode').show();
 				freeLayoutSettings.get('parentNode').show();
 				

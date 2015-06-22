@@ -68,12 +68,8 @@
 	} catch (SystemException e2) {
 		e2.printStackTrace();
 	}
-
 	
-	String itemTemplate = GetterUtil.getString(portletPreferences.getValue("itemTemplate", "span3"));
-
-	String itemTemplate = "<a href='[VIEW_URL]' class='free-layout-item-image'><img src='[IMAGE_PATH]'/></a><div class='panel-body'><div class='free-layout-item-caption'>[TEXT]</div><a class='btn btn-small free-layout-item-link' href='[VIEW_URL]'>[VIEW_TEXT]</a></div>";
-	String itemDisplay = itemTemplate.replaceAll("\\[IMAGE_PATH\\]", imagePath).replaceAll("\\[VIEW_TEXT\\]", "view").replaceAll("\\[VIEW_URL\\]", viewURL).replaceAll("\\[TEXT\\]", text);
+	String itemDisplay = freeLayoutItemTemplate.replaceAll("\\[TITLE\\]", title).replaceAll("\\[IMAGE_PATH\\]", imagePath).replaceAll("\\[VIEW_TEXT\\]", "view").replaceAll("\\[VIEW_URL\\]", viewURL).replaceAll("\\[TEXT\\]", text);
 
 %>
 
