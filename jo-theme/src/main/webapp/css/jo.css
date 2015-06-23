@@ -60,7 +60,7 @@ $lightGray: #e6e6e6;
 	  		background: none;
 	  		border-width: 0;
 	  		min-height: 36px;
-	  		border-bottom: 1px solid black;
+	  		/*border-bottom: 1px solid black;*/
 	  		li a {
 				color: rgb(34, 34, 34);			  	
 				font-size: 18px;
@@ -74,9 +74,7 @@ $lightGray: #e6e6e6;
 	#breadcrumbs {
   		margin-bottom: 0;
 	}
-	.portlet, .aui .portlet-borderless-container {
-  		margin-bottom: 0;
-	}
+	
 	#main-content{
 
 	}
@@ -112,9 +110,12 @@ $lightGray: #e6e6e6;
 	.portlet-column{
 
 	}
-	.portlet, .portlet-borderless-container {
+	
+  	.portlet, .portlet-borderless-container {
   		background: none;
-  	}
+  		margin-bottom: 0;
+  		padding: 0;
+	}
   	.portlet-column-content.empty {
   		padding: 0;
 	}
@@ -391,5 +392,14 @@ $lightGray: #e6e6e6;
   		/*padding-bottom: 9px;
   		margin: 20px 0 30px;*/
   		border: none;
-}
+	}
+	.btn{
+		box-shadow: none;
+		-webkit-box-shadow: none;
+		background-image: none !important;
+		border: 0
+	}
+	.btn-primary{
+	
+	}
 }

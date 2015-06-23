@@ -14,6 +14,7 @@
  */
 --%>
 
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="com.liferay.portal.kernel.util.FastDateFormatFactoryUtil"%>
 <%@page import="java.text.Format"%>
 <%@ include file="/html/portlet/blogs/init.jsp" %>
@@ -31,7 +32,6 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 
 
 //SimpleDateFormat dateFormatDateTime = new SimpleDateFormat("yyyy/MM/dd");
-
 
 %>
 
@@ -167,8 +167,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 						<%= StringUtil.shorten(HtmlUtil.stripHtml(summary), pageAbstractLength) %>
 
 						<br />
-
-						<aui:a href="<%= viewEntryURL %>"><liferay-ui:message arguments='<%= new Object[] {"hide-accessible", HtmlUtil.escape(entry.getTitle())} %>' key="read-more-x-about-x" /> &raquo;</aui:a>
+ 
 					</c:when>
 					<c:when test='<%= displayStyle.equals(BlogsUtil.DISPLAY_STYLE_FULL_CONTENT) || strutsAction.equals("/blogs/view_entry") %>'>
 
@@ -206,46 +205,42 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 							/>
 						</c:if>
 					</c:when>
-					<c:when test='<%= displayStyle.equals(BlogsUtil.DISPLAY_STYLE_TITLE) && !strutsAction.equals("/blogs/view_entry") %>'>
-						<aui:a href="<%= viewEntryURL %>"><liferay-ui:message arguments='<%= new Object[] {"hide-accessible", HtmlUtil.escape(entry.getTitle())} %>' key="read-more-x-about-x" /> &raquo;</aui:a>
-					</c:when>
+					
 				</c:choose>
 			</div>
 
 			<div class="entry-footer">
-				<div class="continue-reading">
-					<a class='btn btn-small' href='<%= viewEntryURL %>'><liferay-ui:message key="continue-reading" /> </a>
-					
-				</div>
+				<c:if test="<%= displayStyle.equals(BlogsUtil.DISPLAY_STYLE_ABSTRACT) || displayStyle.equals(BlogsUtil.DISPLAY_STYLE_TITLE)  %>"> 
+					<div class="continue-reading">
+						<a class='btn btn-small' href='<%= viewEntryURL %>'><liferay-ui:message key="continue-reading" /> </a>
+					</div>
+				</c:if>
 				<div class="stats">
 					<c:if test="<%= assetEntry != null %>">
 						<span class="view-count">
-							<c:choose>
-								<c:when test="<%= assetEntry.getViewCount() == 1 %>">
-									<%= assetEntry.getViewCount() %> <liferay-ui:message key="view" />,
-								</c:when>
-								<c:when test="<%= assetEntry.getViewCount() > 1 %>">
-									<%= assetEntry.getViewCount() %> <liferay-ui:message key="views" />,
-								</c:when>
-							</c:choose>
+							<span class="fa fa-eye" title="<%=LanguageUtil.get(pageContext, (assetEntry.getViewCount() == 1) ? "view" : "views") %>">
+								<%= assetEntry.getViewCount() %>
+							</span>
 						</span>
 					</c:if>
 
 					<c:if test="<%= enableComments %>">
 						<span class="comments">
-
 							<%
 							long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
-
 							int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId(), WorkflowConstants.STATUS_APPROVED);
 							%>
 
 							<c:choose>
 								<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
-									<%= messagesCount %> <liferay-ui:message key='<%= (messagesCount == 1) ? "comment" : "comments" %>' />
+									<span class="fa fa-comment-o" title="<%=LanguageUtil.get(pageContext, (messagesCount == 1) ? "comment" : "comments") %>">
+										<%= messagesCount %>
+									</span>
 								</c:when>
 								<c:otherwise>
-									<aui:a href='<%= PropsValues.PORTLET_URL_ANCHOR_ENABLE ? viewEntryURL : viewEntryURL + StringPool.POUND + "blogsCommentsPanelContainer" %>'><%= messagesCount %> <liferay-ui:message key='<%= (messagesCount == 1) ? "comment" : "comments" %>' /></aui:a>
+									<aui:a title='<%=LanguageUtil.get(pageContext, (messagesCount == 1) ? "comment" : "comments") %>' href='<%= PropsValues.PORTLET_URL_ANCHOR_ENABLE ? viewEntryURL : viewEntryURL + StringPool.POUND + "blogsCommentsPanelContainer" %>'>
+										<i class="fa fa-comment-o"></i><%= messagesCount %>
+									</aui:a>
 								</c:otherwise>
 							</c:choose>
 						</span>
