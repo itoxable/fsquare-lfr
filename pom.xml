@@ -12,15 +12,17 @@
 	<properties>
 		<liferay.theme.parent>classic</liferay.theme.parent>
 		<liferay.theme.type>vm</liferay.theme.type>
-		<liferay.auto.deploy.dir>C:/dev/liferay-portal-6.2-ce-ga3/deploy</liferay.auto.deploy.dir>
-		<liferay.app.server.deploy.dir>C:/dev/liferay-portal-6.2-ce-ga3/tomcat-7.0.42/webapps</liferay.app.server.deploy.dir>
-		<liferay.app.server.lib.global.dir>C:/dev/liferay-portal-6.2-ce-ga3/tomcat-7.0.42/lib</liferay.app.server.lib.global.dir>
-		<liferay.app.server.portal.dir>C:/dev/liferay-portal-6.2-ce-ga3/tomcat-7.0.42/webapps/ROOT</liferay.app.server.portal.dir>
+		<liferay.home>C:/Users/Rui/dev/liferay-portal-6.2-ce-ga4</liferay.home>
+		<liferay.auto.deploy.dir>${liferay.home}/deploy</liferay.auto.deploy.dir>
+		<liferay.app.server.deploy.dir>${liferay.home}/tomcat-7.0.42/webapps</liferay.app.server.deploy.dir>
+		<liferay.app.server.lib.global.dir>${liferay.home}/tomcat-7.0.42/lib</liferay.app.server.lib.global.dir>
+		<liferay.app.server.portal.dir>${liferay.home}/tomcat-7.0.42/webapps/ROOT</liferay.app.server.portal.dir>
 		<liferay.version>6.2.2</liferay.version>
 		<liferay.maven.plugin.version>6.2.10.11</liferay.maven.plugin.version>
 	</properties>
 	
     <description>FSquare's Liferay apps</description>
+    
     <repositories>
         <repository>
             <id>public snapshots</id>
@@ -32,8 +34,45 @@
             <name>public releases</name>
             <url>http://nexus.broadleafcommerce.org/nexus/content/repositories/releases/</url>
         </repository>
-		
     </repositories>
+    
+    <build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.liferay.maven.plugins</groupId>
+					<artifactId>liferay-maven-plugin</artifactId>
+					<version>${liferay.maven.plugin.version}</version>
+					<configuration>
+						<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
+						<appServerDeployDir>${liferay.app.server.deploy.dir}</appServerDeployDir>
+						<appServerLibGlobalDir>${liferay.app.server.lib.global.dir}</appServerLibGlobalDir>
+						<appServerPortalDir>${liferay.app.server.portal.dir}</appServerPortalDir>
+						<liferayVersion>${liferay.version}</liferayVersion>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.5</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.5</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				
+			</plugins>
+		</pluginManagement>
+	</build>
     
     <dependencyManagement>
         <dependencies>

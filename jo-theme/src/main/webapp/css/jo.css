@@ -145,6 +145,9 @@ $lightGray: #e6e6e6;
 			.free-layout-item-link{
 				  margin-top: 20px;
 			}
+			.free-layout-item-title{
+				padding: 0 15px;
+			}
 		}
 	}
 	#footer-wrapper{

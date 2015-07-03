@@ -18,7 +18,8 @@
 String carouselSettings = GetterUtil.getString(portletPreferences.getValue("carouselSettings", "{autoplay: true,autoplaySpeed: 5000,dots: true,mobileFirst: true}"));
 String freeLayoutSettings = GetterUtil.getString(portletPreferences.getValue("freeLayoutSettings", "{itemSelector: '.free-layout-item', masonry: {isFitWidth: true}}"));
 String freeLayoutColumns = GetterUtil.getString(portletPreferences.getValue("freeLayoutColumns", "span3"));
-String freeLayoutItemTemplate = GetterUtil.getString(portletPreferences.getValue("freeLayoutItemTemplate", "<div class='panel-body free-layout-item-title'><h3 class='panel-title'> <a href='[VIEW_URL]'>[TITLE]</a></h3></div><a href='[VIEW_URL]' class='free-layout-item-image'><img src='[IMAGE_PATH]'/></a><div class='panel-body'><div class='free-layout-item-caption'>[TEXT]</div><a class='btn btn-small free-layout-item-link' href='[VIEW_URL]'>[VIEW_TEXT]</a></div>"));
+String freeLayoutItemTemplate = GetterUtil.getString(portletPreferences.getValue("freeLayoutItemTemplate", "<a href='[VIEW_URL]' class='free-layout-item-image'><img src='[IMAGE_PATH]'/></a><div class='panel-body free-layout-item-title'><h3 class='panel-title'><a href='[VIEW_URL]'>[TITLE]</a></h3></div><div class='panel-body'><div class='free-layout-item-caption'>[TEXT]</div><a class='btn btn-small free-layout-item-link' href='[VIEW_URL]'>[VIEW_TEXT]</a></div>"));
 
 
 %>
+
