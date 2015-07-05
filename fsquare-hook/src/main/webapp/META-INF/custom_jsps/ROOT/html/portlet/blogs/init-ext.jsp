@@ -18,5 +18,5 @@
 <%
 
 showSearch = GetterUtil.getBoolean(portletPreferences.getValue("showSearch", null), true);
-
+boolean showEntryNavigation = GetterUtil.getBoolean(portletPreferences.getValue("showEntryNavigation", null), false);
 %>

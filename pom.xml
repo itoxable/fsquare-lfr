@@ -126,6 +126,6 @@
         <module>jo-theme</module>
         <module>jo-layout</module>
         <module>fsquare-hook</module>
-        <module>fsquare-shopping-portlet</module>
+<!--         <module>fsquare-shopping-portlet</module> -->
     </modules>
 </project>

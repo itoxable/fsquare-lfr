@@ -74,7 +74,7 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 	<liferay-util:include page="/html/portlet/blogs/view_entry_content.jsp" />
 </aui:form>
 
-<c:if test="<%= PropsValues.BLOGS_ENTRY_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED %>">
+<c:if test="<%= showEntryNavigation && PropsValues.BLOGS_ENTRY_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED %>">
 
 	<%
 	BlogsEntry[] prevAndNext = BlogsEntryLocalServiceUtil.getEntriesPrevAndNext(entryId);
@@ -92,7 +92,7 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 					<portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" />
 				</portlet:renderURL>
 
-				<aui:a cssClass="previous" href="<%= previousEntryURL %>" label="previous" />
+				<aui:a cssClass="previous" href="<%= previousEntryURL %>" label="previous" ><%= previousEntry.getTitle() %></aui:a>
 			</c:when>
 			<c:otherwise>
 				<span class="previous"><liferay-ui:message key="previous" /></span>
@@ -110,7 +110,7 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 				<aui:a cssClass="next" href="<%= nextEntryURL %>" label="next" />
 			</c:when>
 			<c:otherwise>
-				<span class="next"><liferay-ui:message key="next" /></span>
+				<span class="next"><liferay-ui:message key="next" /><%= nextEntry.getTitle() %></span>
 			</c:otherwise>
 		</c:choose>
 	</div>

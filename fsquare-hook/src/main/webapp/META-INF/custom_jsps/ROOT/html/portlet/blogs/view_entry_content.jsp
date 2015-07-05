@@ -42,6 +42,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 
 				<%
 				String strutsAction = ParamUtil.getString(request, "struts_action");
+				//System.out.println("strutsAction: "+strutsAction);
 				%>
 
 				<c:if test="<%= !entry.isApproved() %>">
@@ -137,25 +138,21 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 								<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 							</portlet:actionURL>
 
-							<liferay-ui:icon-delete
-								label="<%= true %>"
-								trash="<%= TrashUtil.isTrashEnabled(scopeGroupId) %>"
-								url="<%= deleteEntryURL %>"
-							/>
+							<liferay-ui:icon-delete label="<%= true %>" trash="<%= TrashUtil.isTrashEnabled(scopeGroupId) %>" url="<%= deleteEntryURL %>" />
 						</li>
 					</c:if>
 				</ul>
 			</c:if>
 
 			<div class="entry-body">
-				<c:choose>
-					<c:when test='<%= displayStyle.equals(BlogsUtil.DISPLAY_STYLE_ABSTRACT) && !strutsAction.equals("/blogs/view_entry") %>'>
-						<c:if test="<%= entry.isSmallImage() %>">
-							<div class="asset-small-image">
-								<img alt="" class="asset-small-image" src="<%= HtmlUtil.escape(entry.getEntryImageURL(themeDisplay)) %>" width="150" />
-							</div>
-						</c:if>
-
+				<c:if test='<%= displayStyle.equals(BlogsUtil.DISPLAY_STYLE_ABSTRACT) %>'>
+					<c:if test="<%= entry.isSmallImage() %>">
+						<div class="asset-small-image">
+							<img alt="" class="asset-small-image" src="<%= HtmlUtil.escape(entry.getEntryImageURL(themeDisplay)) %>" />
+						</div>
+					</c:if>
+					
+					<div class="asset-small-summary">
 						<%
 						String summary = entry.getDescription();
 
@@ -165,52 +162,50 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 						%>
 
 						<%= StringUtil.shorten(HtmlUtil.stripHtml(summary), pageAbstractLength) %>
-
-						<br />
+					</div>
+						
  
-					</c:when>
-					<c:when test='<%= displayStyle.equals(BlogsUtil.DISPLAY_STYLE_FULL_CONTENT) || strutsAction.equals("/blogs/view_entry") %>'>
+				</c:if>
+				<c:if test='<%= displayStyle.equals(BlogsUtil.DISPLAY_STYLE_FULL_CONTENT) || strutsAction.equals("/blogs/view_entry") %>'>
 
-						<%
-						String entryContentId = "blogs-entry-content-" + entry.getEntryId();
+					<%
+					String entryContentId = "blogs-entry-content-" + entry.getEntryId();
 
-						boolean inlineEditEnabled = EDITOR_INLINE_EDITING_ENABLED && BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) && BrowserSnifferUtil.isRtf(request) && !WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, BlogsEntry.class.getName()) && Validator.equals(GetterUtil.getString(SessionClicks.get(request, "liferay_toggle_controls", "visible")), "visible");
-						%>
+					boolean inlineEditEnabled = EDITOR_INLINE_EDITING_ENABLED && BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) && BrowserSnifferUtil.isRtf(request) && !WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, BlogsEntry.class.getName()) && Validator.equals(GetterUtil.getString(SessionClicks.get(request, "liferay_toggle_controls", "visible")), "visible");
+					%>
 
-						<div id="<%= entryContentId %>" <%= inlineEditEnabled ? "class=\"lfr-editable\" contenteditable=\"true\" spellcheck=\"false\"" : StringPool.BLANK %>>
-							<%= entry.getContent() %>
-						</div>
+					<div id="<%= entryContentId %>" class='blogs-entry-content <%= inlineEditEnabled ? "lfr-editable":StringPool.BLANK %>' <%= inlineEditEnabled ?"contenteditable=\"true\" spellcheck=\"false\"" : StringPool.BLANK %>>
+						<%= entry.getContent() %>
+					</div>
 
-						<liferay-ui:custom-attributes-available className="<%= BlogsEntry.class.getName() %>">
-							<liferay-ui:custom-attribute-list
-								className="<%= BlogsEntry.class.getName() %>"
-								classPK="<%= entry.getEntryId() %>"
-								editable="<%= false %>"
-								label="<%= true %>"
-							/>
-						</liferay-ui:custom-attributes-available>
+					<liferay-ui:custom-attributes-available className="<%= BlogsEntry.class.getName() %>">
+						<liferay-ui:custom-attribute-list
+							className="<%= BlogsEntry.class.getName() %>"
+							classPK="<%= entry.getEntryId() %>"
+							editable="<%= false %>"
+							label="<%= true %>"
+						/>
+					</liferay-ui:custom-attributes-available>
 
-						<c:if test="<%= inlineEditEnabled %>">
-							<portlet:actionURL var="updateEntryContent">
-								<portlet:param name="struts_action" value="/blogs/edit_entry" />
-								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE_CONTENT %>" />
-								<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
-							</portlet:actionURL>
+					<c:if test="<%= inlineEditEnabled %>">
+						<portlet:actionURL var="updateEntryContent">
+							<portlet:param name="struts_action" value="/blogs/edit_entry" />
+							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE_CONTENT %>" />
+							<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
+						</portlet:actionURL>
 
-							<liferay-ui:input-editor
-								editorImpl="ckeditor"
-								inlineEdit="<%= true %>"
-								inlineEditSaveURL="<%= updateEntryContent %>"
-								name="<%= entryContentId %>"
-							/>
-						</c:if>
-					</c:when>
-					
-				</c:choose>
+						<liferay-ui:input-editor
+							editorImpl="ckeditor"
+							inlineEdit="<%= true %>"
+							inlineEditSaveURL="<%= updateEntryContent %>"
+							name="<%= entryContentId %>"
+						/>
+					</c:if>
+				</c:if>
 			</div>
 
 			<div class="entry-footer">
-				<c:if test="<%= displayStyle.equals(BlogsUtil.DISPLAY_STYLE_ABSTRACT) || displayStyle.equals(BlogsUtil.DISPLAY_STYLE_TITLE)  %>"> 
+				<c:if test='<%= (!strutsAction.equals("/blogs/view_entry")) && (displayStyle.equals(BlogsUtil.DISPLAY_STYLE_ABSTRACT) || displayStyle.equals(BlogsUtil.DISPLAY_STYLE_TITLE))  %>'> 
 					<div class="continue-reading">
 						<a class='btn btn-small' href='<%= viewEntryURL %>'><liferay-ui:message key="continue-reading" /> </a>
 					</div>
