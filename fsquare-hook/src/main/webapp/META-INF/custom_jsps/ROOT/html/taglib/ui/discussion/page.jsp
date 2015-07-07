@@ -35,7 +35,7 @@ String strutsAction = ParamUtil.getString(request, "struts_action");
 System.out.println("strutsAction: "+strutsAction);
 System.out.println("PropsValues.DISCUSSION_THREAD_VIEW: "+PropsValues.DISCUSSION_THREAD_VIEW);
 String threadView = PropsValues.DISCUSSION_THREAD_VIEW;
-threadView = "tree";
+// threadView = "tree";
 
 MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, scopeGroupId, className, classPK, WorkflowConstants.STATUS_ANY, threadView);
 

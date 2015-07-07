@@ -371,6 +371,9 @@ $lightGray: #e6e6e6;
 		}
 	 	.stats {
 			float: right;
+			span{
+				color: #999;
+			}
 	 	}
 		
 	}

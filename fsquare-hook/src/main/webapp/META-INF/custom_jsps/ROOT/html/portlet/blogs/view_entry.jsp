@@ -48,6 +48,8 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 displayStyle = BlogsUtil.DISPLAY_STYLE_FULL_CONTENT;
 
 AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
+System.out.println("***AssetEntry: "+assetEntry);
+System.out.println("***BlogsEntry: "+entry);
 
 AssetEntryServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry.getEntryId());
 
@@ -117,33 +119,42 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 </c:if>
 
 <c:if test="<%= enableComments %>">
-	<liferay-ui:panel-container extended="<%= false %>" id="blogsCommentsPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="blogsCommentsPanel" persistState="<%= true %>" title="comments">
-			<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED && entry.isAllowTrackbacks() %>">
-				<liferay-ui:message key="trackback-url" />:
 
-				<liferay-ui:input-resource
-					url='<%= PortalUtil.getLayoutFullURL(themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/trackback/" + entry.getUrlTitle() %>'
-				/>
-
-				<br /><br />
-			</c:if>
-
-			<portlet:actionURL var="discussionURL">
-				<portlet:param name="struts_action" value="/blogs/edit_entry_discussion" />
-			</portlet:actionURL>
-
-			<liferay-ui:discussion
-				className="<%= BlogsEntry.class.getName() %>"
-				classPK="<%= entry.getEntryId() %>"
-				formAction="<%= discussionURL %>"
-				formName="fm2"
-				ratingsEnabled="<%= enableCommentRatings %>"
-				redirect="<%= currentURL %>"
-				userId="<%= entry.getUserId() %>"
-			/>
-		</liferay-ui:panel>
-	</liferay-ui:panel-container>
+	<c:choose>
+		<c:when test='<%= facebookComments %>'>
+			<div class="fb-comments" data-href="<%=PortalUtil.getLayoutFullURL(themeDisplay) %>" data-version="v2.3" data-width="100%"></div>
+		</c:when>
+		<c:otherwise>
+			
+			<liferay-ui:panel-container extended="<%= false %>" id="blogsCommentsPanelContainer" persistState="<%= true %>">
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="blogsCommentsPanel" persistState="<%= true %>" title="comments">
+					<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED && entry.isAllowTrackbacks() %>">
+						<liferay-ui:message key="trackback-url" />:
+		
+						<liferay-ui:input-resource
+							url='<%= PortalUtil.getLayoutFullURL(themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/trackback/" + entry.getUrlTitle() %>'
+						/>
+		
+						<br /><br />
+					</c:if>
+		
+					<portlet:actionURL var="discussionURL">
+						<portlet:param name="struts_action" value="/blogs/edit_entry_discussion" />
+					</portlet:actionURL>
+		
+					<liferay-ui:discussion
+						className="<%= BlogsEntry.class.getName() %>"
+						classPK="<%= entry.getEntryId() %>"
+						formAction="<%= discussionURL %>"
+						formName="fm2"
+						ratingsEnabled="<%= enableCommentRatings %>"
+						redirect="<%= currentURL %>"
+						userId="<%= entry.getUserId() %>"
+					/>
+				</liferay-ui:panel>
+			</liferay-ui:panel-container>
+		</c:otherwise>
+	</c:choose>
 </c:if>
 
 <%

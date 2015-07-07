@@ -59,10 +59,18 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 
 				
 				<div class="entry-title">
-					<h2><aui:a href="<%= viewEntryURL %>"><%= HtmlUtil.escape(entry.getTitle()) %></aui:a></h2>
+					<h2>
+						<c:choose>
+							<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
+								<%= HtmlUtil.escape(entry.getTitle()) %>
+							</c:when>
+							<c:otherwise>
+								<aui:a href="<%= viewEntryURL %>"><%= HtmlUtil.escape(entry.getTitle()) %></aui:a>
+							</c:otherwise>
+						</c:choose>
+					</h2>
 				</div>
 				
-
 				<div class="entry-date-author">
 					<%= dateFormatDateTime.format(entry.getDisplayDate()) %>
 					<liferay-ui:message key="written-by" /> 
@@ -218,27 +226,33 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 							</span>
 						</span>
 					</c:if>
-
-					<c:if test="<%= enableComments %>">
-						<span class="comments">
-							<%
-							long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
-							int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId(), WorkflowConstants.STATUS_APPROVED);
-							%>
-
-							<c:choose>
-								<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
-									<span class="fa fa-comment-o" title="<%=LanguageUtil.get(pageContext, (messagesCount == 1) ? "comment" : "comments") %>">
-										<%= messagesCount %>
-									</span>
-								</c:when>
-								<c:otherwise>
-									<aui:a title='<%=LanguageUtil.get(pageContext, (messagesCount == 1) ? "comment" : "comments") %>' href='<%= PropsValues.PORTLET_URL_ANCHOR_ENABLE ? viewEntryURL : viewEntryURL + StringPool.POUND + "blogsCommentsPanelContainer" %>'>
-										<i class="fa fa-comment-o"></i><%= messagesCount %>
-									</aui:a>
-								</c:otherwise>
-							</c:choose>
-						</span>
+					
+					<c:if test='<%= !facebookComments %>'>
+						<c:if test="<%= enableComments %>">
+						
+						
+							<span class="comments">
+								<%
+								long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
+								int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId(), WorkflowConstants.STATUS_APPROVED);
+								%>
+	
+								<c:choose>
+									<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
+										<span class="fa fa-comment-o" title="<%=LanguageUtil.get(pageContext, (messagesCount == 1) ? "comment" : "comments") %>">
+											<%= messagesCount %>
+										</span>
+									</c:when>
+									<c:otherwise>
+										<aui:a title='<%=LanguageUtil.get(pageContext, (messagesCount == 1) ? "comment" : "comments") %>' href='<%= PropsValues.PORTLET_URL_ANCHOR_ENABLE ? viewEntryURL : viewEntryURL + StringPool.POUND + "blogsCommentsPanelContainer" %>'>
+											<span class="fa fa-comment-o" title="<%=LanguageUtil.get(pageContext, (messagesCount == 1) ? "comment" : "comments") %>">
+												<%= messagesCount %>
+											</span>
+										</aui:a>
+									</c:otherwise>
+								</c:choose>
+							</span>
+						</c:if>
 					</c:if>
 				</div>
 
