@@ -294,6 +294,9 @@ $lightGray: #e6e6e6;
 	}
 		
 	.image-carousel{
+		.slick-dots{
+			  bottom: 0;
+		}
 		.image-carousel-wrapper{
 			position: relative;
 		}

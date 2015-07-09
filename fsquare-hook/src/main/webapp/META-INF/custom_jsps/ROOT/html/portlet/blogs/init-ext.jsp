@@ -19,6 +19,6 @@
 
 showSearch = GetterUtil.getBoolean(portletPreferences.getValue("showSearch", null), true);
 boolean showEntryNavigation = GetterUtil.getBoolean(portletPreferences.getValue("showEntryNavigation", null), false);
-boolean facebookComments = GetterUtil.getBoolean(portletPreferences.getValue("facebookComments", null), true);		 
+boolean facebookComments = GetterUtil.getBoolean(portletPreferences.getValue("facebookComments", null), false);		 
 		 
 %>

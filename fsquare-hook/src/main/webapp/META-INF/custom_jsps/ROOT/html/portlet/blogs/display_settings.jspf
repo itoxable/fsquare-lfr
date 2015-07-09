@@ -65,7 +65,11 @@
 
 	<c:if test="<%= PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED %>">
 		<aui:input name="preferences--enableComments--" type="checkbox" value="<%= enableComments %>" />
-
+		
+	
+		
+		<aui:input name="preferences--facebookComments--" type="checkbox" value="<%= facebookComments %>" disabled="<%= !enableComments %>"  />
+		
 		<aui:input name="preferences--enableCommentRatings--" type="checkbox" value="<%= enableCommentRatings %>" />
 	</c:if>
 
@@ -100,3 +104,17 @@
 		</div>
 	</aui:fieldset>
 </aui:fieldset>
+
+<aui:script use="aui-base">
+	var enableCommentsCheckbox = A.one('#<portlet:namespace />enableCommentsCheckbox');
+	function enableComments () {
+		console.log('enableComments');
+		var facebookCommentsCheckbox = A.one('#<portlet:namespace />facebookCommentsCheckbox');
+		facebookCommentsCheckbox.set('disabled', !(enableCommentsCheckbox.val()));
+	}
+
+	if (enableCommentsCheckbox) {
+		enableCommentsCheckbox.on('change', enableComments);
+	}
+
+</aui:script>

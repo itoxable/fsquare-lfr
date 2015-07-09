@@ -12,7 +12,8 @@
 	<properties>
 		<liferay.theme.parent>classic</liferay.theme.parent>
 		<liferay.theme.type>vm</liferay.theme.type>
-		<liferay.home>C:/Users/Rui/dev/liferay-portal-6.2-ce-ga4</liferay.home>
+<!-- 		<liferay.home>C:/Users/Rui/dev/liferay-portal-6.2-ce-ga4</liferay.home> -->
+		<liferay.home>/Users/ruic/Projects/jo-liferay-portal-6.2-ce-ga4</liferay.home>
 		<liferay.auto.deploy.dir>${liferay.home}/deploy</liferay.auto.deploy.dir>
 		<liferay.app.server.deploy.dir>${liferay.home}/tomcat-7.0.42/webapps</liferay.app.server.deploy.dir>
 		<liferay.app.server.lib.global.dir>${liferay.home}/tomcat-7.0.42/lib</liferay.app.server.lib.global.dir>
