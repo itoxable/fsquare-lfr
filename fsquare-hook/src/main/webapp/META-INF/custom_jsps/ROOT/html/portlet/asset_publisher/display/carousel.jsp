@@ -87,13 +87,12 @@ try {
 
 
 
-<div class="image-carousel-wrapper">
+<div class="image-carousel-wrapper" style="background-image: url('<%=imagePath %>')">
 	<c:if test='<%= editTitle != null && !editTitle.equals("") %>'>
 	<liferay-ui:icon image="edit" label="<%= true %>" message='Edit' 
    		url="javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'<%=renderResponse.getNamespace()%> editAsset', title: '<%= editTitle %>', uri:'<%= HtmlUtil.escapeURL(editPortletURL.toString())%>'});"
 	/>
     </c:if>
-    <img src="<%=imagePath %>" />
 	<c:if test='<%= text != null && !text.equals("") %>'>
         <div class="image-carousel-caption"><%=text %></div>
     </c:if>

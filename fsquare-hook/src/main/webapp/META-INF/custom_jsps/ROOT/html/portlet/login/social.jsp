@@ -47,6 +47,7 @@ social = social.trim();
 
 <%!
 private String _getSectionJsp(String name) {
+	System.out.println("XXX: "+name);
 	return TextFormatter.format(name, TextFormatter.N);
 }
 %>
