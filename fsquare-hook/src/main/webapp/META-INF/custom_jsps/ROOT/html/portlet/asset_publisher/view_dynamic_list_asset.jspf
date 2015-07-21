@@ -17,11 +17,12 @@
 
 <%
 long elementId = System.currentTimeMillis();
+		System.out.println("displayStyle: "+displayStyle); 
 if(displayStyle.equals("carousel")) {
 %>
 		<div class="image-carousel image-carousel-<%=elementId %>" >
 		
-<% } else if(displayStyle.equals("free_layout")) {%>
+<% } else if(displayStyle.equals("free-layout")) {%>
 	
 	<div class="free-layout free-layout-<%=elementId %>">
 
@@ -89,12 +90,12 @@ if(displayStyle.equals("carousel")) {
 %>
 	</div>
 	<script type="text/javascript" charset="utf-8">
-	    jQuery('.image-carousel-<%=elementId%>').slick(<%=carouselSettings%>);
+	    jQuery('.image-carousel-<%= elementId %>').slick(<%=carouselSettings%>);
 	</script>
-<% } else if(displayStyle.equals("free_layout")) {%>
+<% } else if(displayStyle.equals("free-layout")) {%>
 	</div>
-	<script type="text/javascript" charset="utf-8">freeLayoutSettings
-	    jQuery('.free-layout-<%=elementId%>').isotope(<%=freeLayoutSettings%>);
+	<script type="text/javascript" charset="utf-8">
+	    jQuery('.free-layout-<%= elementId %> > .row').isotope(<%=freeLayoutSettings%>);
 	</script>
 
 <% } %>
