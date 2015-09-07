@@ -36,6 +36,23 @@
 		/>
 	</div>
 	
+	
+	<%
+	String galleryLayoutJsonVal = galleryLayoutSettings;
+	System.out.println("1 galleryLayoutJsonVal: "+galleryLayoutJsonVal);
+	try{
+		JSONObject galleryLayoutSettingsJSONObject = JSONFactoryUtil.createJSONObject(galleryLayoutSettings);
+		galleryLayoutJsonVal = galleryLayoutSettingsJSONObject.toString(4);
+		System.out.println("2 galleryLayoutJsonVal: "+galleryLayoutJsonVal);
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	%>
+	<aui:input cssClass="configuration-text gallery-layout-settings hidden-field" style="width: 500px; height: 200px;"
+	helpMessage="gallery-layout-settings-help" id="<portlet:namespace />galleryLayoutSettings"
+	name="preferences--galleryLayoutSettings--" type="textarea" value="<%= galleryLayoutJsonVal %>" />
+	
+	
 
 	<%
 	
@@ -49,13 +66,13 @@
 	helpMessage="free-layout-settings-help" id="<portlet:namespace />freeLayoutSettings"
 	name="preferences--freeLayoutSettings--" type="textarea" value="<%= freeLayoutJsonVal %>" />
 
-	<aui:select cssClass="hidden-field free-layout-columns" helpMessage="free-layout-columns-help" name="preferences--freeLayoutColumns--">
-		<aui:option label="1" value="span12" selected='<%= freeLayoutColumns.equals("span12") %>' />
-		<aui:option label="2" value="span6" selected='<%= freeLayoutColumns.equals("span6") %>' />
-		<aui:option label="3" value="span4" selected='<%= freeLayoutColumns.equals("span4") %>' />
-		<aui:option label="4" value="span3" selected='<%= freeLayoutColumns.equals("span3") %>' />
-		<aui:option label="6" value="span2" selected='<%= freeLayoutColumns.equals("span2") %>' />
-		<aui:option label="12" value="span1" selected='<%= freeLayoutColumns.equals("span1") %>' />
+	<aui:select cssClass="hidden-field layout-columns" helpMessage="layout-columns-help" name="preferences--layoutColumns--">
+		<aui:option label="1" value="span12" selected='<%= layoutColumns.equals("span12") %>' />
+		<aui:option label="2" value="span6" selected='<%= layoutColumns.equals("span6") %>' />
+		<aui:option label="3" value="span4" selected='<%= layoutColumns.equals("span4") %>' />
+		<aui:option label="4" value="span3" selected='<%= layoutColumns.equals("span3") %>' />
+		<aui:option label="6" value="span2" selected='<%= layoutColumns.equals("span2") %>' />
+		<aui:option label="12" value="span1" selected='<%= layoutColumns.equals("span1") %>' />
 	</aui:select>
 
 	<aui:input cssClass="configuration-text free-layout-template hidden-field" style="width: 500px; height: 200px;"
@@ -261,7 +278,7 @@
 			
 			}else if(displayStyle == 'free-layout') {
 				var freeLayoutSettings = A.one('.free-layout-settings');
-				var freeLayoutColumns = A.one('.free-layout-columns');
+				var freeLayoutColumns = A.one('.layout-columns');
 				var freeLayoutTemplate = A.one('.free-layout-template');
 				
 				freeLayoutTemplate.get('parentNode').show();
@@ -279,8 +296,14 @@
 				if (showContextLink) {
 					showContextLink.get('parentNode').show();
 				}
-			}
-			else {
+			}else if (displayStyle == 'media-gallery') {
+				var galleryLayoutSettings = A.one('.gallery-layout-settings');
+				var galleryLayoutColumns = A.one('.layout-columns');
+
+				galleryLayoutSettings.get('parentNode').show();
+				galleryLayoutColumns.get('parentNode').show();
+
+			} else {
 				if (displayStyle == 'abstracts') {
 					var abstractLength = A.one('.abstract-length');
 

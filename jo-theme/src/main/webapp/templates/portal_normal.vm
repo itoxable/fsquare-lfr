@@ -11,16 +11,19 @@
 	
 		$theme.include($top_head_include)
 		
-		<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
-		<link href='//fonts.googleapis.com/css?family=Lato:300,400,700,700italic' rel='stylesheet' type='text/css'>
-		<link href='//fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
-		
 		#js("$javascript_folder/vendor/jquery-1.11.3.min.js")
 		#js("$javascript_folder/vendor/jquery-ui.js")
+		#js("$javascript_folder/vendor/hammer.js")
+		#js("$javascript_folder/vendor/jquery.hammer.js")
+		#js("$javascript_folder/vendor/jquery.mousewheel.min.js")
 		#js("$javascript_folder/vendor/slick.js")
 		#js("$javascript_folder/vendor/isotope.pkgd.js")
-		#js("$javascript_folder/vendor/fit-columns.js")
+		#js("$javascript_folder/vendor/fit-columns.js")	
 		
+		#set ($js_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$javascript_folder/vendor/jquery.magnific-popup.js")))
+		#js ("$js_file")
+			
+<!-- UI JS file -->
 	</head>
 	
 	<body class="$css_class">
@@ -150,6 +153,11 @@
 		     fjs.parentNode.insertBefore(js, fjs);
 		   }(document, 'script', 'facebook-jssdk'));
 		</script>
+		
+		
+		
+		
+		
 	</body>
 
 </html>

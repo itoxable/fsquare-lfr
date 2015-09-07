@@ -74,7 +74,7 @@
 <c:if test='<%= assetEntryIndex == 0 %>'>
 	<div class="row">
 </c:if>
-<div class="<%= freeLayoutColumns %>">
+<div class="<%= layoutColumns %>">
 	<div class="free-layout-item">
 		<div class="free-layout-item-wrapper">
 			<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />

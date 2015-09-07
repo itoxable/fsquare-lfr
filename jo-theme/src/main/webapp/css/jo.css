@@ -2,13 +2,19 @@
 @import "mixins";
 
 @import url(font-awesome.css);
+@import url(merloround.css);
 @import url(slick/slick.css);
 @import url(slick/slick-theme.css);
 @import url(jquery.cookiebar.css);
 
+@import 'magnific/main';
+/* @import 'photoswipe/main'; */
+/* @import 'photoswipe/default-skin/default-skin'; */
+
 
 $darkerGray: #bbbcbc;
 $lightGray: #e6e6e6;
+
 .aui {
 	/*@include respond-to(phone){
 		body{
@@ -35,7 +41,7 @@ $lightGray: #e6e6e6;
 		margin: 0;
 /* 		font-family: 'Roboto Condensed', "Trebuchet MS",Trebuchet,"Liberation Sans",sans-serif; */
 /* 		font-family: 'Lato', sans-serif; */
-		font-family: 'Raleway', sans-serif;
+		font-family: merloround_regular,sans-serif;
 		background-color: #FFF;
 		/*background: url('../images/background.jpg');*/
 	}
@@ -100,7 +106,7 @@ $lightGray: #e6e6e6;
 				z-index: 1;
 				right: -15px;
 				top: -15px;
-				font-family: 'Avenir Next LT W01 Bold';
+/* 				font-family: ' Next LT W01 Bold'; */
 				
 				@include box-shadow(0 3px 7px rgba(0,0,0,0.3));
 				
@@ -133,6 +139,19 @@ $lightGray: #e6e6e6;
 		&.yui3-dd-drop-active-valid.yui3-dd-drop-over{
 			border: 1px dotted #000;
 			
+		}
+	}
+	
+	.gallery-item{
+		margin-top: 10px;
+		margin-bottom: 10px;
+		display: block;
+		img{
+			margin: 0 10px;
+			width: auto;
+			-webkit-box-shadow: 3px 3px 18px -2px rgba(0,0,0,0.75);
+			-moz-box-shadow: 3px 3px 18px -2px rgba(0,0,0,0.75);
+			box-shadow: 3px 3px 18px -2px rgba(0,0,0,0.75);
 		}
 	}
 	.free-layout-item{
