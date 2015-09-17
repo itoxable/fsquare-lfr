@@ -14,6 +14,22 @@
 <%@page import="com.liferay.portal.kernel.xml.Node" %>
 
 <%
+
+	int columns = 4; 
+	if(layoutColumns.equals("span12")){
+		columns = 1; 
+	}else if(layoutColumns.equals("span6")){
+		columns = 2; 
+	}else if(layoutColumns.equals("span4")){
+		columns = 3; 
+	}else if(layoutColumns.equals("span3")){
+		columns = 4; 
+	}else if(layoutColumns.equals("span2")){
+		columns = 6; 
+	}else if(layoutColumns.equals("span1")){
+		columns = 12; 
+	}
+
 	List results = (List)request.getAttribute("view.jsp-results");
 
 	int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
@@ -82,24 +98,23 @@
 
 
 <c:if test='<%= assetEntryIndex == 0 || ((assetEntryIndex+1) % columns) == 0 %>'>
+	<div class="container">
 	<div class="row">
 </c:if>
 
 
 	<a href="<%= smallImagePath %>" class="gallery-item <%= layoutColumns %>"  data-caption-html="<%= HtmlUtil.escape(text) %>">
-		<div class="gallery-item-poster"><img src="<%= imagePath %>" />
-			<div>
-				<%= layoutColumns %>
-			</div>
+		<div class="gallery-item-poster">
+			<img src="<%= imagePath %>" />
 		</div>
-		
-		
-<!-- 		<div class="gallery-item-poster"> -->
-<%--                <img src="<%= themeDisplay.getPathThemeImage()%>/zoom.png"> --%>
-<!--            </div> -->
+		<div class="gallery-item-details">
+			vvdffvdvd
+		</div>
+
   	</a>
 
 	
 <c:if test='<%= assetEntryIndex == (results.size()-1)  || ((assetEntryIndex+1) % columns) == 0 %>'>
+	</div>
 	</div>
 </c:if>

@@ -72,7 +72,9 @@
 
 
 <c:if test='<%= assetEntryIndex == 0 %>'>
-	<div class="row">
+	<div class="container">
+		<div class="row">
+	
 </c:if>
 <div class="<%= layoutColumns %>">
 	<div class="free-layout-item">
@@ -84,5 +86,6 @@
 	</div>
 </div>
 <c:if test='<%= assetEntryIndex == (results.size()-1) %>'>
+		</div>
 	</div>
 </c:if>

@@ -141,17 +141,41 @@ $lightGray: #e6e6e6;
 			
 		}
 	}
+	@keyframes gallery-show-details {
+	   from {display: none}
+	    to {display: block;}
+	}
+	@-webkit-keyframes gallery-show-details {
+	    from {display: none}
+	    to {display: block;}
+	}
 	
 	.gallery-item{
-		margin-top: 10px;
-		margin-bottom: 10px;
+/* 		margin-top: 10px; */
+		margin-bottom: 40px;
 		display: block;
+		position: relative;
 		img{
-			margin: 0 10px;
-			width: auto;
-			-webkit-box-shadow: 3px 3px 18px -2px rgba(0,0,0,0.75);
-			-moz-box-shadow: 3px 3px 18px -2px rgba(0,0,0,0.75);
-			box-shadow: 3px 3px 18px -2px rgba(0,0,0,0.75);
+/* 			margin: 0 10px; */
+/* 			width: auto; */
+ 			@include box-shadow(0 0 15px rgba(0, 0, 0, 0.5));
+/* 			@include box-shadow(3px 3px 18px -2px rgba(0,0,0,0.75)); */
+		}
+		.gallery-item-details{
+			display: none;
+			position: relative;
+			background-color: rgba(0, 0, 0, 0.5);
+			height: 30px;
+		}
+	}
+	.gallery-item:HOVER{
+		.gallery-item-details{
+			display: block;
+/*     		-webkit-animation-name: gallery-show-details; Chrome, Safari, Opera */
+/*     		-webkit-animation-duration: 2s; Chrome, Safari, Opera */
+/*     		animation-name: gallery-show-details; */
+/*     		animation-duration: 2s; */
+    		
 		}
 	}
 	.free-layout-item{
@@ -318,6 +342,7 @@ $lightGray: #e6e6e6;
 	}
 		
 	.image-carousel{
+		@include box-shadow(0 0 15px rgba(0, 0, 0, 0.5));
 		height: 500px;
 		.slick-list {
 			height: 100%;
@@ -329,6 +354,8 @@ $lightGray: #e6e6e6;
 		.slick-dots{
 			bottom: 10px;
 		  	margin: 0;
+		  	left: 10px;
+		  	width: auto;
 		  	li button:before{
 				font-size: 10px;
 				color: white;
@@ -354,12 +381,19 @@ $lightGray: #e6e6e6;
 			left: 20px;
 		}
 		.slick-prev, .slick-next{
-			  width: 20px;
-  			  height: 40px;
+			  width: 60px;
+   			  height: 60px;
+   			  margin-top: -30px;
+  			  background-color: rgba(255, 255, 255 ,0.5);
+		}
+		.slick-prev:HOVER,.slick-prev:ACTIVE, .slick-next:HOVER,.slick-next:ACTIVE{
+			 background-color: rgba(255, 255,255,1);
 		}
 		.slick-prev:before, .slick-next:before {
 		  	font-family: 'FontAwesome';
+		  	display: block;
 			font-size: 40px;
+			line-height: 60px;
 			color: black;
 			/*line-height: 1;
 			opacity: .75;
@@ -367,7 +401,12 @@ $lightGray: #e6e6e6;
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;*/
 		}
-		
+		.slick-prev{
+			left: 0;
+		}
+		.slick-next{
+			right: 0
+		}
 		.slick-prev:before{
 		    content: "\f104";
 		}
@@ -458,8 +497,9 @@ $lightGray: #e6e6e6;
   		border: none;
 	}
 	.btn{
-		box-shadow: none;
-		-webkit-box-shadow: none;
+		@include box-shadow(none);
+/* 		box-shadow: none; */
+/* 		-webkit-box-shadow: none; */
 		background-image: none !important;
 		border: 0
 	}
