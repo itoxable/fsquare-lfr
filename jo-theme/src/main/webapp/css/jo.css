@@ -149,7 +149,25 @@ $lightGray: #e6e6e6;
 	    from {display: none}
 	    to {display: block;}
 	}
-	
+	a.big-link-item{
+		text-decoration: none;
+		position: relative;
+		@include box-shadow(0 0 15px rgba(0, 0, 0, 0.5));
+		height: 358px;
+		display: block;
+		background-size: 100% 100%;
+		.big-link-item-text-wrapper{
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 60px;
+			background-color: rgba(0,0,0,0.5);
+			.big-link-item-text{
+				color: #FFF;
+			}
+		}
+	}
 	.gallery-item{
 /* 		margin-top: 10px; */
 		margin-bottom: 40px;
@@ -200,6 +218,7 @@ $lightGray: #e6e6e6;
 	#footer-wrapper{
 		background: #FFF;
 		padding: 20px 0;
+		margin-top: 100px;
 		border-top: 1px solid $darkerGray;
 	}
 	#footer {
@@ -372,13 +391,14 @@ $lightGray: #e6e6e6;
 		}
 		.image-carousel-caption{
 			position: absolute;
-		  	background-color: rgba(0,66,91,0.8);
+/* 		  	background-color: rgba(0,66,91,0.8); */
 			color: #fff;
 			max-width: 90%;
 			max-height: 50%;
 			margin: 0;
-			bottom: 20px;
-			left: 20px;
+			bottom: 100px;
+			left: 100px;
+			font-size: 60px;
 		}
 		.slick-prev, .slick-next{
 			  width: 60px;

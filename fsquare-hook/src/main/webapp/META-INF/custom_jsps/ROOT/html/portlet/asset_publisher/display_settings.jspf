@@ -39,11 +39,9 @@
 	
 	<%
 	String galleryLayoutJsonVal = galleryLayoutSettings;
-	System.out.println("1 galleryLayoutJsonVal: "+galleryLayoutJsonVal);
 	try{
 		JSONObject galleryLayoutSettingsJSONObject = JSONFactoryUtil.createJSONObject(galleryLayoutSettings);
 		galleryLayoutJsonVal = galleryLayoutSettingsJSONObject.toString(4);
-		System.out.println("2 galleryLayoutJsonVal: "+galleryLayoutJsonVal);
 	}catch(Exception e){
 		e.printStackTrace();
 	}
@@ -303,7 +301,11 @@
 				galleryLayoutSettings.get('parentNode').show();
 				galleryLayoutColumns.get('parentNode').show();
 
-			} else {
+			} else if (displayStyle == 'big-link') {
+				var galleryLayoutColumns = A.one('.layout-columns');
+				galleryLayoutColumns.get('parentNode').show();
+
+			}else {
 				if (displayStyle == 'abstracts') {
 					var abstractLength = A.one('.abstract-length');
 
