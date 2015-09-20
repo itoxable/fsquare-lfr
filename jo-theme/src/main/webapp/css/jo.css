@@ -11,26 +11,35 @@
 /* @import 'photoswipe/main'; */
 /* @import 'photoswipe/default-skin/default-skin'; */
 
+/* font-family: 'merloround_serif_regular'; */
+/* font-family: 'merloroundserifRgIt'; */
+/* font-family: 'merloround_thin_italic'; */
+/* font-family: 'merloround_thin'; */
+/* font-family: 'merloround_regular'; */
+/* font-family: 'merloround_medium_italic'; */
+/* font-family: 'merloround_medium'; */
+/* font-family: 'merloround_light_italic'; */
+/* font-family: 'merloround_light'; */
+/* font-family: 'merloround_regular_italic'; */
+/* font-family: 'merloround_bold_italic'; */
+/* font-family: 'merloround_bold'; */
+
+
 
 $darkerGray: #bbbcbc;
 $lightGray: #e6e6e6;
+$defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 
 .aui {
-	/*@include respond-to(phone){
-		body{
-			background: blue;
-		}	
+	@include respond-to(phone){
+			
 	}
 	@include respond-to(tablet){
-		body{
-			background: red;
-		}
+		
 	}
 	@include respond-to(desktop){
-		body{
-			background: #FFF;
-		}
-	}*/
+		
+	}
 	html{
 		padding: 0;
 		margin: 0;
@@ -39,11 +48,8 @@ $lightGray: #e6e6e6;
 		color: rgb(34, 34, 34);
 		padding: 0;
 		margin: 0;
-/* 		font-family: 'Roboto Condensed', "Trebuchet MS",Trebuchet,"Liberation Sans",sans-serif; */
-/* 		font-family: 'Lato', sans-serif; */
 		font-family: merloround_regular,sans-serif;
 		background-color: #FFF;
-		/*background: url('../images/background.jpg');*/
 	}
 	form {
 	  	margin: 0;
@@ -62,22 +68,29 @@ $lightGray: #e6e6e6;
 		margin: 0;
 	}
 	#navigation {
-/* 		margin-bottom: 10px; */
 		.navbar-inner {
 			padding: 0;
 			margin: 0;
 	  		background: none;
 	  		border-width: 0;
 	  		min-height: 36px;
-/* 	  		border-top: 1px solid #bbbcbc; */
-/*   			border-bottom: 1px solid #bbbcbc; */
-	  		li a {
+  		    margin-bottom: 20px;
+    		margin-top: 20px;
+    		font-family: 'merloround_medium';
+    		li a {
 				color: rgb(34, 34, 34);			  	
-				font-size: 18px;
+				font-size: 20px;
 			  	font-weight: 400;
+			  	padding-bottom: 10px;
 			}
 			.nav li.active>a {
 			 	 background: none;
+			}
+			li {
+	   			border-bottom: 2px solid transparent;
+			}
+			li:HOVER {
+	   			border-bottom: 2px solid rgb(34, 34, 34);
 			}
 		}
 	}
@@ -106,7 +119,6 @@ $lightGray: #e6e6e6;
 				z-index: 1;
 				right: -15px;
 				top: -15px;
-/* 				font-family: ' Next LT W01 Bold'; */
 				
 				@include box-shadow(0 3px 7px rgba(0,0,0,0.3));
 				
@@ -152,38 +164,45 @@ $lightGray: #e6e6e6;
 	a.big-link-item{
 		text-decoration: none;
 		position: relative;
-		@include box-shadow(0 0 15px rgba(0, 0, 0, 0.5));
+		@include box-shadow($defaultShadow);
 		height: 358px;
 		display: block;
+		background-image:  url('../images/Gaussian Blurs_033_resized.jpg');
 		background-size: 100% 100%;
+		@include border-radius(3px);
 		.big-link-item-text-wrapper{
 			position: absolute;
 			bottom: 0;
 			left: 0;
 			width: 100%;
-			height: 60px;
-			background-color: rgba(0,0,0,0.5);
+			height: 100px;
+			max-height: 70%;
+			background-color: rgba(0,0,0,0.8);
 			.big-link-item-text{
 				color: #FFF;
+				font-family: 'merloround_bold';    
+				margin-left: 20px;
+				font-size: 40px;
 			}
 		}
 	}
 	.gallery-item{
-/* 		margin-top: 10px; */
 		margin-bottom: 40px;
 		display: block;
-		position: relative;
+		
 		img{
-/* 			margin: 0 10px; */
-/* 			width: auto; */
- 			@include box-shadow(0 0 15px rgba(0, 0, 0, 0.5));
-/* 			@include box-shadow(3px 3px 18px -2px rgba(0,0,0,0.75)); */
+ 			@include box-shadow($defaultShadow);
+		}
+		.gallery-item-poster{
+			position: relative;
 		}
 		.gallery-item-details{
 			display: none;
-			position: relative;
+			position: absolute;
+			bottom: 0;
+			width: 100%;
 			background-color: rgba(0, 0, 0, 0.5);
-			height: 30px;
+			max-height: 100%;
 		}
 	}
 	.gallery-item:HOVER{
@@ -281,7 +300,6 @@ $lightGray: #e6e6e6;
 			padding: 10px;
 		}
 		form{
-		/*text-align: center;*/
 		}
 		.form-horizontal{
 			input, select{
@@ -355,13 +373,12 @@ $lightGray: #e6e6e6;
 				background: #d73d32;
 			}
 		}
-		
-		  
+	
 		
 	}
 		
 	.image-carousel{
-		@include box-shadow(0 0 15px rgba(0, 0, 0, 0.5));
+		@include box-shadow($defaultShadow);
 		height: 500px;
 		.slick-list {
 			height: 100%;
@@ -391,7 +408,6 @@ $lightGray: #e6e6e6;
 		}
 		.image-carousel-caption{
 			position: absolute;
-/* 		  	background-color: rgba(0,66,91,0.8); */
 			color: #fff;
 			max-width: 90%;
 			max-height: 50%;
@@ -399,6 +415,7 @@ $lightGray: #e6e6e6;
 			bottom: 100px;
 			left: 100px;
 			font-size: 60px;
+			line-height: 60px;
 		}
 		.slick-prev, .slick-next{
 			  width: 60px;
@@ -415,11 +432,6 @@ $lightGray: #e6e6e6;
 			font-size: 40px;
 			line-height: 60px;
 			color: black;
-			/*line-height: 1;
-			opacity: .75;
-			color: black;
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;*/
 		}
 		.slick-prev{
 			left: 0;
@@ -504,22 +516,16 @@ $lightGray: #e6e6e6;
 		background-color: #fff;
 		border: 1px solid transparent;
 		border-radius: 4px;
-/* 		-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05); */
-/* 		box-shadow: 0 1px 1px rgba(0,0,0,.05); */
 	}
 	
 	.panel-body {
   		padding: 15px;
 	}
 	.page-header {
-  		/*padding-bottom: 9px;
-  		margin: 20px 0 30px;*/
   		border: none;
 	}
 	.btn{
 		@include box-shadow(none);
-/* 		box-shadow: none; */
-/* 		-webkit-box-shadow: none; */
 		background-image: none !important;
 		border: 0
 	}

@@ -1,3 +1,9 @@
+<%@page import="com.liferay.portal.util.PortalUtil"%>
+<%@page import="com.liferay.portal.model.Layout"%>
+<%@page import="com.liferay.portal.service.LayoutLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.util.CharPool"%>
+<%@page import="com.liferay.portal.service.GroupLocalServiceUtil"%>
+<%@page import="com.liferay.portal.model.Group"%>
 <%@page import="com.liferay.portal.kernel.portlet.WindowStateFactory"%>
 <%@page import="com.liferay.portal.kernel.util.HtmlUtil"%>
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
@@ -71,6 +77,29 @@ try {
 					.selectSingleNode("//*/dynamic-element[@name='Text']/dynamic-content");
 			if (fieldContent != null) {
 				text = fieldContent.getText();
+			}
+			
+			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Link_to_Page']/dynamic-content");
+			if (fieldContent != null) {
+				String data = fieldContent.getText();
+				String[] layoutDetails = data.split(Character.toString(CharPool.AT));				
+				try {
+					long groupId = Long.parseLong(layoutDetails[2]);
+					Group group = GroupLocalServiceUtil.getGroup(groupId);
+					
+					if (groupId == 0) {
+						groupId = themeDisplay.getScopeGroupId();
+					}
+					
+					boolean privateLayout = !"public".equals(layoutDetails[1]);
+					long layoutId = Long.parseLong(layoutDetails[0]);
+					Layout _layout = LayoutLocalServiceUtil.getLayout(groupId, privateLayout, layoutId);
+
+					link = PortalUtil.getLayoutFriendlyURL(_layout, themeDisplay);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			
 						

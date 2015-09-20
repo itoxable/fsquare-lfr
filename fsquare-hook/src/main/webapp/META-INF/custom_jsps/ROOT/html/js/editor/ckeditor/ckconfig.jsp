@@ -41,7 +41,7 @@ if (!CKEDITOR.stylesSet.get('liferayStyles')) {
 		'liferayStyles',
 		[
 
-		// Geoplace Styles
+		// FSquare Styles
 		{name: 'Carousel Title', element: 'h2', attributes: {'class': 'caroussel-title'}},
 		{name: 'Carousel text', element: 'p', attributes: {'class': 'caroussel-text'}},
 		

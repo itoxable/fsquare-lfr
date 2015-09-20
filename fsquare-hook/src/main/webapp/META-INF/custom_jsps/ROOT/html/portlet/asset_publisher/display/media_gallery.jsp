@@ -106,10 +106,12 @@
 	<a href="<%= smallImagePath %>" class="gallery-item <%= layoutColumns %>"  data-caption-html="<%= HtmlUtil.escape(text) %>">
 		<div class="gallery-item-poster">
 			<img src="<%= imagePath %>" />
+			
+			<div class="gallery-item-details">
+				<%= text %>
+			</div>
 		</div>
-		<div class="gallery-item-details">
-			vvdffvdvd
-		</div>
+		
 
   	</a>
 

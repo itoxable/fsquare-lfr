@@ -1,3 +1,10 @@
+<%@page import="com.liferay.portal.service.GroupLocalServiceUtil"%>
+<%@page import="com.liferay.portal.model.Group"%>
+<%@page import="com.liferay.portal.service.LayoutLocalServiceUtil"%>
+<%@page import="com.liferay.portal.model.Layout"%>
+<%@page import="com.liferay.portal.util.PortalUtil"%>
+<%@page import="com.liferay.portal.kernel.util.CharPool"%>
+<%@page import="com.liferay.portal.kernel.templateparser.TemplateNode"%>
 <%@page import="com.liferay.portal.theme.ThemeDisplay"%>
 <%@page import="com.liferay.portal.kernel.util.HtmlUtil"%>
 <%@page import="com.liferay.portal.kernel.util.StringUtil"%>
@@ -59,9 +66,10 @@
 	
         journalArticleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(assetEntry.getClassPK());
         journalArticle = JournalArticleLocalServiceUtil.getArticle(assetEntry.getGroupId(), journalArticleResource.getArticleId());
-        //System.out.println("journalArticle.getSmallImageURL(): "+journalArticle.getSmallImageURL());
+        
         smallImagePath = journalArticle.getSmallImageURL();
 		String content = journalArticle.getContent();
+				
 		Document document = null;
 		try {
 			document = SAXReaderUtil.read(content);
@@ -84,7 +92,25 @@
 			}
 			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Link_to_Page']/dynamic-content");
 			if (fieldContent != null) {
-				link = fieldContent.getText();
+				String data = fieldContent.getText();
+				String[] layoutDetails = data.split(Character.toString(CharPool.AT));				
+				try {
+					long groupId = Long.parseLong(layoutDetails[2]);
+					Group group = GroupLocalServiceUtil.getGroup(groupId);
+					
+					if (groupId == 0) {
+						groupId = themeDisplay.getScopeGroupId();
+					}
+					
+					boolean privateLayout = !"public".equals(layoutDetails[1]);
+					long layoutId = Long.parseLong(layoutDetails[0]);
+					Layout _layout = LayoutLocalServiceUtil.getLayout(groupId, privateLayout, layoutId);
+
+					link = PortalUtil.getLayoutFriendlyURL(_layout, themeDisplay);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 
 		}
@@ -94,27 +120,26 @@
 	} catch (SystemException e2) {
 		e2.printStackTrace();
 	}
-	
-// 	.span2:nth-child(6n+1) {
-//     	margin-left: 0;
-// 	}
+	System.out.println("columns: "+columns);
+	System.out.println("assetEntryIndex: "+assetEntryIndex);
+	System.out.println(""+((assetEntryIndex+1) % columns));
 %>
 
 
-<c:if test='<%= assetEntryIndex == 0 || ((assetEntryIndex+1) % columns) == 0 %>'>
+<c:if test='<%= assetEntryIndex == 0 %>'>
 	<div class="container">
 	<div class="row">
 </c:if>
 
-
-	<a href="<%= link %>" class="big-link-item <%= layoutColumns %>" style="background-image: url('<%=imagePath %>')">
-		<div class="big-link-item-text-wrapper">
-			<h2 class="big-link-item-text"><%= text %></h2>
-		</div>
-  	</a>
-
+	<div class="<%= layoutColumns %>">
+		<a href="<%= link %>" class="big-link-item" style='<%= Validator.isNotNull(imagePath)?"background-image: url(\""+imagePath+"\")":"" %>'>
+			<div class="big-link-item-text-wrapper">
+				<h2 class="big-link-item-text"><%= title %></h2>
+			</div>
+	  	</a>
+	</div>
 	
-<c:if test='<%= assetEntryIndex == (results.size()-1)  || ((assetEntryIndex+1) % columns) == 0 %>'>
+<c:if test='<%= assetEntryIndex == (results.size()-1) %>'>
 	</div>
 	</div>
 </c:if>
