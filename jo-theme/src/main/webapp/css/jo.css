@@ -49,7 +49,10 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		padding: 0;
 		margin: 0;
 		font-family: merloround_regular,sans-serif;
-		background-color: #FFF;
+/* 		background-color: #FFF; */
+		background: url(../images/bg.jpg) repeat scroll 2% 2% transparent;
+		background-size: 2%;
+		background-color: #F3F3F3;
 	}
 	form {
 	  	margin: 0;
@@ -82,6 +85,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 				font-size: 20px;
 			  	font-weight: 400;
 			  	padding-bottom: 10px;
+			  	padding-top: 10px;
 			}
 			.nav li.active>a {
 			 	 background: none;
@@ -376,7 +380,14 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	
 		
 	}
-		
+	.image-carousel:hover{
+		.slick-prev, .slick-next{
+   			display: block !important;
+		}
+		.slick-dots{
+			display: block !important;
+		}
+	}	
 	.image-carousel{
 		@include box-shadow($defaultShadow);
 		height: 500px;
@@ -392,6 +403,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		  	margin: 0;
 		  	left: 10px;
 		  	width: auto;
+		  	display:none !important;
 		  	li button:before{
 				font-size: 10px;
 				color: white;
@@ -421,6 +433,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 			  width: 60px;
    			  height: 60px;
    			  margin-top: -30px;
+   			  display: none !important;
   			  background-color: rgba(255, 255, 255 ,0.5);
 		}
 		.slick-prev:HOVER,.slick-prev:ACTIVE, .slick-next:HOVER,.slick-next:ACTIVE{
@@ -457,7 +470,8 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		.panel-body{
 			background-color: #FFF;
 			margin-bottom: 10px;
-			border: 1px solid $darkerGray;
+/* 			border: 1px solid $darkerGray; */
+			@include box-shadow($defaultShadow);
 		}
 		.entry-date, .entry-author{
 			background: none;

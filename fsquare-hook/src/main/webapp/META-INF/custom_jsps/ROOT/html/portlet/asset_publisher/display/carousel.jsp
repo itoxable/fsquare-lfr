@@ -37,6 +37,7 @@ String title = (String)request.getAttribute("view.jsp-title");
 String text = "";
 String imagePath = "";
 String secondSection = "";
+String link = "";
 if (Validator.isNull(title)) {
 	title = assetRenderer.getTitle(locale);
 }
