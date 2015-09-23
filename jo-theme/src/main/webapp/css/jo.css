@@ -50,9 +50,9 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		margin: 0;
 		font-family: merloround_regular,sans-serif;
 /* 		background-color: #FFF; */
-		background: url(../images/bg.jpg) repeat scroll 2% 2% transparent;
-		background-size: 2%;
-		background-color: #F3F3F3;
+/* 		background: url(../images/bg.jpg) repeat scroll 2% 2% transparent; */
+/* 		background-size: 2%; */
+/* 		background-color: #F3F3F3; */
 	}
 	form {
 	  	margin: 0;
@@ -69,6 +69,8 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	#wrapper.container-fluid{
 		padding: 0;
 		margin: 0;
+		background: url(../images/bkgrd.png);
+		background-color: rgba(255,255,255,0.5);
 	}
 	#navigation {
 		.navbar-inner {
@@ -80,6 +82,11 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
   		    margin-bottom: 20px;
     		margin-top: 20px;
     		font-family: 'merloround_medium';
+    		font-family: 'merloround_bold';
+    		font-family: 'Bacon Sandwich';
+    		font-family: 'Faith And Glory Two';
+    		border-top: 1px solid;
+    		border-bottom: 1px solid;
     		li a {
 				color: rgb(34, 34, 34);			  	
 				font-size: 20px;
@@ -239,7 +246,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		}
 	}
 	#footer-wrapper{
-		background: #FFF;
+		background-color: rgba(255,255,255,0.5);
 		padding: 20px 0;
 		margin-top: 100px;
 		border-top: 1px solid $darkerGray;
@@ -469,7 +476,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	.portlet-blogs{
 		.panel-body{
 			background-color: #FFF;
-			margin-bottom: 10px;
+			margin-bottom: 30px;
 /* 			border: 1px solid $darkerGray; */
 			@include box-shadow($defaultShadow);
 		}
