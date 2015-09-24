@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.kernel.util.StringPool"%>
 <%@page import="com.liferay.portal.theme.ThemeDisplay"%>
 <%@page import="com.liferay.portal.kernel.util.HtmlUtil"%>
 <%@page import="com.liferay.portal.kernel.util.StringUtil"%>
@@ -31,7 +32,7 @@
 	}
 
 	List results = (List)request.getAttribute("view.jsp-results");
-
+	String portletId = (String)request.getAttribute("view.jsp-portletId");
 	int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 	
 	request.setAttribute("view.jsp-showIconLabel", true);
@@ -44,10 +45,11 @@
 	JournalArticle journalArticle = null;
 	
 	String title = (String)request.getAttribute("view.jsp-title");
-	String text = "";
-	String imagePath = "";
-	String smallImagePath = "";
-	String secondSection = "";
+	String text = StringPool.BLANK;
+	String filterType = StringPool.BLANK;
+	String imagePath = StringPool.BLANK;
+	String smallImagePath = StringPool.BLANK;
+	String secondSection = StringPool.BLANK;
 	
 	if (Validator.isNull(title)) {
 		title = assetRenderer.getTitle(locale);
@@ -82,6 +84,11 @@
 			if (fieldContent != null) {
 				text = fieldContent.getText();
 			}
+			
+			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Filter']/dynamic-content");
+			if (fieldContent != null) {
+				filterType = fieldContent.getText();
+			}
 
 		}
 
@@ -97,26 +104,65 @@
 %>
 
 
-<c:if test='<%= assetEntryIndex == 0 || ((assetEntryIndex+1) % columns) == 0 %>'>
+<c:if test='<%= assetEntryIndex == 0 %>'>
 	<div class="container">
-	<div class="row">
+	
+	<c:if test='<%= Validator.isNotNull(filterSettings) %>'>
+		<div class="row">
+		<div class="span12">
+			<ul class="gallery-filter">
+				<li class="gallery-filter-first">
+		        	<a href="javascript:;" class="gallery-filter-item" data-filter="*">All</a>
+		        </li>
+				<%
+				String[] filtersArr = filterSettings.split(StringPool.SEMICOLON);
+				int index = 1;
+				for(String filter: filtersArr){
+					String[] filterArr = filter.split(StringPool.DASH);
+					%>
+				        <li class='<%= index == filtersArr.length?"gallery-filter-last":StringPool.BLANK %>'>
+				        	<a href="javascript:;" class="gallery-filter-item" data-filter=".<%= filterArr.length>1?filterArr[1]:filterArr[0] %>"><%= filterArr[0] %></a>
+				        </li>
+					<%
+					index++;			
+				}
+				%>
+			</ul>
+		</div>
+		</div>
+	</c:if>
+	<div class="row media-gallery media-gallery-<%=portletId %>" id='media-gallery-<%=portletId %>'>
 </c:if>
 
 
-	<a href="<%= smallImagePath %>" class="gallery-item <%= layoutColumns %>"  data-caption-html="<%= HtmlUtil.escape(text) %>">
-		<div class="gallery-item-poster">
-			<img src="<%= imagePath %>" />
-			
-			<div class="gallery-item-details">
-				<%= text %>
-			</div>
+	<a href="<%= smallImagePath %>" class='gallery-item <%= layoutColumns + " " + filterType%>'  data-caption-html="<%= HtmlUtil.escape(text) %>">
+	<div class="gallery-item-poster">
+		<img src="<%= imagePath %>" />
+		<div class="gallery-item-details">
+			<div><%= title %></div>
 		</div>
-		
-
-  	</a>
+	</div>
+ 	</a>
 
 	
-<c:if test='<%= assetEntryIndex == (results.size()-1)  || ((assetEntryIndex+1) % columns) == 0 %>'>
+<c:if test='<%= assetEntryIndex == (results.size()-1) %>'>
 	</div>
 	</div>
+
+	<script type="text/javascript" charset="utf-8">
+	<c:if test='<%= Validator.isNotNull(filterSettings) %>'>
+		window.mediaGallery<%=portletId %> = $('#media-gallery-<%=portletId %>').isotope({});
+		window.mediaGallery<%=portletId %>.isotope({ filter: '*' })
+		$('.gallery-filter-item').click(function(){
+			var filter = $(this).attr('data-filter');
+			console.log("filter: "+filter);
+			window.mediaGallery<%=portletId %>.isotope({ filter: filter})
+		});
+	</c:if>
+	
+	
+	
+	
+	
+	</script>
 </c:if>

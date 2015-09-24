@@ -13,6 +13,7 @@
  * details.
  */
 --%>
+<%@page import="com.liferay.portal.kernel.util.StringPool"%>
 <%
 
 String carouselSettings = GetterUtil.getString(portletPreferences.getValue("carouselSettings", "{autoplay: true,autoplaySpeed: 5000,dots: true,mobileFirst: true}"));
@@ -20,6 +21,9 @@ String freeLayoutSettings = GetterUtil.getString(portletPreferences.getValue("fr
 String layoutColumns = GetterUtil.getString(portletPreferences.getValue("layoutColumns", "span3"));
 String freeLayoutItemTemplate = GetterUtil.getString(portletPreferences.getValue("freeLayoutItemTemplate", "<a href='[VIEW_URL]' class='free-layout-item-image'><img src='[IMAGE_PATH]'/></a><div class='panel-body free-layout-item-title'><h3 class='panel-title'><a href='[VIEW_URL]'>[TITLE]</a></h3></div><div class='panel-body'><div class='free-layout-item-caption'>[TEXT]</div><a class='btn btn-small free-layout-item-link' href='[VIEW_URL]'>[VIEW_TEXT]</a></div>"));
 String galleryLayoutSettings = GetterUtil.getString(portletPreferences.getValue("galleryLayoutSettings", "{download:false,thumbnail:true}"));
+
+
+String filterSettings = GetterUtil.getString(portletPreferences.getValue("filterSettings", StringPool.BLANK));
 
 
 %>

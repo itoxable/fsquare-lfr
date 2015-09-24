@@ -73,6 +73,10 @@
 		<aui:option label="12" value="span1" selected='<%= layoutColumns.equals("span1") %>' />
 	</aui:select>
 
+	<aui:input cssClass="configuration-text filter-settings hidden-field" style="width: 500px;" helpMessage="filter-fettings-help" name="preferences--filterSettings--" value="<%= filterSettings %>" />
+
+
+
 	<aui:input cssClass="configuration-text free-layout-template hidden-field" style="width: 500px; height: 200px;"
 			helpMessage="free-layout-template-help" id="<portlet:namespace />freeLayoutItemTemplate"
 			name="preferences--freeLayoutItemTemplate--" type="textarea" value="<%= freeLayoutItemTemplate %>" />
@@ -278,7 +282,9 @@
 				var freeLayoutSettings = A.one('.free-layout-settings');
 				var freeLayoutColumns = A.one('.layout-columns');
 				var freeLayoutTemplate = A.one('.free-layout-template');
+				var filterSettings = A.one('.filter-settings');
 				
+				filterSettings.get('parentNode').show();
 				freeLayoutTemplate.get('parentNode').show();
 				freeLayoutColumns.get('parentNode').show();
 				freeLayoutSettings.get('parentNode').show();
@@ -297,7 +303,9 @@
 			}else if (displayStyle == 'media-gallery') {
 				var galleryLayoutSettings = A.one('.gallery-layout-settings');
 				var galleryLayoutColumns = A.one('.layout-columns');
-
+				var filterSettings = A.one('.filter-settings');
+				
+				filterSettings.get('parentNode').show();
 				galleryLayoutSettings.get('parentNode').show();
 				galleryLayoutColumns.get('parentNode').show();
 

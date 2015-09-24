@@ -19,7 +19,7 @@
 
 Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 String portletId = portlet.getPortletId();
-
+request.setAttribute("view.jsp-portletId", portletId);
 //long elementId = System.currentTimeMillis();
 //System.out.println("displayStyle: "+displayStyle); 
 
@@ -38,6 +38,7 @@ if(layoutColumns.equals("span12")){
 	columns = 12; 
 }	
 
+
 if(displayStyle.equals("carousel")) {
 %>
 <div class="container">
@@ -47,10 +48,6 @@ if(displayStyle.equals("carousel")) {
 <% } else if(displayStyle.equals("free-layout")) {%>
 	
 	<div class="free-layout free-layout-<%=portletId %>">
-
-<% }else if(displayStyle.equals("media-gallery")) {%>
-
-	<div class="media-gallery media-gallery-<%=portletId %>" id='media-gallery-<%=portletId %>'>
 
 <% } %>
 
@@ -126,39 +123,5 @@ if(displayStyle.equals("carousel")) {
 
 <% } else if(displayStyle.equals("media-gallery")) { %>
 	</div>
-	<script type="text/javascript" charset="utf-8">
 	
-// 	var pswp = jQuery('.pswp');
-// 	if(!pswp || pswp.length == 0){
-// 		jQuery('body').append('<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button><button class="pswp__button pswp__button--share" title="Share"></button><button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button><button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button><button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div> </div></div>')
-// 	}
-	
-	$('#media-gallery-<%=portletId %> > .row').magnificPopup({
-		delegate: 'a',
-		type: 'image',
-		tLoading: 'Loading image #%curr%...',
-		mainClass: 'mfp-img-mobile',
-		gallery: {
-			enabled: true,
-			navigateByImgClick: true,
-			preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-		},
-		image: {
-			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
-			titleSrc: function(item) {
-				return item.el.attr('data-caption-html');
-			}
-		},
-		zoom: {
-			enabled: true,
-			duration: 300, // don't foget to change the duration also in CSS
-			opener: function(element) {
-				return element.find('img');
-			}
-		}
-	});
-	
-	
-	
-	</script>
 <% } %>
