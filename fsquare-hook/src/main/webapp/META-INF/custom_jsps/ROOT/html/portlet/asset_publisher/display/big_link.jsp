@@ -61,9 +61,15 @@
 	}
 	
 	String viewURL = AssetPublisherHelperImpl.getAssetViewURL(liferayPortletRequest, liferayPortletResponse, assetEntry, viewInContext);
-
+	String editURL = null;
 	try {
-	
+		if(assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker())){
+			PortletURL renderURL = liferayPortletResponse.createRenderURL();
+			renderURL.setWindowState(LiferayWindowState.POP_UP);
+			renderURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
+			PortletURL editPortletURL = assetRenderer.getURLEdit(liferayPortletRequest, liferayPortletResponse, LiferayWindowState.POP_UP, renderURL);
+			editURL = HtmlUtil.escapeURL(editPortletURL.toString());
+		}
         journalArticleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(assetEntry.getClassPK());
         journalArticle = JournalArticleLocalServiceUtil.getArticle(assetEntry.getGroupId(), journalArticleResource.getArticleId());
         
@@ -132,6 +138,14 @@
 </c:if>
 
 	<div class="<%= layoutColumns %>">
+		<c:if test='<%= Validator.isNotNull(editURL) %>'>
+			<div class="lfr-meta-actions asset-actions" style="float: none;">
+				<a class="fa fa-pencil-square edit-button" target="_self" href=
+				"javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'<%= liferayPortletResponse.getNamespace() %>editAsset', title: '<%= title %>', uri:'<%= editURL %>'});">
+					Edit
+				</a>
+			</div>
+		</c:if>
 		<a href="<%= link %>" class="big-link-item" style='<%= Validator.isNotNull(imagePath)?"background-image: url(\""+imagePath+"\")":"" %>'>
 			<div class="big-link-item-text-wrapper">
 				<h2 class="big-link-item-text"><%= title %></h2>

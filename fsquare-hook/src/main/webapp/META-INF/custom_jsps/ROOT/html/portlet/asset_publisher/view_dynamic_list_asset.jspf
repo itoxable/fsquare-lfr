@@ -119,9 +119,5 @@ if(displayStyle.equals("carousel")) {
 	</div>
 	<script type="text/javascript" charset="utf-8">
 	    jQuery('.free-layout-<%= portletId %> > .row').isotope(<%= freeLayoutSettings %>);
-	</script>
-
-<% } else if(displayStyle.equals("media-gallery")) { %>
-	</div>
-	
+	</script>	
 <% } %>

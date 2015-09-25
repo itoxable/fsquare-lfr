@@ -20,14 +20,18 @@
 	<liferay-ui:icon-list>
 
 		<%
+		int width = 100/(PropsValues.LOGIN_FORM_NAVIGATION_PRE.length-1);
+		System.out.println("width: "+width);
+		System.out.println("size: "+(PropsValues.LOGIN_FORM_NAVIGATION_PRE.length-1));
 		for (String section : PropsValues.LOGIN_FORM_NAVIGATION_PRE) {
 		%>
-			<liferay-util:include page='<%= "/html/portlet/login/navigation/" + _getSectionJsp(section) + ".jsp" %>' portletId="<%= portletDisplay.getRootPortletId() %>" />
-
+			<div class="social-wrapper" style="width: <%= width %>%">
+				<liferay-util:include page='<%= "/html/portlet/login/navigation/" + _getSectionJsp(section) + ".jsp" %>' portletId="<%= portletDisplay.getRootPortletId() %>" />
+			</div>
 		<%
 		}
 		%>
-
+		<div style="clear: both"></div>
 		
 
 	</liferay-ui:icon-list>
@@ -47,7 +51,7 @@ social = social.trim();
 
 <%!
 private String _getSectionJsp(String name) {
-	System.out.println("XXX: "+name);
+	//System.out.println("XXX: "+name);
 	return TextFormatter.format(name, TextFormatter.N);
 }
 %>

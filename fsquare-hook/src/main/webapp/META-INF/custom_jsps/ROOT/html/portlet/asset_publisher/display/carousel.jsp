@@ -56,68 +56,88 @@ String editTitle = null;
 }
 
 */
+
+String editURL = null;
+
 try {
-        journalArticleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(assetEntry.getClassPK());
-        journalArticle = JournalArticleLocalServiceUtil.getArticle(assetEntry.getGroupId(), journalArticleResource.getArticleId());
-            
-		String content = journalArticle.getContent();
-		Document document = null;
-		try {
-			document = SAXReaderUtil.read(content);
-		} catch (Exception de) {
-			de.printStackTrace();
-		}
-
-		if (Validator.isNotNull(document)) {
-			Node fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Image']/dynamic-content");
-			if (fieldContent != null) {
-				imagePath = fieldContent.getText();
-			}
-			
-			fieldContent = document
-					.selectSingleNode("//*/dynamic-element[@name='Text']/dynamic-content");
-			if (fieldContent != null) {
-				text = fieldContent.getText();
-			}
-			
-			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Link_to_Page']/dynamic-content");
-			if (fieldContent != null) {
-				String data = fieldContent.getText();
-				String[] layoutDetails = data.split(Character.toString(CharPool.AT));				
-				try {
-					long groupId = Long.parseLong(layoutDetails[2]);
-					Group group = GroupLocalServiceUtil.getGroup(groupId);
-					
-					if (groupId == 0) {
-						groupId = themeDisplay.getScopeGroupId();
-					}
-					
-					boolean privateLayout = !"public".equals(layoutDetails[1]);
-					long layoutId = Long.parseLong(layoutDetails[0]);
-					Layout _layout = LayoutLocalServiceUtil.getLayout(groupId, privateLayout, layoutId);
-
-					link = PortalUtil.getLayoutFriendlyURL(_layout, themeDisplay);
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			
-						
-		}
-
-	} catch (PortalException e2) {
-		// TODO Auto-generated catch block
-		e2.printStackTrace();
-	} catch (SystemException e2) {
-		// TODO Auto-generated catch block
-		e2.printStackTrace();
+	
+	if(assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker())){
+		PortletURL renderURL = liferayPortletResponse.createRenderURL();
+		renderURL.setWindowState(LiferayWindowState.POP_UP);
+		renderURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
+		PortletURL editPortletURL = assetRenderer.getURLEdit(liferayPortletRequest, liferayPortletResponse, LiferayWindowState.POP_UP, renderURL);
+		editURL = HtmlUtil.escapeURL(editPortletURL.toString());
 	}
+    journalArticleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(assetEntry.getClassPK());
+    journalArticle = JournalArticleLocalServiceUtil.getArticle(assetEntry.getGroupId(), journalArticleResource.getArticleId());
+           
+	String content = journalArticle.getContent();
+	Document document = null;
+	try {
+		document = SAXReaderUtil.read(content);
+	} catch (Exception de) {
+		de.printStackTrace();
+	}
+
+	if (Validator.isNotNull(document)) {
+		Node fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Image']/dynamic-content");
+		if (fieldContent != null) {
+			imagePath = fieldContent.getText();
+		}
+		
+		fieldContent = document
+				.selectSingleNode("//*/dynamic-element[@name='Text']/dynamic-content");
+		if (fieldContent != null) {
+			text = fieldContent.getText();
+		}
+		
+		fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Link_to_Page']/dynamic-content");
+		if (fieldContent != null) {
+			String data = fieldContent.getText();
+			String[] layoutDetails = data.split(Character.toString(CharPool.AT));				
+			try {
+				long groupId = Long.parseLong(layoutDetails[2]);
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+				
+				if (groupId == 0) {
+					groupId = themeDisplay.getScopeGroupId();
+				}
+				
+				boolean privateLayout = !"public".equals(layoutDetails[1]);
+				long layoutId = Long.parseLong(layoutDetails[0]);
+				Layout _layout = LayoutLocalServiceUtil.getLayout(groupId, privateLayout, layoutId);
+
+				link = PortalUtil.getLayoutFriendlyURL(_layout, themeDisplay);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+					
+	}
+
+} catch (PortalException e2) {
+	// TODO Auto-generated catch block
+	e2.printStackTrace();
+} catch (SystemException e2) {
+	// TODO Auto-generated catch block
+	e2.printStackTrace();
+}
 %>
 
 
 
 <div class="image-carousel-wrapper" style="background-image: url('<%=imagePath %>')">
+
+	<c:if test='<%= Validator.isNotNull(editURL) %>'>
+		<div class="lfr-meta-actions asset-actions" style="float: none;">
+			<a class="fa fa-pencil-square edit-button" target="_self" href="javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'<%= liferayPortletResponse.getNamespace() %>editAsset', title: '<%= title %>', uri:'<%= editURL %>'});">
+				Edit
+			</a>
+		</div>
+	</c:if>
+
 	<c:if test='<%= editTitle != null && !editTitle.equals("") %>'>
 	<liferay-ui:icon image="edit" label="<%= true %>" message='Edit' 
    		url="javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'<%=renderResponse.getNamespace()%> editAsset', title: '<%= editTitle %>', uri:'<%= HtmlUtil.escapeURL(editPortletURL.toString())%>'});"

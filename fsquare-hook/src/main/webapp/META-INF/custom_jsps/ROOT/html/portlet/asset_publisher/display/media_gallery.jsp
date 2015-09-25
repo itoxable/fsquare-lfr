@@ -1,3 +1,9 @@
+<%@page import="javax.portlet.PortletURL"%>
+<%@page import="com.liferay.portal.kernel.portlet.LiferayPortletResponse"%>
+<%@page import="com.liferay.portlet.asset.model.AssetEntry"%>
+<%@page import="com.liferay.portlet.asset.model.AssetRenderer"%>
+<%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
+<%@page import="javax.portlet.WindowState"%>
 <%@page import="com.liferay.portal.kernel.util.StringPool"%>
 <%@page import="com.liferay.portal.theme.ThemeDisplay"%>
 <%@page import="com.liferay.portal.kernel.util.HtmlUtil"%>
@@ -56,9 +62,18 @@
 	}
 	
 	String viewURL = AssetPublisherHelperImpl.getAssetViewURL(liferayPortletRequest, liferayPortletResponse, assetEntry, viewInContext);
+	String editURL = null;
+	
 
 	try {
-	
+		if(assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker())){
+			PortletURL renderURL = liferayPortletResponse.createRenderURL();
+			renderURL.setWindowState(LiferayWindowState.POP_UP);
+			renderURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
+			PortletURL editPortletURL = assetRenderer.getURLEdit(liferayPortletRequest, liferayPortletResponse, LiferayWindowState.POP_UP, renderURL);
+			editURL = HtmlUtil.escapeURL(editPortletURL.toString());
+		}
+		
         journalArticleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(assetEntry.getClassPK());
         journalArticle = JournalArticleLocalServiceUtil.getArticle(assetEntry.getGroupId(), journalArticleResource.getArticleId());
         //System.out.println("journalArticle.getSmallImageURL(): "+journalArticle.getSmallImageURL());
@@ -98,18 +113,15 @@
 		e2.printStackTrace();
 	}
 	
-// 	.span2:nth-child(6n+1) {
-//     	margin-left: 0;
-// 	}
 %>
 
 
 <c:if test='<%= assetEntryIndex == 0 %>'>
-	<div class="container">
 	
 	<c:if test='<%= Validator.isNotNull(filterSettings) %>'>
 		<div class="row">
 		<div class="span12">
+			<div class="filter-separator"></div>
 			<ul class="gallery-filter">
 				<li class="gallery-filter-first">
 		        	<a href="javascript:;" class="gallery-filter-item" data-filter="*">All</a>
@@ -134,35 +146,41 @@
 	<div class="row media-gallery media-gallery-<%=portletId %>" id='media-gallery-<%=portletId %>'>
 </c:if>
 
-
-	<a href="<%= smallImagePath %>" class='gallery-item <%= layoutColumns + " " + filterType%>'  data-caption-html="<%= HtmlUtil.escape(text) %>">
-	<div class="gallery-item-poster">
-		<img src="<%= imagePath %>" />
-		<div class="gallery-item-details">
-			<div><%= title %></div>
-		</div>
+	<div class='<%= layoutColumns + " " + filterType %>'>
+		<c:if test='<%= Validator.isNotNull(editURL) %>'>
+			<div class="lfr-meta-actions asset-actions" style="float: none;">
+				<a class="fa fa-pencil-square edit-button" target="_self" href=
+				"javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'<%= liferayPortletResponse.getNamespace() %>editAsset', title: '<%= title %>', uri:'<%= editURL %>'});">
+					Edit
+				</a>
+			</div>
+		</c:if>
+		<a href="<%= viewURL %>" class='gallery-item '>
+			<div class="gallery-item-poster">
+				<img src="<%= imagePath %>"></img>
+				<div class="gallery-item-details">
+					<div><%= title %></div>
+				</div>
+			</div>
+	 	</a>
 	</div>
- 	</a>
-
 	
 <c:if test='<%= assetEntryIndex == (results.size()-1) %>'>
-	</div>
 	</div>
 
 	<script type="text/javascript" charset="utf-8">
 	<c:if test='<%= Validator.isNotNull(filterSettings) %>'>
-		window.mediaGallery<%=portletId %> = $('#media-gallery-<%=portletId %>').isotope({});
-		window.mediaGallery<%=portletId %>.isotope({ filter: '*' })
+		
+		$('#media-gallery-<%=portletId %>').ready(function() {
+			window.mediaGallery<%=portletId %> = $('#media-gallery-<%=portletId %>').isotope({});
+		});
+		/*window.mediaGallery<%=portletId %>.isotope({ filter: '*' })*/
 		$('.gallery-filter-item').click(function(){
 			var filter = $(this).attr('data-filter');
 			console.log("filter: "+filter);
 			window.mediaGallery<%=portletId %>.isotope({ filter: filter})
 		});
 	</c:if>
-	
-	
-	
-	
 	
 	</script>
 </c:if>
