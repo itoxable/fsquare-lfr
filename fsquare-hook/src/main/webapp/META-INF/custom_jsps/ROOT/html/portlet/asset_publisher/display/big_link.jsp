@@ -55,6 +55,7 @@
 	String link = "";
 	String imagePath = "";
 	String smallImagePath = "";
+	String rows = layoutColumns;
 	
 	if (Validator.isNull(title)) {
 		title = assetRenderer.getTitle(locale);
@@ -95,6 +96,10 @@
 			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Text']/dynamic-content");
 			if (fieldContent != null) {
 				text = fieldContent.getText();
+			}
+			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Rows']/dynamic-content");
+			if (fieldContent != null) {
+				rows = fieldContent.getText();
 			}
 			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Link_to_Page']/dynamic-content");
 			if (fieldContent != null) {
@@ -137,7 +142,7 @@
 	<div class="row">
 </c:if>
 
-	<div class="<%= layoutColumns %>">
+	<div class="<%= rows %> big-link-wrapper">
 		<c:if test='<%= Validator.isNotNull(editURL) %>'>
 			<div class="lfr-meta-actions asset-actions" style="float: none;">
 				<a class="fa fa-pencil-square edit-button" target="_self" href=
