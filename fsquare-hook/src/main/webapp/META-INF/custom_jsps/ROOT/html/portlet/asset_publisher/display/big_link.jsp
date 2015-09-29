@@ -56,7 +56,7 @@
 	String imagePath = "";
 	String smallImagePath = "";
 	String rows = layoutColumns;
-	
+	double priority = assetEntry.getPriority();
 	if (Validator.isNull(title)) {
 		title = assetRenderer.getTitle(locale);
 	}
@@ -134,6 +134,7 @@
 	System.out.println("columns: "+columns);
 	System.out.println("assetEntryIndex: "+assetEntryIndex);
 	System.out.println(""+((assetEntryIndex+1) % columns));
+	
 %>
 
 
@@ -143,14 +144,22 @@
 </c:if>
 
 	<div class="<%= rows %> big-link-wrapper">
-		<c:if test='<%= Validator.isNotNull(editURL) %>'>
+		
+		<c:if test='<%= assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker()) %>'>
 			<div class="lfr-meta-actions asset-actions" style="float: none;">
-				<a class="fa fa-pencil-square edit-button" target="_self" href=
-				"javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'<%= liferayPortletResponse.getNamespace() %>editAsset', title: '<%= title %>', uri:'<%= editURL %>'});">
-					Edit
-				</a>
+				<c:if test='<%= Validator.isNotNull(editURL) %>'>
+					<a class="fa fa-pencil-square edit-button" target="_self" href=
+					"javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'<%= liferayPortletResponse.getNamespace() %>editAsset', title: '<%= title %>', uri:'<%= editURL %>'});">
+						Edit
+					</a>
+				</c:if>
+				<div class="inline-priority-set-wrapper">
+					<input type="number" name="priority" id="<portlet:namespace />priority_input<%= journalArticle.getId() %>" value="<%= priority %>" maxlength="3" size="3"></input>
+					<a class="priority-button" onclick="<portlet:namespace />changePriority(<%= assetEntry.getEntryId() %>,<%= journalArticle.getId() %>)"><i class="fa fa-chevron-circle-right"></i></a>
+				</div>
 			</div>
 		</c:if>
+		
 		<a href="<%= link %>" class="big-link-item" style='<%= Validator.isNotNull(imagePath)?"background-image: url(\""+imagePath+"\")":"" %>'>
 			<div class="big-link-item-text-wrapper">
 				<h2 class="big-link-item-text"><%= title %></h2>

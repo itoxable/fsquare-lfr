@@ -254,3 +254,44 @@ if ((total == 0) && (portletDisplayDDMTemplateId == 0)) {
 <%
 }
 %>
+
+<liferay-portlet:resourceURL var="changePriorityURL" >
+	<portlet:param name="struts_action" value="/asset_publisher/prioritize" />
+</liferay-portlet:resourceURL>
+
+<aui:script use="aui-base,selector-css3,aui-io-request">
+	
+	Liferay.provide(window, '<portlet:namespace />changePriority',
+		function(assetEntryId, assetId) {
+			var input = A.one('#<portlet:namespace />priority_input'+assetId);
+			console.log('#<portlet:namespace />priority_input'+assetId);
+			console.log('Val: '+input.val());
+        	A.io.request('<%= changePriorityURL %>',{
+                  dataType: 'json',
+                  method: 'POST',
+                  data: {
+                  	<portlet:namespace />assetEntryId: assetEntryId,
+                  	<portlet:namespace />id: assetId,
+                  	<portlet:namespace />priority: input.val()
+                  },
+                  on: {
+                      success: function() {
+                      	var response = this.get('responseData');
+                      	if(response.success){
+                      		console.log(response.success);
+                      		input.removeClass('error');
+							input.addClass('success');
+                      	}else{
+                      		console.log(response.success);
+                      		input.addClass('error');
+							input.removeClass('success');
+                      	}
+                      }
+                  }
+            });
+			
+        },
+        ['aui-base,selector-css3']
+    );
+    
+</aui:script>

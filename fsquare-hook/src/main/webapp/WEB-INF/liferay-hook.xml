@@ -5,16 +5,12 @@
 	<portal-properties>portal.properties</portal-properties>
 	<language-properties>Language.properties</language-properties>
     <custom-jsp-dir>/META-INF/custom_jsps/ROOT</custom-jsp-dir>
+    
     <struts-action>
 		<struts-action-path>/portal/google_login</struts-action-path>
 		<struts-action-impl>com.liferay.google.login.hook.action.GoogleLoginAction</struts-action-impl>
 	</struts-action>
-<!-- 	<struts-action> -->
-<!-- 	    <struts-action-path>/asset_publisher/reorder</struts-action-path> -->
-<!-- 	    <struts-action-impl> -->
-<!-- 	    	com.geoplace.action.ReorderAction -->
-<!-- 	    </struts-action-impl> -->
-<!-- 	</struts-action> -->
+
 	<struts-action>
 	    <struts-action-path>/journal/prioritize</struts-action-path>
 	    <struts-action-impl>
@@ -24,6 +20,13 @@
 	
 	<struts-action>
 	    <struts-action-path>/document_library/prioritize</struts-action-path>
+	    <struts-action-impl>
+	    	com.fsquare.action.PrioritizeAction
+	    </struts-action-impl>
+	</struts-action>
+	
+	<struts-action>
+	    <struts-action-path>/asset_publisher/prioritize</struts-action-path>
 	    <struts-action-impl>
 	    	com.fsquare.action.PrioritizeAction
 	    </struts-action-impl>

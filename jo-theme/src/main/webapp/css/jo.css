@@ -626,4 +626,38 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	.btn-primary{
 	
 	}
+	
+	.inline-priority-set-wrapper:HOVER{
+		@include opacity(1);
+	}
+	.inline-priority-set-wrapper{
+		display: inline-block;
+		@include box-shadow(0 3px 7px rgba(0,0,0,0.3));
+		@include opacity(0.6);
+		@include border-radius(2px);
+		padding: 0 2px;
+		background-color:  rgb(255, 194, 0);
+		input{
+			margin: 0;
+			margin-left: 2px;
+			width: 37px;
+			height: 16px;
+			font-size: 12px;
+			padding: 0 2px;
+			border: 0;
+			background: transparent; 
+		}
+		input.error{
+			color: rgb(181, 3, 3);
+		}
+		input.success{
+			color: rgb(72, 143, 6);
+		}
+		input:FOCUS{
+			background-color: #FFF;
+		}
+		a.priority-button{
+			display: inline-block;
+		}
+	}
 }
