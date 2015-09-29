@@ -14,7 +14,24 @@
  */
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.liferay.portal.model.Layout"%>
+<%@page import="com.liferay.portlet.expando.NoSuchTableException"%>
+<%@page import="com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil"%>
+<%@page import="com.liferay.portlet.expando.model.ExpandoValue"%>
+<%@page import="java.util.List"%>
+<%@page import="com.liferay.portlet.expando.model.ExpandoRow"%>
+<%@page import="com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil"%>
+<%@page import="com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil"%>
+<%@page import="com.liferay.portlet.expando.model.ExpandoTable"%>
+<%@page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil"%>
+<%@page import="com.liferay.portlet.expando.model.ExpandoColumnConstants"%>
+<%@page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure"%>
+<%@page import="com.liferay.portal.theme.ThemeDisplay"%>
+<%@page import="com.liferay.portal.service.LayoutLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.util.KeyValuePair"%>
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
+
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -60,6 +77,36 @@ if (Validator.isNotNull(script)) {
 		scriptJSONArray = DDMXSDUtil.getJSONArray(script);
 	}
 }
+
+ExpandoTable expandoTable = null;
+String databaseTableName = "DDMStructure_displayPage";
+String structureLayoutUuid = null;
+
+try {
+	expandoTable = ExpandoTableLocalServiceUtil.getTable(themeDisplay.getCompanyId(), DDMStructure.class.getName(), databaseTableName);
+	if (structure != null) {
+		Object object = ExpandoValueLocalServiceUtil.getData(themeDisplay.getCompanyId(), DDMStructure.class.getName(), databaseTableName, "DisplayPage", structure.getStructureId(), StringPool.BLANK);
+		if(object != null){
+			structureLayoutUuid = (String)object;
+		}
+	}
+}
+catch (NoSuchTableException e) {}
+
+List<KeyValuePair> layoutsKeyValuePair = new ArrayList<KeyValuePair>();
+try {
+	List<Layout> layoutsTemp = LayoutLocalServiceUtil.getLayouts(themeDisplay.getDoAsGroupId(), false);
+	for(Layout lay : layoutsTemp){
+		if(lay.isContentDisplayPage()){
+			layoutsKeyValuePair.add(new KeyValuePair(lay.getUuid(), getLayoutBreadcrumb(lay, locale)));
+		}
+	}
+} catch (SystemException e) {
+	e.printStackTrace();
+} catch (Exception e) {
+	e.printStackTrace();
+}
+
 %>
 
 <portlet:actionURL var="editStructureURL">
@@ -214,6 +261,34 @@ if (Validator.isNotNull(requestEditStructureURL)) {
 						<aui:button name="removeParentStructureButton" onClick='<%= renderResponse.getNamespace() + "removeParentStructure();" %>' value="remove" />
 					</div>
 				</aui:field-wrapper>
+				
+				<aui:field-wrapper label='default-display-page' >
+				
+					<fieldset <%= structure == null?"disabled":StringPool.BLANK %> >
+						<div class="form-inline priority-set-wrapper">
+							
+							<aui:select label="" name="displayPage" >
+								<aui:option value='' >Select...</aui:option>
+								<%
+								for (KeyValuePair keyValuePair : layoutsKeyValuePair) {
+								%>
+									<aui:option selected='<%= keyValuePair.getKey().equals(structureLayoutUuid) %>' value='<%= keyValuePair.getKey()%>' >
+										<%= keyValuePair.getValue() %>
+									</aui:option>
+								<%
+								}
+								%>
+							</aui:select>
+							
+							<button <%= structure == null?"disabled":StringPool.BLANK %> type="button" class="btn btn-primary" id="<portlet:namespace />display_page_button">Set Display Page</button>
+							<div class="priority-result-message" style="margin-left: 0;">
+								<span class="alert"></span>
+							</div>
+						</div>
+					</fieldset>	
+				
+				</aui:field-wrapper>
+				
 
 				<c:if test="<%= structure != null %>">
 					<aui:field-wrapper label="url">
@@ -294,3 +369,91 @@ if (Validator.isNotNull(requestEditStructureURL)) {
 		['aui-base', 'liferay-portlet-dynamic-data-mapping']
 	);
 </aui:script>
+
+<liferay-portlet:resourceURL var="changeDisplayPageURL" >
+	<portlet:param name="struts_action" value="/dynamic_data_mapping/structure_display_page" />
+</liferay-portlet:resourceURL>
+
+<aui:script use="aui-base,selector-css3,aui-io-request">
+	
+	var button = A.one('#<portlet:namespace />display_page_button');
+	button.on('click', function(event) {
+		<portlet:namespace />changeDisplayPage();
+	});
+
+	Liferay.provide(window, '<portlet:namespace />changeDisplayPage',
+		function() {
+			var input = A.one('#<portlet:namespace />displayPage');
+			
+			var prioritySetWrapper = A.one('.priority-set-wrapper');
+			prioritySetWrapper.removeClass('error');
+			prioritySetWrapper.removeClass('success');
+		
+			var alert = prioritySetWrapper.one('.alert');
+			alert.set('text', '');
+			
+        	A.io.request('<%= changeDisplayPageURL %>',{
+                  dataType: 'json',
+                  method: 'POST',
+                  data: {
+                  	<portlet:namespace />structureId: '<%= structure==null?"":structure.getStructureId() %>',
+                  	<portlet:namespace />displayPageUuid: input.val()
+                  },
+                  on: {
+                      success: function() {
+                      	var response = this.get('responseData');
+                      	alert.set('text', response.message)
+                      	if(response.success){
+                      		console.log(response.success);
+                      		prioritySetWrapper.addClass('success');                      		
+                      	}else{
+                      		console.log(response.success);
+                      		prioritySetWrapper.addClass('error');                      		
+                      	}
+                      }
+                  }
+            });
+			
+        },
+        ['aui-base,selector-css3']
+    );
+    
+</aui:script>
+
+<%!
+
+public String getLayoutBreadcrumb(Layout layout, Locale locale) throws Exception {
+	StringBundler sb = new StringBundler();
+
+	layout = layout.toEscapedModel();
+
+	if (layout.isPrivateLayout()) {
+		sb.append(LanguageUtil.get(locale, "private-pages"));
+	}
+	else {
+		sb.append(LanguageUtil.get(locale, "public-pages"));
+	}
+
+	sb.append(StringPool.SPACE);
+	sb.append(StringPool.GREATER_THAN);
+	sb.append(StringPool.SPACE);
+
+	List<Layout> ancestors = layout.getAncestors();
+
+	Collections.reverse(ancestors);
+
+	for (Layout ancestor : ancestors) {
+		ancestor = ancestor.toEscapedModel();
+
+		sb.append(ancestor.getName(locale));
+		sb.append(StringPool.SPACE);
+		sb.append(StringPool.GREATER_THAN);
+		sb.append(StringPool.SPACE);
+	}
+
+	sb.append(layout.getName(locale));
+
+	return sb.toString();
+}
+
+%>
