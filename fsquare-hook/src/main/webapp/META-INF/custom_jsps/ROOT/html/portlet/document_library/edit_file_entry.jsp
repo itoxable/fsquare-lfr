@@ -45,9 +45,18 @@ long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String extension = BeanParamUtil.getString(fileEntry, request, "extension");
 
 Folder folder = null;
-
+AssetEntry assetEntry = null;
+double priority = 0;
+long assetId = 0;
 if (fileEntry != null) {
 	folder = fileEntry.getFolder();
+	
+	assetId = fileEntry.getFileEntryId();
+	
+	assetEntry = AssetEntryLocalServiceUtil.getEntry(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+	if(assetEntry != null){
+		priority = assetEntry.getPriority();
+	}
 }
 
 if ((folder == null) && (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
@@ -327,6 +336,16 @@ if ((checkedOut || pending) && !PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) {
 				}
 			</aui:validator>
 		</aui:input>
+		
+		<fieldset <%= fileEntry == null?"disabled":StringPool.BLANK %> >
+			<div class="form-inline priority-set-wrapper">
+				<aui:input type="number" name="priority" id="priority_input" value="<%= priority %>"></aui:input>
+				<button <%= fileEntry == null?"disabled":StringPool.BLANK %> type="button" class="btn btn-primary" id="<portlet:namespace />priority_button">Set priority</button>
+				<div class="priority-result-message" >
+					<span class="alert"></span>
+				</div>
+			</div>
+		</fieldset>	
 
 		<c:if test="<%= ((folder == null) || folder.isSupportsMetadata()) %>">
 			<aui:input name="description" />
@@ -539,6 +558,57 @@ if ((checkedOut || pending) && !PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) {
 	function <portlet:namespace />validateTitle() {
 		Liferay.Form.get('<portlet:namespace />fm').formValidator.validateField('<portlet:namespace />title');
 	}
+</aui:script>
+
+<liferay-portlet:resourceURL var="changePriorityURL" >
+	<portlet:param name="struts_action" value="/document_library/prioritize" />
+</liferay-portlet:resourceURL>
+
+<aui:script use="aui-base,selector-css3,aui-io-request">
+	
+	var button = A.one('#<portlet:namespace />priority_button');
+	button.on('click', function(event) {
+		<portlet:namespace />changePriority();
+	});
+
+	Liferay.provide(window, '<portlet:namespace />changePriority',
+		function() {
+			var input = A.one('#<portlet:namespace />priority_input');
+			
+			var prioritySetWrapper = A.one('.priority-set-wrapper');
+			prioritySetWrapper.removeClass('error');
+			prioritySetWrapper.removeClass('success');
+		
+			var alert = prioritySetWrapper.one('.alert');
+			alert.set('text', '');
+			
+        	A.io.request('<%= changePriorityURL %>',{
+                  dataType: 'json',
+                  method: 'POST',
+                  data: {
+                  	<portlet:namespace />assetEntryId: '<%= assetEntry == null?"":assetEntry.getEntryId() %>',
+                  	<portlet:namespace />id: '<%= assetId %>',
+                  	<portlet:namespace />priority: input.val()
+                  },
+                  on: {
+                      success: function() {
+                      	var response = this.get('responseData');
+                      	alert.set('text', response.message)
+                      	if(response.success){
+                      		console.log(response.success);
+                      		prioritySetWrapper.addClass('success');                      		
+                      	}else{
+                      		console.log(response.success);
+                      		prioritySetWrapper.addClass('error');                      		
+                      	}
+                      }
+                  }
+            });
+			
+        },
+        ['aui-base,selector-css3']
+    );
+    
 </aui:script>
 
 <%

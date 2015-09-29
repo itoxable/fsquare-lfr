@@ -78,7 +78,9 @@ String toLanguageId = (String)request.getAttribute("edit_article.jsp-toLanguageI
 String content = ParamUtil.getString(request, "articleContent");
 
 boolean preselectCurrentLayout = false;
-
+double priority = 0;
+long assetId = 0;
+AssetEntry assetEntry = null;
 if (article != null) {
 	if (Validator.isNull(content)) {
 		content = article.getContent();
@@ -89,6 +91,11 @@ if (article != null) {
 		else {
 			content = JournalArticleImpl.getContentByLocale(content, Validator.isNotNull(structureId), defaultLanguageId);
 		}
+	}
+	assetId = article.getId();
+	assetEntry = AssetEntryLocalServiceUtil.getEntry(JournalArticle.class.getName(), article.getResourcePrimKey());
+	if(assetEntry != null){
+		priority = assetEntry.getPriority();
 	}
 }
 else {
@@ -414,6 +421,17 @@ if (Validator.isNotNull(content)) {
 					<aui:validator name="required" />
 				</c:if>
 			</aui:input>
+			
+			<fieldset <%= article == null?"disabled":StringPool.BLANK %> >
+				<div class="form-inline priority-set-wrapper">
+					<aui:input type="number" name="priority" id="priority_input" value="<%= priority %>"></aui:input>
+					<button <%= article == null?"disabled":StringPool.BLANK %> type="button" class="btn btn-primary" id="<portlet:namespace />priority_button">Set priority</button>
+					<div class="priority-result-message" >
+						<span class="alert"></span>
+					</div>
+				</div>
+			</fieldset>
+			
 		</div>
 
 		<div class="journal-article-container" id="<portlet:namespace />journalArticleContainer">
@@ -752,6 +770,57 @@ if (Validator.isNotNull(content)) {
 			);
 		}
 	</c:if>
+</aui:script>
+
+<liferay-portlet:resourceURL var="changePriorityURL" >
+	<portlet:param name="struts_action" value="/journal/prioritize" />
+</liferay-portlet:resourceURL>
+
+<aui:script use="aui-base,selector-css3,aui-io-request">
+	
+	var button = A.one('#<portlet:namespace />priority_button');
+	button.on('click', function(event) {
+		<portlet:namespace />changePriority();
+	});
+
+	Liferay.provide(window, '<portlet:namespace />changePriority',
+		function() {
+			var input = A.one('#<portlet:namespace />priority_input');
+			
+			var prioritySetWrapper = A.one('.priority-set-wrapper');
+			prioritySetWrapper.removeClass('error');
+			prioritySetWrapper.removeClass('success');
+		
+			var alert = prioritySetWrapper.one('.alert');
+			alert.set('text', '');
+			
+        	A.io.request('<%= changePriorityURL %>',{
+                  dataType: 'json',
+                  method: 'POST',
+                  data: {
+                  	<portlet:namespace />assetEntryId: '<%= assetEntry == null?"":assetEntry.getEntryId() %>',
+                  	<portlet:namespace />id: '<%= assetId %>',
+                  	<portlet:namespace />priority: input.val()
+                  },
+                  on: {
+                      success: function() {
+                      	var response = this.get('responseData');
+                      	alert.set('text', response.message)
+                      	if(response.success){
+                      		console.log(response.success);
+                      		prioritySetWrapper.addClass('success');                      		
+                      	}else{
+                      		console.log(response.success);
+                      		prioritySetWrapper.addClass('error');                      		
+                      	}
+                      }
+                  }
+            });
+			
+        },
+        ['aui-base,selector-css3']
+    );
+    
 </aui:script>
 
 <%!

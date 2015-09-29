@@ -15,5 +15,24 @@
 <!-- 	    	com.geoplace.action.ReorderAction -->
 <!-- 	    </struts-action-impl> -->
 <!-- 	</struts-action> -->
+	<struts-action>
+	    <struts-action-path>/journal/prioritize</struts-action-path>
+	    <struts-action-impl>
+	    	com.fsquare.action.PrioritizeAction
+	    </struts-action-impl>
+	</struts-action>
 	
+	<struts-action>
+	    <struts-action-path>/document_library/prioritize</struts-action-path>
+	    <struts-action-impl>
+	    	com.fsquare.action.PrioritizeAction
+	    </struts-action-impl>
+	</struts-action>
+	
+	<struts-action>
+	    <struts-action-path>/dynamic_data_mapping/structure_display_page</struts-action-path>
+	    <struts-action-impl>
+	    	com.fsquare.action.StructureDisplayPageAction
+	    </struts-action-impl>
+	</struts-action>
 </hook>
