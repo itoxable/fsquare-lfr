@@ -131,9 +131,9 @@
 	} catch (SystemException e2) {
 		e2.printStackTrace();
 	}
-	System.out.println("columns: "+columns);
-	System.out.println("assetEntryIndex: "+assetEntryIndex);
-	System.out.println(""+((assetEntryIndex+1) % columns));
+// 	System.out.println("columns: "+columns);
+// 	System.out.println("assetEntryIndex: "+assetEntryIndex);
+// 	System.out.println(""+((assetEntryIndex+1) % columns));
 	
 %>
 

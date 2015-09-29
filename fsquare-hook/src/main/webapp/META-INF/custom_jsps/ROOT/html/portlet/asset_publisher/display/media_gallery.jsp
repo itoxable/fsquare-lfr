@@ -63,7 +63,8 @@
 	
 	String viewURL = AssetPublisherHelperImpl.getAssetViewURL(liferayPortletRequest, liferayPortletResponse, assetEntry, viewInContext);
 	String editURL = null;
-	
+// 	System.out.println("viewInContext: "+viewInContext);
+// 	System.out.println("viewURL: "+viewURL);
 
 	try {
 		if(assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker())){

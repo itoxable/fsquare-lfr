@@ -257,11 +257,11 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	}
 	.gallery-item:HOVER{
 		.gallery-item-details{
-/* 			display: block; */
-    		-webkit-animation-name: gallery-show-details;
-    		-webkit-animation-duration: 2s;
-    		animation-name: gallery-show-details;
-    		animation-duration: 2s;
+			display: block;
+/*     		-webkit-animation-name: gallery-show-details; */
+/*     		-webkit-animation-duration: 2s; */
+/*     		animation-name: gallery-show-details; */
+/*     		animation-duration: 2s; */
     		
 		}
 	}
