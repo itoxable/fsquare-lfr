@@ -52,6 +52,17 @@ PortletPreferences portletPreferences = PortletPreferencesLocalServiceUtil.getSt
 
 PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getStrictLayoutPortletSetup(layout, portletId);
 
+UnicodeProperties typeSettingsProperties = layout.getTypeSettingsProperties();
+String defaultAssetPublisherPortletId = typeSettingsProperties.getProperty(LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID, StringPool.BLANK);
+HttpServletRequest originalRequest = PortalUtil.getOriginalServletRequest(request);
+String strutsAction = originalRequest.getParameter("_"+defaultAssetPublisherPortletId+"_struts_action");
+boolean hideTop = (strutsAction != null && strutsAction.equals("/asset_publisher/view_content"));
+boolean hideOnPublisherDetails = Boolean.parseBoolean(portletPreferences.getValue("hideOnPublisherDetails", "false")) ;
+
+if(hideOnPublisherDetails && hideTop){
+	return;
+}
+
 Group group = null;
 boolean privateLayout = false;
 
