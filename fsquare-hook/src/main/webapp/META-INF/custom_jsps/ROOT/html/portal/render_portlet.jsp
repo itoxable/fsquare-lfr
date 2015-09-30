@@ -148,7 +148,7 @@ catch (RuntimeException re) {
 	re.printStackTrace();
 }
 
-HttpServletRequest originalRequest = PortalUtil.getOriginalServletRequest(request);
+//HttpServletRequest originalRequest = PortalUtil.getOriginalServletRequest(request);
 
 RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(originalRequest, portlet, invokerPortlet, portletCtx, windowState, portletMode, portletPreferences, plid);
 

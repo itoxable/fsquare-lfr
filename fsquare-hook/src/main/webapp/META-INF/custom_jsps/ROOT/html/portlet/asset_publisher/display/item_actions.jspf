@@ -1,0 +1,15 @@
+<div class="lfr-meta-actions asset-actions" style="float: none;">
+	<c:if test='<%= Validator.isNotNull(editURL) %>'>
+		<a class="fa fa-pencil-square asset-action-button" target="_self" href="javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'<%= liferayPortletResponse.getNamespace() %>editAsset', title: '<%= title %>', uri:'<%= editURL %>'});">
+			Edit
+		</a>
+	</c:if>
+	<div class="inline-priority-set-wrapper">
+		<input type="number" name="priority" id="<portlet:namespace />priority_input<%= journalArticle.getId() %>" value="<%= priority %>" maxlength="3" size="3"></input>
+		<a class="priority-button" onclick="<portlet:namespace />changePriority(<%= assetEntry.getEntryId() %>,<%= journalArticle.getId() %>)"><i class="fa fa-chevron-circle-right"></i></a>
+	</div>
+	
+	<a class="fa fa-trash asset-action-button" href="javascript:;" onclick="<portlet:namespace />deleteAsset(<%= journalArticle.getId() %>)">Delete</a>
+	
+</div>
+

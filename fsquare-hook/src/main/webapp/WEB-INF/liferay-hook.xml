@@ -33,6 +33,13 @@
 	</struts-action>
 	
 	<struts-action>
+	    <struts-action-path>/asset_publisher/delete</struts-action-path>
+	    <struts-action-impl>
+	    	com.fsquare.action.DeleteAssetAction
+	    </struts-action-impl>
+	</struts-action>
+	
+	<struts-action>
 	    <struts-action-path>/dynamic_data_mapping/structure_display_page</struts-action-path>
 	    <struts-action-impl>
 	    	com.fsquare.action.StructureDisplayPageAction

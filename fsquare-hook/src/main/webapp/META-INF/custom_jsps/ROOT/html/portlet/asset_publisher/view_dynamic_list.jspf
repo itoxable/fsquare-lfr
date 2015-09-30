@@ -259,6 +259,11 @@ if ((total == 0) && (portletDisplayDDMTemplateId == 0)) {
 	<portlet:param name="struts_action" value="/asset_publisher/prioritize" />
 </liferay-portlet:resourceURL>
 
+<liferay-portlet:resourceURL var="deleteAssetURL" >
+	<portlet:param name="struts_action" value="/asset_publisher/delete" />
+</liferay-portlet:resourceURL>
+
+
 <aui:script use="aui-base,selector-css3,aui-io-request">
 	
 	Liferay.provide(window, '<portlet:namespace />changePriority',
@@ -285,6 +290,30 @@ if ((total == 0) && (portletDisplayDDMTemplateId == 0)) {
                       		console.log(response.success);
                       		input.addClass('error');
 							input.removeClass('success');
+                      	}
+                      }
+                  }
+            });
+			
+        },
+        ['aui-base,selector-css3']
+    );
+    
+    Liferay.provide(window, '<portlet:namespace />deleteAsset',
+		function(id) {
+        	A.io.request('<%= deleteAssetURL %>',{
+                  dataType: 'json',
+                  method: 'POST',
+                  data: {
+                  	<portlet:namespace />id: id,
+                  },
+                  on: {
+                      success: function() {
+                      	var response = this.get('responseData');
+                      	if(response.success){
+                      		console.log(response.success);
+                      	}else{
+                      		console.log(response.success);
                       	}
                       }
                   }

@@ -148,19 +148,9 @@
 </c:if>
 
 	<div class='<%= layoutColumns + " " + filterType %>'>
+		
 		<c:if test='<%= assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker()) %>'>
-			<div class="lfr-meta-actions asset-actions" style="float: none;">
-				<c:if test='<%= Validator.isNotNull(editURL) %>'>
-					<a class="fa fa-pencil-square edit-button" target="_self" href=
-					"javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'<%= liferayPortletResponse.getNamespace() %>editAsset', title: '<%= title %>', uri:'<%= editURL %>'});">
-						Edit
-					</a>
-				</c:if>
-				<div class="inline-priority-set-wrapper">
-					<input type="number" name="priority" id="<portlet:namespace />priority_input<%= journalArticle.getId() %>" value="<%= priority %>" maxlength="3" size="3"></input>
-					<a class="priority-button" onclick="<portlet:namespace />changePriority(<%= assetEntry.getEntryId() %>,<%= journalArticle.getId() %>)"><i class="fa fa-chevron-circle-right"></i></a>
-				</div>
-			</div>
+			<%@ include file="/html/portlet/asset_publisher/display/item_actions.jspf" %>
 		</c:if>
 		
 		<a href="<%= viewURL %>" class='gallery-item '>

@@ -18,13 +18,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.asset.model.AssetEntry;
-import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 
 
@@ -41,54 +35,29 @@ public class DeleteAssetAction extends BaseStrutsPortletAction {
         JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
         
         jsonObject.put("success", false);
-        
-        Long assetEntryId = ParamUtil.getLong(resourceRequest, "assetEntryId");
-        
+
         ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
         Locale locale = themeDisplay.getLocale();
         ServiceContext serviceContext = new ServiceContext();
-        String articleURL = "";
-        String articleId = "";
-        Long fileEntryId = 0L;
-        JournalArticleServiceUtil.deleteArticle(themeDisplay.getScopeGroupId(), articleId, articleURL, serviceContext);
-        DLAppServiceUtil.deleteFileEntry(fileEntryId);
-        
-//        Double priority = ParamUtil.getDouble(resourceRequest, "priority", 0);
-//
-//        Long id = ParamUtil.getLong(resourceRequest, "id");
-//        
-//        ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
-//        Locale locale = themeDisplay.getLocale();
-//
-//        if(Validator.isNull(assetEntryId) || assetEntryId.equals(0L)){
-//        	jsonObject.put("message", LanguageUtil.get(locale, "asset-not-found"));
-//        }else{
-//        	
-//	        try{
-//		        AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(assetEntryId);
-//		        if(!assetEntry.isNew()){
-//		            assetEntry.setPriority(priority);
-//			        assetEntry = AssetEntryLocalServiceUtil.updateAssetEntry(assetEntry);
-//			        
-//			        if(DLFileEntry.class.getName().equals(assetEntry.getClassName())){
-//			        	DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.fetchDLFileEntry(id);
-//			        	DLFileEntryLocalServiceUtil.updateDLFileEntry(dlFileEntry);			        
-//			        
-//			        }else if(JournalArticle.class.getName().equals(assetEntry.getClassName())){
-//			        	JournalArticle journalArticle = JournalArticleLocalServiceUtil.getArticle(id);
-//			        	JournalArticleLocalServiceUtil.updateJournalArticle(journalArticle);
-//			        }
-//			       
-//			        jsonObject.put("success", true);
-//			        jsonObject.put("message", LanguageUtil.get(locale, "asset-priority-updated"));
-//		        }else{
-//		        	jsonObject.put("message", LanguageUtil.get(locale, "asset-not-found"));
-//		        }
-//	        }catch(Exception e){
-//	        	e.printStackTrace();
-//	        	jsonObject.put("message", LanguageUtil.get(locale, "asset-priority-set-error"));
-//	        }
-//        }
+
+        Long id = ParamUtil.getLong(resourceRequest, "id");
+        System.out.println("id: "+id);
+        if(Validator.isNull(id) || id.equals(0L)){
+        	jsonObject.put("message", LanguageUtil.get(locale, "asset-not-found"));
+        }else{
+	        try{
+		       
+	        	JournalArticle journalArticle = JournalArticleServiceUtil.getArticle(id);
+	        	JournalArticleServiceUtil.deleteArticle(themeDisplay.getScopeGroupId(), journalArticle.getArticleId(), journalArticle.getUrlTitle(), serviceContext);
+
+		        jsonObject.put("success", true);
+		        jsonObject.put("message", LanguageUtil.get(locale, "asset-deleted"));
+		        
+	        }catch(Exception e){
+	        	e.printStackTrace();
+	        	jsonObject.put("message", LanguageUtil.get(locale, "asset-priority-set-error"));
+	        }
+        }
         
         writer.print(jsonObject.toString());
         writer.flush();
