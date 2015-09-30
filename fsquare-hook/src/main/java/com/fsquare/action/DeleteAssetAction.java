@@ -48,8 +48,11 @@ public class DeleteAssetAction extends BaseStrutsPortletAction {
 	        try{
 		       
 	        	JournalArticle journalArticle = JournalArticleServiceUtil.getArticle(id);
-	        	JournalArticleServiceUtil.deleteArticle(themeDisplay.getScopeGroupId(), journalArticle.getArticleId(), journalArticle.getUrlTitle(), serviceContext);
-
+	        	
+	        	//JournalArticleServiceUtil.deleteArticle(themeDisplay.getScopeGroupId(), journalArticle.getArticleId(), journalArticle.getUrlTitle(), serviceContext);
+	        	
+	        	JournalArticleServiceUtil.moveArticleToTrash(themeDisplay.getScopeGroupId(), journalArticle.getArticleId());
+	        	
 		        jsonObject.put("success", true);
 		        jsonObject.put("message", LanguageUtil.get(locale, "asset-deleted"));
 		        
