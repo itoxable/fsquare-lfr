@@ -129,17 +129,13 @@ try {
 
 
 
-<div class="image-carousel-wrapper" style="background-image: url('<%=imagePath %>')">
+<div class="image-carousel-wrapper" style="background-image: url('<%=imagePath %>')" id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>">
 
 	<c:if test='<%= assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker()) %>'>
 		<%@ include file="/html/portlet/asset_publisher/display/item_actions.jspf" %>
 	</c:if>
 
-	<c:if test='<%= editTitle != null && !editTitle.equals("") %>'>
-	<liferay-ui:icon image="edit" label="<%= true %>" message='Edit' 
-   		url="javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'<%=renderResponse.getNamespace()%> editAsset', title: '<%= editTitle %>', uri:'<%= HtmlUtil.escapeURL(editPortletURL.toString())%>'});"
-	/>
-    </c:if>
+	
 	<c:if test='<%= text != null && !text.equals("") %>'>
         <div class="image-carousel-caption"><%=text %></div>
     </c:if>

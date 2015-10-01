@@ -187,10 +187,10 @@ boolean showAssetTitle = GetterUtil.getBoolean(portletPreferences.getValue("show
 boolean showContextLink = GetterUtil.getBoolean(portletPreferences.getValue("showContextLink", null), true);
 int abstractLength = GetterUtil.getInteger(portletPreferences.getValue("abstractLength", null), 200);
 String assetLinkBehavior = GetterUtil.getString(portletPreferences.getValue("assetLinkBehavior", "viewInPortlet"));
-String orderByColumn1 = GetterUtil.getString(portletPreferences.getValue("orderByColumn1", "modifiedDate"));
-String orderByColumn2 = GetterUtil.getString(portletPreferences.getValue("orderByColumn2", "title"));
+String orderByColumn1 = GetterUtil.getString(portletPreferences.getValue("orderByColumn1", "priority"));
+String orderByColumn2 = GetterUtil.getString(portletPreferences.getValue("orderByColumn2", "modifiedDate"));
 String orderByType1 = GetterUtil.getString(portletPreferences.getValue("orderByType1", "DESC"));
-String orderByType2 = GetterUtil.getString(portletPreferences.getValue("orderByType2", "ASC"));
+String orderByType2 = GetterUtil.getString(portletPreferences.getValue("orderByType2", "DESC"));
 boolean excludeZeroViewCount = GetterUtil.getBoolean(portletPreferences.getValue("excludeZeroViewCount", null));
 
 int delta = GetterUtil.getInteger(portletPreferences.getValue("delta", null), SearchContainer.DEFAULT_DELTA);

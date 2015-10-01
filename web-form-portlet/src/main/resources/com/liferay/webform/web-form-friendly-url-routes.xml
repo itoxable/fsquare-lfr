@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.2.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_2_0.dtd">
+
+<routes>
+	<route>
+		<pattern>/{instanceId}/data_util</pattern>
+		<implicit-parameter name="javax.portlet.action">/getData</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/{instanceId}/saved/{uniqueId}</pattern>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_auth">0</implicit-parameter>
+		<implicit-parameter name="javax.portlet.action">getTempData</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/{instanceId}/modify/{uniqueId}</pattern>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_auth">0</implicit-parameter>
+		<implicit-parameter name="javax.portlet.action">modifyData</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/{instanceId}/show</pattern>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_state">pop_up</implicit-parameter>
+		<implicit-parameter name="p_p_state_rcv">1</implicit-parameter>
+		<implicit-parameter name="p_p_auth">0</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/{instanceId}/submit</pattern>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+		<implicit-parameter name="p_p_auth">0</implicit-parameter>
+		<implicit-parameter name="p_p_mode">view</implicit-parameter>
+		<implicit-parameter name="javax.portlet.action">saveTempData</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/{instanceId}/save</pattern>
+		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+		<implicit-parameter name="p_p_auth">0</implicit-parameter>
+		<implicit-parameter name="p_p_mode">view</implicit-parameter>
+		<implicit-parameter name="javax.portlet.action">saveData</implicit-parameter>
+	</route>
+</routes>

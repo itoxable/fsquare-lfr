@@ -1,0 +1,222 @@
+.portlet-configuration .lfr-panel-content {
+  padding: 0 1em; }
+.portlet-configuration fieldset.rows-container {
+  border-width: 0;
+  margin-top: 0; }
+.portlet-configuration .editing-disabled dt {
+  color: #999;
+  float: left;
+  font-weight: bold;
+  width: 9em; }
+.portlet-configuration .lfr-form-row .field {
+  margin-left: 2em; }
+.portlet-configuration .lfr-form-row .field.onselect-script {
+  margin-left: 0; }
+.portlet-configuration .lfr-form-row .field.options, .portlet-configuration .lfr-form-row .validation .field {
+  clear: both;
+  display: block; }
+.portlet-configuration .lfr-form-row .field-title {
+  color: #000;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 3px; }
+.portlet-configuration .syntax-help {
+  margin: 2em 0 0 2em; }
+.portlet-configuration .validation {
+  clear: left; }
+.portlet-configuration .label-name .field-wrapper-content {
+  margin-top: 0; }
+.portlet-configuration .label-name input, .portlet-configuration .options input {
+  width: 200px; }
+
+.portlet-configuration.web-form-portlet {
+  background-color: rgba(0, 0, 0, 0);
+  font-family: AvenirNextLTW01-Medium, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 200; }
+
+.web-form-portlet {
+  position: relative;
+  background-color: #ececec;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400; }
+  .web-form-portlet form {
+    position: relative;
+    margin: 0 30px; }
+    .web-form-portlet form .form-wrapper {
+      padding: 35px 0;
+      color: #111; }
+      .web-form-portlet form .form-wrapper legend.fieldset-legend {
+        display: none; }
+      .web-form-portlet form .form-wrapper .trainning-form-onsite-fields {
+        display: none; }
+      .web-form-portlet form .form-wrapper .form-head {
+        margin: 1%; }
+        .web-form-portlet form .form-wrapper .form-head h2#form-title {
+          margin-top: 0;
+          margin-bottom: 35px; }
+        .web-form-portlet form .form-wrapper .form-head p.description {
+          /* 					font-weight: 400; */
+          margin-bottom: 30px;
+          font-size: 16px; }
+      .web-form-portlet form .form-wrapper .form-body .field-wrapper {
+        margin: 1%;
+        margin-bottom: 6px;
+        width: 48%;
+        overflow: hidden; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper.field-type-text, .web-form-portlet form .form-wrapper .form-body .field-wrapper.field-type-options, .web-form-portlet form .form-wrapper .form-body .field-wrapper.field-type-email {
+          float: left; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper.field-type-checkbox, .web-form-portlet form .form-wrapper .form-body .field-wrapper.field-type-dateTime, .web-form-portlet form .form-wrapper .form-body .field-wrapper.field-type-fileupload, .web-form-portlet form .form-wrapper .form-body .field-wrapper.field-type-richText, .web-form-portlet form .form-wrapper .form-body .field-wrapper.field-type-paragraph, .web-form-portlet form .form-wrapper .form-body .field-wrapper.field-type-radio {
+          clear: both;
+          width: 100%; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper.field-type-paragraph p {
+          font-size: 16px; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper label {
+          font-weight: 700;
+          color: #111;
+          font-size: 16px;
+          margin-bottom: 10px; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper label.checkbox, .web-form-portlet form .form-wrapper .form-body .field-wrapper label.radio {
+          font-weight: 300;
+          margin-left: 1px; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper input[type="text"], .web-form-portlet form .form-wrapper .form-body .field-wrapper input[type="email"], .web-form-portlet form .form-wrapper .form-body .field-wrapper select, .web-form-portlet form .form-wrapper .form-body .field-wrapper textarea {
+          /* 						border: 1px solid transparent; */
+          padding: 10px;
+          height: 40px;
+          width: 100%;
+          box-sizing: border-box;
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          -ms-border-radius: 0;
+          -o-border-radius: 0;
+          border-radius: 0;
+          font-family: 'Lato', sans-serif;
+          font-weight: 400;
+          font-size: 16px;
+          margin-bottom: 0;
+          color: #303030; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper textarea {
+          height: 120px; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper .input-error {
+          border: 1px solid #b50303 !important; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper input:FOCUS, .web-form-portlet form .form-wrapper .form-body .field-wrapper textarea:FOCUS {
+          padding: 10px;
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          -ms-border-radius: 0;
+          -o-border-radius: 0;
+          border-radius: 0; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper select {
+          height: 40px;
+          line-height: 40px; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper select.field-blank-option {
+          color: #8d8d8d; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper .control-group {
+          margin: 0; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper .alert-wrapper {
+          height: 14px;
+          margin-top: 2px; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper .alert {
+          display: inline-block;
+          margin: 0;
+          background: none;
+          padding: 0;
+          border: 0;
+          text-shadow: none;
+          -webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          -ms-border-radius: 0;
+          -o-border-radius: 0;
+          border-radius: 0;
+          font-size: 13px;
+          vertical-align: top;
+          line-height: 14px; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper input::input-placeholder, .web-form-portlet form .form-wrapper .form-body .field-wrapper input::-webkit-input-placeholder, .web-form-portlet form .form-wrapper .form-body .field-wrapper input:-moz-placeholder, .web-form-portlet form .form-wrapper .form-body .field-wrapper input::-moz-placeholder, .web-form-portlet form .form-wrapper .form-body .field-wrapper input:-ms-input-placeholder {
+          color: #b4b4b4; }
+      .web-form-portlet form .form-wrapper .form-body button.btn-primary {
+        font-family: 'Avenir Next W01 Light';
+        font-size: 15px;
+        border: none;
+        background: none;
+        background-color: #00425b;
+        text-shadow: none;
+        padding: 10px 15px; }
+  .web-form-portlet fieldset legend {
+    display: none; }
+  .web-form-portlet form:AFTER {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 10px;
+    margin: 0 1%; }
+  .web-form-portlet .date-time-group span.lfr-input-date {
+    display: inline-block; }
+  .web-form-portlet .date-time-group span.lfr-input-date input[type="text"] {
+    width: 150px; }
+  .web-form-portlet .date-time-group span.lfr-input-time {
+    display: inline-block; }
+  .web-form-portlet .date-time-group span.lfr-input-time input[type="text"] {
+    width: 100px; }
+  .web-form-portlet .field-type-hidden {
+    display: none !important; }
+  .web-form-portlet .wizard-step {
+    display: none; }
+  .web-form-portlet .wizard-step-active {
+    display: block; }
+
+.btn.wizard-button, .btn.wizard-button:HOVER, .btn.wizard-button:FOCUS {
+  color: #FFF;
+  background: none;
+  background-color: #00425b;
+  text-shadow: none;
+  font-family: 'Lato';
+  font-weight: 300;
+  font-size: 16px;
+  padding: 10px 20px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  border: none; }
+
+@media (max-width: 1279px) {
+  .web-form-portlet form {
+    margin: 0 15px; }
+    .web-form-portlet form .form-wrapper {
+      padding: 20px 0; }
+      .web-form-portlet form .form-wrapper .form-head {
+        margin: 0; }
+        .web-form-portlet form .form-wrapper .form-head h2#form-title {
+          margin-bottom: 20px; }
+      .web-form-portlet form .form-wrapper .form-body .field-wrapper {
+        margin: 0;
+        margin-bottom: 10px;
+        width: 100%;
+        overflow: hidden; }
+        .web-form-portlet form .form-wrapper .form-body .field-wrapper.field-type-text, .web-form-portlet form .form-wrapper .form-body .field-wrapper.field-type-options {
+          float: none; }
+  .web-form-portlet form:AFTER {
+    margin: 0; }
+
+  /*.web-form-portlet{
+  	form{
+  		margin: 0 15px;
+  		.form-wrapper{
+  			padding: 20px 0;
+  			.form-head{
+  				margin: 0;
+  				h2#form-title{
+  					margin-bottom: 20px;
+  				}
+  			}
+  			.form-body{
+  				.field-wrapper{
+  					&.field-type-text, &.field-type-options {
+  						float: none;
+  					}
+  				}
+  			} 
+  		}
+  	}
+  } */ }
+

@@ -147,7 +147,7 @@
 	<div class="row media-gallery media-gallery-<%=portletId %>" id='media-gallery-<%=portletId %>'>
 </c:if>
 
-	<div class='<%= layoutColumns + " " + filterType %>'>
+	<div class='<%= layoutColumns + " " + filterType %>' id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>">
 		
 		<c:if test='<%= assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker()) %>'>
 			<%@ include file="/html/portlet/asset_publisher/display/item_actions.jspf" %>

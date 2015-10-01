@@ -9,7 +9,7 @@
 		<a class="priority-button" onclick="<portlet:namespace />changePriority(<%= assetEntry.getEntryId() %>,<%= journalArticle.getId() %>)"><i class="fa fa-chevron-circle-right"></i></a>
 	</div>
 	
-	<a class="fa fa-trash asset-action-button" href="javascript:;" onclick="<portlet:namespace />deleteAsset(<%= journalArticle.getId() %>)">Delete</a>
+	<a class="fa fa-trash asset-action-button" data-entry-id="<%= assetEntry.getEntryId() %>" href="javascript:;" onclick="<portlet:namespace />deleteAsset('<%= assetEntry.getEntryId() %>', '<%= journalArticle.getId() %>')">Delete</a>
 	
 </div>
 

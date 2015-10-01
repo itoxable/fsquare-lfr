@@ -1,4 +1,4 @@
-function debug(x){
+function debug(a,b,c,d,e){
 	var xx;
 }
 

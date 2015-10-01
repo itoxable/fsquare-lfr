@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.2.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_2_0.dtd">
+
+<hook>
+	<language-properties>Language.properties</language-properties>
+	
+<!-- 	<struts-action> -->
+<!-- 	    <struts-action-path>/web_form/data_util</struts-action-path> -->
+<!-- 	    <struts-action-impl> -->
+<!-- 	    	com.liferay.webform.action.WebFormUtilAction -->
+<!-- 	    </struts-action-impl> -->
+<!-- 	</struts-action> -->
+	
+</hook>
