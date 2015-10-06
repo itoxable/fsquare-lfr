@@ -66,6 +66,23 @@
 // 	System.out.println("viewInContext: "+viewInContext);
 // 	System.out.println("viewURL: "+viewURL);
 
+
+// <img alt="Main Image" src="${Main_Image.getData()}" />
+// ${Text.getData()}
+// ${Price.getData()}
+// ${Filter.getData()}
+// <#if Images.getSiblings()?has_content>
+// 	<#list Images.getSiblings() as cur_Images>
+// 		<img alt="Images" src="${cur_Images.getData()}" />
+// 	</#list>
+// </#if>
+// ${Quantity.getData()}
+// ${Type.getData()}
+// ${Size.getData()}
+// ${Author.getData()}
+
+
+
 	try {
 		if(assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker())){
 			PortletURL renderURL = liferayPortletResponse.createRenderURL();
@@ -88,7 +105,7 @@
 		}
 
 		if (Validator.isNotNull(document)) {
-			Node fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Image']/dynamic-content");
+			Node fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Main_Image']/dynamic-content");
 			if (fieldContent != null) {
 				imagePath = fieldContent.getText();
 				if(Validator.isNull(smallImagePath)){
@@ -123,24 +140,24 @@
 		<div class="row">
 		<div class="span12">
 			<div class="filter-separator"></div>
-			<ul class="gallery-filter">
-				<li class="gallery-filter-first">
+			<div class="gallery-filter">
+				<span class="gallery-filter-first">
 		        	<a href="javascript:;" class="gallery-filter-item" data-filter="*">All</a>
-		        </li>
+		        </span>
 				<%
 				String[] filtersArr = filterSettings.split(StringPool.SEMICOLON);
 				int index = 1;
 				for(String filter: filtersArr){
 					String[] filterArr = filter.split(StringPool.DASH);
 					%>
-				        <li class='<%= index == filtersArr.length?"gallery-filter-last":StringPool.BLANK %>'>
+				        <span class='<%= index == filtersArr.length?"gallery-filter-last":StringPool.BLANK %>'>
 				        	<a href="javascript:;" class="gallery-filter-item" data-filter=".<%= filterArr.length>1?filterArr[1]:filterArr[0] %>"><%= filterArr[0] %></a>
-				        </li>
+				        </span>
 					<%
 					index++;			
 				}
 				%>
-			</ul>
+			</div>
 		</div>
 		</div>
 	</c:if>
