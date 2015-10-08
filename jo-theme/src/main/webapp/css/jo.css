@@ -5,10 +5,10 @@
 @import url(merloround.css);
 @import url(safina.css);
 @import url(faith-glory.css);
-@import url(slick/slick.css);
-@import url(slick/slick-theme.css);
 @import url(jquery.cookiebar.css);
 
+@import 'slick/slick';
+@import 'slick/slick-theme';
 @import 'magnific/main';
 /* @import 'photoswipe/main'; */
 /* @import 'photoswipe/default-skin/default-skin'; */
@@ -664,19 +664,45 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	
 	
 	.product{
+	    background-color: #3498db;
 		background-color: #FFF;
-/* 			border: 1px solid $darkerGray; */
+
 		@include box-shadow($defaultShadow);
 		.product-gallery{
-			.product-main-image{}
-			.product-images{}
+			margin: 30px 20px;
+			.product-main-image{
+				.product-main-image-item{
+					margin: 5px;
+					@include box-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+				}
+			}
+			.product-images{
+				.product-images-item{
+					margin: 4px;
+					border: 2px solid transparent;
+				}
+				.slick-center{
+					border: 2px solid purple;
+				}
+			}
 		}
-		.product-details{}
-		.product-details-title{}
-		.product-details-author{}
-		.product-details-text{}
+		.product-details{
+			margin: 30px 20px;
+		 	font-size: 16px;
+			.product-details-title{}
+			.product-details-author{
+				.product-details-author-name{
+					font-weight: bold;
+					color: purple;
+					margin-left: 5px;
+				}
+			}
+			.product-details-text{}
+		}
+		
 	}
-	
+	.add-to-cart-button{
+	}
 
 	
 	
