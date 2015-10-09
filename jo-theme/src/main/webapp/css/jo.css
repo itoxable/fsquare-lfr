@@ -6,6 +6,7 @@
 @import url(safina.css);
 @import url(faith-glory.css);
 @import url(jquery.cookiebar.css);
+@import url(lightbox.css);
 
 @import 'slick/slick';
 @import 'slick/slick-theme';
@@ -202,7 +203,10 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		margin: 0;
 	}
 	.portlet-column{
-
+		&.span12{
+/* 			padding: 0; */
+			
+		}
 	}
 	
   	.portlet, .portlet-borderless-container {
@@ -672,25 +676,38 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 			margin: 30px 20px;
 			.product-main-image{
 				.product-main-image-item{
+					display: block;
 					margin: 5px;
 					@include box-shadow(0 0 5px rgba(0, 0, 0, 0.5));
 				}
 			}
 			.product-images{
 				.product-images-item{
-					margin: 4px;
-					border: 2px solid transparent;
+					margin: 6px;
+					a{
+/* 						height: 60px; */
+/* 						width: 60px; */
+						background-repeat: no-repeat;
+						-webkit-background-size: cover;
+						background-size: cover;
+						display: block;
+  
+					}
 				}
 				.slick-center{
-					border: 2px solid purple;
+					@include box-shadow(0 0 8px rgba(0,0,0,0.8));
 				}
 			}
 		}
 		.product-details{
 			margin: 30px 20px;
 		 	font-size: 16px;
+		 	.product-details-price{
+		 		margin: 20px 0;
+		 	}
 			.product-details-title{}
 			.product-details-author{
+				margin: 20px 0;
 				.product-details-author-name{
 					font-weight: bold;
 					color: purple;
