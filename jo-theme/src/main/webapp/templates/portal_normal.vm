@@ -19,6 +19,7 @@
 		#js("$javascript_folder/vendor/slick.js")
 		#js("$javascript_folder/vendor/isotope.pkgd.js")
 		#js("$javascript_folder/vendor/fit-columns.js")	
+		#js("$javascript_folder/vendor/layzr.js")
 		
 		#set ($js_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$javascript_folder/vendor/jquery.magnific-popup.js")))
 		#js ("$js_file")

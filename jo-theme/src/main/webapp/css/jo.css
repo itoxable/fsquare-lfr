@@ -5,12 +5,15 @@
 @import url(merloround.css);
 @import url(safina.css);
 @import url(faith-glory.css);
+@import url(stringbeans.css);
+@import url(hunterswood.css);
 @import url(jquery.cookiebar.css);
 @import url(lightbox.css);
 
 @import 'slick/slick';
 @import 'slick/slick-theme';
-@import 'magnific/main';
+/* @import 'magnific/main'; */
+
 /* @import 'photoswipe/main'; */
 /* @import 'photoswipe/default-skin/default-skin'; */
 
@@ -85,6 +88,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		font-family: 'safina_script';
 		font-family: 'safina_fancy';
 		line-height: 80px;
+		padding: 20px 20px;
 	}
 	a.asset-action-button{
 		background-color:  rgb(255, 194, 0);
@@ -147,6 +151,9 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
     		font-family: 'merloround_bold';
     		font-family: 'Bacon Sandwich';
     		font-family: 'FaithAndGloryTwo';
+    		font-family: Stringbeans;
+    		font-family: Hunterswood;
+    		
     		border-top: 1px solid;
     		border-bottom: 1px solid;
     		li a {
@@ -192,9 +199,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 				z-index: 1;
 				right: -15px;
 				top: -15px;
-				
 				@include box-shadow(0 3px 7px rgba(0,0,0,0.3));
-				
 			}
 		}
 	}
@@ -203,9 +208,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		margin: 0;
 	}
 	.portlet-column{
-		&.span12{
-/* 			padding: 0; */
-			
+		&.span12{		
 		}
 	}
 	
@@ -258,8 +261,10 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 				background-color: rgba(0,0,0,0.8);
 				.big-link-item-text{
 					color: #FFF;
-	/* 				font-family: 'merloround_bold';  */
+	 				font-family: 'merloround_bold';  
 					font-family: 'FaithAndGloryTwo';  
+					font-family: Stringbeans;
+  					font-family: Hunterswood;
 					margin-left: 20px;
 					font-size: 30px;
 				}
@@ -513,7 +518,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		  	width: auto;
 		  	display:none !important;
 		  	li button:before{
-				font-size: 10px;
+				font-size: 30px;
 				color: white;
 			}
 			li.slick-active button:before {
@@ -553,6 +558,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		.slick-prev:HOVER,.slick-prev:ACTIVE, .slick-next:HOVER,.slick-next:ACTIVE{
 			 background-color: rgba(255, 255,255,1);
 		}
+		
 		.slick-prev:before, .slick-next:before {
 		  	font-family: 'FontAwesome';
 		  	display: block;
@@ -596,6 +602,8 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		}
 		.entry-title{
 			margin-bottom: 0;
+			font-family: Stringbeans;
+  			font-family: Hunterswood;
 		}
 		.entry-body{
 			border-top: 1px solid $lightGray;
@@ -652,11 +660,13 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	.page-header {
   		border: none;
   		font-family: FaithAndGloryTwo;
+  		font-family: Stringbeans;
+  		font-family: Hunterswood;
 	}
 	.btn{
 		@include box-shadow(none);
 		background-image: none !important;
-		border: 0
+		border: 0;
 	}
 	.btn-primary{
 	
@@ -682,16 +692,60 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 				}
 			}
 			.product-images{
+			
+				.product-images-button{
+					background-color: rgb(255,255,255);
+					position: absolute;
+				    display: block;
+				    height: 40px;
+				    width: 20px;
+				    line-height: 0;
+				    font-size: 0;
+				    cursor: pointer;
+				    top: 50%;
+				    margin-top: -20px;
+				    padding: 0;
+				    border: 0;
+				    outline: 0;
+				}
+				.product-images-button:HOVER, .product-images-button:ACTIVE{
+					background-color: rgba(255, 255,255,1);
+				}
+				.product-images-button:before {
+					font-family: 'FontAwesome';
+					display: block;
+					font-size:25px;
+					line-height: 40px;
+					color: black;
+				}
+				.product-images-button-prev{
+					left: 0;
+				}
+				.product-images-button-next{
+					right: 0
+				}
+				
+				.product-images-button-prev:before{
+				    content: "\f104";
+				}
+				[dir='rtl'] .product-images-button-prev:before{
+				    content: "\f105";
+				}
+				.product-images-button-next:before{
+				    content: "\f105";
+				}
+				[dir='rtl'] .product-images-button-next:before{
+				    content: "\f104";
+				}
+				
 				.product-images-item{
 					margin: 6px;
 					a{
-/* 						height: 60px; */
-/* 						width: 60px; */
+						padding-bottom: 100%;
 						background-repeat: no-repeat;
 						-webkit-background-size: cover;
 						background-size: cover;
 						display: block;
-  
 					}
 				}
 				.slick-center{
@@ -721,7 +775,4 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	.add-to-cart-button{
 	}
 
-	
-	
-	
 }
