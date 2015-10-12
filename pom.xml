@@ -134,12 +134,29 @@
 				<artifactId>google-http-client-jackson2</artifactId>
 				<version>1.20.0</version>
 			</dependency>
+			<dependency>
+			<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>1.4.7</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mozilla</groupId>
+				<artifactId>rhino</artifactId>
+				<version>1.7.6</version>
+			</dependency>
+			<dependency>
+ 				<groupId>org.springframework</groupId>
+	 			<artifactId>spring-webmvc-portlet</artifactId>
+	 			<version>3.0.7.RELEASE</version>
+	 		</dependency>
         </dependencies>
     </dependencyManagement>
     <modules>
         <module>jo-theme</module>
         <module>jo-layout</module>
         <module>fsquare-hook</module>
+        <module>web-form-portlet</module>
 <!--         <module>fsquare-shopping-portlet</module> -->
     </modules>
 </project>

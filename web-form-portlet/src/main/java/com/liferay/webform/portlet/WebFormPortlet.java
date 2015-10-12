@@ -45,10 +45,6 @@ import javax.portlet.ResourceResponse;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.XmlWebApplicationContext;
-
-import com.geoplace.content.manager.CMSContentManager;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
@@ -89,7 +85,6 @@ import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.liferay.webform.util.PortletPropsValues;
-import com.liferay.webform.util.WebFormCache;
 import com.liferay.webform.util.WebFormUtil;
 
 /**
@@ -100,80 +95,6 @@ import com.liferay.webform.util.WebFormUtil;
  * @author Brian Wing Shun Chan
  */
 public class WebFormPortlet extends MVCPortlet {
-
-	public static WebFormCache<String, Object> CACHE = WebFormCache.getInstance();
-	
-	@Override
-	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
-		
-		String portletId = PortalUtil.getPortletId(renderRequest);
-		try {
-			PortletPreferences preferences = PortletPreferencesFactoryUtil.getPortletSetup(renderRequest, portletId);
-
-			for (int i = 1; true; i++) {
-				String fieldLabel = preferences.getValue("fieldLabel" + i, StringPool.BLANK);
-				String fieldType = preferences.getValue("fieldType" + i, StringPool.BLANK);
-				if (Validator.isNull(fieldLabel)) {
-					break; 
-				}
-				if(fieldType.equals("options")){
-					boolean nsgOrganisation = PrefsParamUtil.getBoolean(preferences, renderRequest, "nsgOrganisation" + i);
-					if(nsgOrganisation){
-						String cacheKey = "web_form_nsgOrganisation";
-						String options = (String)CACHE.get(cacheKey);
-						
-						if(options == null){					
-							StringBuilder sb = new StringBuilder();
-							
-							String optionTemplate = "<option value=\"SECURITY_GROUP_ID\">[SECURITY_GROUP_EXTERNAL_ID] SECURITY_GROUP_NAME</option>";
-							
-							HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
-							ServletContext servletContext = request.getSession().getServletContext();
-							XmlWebApplicationContext xmlWebApplicationContext = (XmlWebApplicationContext)servletContext.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
-							CMSContentManager cmsManager = (CMSContentManager)xmlWebApplicationContext.getBean("cmsManager");
-							String whereClause = "AND sgr_sgt_id in (2,3,4,5,6,7,9,15,19,20,21,22,25) ORDER BY sgr_name ASC";
-							
-							List<Map<String, Object>> result = cmsManager.getSGRMap(whereClause);
-							if(result == null){
-								System.out.println("Result: null");
-								break;
-							}
-							System.out.println("result.size():"+result.size());
-							for(Map<String, Object> map: result){
-								
-								String sgrExternalId = (String)map.get("sgr_external_id");
-								Integer sgrId = (Integer)map.get("sgr_id");
-								if(Validator.isNotNull( sgrId) && Validator.isNotNull(sgrExternalId)){
-									
-									
-									String option = optionTemplate.replaceAll("SECURITY_GROUP_ID", WebFormUtil.leftHandPad(sgrId.toString().trim(),'0',4))
-											.replaceAll("SECURITY_GROUP_EXTERNAL_ID",  WebFormUtil.leftHandPad(sgrExternalId, '0', 4))
-												.replaceAll("SECURITY_GROUP_NAME",  (String)map.get("sgr_name"));
-	
-									sb.append(option);
-								
-								}
-							}
-							options = sb.toString();
-							CACHE.put(cacheKey, options, 60*24*30);
-						}
-						renderRequest.setAttribute("nsgOrganisation"+i, options);
-					}
-				}
-			}
-		
-		} catch (PortalException e) {
-			e.printStackTrace();
-		} catch (SystemException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		super.doView(renderRequest, renderResponse);
-	}
-	
 	
 	private String inputFileName = null;
 	private String ackEmailAddress = null;

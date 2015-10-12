@@ -14,7 +14,6 @@
 
 package com.liferay.webform.action;
 
-import com.geoplace.content.manager.CMSContentManager;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -63,9 +62,6 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
  * @author Jorge Ferrer
@@ -512,25 +508,5 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		return true;
 	}
 	
-	private void addExternalData(PortletPreferences preferences, ActionRequest actionRequest, String dataSource, String fieldName) throws Exception{
-		if(dataSource.equals("nsgOrganisation")){
-			String value = "";
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(actionRequest);
-			ServletContext servletContext = request.getSession().getServletContext();
-			XmlWebApplicationContext xmlWebApplicationContext = (XmlWebApplicationContext)servletContext.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
-			CMSContentManager cmsManager = (CMSContentManager)xmlWebApplicationContext.getBean("cmsManager");
-			List<Map<String, Object>> result = cmsManager.getSGRMap("");
-			for(Map<String, Object> map: result){
-				System.out.println("--------------------------------");
-				for(Map.Entry<String, Object> entry: map.entrySet()){
-					System.out.println(entry.getKey()+": "+entry.getValue());
-				}
-			}
-			Locale defaultLocale = LocaleUtil.getDefault();
-			String languageId = LocaleUtil.toLanguageId(defaultLocale);
-			LocalizationUtil.setPreferencesValue(preferences, fieldName, languageId, value);
-			
-		}
-	}
 
 }
