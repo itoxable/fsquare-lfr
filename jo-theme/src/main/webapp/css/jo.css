@@ -586,6 +586,14 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		}
 		
 	}
+	.portlet-asset-publisher  .asset-content{
+		.asset-full-content{
+			.asset-content{
+				margin: 0;
+			}
+		}
+	
+	}
 	.portlet-blogs{
 		.panel-body{
 			background-color: #FFF;
@@ -640,6 +648,9 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		background: transparent;
 		ul{
 			padding: 0;
+			li{
+				line-height: 20px;
+			}
 		}
 	}
 	

@@ -17,14 +17,14 @@
 <%@ include file="/html/taglib/ui/social_bookmark/init.jsp" %>
 
 <%
-String facebookDisplayStyle = "button_count";
+String facebookDisplayStyle = "button";//"button_count";
 
-if (displayStyle.equals("simple")) {
-	facebookDisplayStyle = "standard";
-}
-else if (displayStyle.equals("vertical")) {
-	facebookDisplayStyle = "box_count";
-}
+// if (displayStyle.equals("simple")) {
+// 	facebookDisplayStyle = "standard";
+// }
+// else if (displayStyle.equals("vertical")) {
+// 	facebookDisplayStyle = "box_count";
+// }
 %>
 
 <liferay-util:html-bottom outputKey="taglib_ui_social_bookmark_facebook">
@@ -39,6 +39,6 @@ else if (displayStyle.equals("vertical")) {
 	data-href="<%= url %>"
 	data-layout="<%= facebookDisplayStyle %>"
 	data-send="false"
-	data-show_faces="true"
+	data-show_faces="false"
 >
 </div>

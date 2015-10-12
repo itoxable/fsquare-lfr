@@ -36,7 +36,7 @@ if (displayStyle.equals("vertical")) {
 			script.async = true;
 			script.type = 'text/javascript';
 
-			script.src = 'https://apis.google.com/js/plusone.js';
+			script.src = 'https://apis.google.com/js/platform.js';
 
 			var firstScript = document.getElementsByTagName('script')[0];
 
@@ -49,5 +49,6 @@ if (displayStyle.equals("vertical")) {
 	count="<%= !displayStyle.equals("simple") %>"
 	href="<%= url %>"
 	size="<%= plusOneDisplayStyle %>"
+	annotation="none"
 >
 </g:plusone>
