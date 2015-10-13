@@ -71,7 +71,7 @@
 		
 		<column name="price" type="double" />
 		<column name="name" type="String" />
-		<column name="method" type="String" />
+		<column name="methodName" type="String" />
 		
 	</entity>
 	<entity name="Order" local-service="true" remote-service="true">
