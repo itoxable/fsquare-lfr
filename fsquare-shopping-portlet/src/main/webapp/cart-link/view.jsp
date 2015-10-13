@@ -17,16 +17,13 @@
 <%@page import="java.util.Map"%>
 <%@page import="com.liferay.portlet.shopping.model.ShoppingCart" %>
 <%@page import="com.liferay.portlet.shopping.model.ShoppingCartItem" %>
-<%@page import="com.liferay.portlet.shopping.util.ShoppingUtil" %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <%@ include file="/cart-link/init.jsp" %>
 
 <%
-ShoppingCart cart = ShoppingUtil.getCart(renderRequest);
 
-Map<ShoppingCartItem, Integer> items = cart.getItems();
 
 %>
 <a href="#cart" class="icon-cart cart-button"> <span>Cart</span></a>

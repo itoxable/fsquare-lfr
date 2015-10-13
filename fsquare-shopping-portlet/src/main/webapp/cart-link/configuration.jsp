@@ -9,8 +9,6 @@
 
 List<Layout> layoutsx = themeDisplay.getLayouts();
 
-String linkTemplate = portletPreferences.getValue("linkTemplate", "");
-String miniCartTemplate = portletPreferences.getValue("miniCartTemplate", "");
 
 %>
 
