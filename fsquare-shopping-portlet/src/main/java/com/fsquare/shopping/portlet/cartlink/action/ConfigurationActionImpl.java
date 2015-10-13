@@ -1,4 +1,4 @@
-package com.fsquare.shopping.cartlink.action;
+package com.fsquare.shopping.portlet.cartlink.action;
 
 import java.io.File;
 import java.util.List;
