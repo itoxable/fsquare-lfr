@@ -4,11 +4,14 @@
 <liferay-portlet-app>
 	
 	<portlet>
-		<portlet-name>cart-link</portlet-name>
+		<portlet-name>cart</portlet-name>
 		<icon>/cart-link/icon.png</icon>
+		<struts-path>cart</struts-path>
 		<configuration-action-class>com.fsquare.shopping.portlet.cartlink.action.ConfigurationActionImpl</configuration-action-class>
 		<preferences-company-wide>true</preferences-company-wide>
 		<instanceable>false</instanceable>
+<!-- 		<requires-namespaced-parameters>false</requires-namespaced-parameters> -->
+		
 		<header-portlet-css>/cart-link/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/cart-link/js/main.js</footer-portlet-javascript>
 	</portlet>

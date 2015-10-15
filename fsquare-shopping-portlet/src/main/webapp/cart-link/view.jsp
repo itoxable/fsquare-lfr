@@ -14,6 +14,9 @@
  */
 --%>
 
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
+<%@page import="com.fsquare.shopping.portlet.util.ShoppingPortletUtil"%>
+<%@page import="com.fsquare.shopping.model.ShoppingOrderItem"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.liferay.portlet.shopping.model.ShoppingCart" %>
 <%@page import="com.liferay.portlet.shopping.model.ShoppingCartItem" %>
@@ -24,6 +27,46 @@
 
 <%
 
+List<ShoppingOrderItem> shoppingOrderItemList = (List<ShoppingOrderItem>)portletSession.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
 
 %>
-<a href="#cart" class="icon-cart cart-button"> <span>Cart</span></a>
+
+<portlet:resourceURL var="addToCartURL">
+	<portlet:param name="<%= Constants.CMD %>" value="addToCart" />
+</portlet:resourceURL>
+
+
+<a href="#cart" class="icon-cart cart-button" style=""> 
+<span>Cart</span>
+<span><%=Validator.isNotNull(shoppingOrderItemList)?shoppingOrderItemList.size():"0" %></span>
+</a>
+
+<a href="javascript:;" id="<portlet:namespace />addToCartButton" style="display: block; padding: 10px; border: 1px solid black; margin: 10px">Add to cart</a>
+<aui:script use="aui-base,selector-css3,aui-io-request">
+
+	var addToCartButton = A.one('#<portlet:namespace />addToCartButton');
+	addToCartButton.on('click', function(event) {
+		<portlet:namespace />addToCart();
+	});
+
+	Liferay.provide(window, '<portlet:namespace />addToCart',
+		function() {
+			
+        	A.io.request('<%= addToCartURL %>',{
+                  dataType: 'json',
+                  method: 'POST',
+                  data: {
+                	  entryId: '22218'
+                  },
+                  on: {
+                      success: function() {
+                      	var response = this.get('responseData');
+                      }
+                  }
+            });
+			
+        },
+    	['aui-base,selector-css3']);
+  
+</aui:script>
+

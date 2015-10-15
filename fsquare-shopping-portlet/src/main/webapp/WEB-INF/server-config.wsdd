@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<globalConfiguration>
+		<parameter name="adminPassword" value="admin" />
+		<parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl" />
+		<parameter name="sendXsiTypes" value="true" />
+		<parameter name="sendMultiRefs" value="true" />
+		<parameter name="sendXMLDeclaration" value="true" />
+		<parameter name="axis.sendMinimizedElements" value="true" />
+		<requestFlow>
+			<handler type="java:org.apache.axis.handlers.JWSHandler">
+				<parameter name="scope" value="session" />
+			</handler>
+			<handler type="java:org.apache.axis.handlers.JWSHandler">
+				<parameter name="scope" value="request" />
+				<parameter name="extension" value=".jwr" />
+			</handler>
+		</requestFlow>
+	</globalConfiguration>
+	<handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder" />
+	<handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper" />
+	<handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler" />
+	<transport name="http">
+		<requestFlow>
+			<handler type="URLMapper" />
+			<handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler" />
+		</requestFlow>
+	</transport>
+	<transport name="local">
+		<responseFlow>
+			<handler type="LocalResponder" />
+		</responseFlow>
+	</transport>
+	<service name="Plugin_FsquareShopping_ShoppingCouponService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingCouponServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ShoppingCouponServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ShoppingCouponServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingCouponService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
+	</service>
+	<service name="Plugin_FsquareShopping_ShoppingOrderItemService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingOrderItemServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ShoppingOrderItemServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ShoppingOrderItemServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingOrderItemService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
+	</service>
+	<service name="Plugin_FsquareShopping_ShoppingOrderService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingOrderServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ShoppingOrderServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ShoppingOrderServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingOrderService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
+	</service>
+	<service name="Plugin_FsquareShopping_ShoppingShippingMethodService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingShippingMethodServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ShoppingShippingMethodServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ShoppingShippingMethodServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingShippingMethodService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
+	</service>
+</deployment>

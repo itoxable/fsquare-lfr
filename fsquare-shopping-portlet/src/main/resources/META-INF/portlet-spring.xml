@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.fsquare.shopping.service.ShoppingCouponLocalService" class="com.fsquare.shopping.service.impl.ShoppingCouponLocalServiceImpl" />
+	<bean id="com.fsquare.shopping.service.ShoppingCouponService" class="com.fsquare.shopping.service.impl.ShoppingCouponServiceImpl" />
+	<bean id="com.fsquare.shopping.service.persistence.ShoppingCouponPersistence" class="com.fsquare.shopping.service.persistence.ShoppingCouponPersistenceImpl" parent="basePersistence" />
+	<bean id="com.fsquare.shopping.service.ShoppingOrderLocalService" class="com.fsquare.shopping.service.impl.ShoppingOrderLocalServiceImpl" />
+	<bean id="com.fsquare.shopping.service.ShoppingOrderService" class="com.fsquare.shopping.service.impl.ShoppingOrderServiceImpl" />
+	<bean id="com.fsquare.shopping.service.persistence.ShoppingOrderPersistence" class="com.fsquare.shopping.service.persistence.ShoppingOrderPersistenceImpl" parent="basePersistence" />
+	<bean id="com.fsquare.shopping.service.ShoppingOrderItemLocalService" class="com.fsquare.shopping.service.impl.ShoppingOrderItemLocalServiceImpl" />
+	<bean id="com.fsquare.shopping.service.ShoppingOrderItemService" class="com.fsquare.shopping.service.impl.ShoppingOrderItemServiceImpl" />
+	<bean id="com.fsquare.shopping.service.persistence.ShoppingOrderItemPersistence" class="com.fsquare.shopping.service.persistence.ShoppingOrderItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.fsquare.shopping.service.ShoppingShippingMethodLocalService" class="com.fsquare.shopping.service.impl.ShoppingShippingMethodLocalServiceImpl" />
+	<bean id="com.fsquare.shopping.service.ShoppingShippingMethodService" class="com.fsquare.shopping.service.impl.ShoppingShippingMethodServiceImpl" />
+	<bean id="com.fsquare.shopping.service.persistence.ShoppingShippingMethodPersistence" class="com.fsquare.shopping.service.persistence.ShoppingShippingMethodPersistenceImpl" parent="basePersistence" />
+</beans>

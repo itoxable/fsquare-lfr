@@ -4,7 +4,7 @@
 <service-builder package-path="com.fsquare.shopping">
 	<namespace>FsquareShopping</namespace>
 
-	<entity name="Coupon" local-service="true" remote-service="true">
+	<entity name="ShoppingCoupon" local-service="true" remote-service="true">
 		<!-- PK fields -->
 
 		<column name="couponId" type="long" primary="true" />
@@ -36,7 +36,6 @@
 		<column name="discountType" type="String" />
 
 		<!-- Order -->
-
 		<order by="asc">
 			<order-column name="createDate" />
 		</order>
@@ -50,7 +49,8 @@
 			<finder-column name="code" />
 		</finder>
 	</entity>
-	<entity name="ShippingMethod" local-service="true" remote-service="true">
+	
+	<entity name="ShoppingShippingMethod" local-service="true" remote-service="true">
 		<!-- PK fields -->
 
 		<column name="shippingMethodId" type="long" primary="true" />
@@ -74,7 +74,7 @@
 		<column name="methodName" type="String" />
 		
 	</entity>
-	<entity name="Order" local-service="true" remote-service="true">
+	<entity name="ShoppingOrder" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -139,7 +139,12 @@
 		<column name="ppPayerEmail" type="String" />
 		<column name="sendOrderEmail" type="boolean" />
 		<column name="sendShippingEmail" type="boolean" />
+		<column name="shippingMethodId" type="long" />
 
+		<!-- Relationships -->
+
+<!-- 		<column name="item" type="Collection" entity="ShoppingOrderItem" mapping-table="ShoppingOrder_Item" /> -->
+		
 		<!-- Order -->
 
 		<order by="desc">
@@ -175,7 +180,7 @@
 <!-- 		<reference package-path="com.liferay.portal" entity="Subscription" /> -->
 <!-- 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" /> -->
 	</entity>
-	<entity name="OrderItem" local-service="true" remote-service="false">
+	<entity name="ShoppingOrderItem" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -209,6 +214,10 @@
 		<finder name="EntryId" return-type="Collection">
 			<finder-column name="entryId" />
 		</finder>
+		
+		<!-- References -->
+		
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 	</entity>
 	<exceptions>
 		<exception>BillingCity</exception>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_FsquareShopping_ShoppingShippingMethodService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingShippingMethodServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ShoppingShippingMethodServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ShoppingShippingMethodServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingShippingMethodService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
+	</service>
+</deployment>

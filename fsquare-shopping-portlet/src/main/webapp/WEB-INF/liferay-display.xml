@@ -3,9 +3,7 @@
 
 <display>
 	<category name="category.fsquare.shopping.portlets">
-		<portlet id="cart-link" />
-	</category>
-	<category name="category.fsquare.shopping.portlets">
+		<portlet id="cart" />
 		<portlet id="order" />
 	</category>
 </display>

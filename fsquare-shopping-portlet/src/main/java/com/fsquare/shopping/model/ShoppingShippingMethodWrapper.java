@@ -1,0 +1,502 @@
+package com.fsquare.shopping.model;
+
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelWrapper;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * <p>
+ * This class is a wrapper for {@link ShoppingShippingMethod}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ShoppingShippingMethod
+ * @generated
+ */
+public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
+    ModelWrapper<ShoppingShippingMethod> {
+    private ShoppingShippingMethod _shoppingShippingMethod;
+
+    public ShoppingShippingMethodWrapper(
+        ShoppingShippingMethod shoppingShippingMethod) {
+        _shoppingShippingMethod = shoppingShippingMethod;
+    }
+
+    @Override
+    public Class<?> getModelClass() {
+        return ShoppingShippingMethod.class;
+    }
+
+    @Override
+    public String getModelClassName() {
+        return ShoppingShippingMethod.class.getName();
+    }
+
+    @Override
+    public Map<String, Object> getModelAttributes() {
+        Map<String, Object> attributes = new HashMap<String, Object>();
+
+        attributes.put("shippingMethodId", getShippingMethodId());
+        attributes.put("groupId", getGroupId());
+        attributes.put("companyId", getCompanyId());
+        attributes.put("userId", getUserId());
+        attributes.put("userName", getUserName());
+        attributes.put("createDate", getCreateDate());
+        attributes.put("modifiedDate", getModifiedDate());
+        attributes.put("price", getPrice());
+        attributes.put("name", getName());
+        attributes.put("methodName", getMethodName());
+
+        return attributes;
+    }
+
+    @Override
+    public void setModelAttributes(Map<String, Object> attributes) {
+        Long shippingMethodId = (Long) attributes.get("shippingMethodId");
+
+        if (shippingMethodId != null) {
+            setShippingMethodId(shippingMethodId);
+        }
+
+        Long groupId = (Long) attributes.get("groupId");
+
+        if (groupId != null) {
+            setGroupId(groupId);
+        }
+
+        Long companyId = (Long) attributes.get("companyId");
+
+        if (companyId != null) {
+            setCompanyId(companyId);
+        }
+
+        Long userId = (Long) attributes.get("userId");
+
+        if (userId != null) {
+            setUserId(userId);
+        }
+
+        String userName = (String) attributes.get("userName");
+
+        if (userName != null) {
+            setUserName(userName);
+        }
+
+        Date createDate = (Date) attributes.get("createDate");
+
+        if (createDate != null) {
+            setCreateDate(createDate);
+        }
+
+        Date modifiedDate = (Date) attributes.get("modifiedDate");
+
+        if (modifiedDate != null) {
+            setModifiedDate(modifiedDate);
+        }
+
+        Double price = (Double) attributes.get("price");
+
+        if (price != null) {
+            setPrice(price);
+        }
+
+        String name = (String) attributes.get("name");
+
+        if (name != null) {
+            setName(name);
+        }
+
+        String methodName = (String) attributes.get("methodName");
+
+        if (methodName != null) {
+            setMethodName(methodName);
+        }
+    }
+
+    /**
+    * Returns the primary key of this shopping shipping method.
+    *
+    * @return the primary key of this shopping shipping method
+    */
+    @Override
+    public long getPrimaryKey() {
+        return _shoppingShippingMethod.getPrimaryKey();
+    }
+
+    /**
+    * Sets the primary key of this shopping shipping method.
+    *
+    * @param primaryKey the primary key of this shopping shipping method
+    */
+    @Override
+    public void setPrimaryKey(long primaryKey) {
+        _shoppingShippingMethod.setPrimaryKey(primaryKey);
+    }
+
+    /**
+    * Returns the shipping method ID of this shopping shipping method.
+    *
+    * @return the shipping method ID of this shopping shipping method
+    */
+    @Override
+    public long getShippingMethodId() {
+        return _shoppingShippingMethod.getShippingMethodId();
+    }
+
+    /**
+    * Sets the shipping method ID of this shopping shipping method.
+    *
+    * @param shippingMethodId the shipping method ID of this shopping shipping method
+    */
+    @Override
+    public void setShippingMethodId(long shippingMethodId) {
+        _shoppingShippingMethod.setShippingMethodId(shippingMethodId);
+    }
+
+    /**
+    * Returns the group ID of this shopping shipping method.
+    *
+    * @return the group ID of this shopping shipping method
+    */
+    @Override
+    public long getGroupId() {
+        return _shoppingShippingMethod.getGroupId();
+    }
+
+    /**
+    * Sets the group ID of this shopping shipping method.
+    *
+    * @param groupId the group ID of this shopping shipping method
+    */
+    @Override
+    public void setGroupId(long groupId) {
+        _shoppingShippingMethod.setGroupId(groupId);
+    }
+
+    /**
+    * Returns the company ID of this shopping shipping method.
+    *
+    * @return the company ID of this shopping shipping method
+    */
+    @Override
+    public long getCompanyId() {
+        return _shoppingShippingMethod.getCompanyId();
+    }
+
+    /**
+    * Sets the company ID of this shopping shipping method.
+    *
+    * @param companyId the company ID of this shopping shipping method
+    */
+    @Override
+    public void setCompanyId(long companyId) {
+        _shoppingShippingMethod.setCompanyId(companyId);
+    }
+
+    /**
+    * Returns the user ID of this shopping shipping method.
+    *
+    * @return the user ID of this shopping shipping method
+    */
+    @Override
+    public long getUserId() {
+        return _shoppingShippingMethod.getUserId();
+    }
+
+    /**
+    * Sets the user ID of this shopping shipping method.
+    *
+    * @param userId the user ID of this shopping shipping method
+    */
+    @Override
+    public void setUserId(long userId) {
+        _shoppingShippingMethod.setUserId(userId);
+    }
+
+    /**
+    * Returns the user uuid of this shopping shipping method.
+    *
+    * @return the user uuid of this shopping shipping method
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public java.lang.String getUserUuid()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingShippingMethod.getUserUuid();
+    }
+
+    /**
+    * Sets the user uuid of this shopping shipping method.
+    *
+    * @param userUuid the user uuid of this shopping shipping method
+    */
+    @Override
+    public void setUserUuid(java.lang.String userUuid) {
+        _shoppingShippingMethod.setUserUuid(userUuid);
+    }
+
+    /**
+    * Returns the user name of this shopping shipping method.
+    *
+    * @return the user name of this shopping shipping method
+    */
+    @Override
+    public java.lang.String getUserName() {
+        return _shoppingShippingMethod.getUserName();
+    }
+
+    /**
+    * Sets the user name of this shopping shipping method.
+    *
+    * @param userName the user name of this shopping shipping method
+    */
+    @Override
+    public void setUserName(java.lang.String userName) {
+        _shoppingShippingMethod.setUserName(userName);
+    }
+
+    /**
+    * Returns the create date of this shopping shipping method.
+    *
+    * @return the create date of this shopping shipping method
+    */
+    @Override
+    public java.util.Date getCreateDate() {
+        return _shoppingShippingMethod.getCreateDate();
+    }
+
+    /**
+    * Sets the create date of this shopping shipping method.
+    *
+    * @param createDate the create date of this shopping shipping method
+    */
+    @Override
+    public void setCreateDate(java.util.Date createDate) {
+        _shoppingShippingMethod.setCreateDate(createDate);
+    }
+
+    /**
+    * Returns the modified date of this shopping shipping method.
+    *
+    * @return the modified date of this shopping shipping method
+    */
+    @Override
+    public java.util.Date getModifiedDate() {
+        return _shoppingShippingMethod.getModifiedDate();
+    }
+
+    /**
+    * Sets the modified date of this shopping shipping method.
+    *
+    * @param modifiedDate the modified date of this shopping shipping method
+    */
+    @Override
+    public void setModifiedDate(java.util.Date modifiedDate) {
+        _shoppingShippingMethod.setModifiedDate(modifiedDate);
+    }
+
+    /**
+    * Returns the price of this shopping shipping method.
+    *
+    * @return the price of this shopping shipping method
+    */
+    @Override
+    public double getPrice() {
+        return _shoppingShippingMethod.getPrice();
+    }
+
+    /**
+    * Sets the price of this shopping shipping method.
+    *
+    * @param price the price of this shopping shipping method
+    */
+    @Override
+    public void setPrice(double price) {
+        _shoppingShippingMethod.setPrice(price);
+    }
+
+    /**
+    * Returns the name of this shopping shipping method.
+    *
+    * @return the name of this shopping shipping method
+    */
+    @Override
+    public java.lang.String getName() {
+        return _shoppingShippingMethod.getName();
+    }
+
+    /**
+    * Sets the name of this shopping shipping method.
+    *
+    * @param name the name of this shopping shipping method
+    */
+    @Override
+    public void setName(java.lang.String name) {
+        _shoppingShippingMethod.setName(name);
+    }
+
+    /**
+    * Returns the method name of this shopping shipping method.
+    *
+    * @return the method name of this shopping shipping method
+    */
+    @Override
+    public java.lang.String getMethodName() {
+        return _shoppingShippingMethod.getMethodName();
+    }
+
+    /**
+    * Sets the method name of this shopping shipping method.
+    *
+    * @param methodName the method name of this shopping shipping method
+    */
+    @Override
+    public void setMethodName(java.lang.String methodName) {
+        _shoppingShippingMethod.setMethodName(methodName);
+    }
+
+    @Override
+    public boolean isNew() {
+        return _shoppingShippingMethod.isNew();
+    }
+
+    @Override
+    public void setNew(boolean n) {
+        _shoppingShippingMethod.setNew(n);
+    }
+
+    @Override
+    public boolean isCachedModel() {
+        return _shoppingShippingMethod.isCachedModel();
+    }
+
+    @Override
+    public void setCachedModel(boolean cachedModel) {
+        _shoppingShippingMethod.setCachedModel(cachedModel);
+    }
+
+    @Override
+    public boolean isEscapedModel() {
+        return _shoppingShippingMethod.isEscapedModel();
+    }
+
+    @Override
+    public java.io.Serializable getPrimaryKeyObj() {
+        return _shoppingShippingMethod.getPrimaryKeyObj();
+    }
+
+    @Override
+    public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+        _shoppingShippingMethod.setPrimaryKeyObj(primaryKeyObj);
+    }
+
+    @Override
+    public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+        return _shoppingShippingMethod.getExpandoBridge();
+    }
+
+    @Override
+    public void setExpandoBridgeAttributes(
+        com.liferay.portal.model.BaseModel<?> baseModel) {
+        _shoppingShippingMethod.setExpandoBridgeAttributes(baseModel);
+    }
+
+    @Override
+    public void setExpandoBridgeAttributes(
+        com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
+        _shoppingShippingMethod.setExpandoBridgeAttributes(expandoBridge);
+    }
+
+    @Override
+    public void setExpandoBridgeAttributes(
+        com.liferay.portal.service.ServiceContext serviceContext) {
+        _shoppingShippingMethod.setExpandoBridgeAttributes(serviceContext);
+    }
+
+    @Override
+    public java.lang.Object clone() {
+        return new ShoppingShippingMethodWrapper((ShoppingShippingMethod) _shoppingShippingMethod.clone());
+    }
+
+    @Override
+    public int compareTo(
+        com.fsquare.shopping.model.ShoppingShippingMethod shoppingShippingMethod) {
+        return _shoppingShippingMethod.compareTo(shoppingShippingMethod);
+    }
+
+    @Override
+    public int hashCode() {
+        return _shoppingShippingMethod.hashCode();
+    }
+
+    @Override
+    public com.liferay.portal.model.CacheModel<com.fsquare.shopping.model.ShoppingShippingMethod> toCacheModel() {
+        return _shoppingShippingMethod.toCacheModel();
+    }
+
+    @Override
+    public com.fsquare.shopping.model.ShoppingShippingMethod toEscapedModel() {
+        return new ShoppingShippingMethodWrapper(_shoppingShippingMethod.toEscapedModel());
+    }
+
+    @Override
+    public com.fsquare.shopping.model.ShoppingShippingMethod toUnescapedModel() {
+        return new ShoppingShippingMethodWrapper(_shoppingShippingMethod.toUnescapedModel());
+    }
+
+    @Override
+    public java.lang.String toString() {
+        return _shoppingShippingMethod.toString();
+    }
+
+    @Override
+    public java.lang.String toXmlString() {
+        return _shoppingShippingMethod.toXmlString();
+    }
+
+    @Override
+    public void persist()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _shoppingShippingMethod.persist();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof ShoppingShippingMethodWrapper)) {
+            return false;
+        }
+
+        ShoppingShippingMethodWrapper shoppingShippingMethodWrapper = (ShoppingShippingMethodWrapper) obj;
+
+        if (Validator.equals(_shoppingShippingMethod,
+                    shoppingShippingMethodWrapper._shoppingShippingMethod)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+     */
+    public ShoppingShippingMethod getWrappedShoppingShippingMethod() {
+        return _shoppingShippingMethod;
+    }
+
+    @Override
+    public ShoppingShippingMethod getWrappedModel() {
+        return _shoppingShippingMethod;
+    }
+
+    @Override
+    public void resetOriginalValues() {
+        _shoppingShippingMethod.resetOriginalValues();
+    }
+}
