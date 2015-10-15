@@ -28,39 +28,51 @@
 <%
 
 List<ShoppingOrderItem> shoppingOrderItemList = (List<ShoppingOrderItem>)portletSession.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
+int quantity = 0;
+System.out.println("portletSession: "+portletSession);
+if(shoppingOrderItemList != null){
+	for(ShoppingOrderItem orderItem: shoppingOrderItemList){
+		quantity = quantity + orderItem.getQuantity();
+//	 	System.out.println("orderItem.getQuantity(): "+orderItem.getQuantity());
+	}
+}
 
 %>
 
-<portlet:resourceURL var="addToCartURL">
+<liferay-portlet:resourceURL var="addToCartURL">
 	<portlet:param name="<%= Constants.CMD %>" value="addToCart" />
-</portlet:resourceURL>
+</liferay-portlet:resourceURL>
 
 
 <a href="#cart" class="icon-cart cart-button" style=""> 
 <span>Cart</span>
-<span><%=Validator.isNotNull(shoppingOrderItemList)?shoppingOrderItemList.size():"0" %></span>
+<span id="<portlet:namespace />cart-size"><%=quantity %></span>
 </a>
 
-<a href="javascript:;" id="<portlet:namespace />addToCartButton" style="display: block; padding: 10px; border: 1px solid black; margin: 10px">Add to cart</a>
+<a href="javascript:;" data-asset-id='22218' id="<portlet:namespace />addToCartButton" class="add-to-cart-button" style="display: block; padding: 10px; border: 1px solid black; margin: 10px">Add to cart</a>
+
 <aui:script use="aui-base,selector-css3,aui-io-request">
 
 	var addToCartButton = A.one('#<portlet:namespace />addToCartButton');
 	addToCartButton.on('click', function(event) {
-		<portlet:namespace />addToCart();
+		debug(this, A.one(this));
+		var assetId = A.one(this).getAttribute('data-asset-id');
+		addToCart(assetId);
 	});
 
-	Liferay.provide(window, '<portlet:namespace />addToCart',
-		function() {
+	Liferay.provide(window, 'addToCart',
+		function(assetId) {
 			
         	A.io.request('<%= addToCartURL %>',{
                   dataType: 'json',
                   method: 'POST',
                   data: {
-                	  entryId: '22218'
+                	  <portlet:namespace />entryId: assetId
                   },
                   on: {
                       success: function() {
                       	var response = this.get('responseData');
+                      	A.one('#<portlet:namespace />cart-size').set('text', response.size);
                       }
                   }
             });

@@ -1,11 +1,13 @@
 package com.fsquare.shopping.portlet.cartlink;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletException;
 import javax.portlet.PortletSession;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
@@ -30,8 +32,7 @@ public class CartPortlet extends MVCPortlet {
 	
 	
 	@Override
-	public void serveResource(
-		ResourceRequest resourceRequest, ResourceResponse resourceResponse) {
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
 
 		String cmd = ParamUtil.getString(resourceRequest, Constants.CMD);
 
@@ -74,6 +75,7 @@ public class CartPortlet extends MVCPortlet {
 			}
 		}
 		
+		int quantity = 0;
 		if(shoppingOrderItem == null){
 			shoppingOrderItem = new ShoppingOrderItemImpl();
 			shoppingOrderItem.setOrderItemId((shoppingOrderItemList.size()+1)*(-1L));
@@ -83,14 +85,18 @@ public class CartPortlet extends MVCPortlet {
 			shoppingOrderItem.setName(assetEntry.getTitle(themeDisplay.getSiteDefaultLocale()));
 			
 			shoppingOrderItemList.add(shoppingOrderItem);
+		}else{
+			shoppingOrderItem.setQuantity(shoppingOrderItem.getQuantity()+1);
+		}
+		
+		for(ShoppingOrderItem orderItem: shoppingOrderItemList){
+			quantity = quantity + orderItem.getQuantity();
 		}
 		
 		portletSession.setAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT, shoppingOrderItemList);
-//		JournalArticleServiceUtil.getArticle(id)
-		//AssetEntryLocalServiceUtil.getEntry(entryId)
 		
 		jsonObject.put("success", true);
-		
+		jsonObject.put("size", Integer.toString(quantity));
 		writer.print(jsonObject.toString());
         writer.flush();
         writer.close();
