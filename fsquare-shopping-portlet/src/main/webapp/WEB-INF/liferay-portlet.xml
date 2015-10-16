@@ -4,28 +4,37 @@
 <liferay-portlet-app>
 	
 	<portlet>
-		<portlet-name>cart</portlet-name>
-		<icon>/cart-link/icon.png</icon>
-		<struts-path>cart</struts-path>
-		<configuration-action-class>com.fsquare.shopping.portlet.cartlink.action.ConfigurationActionImpl</configuration-action-class>
+		<portlet-name>minicart</portlet-name>
+		<icon>/mini-cart/icon.png</icon>
+		<struts-path>minicart</struts-path>
+		<configuration-action-class>com.fsquare.shopping.portlet.minicart.action.ConfigurationActionImpl</configuration-action-class>
 		<preferences-company-wide>true</preferences-company-wide>
 		<instanceable>false</instanceable>
 <!-- 		<requires-namespaced-parameters>false</requires-namespaced-parameters> -->
-		
-		<header-portlet-css>/cart-link/css/main.css</header-portlet-css>
-		<footer-portlet-javascript>/cart-link/js/main.js</footer-portlet-javascript>
+		<header-portlet-css>/mini-cart/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>/mini-cart/js/main.js</footer-portlet-javascript>
 	</portlet>
 	
 	<portlet>
-		<portlet-name>order</portlet-name>
-		<icon>/order/icon.png</icon>
-		<configuration-action-class>com.fsquare.shopping.portlet.order.action.ConfigurationActionImpl</configuration-action-class>
+		<portlet-name>shoppingorder</portlet-name>
+		<icon>/shopping-order/icon.png</icon>
+		<configuration-action-class>com.fsquare.shopping.portlet.shoppingorder.action.ConfigurationActionImpl</configuration-action-class>
 		<preferences-company-wide>true</preferences-company-wide>
 		<instanceable>false</instanceable>
-		<header-portlet-css>/order/css/main.css</header-portlet-css>
-		<footer-portlet-javascript>/order/js/main.js</footer-portlet-javascript>
+		<header-portlet-css>/shopping-order/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>/shopping-order/js/main.js</footer-portlet-javascript>
 	</portlet>
 	
+	<portlet>
+		<portlet-name>cartview</portlet-name>
+		<icon>/cart-view/icon.png</icon>
+		<struts-path>cart</struts-path>
+		<configuration-action-class>com.fsquare.shopping.portlet.cartview.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-company-wide>true</preferences-company-wide>
+		<instanceable>false</instanceable>		
+		<header-portlet-css>/cart-view/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>/cart-view/js/main.js</footer-portlet-javascript>
+	</portlet>
 	
 	<role-mapper>
 		<role-name>administrator</role-name>

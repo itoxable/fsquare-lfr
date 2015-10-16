@@ -2,21 +2,21 @@
 
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
 	<portlet>
-		<portlet-name>cart</portlet-name>
-		<display-name>Cart</display-name>
-		<portlet-class>com.fsquare.shopping.portlet.cartlink.CartPortlet</portlet-class>
+		<portlet-name>minicart</portlet-name>
+		<display-name>Mini cart</display-name>
+		<portlet-class>com.fsquare.shopping.portlet.minicart.MiniCartPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/cart-link/view.jsp</value>
+			<value>/mini-cart/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
 		<portlet-info>
-			<title>cart</title>
+			<title>Mini cart</title>
 			<short-title>cart</short-title>
-			<keywords>cart-link</keywords>
+			<keywords>mini cart</keywords>
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>
@@ -33,9 +33,40 @@
 	</portlet>
 	
 	<portlet>
-		<portlet-name>order</portlet-name>
-		<display-name>Orders</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-name>cartview</portlet-name>
+		<display-name>Cart View</display-name>
+		<portlet-class>com.fsquare.shopping.portlet.cartview.CartViewPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/cart-view/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Cart View</title>
+			<short-title>Cart</short-title>
+			<keywords>Cart View</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>shoppingorder</portlet-name>
+		<display-name>Shopping Order</display-name>
+		<portlet-class>com.fsquare.shopping.portlet.shoppingorder.OrdersPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/order/view.jsp</value>
@@ -45,9 +76,9 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<portlet-info>
-			<title>order</title>
-			<short-title>order</short-title>
-			<keywords>order</keywords>
+			<title>Shopping Order</title>
+			<short-title>Shopping Order</short-title>
+			<keywords>Shopping Order</keywords>
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>

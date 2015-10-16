@@ -23,33 +23,34 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
-<%@ include file="/cart-link/init.jsp" %>
+<%@ include file="/mini-cart/init.jsp" %>
 
 <%
 
-List<ShoppingOrderItem> shoppingOrderItemList = (List<ShoppingOrderItem>)portletSession.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
+//sess
+//HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
+//HttpSession session = request.getSession();
+List<ShoppingOrderItem> shoppingOrderItemList = (List<ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
 int quantity = 0;
-System.out.println("portletSession: "+portletSession);
 if(shoppingOrderItemList != null){
 	for(ShoppingOrderItem orderItem: shoppingOrderItemList){
 		quantity = quantity + orderItem.getQuantity();
-//	 	System.out.println("orderItem.getQuantity(): "+orderItem.getQuantity());
 	}
 }
 
 %>
 
 <liferay-portlet:resourceURL var="addToCartURL">
-	<portlet:param name="<%= Constants.CMD %>" value="addToCart" />
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_ADD_TO_CART %>" />
 </liferay-portlet:resourceURL>
 
 
 <a href="#cart" class="icon-cart cart-button" style=""> 
-<span>Cart</span>
-<span id="<portlet:namespace />cart-size"><%=quantity %></span>
+	<span>Cart</span>
+	<span id="<portlet:namespace />cart-size"><%=quantity %></span>
 </a>
 
-<a href="javascript:;" data-asset-id='22218' id="<portlet:namespace />addToCartButton" class="add-to-cart-button" style="display: block; padding: 10px; border: 1px solid black; margin: 10px">Add to cart</a>
+<a href="javascript:;" data-asset-id='110593' id="<portlet:namespace />addToCartButton" class="add-to-cart-button" style="display: block; padding: 10px; border: 1px solid black; margin: 10px">Add to cart</a>
 
 <aui:script use="aui-base,selector-css3,aui-io-request">
 
@@ -57,12 +58,12 @@ if(shoppingOrderItemList != null){
 	addToCartButton.on('click', function(event) {
 		debug(this, A.one(this));
 		var assetId = A.one(this).getAttribute('data-asset-id');
-		addToCart(assetId);
+		addToShoppingCart(assetId);
 	});
 
-	Liferay.provide(window, 'addToCart',
+	Liferay.provide(window, 'addToShoppingCart',
 		function(assetId) {
-			
+			console.log("adding to cart: "+assetId);
         	A.io.request('<%= addToCartURL %>',{
                   dataType: 'json',
                   method: 'POST',

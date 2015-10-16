@@ -26,10 +26,5 @@
 <portlet:defineObjects />
 
 <%
-String displayType = portletPreferences.getValue("displayType", "linkToPage");
 
-String cartPage = portletPreferences.getValue("cartPage", "");
-
-String linkTemplate = portletPreferences.getValue("linkTemplate", "");
-String miniCartTemplate = portletPreferences.getValue("miniCartTemplate", "");
 %>

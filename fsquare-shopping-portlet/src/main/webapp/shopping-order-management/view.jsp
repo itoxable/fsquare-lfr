@@ -14,16 +14,10 @@
  */
 --%>
 
-<%@page import="java.util.Map"%>
-<%@page import="com.liferay.portlet.shopping.model.ShoppingCart" %>
-<%@page import="com.liferay.portlet.shopping.model.ShoppingCartItem" %>
 
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-
-<%@ include file="/order/init.jsp" %>
+<%@ include file="/shopping-order/init.jsp" %>
 
 <%
 
 
 %>
-<a href="#cart" class="icon-cart cart-button"> <span>Cart</span></a>
