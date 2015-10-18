@@ -10,7 +10,10 @@
 		<configuration-action-class>com.fsquare.shopping.portlet.minicart.action.ConfigurationActionImpl</configuration-action-class>
 		<preferences-company-wide>true</preferences-company-wide>
 		<instanceable>false</instanceable>
-<!-- 		<requires-namespaced-parameters>false</requires-namespaced-parameters> -->
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
+		
+		
+		
 		<header-portlet-css>/mini-cart/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/mini-cart/js/main.js</footer-portlet-javascript>
 	</portlet>

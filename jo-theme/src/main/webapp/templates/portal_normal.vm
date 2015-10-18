@@ -57,6 +57,12 @@
 								<h2 class="page-title">
 									<span>$the_title</span>
 								</h2>
+								
+								#set ($VOID = $velocityPortletPreferences.setValue('portletSetupShowBorders', 'false'))
+								$theme.runtime("minicart_WAR_fsquareshoppingportlet", "", $velocityPortletPreferences.toString())
+								$velocityPortletPreferences.reset()
+								
+								
 							</div>
 					
 							#if ($has_navigation || $is_signed_in)

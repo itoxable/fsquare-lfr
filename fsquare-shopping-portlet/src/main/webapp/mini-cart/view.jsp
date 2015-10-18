@@ -40,7 +40,7 @@ if(shoppingOrderItemList != null){
 
 %>
 
-<liferay-portlet:resourceURL var="addToCartURL">
+<liferay-portlet:resourceURL var="addToCartURL" secure="false">
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_ADD_TO_CART %>" />
 </liferay-portlet:resourceURL>
 
@@ -50,16 +50,8 @@ if(shoppingOrderItemList != null){
 	<span id="<portlet:namespace />cart-size"><%=quantity %></span>
 </a>
 
-<a href="javascript:;" data-asset-id='110593' id="<portlet:namespace />addToCartButton" class="add-to-cart-button" style="display: block; padding: 10px; border: 1px solid black; margin: 10px">Add to cart</a>
 
 <aui:script use="aui-base,selector-css3,aui-io-request">
-
-	var addToCartButton = A.one('#<portlet:namespace />addToCartButton');
-	addToCartButton.on('click', function(event) {
-		debug(this, A.one(this));
-		var assetId = A.one(this).getAttribute('data-asset-id');
-		addToShoppingCart(assetId);
-	});
 
 	Liferay.provide(window, 'addToShoppingCart',
 		function(assetId) {

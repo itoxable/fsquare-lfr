@@ -780,6 +780,22 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 				}
 			}
 			.product-details-text{}
+			.product-add-to-cart-button{
+				display: block;
+				padding: 15px 20px;
+				color: #FFF;
+				background-color: purple;
+				@include border-radius(2px);
+				width: 150px;
+    			text-align: center;
+    			font-size: 30px;
+    			line-height: 30px;
+    			font-weight: bold;
+			}
+			.product-add-to-cart-button:HOVER, .product-add-to-cart-button:FOCUS {
+				text-decoration: none;
+				color: #FFF;
+			}
 		}
 		
 	}
