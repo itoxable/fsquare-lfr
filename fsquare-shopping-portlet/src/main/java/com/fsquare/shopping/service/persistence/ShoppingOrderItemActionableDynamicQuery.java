@@ -18,6 +18,6 @@ public abstract class ShoppingOrderItemActionableDynamicQuery
 
         setClassLoader(com.fsquare.shopping.service.ClpSerializer.class.getClassLoader());
 
-        setPrimaryKeyPropertyName("orderItemId");
+        setPrimaryKeyPropertyName("shoppingOrderItemId");
     }
 }

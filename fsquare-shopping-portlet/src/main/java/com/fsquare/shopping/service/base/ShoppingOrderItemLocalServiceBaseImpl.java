@@ -6,6 +6,7 @@ import com.fsquare.shopping.service.persistence.ShoppingCouponPersistence;
 import com.fsquare.shopping.service.persistence.ShoppingOrderItemPersistence;
 import com.fsquare.shopping.service.persistence.ShoppingOrderPersistence;
 import com.fsquare.shopping.service.persistence.ShoppingShippingMethodPersistence;
+import com.fsquare.shopping.service.persistence.ShoppingStorePersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -24,7 +25,7 @@ import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 
-import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.journal.service.persistence.JournalArticlePersistence;
 
 import java.io.Serializable;
 
@@ -71,6 +72,12 @@ public abstract class ShoppingOrderItemLocalServiceBaseImpl
     protected com.fsquare.shopping.service.ShoppingShippingMethodService shoppingShippingMethodService;
     @BeanReference(type = ShoppingShippingMethodPersistence.class)
     protected ShoppingShippingMethodPersistence shoppingShippingMethodPersistence;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingStoreLocalService.class)
+    protected com.fsquare.shopping.service.ShoppingStoreLocalService shoppingStoreLocalService;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingStoreService.class)
+    protected com.fsquare.shopping.service.ShoppingStoreService shoppingStoreService;
+    @BeanReference(type = ShoppingStorePersistence.class)
+    protected ShoppingStorePersistence shoppingStorePersistence;
     @BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
     protected com.liferay.counter.service.CounterLocalService counterLocalService;
     @BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)
@@ -81,12 +88,12 @@ public abstract class ShoppingOrderItemLocalServiceBaseImpl
     protected com.liferay.portal.service.UserService userService;
     @BeanReference(type = UserPersistence.class)
     protected UserPersistence userPersistence;
-    @BeanReference(type = com.liferay.portlet.asset.service.AssetEntryLocalService.class)
-    protected com.liferay.portlet.asset.service.AssetEntryLocalService assetEntryLocalService;
-    @BeanReference(type = com.liferay.portlet.asset.service.AssetEntryService.class)
-    protected com.liferay.portlet.asset.service.AssetEntryService assetEntryService;
-    @BeanReference(type = AssetEntryPersistence.class)
-    protected AssetEntryPersistence assetEntryPersistence;
+    @BeanReference(type = com.liferay.portlet.journal.service.JournalArticleLocalService.class)
+    protected com.liferay.portlet.journal.service.JournalArticleLocalService journalArticleLocalService;
+    @BeanReference(type = com.liferay.portlet.journal.service.JournalArticleService.class)
+    protected com.liferay.portlet.journal.service.JournalArticleService journalArticleService;
+    @BeanReference(type = JournalArticlePersistence.class)
+    protected JournalArticlePersistence journalArticlePersistence;
     private String _beanIdentifier;
     private ClassLoader _classLoader;
     private ShoppingOrderItemLocalServiceClpInvoker _clpInvoker = new ShoppingOrderItemLocalServiceClpInvoker();
@@ -116,27 +123,27 @@ public abstract class ShoppingOrderItemLocalServiceBaseImpl
     /**
      * Creates a new shopping order item with the primary key. Does not add the shopping order item to the database.
      *
-     * @param orderItemId the primary key for the new shopping order item
+     * @param shoppingOrderItemId the primary key for the new shopping order item
      * @return the new shopping order item
      */
     @Override
-    public ShoppingOrderItem createShoppingOrderItem(long orderItemId) {
-        return shoppingOrderItemPersistence.create(orderItemId);
+    public ShoppingOrderItem createShoppingOrderItem(long shoppingOrderItemId) {
+        return shoppingOrderItemPersistence.create(shoppingOrderItemId);
     }
 
     /**
      * Deletes the shopping order item with the primary key from the database. Also notifies the appropriate model listeners.
      *
-     * @param orderItemId the primary key of the shopping order item
+     * @param shoppingOrderItemId the primary key of the shopping order item
      * @return the shopping order item that was removed
      * @throws PortalException if a shopping order item with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Indexable(type = IndexableType.DELETE)
     @Override
-    public ShoppingOrderItem deleteShoppingOrderItem(long orderItemId)
+    public ShoppingOrderItem deleteShoppingOrderItem(long shoppingOrderItemId)
         throws PortalException, SystemException {
-        return shoppingOrderItemPersistence.remove(orderItemId);
+        return shoppingOrderItemPersistence.remove(shoppingOrderItemId);
     }
 
     /**
@@ -247,23 +254,23 @@ public abstract class ShoppingOrderItemLocalServiceBaseImpl
     }
 
     @Override
-    public ShoppingOrderItem fetchShoppingOrderItem(long orderItemId)
+    public ShoppingOrderItem fetchShoppingOrderItem(long shoppingOrderItemId)
         throws SystemException {
-        return shoppingOrderItemPersistence.fetchByPrimaryKey(orderItemId);
+        return shoppingOrderItemPersistence.fetchByPrimaryKey(shoppingOrderItemId);
     }
 
     /**
      * Returns the shopping order item with the primary key.
      *
-     * @param orderItemId the primary key of the shopping order item
+     * @param shoppingOrderItemId the primary key of the shopping order item
      * @return the shopping order item
      * @throws PortalException if a shopping order item with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem getShoppingOrderItem(long orderItemId)
+    public ShoppingOrderItem getShoppingOrderItem(long shoppingOrderItemId)
         throws PortalException, SystemException {
-        return shoppingOrderItemPersistence.findByPrimaryKey(orderItemId);
+        return shoppingOrderItemPersistence.findByPrimaryKey(shoppingOrderItemId);
     }
 
     @Override
@@ -544,6 +551,63 @@ public abstract class ShoppingOrderItemLocalServiceBaseImpl
     }
 
     /**
+     * Returns the shopping store local service.
+     *
+     * @return the shopping store local service
+     */
+    public com.fsquare.shopping.service.ShoppingStoreLocalService getShoppingStoreLocalService() {
+        return shoppingStoreLocalService;
+    }
+
+    /**
+     * Sets the shopping store local service.
+     *
+     * @param shoppingStoreLocalService the shopping store local service
+     */
+    public void setShoppingStoreLocalService(
+        com.fsquare.shopping.service.ShoppingStoreLocalService shoppingStoreLocalService) {
+        this.shoppingStoreLocalService = shoppingStoreLocalService;
+    }
+
+    /**
+     * Returns the shopping store remote service.
+     *
+     * @return the shopping store remote service
+     */
+    public com.fsquare.shopping.service.ShoppingStoreService getShoppingStoreService() {
+        return shoppingStoreService;
+    }
+
+    /**
+     * Sets the shopping store remote service.
+     *
+     * @param shoppingStoreService the shopping store remote service
+     */
+    public void setShoppingStoreService(
+        com.fsquare.shopping.service.ShoppingStoreService shoppingStoreService) {
+        this.shoppingStoreService = shoppingStoreService;
+    }
+
+    /**
+     * Returns the shopping store persistence.
+     *
+     * @return the shopping store persistence
+     */
+    public ShoppingStorePersistence getShoppingStorePersistence() {
+        return shoppingStorePersistence;
+    }
+
+    /**
+     * Sets the shopping store persistence.
+     *
+     * @param shoppingStorePersistence the shopping store persistence
+     */
+    public void setShoppingStorePersistence(
+        ShoppingStorePersistence shoppingStorePersistence) {
+        this.shoppingStorePersistence = shoppingStorePersistence;
+    }
+
+    /**
      * Returns the counter local service.
      *
      * @return the counter local service
@@ -638,60 +702,60 @@ public abstract class ShoppingOrderItemLocalServiceBaseImpl
     }
 
     /**
-     * Returns the asset entry local service.
+     * Returns the journal article local service.
      *
-     * @return the asset entry local service
+     * @return the journal article local service
      */
-    public com.liferay.portlet.asset.service.AssetEntryLocalService getAssetEntryLocalService() {
-        return assetEntryLocalService;
+    public com.liferay.portlet.journal.service.JournalArticleLocalService getJournalArticleLocalService() {
+        return journalArticleLocalService;
     }
 
     /**
-     * Sets the asset entry local service.
+     * Sets the journal article local service.
      *
-     * @param assetEntryLocalService the asset entry local service
+     * @param journalArticleLocalService the journal article local service
      */
-    public void setAssetEntryLocalService(
-        com.liferay.portlet.asset.service.AssetEntryLocalService assetEntryLocalService) {
-        this.assetEntryLocalService = assetEntryLocalService;
+    public void setJournalArticleLocalService(
+        com.liferay.portlet.journal.service.JournalArticleLocalService journalArticleLocalService) {
+        this.journalArticleLocalService = journalArticleLocalService;
     }
 
     /**
-     * Returns the asset entry remote service.
+     * Returns the journal article remote service.
      *
-     * @return the asset entry remote service
+     * @return the journal article remote service
      */
-    public com.liferay.portlet.asset.service.AssetEntryService getAssetEntryService() {
-        return assetEntryService;
+    public com.liferay.portlet.journal.service.JournalArticleService getJournalArticleService() {
+        return journalArticleService;
     }
 
     /**
-     * Sets the asset entry remote service.
+     * Sets the journal article remote service.
      *
-     * @param assetEntryService the asset entry remote service
+     * @param journalArticleService the journal article remote service
      */
-    public void setAssetEntryService(
-        com.liferay.portlet.asset.service.AssetEntryService assetEntryService) {
-        this.assetEntryService = assetEntryService;
+    public void setJournalArticleService(
+        com.liferay.portlet.journal.service.JournalArticleService journalArticleService) {
+        this.journalArticleService = journalArticleService;
     }
 
     /**
-     * Returns the asset entry persistence.
+     * Returns the journal article persistence.
      *
-     * @return the asset entry persistence
+     * @return the journal article persistence
      */
-    public AssetEntryPersistence getAssetEntryPersistence() {
-        return assetEntryPersistence;
+    public JournalArticlePersistence getJournalArticlePersistence() {
+        return journalArticlePersistence;
     }
 
     /**
-     * Sets the asset entry persistence.
+     * Sets the journal article persistence.
      *
-     * @param assetEntryPersistence the asset entry persistence
+     * @param journalArticlePersistence the journal article persistence
      */
-    public void setAssetEntryPersistence(
-        AssetEntryPersistence assetEntryPersistence) {
-        this.assetEntryPersistence = assetEntryPersistence;
+    public void setJournalArticlePersistence(
+        JournalArticlePersistence journalArticlePersistence) {
+        this.journalArticlePersistence = journalArticlePersistence;
     }
 
     public void afterPropertiesSet() {

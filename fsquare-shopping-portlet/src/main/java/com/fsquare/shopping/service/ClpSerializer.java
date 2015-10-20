@@ -4,6 +4,7 @@ import com.fsquare.shopping.model.ShoppingCouponClp;
 import com.fsquare.shopping.model.ShoppingOrderClp;
 import com.fsquare.shopping.model.ShoppingOrderItemClp;
 import com.fsquare.shopping.model.ShoppingShippingMethodClp;
+import com.fsquare.shopping.model.ShoppingStoreClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -107,6 +108,10 @@ public class ClpSerializer {
             return translateInputShoppingShippingMethod(oldModel);
         }
 
+        if (oldModelClassName.equals(ShoppingStoreClp.class.getName())) {
+            return translateInputShoppingStore(oldModel);
+        }
+
         return oldModel;
     }
 
@@ -157,6 +162,16 @@ public class ClpSerializer {
         ShoppingShippingMethodClp oldClpModel = (ShoppingShippingMethodClp) oldModel;
 
         BaseModel<?> newModel = oldClpModel.getShoppingShippingMethodRemoteModel();
+
+        newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+        return newModel;
+    }
+
+    public static Object translateInputShoppingStore(BaseModel<?> oldModel) {
+        ShoppingStoreClp oldClpModel = (ShoppingStoreClp) oldModel;
+
+        BaseModel<?> newModel = oldClpModel.getShoppingStoreRemoteModel();
 
         newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -286,6 +301,41 @@ public class ClpSerializer {
         if (oldModelClassName.equals(
                     "com.fsquare.shopping.model.impl.ShoppingShippingMethodImpl")) {
             return translateOutputShoppingShippingMethod(oldModel);
+        } else if (oldModelClassName.endsWith("Clp")) {
+            try {
+                ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+                Method getClpSerializerClassMethod = oldModelClass.getMethod(
+                        "getClpSerializerClass");
+
+                Class<?> oldClpSerializerClass = (Class<?>) getClpSerializerClassMethod.invoke(oldModel);
+
+                Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+                Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+                        BaseModel.class);
+
+                Class<?> oldModelModelClass = oldModel.getModelClass();
+
+                Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+                        oldModelModelClass.getSimpleName() + "RemoteModel");
+
+                Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+                BaseModel<?> newModel = (BaseModel<?>) translateOutputMethod.invoke(null,
+                        oldRemoteModel);
+
+                return newModel;
+            } catch (Throwable t) {
+                if (_log.isInfoEnabled()) {
+                    _log.info("Unable to translate " + oldModelClassName, t);
+                }
+            }
+        }
+
+        if (oldModelClassName.equals(
+                    "com.fsquare.shopping.model.impl.ShoppingStoreImpl")) {
+            return translateOutputShoppingStore(oldModel);
         } else if (oldModelClassName.endsWith("Clp")) {
             try {
                 ClassLoader classLoader = ClpSerializer.class.getClassLoader();
@@ -562,6 +612,11 @@ public class ClpSerializer {
             return new com.fsquare.shopping.NoSuchShoppingShippingMethodException();
         }
 
+        if (className.equals(
+                    "com.fsquare.shopping.NoSuchShoppingStoreException")) {
+            return new com.fsquare.shopping.NoSuchShoppingStoreException();
+        }
+
         return throwable;
     }
 
@@ -602,6 +657,16 @@ public class ClpSerializer {
         newModel.setModelAttributes(oldModel.getModelAttributes());
 
         newModel.setShoppingShippingMethodRemoteModel(oldModel);
+
+        return newModel;
+    }
+
+    public static Object translateOutputShoppingStore(BaseModel<?> oldModel) {
+        ShoppingStoreClp newModel = new ShoppingStoreClp();
+
+        newModel.setModelAttributes(oldModel.getModelAttributes());
+
+        newModel.setShoppingStoreRemoteModel(oldModel);
 
         return newModel;
     }

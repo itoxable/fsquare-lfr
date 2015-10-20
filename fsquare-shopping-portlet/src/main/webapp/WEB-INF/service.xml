@@ -45,7 +45,7 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="Code" return-type="Coupon" unique="true">
+		<finder name="Code" return-type="ShoppingCoupon" unique="true">
 			<finder-column name="code" />
 		</finder>
 	</entity>
@@ -78,7 +78,7 @@
 
 		<!-- PK fields -->
 
-		<column name="orderId" type="long" primary="true" />
+		<column name="shoppingOrderId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -156,14 +156,14 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="Number" return-type="Order" unique="true">
+		<finder name="Number" return-type="ShoppingOrder" unique="true">
 			<finder-column name="number" />
 		</finder>
-		<finder name="PPTxnId" return-type="Order">
+		<finder name="PPTxnId" return-type="ShoppingOrder">
 			<finder-column name="ppTxnId" />
 		</finder>
 		
-		<finder name="Status" return-type="Order">
+		<finder name="Status" return-type="ShoppingOrder">
 			<finder-column name="status" />
 		</finder>
 		
@@ -171,6 +171,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 			<finder-column name="ppPaymentStatus" />
+		</finder>
+
+		<finder name="ShippingMethodId" return-type="Collection">
+			<finder-column name="shippingMethodId" />
 		</finder>
 
 		<!-- References -->
@@ -184,12 +188,12 @@
 
 		<!-- PK fields -->
 
-		<column name="orderItemId" type="long" primary="true" />
+		<column name="shoppingOrderItemId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
-		<column name="orderId" type="long" />
-		<column name="entryId" type="String" />
+		<column name="shoppingOrderId" type="long" />
+		<column name="articleId" type="String" />
 		<column name="sku" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
@@ -207,18 +211,56 @@
 
 		<!-- Finder methods -->
 
-		<finder name="OrderId" return-type="Collection">
-			<finder-column name="orderId" />
+		<finder name="ShoppingOrderId" return-type="Collection">
+			<finder-column name="shoppingOrderId" />
 		</finder>
 		
-		<finder name="EntryId" return-type="Collection">
-			<finder-column name="entryId" />
+		<finder name="ShoppingOrderItemId" return-type="ShoppingOrderItem">
+			<finder-column name="shoppingOrderItemId" />
+		</finder>
+		
+		<finder name="ArticleId" return-type="Collection">
+			<finder-column name="articleId" />
 		</finder>
 		
 		<!-- References -->
 		
-		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.journal" entity="JournalArticle" />
 	</entity>
+	
+	<entity name="ShoppingStore" local-service="true" remote-service="true">
+		<!-- PK fields -->
+
+<!-- 		<column name="shoppingStoreId" type="long" primary="true" /> -->
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="cartPageUuid" type="String" />
+		<column name="checkoutPageUuid" type="String" />
+		<column name="onAddToCart" type="String" />
+		<column name="currency" type="String" />
+		
+		
+<!-- 		<finder name="GroupId" return-type="ShoppingStore"> -->
+<!-- 			<finder-column name="groupId" /> -->
+<!-- 		</finder> -->
+		
+<!-- 		<reference package-path="com.liferay.portal.model" entity="Layout" /> -->
+		
+	</entity>
+	
 	<exceptions>
 		<exception>BillingCity</exception>
 		<exception>BillingCountry</exception>

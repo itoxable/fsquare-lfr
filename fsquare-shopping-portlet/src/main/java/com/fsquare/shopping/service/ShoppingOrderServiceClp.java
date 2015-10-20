@@ -12,10 +12,6 @@ public class ShoppingOrderServiceClp implements ShoppingOrderService {
     private String[] _methodParameterTypes0;
     private String _methodName1;
     private String[] _methodParameterTypes1;
-    private String _methodName3;
-    private String[] _methodParameterTypes3;
-    private String _methodName4;
-    private String[] _methodParameterTypes4;
 
     public ShoppingOrderServiceClp(InvokableService invokableService) {
         _invokableService = invokableService;
@@ -27,16 +23,6 @@ public class ShoppingOrderServiceClp implements ShoppingOrderService {
         _methodName1 = "setBeanIdentifier";
 
         _methodParameterTypes1 = new String[] { "java.lang.String" };
-
-        _methodName3 = "addShoppingOrder";
-
-        _methodParameterTypes3 = new String[] {
-                "com.fsquare.shopping.model.ShoppingOrder"
-            };
-
-        _methodName4 = "createShoppingOrder";
-
-        _methodParameterTypes4 = new String[] { "long" };
     }
 
     @Override
@@ -83,55 +69,5 @@ public class ShoppingOrderServiceClp implements ShoppingOrderService {
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public com.fsquare.shopping.model.ShoppingOrder addShoppingOrder(
-        com.fsquare.shopping.model.ShoppingOrder shoppingOrder)
-        throws com.liferay.portal.kernel.exception.SystemException {
-        Object returnObj = null;
-
-        try {
-            returnObj = _invokableService.invokeMethod(_methodName3,
-                    _methodParameterTypes3,
-                    new Object[] { ClpSerializer.translateInput(shoppingOrder) });
-        } catch (Throwable t) {
-            t = ClpSerializer.translateThrowable(t);
-
-            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-                throw (com.liferay.portal.kernel.exception.SystemException) t;
-            }
-
-            if (t instanceof RuntimeException) {
-                throw (RuntimeException) t;
-            } else {
-                throw new RuntimeException(t.getClass().getName() +
-                    " is not a valid exception");
-            }
-        }
-
-        return (com.fsquare.shopping.model.ShoppingOrder) ClpSerializer.translateOutput(returnObj);
-    }
-
-    @Override
-    public com.fsquare.shopping.model.ShoppingOrder createShoppingOrder(
-        long orderId) {
-        Object returnObj = null;
-
-        try {
-            returnObj = _invokableService.invokeMethod(_methodName4,
-                    _methodParameterTypes4, new Object[] { orderId });
-        } catch (Throwable t) {
-            t = ClpSerializer.translateThrowable(t);
-
-            if (t instanceof RuntimeException) {
-                throw (RuntimeException) t;
-            } else {
-                throw new RuntimeException(t.getClass().getName() +
-                    " is not a valid exception");
-            }
-        }
-
-        return (com.fsquare.shopping.model.ShoppingOrder) ClpSerializer.translateOutput(returnObj);
     }
 }

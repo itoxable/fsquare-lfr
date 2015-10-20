@@ -47,7 +47,7 @@
 	</mapped-superclass>
 	<mapped-superclass class="com.fsquare.shopping.model.impl.ShoppingOrderModelImpl">
 		<attributes>
-			<id name="orderId" />
+			<id name="shoppingOrderId" />
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
@@ -114,9 +114,9 @@
 	</mapped-superclass>
 	<mapped-superclass class="com.fsquare.shopping.model.impl.ShoppingOrderItemModelImpl">
 		<attributes>
-			<id name="orderItemId" />
-			<basic name="orderId" />
-			<basic name="entryId" />
+			<id name="shoppingOrderItemId" />
+			<basic name="shoppingOrderId" />
+			<basic name="articleId" />
 			<basic name="sku" />
 			<basic name="name" />
 			<basic name="description" />
@@ -153,6 +153,30 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.fsquare.shopping.model.impl.ShoppingStoreModelImpl">
+		<attributes>
+			<id name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="cartPageUuid" />
+			<basic name="checkoutPageUuid" />
+			<basic name="onAddToCart" />
+			<basic name="currency">
+				<column name="CURRENCY_" />
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.fsquare.shopping.model.impl.ShoppingCouponImpl" name="ShoppingCoupon">
 		<table name="FsquareShopping_ShoppingCoupon" />
 		<attributes />
@@ -167,6 +191,10 @@
 	</entity>
 	<entity class="com.fsquare.shopping.model.impl.ShoppingShippingMethodImpl" name="ShoppingShippingMethod">
 		<table name="FsquareShopping_ShoppingShippingMethod" />
+		<attributes />
+	</entity>
+	<entity class="com.fsquare.shopping.model.impl.ShoppingStoreImpl" name="ShoppingStore">
+		<table name="FsquareShopping_ShoppingStore" />
 		<attributes />
 	</entity>
 </entity-mappings>

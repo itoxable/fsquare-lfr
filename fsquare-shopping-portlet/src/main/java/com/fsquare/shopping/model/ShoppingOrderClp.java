@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
     implements ShoppingOrder {
-    private long _orderId;
+    private long _shoppingOrderId;
     private long _groupId;
     private long _companyId;
     private long _userId;
@@ -95,17 +95,17 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public long getPrimaryKey() {
-        return _orderId;
+        return _shoppingOrderId;
     }
 
     @Override
     public void setPrimaryKey(long primaryKey) {
-        setOrderId(primaryKey);
+        setShoppingOrderId(primaryKey);
     }
 
     @Override
     public Serializable getPrimaryKeyObj() {
-        return _orderId;
+        return _shoppingOrderId;
     }
 
     @Override
@@ -117,7 +117,7 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
     public Map<String, Object> getModelAttributes() {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
-        attributes.put("orderId", getOrderId());
+        attributes.put("shoppingOrderId", getShoppingOrderId());
         attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
@@ -176,10 +176,10 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long orderId = (Long) attributes.get("orderId");
+        Long shoppingOrderId = (Long) attributes.get("shoppingOrderId");
 
-        if (orderId != null) {
-            setOrderId(orderId);
+        if (shoppingOrderId != null) {
+            setShoppingOrderId(shoppingOrderId);
         }
 
         Long groupId = (Long) attributes.get("groupId");
@@ -499,21 +499,21 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
     }
 
     @Override
-    public long getOrderId() {
-        return _orderId;
+    public long getShoppingOrderId() {
+        return _shoppingOrderId;
     }
 
     @Override
-    public void setOrderId(long orderId) {
-        _orderId = orderId;
+    public void setShoppingOrderId(long shoppingOrderId) {
+        _shoppingOrderId = shoppingOrderId;
 
         if (_shoppingOrderRemoteModel != null) {
             try {
                 Class<?> clazz = _shoppingOrderRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setOrderId", long.class);
+                Method method = clazz.getMethod("setShoppingOrderId", long.class);
 
-                method.invoke(_shoppingOrderRemoteModel, orderId);
+                method.invoke(_shoppingOrderRemoteModel, shoppingOrderId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -1787,7 +1787,7 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
     public Object clone() {
         ShoppingOrderClp clone = new ShoppingOrderClp();
 
-        clone.setOrderId(getOrderId());
+        clone.setShoppingOrderId(getShoppingOrderId());
         clone.setGroupId(getGroupId());
         clone.setCompanyId(getCompanyId());
         clone.setUserId(getUserId());
@@ -1894,8 +1894,8 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
     public String toString() {
         StringBundler sb = new StringBundler(107);
 
-        sb.append("{orderId=");
-        sb.append(getOrderId());
+        sb.append("{shoppingOrderId=");
+        sb.append(getShoppingOrderId());
         sb.append(", groupId=");
         sb.append(getGroupId());
         sb.append(", companyId=");
@@ -2014,8 +2014,8 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
         sb.append("</model-name>");
 
         sb.append(
-            "<column><column-name>orderId</column-name><column-value><![CDATA[");
-        sb.append(getOrderId());
+            "<column><column-name>shoppingOrderId</column-name><column-value><![CDATA[");
+        sb.append(getShoppingOrderId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>groupId</column-name><column-value><![CDATA[");

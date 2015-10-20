@@ -1,6 +1,8 @@
 package com.fsquare.shopping.service.impl;
 
+import com.fsquare.shopping.model.ShoppingCoupon;
 import com.fsquare.shopping.service.base.ShoppingCouponServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the shopping coupon remote service.
@@ -22,4 +24,14 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
      *
      * Never reference this interface directly. Always use {@link com.fsquare.shopping.service.ShoppingCouponServiceUtil} to access the shopping coupon remote service.
      */
+	
+	public ShoppingCoupon fetchByCode(String code){
+		try {
+			return shoppingCouponPersistence.fetchByCode(code);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

@@ -100,325 +100,409 @@ public class ShoppingOrderItemUtil {
     }
 
     /**
-    * Returns all the shopping order items where orderId = &#63;.
+    * Returns all the shopping order items where shoppingOrderId = &#63;.
     *
-    * @param orderId the order ID
+    * @param shoppingOrderId the shopping order ID
     * @return the matching shopping order items
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByOrderId(
-        long orderId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByShoppingOrderId(
+        long shoppingOrderId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByOrderId(orderId);
+        return getPersistence().findByShoppingOrderId(shoppingOrderId);
     }
 
     /**
-    * Returns a range of all the shopping order items where orderId = &#63;.
+    * Returns a range of all the shopping order items where shoppingOrderId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param orderId the order ID
+    * @param shoppingOrderId the shopping order ID
     * @param start the lower bound of the range of shopping order items
     * @param end the upper bound of the range of shopping order items (not inclusive)
     * @return the range of matching shopping order items
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByOrderId(
-        long orderId, int start, int end)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByShoppingOrderId(
+        long shoppingOrderId, int start, int end)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByOrderId(orderId, start, end);
+        return getPersistence()
+                   .findByShoppingOrderId(shoppingOrderId, start, end);
     }
 
     /**
-    * Returns an ordered range of all the shopping order items where orderId = &#63;.
+    * Returns an ordered range of all the shopping order items where shoppingOrderId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param orderId the order ID
+    * @param shoppingOrderId the shopping order ID
     * @param start the lower bound of the range of shopping order items
     * @param end the upper bound of the range of shopping order items (not inclusive)
     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
     * @return the ordered range of matching shopping order items
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByOrderId(
-        long orderId, int start, int end,
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByShoppingOrderId(
+        long shoppingOrderId, int start, int end,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByOrderId(orderId, start, end, orderByComparator);
+                   .findByShoppingOrderId(shoppingOrderId, start, end,
+            orderByComparator);
     }
 
     /**
-    * Returns the first shopping order item in the ordered set where orderId = &#63;.
+    * Returns the first shopping order item in the ordered set where shoppingOrderId = &#63;.
     *
-    * @param orderId the order ID
+    * @param shoppingOrderId the shopping order ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping order item
     * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a matching shopping order item could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrderItem findByOrderId_First(
-        long orderId,
+    public static com.fsquare.shopping.model.ShoppingOrderItem findByShoppingOrderId_First(
+        long shoppingOrderId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderItemException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByOrderId_First(orderId, orderByComparator);
+        return getPersistence()
+                   .findByShoppingOrderId_First(shoppingOrderId,
+            orderByComparator);
     }
 
     /**
-    * Returns the first shopping order item in the ordered set where orderId = &#63;.
+    * Returns the first shopping order item in the ordered set where shoppingOrderId = &#63;.
     *
-    * @param orderId the order ID
+    * @param shoppingOrderId the shopping order ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping order item, or <code>null</code> if a matching shopping order item could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrderItem fetchByOrderId_First(
-        long orderId,
+    public static com.fsquare.shopping.model.ShoppingOrderItem fetchByShoppingOrderId_First(
+        long shoppingOrderId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchByOrderId_First(orderId, orderByComparator);
+        return getPersistence()
+                   .fetchByShoppingOrderId_First(shoppingOrderId,
+            orderByComparator);
     }
 
     /**
-    * Returns the last shopping order item in the ordered set where orderId = &#63;.
+    * Returns the last shopping order item in the ordered set where shoppingOrderId = &#63;.
     *
-    * @param orderId the order ID
+    * @param shoppingOrderId the shopping order ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping order item
     * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a matching shopping order item could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrderItem findByOrderId_Last(
-        long orderId,
+    public static com.fsquare.shopping.model.ShoppingOrderItem findByShoppingOrderId_Last(
+        long shoppingOrderId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderItemException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByOrderId_Last(orderId, orderByComparator);
+        return getPersistence()
+                   .findByShoppingOrderId_Last(shoppingOrderId,
+            orderByComparator);
     }
 
     /**
-    * Returns the last shopping order item in the ordered set where orderId = &#63;.
+    * Returns the last shopping order item in the ordered set where shoppingOrderId = &#63;.
     *
-    * @param orderId the order ID
+    * @param shoppingOrderId the shopping order ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping order item, or <code>null</code> if a matching shopping order item could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrderItem fetchByOrderId_Last(
-        long orderId,
+    public static com.fsquare.shopping.model.ShoppingOrderItem fetchByShoppingOrderId_Last(
+        long shoppingOrderId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchByOrderId_Last(orderId, orderByComparator);
+        return getPersistence()
+                   .fetchByShoppingOrderId_Last(shoppingOrderId,
+            orderByComparator);
     }
 
     /**
-    * Returns the shopping order items before and after the current shopping order item in the ordered set where orderId = &#63;.
+    * Returns the shopping order items before and after the current shopping order item in the ordered set where shoppingOrderId = &#63;.
     *
-    * @param orderItemId the primary key of the current shopping order item
-    * @param orderId the order ID
+    * @param shoppingOrderItemId the primary key of the current shopping order item
+    * @param shoppingOrderId the shopping order ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the previous, current, and next shopping order item
     * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a shopping order item with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrderItem[] findByOrderId_PrevAndNext(
-        long orderItemId, long orderId,
+    public static com.fsquare.shopping.model.ShoppingOrderItem[] findByShoppingOrderId_PrevAndNext(
+        long shoppingOrderItemId, long shoppingOrderId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderItemException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByOrderId_PrevAndNext(orderItemId, orderId,
-            orderByComparator);
+                   .findByShoppingOrderId_PrevAndNext(shoppingOrderItemId,
+            shoppingOrderId, orderByComparator);
     }
 
     /**
-    * Removes all the shopping order items where orderId = &#63; from the database.
+    * Removes all the shopping order items where shoppingOrderId = &#63; from the database.
     *
-    * @param orderId the order ID
+    * @param shoppingOrderId the shopping order ID
     * @throws SystemException if a system exception occurred
     */
-    public static void removeByOrderId(long orderId)
+    public static void removeByShoppingOrderId(long shoppingOrderId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        getPersistence().removeByOrderId(orderId);
+        getPersistence().removeByShoppingOrderId(shoppingOrderId);
     }
 
     /**
-    * Returns the number of shopping order items where orderId = &#63;.
+    * Returns the number of shopping order items where shoppingOrderId = &#63;.
     *
-    * @param orderId the order ID
+    * @param shoppingOrderId the shopping order ID
     * @return the number of matching shopping order items
     * @throws SystemException if a system exception occurred
     */
-    public static int countByOrderId(long orderId)
+    public static int countByShoppingOrderId(long shoppingOrderId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().countByOrderId(orderId);
+        return getPersistence().countByShoppingOrderId(shoppingOrderId);
     }
 
     /**
-    * Returns all the shopping order items where entryId = &#63;.
+    * Returns the shopping order item where shoppingOrderItemId = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingOrderItemException} if it could not be found.
     *
-    * @param entryId the entry ID
+    * @param shoppingOrderItemId the shopping order item ID
+    * @return the matching shopping order item
+    * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a matching shopping order item could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingOrderItem findByShoppingOrderItemId(
+        long shoppingOrderItemId)
+        throws com.fsquare.shopping.NoSuchShoppingOrderItemException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().findByShoppingOrderItemId(shoppingOrderItemId);
+    }
+
+    /**
+    * Returns the shopping order item where shoppingOrderItemId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+    *
+    * @param shoppingOrderItemId the shopping order item ID
+    * @return the matching shopping order item, or <code>null</code> if a matching shopping order item could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingOrderItem fetchByShoppingOrderItemId(
+        long shoppingOrderItemId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().fetchByShoppingOrderItemId(shoppingOrderItemId);
+    }
+
+    /**
+    * Returns the shopping order item where shoppingOrderItemId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+    *
+    * @param shoppingOrderItemId the shopping order item ID
+    * @param retrieveFromCache whether to use the finder cache
+    * @return the matching shopping order item, or <code>null</code> if a matching shopping order item could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingOrderItem fetchByShoppingOrderItemId(
+        long shoppingOrderItemId, boolean retrieveFromCache)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .fetchByShoppingOrderItemId(shoppingOrderItemId,
+            retrieveFromCache);
+    }
+
+    /**
+    * Removes the shopping order item where shoppingOrderItemId = &#63; from the database.
+    *
+    * @param shoppingOrderItemId the shopping order item ID
+    * @return the shopping order item that was removed
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingOrderItem removeByShoppingOrderItemId(
+        long shoppingOrderItemId)
+        throws com.fsquare.shopping.NoSuchShoppingOrderItemException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().removeByShoppingOrderItemId(shoppingOrderItemId);
+    }
+
+    /**
+    * Returns the number of shopping order items where shoppingOrderItemId = &#63;.
+    *
+    * @param shoppingOrderItemId the shopping order item ID
+    * @return the number of matching shopping order items
+    * @throws SystemException if a system exception occurred
+    */
+    public static int countByShoppingOrderItemId(long shoppingOrderItemId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().countByShoppingOrderItemId(shoppingOrderItemId);
+    }
+
+    /**
+    * Returns all the shopping order items where articleId = &#63;.
+    *
+    * @param articleId the article ID
     * @return the matching shopping order items
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByEntryId(
-        java.lang.String entryId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByArticleId(
+        java.lang.String articleId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByEntryId(entryId);
+        return getPersistence().findByArticleId(articleId);
     }
 
     /**
-    * Returns a range of all the shopping order items where entryId = &#63;.
+    * Returns a range of all the shopping order items where articleId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param entryId the entry ID
+    * @param articleId the article ID
     * @param start the lower bound of the range of shopping order items
     * @param end the upper bound of the range of shopping order items (not inclusive)
     * @return the range of matching shopping order items
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByEntryId(
-        java.lang.String entryId, int start, int end)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByArticleId(
+        java.lang.String articleId, int start, int end)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByEntryId(entryId, start, end);
+        return getPersistence().findByArticleId(articleId, start, end);
     }
 
     /**
-    * Returns an ordered range of all the shopping order items where entryId = &#63;.
+    * Returns an ordered range of all the shopping order items where articleId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param entryId the entry ID
+    * @param articleId the article ID
     * @param start the lower bound of the range of shopping order items
     * @param end the upper bound of the range of shopping order items (not inclusive)
     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
     * @return the ordered range of matching shopping order items
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByEntryId(
-        java.lang.String entryId, int start, int end,
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByArticleId(
+        java.lang.String articleId, int start, int end,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByEntryId(entryId, start, end, orderByComparator);
+                   .findByArticleId(articleId, start, end, orderByComparator);
     }
 
     /**
-    * Returns the first shopping order item in the ordered set where entryId = &#63;.
+    * Returns the first shopping order item in the ordered set where articleId = &#63;.
     *
-    * @param entryId the entry ID
+    * @param articleId the article ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping order item
     * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a matching shopping order item could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrderItem findByEntryId_First(
-        java.lang.String entryId,
+    public static com.fsquare.shopping.model.ShoppingOrderItem findByArticleId_First(
+        java.lang.String articleId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderItemException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByEntryId_First(entryId, orderByComparator);
+        return getPersistence()
+                   .findByArticleId_First(articleId, orderByComparator);
     }
 
     /**
-    * Returns the first shopping order item in the ordered set where entryId = &#63;.
+    * Returns the first shopping order item in the ordered set where articleId = &#63;.
     *
-    * @param entryId the entry ID
+    * @param articleId the article ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping order item, or <code>null</code> if a matching shopping order item could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrderItem fetchByEntryId_First(
-        java.lang.String entryId,
+    public static com.fsquare.shopping.model.ShoppingOrderItem fetchByArticleId_First(
+        java.lang.String articleId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchByEntryId_First(entryId, orderByComparator);
+        return getPersistence()
+                   .fetchByArticleId_First(articleId, orderByComparator);
     }
 
     /**
-    * Returns the last shopping order item in the ordered set where entryId = &#63;.
+    * Returns the last shopping order item in the ordered set where articleId = &#63;.
     *
-    * @param entryId the entry ID
+    * @param articleId the article ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping order item
     * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a matching shopping order item could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrderItem findByEntryId_Last(
-        java.lang.String entryId,
+    public static com.fsquare.shopping.model.ShoppingOrderItem findByArticleId_Last(
+        java.lang.String articleId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderItemException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByEntryId_Last(entryId, orderByComparator);
+        return getPersistence()
+                   .findByArticleId_Last(articleId, orderByComparator);
     }
 
     /**
-    * Returns the last shopping order item in the ordered set where entryId = &#63;.
+    * Returns the last shopping order item in the ordered set where articleId = &#63;.
     *
-    * @param entryId the entry ID
+    * @param articleId the article ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping order item, or <code>null</code> if a matching shopping order item could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrderItem fetchByEntryId_Last(
-        java.lang.String entryId,
+    public static com.fsquare.shopping.model.ShoppingOrderItem fetchByArticleId_Last(
+        java.lang.String articleId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchByEntryId_Last(entryId, orderByComparator);
+        return getPersistence()
+                   .fetchByArticleId_Last(articleId, orderByComparator);
     }
 
     /**
-    * Returns the shopping order items before and after the current shopping order item in the ordered set where entryId = &#63;.
+    * Returns the shopping order items before and after the current shopping order item in the ordered set where articleId = &#63;.
     *
-    * @param orderItemId the primary key of the current shopping order item
-    * @param entryId the entry ID
+    * @param shoppingOrderItemId the primary key of the current shopping order item
+    * @param articleId the article ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the previous, current, and next shopping order item
     * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a shopping order item with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrderItem[] findByEntryId_PrevAndNext(
-        long orderItemId, java.lang.String entryId,
+    public static com.fsquare.shopping.model.ShoppingOrderItem[] findByArticleId_PrevAndNext(
+        long shoppingOrderItemId, java.lang.String articleId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderItemException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByEntryId_PrevAndNext(orderItemId, entryId,
+                   .findByArticleId_PrevAndNext(shoppingOrderItemId, articleId,
             orderByComparator);
     }
 
     /**
-    * Removes all the shopping order items where entryId = &#63; from the database.
+    * Removes all the shopping order items where articleId = &#63; from the database.
     *
-    * @param entryId the entry ID
+    * @param articleId the article ID
     * @throws SystemException if a system exception occurred
     */
-    public static void removeByEntryId(java.lang.String entryId)
+    public static void removeByArticleId(java.lang.String articleId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        getPersistence().removeByEntryId(entryId);
+        getPersistence().removeByArticleId(articleId);
     }
 
     /**
-    * Returns the number of shopping order items where entryId = &#63;.
+    * Returns the number of shopping order items where articleId = &#63;.
     *
-    * @param entryId the entry ID
+    * @param articleId the article ID
     * @return the number of matching shopping order items
     * @throws SystemException if a system exception occurred
     */
-    public static int countByEntryId(java.lang.String entryId)
+    public static int countByArticleId(java.lang.String articleId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().countByEntryId(entryId);
+        return getPersistence().countByArticleId(articleId);
     }
 
     /**
@@ -444,27 +528,27 @@ public class ShoppingOrderItemUtil {
     /**
     * Creates a new shopping order item with the primary key. Does not add the shopping order item to the database.
     *
-    * @param orderItemId the primary key for the new shopping order item
+    * @param shoppingOrderItemId the primary key for the new shopping order item
     * @return the new shopping order item
     */
     public static com.fsquare.shopping.model.ShoppingOrderItem create(
-        long orderItemId) {
-        return getPersistence().create(orderItemId);
+        long shoppingOrderItemId) {
+        return getPersistence().create(shoppingOrderItemId);
     }
 
     /**
     * Removes the shopping order item with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param orderItemId the primary key of the shopping order item
+    * @param shoppingOrderItemId the primary key of the shopping order item
     * @return the shopping order item that was removed
     * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a shopping order item with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public static com.fsquare.shopping.model.ShoppingOrderItem remove(
-        long orderItemId)
+        long shoppingOrderItemId)
         throws com.fsquare.shopping.NoSuchShoppingOrderItemException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().remove(orderItemId);
+        return getPersistence().remove(shoppingOrderItemId);
     }
 
     public static com.fsquare.shopping.model.ShoppingOrderItem updateImpl(
@@ -476,29 +560,29 @@ public class ShoppingOrderItemUtil {
     /**
     * Returns the shopping order item with the primary key or throws a {@link com.fsquare.shopping.NoSuchShoppingOrderItemException} if it could not be found.
     *
-    * @param orderItemId the primary key of the shopping order item
+    * @param shoppingOrderItemId the primary key of the shopping order item
     * @return the shopping order item
     * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a shopping order item with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public static com.fsquare.shopping.model.ShoppingOrderItem findByPrimaryKey(
-        long orderItemId)
+        long shoppingOrderItemId)
         throws com.fsquare.shopping.NoSuchShoppingOrderItemException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByPrimaryKey(orderItemId);
+        return getPersistence().findByPrimaryKey(shoppingOrderItemId);
     }
 
     /**
     * Returns the shopping order item with the primary key or returns <code>null</code> if it could not be found.
     *
-    * @param orderItemId the primary key of the shopping order item
+    * @param shoppingOrderItemId the primary key of the shopping order item
     * @return the shopping order item, or <code>null</code> if a shopping order item with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public static com.fsquare.shopping.model.ShoppingOrderItem fetchByPrimaryKey(
-        long orderItemId)
+        long shoppingOrderItemId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchByPrimaryKey(orderItemId);
+        return getPersistence().fetchByPrimaryKey(shoppingOrderItemId);
     }
 
     /**

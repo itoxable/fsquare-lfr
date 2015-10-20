@@ -14,8 +14,8 @@
  */
 --%>
 
-<%@page import="com.liferay.portal.kernel.util.Validator"%>
-<%@page import="com.fsquare.shopping.portlet.util.ShoppingPortletUtil"%>
+
+<%@page import="com.fsquare.shopping.NoSuchShoppingStoreException"%>
 <%@page import="com.fsquare.shopping.model.ShoppingOrderItem"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.liferay.portlet.shopping.model.ShoppingCart" %>
@@ -27,45 +27,61 @@
 
 <%
 
-//sess
-//HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
-//HttpSession session = request.getSession();
-List<ShoppingOrderItem> shoppingOrderItemList = (List<ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
+
+Map<Long,ShoppingOrderItem> shoppingOrderItemMap = (Map<Long,ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
 int quantity = 0;
-if(shoppingOrderItemList != null){
-	for(ShoppingOrderItem orderItem: shoppingOrderItemList){
-		quantity = quantity + orderItem.getQuantity();
+if(shoppingOrderItemMap != null){
+	for(Map.Entry<Long, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet()){
+		quantity = quantity + entry.getValue().getQuantity();
 	}
 }
 
+ShoppingStore shoppingStore = null;
+try{
+	shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+}catch(NoSuchShoppingStoreException e){
+	shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
+}
+Layout cartPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(shoppingStore.getCartPageUuid(), themeDisplay.getScopeGroupId(), false);
+NavItem cartPageNavItem = new NavItem(request, cartPageLayout, null);
+
+Layout checkoutPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(shoppingStore.getCheckoutPageUuid(), themeDisplay.getScopeGroupId(), false);
+NavItem checkoutPageNavItem = new NavItem(request, checkoutPageLayout, null);
+
 %>
+
 
 <liferay-portlet:resourceURL var="addToCartURL" secure="false">
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_ADD_TO_CART %>" />
 </liferay-portlet:resourceURL>
 
-
-<a href="#cart" class="icon-cart cart-button" style=""> 
+<a href="<%= cartPageNavItem.getURL() %>" class="icon-cart cart-button" style="">
+	<span class="fa fa-shopping-cart cart-icon"></span>
 	<span>Cart</span>
-	<span id="<portlet:namespace />cart-size"><%=quantity %></span>
+	<span id="<portlet:namespace />cart-size">(<%=quantity %>)</span>
 </a>
-
 
 <aui:script use="aui-base,selector-css3,aui-io-request">
 
 	Liferay.provide(window, 'addToShoppingCart',
-		function(assetId) {
-			console.log("adding to cart: "+assetId);
+		function(articleId) {
+			console.log("adding to cart: "+articleId);
         	A.io.request('<%= addToCartURL %>',{
                   dataType: 'json',
                   method: 'POST',
                   data: {
-                	  <portlet:namespace />entryId: assetId
+                	  <portlet:namespace />articleId: articleId
                   },
                   on: {
                       success: function() {
                       	var response = this.get('responseData');
-                      	A.one('#<portlet:namespace />cart-size').set('text', response.size);
+                      	if(response.success){
+                          	A.one('#<portlet:namespace />cart-size').set('text', '('+response.size+')');
+							if(response.redirect){
+								window.location.href = '<%= cartPageNavItem.getRegularURL() %>';
+							}
+                      	}
+                      		
                       }
                   }
             });

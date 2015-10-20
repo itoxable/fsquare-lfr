@@ -50,9 +50,9 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
      */
     public static final String TABLE_NAME = "FsquareShopping_ShoppingOrderItem";
     public static final Object[][] TABLE_COLUMNS = {
-            { "orderItemId", Types.BIGINT },
-            { "orderId", Types.BIGINT },
-            { "entryId", Types.VARCHAR },
+            { "shoppingOrderItemId", Types.BIGINT },
+            { "shoppingOrderId", Types.BIGINT },
+            { "articleId", Types.VARCHAR },
             { "sku", Types.VARCHAR },
             { "name", Types.VARCHAR },
             { "description", Types.VARCHAR },
@@ -61,7 +61,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
             { "quantity", Types.INTEGER },
             { "shippedDate", Types.TIMESTAMP }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingOrderItem (orderItemId LONG not null primary key,orderId LONG,entryId VARCHAR(75) null,sku VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(75) null,properties VARCHAR(75) null,price DOUBLE,quantity INTEGER,shippedDate DATE null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingOrderItem (shoppingOrderItemId LONG not null primary key,shoppingOrderId LONG,articleId VARCHAR(75) null,sku VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(75) null,properties VARCHAR(75) null,price DOUBLE,quantity INTEGER,shippedDate DATE null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingOrderItem";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingOrderItem.name ASC, shoppingOrderItem.description ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingOrderItem.name ASC, FsquareShopping_ShoppingOrderItem.description ASC";
@@ -77,22 +77,25 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
     public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
                 "value.object.column.bitmask.enabled.com.fsquare.shopping.model.ShoppingOrderItem"),
             true);
-    public static long ENTRYID_COLUMN_BITMASK = 1L;
-    public static long ORDERID_COLUMN_BITMASK = 2L;
-    public static long NAME_COLUMN_BITMASK = 4L;
-    public static long DESCRIPTION_COLUMN_BITMASK = 8L;
+    public static long ARTICLEID_COLUMN_BITMASK = 1L;
+    public static long SHOPPINGORDERID_COLUMN_BITMASK = 2L;
+    public static long SHOPPINGORDERITEMID_COLUMN_BITMASK = 4L;
+    public static long NAME_COLUMN_BITMASK = 8L;
+    public static long DESCRIPTION_COLUMN_BITMASK = 16L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.com.fsquare.shopping.model.ShoppingOrderItem"));
     private static ClassLoader _classLoader = ShoppingOrderItem.class.getClassLoader();
     private static Class<?>[] _escapedModelInterfaces = new Class[] {
             ShoppingOrderItem.class
         };
-    private long _orderItemId;
-    private long _orderId;
-    private long _originalOrderId;
-    private boolean _setOriginalOrderId;
-    private String _entryId;
-    private String _originalEntryId;
+    private long _shoppingOrderItemId;
+    private long _originalShoppingOrderItemId;
+    private boolean _setOriginalShoppingOrderItemId;
+    private long _shoppingOrderId;
+    private long _originalShoppingOrderId;
+    private boolean _setOriginalShoppingOrderId;
+    private String _articleId;
+    private String _originalArticleId;
     private String _sku;
     private String _name;
     private String _description;
@@ -119,9 +122,9 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 
         ShoppingOrderItem model = new ShoppingOrderItemImpl();
 
-        model.setOrderItemId(soapModel.getOrderItemId());
-        model.setOrderId(soapModel.getOrderId());
-        model.setEntryId(soapModel.getEntryId());
+        model.setShoppingOrderItemId(soapModel.getShoppingOrderItemId());
+        model.setShoppingOrderId(soapModel.getShoppingOrderId());
+        model.setArticleId(soapModel.getArticleId());
         model.setSku(soapModel.getSku());
         model.setName(soapModel.getName());
         model.setDescription(soapModel.getDescription());
@@ -156,17 +159,17 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 
     @Override
     public long getPrimaryKey() {
-        return _orderItemId;
+        return _shoppingOrderItemId;
     }
 
     @Override
     public void setPrimaryKey(long primaryKey) {
-        setOrderItemId(primaryKey);
+        setShoppingOrderItemId(primaryKey);
     }
 
     @Override
     public Serializable getPrimaryKeyObj() {
-        return _orderItemId;
+        return _shoppingOrderItemId;
     }
 
     @Override
@@ -188,9 +191,9 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
     public Map<String, Object> getModelAttributes() {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
-        attributes.put("orderItemId", getOrderItemId());
-        attributes.put("orderId", getOrderId());
-        attributes.put("entryId", getEntryId());
+        attributes.put("shoppingOrderItemId", getShoppingOrderItemId());
+        attributes.put("shoppingOrderId", getShoppingOrderId());
+        attributes.put("articleId", getArticleId());
         attributes.put("sku", getSku());
         attributes.put("name", getName());
         attributes.put("description", getDescription());
@@ -204,22 +207,22 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long orderItemId = (Long) attributes.get("orderItemId");
+        Long shoppingOrderItemId = (Long) attributes.get("shoppingOrderItemId");
 
-        if (orderItemId != null) {
-            setOrderItemId(orderItemId);
+        if (shoppingOrderItemId != null) {
+            setShoppingOrderItemId(shoppingOrderItemId);
         }
 
-        Long orderId = (Long) attributes.get("orderId");
+        Long shoppingOrderId = (Long) attributes.get("shoppingOrderId");
 
-        if (orderId != null) {
-            setOrderId(orderId);
+        if (shoppingOrderId != null) {
+            setShoppingOrderId(shoppingOrderId);
         }
 
-        String entryId = (String) attributes.get("entryId");
+        String articleId = (String) attributes.get("articleId");
 
-        if (entryId != null) {
-            setEntryId(entryId);
+        if (articleId != null) {
+            setArticleId(articleId);
         }
 
         String sku = (String) attributes.get("sku");
@@ -267,61 +270,73 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 
     @JSON
     @Override
-    public long getOrderItemId() {
-        return _orderItemId;
+    public long getShoppingOrderItemId() {
+        return _shoppingOrderItemId;
     }
 
     @Override
-    public void setOrderItemId(long orderItemId) {
-        _orderItemId = orderItemId;
-    }
+    public void setShoppingOrderItemId(long shoppingOrderItemId) {
+        _columnBitmask |= SHOPPINGORDERITEMID_COLUMN_BITMASK;
 
-    @JSON
-    @Override
-    public long getOrderId() {
-        return _orderId;
-    }
+        if (!_setOriginalShoppingOrderItemId) {
+            _setOriginalShoppingOrderItemId = true;
 
-    @Override
-    public void setOrderId(long orderId) {
-        _columnBitmask |= ORDERID_COLUMN_BITMASK;
-
-        if (!_setOriginalOrderId) {
-            _setOriginalOrderId = true;
-
-            _originalOrderId = _orderId;
+            _originalShoppingOrderItemId = _shoppingOrderItemId;
         }
 
-        _orderId = orderId;
+        _shoppingOrderItemId = shoppingOrderItemId;
     }
 
-    public long getOriginalOrderId() {
-        return _originalOrderId;
+    public long getOriginalShoppingOrderItemId() {
+        return _originalShoppingOrderItemId;
     }
 
     @JSON
     @Override
-    public String getEntryId() {
-        if (_entryId == null) {
+    public long getShoppingOrderId() {
+        return _shoppingOrderId;
+    }
+
+    @Override
+    public void setShoppingOrderId(long shoppingOrderId) {
+        _columnBitmask |= SHOPPINGORDERID_COLUMN_BITMASK;
+
+        if (!_setOriginalShoppingOrderId) {
+            _setOriginalShoppingOrderId = true;
+
+            _originalShoppingOrderId = _shoppingOrderId;
+        }
+
+        _shoppingOrderId = shoppingOrderId;
+    }
+
+    public long getOriginalShoppingOrderId() {
+        return _originalShoppingOrderId;
+    }
+
+    @JSON
+    @Override
+    public String getArticleId() {
+        if (_articleId == null) {
             return StringPool.BLANK;
         } else {
-            return _entryId;
+            return _articleId;
         }
     }
 
     @Override
-    public void setEntryId(String entryId) {
-        _columnBitmask |= ENTRYID_COLUMN_BITMASK;
+    public void setArticleId(String articleId) {
+        _columnBitmask |= ARTICLEID_COLUMN_BITMASK;
 
-        if (_originalEntryId == null) {
-            _originalEntryId = _entryId;
+        if (_originalArticleId == null) {
+            _originalArticleId = _articleId;
         }
 
-        _entryId = entryId;
+        _articleId = articleId;
     }
 
-    public String getOriginalEntryId() {
-        return GetterUtil.getString(_originalEntryId);
+    public String getOriginalArticleId() {
+        return GetterUtil.getString(_originalArticleId);
     }
 
     @JSON
@@ -452,9 +467,9 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
     public Object clone() {
         ShoppingOrderItemImpl shoppingOrderItemImpl = new ShoppingOrderItemImpl();
 
-        shoppingOrderItemImpl.setOrderItemId(getOrderItemId());
-        shoppingOrderItemImpl.setOrderId(getOrderId());
-        shoppingOrderItemImpl.setEntryId(getEntryId());
+        shoppingOrderItemImpl.setShoppingOrderItemId(getShoppingOrderItemId());
+        shoppingOrderItemImpl.setShoppingOrderId(getShoppingOrderId());
+        shoppingOrderItemImpl.setArticleId(getArticleId());
         shoppingOrderItemImpl.setSku(getSku());
         shoppingOrderItemImpl.setName(getName());
         shoppingOrderItemImpl.setDescription(getDescription());
@@ -517,11 +532,15 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
     public void resetOriginalValues() {
         ShoppingOrderItemModelImpl shoppingOrderItemModelImpl = this;
 
-        shoppingOrderItemModelImpl._originalOrderId = shoppingOrderItemModelImpl._orderId;
+        shoppingOrderItemModelImpl._originalShoppingOrderItemId = shoppingOrderItemModelImpl._shoppingOrderItemId;
 
-        shoppingOrderItemModelImpl._setOriginalOrderId = false;
+        shoppingOrderItemModelImpl._setOriginalShoppingOrderItemId = false;
 
-        shoppingOrderItemModelImpl._originalEntryId = shoppingOrderItemModelImpl._entryId;
+        shoppingOrderItemModelImpl._originalShoppingOrderId = shoppingOrderItemModelImpl._shoppingOrderId;
+
+        shoppingOrderItemModelImpl._setOriginalShoppingOrderId = false;
+
+        shoppingOrderItemModelImpl._originalArticleId = shoppingOrderItemModelImpl._articleId;
 
         shoppingOrderItemModelImpl._columnBitmask = 0;
     }
@@ -530,16 +549,16 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
     public CacheModel<ShoppingOrderItem> toCacheModel() {
         ShoppingOrderItemCacheModel shoppingOrderItemCacheModel = new ShoppingOrderItemCacheModel();
 
-        shoppingOrderItemCacheModel.orderItemId = getOrderItemId();
+        shoppingOrderItemCacheModel.shoppingOrderItemId = getShoppingOrderItemId();
 
-        shoppingOrderItemCacheModel.orderId = getOrderId();
+        shoppingOrderItemCacheModel.shoppingOrderId = getShoppingOrderId();
 
-        shoppingOrderItemCacheModel.entryId = getEntryId();
+        shoppingOrderItemCacheModel.articleId = getArticleId();
 
-        String entryId = shoppingOrderItemCacheModel.entryId;
+        String articleId = shoppingOrderItemCacheModel.articleId;
 
-        if ((entryId != null) && (entryId.length() == 0)) {
-            shoppingOrderItemCacheModel.entryId = null;
+        if ((articleId != null) && (articleId.length() == 0)) {
+            shoppingOrderItemCacheModel.articleId = null;
         }
 
         shoppingOrderItemCacheModel.sku = getSku();
@@ -593,12 +612,12 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
     public String toString() {
         StringBundler sb = new StringBundler(21);
 
-        sb.append("{orderItemId=");
-        sb.append(getOrderItemId());
-        sb.append(", orderId=");
-        sb.append(getOrderId());
-        sb.append(", entryId=");
-        sb.append(getEntryId());
+        sb.append("{shoppingOrderItemId=");
+        sb.append(getShoppingOrderItemId());
+        sb.append(", shoppingOrderId=");
+        sb.append(getShoppingOrderId());
+        sb.append(", articleId=");
+        sb.append(getArticleId());
         sb.append(", sku=");
         sb.append(getSku());
         sb.append(", name=");
@@ -627,16 +646,16 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
         sb.append("</model-name>");
 
         sb.append(
-            "<column><column-name>orderItemId</column-name><column-value><![CDATA[");
-        sb.append(getOrderItemId());
+            "<column><column-name>shoppingOrderItemId</column-name><column-value><![CDATA[");
+        sb.append(getShoppingOrderItemId());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>orderId</column-name><column-value><![CDATA[");
-        sb.append(getOrderId());
+            "<column><column-name>shoppingOrderId</column-name><column-value><![CDATA[");
+        sb.append(getShoppingOrderId());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>entryId</column-name><column-value><![CDATA[");
-        sb.append(getEntryId());
+            "<column><column-name>articleId</column-name><column-value><![CDATA[");
+        sb.append(getArticleId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>sku</column-name><column-value><![CDATA[");

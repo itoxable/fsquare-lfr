@@ -46,47 +46,47 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
     public void setPrimaryKey(long primaryKey);
 
     /**
-     * Returns the order item ID of this shopping order item.
+     * Returns the shopping order item ID of this shopping order item.
      *
-     * @return the order item ID of this shopping order item
+     * @return the shopping order item ID of this shopping order item
      */
-    public long getOrderItemId();
+    public long getShoppingOrderItemId();
 
     /**
-     * Sets the order item ID of this shopping order item.
+     * Sets the shopping order item ID of this shopping order item.
      *
-     * @param orderItemId the order item ID of this shopping order item
+     * @param shoppingOrderItemId the shopping order item ID of this shopping order item
      */
-    public void setOrderItemId(long orderItemId);
+    public void setShoppingOrderItemId(long shoppingOrderItemId);
 
     /**
-     * Returns the order ID of this shopping order item.
+     * Returns the shopping order ID of this shopping order item.
      *
-     * @return the order ID of this shopping order item
+     * @return the shopping order ID of this shopping order item
      */
-    public long getOrderId();
+    public long getShoppingOrderId();
 
     /**
-     * Sets the order ID of this shopping order item.
+     * Sets the shopping order ID of this shopping order item.
      *
-     * @param orderId the order ID of this shopping order item
+     * @param shoppingOrderId the shopping order ID of this shopping order item
      */
-    public void setOrderId(long orderId);
+    public void setShoppingOrderId(long shoppingOrderId);
 
     /**
-     * Returns the entry ID of this shopping order item.
+     * Returns the article ID of this shopping order item.
      *
-     * @return the entry ID of this shopping order item
+     * @return the article ID of this shopping order item
      */
     @AutoEscape
-    public String getEntryId();
+    public String getArticleId();
 
     /**
-     * Sets the entry ID of this shopping order item.
+     * Sets the article ID of this shopping order item.
      *
-     * @param entryId the entry ID of this shopping order item
+     * @param articleId the article ID of this shopping order item
      */
-    public void setEntryId(String entryId);
+    public void setArticleId(String articleId);
 
     /**
      * Returns the sku of this shopping order item.

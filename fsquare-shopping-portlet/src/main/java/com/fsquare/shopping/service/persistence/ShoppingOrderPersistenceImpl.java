@@ -168,6 +168,30 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     private static final String _FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_1 = "shoppingOrder.ppPaymentStatus IS NULL";
     private static final String _FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_2 = "shoppingOrder.ppPaymentStatus = ?";
     private static final String _FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_3 = "(shoppingOrder.ppPaymentStatus IS NULL OR shoppingOrder.ppPaymentStatus = '')";
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_SHIPPINGMETHODID =
+        new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
+            ShoppingOrderImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+            "findByShippingMethodId",
+            new String[] {
+                Long.class.getName(),
+                
+            Integer.class.getName(), Integer.class.getName(),
+                OrderByComparator.class.getName()
+            });
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SHIPPINGMETHODID =
+        new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
+            ShoppingOrderImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+            "findByShippingMethodId", new String[] { Long.class.getName() },
+            ShoppingOrderModelImpl.SHIPPINGMETHODID_COLUMN_BITMASK |
+            ShoppingOrderModelImpl.CREATEDATE_COLUMN_BITMASK);
+    public static final FinderPath FINDER_PATH_COUNT_BY_SHIPPINGMETHODID = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+            "countByShippingMethodId", new String[] { Long.class.getName() });
+    private static final String _FINDER_COLUMN_SHIPPINGMETHODID_SHIPPINGMETHODID_2 =
+        "shoppingOrder.shippingMethodId = ?";
     private static final String _SQL_SELECT_SHOPPINGORDER = "SELECT shoppingOrder FROM ShoppingOrder shoppingOrder";
     private static final String _SQL_SELECT_SHOPPINGORDER_WHERE = "SELECT shoppingOrder FROM ShoppingOrder shoppingOrder WHERE ";
     private static final String _SQL_COUNT_SHOPPINGORDER = "SELECT COUNT(shoppingOrder) FROM ShoppingOrder shoppingOrder";
@@ -457,7 +481,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     /**
      * Returns the shopping orders before and after the current shopping order in the ordered set where groupId = &#63;.
      *
-     * @param orderId the primary key of the current shopping order
+     * @param shoppingOrderId the primary key of the current shopping order
      * @param groupId the group ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next shopping order
@@ -465,10 +489,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder[] findByGroupId_PrevAndNext(long orderId,
+    public ShoppingOrder[] findByGroupId_PrevAndNext(long shoppingOrderId,
         long groupId, OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = findByPrimaryKey(orderId);
+        ShoppingOrder shoppingOrder = findByPrimaryKey(shoppingOrderId);
 
         Session session = null;
 
@@ -1633,7 +1657,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     /**
      * Returns the shopping orders before and after the current shopping order in the ordered set where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
      *
-     * @param orderId the primary key of the current shopping order
+     * @param shoppingOrderId the primary key of the current shopping order
      * @param groupId the group ID
      * @param userId the user ID
      * @param ppPaymentStatus the pp payment status
@@ -1643,11 +1667,11 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder[] findByG_U_PPPS_PrevAndNext(long orderId,
+    public ShoppingOrder[] findByG_U_PPPS_PrevAndNext(long shoppingOrderId,
         long groupId, long userId, String ppPaymentStatus,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = findByPrimaryKey(orderId);
+        ShoppingOrder shoppingOrder = findByPrimaryKey(shoppingOrderId);
 
         Session session = null;
 
@@ -1881,6 +1905,465 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
+     * Returns all the shopping orders where shippingMethodId = &#63;.
+     *
+     * @param shippingMethodId the shipping method ID
+     * @return the matching shopping orders
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<ShoppingOrder> findByShippingMethodId(long shippingMethodId)
+        throws SystemException {
+        return findByShippingMethodId(shippingMethodId, QueryUtil.ALL_POS,
+            QueryUtil.ALL_POS, null);
+    }
+
+    /**
+     * Returns a range of all the shopping orders where shippingMethodId = &#63;.
+     *
+     * <p>
+     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+     * </p>
+     *
+     * @param shippingMethodId the shipping method ID
+     * @param start the lower bound of the range of shopping orders
+     * @param end the upper bound of the range of shopping orders (not inclusive)
+     * @return the range of matching shopping orders
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<ShoppingOrder> findByShippingMethodId(long shippingMethodId,
+        int start, int end) throws SystemException {
+        return findByShippingMethodId(shippingMethodId, start, end, null);
+    }
+
+    /**
+     * Returns an ordered range of all the shopping orders where shippingMethodId = &#63;.
+     *
+     * <p>
+     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+     * </p>
+     *
+     * @param shippingMethodId the shipping method ID
+     * @param start the lower bound of the range of shopping orders
+     * @param end the upper bound of the range of shopping orders (not inclusive)
+     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+     * @return the ordered range of matching shopping orders
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<ShoppingOrder> findByShippingMethodId(long shippingMethodId,
+        int start, int end, OrderByComparator orderByComparator)
+        throws SystemException {
+        boolean pagination = true;
+        FinderPath finderPath = null;
+        Object[] finderArgs = null;
+
+        if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+                (orderByComparator == null)) {
+            pagination = false;
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SHIPPINGMETHODID;
+            finderArgs = new Object[] { shippingMethodId };
+        } else {
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_SHIPPINGMETHODID;
+            finderArgs = new Object[] {
+                    shippingMethodId,
+                    
+                    start, end, orderByComparator
+                };
+        }
+
+        List<ShoppingOrder> list = (List<ShoppingOrder>) FinderCacheUtil.getResult(finderPath,
+                finderArgs, this);
+
+        if ((list != null) && !list.isEmpty()) {
+            for (ShoppingOrder shoppingOrder : list) {
+                if ((shippingMethodId != shoppingOrder.getShippingMethodId())) {
+                    list = null;
+
+                    break;
+                }
+            }
+        }
+
+        if (list == null) {
+            StringBundler query = null;
+
+            if (orderByComparator != null) {
+                query = new StringBundler(3 +
+                        (orderByComparator.getOrderByFields().length * 3));
+            } else {
+                query = new StringBundler(3);
+            }
+
+            query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
+
+            query.append(_FINDER_COLUMN_SHIPPINGMETHODID_SHIPPINGMETHODID_2);
+
+            if (orderByComparator != null) {
+                appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+                    orderByComparator);
+            } else
+             if (pagination) {
+                query.append(ShoppingOrderModelImpl.ORDER_BY_JPQL);
+            }
+
+            String sql = query.toString();
+
+            Session session = null;
+
+            try {
+                session = openSession();
+
+                Query q = session.createQuery(sql);
+
+                QueryPos qPos = QueryPos.getInstance(q);
+
+                qPos.add(shippingMethodId);
+
+                if (!pagination) {
+                    list = (List<ShoppingOrder>) QueryUtil.list(q,
+                            getDialect(), start, end, false);
+
+                    Collections.sort(list);
+
+                    list = new UnmodifiableList<ShoppingOrder>(list);
+                } else {
+                    list = (List<ShoppingOrder>) QueryUtil.list(q,
+                            getDialect(), start, end);
+                }
+
+                cacheResult(list);
+
+                FinderCacheUtil.putResult(finderPath, finderArgs, list);
+            } catch (Exception e) {
+                FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+                throw processException(e);
+            } finally {
+                closeSession(session);
+            }
+        }
+
+        return list;
+    }
+
+    /**
+     * Returns the first shopping order in the ordered set where shippingMethodId = &#63;.
+     *
+     * @param shippingMethodId the shipping method ID
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the first matching shopping order
+     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrder findByShippingMethodId_First(long shippingMethodId,
+        OrderByComparator orderByComparator)
+        throws NoSuchShoppingOrderException, SystemException {
+        ShoppingOrder shoppingOrder = fetchByShippingMethodId_First(shippingMethodId,
+                orderByComparator);
+
+        if (shoppingOrder != null) {
+            return shoppingOrder;
+        }
+
+        StringBundler msg = new StringBundler(4);
+
+        msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+        msg.append("shippingMethodId=");
+        msg.append(shippingMethodId);
+
+        msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+        throw new NoSuchShoppingOrderException(msg.toString());
+    }
+
+    /**
+     * Returns the first shopping order in the ordered set where shippingMethodId = &#63;.
+     *
+     * @param shippingMethodId the shipping method ID
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the first matching shopping order, or <code>null</code> if a matching shopping order could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrder fetchByShippingMethodId_First(long shippingMethodId,
+        OrderByComparator orderByComparator) throws SystemException {
+        List<ShoppingOrder> list = findByShippingMethodId(shippingMethodId, 0,
+                1, orderByComparator);
+
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the last shopping order in the ordered set where shippingMethodId = &#63;.
+     *
+     * @param shippingMethodId the shipping method ID
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the last matching shopping order
+     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrder findByShippingMethodId_Last(long shippingMethodId,
+        OrderByComparator orderByComparator)
+        throws NoSuchShoppingOrderException, SystemException {
+        ShoppingOrder shoppingOrder = fetchByShippingMethodId_Last(shippingMethodId,
+                orderByComparator);
+
+        if (shoppingOrder != null) {
+            return shoppingOrder;
+        }
+
+        StringBundler msg = new StringBundler(4);
+
+        msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+        msg.append("shippingMethodId=");
+        msg.append(shippingMethodId);
+
+        msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+        throw new NoSuchShoppingOrderException(msg.toString());
+    }
+
+    /**
+     * Returns the last shopping order in the ordered set where shippingMethodId = &#63;.
+     *
+     * @param shippingMethodId the shipping method ID
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the last matching shopping order, or <code>null</code> if a matching shopping order could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrder fetchByShippingMethodId_Last(long shippingMethodId,
+        OrderByComparator orderByComparator) throws SystemException {
+        int count = countByShippingMethodId(shippingMethodId);
+
+        if (count == 0) {
+            return null;
+        }
+
+        List<ShoppingOrder> list = findByShippingMethodId(shippingMethodId,
+                count - 1, count, orderByComparator);
+
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the shopping orders before and after the current shopping order in the ordered set where shippingMethodId = &#63;.
+     *
+     * @param shoppingOrderId the primary key of the current shopping order
+     * @param shippingMethodId the shipping method ID
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the previous, current, and next shopping order
+     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a shopping order with the primary key could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrder[] findByShippingMethodId_PrevAndNext(
+        long shoppingOrderId, long shippingMethodId,
+        OrderByComparator orderByComparator)
+        throws NoSuchShoppingOrderException, SystemException {
+        ShoppingOrder shoppingOrder = findByPrimaryKey(shoppingOrderId);
+
+        Session session = null;
+
+        try {
+            session = openSession();
+
+            ShoppingOrder[] array = new ShoppingOrderImpl[3];
+
+            array[0] = getByShippingMethodId_PrevAndNext(session,
+                    shoppingOrder, shippingMethodId, orderByComparator, true);
+
+            array[1] = shoppingOrder;
+
+            array[2] = getByShippingMethodId_PrevAndNext(session,
+                    shoppingOrder, shippingMethodId, orderByComparator, false);
+
+            return array;
+        } catch (Exception e) {
+            throw processException(e);
+        } finally {
+            closeSession(session);
+        }
+    }
+
+    protected ShoppingOrder getByShippingMethodId_PrevAndNext(Session session,
+        ShoppingOrder shoppingOrder, long shippingMethodId,
+        OrderByComparator orderByComparator, boolean previous) {
+        StringBundler query = null;
+
+        if (orderByComparator != null) {
+            query = new StringBundler(6 +
+                    (orderByComparator.getOrderByFields().length * 6));
+        } else {
+            query = new StringBundler(3);
+        }
+
+        query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
+
+        query.append(_FINDER_COLUMN_SHIPPINGMETHODID_SHIPPINGMETHODID_2);
+
+        if (orderByComparator != null) {
+            String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+            if (orderByConditionFields.length > 0) {
+                query.append(WHERE_AND);
+            }
+
+            for (int i = 0; i < orderByConditionFields.length; i++) {
+                query.append(_ORDER_BY_ENTITY_ALIAS);
+                query.append(orderByConditionFields[i]);
+
+                if ((i + 1) < orderByConditionFields.length) {
+                    if (orderByComparator.isAscending() ^ previous) {
+                        query.append(WHERE_GREATER_THAN_HAS_NEXT);
+                    } else {
+                        query.append(WHERE_LESSER_THAN_HAS_NEXT);
+                    }
+                } else {
+                    if (orderByComparator.isAscending() ^ previous) {
+                        query.append(WHERE_GREATER_THAN);
+                    } else {
+                        query.append(WHERE_LESSER_THAN);
+                    }
+                }
+            }
+
+            query.append(ORDER_BY_CLAUSE);
+
+            String[] orderByFields = orderByComparator.getOrderByFields();
+
+            for (int i = 0; i < orderByFields.length; i++) {
+                query.append(_ORDER_BY_ENTITY_ALIAS);
+                query.append(orderByFields[i]);
+
+                if ((i + 1) < orderByFields.length) {
+                    if (orderByComparator.isAscending() ^ previous) {
+                        query.append(ORDER_BY_ASC_HAS_NEXT);
+                    } else {
+                        query.append(ORDER_BY_DESC_HAS_NEXT);
+                    }
+                } else {
+                    if (orderByComparator.isAscending() ^ previous) {
+                        query.append(ORDER_BY_ASC);
+                    } else {
+                        query.append(ORDER_BY_DESC);
+                    }
+                }
+            }
+        } else {
+            query.append(ShoppingOrderModelImpl.ORDER_BY_JPQL);
+        }
+
+        String sql = query.toString();
+
+        Query q = session.createQuery(sql);
+
+        q.setFirstResult(0);
+        q.setMaxResults(2);
+
+        QueryPos qPos = QueryPos.getInstance(q);
+
+        qPos.add(shippingMethodId);
+
+        if (orderByComparator != null) {
+            Object[] values = orderByComparator.getOrderByConditionValues(shoppingOrder);
+
+            for (Object value : values) {
+                qPos.add(value);
+            }
+        }
+
+        List<ShoppingOrder> list = q.list();
+
+        if (list.size() == 2) {
+            return list.get(1);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Removes all the shopping orders where shippingMethodId = &#63; from the database.
+     *
+     * @param shippingMethodId the shipping method ID
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void removeByShippingMethodId(long shippingMethodId)
+        throws SystemException {
+        for (ShoppingOrder shoppingOrder : findByShippingMethodId(
+                shippingMethodId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+            remove(shoppingOrder);
+        }
+    }
+
+    /**
+     * Returns the number of shopping orders where shippingMethodId = &#63;.
+     *
+     * @param shippingMethodId the shipping method ID
+     * @return the number of matching shopping orders
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public int countByShippingMethodId(long shippingMethodId)
+        throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_SHIPPINGMETHODID;
+
+        Object[] finderArgs = new Object[] { shippingMethodId };
+
+        Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
+                this);
+
+        if (count == null) {
+            StringBundler query = new StringBundler(2);
+
+            query.append(_SQL_COUNT_SHOPPINGORDER_WHERE);
+
+            query.append(_FINDER_COLUMN_SHIPPINGMETHODID_SHIPPINGMETHODID_2);
+
+            String sql = query.toString();
+
+            Session session = null;
+
+            try {
+                session = openSession();
+
+                Query q = session.createQuery(sql);
+
+                QueryPos qPos = QueryPos.getInstance(q);
+
+                qPos.add(shippingMethodId);
+
+                count = (Long) q.uniqueResult();
+
+                FinderCacheUtil.putResult(finderPath, finderArgs, count);
+            } catch (Exception e) {
+                FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+                throw processException(e);
+            } finally {
+                closeSession(session);
+            }
+        }
+
+        return count.intValue();
+    }
+
+    /**
      * Caches the shopping order in the entity cache if it is enabled.
      *
      * @param shoppingOrder the shopping order
@@ -2075,15 +2558,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     /**
      * Creates a new shopping order with the primary key. Does not add the shopping order to the database.
      *
-     * @param orderId the primary key for the new shopping order
+     * @param shoppingOrderId the primary key for the new shopping order
      * @return the new shopping order
      */
     @Override
-    public ShoppingOrder create(long orderId) {
+    public ShoppingOrder create(long shoppingOrderId) {
         ShoppingOrder shoppingOrder = new ShoppingOrderImpl();
 
         shoppingOrder.setNew(true);
-        shoppingOrder.setPrimaryKey(orderId);
+        shoppingOrder.setPrimaryKey(shoppingOrderId);
 
         return shoppingOrder;
     }
@@ -2091,15 +2574,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     /**
      * Removes the shopping order with the primary key from the database. Also notifies the appropriate model listeners.
      *
-     * @param orderId the primary key of the shopping order
+     * @param shoppingOrderId the primary key of the shopping order
      * @return the shopping order that was removed
      * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a shopping order with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder remove(long orderId)
+    public ShoppingOrder remove(long shoppingOrderId)
         throws NoSuchShoppingOrderException, SystemException {
-        return remove((Serializable) orderId);
+        return remove((Serializable) shoppingOrderId);
     }
 
     /**
@@ -2244,6 +2727,25 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
                 FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U_PPPS,
                     args);
             }
+
+            if ((shoppingOrderModelImpl.getColumnBitmask() &
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SHIPPINGMETHODID.getColumnBitmask()) != 0) {
+                Object[] args = new Object[] {
+                        shoppingOrderModelImpl.getOriginalShippingMethodId()
+                    };
+
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_SHIPPINGMETHODID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SHIPPINGMETHODID,
+                    args);
+
+                args = new Object[] { shoppingOrderModelImpl.getShippingMethodId() };
+
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_SHIPPINGMETHODID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SHIPPINGMETHODID,
+                    args);
+            }
         }
 
         EntityCacheUtil.putResult(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
@@ -2266,7 +2768,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         shoppingOrderImpl.setNew(shoppingOrder.isNew());
         shoppingOrderImpl.setPrimaryKey(shoppingOrder.getPrimaryKey());
 
-        shoppingOrderImpl.setOrderId(shoppingOrder.getOrderId());
+        shoppingOrderImpl.setShoppingOrderId(shoppingOrder.getShoppingOrderId());
         shoppingOrderImpl.setGroupId(shoppingOrder.getGroupId());
         shoppingOrderImpl.setCompanyId(shoppingOrder.getCompanyId());
         shoppingOrderImpl.setUserId(shoppingOrder.getUserId());
@@ -2351,15 +2853,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     /**
      * Returns the shopping order with the primary key or throws a {@link com.fsquare.shopping.NoSuchShoppingOrderException} if it could not be found.
      *
-     * @param orderId the primary key of the shopping order
+     * @param shoppingOrderId the primary key of the shopping order
      * @return the shopping order
      * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a shopping order with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder findByPrimaryKey(long orderId)
+    public ShoppingOrder findByPrimaryKey(long shoppingOrderId)
         throws NoSuchShoppingOrderException, SystemException {
-        return findByPrimaryKey((Serializable) orderId);
+        return findByPrimaryKey((Serializable) shoppingOrderId);
     }
 
     /**
@@ -2410,14 +2912,14 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     /**
      * Returns the shopping order with the primary key or returns <code>null</code> if it could not be found.
      *
-     * @param orderId the primary key of the shopping order
+     * @param shoppingOrderId the primary key of the shopping order
      * @return the shopping order, or <code>null</code> if a shopping order with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder fetchByPrimaryKey(long orderId)
+    public ShoppingOrder fetchByPrimaryKey(long shoppingOrderId)
         throws SystemException {
-        return fetchByPrimaryKey((Serializable) orderId);
+        return fetchByPrimaryKey((Serializable) shoppingOrderId);
     }
 
     /**

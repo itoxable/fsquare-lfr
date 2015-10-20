@@ -12,6 +12,8 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
     private String[] _methodParameterTypes0;
     private String _methodName1;
     private String[] _methodParameterTypes1;
+    private String _methodName3;
+    private String[] _methodParameterTypes3;
 
     public ShoppingCouponServiceClp(InvokableService invokableService) {
         _invokableService = invokableService;
@@ -23,6 +25,10 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
         _methodName1 = "setBeanIdentifier";
 
         _methodParameterTypes1 = new String[] { "java.lang.String" };
+
+        _methodName3 = "fetchByCode";
+
+        _methodParameterTypes3 = new String[] { "java.lang.String" };
     }
 
     @Override
@@ -69,5 +75,28 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public com.fsquare.shopping.model.ShoppingCoupon fetchByCode(
+        java.lang.String code) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableService.invokeMethod(_methodName3,
+                    _methodParameterTypes3,
+                    new Object[] { ClpSerializer.translateInput(code) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (com.fsquare.shopping.model.ShoppingCoupon) ClpSerializer.translateOutput(returnObj);
     }
 }

@@ -22,9 +22,9 @@ import java.util.Date;
  */
 public class ShoppingOrderItemCacheModel implements CacheModel<ShoppingOrderItem>,
     Externalizable {
-    public long orderItemId;
-    public long orderId;
-    public String entryId;
+    public long shoppingOrderItemId;
+    public long shoppingOrderId;
+    public String articleId;
     public String sku;
     public String name;
     public String description;
@@ -37,12 +37,12 @@ public class ShoppingOrderItemCacheModel implements CacheModel<ShoppingOrderItem
     public String toString() {
         StringBundler sb = new StringBundler(21);
 
-        sb.append("{orderItemId=");
-        sb.append(orderItemId);
-        sb.append(", orderId=");
-        sb.append(orderId);
-        sb.append(", entryId=");
-        sb.append(entryId);
+        sb.append("{shoppingOrderItemId=");
+        sb.append(shoppingOrderItemId);
+        sb.append(", shoppingOrderId=");
+        sb.append(shoppingOrderId);
+        sb.append(", articleId=");
+        sb.append(articleId);
         sb.append(", sku=");
         sb.append(sku);
         sb.append(", name=");
@@ -66,13 +66,13 @@ public class ShoppingOrderItemCacheModel implements CacheModel<ShoppingOrderItem
     public ShoppingOrderItem toEntityModel() {
         ShoppingOrderItemImpl shoppingOrderItemImpl = new ShoppingOrderItemImpl();
 
-        shoppingOrderItemImpl.setOrderItemId(orderItemId);
-        shoppingOrderItemImpl.setOrderId(orderId);
+        shoppingOrderItemImpl.setShoppingOrderItemId(shoppingOrderItemId);
+        shoppingOrderItemImpl.setShoppingOrderId(shoppingOrderId);
 
-        if (entryId == null) {
-            shoppingOrderItemImpl.setEntryId(StringPool.BLANK);
+        if (articleId == null) {
+            shoppingOrderItemImpl.setArticleId(StringPool.BLANK);
         } else {
-            shoppingOrderItemImpl.setEntryId(entryId);
+            shoppingOrderItemImpl.setArticleId(articleId);
         }
 
         if (sku == null) {
@@ -115,9 +115,9 @@ public class ShoppingOrderItemCacheModel implements CacheModel<ShoppingOrderItem
 
     @Override
     public void readExternal(ObjectInput objectInput) throws IOException {
-        orderItemId = objectInput.readLong();
-        orderId = objectInput.readLong();
-        entryId = objectInput.readUTF();
+        shoppingOrderItemId = objectInput.readLong();
+        shoppingOrderId = objectInput.readLong();
+        articleId = objectInput.readUTF();
         sku = objectInput.readUTF();
         name = objectInput.readUTF();
         description = objectInput.readUTF();
@@ -130,13 +130,13 @@ public class ShoppingOrderItemCacheModel implements CacheModel<ShoppingOrderItem
     @Override
     public void writeExternal(ObjectOutput objectOutput)
         throws IOException {
-        objectOutput.writeLong(orderItemId);
-        objectOutput.writeLong(orderId);
+        objectOutput.writeLong(shoppingOrderItemId);
+        objectOutput.writeLong(shoppingOrderId);
 
-        if (entryId == null) {
+        if (articleId == null) {
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
-            objectOutput.writeUTF(entryId);
+            objectOutput.writeUTF(articleId);
         }
 
         if (sku == null) {

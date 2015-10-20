@@ -72,56 +72,71 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ORDERID = new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_SHOPPINGORDERID =
+        new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderItemModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderItemImpl.class,
-            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByOrderId",
+            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByShoppingOrderId",
             new String[] {
                 Long.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
             });
-    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORDERID =
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SHOPPINGORDERID =
         new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderItemModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderItemImpl.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByOrderId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByShoppingOrderId",
             new String[] { Long.class.getName() },
-            ShoppingOrderItemModelImpl.ORDERID_COLUMN_BITMASK |
+            ShoppingOrderItemModelImpl.SHOPPINGORDERID_COLUMN_BITMASK |
             ShoppingOrderItemModelImpl.NAME_COLUMN_BITMASK |
             ShoppingOrderItemModelImpl.DESCRIPTION_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_ORDERID = new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_COUNT_BY_SHOPPINGORDERID = new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByOrderId",
-            new String[] { Long.class.getName() });
-    private static final String _FINDER_COLUMN_ORDERID_ORDERID_2 = "shoppingOrderItem.orderId = ?";
-    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ENTRYID = new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+            "countByShoppingOrderId", new String[] { Long.class.getName() });
+    private static final String _FINDER_COLUMN_SHOPPINGORDERID_SHOPPINGORDERID_2 =
+        "shoppingOrderItem.shoppingOrderId = ?";
+    public static final FinderPath FINDER_PATH_FETCH_BY_SHOPPINGORDERITEMID = new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingOrderItemModelImpl.FINDER_CACHE_ENABLED,
+            ShoppingOrderItemImpl.class, FINDER_CLASS_NAME_ENTITY,
+            "fetchByShoppingOrderItemId",
+            new String[] { Long.class.getName() },
+            ShoppingOrderItemModelImpl.SHOPPINGORDERITEMID_COLUMN_BITMASK);
+    public static final FinderPath FINDER_PATH_COUNT_BY_SHOPPINGORDERITEMID = new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingOrderItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+            "countByShoppingOrderItemId", new String[] { Long.class.getName() });
+    private static final String _FINDER_COLUMN_SHOPPINGORDERITEMID_SHOPPINGORDERITEMID_2 =
+        "shoppingOrderItem.shoppingOrderItemId = ?";
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ARTICLEID =
+        new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderItemModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderItemImpl.class,
-            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByEntryId",
+            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByArticleId",
             new String[] {
                 String.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
             });
-    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENTRYID =
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ARTICLEID =
         new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderItemModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderItemImpl.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByEntryId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByArticleId",
             new String[] { String.class.getName() },
-            ShoppingOrderItemModelImpl.ENTRYID_COLUMN_BITMASK |
+            ShoppingOrderItemModelImpl.ARTICLEID_COLUMN_BITMASK |
             ShoppingOrderItemModelImpl.NAME_COLUMN_BITMASK |
             ShoppingOrderItemModelImpl.DESCRIPTION_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_ENTRYID = new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_COUNT_BY_ARTICLEID = new FinderPath(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByEntryId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByArticleId",
             new String[] { String.class.getName() });
-    private static final String _FINDER_COLUMN_ENTRYID_ENTRYID_1 = "shoppingOrderItem.entryId IS NULL";
-    private static final String _FINDER_COLUMN_ENTRYID_ENTRYID_2 = "shoppingOrderItem.entryId = ?";
-    private static final String _FINDER_COLUMN_ENTRYID_ENTRYID_3 = "(shoppingOrderItem.entryId IS NULL OR shoppingOrderItem.entryId = '')";
+    private static final String _FINDER_COLUMN_ARTICLEID_ARTICLEID_1 = "shoppingOrderItem.articleId IS NULL";
+    private static final String _FINDER_COLUMN_ARTICLEID_ARTICLEID_2 = "shoppingOrderItem.articleId = ?";
+    private static final String _FINDER_COLUMN_ARTICLEID_ARTICLEID_3 = "(shoppingOrderItem.articleId IS NULL OR shoppingOrderItem.articleId = '')";
     private static final String _SQL_SELECT_SHOPPINGORDERITEM = "SELECT shoppingOrderItem FROM ShoppingOrderItem shoppingOrderItem";
     private static final String _SQL_SELECT_SHOPPINGORDERITEM_WHERE = "SELECT shoppingOrderItem FROM ShoppingOrderItem shoppingOrderItem WHERE ";
     private static final String _SQL_COUNT_SHOPPINGORDERITEM = "SELECT COUNT(shoppingOrderItem) FROM ShoppingOrderItem shoppingOrderItem";
@@ -157,45 +172,46 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns all the shopping order items where orderId = &#63;.
+     * Returns all the shopping order items where shoppingOrderId = &#63;.
      *
-     * @param orderId the order ID
+     * @param shoppingOrderId the shopping order ID
      * @return the matching shopping order items
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrderItem> findByOrderId(long orderId)
+    public List<ShoppingOrderItem> findByShoppingOrderId(long shoppingOrderId)
         throws SystemException {
-        return findByOrderId(orderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+        return findByShoppingOrderId(shoppingOrderId, QueryUtil.ALL_POS,
+            QueryUtil.ALL_POS, null);
     }
 
     /**
-     * Returns a range of all the shopping order items where orderId = &#63;.
+     * Returns a range of all the shopping order items where shoppingOrderId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param orderId the order ID
+     * @param shoppingOrderId the shopping order ID
      * @param start the lower bound of the range of shopping order items
      * @param end the upper bound of the range of shopping order items (not inclusive)
      * @return the range of matching shopping order items
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrderItem> findByOrderId(long orderId, int start,
-        int end) throws SystemException {
-        return findByOrderId(orderId, start, end, null);
+    public List<ShoppingOrderItem> findByShoppingOrderId(long shoppingOrderId,
+        int start, int end) throws SystemException {
+        return findByShoppingOrderId(shoppingOrderId, start, end, null);
     }
 
     /**
-     * Returns an ordered range of all the shopping order items where orderId = &#63;.
+     * Returns an ordered range of all the shopping order items where shoppingOrderId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param orderId the order ID
+     * @param shoppingOrderId the shopping order ID
      * @param start the lower bound of the range of shopping order items
      * @param end the upper bound of the range of shopping order items (not inclusive)
      * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -203,8 +219,9 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrderItem> findByOrderId(long orderId, int start,
-        int end, OrderByComparator orderByComparator) throws SystemException {
+    public List<ShoppingOrderItem> findByShoppingOrderId(long shoppingOrderId,
+        int start, int end, OrderByComparator orderByComparator)
+        throws SystemException {
         boolean pagination = true;
         FinderPath finderPath = null;
         Object[] finderArgs = null;
@@ -212,11 +229,15 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
         if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
                 (orderByComparator == null)) {
             pagination = false;
-            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORDERID;
-            finderArgs = new Object[] { orderId };
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SHOPPINGORDERID;
+            finderArgs = new Object[] { shoppingOrderId };
         } else {
-            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ORDERID;
-            finderArgs = new Object[] { orderId, start, end, orderByComparator };
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_SHOPPINGORDERID;
+            finderArgs = new Object[] {
+                    shoppingOrderId,
+                    
+                    start, end, orderByComparator
+                };
         }
 
         List<ShoppingOrderItem> list = (List<ShoppingOrderItem>) FinderCacheUtil.getResult(finderPath,
@@ -224,7 +245,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
         if ((list != null) && !list.isEmpty()) {
             for (ShoppingOrderItem shoppingOrderItem : list) {
-                if ((orderId != shoppingOrderItem.getOrderId())) {
+                if ((shoppingOrderId != shoppingOrderItem.getShoppingOrderId())) {
                     list = null;
 
                     break;
@@ -244,7 +265,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
             query.append(_SQL_SELECT_SHOPPINGORDERITEM_WHERE);
 
-            query.append(_FINDER_COLUMN_ORDERID_ORDERID_2);
+            query.append(_FINDER_COLUMN_SHOPPINGORDERID_SHOPPINGORDERID_2);
 
             if (orderByComparator != null) {
                 appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -265,7 +286,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(orderId);
+                qPos.add(shoppingOrderId);
 
                 if (!pagination) {
                     list = (List<ShoppingOrderItem>) QueryUtil.list(q,
@@ -295,19 +316,19 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the first shopping order item in the ordered set where orderId = &#63;.
+     * Returns the first shopping order item in the ordered set where shoppingOrderId = &#63;.
      *
-     * @param orderId the order ID
+     * @param shoppingOrderId the shopping order ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping order item
      * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a matching shopping order item could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem findByOrderId_First(long orderId,
+    public ShoppingOrderItem findByShoppingOrderId_First(long shoppingOrderId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderItemException, SystemException {
-        ShoppingOrderItem shoppingOrderItem = fetchByOrderId_First(orderId,
+        ShoppingOrderItem shoppingOrderItem = fetchByShoppingOrderId_First(shoppingOrderId,
                 orderByComparator);
 
         if (shoppingOrderItem != null) {
@@ -318,8 +339,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("orderId=");
-        msg.append(orderId);
+        msg.append("shoppingOrderId=");
+        msg.append(shoppingOrderId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -327,18 +348,19 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the first shopping order item in the ordered set where orderId = &#63;.
+     * Returns the first shopping order item in the ordered set where shoppingOrderId = &#63;.
      *
-     * @param orderId the order ID
+     * @param shoppingOrderId the shopping order ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping order item, or <code>null</code> if a matching shopping order item could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem fetchByOrderId_First(long orderId,
-        OrderByComparator orderByComparator) throws SystemException {
-        List<ShoppingOrderItem> list = findByOrderId(orderId, 0, 1,
-                orderByComparator);
+    public ShoppingOrderItem fetchByShoppingOrderId_First(
+        long shoppingOrderId, OrderByComparator orderByComparator)
+        throws SystemException {
+        List<ShoppingOrderItem> list = findByShoppingOrderId(shoppingOrderId,
+                0, 1, orderByComparator);
 
         if (!list.isEmpty()) {
             return list.get(0);
@@ -348,19 +370,19 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the last shopping order item in the ordered set where orderId = &#63;.
+     * Returns the last shopping order item in the ordered set where shoppingOrderId = &#63;.
      *
-     * @param orderId the order ID
+     * @param shoppingOrderId the shopping order ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping order item
      * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a matching shopping order item could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem findByOrderId_Last(long orderId,
+    public ShoppingOrderItem findByShoppingOrderId_Last(long shoppingOrderId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderItemException, SystemException {
-        ShoppingOrderItem shoppingOrderItem = fetchByOrderId_Last(orderId,
+        ShoppingOrderItem shoppingOrderItem = fetchByShoppingOrderId_Last(shoppingOrderId,
                 orderByComparator);
 
         if (shoppingOrderItem != null) {
@@ -371,8 +393,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("orderId=");
-        msg.append(orderId);
+        msg.append("shoppingOrderId=");
+        msg.append(shoppingOrderId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -380,24 +402,24 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the last shopping order item in the ordered set where orderId = &#63;.
+     * Returns the last shopping order item in the ordered set where shoppingOrderId = &#63;.
      *
-     * @param orderId the order ID
+     * @param shoppingOrderId the shopping order ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping order item, or <code>null</code> if a matching shopping order item could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem fetchByOrderId_Last(long orderId,
+    public ShoppingOrderItem fetchByShoppingOrderId_Last(long shoppingOrderId,
         OrderByComparator orderByComparator) throws SystemException {
-        int count = countByOrderId(orderId);
+        int count = countByShoppingOrderId(shoppingOrderId);
 
         if (count == 0) {
             return null;
         }
 
-        List<ShoppingOrderItem> list = findByOrderId(orderId, count - 1, count,
-                orderByComparator);
+        List<ShoppingOrderItem> list = findByShoppingOrderId(shoppingOrderId,
+                count - 1, count, orderByComparator);
 
         if (!list.isEmpty()) {
             return list.get(0);
@@ -407,20 +429,21 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the shopping order items before and after the current shopping order item in the ordered set where orderId = &#63;.
+     * Returns the shopping order items before and after the current shopping order item in the ordered set where shoppingOrderId = &#63;.
      *
-     * @param orderItemId the primary key of the current shopping order item
-     * @param orderId the order ID
+     * @param shoppingOrderItemId the primary key of the current shopping order item
+     * @param shoppingOrderId the shopping order ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next shopping order item
      * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a shopping order item with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem[] findByOrderId_PrevAndNext(long orderItemId,
-        long orderId, OrderByComparator orderByComparator)
+    public ShoppingOrderItem[] findByShoppingOrderId_PrevAndNext(
+        long shoppingOrderItemId, long shoppingOrderId,
+        OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderItemException, SystemException {
-        ShoppingOrderItem shoppingOrderItem = findByPrimaryKey(orderItemId);
+        ShoppingOrderItem shoppingOrderItem = findByPrimaryKey(shoppingOrderItemId);
 
         Session session = null;
 
@@ -429,13 +452,13 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
             ShoppingOrderItem[] array = new ShoppingOrderItemImpl[3];
 
-            array[0] = getByOrderId_PrevAndNext(session, shoppingOrderItem,
-                    orderId, orderByComparator, true);
+            array[0] = getByShoppingOrderId_PrevAndNext(session,
+                    shoppingOrderItem, shoppingOrderId, orderByComparator, true);
 
             array[1] = shoppingOrderItem;
 
-            array[2] = getByOrderId_PrevAndNext(session, shoppingOrderItem,
-                    orderId, orderByComparator, false);
+            array[2] = getByShoppingOrderId_PrevAndNext(session,
+                    shoppingOrderItem, shoppingOrderId, orderByComparator, false);
 
             return array;
         } catch (Exception e) {
@@ -445,9 +468,10 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
         }
     }
 
-    protected ShoppingOrderItem getByOrderId_PrevAndNext(Session session,
-        ShoppingOrderItem shoppingOrderItem, long orderId,
-        OrderByComparator orderByComparator, boolean previous) {
+    protected ShoppingOrderItem getByShoppingOrderId_PrevAndNext(
+        Session session, ShoppingOrderItem shoppingOrderItem,
+        long shoppingOrderId, OrderByComparator orderByComparator,
+        boolean previous) {
         StringBundler query = null;
 
         if (orderByComparator != null) {
@@ -459,7 +483,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
         query.append(_SQL_SELECT_SHOPPINGORDERITEM_WHERE);
 
-        query.append(_FINDER_COLUMN_ORDERID_ORDERID_2);
+        query.append(_FINDER_COLUMN_SHOPPINGORDERID_SHOPPINGORDERID_2);
 
         if (orderByComparator != null) {
             String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -522,7 +546,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
         QueryPos qPos = QueryPos.getInstance(q);
 
-        qPos.add(orderId);
+        qPos.add(shoppingOrderId);
 
         if (orderByComparator != null) {
             Object[] values = orderByComparator.getOrderByConditionValues(shoppingOrderItem);
@@ -542,31 +566,33 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Removes all the shopping order items where orderId = &#63; from the database.
+     * Removes all the shopping order items where shoppingOrderId = &#63; from the database.
      *
-     * @param orderId the order ID
+     * @param shoppingOrderId the shopping order ID
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeByOrderId(long orderId) throws SystemException {
-        for (ShoppingOrderItem shoppingOrderItem : findByOrderId(orderId,
-                QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+    public void removeByShoppingOrderId(long shoppingOrderId)
+        throws SystemException {
+        for (ShoppingOrderItem shoppingOrderItem : findByShoppingOrderId(
+                shoppingOrderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
             remove(shoppingOrderItem);
         }
     }
 
     /**
-     * Returns the number of shopping order items where orderId = &#63;.
+     * Returns the number of shopping order items where shoppingOrderId = &#63;.
      *
-     * @param orderId the order ID
+     * @param shoppingOrderId the shopping order ID
      * @return the number of matching shopping order items
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByOrderId(long orderId) throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_ORDERID;
+    public int countByShoppingOrderId(long shoppingOrderId)
+        throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_SHOPPINGORDERID;
 
-        Object[] finderArgs = new Object[] { orderId };
+        Object[] finderArgs = new Object[] { shoppingOrderId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -576,7 +602,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
             query.append(_SQL_COUNT_SHOPPINGORDERITEM_WHERE);
 
-            query.append(_FINDER_COLUMN_ORDERID_ORDERID_2);
+            query.append(_FINDER_COLUMN_SHOPPINGORDERID_SHOPPINGORDERID_2);
 
             String sql = query.toString();
 
@@ -589,7 +615,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(orderId);
+                qPos.add(shoppingOrderId);
 
                 count = (Long) q.uniqueResult();
 
@@ -607,45 +633,250 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns all the shopping order items where entryId = &#63;.
+     * Returns the shopping order item where shoppingOrderItemId = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingOrderItemException} if it could not be found.
      *
-     * @param entryId the entry ID
+     * @param shoppingOrderItemId the shopping order item ID
+     * @return the matching shopping order item
+     * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a matching shopping order item could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrderItem findByShoppingOrderItemId(long shoppingOrderItemId)
+        throws NoSuchShoppingOrderItemException, SystemException {
+        ShoppingOrderItem shoppingOrderItem = fetchByShoppingOrderItemId(shoppingOrderItemId);
+
+        if (shoppingOrderItem == null) {
+            StringBundler msg = new StringBundler(4);
+
+            msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+            msg.append("shoppingOrderItemId=");
+            msg.append(shoppingOrderItemId);
+
+            msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+            if (_log.isWarnEnabled()) {
+                _log.warn(msg.toString());
+            }
+
+            throw new NoSuchShoppingOrderItemException(msg.toString());
+        }
+
+        return shoppingOrderItem;
+    }
+
+    /**
+     * Returns the shopping order item where shoppingOrderItemId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+     *
+     * @param shoppingOrderItemId the shopping order item ID
+     * @return the matching shopping order item, or <code>null</code> if a matching shopping order item could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrderItem fetchByShoppingOrderItemId(
+        long shoppingOrderItemId) throws SystemException {
+        return fetchByShoppingOrderItemId(shoppingOrderItemId, true);
+    }
+
+    /**
+     * Returns the shopping order item where shoppingOrderItemId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+     *
+     * @param shoppingOrderItemId the shopping order item ID
+     * @param retrieveFromCache whether to use the finder cache
+     * @return the matching shopping order item, or <code>null</code> if a matching shopping order item could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrderItem fetchByShoppingOrderItemId(
+        long shoppingOrderItemId, boolean retrieveFromCache)
+        throws SystemException {
+        Object[] finderArgs = new Object[] { shoppingOrderItemId };
+
+        Object result = null;
+
+        if (retrieveFromCache) {
+            result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_SHOPPINGORDERITEMID,
+                    finderArgs, this);
+        }
+
+        if (result instanceof ShoppingOrderItem) {
+            ShoppingOrderItem shoppingOrderItem = (ShoppingOrderItem) result;
+
+            if ((shoppingOrderItemId != shoppingOrderItem.getShoppingOrderItemId())) {
+                result = null;
+            }
+        }
+
+        if (result == null) {
+            StringBundler query = new StringBundler(3);
+
+            query.append(_SQL_SELECT_SHOPPINGORDERITEM_WHERE);
+
+            query.append(_FINDER_COLUMN_SHOPPINGORDERITEMID_SHOPPINGORDERITEMID_2);
+
+            String sql = query.toString();
+
+            Session session = null;
+
+            try {
+                session = openSession();
+
+                Query q = session.createQuery(sql);
+
+                QueryPos qPos = QueryPos.getInstance(q);
+
+                qPos.add(shoppingOrderItemId);
+
+                List<ShoppingOrderItem> list = q.list();
+
+                if (list.isEmpty()) {
+                    FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SHOPPINGORDERITEMID,
+                        finderArgs, list);
+                } else {
+                    if ((list.size() > 1) && _log.isWarnEnabled()) {
+                        _log.warn(
+                            "ShoppingOrderItemPersistenceImpl.fetchByShoppingOrderItemId(long, boolean) with parameters (" +
+                            StringUtil.merge(finderArgs) +
+                            ") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+                    }
+
+                    ShoppingOrderItem shoppingOrderItem = list.get(0);
+
+                    result = shoppingOrderItem;
+
+                    cacheResult(shoppingOrderItem);
+
+                    if ((shoppingOrderItem.getShoppingOrderItemId() != shoppingOrderItemId)) {
+                        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SHOPPINGORDERITEMID,
+                            finderArgs, shoppingOrderItem);
+                    }
+                }
+            } catch (Exception e) {
+                FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SHOPPINGORDERITEMID,
+                    finderArgs);
+
+                throw processException(e);
+            } finally {
+                closeSession(session);
+            }
+        }
+
+        if (result instanceof List<?>) {
+            return null;
+        } else {
+            return (ShoppingOrderItem) result;
+        }
+    }
+
+    /**
+     * Removes the shopping order item where shoppingOrderItemId = &#63; from the database.
+     *
+     * @param shoppingOrderItemId the shopping order item ID
+     * @return the shopping order item that was removed
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrderItem removeByShoppingOrderItemId(
+        long shoppingOrderItemId)
+        throws NoSuchShoppingOrderItemException, SystemException {
+        ShoppingOrderItem shoppingOrderItem = findByShoppingOrderItemId(shoppingOrderItemId);
+
+        return remove(shoppingOrderItem);
+    }
+
+    /**
+     * Returns the number of shopping order items where shoppingOrderItemId = &#63;.
+     *
+     * @param shoppingOrderItemId the shopping order item ID
+     * @return the number of matching shopping order items
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public int countByShoppingOrderItemId(long shoppingOrderItemId)
+        throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_SHOPPINGORDERITEMID;
+
+        Object[] finderArgs = new Object[] { shoppingOrderItemId };
+
+        Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
+                this);
+
+        if (count == null) {
+            StringBundler query = new StringBundler(2);
+
+            query.append(_SQL_COUNT_SHOPPINGORDERITEM_WHERE);
+
+            query.append(_FINDER_COLUMN_SHOPPINGORDERITEMID_SHOPPINGORDERITEMID_2);
+
+            String sql = query.toString();
+
+            Session session = null;
+
+            try {
+                session = openSession();
+
+                Query q = session.createQuery(sql);
+
+                QueryPos qPos = QueryPos.getInstance(q);
+
+                qPos.add(shoppingOrderItemId);
+
+                count = (Long) q.uniqueResult();
+
+                FinderCacheUtil.putResult(finderPath, finderArgs, count);
+            } catch (Exception e) {
+                FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+                throw processException(e);
+            } finally {
+                closeSession(session);
+            }
+        }
+
+        return count.intValue();
+    }
+
+    /**
+     * Returns all the shopping order items where articleId = &#63;.
+     *
+     * @param articleId the article ID
      * @return the matching shopping order items
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrderItem> findByEntryId(String entryId)
+    public List<ShoppingOrderItem> findByArticleId(String articleId)
         throws SystemException {
-        return findByEntryId(entryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+        return findByArticleId(articleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+            null);
     }
 
     /**
-     * Returns a range of all the shopping order items where entryId = &#63;.
+     * Returns a range of all the shopping order items where articleId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param entryId the entry ID
+     * @param articleId the article ID
      * @param start the lower bound of the range of shopping order items
      * @param end the upper bound of the range of shopping order items (not inclusive)
      * @return the range of matching shopping order items
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrderItem> findByEntryId(String entryId, int start,
+    public List<ShoppingOrderItem> findByArticleId(String articleId, int start,
         int end) throws SystemException {
-        return findByEntryId(entryId, start, end, null);
+        return findByArticleId(articleId, start, end, null);
     }
 
     /**
-     * Returns an ordered range of all the shopping order items where entryId = &#63;.
+     * Returns an ordered range of all the shopping order items where articleId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param entryId the entry ID
+     * @param articleId the article ID
      * @param start the lower bound of the range of shopping order items
      * @param end the upper bound of the range of shopping order items (not inclusive)
      * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -653,7 +884,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrderItem> findByEntryId(String entryId, int start,
+    public List<ShoppingOrderItem> findByArticleId(String articleId, int start,
         int end, OrderByComparator orderByComparator) throws SystemException {
         boolean pagination = true;
         FinderPath finderPath = null;
@@ -662,11 +893,11 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
         if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
                 (orderByComparator == null)) {
             pagination = false;
-            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENTRYID;
-            finderArgs = new Object[] { entryId };
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ARTICLEID;
+            finderArgs = new Object[] { articleId };
         } else {
-            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ENTRYID;
-            finderArgs = new Object[] { entryId, start, end, orderByComparator };
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ARTICLEID;
+            finderArgs = new Object[] { articleId, start, end, orderByComparator };
         }
 
         List<ShoppingOrderItem> list = (List<ShoppingOrderItem>) FinderCacheUtil.getResult(finderPath,
@@ -674,7 +905,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
         if ((list != null) && !list.isEmpty()) {
             for (ShoppingOrderItem shoppingOrderItem : list) {
-                if (!Validator.equals(entryId, shoppingOrderItem.getEntryId())) {
+                if (!Validator.equals(articleId,
+                            shoppingOrderItem.getArticleId())) {
                     list = null;
 
                     break;
@@ -694,16 +926,16 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
             query.append(_SQL_SELECT_SHOPPINGORDERITEM_WHERE);
 
-            boolean bindEntryId = false;
+            boolean bindArticleId = false;
 
-            if (entryId == null) {
-                query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_1);
-            } else if (entryId.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_3);
+            if (articleId == null) {
+                query.append(_FINDER_COLUMN_ARTICLEID_ARTICLEID_1);
+            } else if (articleId.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_ARTICLEID_ARTICLEID_3);
             } else {
-                bindEntryId = true;
+                bindArticleId = true;
 
-                query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
+                query.append(_FINDER_COLUMN_ARTICLEID_ARTICLEID_2);
             }
 
             if (orderByComparator != null) {
@@ -725,8 +957,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                if (bindEntryId) {
-                    qPos.add(entryId);
+                if (bindArticleId) {
+                    qPos.add(articleId);
                 }
 
                 if (!pagination) {
@@ -757,19 +989,19 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the first shopping order item in the ordered set where entryId = &#63;.
+     * Returns the first shopping order item in the ordered set where articleId = &#63;.
      *
-     * @param entryId the entry ID
+     * @param articleId the article ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping order item
      * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a matching shopping order item could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem findByEntryId_First(String entryId,
+    public ShoppingOrderItem findByArticleId_First(String articleId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderItemException, SystemException {
-        ShoppingOrderItem shoppingOrderItem = fetchByEntryId_First(entryId,
+        ShoppingOrderItem shoppingOrderItem = fetchByArticleId_First(articleId,
                 orderByComparator);
 
         if (shoppingOrderItem != null) {
@@ -780,8 +1012,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("entryId=");
-        msg.append(entryId);
+        msg.append("articleId=");
+        msg.append(articleId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -789,17 +1021,17 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the first shopping order item in the ordered set where entryId = &#63;.
+     * Returns the first shopping order item in the ordered set where articleId = &#63;.
      *
-     * @param entryId the entry ID
+     * @param articleId the article ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping order item, or <code>null</code> if a matching shopping order item could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem fetchByEntryId_First(String entryId,
+    public ShoppingOrderItem fetchByArticleId_First(String articleId,
         OrderByComparator orderByComparator) throws SystemException {
-        List<ShoppingOrderItem> list = findByEntryId(entryId, 0, 1,
+        List<ShoppingOrderItem> list = findByArticleId(articleId, 0, 1,
                 orderByComparator);
 
         if (!list.isEmpty()) {
@@ -810,19 +1042,19 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the last shopping order item in the ordered set where entryId = &#63;.
+     * Returns the last shopping order item in the ordered set where articleId = &#63;.
      *
-     * @param entryId the entry ID
+     * @param articleId the article ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping order item
      * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a matching shopping order item could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem findByEntryId_Last(String entryId,
+    public ShoppingOrderItem findByArticleId_Last(String articleId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderItemException, SystemException {
-        ShoppingOrderItem shoppingOrderItem = fetchByEntryId_Last(entryId,
+        ShoppingOrderItem shoppingOrderItem = fetchByArticleId_Last(articleId,
                 orderByComparator);
 
         if (shoppingOrderItem != null) {
@@ -833,8 +1065,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("entryId=");
-        msg.append(entryId);
+        msg.append("articleId=");
+        msg.append(articleId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -842,24 +1074,24 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the last shopping order item in the ordered set where entryId = &#63;.
+     * Returns the last shopping order item in the ordered set where articleId = &#63;.
      *
-     * @param entryId the entry ID
+     * @param articleId the article ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping order item, or <code>null</code> if a matching shopping order item could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem fetchByEntryId_Last(String entryId,
+    public ShoppingOrderItem fetchByArticleId_Last(String articleId,
         OrderByComparator orderByComparator) throws SystemException {
-        int count = countByEntryId(entryId);
+        int count = countByArticleId(articleId);
 
         if (count == 0) {
             return null;
         }
 
-        List<ShoppingOrderItem> list = findByEntryId(entryId, count - 1, count,
-                orderByComparator);
+        List<ShoppingOrderItem> list = findByArticleId(articleId, count - 1,
+                count, orderByComparator);
 
         if (!list.isEmpty()) {
             return list.get(0);
@@ -869,20 +1101,21 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the shopping order items before and after the current shopping order item in the ordered set where entryId = &#63;.
+     * Returns the shopping order items before and after the current shopping order item in the ordered set where articleId = &#63;.
      *
-     * @param orderItemId the primary key of the current shopping order item
-     * @param entryId the entry ID
+     * @param shoppingOrderItemId the primary key of the current shopping order item
+     * @param articleId the article ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next shopping order item
      * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a shopping order item with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem[] findByEntryId_PrevAndNext(long orderItemId,
-        String entryId, OrderByComparator orderByComparator)
+    public ShoppingOrderItem[] findByArticleId_PrevAndNext(
+        long shoppingOrderItemId, String articleId,
+        OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderItemException, SystemException {
-        ShoppingOrderItem shoppingOrderItem = findByPrimaryKey(orderItemId);
+        ShoppingOrderItem shoppingOrderItem = findByPrimaryKey(shoppingOrderItemId);
 
         Session session = null;
 
@@ -891,13 +1124,13 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
             ShoppingOrderItem[] array = new ShoppingOrderItemImpl[3];
 
-            array[0] = getByEntryId_PrevAndNext(session, shoppingOrderItem,
-                    entryId, orderByComparator, true);
+            array[0] = getByArticleId_PrevAndNext(session, shoppingOrderItem,
+                    articleId, orderByComparator, true);
 
             array[1] = shoppingOrderItem;
 
-            array[2] = getByEntryId_PrevAndNext(session, shoppingOrderItem,
-                    entryId, orderByComparator, false);
+            array[2] = getByArticleId_PrevAndNext(session, shoppingOrderItem,
+                    articleId, orderByComparator, false);
 
             return array;
         } catch (Exception e) {
@@ -907,8 +1140,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
         }
     }
 
-    protected ShoppingOrderItem getByEntryId_PrevAndNext(Session session,
-        ShoppingOrderItem shoppingOrderItem, String entryId,
+    protected ShoppingOrderItem getByArticleId_PrevAndNext(Session session,
+        ShoppingOrderItem shoppingOrderItem, String articleId,
         OrderByComparator orderByComparator, boolean previous) {
         StringBundler query = null;
 
@@ -921,16 +1154,16 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
         query.append(_SQL_SELECT_SHOPPINGORDERITEM_WHERE);
 
-        boolean bindEntryId = false;
+        boolean bindArticleId = false;
 
-        if (entryId == null) {
-            query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_1);
-        } else if (entryId.equals(StringPool.BLANK)) {
-            query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_3);
+        if (articleId == null) {
+            query.append(_FINDER_COLUMN_ARTICLEID_ARTICLEID_1);
+        } else if (articleId.equals(StringPool.BLANK)) {
+            query.append(_FINDER_COLUMN_ARTICLEID_ARTICLEID_3);
         } else {
-            bindEntryId = true;
+            bindArticleId = true;
 
-            query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
+            query.append(_FINDER_COLUMN_ARTICLEID_ARTICLEID_2);
         }
 
         if (orderByComparator != null) {
@@ -994,8 +1227,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
         QueryPos qPos = QueryPos.getInstance(q);
 
-        if (bindEntryId) {
-            qPos.add(entryId);
+        if (bindArticleId) {
+            qPos.add(articleId);
         }
 
         if (orderByComparator != null) {
@@ -1016,31 +1249,31 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Removes all the shopping order items where entryId = &#63; from the database.
+     * Removes all the shopping order items where articleId = &#63; from the database.
      *
-     * @param entryId the entry ID
+     * @param articleId the article ID
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeByEntryId(String entryId) throws SystemException {
-        for (ShoppingOrderItem shoppingOrderItem : findByEntryId(entryId,
+    public void removeByArticleId(String articleId) throws SystemException {
+        for (ShoppingOrderItem shoppingOrderItem : findByArticleId(articleId,
                 QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
             remove(shoppingOrderItem);
         }
     }
 
     /**
-     * Returns the number of shopping order items where entryId = &#63;.
+     * Returns the number of shopping order items where articleId = &#63;.
      *
-     * @param entryId the entry ID
+     * @param articleId the article ID
      * @return the number of matching shopping order items
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByEntryId(String entryId) throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_ENTRYID;
+    public int countByArticleId(String articleId) throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_ARTICLEID;
 
-        Object[] finderArgs = new Object[] { entryId };
+        Object[] finderArgs = new Object[] { articleId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -1050,16 +1283,16 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
             query.append(_SQL_COUNT_SHOPPINGORDERITEM_WHERE);
 
-            boolean bindEntryId = false;
+            boolean bindArticleId = false;
 
-            if (entryId == null) {
-                query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_1);
-            } else if (entryId.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_3);
+            if (articleId == null) {
+                query.append(_FINDER_COLUMN_ARTICLEID_ARTICLEID_1);
+            } else if (articleId.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_ARTICLEID_ARTICLEID_3);
             } else {
-                bindEntryId = true;
+                bindArticleId = true;
 
-                query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
+                query.append(_FINDER_COLUMN_ARTICLEID_ARTICLEID_2);
             }
 
             String sql = query.toString();
@@ -1073,8 +1306,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                if (bindEntryId) {
-                    qPos.add(entryId);
+                if (bindArticleId) {
+                    qPos.add(articleId);
                 }
 
                 count = (Long) q.uniqueResult();
@@ -1101,6 +1334,10 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     public void cacheResult(ShoppingOrderItem shoppingOrderItem) {
         EntityCacheUtil.putResult(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderItemImpl.class, shoppingOrderItem.getPrimaryKey(),
+            shoppingOrderItem);
+
+        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SHOPPINGORDERITEMID,
+            new Object[] { shoppingOrderItem.getShoppingOrderItemId() },
             shoppingOrderItem);
 
         shoppingOrderItem.resetOriginalValues();
@@ -1159,6 +1396,8 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 
         FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
         FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+        clearUniqueFindersCache(shoppingOrderItem);
     }
 
     @Override
@@ -1169,21 +1408,73 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
         for (ShoppingOrderItem shoppingOrderItem : shoppingOrderItems) {
             EntityCacheUtil.removeResult(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
                 ShoppingOrderItemImpl.class, shoppingOrderItem.getPrimaryKey());
+
+            clearUniqueFindersCache(shoppingOrderItem);
+        }
+    }
+
+    protected void cacheUniqueFindersCache(ShoppingOrderItem shoppingOrderItem) {
+        if (shoppingOrderItem.isNew()) {
+            Object[] args = new Object[] {
+                    shoppingOrderItem.getShoppingOrderItemId()
+                };
+
+            FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SHOPPINGORDERITEMID,
+                args, Long.valueOf(1));
+            FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SHOPPINGORDERITEMID,
+                args, shoppingOrderItem);
+        } else {
+            ShoppingOrderItemModelImpl shoppingOrderItemModelImpl = (ShoppingOrderItemModelImpl) shoppingOrderItem;
+
+            if ((shoppingOrderItemModelImpl.getColumnBitmask() &
+                    FINDER_PATH_FETCH_BY_SHOPPINGORDERITEMID.getColumnBitmask()) != 0) {
+                Object[] args = new Object[] {
+                        shoppingOrderItem.getShoppingOrderItemId()
+                    };
+
+                FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SHOPPINGORDERITEMID,
+                    args, Long.valueOf(1));
+                FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SHOPPINGORDERITEMID,
+                    args, shoppingOrderItem);
+            }
+        }
+    }
+
+    protected void clearUniqueFindersCache(ShoppingOrderItem shoppingOrderItem) {
+        ShoppingOrderItemModelImpl shoppingOrderItemModelImpl = (ShoppingOrderItemModelImpl) shoppingOrderItem;
+
+        Object[] args = new Object[] { shoppingOrderItem.getShoppingOrderItemId() };
+
+        FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_SHOPPINGORDERITEMID,
+            args);
+        FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SHOPPINGORDERITEMID,
+            args);
+
+        if ((shoppingOrderItemModelImpl.getColumnBitmask() &
+                FINDER_PATH_FETCH_BY_SHOPPINGORDERITEMID.getColumnBitmask()) != 0) {
+            args = new Object[] {
+                    shoppingOrderItemModelImpl.getOriginalShoppingOrderItemId()
+                };
+
+            FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_SHOPPINGORDERITEMID,
+                args);
+            FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SHOPPINGORDERITEMID,
+                args);
         }
     }
 
     /**
      * Creates a new shopping order item with the primary key. Does not add the shopping order item to the database.
      *
-     * @param orderItemId the primary key for the new shopping order item
+     * @param shoppingOrderItemId the primary key for the new shopping order item
      * @return the new shopping order item
      */
     @Override
-    public ShoppingOrderItem create(long orderItemId) {
+    public ShoppingOrderItem create(long shoppingOrderItemId) {
         ShoppingOrderItem shoppingOrderItem = new ShoppingOrderItemImpl();
 
         shoppingOrderItem.setNew(true);
-        shoppingOrderItem.setPrimaryKey(orderItemId);
+        shoppingOrderItem.setPrimaryKey(shoppingOrderItemId);
 
         return shoppingOrderItem;
     }
@@ -1191,15 +1482,15 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     /**
      * Removes the shopping order item with the primary key from the database. Also notifies the appropriate model listeners.
      *
-     * @param orderItemId the primary key of the shopping order item
+     * @param shoppingOrderItemId the primary key of the shopping order item
      * @return the shopping order item that was removed
      * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a shopping order item with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem remove(long orderItemId)
+    public ShoppingOrderItem remove(long shoppingOrderItemId)
         throws NoSuchShoppingOrderItemException, SystemException {
-        return remove((Serializable) orderItemId);
+        return remove((Serializable) shoppingOrderItemId);
     }
 
     /**
@@ -1306,36 +1597,42 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
         }
         else {
             if ((shoppingOrderItemModelImpl.getColumnBitmask() &
-                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORDERID.getColumnBitmask()) != 0) {
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SHOPPINGORDERID.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingOrderItemModelImpl.getOriginalOrderId()
+                        shoppingOrderItemModelImpl.getOriginalShoppingOrderId()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ORDERID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORDERID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_SHOPPINGORDERID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SHOPPINGORDERID,
                     args);
 
-                args = new Object[] { shoppingOrderItemModelImpl.getOrderId() };
+                args = new Object[] {
+                        shoppingOrderItemModelImpl.getShoppingOrderId()
+                    };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ORDERID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORDERID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_SHOPPINGORDERID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SHOPPINGORDERID,
                     args);
             }
 
             if ((shoppingOrderItemModelImpl.getColumnBitmask() &
-                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENTRYID.getColumnBitmask()) != 0) {
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ARTICLEID.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingOrderItemModelImpl.getOriginalEntryId()
+                        shoppingOrderItemModelImpl.getOriginalArticleId()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ENTRYID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENTRYID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ARTICLEID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ARTICLEID,
                     args);
 
-                args = new Object[] { shoppingOrderItemModelImpl.getEntryId() };
+                args = new Object[] { shoppingOrderItemModelImpl.getArticleId() };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ENTRYID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ENTRYID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ARTICLEID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ARTICLEID,
                     args);
             }
         }
@@ -1343,6 +1640,9 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
         EntityCacheUtil.putResult(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderItemImpl.class, shoppingOrderItem.getPrimaryKey(),
             shoppingOrderItem);
+
+        clearUniqueFindersCache(shoppingOrderItem);
+        cacheUniqueFindersCache(shoppingOrderItem);
 
         return shoppingOrderItem;
     }
@@ -1358,9 +1658,9 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
         shoppingOrderItemImpl.setNew(shoppingOrderItem.isNew());
         shoppingOrderItemImpl.setPrimaryKey(shoppingOrderItem.getPrimaryKey());
 
-        shoppingOrderItemImpl.setOrderItemId(shoppingOrderItem.getOrderItemId());
-        shoppingOrderItemImpl.setOrderId(shoppingOrderItem.getOrderId());
-        shoppingOrderItemImpl.setEntryId(shoppingOrderItem.getEntryId());
+        shoppingOrderItemImpl.setShoppingOrderItemId(shoppingOrderItem.getShoppingOrderItemId());
+        shoppingOrderItemImpl.setShoppingOrderId(shoppingOrderItem.getShoppingOrderId());
+        shoppingOrderItemImpl.setArticleId(shoppingOrderItem.getArticleId());
         shoppingOrderItemImpl.setSku(shoppingOrderItem.getSku());
         shoppingOrderItemImpl.setName(shoppingOrderItem.getName());
         shoppingOrderItemImpl.setDescription(shoppingOrderItem.getDescription());
@@ -1400,15 +1700,15 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     /**
      * Returns the shopping order item with the primary key or throws a {@link com.fsquare.shopping.NoSuchShoppingOrderItemException} if it could not be found.
      *
-     * @param orderItemId the primary key of the shopping order item
+     * @param shoppingOrderItemId the primary key of the shopping order item
      * @return the shopping order item
      * @throws com.fsquare.shopping.NoSuchShoppingOrderItemException if a shopping order item with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem findByPrimaryKey(long orderItemId)
+    public ShoppingOrderItem findByPrimaryKey(long shoppingOrderItemId)
         throws NoSuchShoppingOrderItemException, SystemException {
-        return findByPrimaryKey((Serializable) orderItemId);
+        return findByPrimaryKey((Serializable) shoppingOrderItemId);
     }
 
     /**
@@ -1460,14 +1760,14 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
     /**
      * Returns the shopping order item with the primary key or returns <code>null</code> if it could not be found.
      *
-     * @param orderItemId the primary key of the shopping order item
+     * @param shoppingOrderItemId the primary key of the shopping order item
      * @return the shopping order item, or <code>null</code> if a shopping order item with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrderItem fetchByPrimaryKey(long orderItemId)
+    public ShoppingOrderItem fetchByPrimaryKey(long shoppingOrderItemId)
         throws SystemException {
-        return fetchByPrimaryKey((Serializable) orderItemId);
+        return fetchByPrimaryKey((Serializable) shoppingOrderItemId);
     }
 
     /**

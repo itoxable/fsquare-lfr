@@ -48,23 +48,23 @@ public interface ShoppingOrderItemLocalService extends BaseLocalService,
     /**
     * Creates a new shopping order item with the primary key. Does not add the shopping order item to the database.
     *
-    * @param orderItemId the primary key for the new shopping order item
+    * @param shoppingOrderItemId the primary key for the new shopping order item
     * @return the new shopping order item
     */
     public com.fsquare.shopping.model.ShoppingOrderItem createShoppingOrderItem(
-        long orderItemId);
+        long shoppingOrderItemId);
 
     /**
     * Deletes the shopping order item with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param orderItemId the primary key of the shopping order item
+    * @param shoppingOrderItemId the primary key of the shopping order item
     * @return the shopping order item that was removed
     * @throws PortalException if a shopping order item with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
     public com.fsquare.shopping.model.ShoppingOrderItem deleteShoppingOrderItem(
-        long orderItemId)
+        long shoppingOrderItemId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -159,20 +159,20 @@ public interface ShoppingOrderItemLocalService extends BaseLocalService,
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public com.fsquare.shopping.model.ShoppingOrderItem fetchShoppingOrderItem(
-        long orderItemId)
+        long shoppingOrderItemId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
     * Returns the shopping order item with the primary key.
     *
-    * @param orderItemId the primary key of the shopping order item
+    * @param shoppingOrderItemId the primary key of the shopping order item
     * @return the shopping order item
     * @throws PortalException if a shopping order item with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public com.fsquare.shopping.model.ShoppingOrderItem getShoppingOrderItem(
-        long orderItemId)
+        long shoppingOrderItemId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 

@@ -1,5 +1,12 @@
 package com.fsquare.shopping.service.http;
 
+import com.fsquare.shopping.service.ShoppingCouponServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.fsquare.shopping.service.ShoppingCouponServiceUtil} service utility. The
@@ -41,4 +48,18 @@ package com.fsquare.shopping.service.http;
  * @generated
  */
 public class ShoppingCouponServiceSoap {
+    private static Log _log = LogFactoryUtil.getLog(ShoppingCouponServiceSoap.class);
+
+    public static com.fsquare.shopping.model.ShoppingCouponSoap fetchByCode(
+        java.lang.String code) throws RemoteException {
+        try {
+            com.fsquare.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.fetchByCode(code);
+
+            return com.fsquare.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

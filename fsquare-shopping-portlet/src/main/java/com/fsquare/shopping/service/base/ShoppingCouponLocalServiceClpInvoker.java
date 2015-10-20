@@ -41,10 +41,10 @@ public class ShoppingCouponLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName52;
-    private String[] _methodParameterTypes52;
-    private String _methodName53;
-    private String[] _methodParameterTypes53;
+    private String _methodName58;
+    private String[] _methodParameterTypes58;
+    private String _methodName59;
+    private String[] _methodParameterTypes59;
 
     public ShoppingCouponLocalServiceClpInvoker() {
         _methodName0 = "addShoppingCoupon";
@@ -129,13 +129,13 @@ public class ShoppingCouponLocalServiceClpInvoker {
                 "com.fsquare.shopping.model.ShoppingCoupon"
             };
 
-        _methodName52 = "getBeanIdentifier";
+        _methodName58 = "getBeanIdentifier";
 
-        _methodParameterTypes52 = new String[] {  };
+        _methodParameterTypes58 = new String[] {  };
 
-        _methodName53 = "setBeanIdentifier";
+        _methodName59 = "setBeanIdentifier";
 
-        _methodParameterTypes53 = new String[] { "java.lang.String" };
+        _methodParameterTypes59 = new String[] { "java.lang.String" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -227,13 +227,13 @@ public class ShoppingCouponLocalServiceClpInvoker {
             return ShoppingCouponLocalServiceUtil.updateShoppingCoupon((com.fsquare.shopping.model.ShoppingCoupon) arguments[0]);
         }
 
-        if (_methodName52.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+        if (_methodName58.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName53.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+        if (_methodName59.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
             ShoppingCouponLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;

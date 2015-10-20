@@ -20,7 +20,7 @@ create table FsquareShopping_ShoppingCoupon (
 );
 
 create table FsquareShopping_ShoppingOrder (
-	orderId LONG not null primary key,
+	shoppingOrderId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -76,9 +76,9 @@ create table FsquareShopping_ShoppingOrder (
 );
 
 create table FsquareShopping_ShoppingOrderItem (
-	orderItemId LONG not null primary key,
-	orderId LONG,
-	entryId VARCHAR(75) null,
+	shoppingOrderItemId LONG not null primary key,
+	shoppingOrderId LONG,
+	articleId VARCHAR(75) null,
 	sku VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description VARCHAR(75) null,
@@ -99,4 +99,17 @@ create table FsquareShopping_ShoppingShippingMethod (
 	price DOUBLE,
 	name VARCHAR(75) null,
 	methodName VARCHAR(75) null
+);
+
+create table FsquareShopping_ShoppingStore (
+	groupId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	cartPageUuid VARCHAR(75) null,
+	checkoutPageUuid VARCHAR(75) null,
+	onAddToCart VARCHAR(75) null,
+	currency_ VARCHAR(75) null
 );

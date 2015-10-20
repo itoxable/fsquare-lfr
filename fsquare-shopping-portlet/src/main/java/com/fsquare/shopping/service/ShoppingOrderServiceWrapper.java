@@ -46,19 +46,6 @@ public class ShoppingOrderServiceWrapper implements ShoppingOrderService,
             arguments);
     }
 
-    @Override
-    public com.fsquare.shopping.model.ShoppingOrder addShoppingOrder(
-        com.fsquare.shopping.model.ShoppingOrder shoppingOrder)
-        throws com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingOrderService.addShoppingOrder(shoppingOrder);
-    }
-
-    @Override
-    public com.fsquare.shopping.model.ShoppingOrder createShoppingOrder(
-        long orderId) {
-        return _shoppingOrderService.createShoppingOrder(orderId);
-    }
-
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

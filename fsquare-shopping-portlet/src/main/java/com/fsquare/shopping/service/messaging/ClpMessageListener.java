@@ -9,6 +9,8 @@ import com.fsquare.shopping.service.ShoppingOrderLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingOrderServiceUtil;
 import com.fsquare.shopping.service.ShoppingShippingMethodLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingShippingMethodServiceUtil;
+import com.fsquare.shopping.service.ShoppingStoreLocalServiceUtil;
+import com.fsquare.shopping.service.ShoppingStoreServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -38,6 +40,9 @@ public class ClpMessageListener extends BaseMessageListener {
             ShoppingShippingMethodLocalServiceUtil.clearService();
 
             ShoppingShippingMethodServiceUtil.clearService();
+            ShoppingStoreLocalServiceUtil.clearService();
+
+            ShoppingStoreServiceUtil.clearService();
         }
     }
 }

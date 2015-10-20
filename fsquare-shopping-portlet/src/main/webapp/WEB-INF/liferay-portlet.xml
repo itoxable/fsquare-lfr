@@ -8,6 +8,13 @@
 		<icon>/mini-cart/icon.png</icon>
 		<struts-path>minicart</struts-path>
 		<configuration-action-class>com.fsquare.shopping.portlet.minicart.action.ConfigurationActionImpl</configuration-action-class>
+		
+		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
+		<friendly-url-mapping>minicart</friendly-url-mapping>
+		<friendly-url-routes>com/fsquare/shopping/portlet/minicart-friendly-url-routes.xml</friendly-url-routes>
+		
+		
+		
 		<preferences-company-wide>true</preferences-company-wide>
 		<instanceable>false</instanceable>
 		<requires-namespaced-parameters>false</requires-namespaced-parameters>
@@ -16,6 +23,9 @@
 		
 		<header-portlet-css>/mini-cart/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/mini-cart/js/main.js</footer-portlet-javascript>
+		
+				<add-default-resource>true</add-default-resource>
+		
 	</portlet>
 	
 	<portlet>
@@ -38,6 +48,18 @@
 		<header-portlet-css>/cart-view/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/cart-view/js/main.js</footer-portlet-javascript>
 	</portlet>
+	<portlet>
+		<portlet-name>shoppingstore</portlet-name>
+		<icon>/shopping-store/icon.png</icon>
+		<struts-path>shoppingstore</struts-path>
+		<configuration-action-class>com.fsquare.shopping.portlet.shoppingstore.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-company-wide>true</preferences-company-wide>
+		<instanceable>false</instanceable>		
+		<header-portlet-css>/shopping-store/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>/shopping-store/js/main.js</footer-portlet-javascript>
+	</portlet>
+
+
 	
 	<role-mapper>
 		<role-name>administrator</role-name>

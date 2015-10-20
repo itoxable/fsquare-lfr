@@ -170,12 +170,12 @@ public class ShoppingOrderLocalServiceClp implements ShoppingOrderLocalService {
 
     @Override
     public com.fsquare.shopping.model.ShoppingOrder createShoppingOrder(
-        long orderId) {
+        long shoppingOrderId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName1,
-                    _methodParameterTypes1, new Object[] { orderId });
+                    _methodParameterTypes1, new Object[] { shoppingOrderId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -192,14 +192,14 @@ public class ShoppingOrderLocalServiceClp implements ShoppingOrderLocalService {
 
     @Override
     public com.fsquare.shopping.model.ShoppingOrder deleteShoppingOrder(
-        long orderId)
+        long shoppingOrderId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName2,
-                    _methodParameterTypes2, new Object[] { orderId });
+                    _methodParameterTypes2, new Object[] { shoppingOrderId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -437,13 +437,13 @@ public class ShoppingOrderLocalServiceClp implements ShoppingOrderLocalService {
 
     @Override
     public com.fsquare.shopping.model.ShoppingOrder fetchShoppingOrder(
-        long orderId)
+        long shoppingOrderId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName10,
-                    _methodParameterTypes10, new Object[] { orderId });
+                    _methodParameterTypes10, new Object[] { shoppingOrderId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -464,14 +464,14 @@ public class ShoppingOrderLocalServiceClp implements ShoppingOrderLocalService {
 
     @Override
     public com.fsquare.shopping.model.ShoppingOrder getShoppingOrder(
-        long orderId)
+        long shoppingOrderId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName11,
-                    _methodParameterTypes11, new Object[] { orderId });
+                    _methodParameterTypes11, new Object[] { shoppingOrderId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

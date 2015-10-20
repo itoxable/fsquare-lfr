@@ -1,12 +1,5 @@
 package com.fsquare.shopping.service.http;
 
-import com.fsquare.shopping.service.ShoppingOrderServiceUtil;
-
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import java.rmi.RemoteException;
-
 /**
  * Provides the SOAP utility for the
  * {@link com.fsquare.shopping.service.ShoppingOrderServiceUtil} service utility. The
@@ -48,33 +41,4 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class ShoppingOrderServiceSoap {
-    private static Log _log = LogFactoryUtil.getLog(ShoppingOrderServiceSoap.class);
-
-    public static com.fsquare.shopping.model.ShoppingOrderSoap addShoppingOrder(
-        com.fsquare.shopping.model.ShoppingOrderSoap shoppingOrder)
-        throws RemoteException {
-        try {
-            com.fsquare.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.addShoppingOrder(com.fsquare.shopping.model.impl.ShoppingOrderModelImpl.toModel(
-                        shoppingOrder));
-
-            return com.fsquare.shopping.model.ShoppingOrderSoap.toSoapModel(returnValue);
-        } catch (Exception e) {
-            _log.error(e, e);
-
-            throw new RemoteException(e.getMessage());
-        }
-    }
-
-    public static com.fsquare.shopping.model.ShoppingOrderSoap createShoppingOrder(
-        long orderId) throws RemoteException {
-        try {
-            com.fsquare.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.createShoppingOrder(orderId);
-
-            return com.fsquare.shopping.model.ShoppingOrderSoap.toSoapModel(returnValue);
-        } catch (Exception e) {
-            _log.error(e, e);
-
-            throw new RemoteException(e.getMessage());
-        }
-    }
 }

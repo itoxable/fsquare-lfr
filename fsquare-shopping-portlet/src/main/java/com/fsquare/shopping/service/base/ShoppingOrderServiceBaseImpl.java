@@ -6,6 +6,7 @@ import com.fsquare.shopping.service.persistence.ShoppingCouponPersistence;
 import com.fsquare.shopping.service.persistence.ShoppingOrderItemPersistence;
 import com.fsquare.shopping.service.persistence.ShoppingOrderPersistence;
 import com.fsquare.shopping.service.persistence.ShoppingShippingMethodPersistence;
+import com.fsquare.shopping.service.persistence.ShoppingStorePersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -55,6 +56,12 @@ public abstract class ShoppingOrderServiceBaseImpl extends BaseServiceImpl
     protected com.fsquare.shopping.service.ShoppingShippingMethodService shoppingShippingMethodService;
     @BeanReference(type = ShoppingShippingMethodPersistence.class)
     protected ShoppingShippingMethodPersistence shoppingShippingMethodPersistence;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingStoreLocalService.class)
+    protected com.fsquare.shopping.service.ShoppingStoreLocalService shoppingStoreLocalService;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingStoreService.class)
+    protected com.fsquare.shopping.service.ShoppingStoreService shoppingStoreService;
+    @BeanReference(type = ShoppingStorePersistence.class)
+    protected ShoppingStorePersistence shoppingStorePersistence;
     @BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
     protected com.liferay.counter.service.CounterLocalService counterLocalService;
     @BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)
@@ -301,6 +308,63 @@ public abstract class ShoppingOrderServiceBaseImpl extends BaseServiceImpl
     public void setShoppingShippingMethodPersistence(
         ShoppingShippingMethodPersistence shoppingShippingMethodPersistence) {
         this.shoppingShippingMethodPersistence = shoppingShippingMethodPersistence;
+    }
+
+    /**
+     * Returns the shopping store local service.
+     *
+     * @return the shopping store local service
+     */
+    public com.fsquare.shopping.service.ShoppingStoreLocalService getShoppingStoreLocalService() {
+        return shoppingStoreLocalService;
+    }
+
+    /**
+     * Sets the shopping store local service.
+     *
+     * @param shoppingStoreLocalService the shopping store local service
+     */
+    public void setShoppingStoreLocalService(
+        com.fsquare.shopping.service.ShoppingStoreLocalService shoppingStoreLocalService) {
+        this.shoppingStoreLocalService = shoppingStoreLocalService;
+    }
+
+    /**
+     * Returns the shopping store remote service.
+     *
+     * @return the shopping store remote service
+     */
+    public com.fsquare.shopping.service.ShoppingStoreService getShoppingStoreService() {
+        return shoppingStoreService;
+    }
+
+    /**
+     * Sets the shopping store remote service.
+     *
+     * @param shoppingStoreService the shopping store remote service
+     */
+    public void setShoppingStoreService(
+        com.fsquare.shopping.service.ShoppingStoreService shoppingStoreService) {
+        this.shoppingStoreService = shoppingStoreService;
+    }
+
+    /**
+     * Returns the shopping store persistence.
+     *
+     * @return the shopping store persistence
+     */
+    public ShoppingStorePersistence getShoppingStorePersistence() {
+        return shoppingStorePersistence;
+    }
+
+    /**
+     * Sets the shopping store persistence.
+     *
+     * @param shoppingStorePersistence the shopping store persistence
+     */
+    public void setShoppingStorePersistence(
+        ShoppingStorePersistence shoppingStorePersistence) {
+        this.shoppingStorePersistence = shoppingStorePersistence;
     }
 
     /**

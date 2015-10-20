@@ -51,17 +51,6 @@ public class ShoppingOrderServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
-    public static com.fsquare.shopping.model.ShoppingOrder addShoppingOrder(
-        com.fsquare.shopping.model.ShoppingOrder shoppingOrder)
-        throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().addShoppingOrder(shoppingOrder);
-    }
-
-    public static com.fsquare.shopping.model.ShoppingOrder createShoppingOrder(
-        long orderId) {
-        return getService().createShoppingOrder(orderId);
-    }
-
     public static void clearService() {
         _service = null;
     }

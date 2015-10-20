@@ -48,23 +48,23 @@ public interface ShoppingOrderLocalService extends BaseLocalService,
     /**
     * Creates a new shopping order with the primary key. Does not add the shopping order to the database.
     *
-    * @param orderId the primary key for the new shopping order
+    * @param shoppingOrderId the primary key for the new shopping order
     * @return the new shopping order
     */
     public com.fsquare.shopping.model.ShoppingOrder createShoppingOrder(
-        long orderId);
+        long shoppingOrderId);
 
     /**
     * Deletes the shopping order with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param orderId the primary key of the shopping order
+    * @param shoppingOrderId the primary key of the shopping order
     * @return the shopping order that was removed
     * @throws PortalException if a shopping order with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
     public com.fsquare.shopping.model.ShoppingOrder deleteShoppingOrder(
-        long orderId)
+        long shoppingOrderId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -159,20 +159,20 @@ public interface ShoppingOrderLocalService extends BaseLocalService,
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public com.fsquare.shopping.model.ShoppingOrder fetchShoppingOrder(
-        long orderId)
+        long shoppingOrderId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
     * Returns the shopping order with the primary key.
     *
-    * @param orderId the primary key of the shopping order
+    * @param shoppingOrderId the primary key of the shopping order
     * @return the shopping order
     * @throws PortalException if a shopping order with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public com.fsquare.shopping.model.ShoppingOrder getShoppingOrder(
-        long orderId)
+        long shoppingOrderId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 

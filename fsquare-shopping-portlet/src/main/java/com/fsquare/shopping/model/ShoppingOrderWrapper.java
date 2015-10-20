@@ -38,7 +38,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
     public Map<String, Object> getModelAttributes() {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
-        attributes.put("orderId", getOrderId());
+        attributes.put("shoppingOrderId", getShoppingOrderId());
         attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
@@ -97,10 +97,10 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long orderId = (Long) attributes.get("orderId");
+        Long shoppingOrderId = (Long) attributes.get("shoppingOrderId");
 
-        if (orderId != null) {
-            setOrderId(orderId);
+        if (shoppingOrderId != null) {
+            setShoppingOrderId(shoppingOrderId);
         }
 
         Long groupId = (Long) attributes.get("groupId");
@@ -440,23 +440,23 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
     }
 
     /**
-    * Returns the order ID of this shopping order.
+    * Returns the shopping order ID of this shopping order.
     *
-    * @return the order ID of this shopping order
+    * @return the shopping order ID of this shopping order
     */
     @Override
-    public long getOrderId() {
-        return _shoppingOrder.getOrderId();
+    public long getShoppingOrderId() {
+        return _shoppingOrder.getShoppingOrderId();
     }
 
     /**
-    * Sets the order ID of this shopping order.
+    * Sets the shopping order ID of this shopping order.
     *
-    * @param orderId the order ID of this shopping order
+    * @param shoppingOrderId the shopping order ID of this shopping order
     */
     @Override
-    public void setOrderId(long orderId) {
-        _shoppingOrder.setOrderId(orderId);
+    public void setShoppingOrderId(long shoppingOrderId) {
+        _shoppingOrder.setShoppingOrderId(shoppingOrderId);
     }
 
     /**

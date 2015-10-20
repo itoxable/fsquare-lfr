@@ -38,9 +38,9 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem,
     public Map<String, Object> getModelAttributes() {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
-        attributes.put("orderItemId", getOrderItemId());
-        attributes.put("orderId", getOrderId());
-        attributes.put("entryId", getEntryId());
+        attributes.put("shoppingOrderItemId", getShoppingOrderItemId());
+        attributes.put("shoppingOrderId", getShoppingOrderId());
+        attributes.put("articleId", getArticleId());
         attributes.put("sku", getSku());
         attributes.put("name", getName());
         attributes.put("description", getDescription());
@@ -54,22 +54,22 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem,
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long orderItemId = (Long) attributes.get("orderItemId");
+        Long shoppingOrderItemId = (Long) attributes.get("shoppingOrderItemId");
 
-        if (orderItemId != null) {
-            setOrderItemId(orderItemId);
+        if (shoppingOrderItemId != null) {
+            setShoppingOrderItemId(shoppingOrderItemId);
         }
 
-        Long orderId = (Long) attributes.get("orderId");
+        Long shoppingOrderId = (Long) attributes.get("shoppingOrderId");
 
-        if (orderId != null) {
-            setOrderId(orderId);
+        if (shoppingOrderId != null) {
+            setShoppingOrderId(shoppingOrderId);
         }
 
-        String entryId = (String) attributes.get("entryId");
+        String articleId = (String) attributes.get("articleId");
 
-        if (entryId != null) {
-            setEntryId(entryId);
+        if (articleId != null) {
+            setArticleId(articleId);
         }
 
         String sku = (String) attributes.get("sku");
@@ -136,63 +136,63 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem,
     }
 
     /**
-    * Returns the order item ID of this shopping order item.
+    * Returns the shopping order item ID of this shopping order item.
     *
-    * @return the order item ID of this shopping order item
+    * @return the shopping order item ID of this shopping order item
     */
     @Override
-    public long getOrderItemId() {
-        return _shoppingOrderItem.getOrderItemId();
+    public long getShoppingOrderItemId() {
+        return _shoppingOrderItem.getShoppingOrderItemId();
     }
 
     /**
-    * Sets the order item ID of this shopping order item.
+    * Sets the shopping order item ID of this shopping order item.
     *
-    * @param orderItemId the order item ID of this shopping order item
+    * @param shoppingOrderItemId the shopping order item ID of this shopping order item
     */
     @Override
-    public void setOrderItemId(long orderItemId) {
-        _shoppingOrderItem.setOrderItemId(orderItemId);
+    public void setShoppingOrderItemId(long shoppingOrderItemId) {
+        _shoppingOrderItem.setShoppingOrderItemId(shoppingOrderItemId);
     }
 
     /**
-    * Returns the order ID of this shopping order item.
+    * Returns the shopping order ID of this shopping order item.
     *
-    * @return the order ID of this shopping order item
+    * @return the shopping order ID of this shopping order item
     */
     @Override
-    public long getOrderId() {
-        return _shoppingOrderItem.getOrderId();
+    public long getShoppingOrderId() {
+        return _shoppingOrderItem.getShoppingOrderId();
     }
 
     /**
-    * Sets the order ID of this shopping order item.
+    * Sets the shopping order ID of this shopping order item.
     *
-    * @param orderId the order ID of this shopping order item
+    * @param shoppingOrderId the shopping order ID of this shopping order item
     */
     @Override
-    public void setOrderId(long orderId) {
-        _shoppingOrderItem.setOrderId(orderId);
+    public void setShoppingOrderId(long shoppingOrderId) {
+        _shoppingOrderItem.setShoppingOrderId(shoppingOrderId);
     }
 
     /**
-    * Returns the entry ID of this shopping order item.
+    * Returns the article ID of this shopping order item.
     *
-    * @return the entry ID of this shopping order item
+    * @return the article ID of this shopping order item
     */
     @Override
-    public java.lang.String getEntryId() {
-        return _shoppingOrderItem.getEntryId();
+    public java.lang.String getArticleId() {
+        return _shoppingOrderItem.getArticleId();
     }
 
     /**
-    * Sets the entry ID of this shopping order item.
+    * Sets the article ID of this shopping order item.
     *
-    * @param entryId the entry ID of this shopping order item
+    * @param articleId the article ID of this shopping order item
     */
     @Override
-    public void setEntryId(java.lang.String entryId) {
-        _shoppingOrderItem.setEntryId(entryId);
+    public void setArticleId(java.lang.String articleId) {
+        _shoppingOrderItem.setArticleId(articleId);
     }
 
     /**

@@ -46,6 +46,12 @@ public class ShoppingCouponServiceWrapper implements ShoppingCouponService,
             arguments);
     }
 
+    @Override
+    public com.fsquare.shopping.model.ShoppingCoupon fetchByCode(
+        java.lang.String code) {
+        return _shoppingCouponService.fetchByCode(code);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

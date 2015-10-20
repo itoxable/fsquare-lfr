@@ -14,9 +14,9 @@ import java.util.List;
  * @generated
  */
 public class ShoppingOrderItemSoap implements Serializable {
-    private long _orderItemId;
-    private long _orderId;
-    private String _entryId;
+    private long _shoppingOrderItemId;
+    private long _shoppingOrderId;
+    private String _articleId;
     private String _sku;
     private String _name;
     private String _description;
@@ -31,9 +31,9 @@ public class ShoppingOrderItemSoap implements Serializable {
     public static ShoppingOrderItemSoap toSoapModel(ShoppingOrderItem model) {
         ShoppingOrderItemSoap soapModel = new ShoppingOrderItemSoap();
 
-        soapModel.setOrderItemId(model.getOrderItemId());
-        soapModel.setOrderId(model.getOrderId());
-        soapModel.setEntryId(model.getEntryId());
+        soapModel.setShoppingOrderItemId(model.getShoppingOrderItemId());
+        soapModel.setShoppingOrderId(model.getShoppingOrderId());
+        soapModel.setArticleId(model.getArticleId());
         soapModel.setSku(model.getSku());
         soapModel.setName(model.getName());
         soapModel.setDescription(model.getDescription());
@@ -85,35 +85,35 @@ public class ShoppingOrderItemSoap implements Serializable {
     }
 
     public long getPrimaryKey() {
-        return _orderItemId;
+        return _shoppingOrderItemId;
     }
 
     public void setPrimaryKey(long pk) {
-        setOrderItemId(pk);
+        setShoppingOrderItemId(pk);
     }
 
-    public long getOrderItemId() {
-        return _orderItemId;
+    public long getShoppingOrderItemId() {
+        return _shoppingOrderItemId;
     }
 
-    public void setOrderItemId(long orderItemId) {
-        _orderItemId = orderItemId;
+    public void setShoppingOrderItemId(long shoppingOrderItemId) {
+        _shoppingOrderItemId = shoppingOrderItemId;
     }
 
-    public long getOrderId() {
-        return _orderId;
+    public long getShoppingOrderId() {
+        return _shoppingOrderId;
     }
 
-    public void setOrderId(long orderId) {
-        _orderId = orderId;
+    public void setShoppingOrderId(long shoppingOrderId) {
+        _shoppingOrderId = shoppingOrderId;
     }
 
-    public String getEntryId() {
-        return _entryId;
+    public String getArticleId() {
+        return _articleId;
     }
 
-    public void setEntryId(String entryId) {
-        _entryId = entryId;
+    public void setArticleId(String articleId) {
+        _articleId = articleId;
     }
 
     public String getSku() {

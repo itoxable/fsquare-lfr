@@ -51,6 +51,11 @@ public class ShoppingCouponServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static com.fsquare.shopping.model.ShoppingCoupon fetchByCode(
+        java.lang.String code) {
+        return getService().fetchByCode(code);
+    }
+
     public static void clearService() {
         _service = null;
     }

@@ -22,7 +22,7 @@
 		<field name="discountType" type="String" />
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingOrder">
-		<field name="orderId" type="long" />
+		<field name="shoppingOrderId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -77,9 +77,9 @@
 		<field name="shippingMethodId" type="long" />
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingOrderItem">
-		<field name="orderItemId" type="long" />
-		<field name="orderId" type="long" />
-		<field name="entryId" type="String" />
+		<field name="shoppingOrderItemId" type="long" />
+		<field name="shoppingOrderId" type="long" />
+		<field name="articleId" type="String" />
 		<field name="sku" type="String" />
 		<field name="name" type="String" />
 		<field name="description" type="String" />
@@ -99,5 +99,17 @@
 		<field name="price" type="double" />
 		<field name="name" type="String" />
 		<field name="methodName" type="String" />
+	</model>
+	<model name="com.fsquare.shopping.model.ShoppingStore">
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="cartPageUuid" type="String" />
+		<field name="checkoutPageUuid" type="String" />
+		<field name="onAddToCart" type="String" />
+		<field name="currency" type="String" />
 	</model>
 </model-hints>

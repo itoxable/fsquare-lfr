@@ -41,10 +41,6 @@ public class ShoppingOrderLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName52;
-    private String[] _methodParameterTypes52;
-    private String _methodName53;
-    private String[] _methodParameterTypes53;
     private String _methodName58;
     private String[] _methodParameterTypes58;
     private String _methodName59;
@@ -133,23 +129,13 @@ public class ShoppingOrderLocalServiceClpInvoker {
                 "com.fsquare.shopping.model.ShoppingOrder"
             };
 
-        _methodName52 = "getBeanIdentifier";
+        _methodName58 = "getBeanIdentifier";
 
-        _methodParameterTypes52 = new String[] {  };
+        _methodParameterTypes58 = new String[] {  };
 
-        _methodName53 = "setBeanIdentifier";
+        _methodName59 = "setBeanIdentifier";
 
-        _methodParameterTypes53 = new String[] { "java.lang.String" };
-
-        _methodName58 = "addShoppingOrder";
-
-        _methodParameterTypes58 = new String[] {
-                "com.fsquare.shopping.model.ShoppingOrder"
-            };
-
-        _methodName59 = "createShoppingOrder";
-
-        _methodParameterTypes59 = new String[] { "long" };
+        _methodParameterTypes59 = new String[] { "java.lang.String" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -241,26 +227,16 @@ public class ShoppingOrderLocalServiceClpInvoker {
             return ShoppingOrderLocalServiceUtil.updateShoppingOrder((com.fsquare.shopping.model.ShoppingOrder) arguments[0]);
         }
 
-        if (_methodName52.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
-            return ShoppingOrderLocalServiceUtil.getBeanIdentifier();
-        }
-
-        if (_methodName53.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
-            ShoppingOrderLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
-
-            return null;
-        }
-
         if (_methodName58.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
-            return ShoppingOrderLocalServiceUtil.addShoppingOrder((com.fsquare.shopping.model.ShoppingOrder) arguments[0]);
+            return ShoppingOrderLocalServiceUtil.getBeanIdentifier();
         }
 
         if (_methodName59.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
-            return ShoppingOrderLocalServiceUtil.createShoppingOrder(((Long) arguments[0]).longValue());
+            ShoppingOrderLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
+
+            return null;
         }
 
         throw new UnsupportedOperationException();

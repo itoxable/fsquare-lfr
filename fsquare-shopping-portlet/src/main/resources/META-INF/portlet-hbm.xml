@@ -6,6 +6,7 @@
 	<import class="com.fsquare.shopping.model.ShoppingOrder" />
 	<import class="com.fsquare.shopping.model.ShoppingOrderItem" />
 	<import class="com.fsquare.shopping.model.ShoppingShippingMethod" />
+	<import class="com.fsquare.shopping.model.ShoppingStore" />
 	<class name="com.fsquare.shopping.model.impl.ShoppingCouponImpl" table="FsquareShopping_ShoppingCoupon">
 		<cache usage="read-write" />
 		<id name="couponId" type="long">
@@ -31,7 +32,7 @@
 	</class>
 	<class name="com.fsquare.shopping.model.impl.ShoppingOrderImpl" table="FsquareShopping_ShoppingOrder">
 		<cache usage="read-write" />
-		<id name="orderId" type="long">
+		<id name="shoppingOrderId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -89,11 +90,11 @@
 	</class>
 	<class name="com.fsquare.shopping.model.impl.ShoppingOrderItemImpl" table="FsquareShopping_ShoppingOrderItem">
 		<cache usage="read-write" />
-		<id name="orderItemId" type="long">
+		<id name="shoppingOrderItemId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="orderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="entryId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="shoppingOrderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="articleId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sku" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -116,5 +117,20 @@
 		<property name="price" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="methodName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.fsquare.shopping.model.impl.ShoppingStoreImpl" table="FsquareShopping_ShoppingStore">
+		<cache usage="read-write" />
+		<id name="groupId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="cartPageUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="checkoutPageUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="onAddToCart" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="currency" type="com.liferay.portal.dao.orm.hibernate.StringType" column="currency_" />
 	</class>
 </hibernate-mapping>

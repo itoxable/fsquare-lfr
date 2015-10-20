@@ -40,6 +40,17 @@
 				<div class="row">
 					<div class="span12">
 						<header id="banner" role="banner">
+							<div class="header-links">
+							
+								#if (!$is_signed_in)
+									<a data-redirect="$is_login_redirect_required" href="$sign_in_url" rel="nofollow">$sign_in_text</a>
+								#end
+							
+								#set ($VOID = $velocityPortletPreferences.setValue('portletSetupShowBorders', 'false'))
+								$theme.runtime("minicart_WAR_fsquareshoppingportlet", "", $velocityPortletPreferences.toString())
+								$velocityPortletPreferences.reset()
+<!-- 								<div style="clear: both;"></div> -->
+							</div>
 							<div id="heading">
 								<h1 class="site-title">
 									<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
@@ -58,9 +69,7 @@
 									<span>$the_title</span>
 								</h2>
 								
-								#set ($VOID = $velocityPortletPreferences.setValue('portletSetupShowBorders', 'false'))
-								$theme.runtime("minicart_WAR_fsquareshoppingportlet", "", $velocityPortletPreferences.toString())
-								$velocityPortletPreferences.reset()
+								
 								
 								
 							</div>

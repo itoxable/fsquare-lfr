@@ -49,18 +49,18 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
     public void setPrimaryKey(long primaryKey);
 
     /**
-     * Returns the order ID of this shopping order.
+     * Returns the shopping order ID of this shopping order.
      *
-     * @return the order ID of this shopping order
+     * @return the shopping order ID of this shopping order
      */
-    public long getOrderId();
+    public long getShoppingOrderId();
 
     /**
-     * Sets the order ID of this shopping order.
+     * Sets the shopping order ID of this shopping order.
      *
-     * @param orderId the order ID of this shopping order
+     * @param shoppingOrderId the shopping order ID of this shopping order
      */
-    public void setOrderId(long orderId);
+    public void setShoppingOrderId(long shoppingOrderId);
 
     /**
      * Returns the group ID of this shopping order.

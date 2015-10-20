@@ -6,6 +6,7 @@ import com.fsquare.shopping.service.persistence.ShoppingCouponPersistence;
 import com.fsquare.shopping.service.persistence.ShoppingOrderItemPersistence;
 import com.fsquare.shopping.service.persistence.ShoppingOrderPersistence;
 import com.fsquare.shopping.service.persistence.ShoppingShippingMethodPersistence;
+import com.fsquare.shopping.service.persistence.ShoppingStorePersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -15,7 +16,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.persistence.UserPersistence;
 
-import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.journal.service.persistence.JournalArticlePersistence;
 
 import javax.sql.DataSource;
 
@@ -57,6 +58,12 @@ public abstract class ShoppingOrderItemServiceBaseImpl extends BaseServiceImpl
     protected com.fsquare.shopping.service.ShoppingShippingMethodService shoppingShippingMethodService;
     @BeanReference(type = ShoppingShippingMethodPersistence.class)
     protected ShoppingShippingMethodPersistence shoppingShippingMethodPersistence;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingStoreLocalService.class)
+    protected com.fsquare.shopping.service.ShoppingStoreLocalService shoppingStoreLocalService;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingStoreService.class)
+    protected com.fsquare.shopping.service.ShoppingStoreService shoppingStoreService;
+    @BeanReference(type = ShoppingStorePersistence.class)
+    protected ShoppingStorePersistence shoppingStorePersistence;
     @BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
     protected com.liferay.counter.service.CounterLocalService counterLocalService;
     @BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)
@@ -67,12 +74,12 @@ public abstract class ShoppingOrderItemServiceBaseImpl extends BaseServiceImpl
     protected com.liferay.portal.service.UserService userService;
     @BeanReference(type = UserPersistence.class)
     protected UserPersistence userPersistence;
-    @BeanReference(type = com.liferay.portlet.asset.service.AssetEntryLocalService.class)
-    protected com.liferay.portlet.asset.service.AssetEntryLocalService assetEntryLocalService;
-    @BeanReference(type = com.liferay.portlet.asset.service.AssetEntryService.class)
-    protected com.liferay.portlet.asset.service.AssetEntryService assetEntryService;
-    @BeanReference(type = AssetEntryPersistence.class)
-    protected AssetEntryPersistence assetEntryPersistence;
+    @BeanReference(type = com.liferay.portlet.journal.service.JournalArticleLocalService.class)
+    protected com.liferay.portlet.journal.service.JournalArticleLocalService journalArticleLocalService;
+    @BeanReference(type = com.liferay.portlet.journal.service.JournalArticleService.class)
+    protected com.liferay.portlet.journal.service.JournalArticleService journalArticleService;
+    @BeanReference(type = JournalArticlePersistence.class)
+    protected JournalArticlePersistence journalArticlePersistence;
     private String _beanIdentifier;
     private ClassLoader _classLoader;
     private ShoppingOrderItemServiceClpInvoker _clpInvoker = new ShoppingOrderItemServiceClpInvoker();
@@ -312,6 +319,63 @@ public abstract class ShoppingOrderItemServiceBaseImpl extends BaseServiceImpl
     }
 
     /**
+     * Returns the shopping store local service.
+     *
+     * @return the shopping store local service
+     */
+    public com.fsquare.shopping.service.ShoppingStoreLocalService getShoppingStoreLocalService() {
+        return shoppingStoreLocalService;
+    }
+
+    /**
+     * Sets the shopping store local service.
+     *
+     * @param shoppingStoreLocalService the shopping store local service
+     */
+    public void setShoppingStoreLocalService(
+        com.fsquare.shopping.service.ShoppingStoreLocalService shoppingStoreLocalService) {
+        this.shoppingStoreLocalService = shoppingStoreLocalService;
+    }
+
+    /**
+     * Returns the shopping store remote service.
+     *
+     * @return the shopping store remote service
+     */
+    public com.fsquare.shopping.service.ShoppingStoreService getShoppingStoreService() {
+        return shoppingStoreService;
+    }
+
+    /**
+     * Sets the shopping store remote service.
+     *
+     * @param shoppingStoreService the shopping store remote service
+     */
+    public void setShoppingStoreService(
+        com.fsquare.shopping.service.ShoppingStoreService shoppingStoreService) {
+        this.shoppingStoreService = shoppingStoreService;
+    }
+
+    /**
+     * Returns the shopping store persistence.
+     *
+     * @return the shopping store persistence
+     */
+    public ShoppingStorePersistence getShoppingStorePersistence() {
+        return shoppingStorePersistence;
+    }
+
+    /**
+     * Sets the shopping store persistence.
+     *
+     * @param shoppingStorePersistence the shopping store persistence
+     */
+    public void setShoppingStorePersistence(
+        ShoppingStorePersistence shoppingStorePersistence) {
+        this.shoppingStorePersistence = shoppingStorePersistence;
+    }
+
+    /**
      * Returns the counter local service.
      *
      * @return the counter local service
@@ -406,60 +470,60 @@ public abstract class ShoppingOrderItemServiceBaseImpl extends BaseServiceImpl
     }
 
     /**
-     * Returns the asset entry local service.
+     * Returns the journal article local service.
      *
-     * @return the asset entry local service
+     * @return the journal article local service
      */
-    public com.liferay.portlet.asset.service.AssetEntryLocalService getAssetEntryLocalService() {
-        return assetEntryLocalService;
+    public com.liferay.portlet.journal.service.JournalArticleLocalService getJournalArticleLocalService() {
+        return journalArticleLocalService;
     }
 
     /**
-     * Sets the asset entry local service.
+     * Sets the journal article local service.
      *
-     * @param assetEntryLocalService the asset entry local service
+     * @param journalArticleLocalService the journal article local service
      */
-    public void setAssetEntryLocalService(
-        com.liferay.portlet.asset.service.AssetEntryLocalService assetEntryLocalService) {
-        this.assetEntryLocalService = assetEntryLocalService;
+    public void setJournalArticleLocalService(
+        com.liferay.portlet.journal.service.JournalArticleLocalService journalArticleLocalService) {
+        this.journalArticleLocalService = journalArticleLocalService;
     }
 
     /**
-     * Returns the asset entry remote service.
+     * Returns the journal article remote service.
      *
-     * @return the asset entry remote service
+     * @return the journal article remote service
      */
-    public com.liferay.portlet.asset.service.AssetEntryService getAssetEntryService() {
-        return assetEntryService;
+    public com.liferay.portlet.journal.service.JournalArticleService getJournalArticleService() {
+        return journalArticleService;
     }
 
     /**
-     * Sets the asset entry remote service.
+     * Sets the journal article remote service.
      *
-     * @param assetEntryService the asset entry remote service
+     * @param journalArticleService the journal article remote service
      */
-    public void setAssetEntryService(
-        com.liferay.portlet.asset.service.AssetEntryService assetEntryService) {
-        this.assetEntryService = assetEntryService;
+    public void setJournalArticleService(
+        com.liferay.portlet.journal.service.JournalArticleService journalArticleService) {
+        this.journalArticleService = journalArticleService;
     }
 
     /**
-     * Returns the asset entry persistence.
+     * Returns the journal article persistence.
      *
-     * @return the asset entry persistence
+     * @return the journal article persistence
      */
-    public AssetEntryPersistence getAssetEntryPersistence() {
-        return assetEntryPersistence;
+    public JournalArticlePersistence getJournalArticlePersistence() {
+        return journalArticlePersistence;
     }
 
     /**
-     * Sets the asset entry persistence.
+     * Sets the journal article persistence.
      *
-     * @param assetEntryPersistence the asset entry persistence
+     * @param journalArticlePersistence the journal article persistence
      */
-    public void setAssetEntryPersistence(
-        AssetEntryPersistence assetEntryPersistence) {
-        this.assetEntryPersistence = assetEntryPersistence;
+    public void setJournalArticlePersistence(
+        JournalArticlePersistence journalArticlePersistence) {
+        this.journalArticlePersistence = journalArticlePersistence;
     }
 
     public void afterPropertiesSet() {

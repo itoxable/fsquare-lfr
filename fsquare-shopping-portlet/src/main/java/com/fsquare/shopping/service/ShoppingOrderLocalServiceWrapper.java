@@ -36,29 +36,29 @@ public class ShoppingOrderLocalServiceWrapper
     /**
     * Creates a new shopping order with the primary key. Does not add the shopping order to the database.
     *
-    * @param orderId the primary key for the new shopping order
+    * @param shoppingOrderId the primary key for the new shopping order
     * @return the new shopping order
     */
     @Override
     public com.fsquare.shopping.model.ShoppingOrder createShoppingOrder(
-        long orderId) {
-        return _shoppingOrderLocalService.createShoppingOrder(orderId);
+        long shoppingOrderId) {
+        return _shoppingOrderLocalService.createShoppingOrder(shoppingOrderId);
     }
 
     /**
     * Deletes the shopping order with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param orderId the primary key of the shopping order
+    * @param shoppingOrderId the primary key of the shopping order
     * @return the shopping order that was removed
     * @throws PortalException if a shopping order with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @Override
     public com.fsquare.shopping.model.ShoppingOrder deleteShoppingOrder(
-        long orderId)
+        long shoppingOrderId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingOrderLocalService.deleteShoppingOrder(orderId);
+        return _shoppingOrderLocalService.deleteShoppingOrder(shoppingOrderId);
     }
 
     /**
@@ -174,25 +174,25 @@ public class ShoppingOrderLocalServiceWrapper
 
     @Override
     public com.fsquare.shopping.model.ShoppingOrder fetchShoppingOrder(
-        long orderId)
+        long shoppingOrderId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingOrderLocalService.fetchShoppingOrder(orderId);
+        return _shoppingOrderLocalService.fetchShoppingOrder(shoppingOrderId);
     }
 
     /**
     * Returns the shopping order with the primary key.
     *
-    * @param orderId the primary key of the shopping order
+    * @param shoppingOrderId the primary key of the shopping order
     * @return the shopping order
     * @throws PortalException if a shopping order with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @Override
     public com.fsquare.shopping.model.ShoppingOrder getShoppingOrder(
-        long orderId)
+        long shoppingOrderId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingOrderLocalService.getShoppingOrder(orderId);
+        return _shoppingOrderLocalService.getShoppingOrder(shoppingOrderId);
     }
 
     @Override

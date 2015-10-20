@@ -33,8 +33,13 @@
 		</responseFlow>
 	</transport>
 	<service name="Plugin_FsquareShopping_ShoppingCouponService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="allowedMethods" value="*" />
+		<typeMapping xmlns:ns="http://model.shopping.fsquare.com" qname="ns:ShoppingCouponSoap" type="java:com.fsquare.shopping.model.ShoppingCouponSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://model.shopping.fsquare.com" name="fetchByCode" qname="operNS:fetchByCode" returnQName="fetchByCodeReturn" returnType="rtns:ShoppingCouponSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="code" type="tns:string"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="fetchByCode" />
 		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingCouponServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.shopping.fsquare.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="ShoppingCouponServiceSoap" />
 		<parameter name="wsdlServiceElement" value="ShoppingCouponServiceSoapService" />
@@ -66,6 +71,15 @@
 		<parameter name="wsdlPortType" value="ShoppingShippingMethodServiceSoap" />
 		<parameter name="wsdlServiceElement" value="ShoppingShippingMethodServiceSoapService" />
 		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingShippingMethodService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
+	</service>
+	<service name="Plugin_FsquareShopping_ShoppingStoreService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingStoreServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ShoppingStoreServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ShoppingStoreServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingStoreService" />
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
 	</service>
 </deployment>

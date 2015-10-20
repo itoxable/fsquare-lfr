@@ -21,9 +21,9 @@ import java.util.Map;
 
 public class ShoppingOrderItemClp extends BaseModelImpl<ShoppingOrderItem>
     implements ShoppingOrderItem {
-    private long _orderItemId;
-    private long _orderId;
-    private String _entryId;
+    private long _shoppingOrderItemId;
+    private long _shoppingOrderId;
+    private String _articleId;
     private String _sku;
     private String _name;
     private String _description;
@@ -49,17 +49,17 @@ public class ShoppingOrderItemClp extends BaseModelImpl<ShoppingOrderItem>
 
     @Override
     public long getPrimaryKey() {
-        return _orderItemId;
+        return _shoppingOrderItemId;
     }
 
     @Override
     public void setPrimaryKey(long primaryKey) {
-        setOrderItemId(primaryKey);
+        setShoppingOrderItemId(primaryKey);
     }
 
     @Override
     public Serializable getPrimaryKeyObj() {
-        return _orderItemId;
+        return _shoppingOrderItemId;
     }
 
     @Override
@@ -71,9 +71,9 @@ public class ShoppingOrderItemClp extends BaseModelImpl<ShoppingOrderItem>
     public Map<String, Object> getModelAttributes() {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
-        attributes.put("orderItemId", getOrderItemId());
-        attributes.put("orderId", getOrderId());
-        attributes.put("entryId", getEntryId());
+        attributes.put("shoppingOrderItemId", getShoppingOrderItemId());
+        attributes.put("shoppingOrderId", getShoppingOrderId());
+        attributes.put("articleId", getArticleId());
         attributes.put("sku", getSku());
         attributes.put("name", getName());
         attributes.put("description", getDescription());
@@ -87,22 +87,22 @@ public class ShoppingOrderItemClp extends BaseModelImpl<ShoppingOrderItem>
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long orderItemId = (Long) attributes.get("orderItemId");
+        Long shoppingOrderItemId = (Long) attributes.get("shoppingOrderItemId");
 
-        if (orderItemId != null) {
-            setOrderItemId(orderItemId);
+        if (shoppingOrderItemId != null) {
+            setShoppingOrderItemId(shoppingOrderItemId);
         }
 
-        Long orderId = (Long) attributes.get("orderId");
+        Long shoppingOrderId = (Long) attributes.get("shoppingOrderId");
 
-        if (orderId != null) {
-            setOrderId(orderId);
+        if (shoppingOrderId != null) {
+            setShoppingOrderId(shoppingOrderId);
         }
 
-        String entryId = (String) attributes.get("entryId");
+        String articleId = (String) attributes.get("articleId");
 
-        if (entryId != null) {
-            setEntryId(entryId);
+        if (articleId != null) {
+            setArticleId(articleId);
         }
 
         String sku = (String) attributes.get("sku");
@@ -149,21 +149,22 @@ public class ShoppingOrderItemClp extends BaseModelImpl<ShoppingOrderItem>
     }
 
     @Override
-    public long getOrderItemId() {
-        return _orderItemId;
+    public long getShoppingOrderItemId() {
+        return _shoppingOrderItemId;
     }
 
     @Override
-    public void setOrderItemId(long orderItemId) {
-        _orderItemId = orderItemId;
+    public void setShoppingOrderItemId(long shoppingOrderItemId) {
+        _shoppingOrderItemId = shoppingOrderItemId;
 
         if (_shoppingOrderItemRemoteModel != null) {
             try {
                 Class<?> clazz = _shoppingOrderItemRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setOrderItemId", long.class);
+                Method method = clazz.getMethod("setShoppingOrderItemId",
+                        long.class);
 
-                method.invoke(_shoppingOrderItemRemoteModel, orderItemId);
+                method.invoke(_shoppingOrderItemRemoteModel, shoppingOrderItemId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -171,21 +172,21 @@ public class ShoppingOrderItemClp extends BaseModelImpl<ShoppingOrderItem>
     }
 
     @Override
-    public long getOrderId() {
-        return _orderId;
+    public long getShoppingOrderId() {
+        return _shoppingOrderId;
     }
 
     @Override
-    public void setOrderId(long orderId) {
-        _orderId = orderId;
+    public void setShoppingOrderId(long shoppingOrderId) {
+        _shoppingOrderId = shoppingOrderId;
 
         if (_shoppingOrderItemRemoteModel != null) {
             try {
                 Class<?> clazz = _shoppingOrderItemRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setOrderId", long.class);
+                Method method = clazz.getMethod("setShoppingOrderId", long.class);
 
-                method.invoke(_shoppingOrderItemRemoteModel, orderId);
+                method.invoke(_shoppingOrderItemRemoteModel, shoppingOrderId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -193,21 +194,21 @@ public class ShoppingOrderItemClp extends BaseModelImpl<ShoppingOrderItem>
     }
 
     @Override
-    public String getEntryId() {
-        return _entryId;
+    public String getArticleId() {
+        return _articleId;
     }
 
     @Override
-    public void setEntryId(String entryId) {
-        _entryId = entryId;
+    public void setArticleId(String articleId) {
+        _articleId = articleId;
 
         if (_shoppingOrderItemRemoteModel != null) {
             try {
                 Class<?> clazz = _shoppingOrderItemRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setEntryId", String.class);
+                Method method = clazz.getMethod("setArticleId", String.class);
 
-                method.invoke(_shoppingOrderItemRemoteModel, entryId);
+                method.invoke(_shoppingOrderItemRemoteModel, articleId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -437,9 +438,9 @@ public class ShoppingOrderItemClp extends BaseModelImpl<ShoppingOrderItem>
     public Object clone() {
         ShoppingOrderItemClp clone = new ShoppingOrderItemClp();
 
-        clone.setOrderItemId(getOrderItemId());
-        clone.setOrderId(getOrderId());
-        clone.setEntryId(getEntryId());
+        clone.setShoppingOrderItemId(getShoppingOrderItemId());
+        clone.setShoppingOrderId(getShoppingOrderId());
+        clone.setArticleId(getArticleId());
         clone.setSku(getSku());
         clone.setName(getName());
         clone.setDescription(getDescription());
@@ -504,12 +505,12 @@ public class ShoppingOrderItemClp extends BaseModelImpl<ShoppingOrderItem>
     public String toString() {
         StringBundler sb = new StringBundler(21);
 
-        sb.append("{orderItemId=");
-        sb.append(getOrderItemId());
-        sb.append(", orderId=");
-        sb.append(getOrderId());
-        sb.append(", entryId=");
-        sb.append(getEntryId());
+        sb.append("{shoppingOrderItemId=");
+        sb.append(getShoppingOrderItemId());
+        sb.append(", shoppingOrderId=");
+        sb.append(getShoppingOrderId());
+        sb.append(", articleId=");
+        sb.append(getArticleId());
         sb.append(", sku=");
         sb.append(getSku());
         sb.append(", name=");
@@ -538,16 +539,16 @@ public class ShoppingOrderItemClp extends BaseModelImpl<ShoppingOrderItem>
         sb.append("</model-name>");
 
         sb.append(
-            "<column><column-name>orderItemId</column-name><column-value><![CDATA[");
-        sb.append(getOrderItemId());
+            "<column><column-name>shoppingOrderItemId</column-name><column-value><![CDATA[");
+        sb.append(getShoppingOrderItemId());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>orderId</column-name><column-value><![CDATA[");
-        sb.append(getOrderId());
+            "<column><column-name>shoppingOrderId</column-name><column-value><![CDATA[");
+        sb.append(getShoppingOrderId());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>entryId</column-name><column-value><![CDATA[");
-        sb.append(getEntryId());
+            "<column><column-name>articleId</column-name><column-value><![CDATA[");
+        sb.append(getArticleId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>sku</column-name><column-value><![CDATA[");
