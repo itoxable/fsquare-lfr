@@ -62,4 +62,18 @@ public class ShoppingCouponServiceSoap {
             throw new RemoteException(e.getMessage());
         }
     }
+
+    public static com.fsquare.shopping.model.ShoppingCouponSoap[] findByGroupId(
+        java.lang.Long groupId) throws RemoteException {
+        try {
+            java.util.List<com.fsquare.shopping.model.ShoppingCoupon> returnValue =
+                ShoppingCouponServiceUtil.findByGroupId(groupId);
+
+            return com.fsquare.shopping.model.ShoppingCouponSoap.toSoapModels(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

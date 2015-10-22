@@ -14,6 +14,8 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
     private String[] _methodParameterTypes1;
     private String _methodName3;
     private String[] _methodParameterTypes3;
+    private String _methodName4;
+    private String[] _methodParameterTypes4;
 
     public ShoppingCouponServiceClp(InvokableService invokableService) {
         _invokableService = invokableService;
@@ -29,6 +31,10 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
         _methodName3 = "fetchByCode";
 
         _methodParameterTypes3 = new String[] { "java.lang.String" };
+
+        _methodName4 = "findByGroupId";
+
+        _methodParameterTypes4 = new String[] { "java.lang.Long" };
     }
 
     @Override
@@ -98,5 +104,28 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
         }
 
         return (com.fsquare.shopping.model.ShoppingCoupon) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
+        java.lang.Long groupId) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableService.invokeMethod(_methodName4,
+                    _methodParameterTypes4,
+                    new Object[] { ClpSerializer.translateInput(groupId) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<com.fsquare.shopping.model.ShoppingCoupon>) ClpSerializer.translateOutput(returnObj);
     }
 }

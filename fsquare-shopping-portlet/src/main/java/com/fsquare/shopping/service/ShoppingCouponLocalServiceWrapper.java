@@ -276,6 +276,12 @@ public class ShoppingCouponLocalServiceWrapper
             arguments);
     }
 
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
+        java.lang.Long groupId) {
+        return _shoppingCouponLocalService.findByGroupId(groupId);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

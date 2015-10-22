@@ -1,6 +1,10 @@
 package com.fsquare.shopping.service.impl;
 
+import java.util.List;
+
+import com.fsquare.shopping.model.ShoppingCoupon;
 import com.fsquare.shopping.service.base.ShoppingOrderLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the shopping order local service.
@@ -23,4 +27,6 @@ public class ShoppingOrderLocalServiceImpl
      *
      * Never reference this interface directly. Always use {@link com.fsquare.shopping.service.ShoppingOrderLocalServiceUtil} to access the shopping order local service.
      */
+	
+	
 }

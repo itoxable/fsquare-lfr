@@ -13,6 +13,7 @@ import javax.portlet.ResourceResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.fsquare.shopping.NoSuchShoppingStoreException;
 import com.fsquare.shopping.model.ShoppingCoupon;
 import com.fsquare.shopping.model.ShoppingOrder;
 import com.fsquare.shopping.model.ShoppingOrderItem;
@@ -26,12 +27,17 @@ import com.fsquare.shopping.service.ShoppingStoreLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.theme.NavItem;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -48,6 +54,8 @@ public class CartViewPortlet extends MVCPortlet {
 				removeFromShoppingCart(resourceRequest, resourceResponse);
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_APPLY_COUPON)) {
 				applyCoupon(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_UPDATE_CART)) {
+				updateCart(resourceRequest, resourceResponse);
 			}
 			
 			
@@ -56,6 +64,53 @@ public class CartViewPortlet extends MVCPortlet {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	private void updateCart(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws Exception {
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        boolean success = false;
+        
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+        Integer quantity = ParamUtil.getInteger(resourceRequest, "quantity");
+        String articleId = ParamUtil.getString(resourceRequest, "articleId");
+        
+        Map<String, String> productDetails = ShoppingPortletUtil.getProductDetails(themeDisplay, articleId);
+        Integer productQuantity = Integer.parseInt(productDetails.get(ShoppingPortletUtil.PRODUCT_QUANTITY));
+        
+        if(quantity > productQuantity){
+        	success = false;
+        	jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-not-enough-quantity"));
+        }else  if(quantity < 1){
+        	removeFromShoppingCart(resourceRequest, resourceResponse);
+        	return;
+        }else{
+        
+	        double price = 0;
+	        double total = 0;
+	        
+	        HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
+			HttpSession session = request.getSession();
+			Map<String,ShoppingOrderItem> shoppingOrderItemMap = (Map<String,ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
+	
+			shoppingOrderItemMap.get(articleId).setQuantity(quantity);
+	        for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet()){
+	        	ShoppingOrderItem orderItem = entry.getValue();
+	        	total = total + orderItem.getQuantity() * orderItem.getPrice();
+	        }
+	        
+	        jsonObject.put("total", total);
+	        jsonObject.put("price", price);
+	        success = true;
+        }
+        
+        jsonObject.put("success", success);
+        
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
+	}
+
 	@SuppressWarnings("unchecked")
 	public void applyCoupon(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws Exception {
 		PrintWriter writer = resourceResponse.getWriter();
@@ -88,8 +143,6 @@ public class CartViewPortlet extends MVCPortlet {
 			
 			Map<String,ShoppingOrderItem> shoppingOrderItemMap = (Map<String,ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
 			StringBuilder sb = new StringBuilder("");
-			
-			
 			
 			ShoppingOrderItem shoppingOrderItem = shoppingOrderItemMap.remove(articleId);
 			if(shoppingOrderItem == null){
@@ -149,19 +202,32 @@ public class CartViewPortlet extends MVCPortlet {
 				orderItem.setShoppingOrderItemId(orderId);
 			}
 			
-
-			
-			
 		}catch(Exception e){
 			
 		}
 		
-		
-		
-		
 		super.processAction(actionRequest, actionResponse);
 
+	}
+	
+	public void checkout( ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 		
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(actionRequest);
+//		Long shoppingOrderId = CounterLocalServiceUtil.increment(ShoppingOrder.class.getName());
+//		ShoppingOrder shoppingOrder = ShoppingOrderLocalServiceUtil.createShoppingOrder(shoppingOrderId);
+//		shoppingOrder.setStatus(ShoppingPortletUtil.ORDER_STATUS_INITIAL);
+		ShoppingStore shoppingStore = null;
+		try{
+			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+		}catch(NoSuchShoppingStoreException e){
+			shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
+		}
 		
+		Layout checkoutPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(shoppingStore.getCheckoutPageUuid(), themeDisplay.getScopeGroupId(), false);
+		NavItem checkoutPageNavItem = new NavItem(request, checkoutPageLayout, null);
+		String redirect = checkoutPageNavItem.getRegularURL();
+		redirect = PortalUtil.escapeRedirect(redirect);
+		actionResponse.sendRedirect(redirect);
 	}
 }

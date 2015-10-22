@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.util.PortalUtil"%>
 <%@page import="javax.portlet.PortletURL"%>
 <%@page import="com.liferay.portal.kernel.portlet.LiferayPortletResponse"%>
 <%@page import="com.liferay.portlet.asset.model.AssetEntry"%>
@@ -63,25 +64,6 @@
 	
 	String viewURL = AssetPublisherHelperImpl.getAssetViewURL(liferayPortletRequest, liferayPortletResponse, assetEntry, viewInContext);
 	String editURL = null;
-// 	System.out.println("viewInContext: "+viewInContext);
-// 	System.out.println("viewURL: "+viewURL);
-
-
-// <img alt="Main Image" src="${Main_Image.getData()}" />
-// ${Text.getData()}
-// ${Price.getData()}
-// ${Filter.getData()}
-// <#if Images.getSiblings()?has_content>
-// 	<#list Images.getSiblings() as cur_Images>
-// 		<img alt="Images" src="${cur_Images.getData()}" />
-// 	</#list>
-// </#if>
-// ${Quantity.getData()}
-// ${Type.getData()}
-// ${Size.getData()}
-// ${Author.getData()}
-
-
 
 	try {
 		if(assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker())){
@@ -94,7 +76,7 @@
 		
         journalArticleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(assetEntry.getClassPK());
         journalArticle = JournalArticleLocalServiceUtil.getArticle(assetEntry.getGroupId(), journalArticleResource.getArticleId());
-        //System.out.println("journalArticle.getSmallImageURL(): "+journalArticle.getSmallImageURL());
+
         smallImagePath = journalArticle.getSmallImageURL();
 		String content = journalArticle.getContent();
 		Document document = null;
@@ -145,6 +127,7 @@
 		        	<a href="javascript:;" class="gallery-filter-item" data-filter="*">All</a>
 		        </span>
 				<%
+				
 				String[] filtersArr = filterSettings.split(StringPool.SEMICOLON);
 				int index = 1;
 				for(String filter: filtersArr){
@@ -164,15 +147,15 @@
 	<div class="row media-gallery media-gallery-<%=portletId %>" id='media-gallery-<%=portletId %>'>
 </c:if>
 
-	<div class='<%= layoutColumns + " " + filterType %>' id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>">
+	<div class='<%= layoutColumns + " " + filterType %>' id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>" >
 		
 		<c:if test='<%= assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker()) %>'>
 			<%@ include file="/html/portlet/asset_publisher/display/item_actions.jspf" %>
 		</c:if>
 		
-		<a href="<%= viewURL %>" class='gallery-item '>
+		<a href="<%= viewURL %>" class='gallery-item '  >
 			<div class="gallery-item-poster">
-				<img src="<%= imagePath %>"></img>
+				<img src="<%= imagePath %>" data-caption="<a href='<%= PortalUtil.escapeRedirect(viewURL) %>' ><h2><%= title %></h2></a>" ></img>
 				<div class="gallery-item-details">
 					<div><%= title %></div>
 				</div>
@@ -196,6 +179,9 @@
 			window.mediaGallery<%=portletId %>.isotope({ filter: filter})
 		});
 	</c:if>
-	
+	$('#media-gallery-<%=portletId %>').sliphover({
+		caption: 'data-caption',
+		height: '60%'
+	});
 	</script>
 </c:if>

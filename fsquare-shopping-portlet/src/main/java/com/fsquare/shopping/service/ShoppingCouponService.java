@@ -55,4 +55,7 @@ public interface ShoppingCouponService extends BaseService, InvokableService {
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public com.fsquare.shopping.model.ShoppingCoupon fetchByCode(
         java.lang.String code);
+
+    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
+        java.lang.Long groupId);
 }

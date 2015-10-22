@@ -1,5 +1,7 @@
 package com.fsquare.shopping.service.impl;
 
+import java.util.List;
+
 import com.fsquare.shopping.model.ShoppingCoupon;
 import com.fsquare.shopping.service.base.ShoppingCouponServiceBaseImpl;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -33,5 +35,15 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public List<ShoppingCoupon> findByGroupId(Long groupId){
+		try {
+			return shoppingCouponPersistence.findByGroupId(groupId);
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return null;
+	
 	}
 }

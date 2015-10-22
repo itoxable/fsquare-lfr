@@ -15,7 +15,6 @@
 --%>
 
 
-<%@page import="com.fsquare.shopping.NoSuchShoppingStoreException"%>
 <%@page import="com.fsquare.shopping.model.ShoppingOrderItem"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.liferay.portlet.shopping.model.ShoppingCart" %>
@@ -36,12 +35,7 @@ if(shoppingOrderItemMap != null){
 	}
 }
 
-ShoppingStore shoppingStore = null;
-try{
-	shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
-}catch(NoSuchShoppingStoreException e){
-	shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
-}
+
 Layout cartPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(shoppingStore.getCartPageUuid(), themeDisplay.getScopeGroupId(), false);
 NavItem cartPageNavItem = new NavItem(request, cartPageLayout, null);
 
@@ -55,7 +49,7 @@ NavItem checkoutPageNavItem = new NavItem(request, checkoutPageLayout, null);
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_ADD_TO_CART %>" />
 </liferay-portlet:resourceURL>
 
-<a href="<%= cartPageNavItem.getURL() %>" class="icon-cart cart-button" style="">
+<a href="<%= cartPageNavItem.getURL() %>" id="<portlet:namespace />shopping-cart-link" class="shopping-cart-link" style='<%= quantity==0?"display:none":""%>'>
 	<span class="fa fa-shopping-cart cart-icon"></span>
 	<span>Cart</span>
 	<span id="<portlet:namespace />cart-size">(<%=quantity %>)</span>
@@ -79,6 +73,8 @@ NavItem checkoutPageNavItem = new NavItem(request, checkoutPageLayout, null);
                           	A.one('#<portlet:namespace />cart-size').set('text', '('+response.size+')');
 							if(response.redirect){
 								window.location.href = '<%= cartPageNavItem.getRegularURL() %>';
+							}else{
+								A.one('#<portlet:namespace />shopping-cart-link').setStyle('display', 'block');
 							}
                       	}
                       		

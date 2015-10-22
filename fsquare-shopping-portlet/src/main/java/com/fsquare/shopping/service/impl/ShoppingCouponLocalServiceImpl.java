@@ -1,6 +1,10 @@
 package com.fsquare.shopping.service.impl;
 
+import java.util.List;
+
+import com.fsquare.shopping.model.ShoppingCoupon;
 import com.fsquare.shopping.service.base.ShoppingCouponLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the shopping coupon local service.
@@ -23,4 +27,14 @@ public class ShoppingCouponLocalServiceImpl
      *
      * Never reference this interface directly. Always use {@link com.fsquare.shopping.service.ShoppingCouponLocalServiceUtil} to access the shopping coupon local service.
      */
+	
+	public List<ShoppingCoupon> findByGroupId(Long groupId){
+		try {
+			return shoppingCouponPersistence.findByGroupId(groupId);
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return null;
+	
+	}
 }

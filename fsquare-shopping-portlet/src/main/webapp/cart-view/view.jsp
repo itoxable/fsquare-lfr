@@ -15,6 +15,7 @@
 --%>
 
 
+<%@page import="javax.portlet.ActionRequest"%>
 <%@page import="com.liferay.portlet.journal.model.JournalArticle"%>
 <%@page import="com.liferay.portlet.journal.service.JournalArticleServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.xml.Node"%>
@@ -39,153 +40,239 @@ double total = 0;
 for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet()){
 	ShoppingOrderItem orderItem = entry.getValue();
 	total = total + orderItem.getQuantity() * orderItem.getPrice();
-	//JournalArticle journalArticle = JournalArticleServiceUtil.getArticle(themeDisplay.getScopeGroupId(), orderItem.getArticleId());
 }
 
 %>
 
+	
 <div class="cart-table-wrapper">
 	<c:choose>
 		<c:when test="<%= shoppingOrderItemMap == null || shoppingOrderItemMap.isEmpty() %>">
 			<h2>Empty Cart</h2>
 		</c:when>
 		<c:otherwise>
-		
+			<portlet:actionURL var="checkoutActionURL">
+				<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="checkout" />
+			</portlet:actionURL>
+			
 			<liferay-portlet:resourceURL var="removeFromCartURL">
 				<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_REMOVE_FROM_CART %>" />
+			</liferay-portlet:resourceURL>
+			
+			<liferay-portlet:resourceURL var="updateCartURL">
+				<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_UPDATE_CART %>" />
 			</liferay-portlet:resourceURL>
 			
 			<liferay-portlet:resourceURL var="applyCouponURL">
 				<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_APPLY_COUPON %>" />
 			</liferay-portlet:resourceURL>
 			
-			<table class="cart-table">
-				<tbody>
-					<tr class="table-header">
-					    <td></td>
-					    <td></td>
-					    <td>PRODUCT</td>
-					    <td align="center">QTY</td>
-					    <td align="right">PRICE</td>
-				  	</tr>
-				  	
-				  	<%
-				  	for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet()){
-				  		ShoppingOrderItem orderItem = entry.getValue();
-				  		JournalArticle journalArticle = JournalArticleServiceUtil.getArticle(themeDisplay.getScopeGroupId(), orderItem.getArticleId());
-				  		
-				  	%>
-				    <tr class="product-row product-row-<%= orderItem.getArticleId() %>">
-					    <td>
-					      	<a href="javascript:;" data-article-id="<%= orderItem.getArticleId() %>" class='fa fa-times-circle remove-from-shopping-cart-button' title="remove"></a>
-					    </td>
-					    <td>      
-					    	<img src="<%= ShoppingPortletUtil.getMainImageURL(journalArticle) %>" alt="" class="cart-item-img">
-					    </td>
-					    
-					    <td>
-					      	<strong><%=journalArticle.getTitle(themeDisplay.getSiteDefaultLocale()) %></strong>
-					    </td>
-					    
-					    <td align="center">
-					    	<input value="<%=orderItem.getQuantity() %>" type="number"/>
-					    </td>          
-				    	<td align="right">
-				    		£<span class="cart-item-price"><%=orderItem.getPrice() %></span>
-				    	</td>
-				  	</tr>
-			    	<%
-			    	}
-				  	%>
-			    	<tr class="coupon-row">
-						<td colspan="5" align="right">
-							Coupon code (optional) &nbsp;
-							<a href="javascript:;" id="<portlet:namespace />coupon_apply_btn" class="btn coupon-apply-btn" >Apply</a> &nbsp;
-							<input type="text" id="<portlet:namespace />coupon_code" class="coupon-apply-input" value="">
-							<div id="coupon-tip" style="display:none;">Click "apply" when done</div>
-					  	</td>
-					</tr>
-					<tr class="cart-summary-row">
-						<td colspan="4" align="right">
-							<strong>Total</strong>
-						</td>
-						<td class="cart-price-cell"><strong>GBP£<span id="cart-total-price"><%= total %></span></strong></td>
-					</tr>
-			  
-			  	</tbody>
-			</table>
+			<liferay-portlet:resourceURL var="checkoutURL">
+				<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_CHECKOUT %>" />
+			</liferay-portlet:resourceURL>
 			
-			<aui:script use="aui-base,selector-css3,aui-io-request">
-			
-				var couponApplyBtn = A.one('#<portlet:namespace />coupon_apply_btn');
-				couponApplyBtn.on('click', function(event) {
-					<portlet:namespace />applyCoupon();
-				});
-			
-				Liferay.provide(window, '<portlet:namespace />applyCoupon',
-					function() {
-						var couponCode = A.one('#<portlet:namespace />coupon_code').val();
-			        	A.io.request('<%= applyCouponURL %>',{
-			                  dataType: 'json',
-			                  method: 'POST',
-			                  data: {
-			                	  <portlet:namespace />couponCode: couponCode
-			                  },
-			                  on: {
-			                      success: function() {
-			                      	var response = this.get('responseData');
-			                      	
-			                      	if(response.success){
-			                      		var x;
-			                      	}else{
-			                      		alert('Invalid coupon code');
-			                      	}
-			                      	//cart-row-
-			                      	//A.one('#<portlet:namespace />cart-size').set('text', response.size);
-			                      }
-			                  }
-			            });
-						
-			        },
-			    	['aui-base,selector-css3']);
+			<aui:form action="<%= checkoutActionURL %>" method="post" name="fm" enctype="multipart/form-data">		
+				<table class="cart-table">
+					<tbody>
+						<tr class="table-header">
+						    <td></td>
+						    <td></td>
+						    <td>PRODUCT</td>
+						    <td align="center">QTY</td>
+						    <td align="right">PRICE</td>
+					  	</tr>
+					  	
+					  	<%
+					  	for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet()){
+					  		ShoppingOrderItem orderItem = entry.getValue();
+					  		JournalArticle journalArticle = JournalArticleServiceUtil.getArticle(themeDisplay.getScopeGroupId(), orderItem.getArticleId());
+					  		
+					  	%>
+					    <tr class="product-row product-row-<%= orderItem.getArticleId() %>">
+						    <td>
+						      	<a href="javascript:;" data-article-id="<%= orderItem.getArticleId() %>" class='fa fa-times-circle remove-from-shopping-cart-button' title="remove"></a>
+						    </td>
+						    <td>      
+						    	<img src="<%= ShoppingPortletUtil.getMainImageURL(journalArticle) %>" alt="" class="cart-item-img">
+						    </td>
+						    
+						    <td>
+						      	<strong><%= journalArticle.getTitle(themeDisplay.getSiteDefaultLocale()) %></strong>
+						    </td>
+						    
+						    <td align="center">
+						    	<input value="<%=orderItem.getQuantity() %>" id="<portlet:namespace />quantity_<%= orderItem.getArticleId() %>" type="number"/>
+						    	<a data-article-id='<%= orderItem.getArticleId() %>' class="update-quantity">
+							    	<span class="fa fa-refresh"></span>
+							    	<span>update</span>
+						    	</a>
+						    	
+						    </td>          
+					    	<td align="right">
+					    		£<span class="cart-item-price" id="<portlet:namespace />cart_item_price_<%= orderItem.getArticleId() %>"><%=orderItem.getPrice() %></span>
+					    	</td>
+					  	</tr>
+				    	<%
+				    	}
+					  	%>
+				    	<tr class="coupon-row">
+							<td colspan="5" align="right">
+								Coupon code (optional) &nbsp;
+								<a href="javascript:;" id="<portlet:namespace />coupon_apply_btn" class="btn coupon-apply-btn" >Apply</a> &nbsp;
+								<input type="text" id="<portlet:namespace />coupon_code" class="coupon-apply-input" value="">
+								<div id="coupon-tip" style="display:none;">Click "apply" when done</div>
+						  	</td>
+						</tr>
+						<tr class="cart-summary-row">
+							<td colspan="4" align="right">
+								<strong>Total</strong>
+							</td>
+							<td class="cart-price-cell"><strong>GBP£<span id="<portlet:namespace />cart-total-price"><%= total %></span></strong></td>
+						</tr>
+				  
+				  	</tbody>
+				</table>
+				<div class="cart-error-messages">
+				</div>
+				<div class="checkout-btn-wrapper">
+					<button type="submit" id="<portlet:namespace />checkout-btn" class="btn btn-large checkout-btn">Checkout</button>
+					<div style="clear:both;"></div>
+				</div>
+				<aui:script use="aui-base,selector-css3,aui-io-request">
 				
-				var removeFromShoppingCartButton = A.all('.remove-from-shopping-cart-button');
-				removeFromShoppingCartButton.on('click', function(event) {
-					debug(this, A.one(this));
-					var articleId = this.getAttribute('data-article-id');
-					removeFromShoppingCart(articleId);
-				});
-			
-				Liferay.provide(window, 'removeFromShoppingCart',
-					function(articleId) {
-						console.log("adding to cart: "+articleId);
-			        	A.io.request('<%= removeFromCartURL %>',{
-			                  dataType: 'json',
-			                  method: 'POST',
-			                  data: {
-			                	  <portlet:namespace />articleId: articleId
-			                  },
-			                  on: {
-			                      success: function() {
-			                      	var response = this.get('responseData');
-			                      	
-			                      	debug(response.redraw, response.success);
-			                      	if(response.success){
-			                      		A.one(".cart-table-wrapper").empty();
-			                      		A.one(".cart-table-wrapper").append(response.redraw);
-			                      	}
-			                      	
-			                      	//cart-row-
-			                      	//A.one('#<portlet:namespace />cart-size').set('text', response.size);
-			                      }
-			                  }
-			            });
-						
-			        },
-			    	['aui-base,selector-css3']);
-			  
-			</aui:script>
-			
+					var checkoutBtn = A.one('#<portlet:namespace />checkout-btn');
+					checkoutBtn.on('click', function(event) {
+						//<portlet:namespace />checkout();
+					});
+					
+					Liferay.provide(window, '<portlet:namespace />checkout',
+						function() {
+							A.one(".cart-error-messages").set('text', '');
+				        	A.io.request('<%= checkoutURL %>',{
+				                  dataType: 'json',
+				                  method: 'POST',
+				                  data: {},
+				                  on: {
+				                      success: function() {
+				                      	var response = this.get('responseData');
+				                      	
+				                      	if(response.success){
+				                      		var x;
+				                      	
+				                      	}
+				                      	
+				                      }
+				                  }
+				            });
+							
+				        },
+				    	['aui-base,selector-css3']);
+					
+				
+					var couponApplyBtn = A.one('#<portlet:namespace />coupon_apply_btn');
+					couponApplyBtn.on('click', function(event) {
+						<portlet:namespace />applyCoupon();
+					});
+				
+					Liferay.provide(window, '<portlet:namespace />applyCoupon',
+						function() {
+							A.one(".cart-error-messages").set('text', '');
+							var couponCode = A.one('#<portlet:namespace />coupon_code').val();
+				        	A.io.request('<%= applyCouponURL %>',{
+				                  dataType: 'json',
+				                  method: 'POST',
+				                  data: {
+				                	  <portlet:namespace />couponCode: couponCode
+				                  },
+				                  on: {
+				                      success: function() {
+				                      	var response = this.get('responseData');
+				                      	
+				                      	if(response.success){
+				                      		var x;
+				                      	}else{
+				                      		alert('Invalid coupon code');
+				                      	}
+				                      	//cart-row-
+				                      	//A.one('#<portlet:namespace />cart-size').set('text', response.size);
+				                      }
+				                  }
+				            });
+							
+				        },
+				    	['aui-base,selector-css3']);
+					
+					var removeFromShoppingCartButton = A.all('.remove-from-shopping-cart-button');
+					removeFromShoppingCartButton.on('click', function(event) {
+						debug(this, A.one(this));
+						var articleId = this.getAttribute('data-article-id');
+						removeFromShoppingCart(articleId);
+					});
+				
+					Liferay.provide(window, 'removeFromShoppingCart',
+						function(articleId) {
+							A.one(".cart-error-messages").set('text', '');
+				        	A.io.request('<%= removeFromCartURL %>',{
+				                  dataType: 'json',
+				                  method: 'POST',
+				                  data: {
+				                	  <portlet:namespace />articleId: articleId
+				                  },
+				                  on: {
+				                      success: function() {
+				                      	var response = this.get('responseData');
+				                      	
+				                      	debug(response.redraw, response.success);
+				                      	if(response.success){
+				                      		A.one(".cart-table-wrapper").empty();
+				                      		A.one(".cart-table-wrapper").append(response.redraw);
+				                      	}
+				                      	
+				                      }
+				                  }
+				            });
+							
+				        },
+				    	['aui-base,selector-css3']);
+					
+					
+					var updateQuantityButton = A.all('.update-quantity');
+					updateQuantityButton.on('click', function(event) {
+						debug(this, A.one(this));
+						var articleId = this.getAttribute('data-article-id');
+						var quantity = A.one('#<portlet:namespace />quantity_'+articleId).val();
+						updateQuantity(articleId, quantity);
+					});
+				
+					Liferay.provide(window, 'updateQuantity',
+						function(articleId, quantity) {
+							A.one(".cart-error-messages").set('text', '');
+				        	A.io.request('<%= updateCartURL %>',{
+				                  dataType: 'json',
+				                  method: 'POST',
+				                  data: {
+				                	  <portlet:namespace />articleId: articleId,
+				                	  <portlet:namespace />quantity: quantity
+				                  },
+				                  on: {
+				                      success: function() {
+				                      	var response = this.get('responseData');
+				                      	if(response.success){
+				                      		A.one("#<portlet:namespace />cart_item_price_"+articleId).set('value', response.price);
+				                      		A.one("#<portlet:namespace />cart-total-price").set('text', response.total);
+				                      	}else{
+				                      		A.one(".cart-error-messages").set('text', response.errorMessage);
+				                      	}
+				                      	
+				                      }
+				                  }
+				            });
+							
+				        },
+				    	['aui-base,selector-css3']);
+				  
+				</aui:script>
+			</aui:form>
 		</c:otherwise>
 	</c:choose>
 </div>

@@ -524,7 +524,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		  	width: auto;
 		  	display:none !important;
 		  	li button:before{
-				font-size: 30px;
+				font-size: 10px;
 				color: white;
 			}
 			li.slick-active button:before {
@@ -806,6 +806,9 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		}
 		
 	}
+	.shopping-cart-link{
+	
+	}
 	.add-to-cart-button{
 	}
 	.store-settings{
@@ -813,6 +816,10 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		background-color: #FFF;
 		@include border-radius(2px);
 		padding: 40px 30px;
+		position: relative;
+		.open-coupon-btn{
+			display: block;
+		}
 	}
 	.cart-table-wrapper{
 		padding: 40px 30px;
@@ -830,6 +837,9 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		  			font-weight: bold;
 		  			font-size: 18px;
 				}
+			}
+			tr.product-row{
+				border-bottom: 1px solid #F0F0F0;
 			}
 			 td {
 				color: #333;
@@ -850,6 +860,12 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	  			&.cart-price-cell{
 	  				text-align: right;
 	  			}
+	  			.update-quantity{
+	  				font-size: 12px;
+	  				display: block;
+	  				cursor: pointer;
+	  				width: 55px;
+	  			}
 			}
 			.remove-from-shopping-cart-button{
 			
@@ -863,5 +879,16 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 				width: 150px;
 			}
 		}
+		.checkout-btn-wrapper{
+			margin-top: 50px;
+			.checkout-btn{
+				float: right;
+			}
+		}
+		.cart-error-messages{
+			color: red;
+			text-align: center;
+		}
+		
 	}
 }

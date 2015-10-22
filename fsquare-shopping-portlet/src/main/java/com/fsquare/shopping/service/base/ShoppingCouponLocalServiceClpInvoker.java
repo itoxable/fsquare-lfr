@@ -45,6 +45,8 @@ public class ShoppingCouponLocalServiceClpInvoker {
     private String[] _methodParameterTypes58;
     private String _methodName59;
     private String[] _methodParameterTypes59;
+    private String _methodName64;
+    private String[] _methodParameterTypes64;
 
     public ShoppingCouponLocalServiceClpInvoker() {
         _methodName0 = "addShoppingCoupon";
@@ -136,6 +138,10 @@ public class ShoppingCouponLocalServiceClpInvoker {
         _methodName59 = "setBeanIdentifier";
 
         _methodParameterTypes59 = new String[] { "java.lang.String" };
+
+        _methodName64 = "findByGroupId";
+
+        _methodParameterTypes64 = new String[] { "java.lang.Long" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -237,6 +243,11 @@ public class ShoppingCouponLocalServiceClpInvoker {
             ShoppingCouponLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
+        }
+
+        if (_methodName64.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+            return ShoppingCouponLocalServiceUtil.findByGroupId((java.lang.Long) arguments[0]);
         }
 
         throw new UnsupportedOperationException();

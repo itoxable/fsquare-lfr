@@ -56,6 +56,11 @@ public class ShoppingCouponServiceUtil {
         return getService().fetchByCode(code);
     }
 
+    public static java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
+        java.lang.Long groupId) {
+        return getService().findByGroupId(groupId);
+    }
+
     public static void clearService() {
         _service = null;
     }
