@@ -155,7 +155,7 @@
 		
 		<a href="<%= viewURL %>" class='gallery-item '  >
 			<div class="gallery-item-poster">
-				<img src="<%= imagePath %>" data-caption="<a href='<%= PortalUtil.escapeRedirect(viewURL) %>' ><h2><%= title %></h2></a>" ></img>
+				<img src="<%= imagePath %>" data-caption="<a class='media-gallery-sliphover' href='<%= PortalUtil.escapeRedirect(viewURL) %>' ><h2><%= title %></h2></a>" ></img>
 				<div class="gallery-item-details">
 					<div><%= title %></div>
 				</div>
@@ -181,7 +181,6 @@
 	</c:if>
 	$('#media-gallery-<%=portletId %>').sliphover({
 		caption: 'data-caption',
-		height: '60%'
 	});
 	</script>
 </c:if>

@@ -817,9 +817,13 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		@include border-radius(2px);
 		padding: 40px 30px;
 		position: relative;
-		.open-coupon-btn{
-			display: block;
+		.open-coupon-btn, .open-new-coupon-btn{
+			display: inline-block;
 		}
+	}
+	.error-message{
+		color: red;
+		text-align: center;
 	}
 	.cart-table-wrapper{
 		padding: 40px 30px;
@@ -890,5 +894,10 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 			text-align: center;
 		}
 		
+	}
+	.media-gallery-sliphover{
+		color: #FFF;
+	}.media-gallery-sliphover:HOVER, .media-gallery-sliphover:FOCUS{
+		color: #FFF;
 	}
 }

@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.fsquare.shopping.NoSuchShoppingStoreException"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -31,6 +32,9 @@
 <portlet:defineObjects />
 
 <%
+String pattern = "dd/MM/yyyy";
+SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+
 ShoppingStore shoppingStore = null;
 try{
 	shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());

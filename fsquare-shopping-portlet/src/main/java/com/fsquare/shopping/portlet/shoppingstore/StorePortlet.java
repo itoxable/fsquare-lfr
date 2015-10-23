@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -54,7 +55,6 @@ public class StorePortlet extends MVCPortlet{
 	}
 	private void openCouponForm(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws PortletException, IOException, SystemException, PortalException {
 
-		System.out.println("In serveResource code");
 		Long couponId = ParamUtil.getLong(resourceRequest, "couponId");
 		PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
 		
@@ -79,15 +79,18 @@ public class StorePortlet extends MVCPortlet{
         JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
         boolean success = false;
         
-        
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
         Long couponId = ParamUtil.getLong(resourceRequest, "couponId");
         try {
 			ShoppingCoupon shoppingCoupon = ShoppingCouponLocalServiceUtil.deleteShoppingCoupon(couponId);
 			success = true;
 		} catch (PortalException e) {
 			e.printStackTrace();
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-deleting-coupon"));
 		} catch (SystemException e) {
 			e.printStackTrace();
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-deleting-coupon"));
 		}
         jsonObject.put("success", success);
 		writer.print(jsonObject.toString());
@@ -95,57 +98,70 @@ public class StorePortlet extends MVCPortlet{
         writer.close();
 	}
 
-	private void saveCoupon(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, SystemException, PortalException {
+	private void saveCoupon(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException{
 		PrintWriter writer = resourceResponse.getWriter();
         JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
         boolean success = true;
-        
-        Long couponId = ParamUtil.getLong(resourceRequest, "couponId");
-        String code = ParamUtil.getString(resourceRequest, "code");
-        String name = ParamUtil.getString(resourceRequest, "name"); 
-        String description = ParamUtil.getString(resourceRequest, "description"); 
-        Date startDate = ParamUtil.getDate(resourceRequest, "startDate", DateFormatFactoryUtil.getSimpleDateFormat("")); 
-        Date endDate = ParamUtil.getDate(resourceRequest, "endDate", DateFormatFactoryUtil.getSimpleDateFormat("")); 
-        Boolean active = ParamUtil.getBoolean(resourceRequest, "active"); 
-        String limitCategories = ParamUtil.getString(resourceRequest, "limitCategories"); 
-        String limitSkus = ParamUtil.getString(resourceRequest, "limitSkus");
-        Double minOrder = ParamUtil.getDouble(resourceRequest, "minOrder"); 
-        Double discount = ParamUtil.getDouble(resourceRequest, "discount"); 
-        String discountType = ParamUtil.getString(resourceRequest, "discountType"); 
-        
-        ShoppingCoupon shoppingCoupon = null;
-        if(couponId == null || couponId == 0){
-	        couponId = CounterLocalServiceUtil.increment(ShoppingCoupon.class.getName());
-	        shoppingCoupon = ShoppingCouponLocalServiceUtil.createShoppingCoupon(couponId);	        
-			ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			shoppingCoupon.setGroupId(themeDisplay.getScopeGroupId());
-			shoppingCoupon.setCreateDate(new Date());
-			shoppingCoupon.setCompanyId(themeDisplay.getCompanyId());
-			shoppingCoupon.setUserId(themeDisplay.getUserId());
-			User user = UserLocalServiceUtil.getUser(themeDisplay.getUserId());
-			shoppingCoupon.setUserName(user.getLogin());
-			
-			
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+		try{
+			boolean isNew = false;
+	        Long couponId = ParamUtil.getLong(resourceRequest, "couponId");
+	        String code = ParamUtil.getString(resourceRequest, "code");
+	        String name = ParamUtil.getString(resourceRequest, "name"); 
+	        String description = ParamUtil.getString(resourceRequest, "description"); 
+	        Date startDate = ParamUtil.getDate(resourceRequest, "startDate", DateFormatFactoryUtil.getSimpleDateFormat("")); 
+	        Date endDate = ParamUtil.getDate(resourceRequest, "endDate", DateFormatFactoryUtil.getSimpleDateFormat("")); 
+	        Boolean active = ParamUtil.getBoolean(resourceRequest, "active"); 
+	        String limitCategories = ParamUtil.getString(resourceRequest, "limitCategories"); 
+	        String limitSkus = ParamUtil.getString(resourceRequest, "limitSkus");
+	        Double minOrder = ParamUtil.getDouble(resourceRequest, "minOrder"); 
+	        Double discount = ParamUtil.getDouble(resourceRequest, "discount"); 
+	        String discountType = ParamUtil.getString(resourceRequest, "discountType"); 
 	        
-        }else{
-        	shoppingCoupon = ShoppingCouponLocalServiceUtil.getShoppingCoupon(couponId);
-        }
-        
-        shoppingCoupon.setActive(active);
-        shoppingCoupon.setCode(code);
-        shoppingCoupon.setName(name);
-        shoppingCoupon.setDescription(description);
-        shoppingCoupon.setStartDate(startDate);
-        shoppingCoupon.setEndDate(endDate);
-        shoppingCoupon.setLimitCategories(limitCategories);
-        shoppingCoupon.setLimitSkus(limitSkus);
-        shoppingCoupon.setMinOrder(minOrder);
-        shoppingCoupon.setDiscount(discount);
-        shoppingCoupon.setDiscountType(discountType);
-        shoppingCoupon.setModifiedDate(new Date());
-        
-        ShoppingCouponLocalServiceUtil.updateShoppingCoupon(shoppingCoupon);
-        
+	        ShoppingCoupon shoppingCoupon = null;
+	        if(couponId == null || couponId == 0){
+		        couponId = CounterLocalServiceUtil.increment(ShoppingCoupon.class.getName());
+		        shoppingCoupon = ShoppingCouponLocalServiceUtil.createShoppingCoupon(couponId);	        
+				shoppingCoupon.setGroupId(themeDisplay.getScopeGroupId());
+				shoppingCoupon.setCreateDate(new Date());
+				shoppingCoupon.setCompanyId(themeDisplay.getCompanyId());
+				shoppingCoupon.setUserId(themeDisplay.getUserId());
+				User user = UserLocalServiceUtil.getUser(themeDisplay.getUserId());
+				shoppingCoupon.setUserName(user.getLogin());
+				isNew = true;
+		        
+	        }else{
+	        	shoppingCoupon = ShoppingCouponLocalServiceUtil.getShoppingCoupon(couponId);
+	        }
+	        
+	        jsonObject.put("isNew", isNew);
+	        
+	        shoppingCoupon.setActive(active);
+	        shoppingCoupon.setCode(code);
+	        shoppingCoupon.setName(name);
+	        shoppingCoupon.setDescription(description);
+	        shoppingCoupon.setStartDate(startDate);
+	        shoppingCoupon.setEndDate(endDate);
+	        shoppingCoupon.setLimitCategories(limitCategories);
+	        shoppingCoupon.setLimitSkus(limitSkus);
+	        shoppingCoupon.setMinOrder(minOrder);
+	        shoppingCoupon.setDiscount(discount);
+	        shoppingCoupon.setDiscountType(discountType);
+	        shoppingCoupon.setModifiedDate(new Date());
+	        
+	        shoppingCoupon = ShoppingCouponLocalServiceUtil.updateShoppingCoupon(shoppingCoupon);
+	        
+	        jsonObject.put("shoppingCouponJson", JSONFactoryUtil.looseSerialize(shoppingCoupon));
+
+		}catch(SystemException e){
+			success = false;
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-saving-coupon"));
+		}catch(PortalException e){
+			success = false;
+		}catch(Exception e){
+			success = false;
+		}
         jsonObject.put("success", success);
 		writer.print(jsonObject.toString());
         writer.flush();

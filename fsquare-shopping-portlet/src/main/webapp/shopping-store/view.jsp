@@ -136,19 +136,17 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 		</aui:field-wrapper>
 		
 		
-		<table>
-			<thead>
+		<table class="coupons-table table table-bordered table-striped" id="<portlet:namespace />coupons-table" >
+			<thead>"
 				<tr>
-					<td>Id</td>
 					<td>Code</td>
 					<td>Name</td>
-					<td>Discount</td>
 					<td>Description</td>
-					<td>Start Date</td>
-					<td>End Date</td>
+					<td>Start</td>
+					<td>End</td>
 					<td>Active</td>
-					<td>Limit Categories</td>
-					<td>Limit Skus</td>
+					<td>Categories</td>
+					<td>Skus</td>
 					<td>Min Order</td>
 					<td>Discount</td>
 					<td>Discount Type</td>
@@ -161,20 +159,18 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 			  	for(ShoppingCoupon shoppingCoupon: shoppingCouponList){
 		  	%>
 				
-				<tr id="coupon-row-<%= shoppingCoupon.getCouponId() %>">
-					<td><%= shoppingCoupon.getCouponId() %></td>
-					<td><%= shoppingCoupon.getCode() %></td>
-					<td><%= shoppingCoupon.getName() %></td>
-					<td><%= shoppingCoupon.getDiscount() %></td>
-					<td><%= shoppingCoupon.getDescription() %></td>
-					<td><%= shoppingCoupon.getStartDate() %></td>
-					<td><%= shoppingCoupon.getEndDate() %></td>
-					<td><%= shoppingCoupon.getActive() %></td>
-					<td><%= shoppingCoupon.getLimitCategories() %></td>
-					<td><%= shoppingCoupon.getLimitSkus() %></td>
-					<td><%= shoppingCoupon.getMinOrder() %></td>
-					<td><%= shoppingCoupon.getDiscount() %></td>
-					<td><%= shoppingCoupon.getDiscountType() %></td>
+				<tr id="<portlet:namespace />coupon-row-<%= shoppingCoupon.getCouponId() %>">
+					<td id="<%= "coupon-code-"+shoppingCoupon.getCouponId() %>"><%= shoppingCoupon.getCode() %></td>
+					<td id="<%= "coupon-name-"+shoppingCoupon.getCouponId() %>"><%= shoppingCoupon.getName() %></td>
+					<td id="<%= "coupon-description-"+shoppingCoupon.getCouponId() %>"><%= shoppingCoupon.getDescription() %></td>
+					<td id="<%= "coupon-start-"+shoppingCoupon.getCouponId() %>"><%= Validator.isNotNull(shoppingCoupon.getStartDate())?dateFormat.format(shoppingCoupon.getStartDate()):"" %></td>
+					<td id="<%= "coupon-end-"+shoppingCoupon.getCouponId() %>"><%= Validator.isNotNull(shoppingCoupon.getEndDate())?dateFormat.format(shoppingCoupon.getEndDate()):"" %></td>
+					<td id="<%= "coupon-active-"+shoppingCoupon.getCouponId() %>"><%= shoppingCoupon.getActive() %></td>
+					<td id="<%= "coupon-categories-"+shoppingCoupon.getCouponId() %>"><%= shoppingCoupon.getLimitCategories() %></td>
+					<td id="<%= "coupon-skus-"+shoppingCoupon.getCouponId() %>"><%= shoppingCoupon.getLimitSkus() %></td>
+					<td id="<%= "coupon-minorder-"+shoppingCoupon.getCouponId() %>"><%= shoppingCoupon.getMinOrder() %></td>
+					<td id="<%= "coupon-discount-"+shoppingCoupon.getCouponId() %>"><%= shoppingCoupon.getDiscount() %></td>
+					<td id="<%= "coupon-discount-type-"+shoppingCoupon.getCouponId() %>"><%= shoppingCoupon.getDiscountType() %></td>
 					<td>
 						<a class="open-coupon-btn fa fa-pencil-square" data-coupon-id="<%= shoppingCoupon.getCouponId() %>" title="edit" href="javascrip:;"></a>
 						<a class="fa fa-times-circle delete-coupon-btn" data-coupon-id="<%= shoppingCoupon.getCouponId() %>" title="delete" href="javascrip:;"></a>
@@ -186,7 +182,10 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 			</tbody>
 		
 		</table>
-		<a class="btn open-coupon-btn" data-coupon-id="" href="javascrip:;"><span class="fa fa-pencil-square"></span><span>New Coupon</span></a>
+		<div id="<portlet:namespace />coupon-table-error" class="error-message coupon-table-error">
+				
+		</div>
+		<a class="btn open-new-coupon-btn" data-coupon-id="" href="javascrip:;"><span class="fa fa-pencil-square"></span><span>New Coupon</span></a>
 		<div style="margin-top: 20px">
 			<button type="button" id="<portlet:namespace />save_store_btn" class="btn save-store-btn" >Save Ajax</button>
 		</div>
@@ -196,6 +195,7 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 	
 	Liferay.provide(window, '<portlet:namespace />saveCoupon',
 		function() {
+			A.one("#<portlet:namespace />coupon-form-error").text('');
 			A.io.request('<%= saveCouponURL %>',{
 	              dataType: 'json',
 	              method: 'POST',
@@ -216,6 +216,45 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 	              on: {
 	                  success: function() {
 	                  	var response = this.get('responseData');
+	                  	if(response.success){
+	                  		A.one('#<portlet:namespace />coupon_form').remove(true);
+	                  		//debug(A.one('#<portlet:namespace />coupons-table'), );
+	                  		var shoppingCouponJson = JSON.parse(response.shoppingCouponJson);
+	                  		if(response.isNew){
+// 	                  			var newRow = '<tr id="<portlet:namespace />coupon-row-"'+shoppingCouponJson.couponId+'>';
+//                   				newRow += '<td id="coupon-id-'+shoppingCouponJson.couponId+'">'+shoppingCouponJson.+'</td>';
+//                 				newRow += '<td id="coupon-name-'+shoppingCouponJson.couponId+'">'+shoppingCouponJson.+'</td>';
+// 	                  			newRow += '<td id="coupon-description-'+shoppingCouponJson.couponId+'">'+shoppingCouponJson.+'</td>';
+//                   				newRow += '<td id="coupon-start-'+shoppingCouponJson.couponId+'">'+shoppingCouponJson.+'</td>';
+//                					newRow += '<td id="coupon-end-'+shoppingCouponJson.couponId+'">'+shoppingCouponJson.+'</td>';
+//             					newRow += '<td id="coupon-active-'+shoppingCouponJson.couponId+'">'+shoppingCouponJson.+'</td>';
+// 	                  			newRow += '<td id="coupon-categories-'+shoppingCouponJson.couponId+'">'+shoppingCouponJson.+'</td>';
+//                   				newRow += '<td id="coupon-skus-'+shoppingCouponJson.couponId+'">'+shoppingCouponJson.+'</td>';
+//                 				newRow += '<td id="coupon-minorder-'+shoppingCouponJson.couponId+'">'+shoppingCouponJson.+'</td>';
+// 	                  			newRow += '<td id="coupon-discount-type-'+shoppingCouponJson.couponId+'">'+shoppingCouponJson.+'</td>';
+// 	                  			newRow += '<td>';
+// 	                  			newRow += '<a class="open-coupon-btn fa fa-pencil-square" data-coupon-id="'+shoppingCouponJson.couponId+'" title="edit" href="javascrip:;"></a>';
+// 	                  			newRow += '<a class="fa fa-times-circle delete-coupon-btn" data-coupon-id="'+shoppingCouponJson.couponId+'" title="delete" href="javascrip:;"></a>';
+// 	                  			newRow += '</td></tr>';
+	                  			
+	                  		}else{
+// 	                  			A.one('#coupon-code-'+shoppingCouponJson.couponId).text(shoppingCouponJson.code);
+// 	                  			A.one('#coupon-name-'+shoppingCouponJson.couponId).text(shoppingCouponJson.name);
+// 	                  			A.one('#coupon-discount-'+shoppingCouponJson.couponId).text(shoppingCouponJson.discount);
+// 	                  			A.one('#coupon-description-'+shoppingCouponJson.couponId).text(shoppingCouponJson.description);
+// 	                  			A.one('#coupon-start-'+shoppingCouponJson.couponId).text(shoppingCouponJson.startDate);
+// 	                  			A.one('#coupon-end-'+shoppingCouponJson.couponId).text(shoppingCouponJson.endDate);
+// 	                  			A.one('#coupon-active-'+shoppingCouponJson.couponId).text(shoppingCouponJson.active);
+// 	                  			A.one('#coupon-categories-'+shoppingCouponJson.couponId).text(shoppingCouponJson.limitCategories);
+// 	                  			A.one('#coupon-skus-'+shoppingCouponJson.couponId).text(shoppingCouponJson.limitSkus);
+// 	                  			A.one('#coupon-minorder-'+shoppingCouponJson.couponId).text(shoppingCouponJson.minOrder);
+// 	                  			A.one('#coupon-discount-type-'+shoppingCouponJson.couponId).text(shoppingCouponJson.discountType);
+	                  		}
+	                  		
+	                  	}else{
+	                  		A.one("#<portlet:namespace />coupon-form-error").text(response.errorMessage);
+	                  	}
+	                  	
 	                  }
 	              }
 	        });
@@ -223,11 +262,9 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 	    },
 		['aui-base,selector-css3']);
 
-	
-	
 	var deleteCouponBtn = A.all('.delete-coupon-btn');
 	deleteCouponBtn.on('click', function(event) {
-		<portlet:namespace />openCoupon(this.getAttribute('data-coupon-id'));
+		<portlet:namespace />deleteCoupon(this.getAttribute('data-coupon-id'));
 	});
 	
 	Liferay.provide(window, '<portlet:namespace />deleteCoupon',
@@ -240,10 +277,14 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 	            	  <portlet:namespace />couponId : couponId
 	              },
 	              on: {
-	                  success: function() {
-	                  	var response = this.get('responseData');
-	                  	debug(this, response);
-	                  }
+                  	success: function() {
+						var response = this.get('responseData');
+						if(response.success){
+							A.one('#<portlet:namespace />coupon-row-'+couponId).remove(true);
+						}else{
+	                  		A.one("#<portlet:namespace />coupon-table-error").text(response.errorMessage);
+						}
+                  	}
 	              }
 	        });
 			
@@ -251,15 +292,18 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 		['aui-base,selector-css3']);
 	
 	
+	var openNewCouponBtn = A.one('.open-new-coupon-btn');
+	openNewCouponBtn.on('click', function(event) {
+		<portlet:namespace />openCoupon(0);
+	});
 	var openCouponBtn = A.all('.open-coupon-btn');
 	openCouponBtn.on('click', function(event) {
-		console.log("Clicked Open Coupon");
 		<portlet:namespace />openCoupon(this.getAttribute('data-coupon-id'));
 	});
 	
 	Liferay.provide(window, '<portlet:namespace />openCoupon',
 		function(couponId) {
-			console.log("Opening Coupon");
+			console.log("Opening Coupon: "+couponId);
 			A.io.request('<%= openCouponFormURL %>',{
 	              dataType: 'json',
 	              method: 'POST',
@@ -270,6 +314,8 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 	                  success: function() {
 	                  	var response = this.get('responseData');
 	                  	A.one('.store-settings').append(response);
+	                  	jQuery("#<portlet:namespace />startDate").datepicker();
+	            	    jQuery("#<portlet:namespace />endDate").datepicker();
 	                  }
 	              }
 	        });
