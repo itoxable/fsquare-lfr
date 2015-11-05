@@ -277,6 +277,12 @@ public class ShoppingCouponLocalServiceWrapper
     }
 
     @Override
+    public com.fsquare.shopping.model.ShoppingCoupon fetchByCode(
+        java.lang.String code) {
+        return _shoppingCouponLocalService.fetchByCode(code);
+    }
+
+    @Override
     public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
         java.lang.Long groupId) {
         return _shoppingCouponLocalService.findByGroupId(groupId);

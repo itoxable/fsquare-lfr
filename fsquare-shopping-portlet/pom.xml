@@ -16,7 +16,9 @@
 	
 
 	<properties>
-<!-- 		<liferay.home>/Users/ruic/Projects/Geoplace liferay-portal-6.2-ce-ga2</liferay.home> -->
+		<liferay.home>/Users/ruic/Projects/Geoplace liferay-portal-6.2-ce-ga2</liferay.home>
+<!-- 		<liferay.home>/Users/ruic/Projects/jo-liferay-portal-6.2-ce-ga4</liferay.home> -->
+
 	</properties>
 	
 	<build>
@@ -33,21 +35,21 @@
 					</execution>
 				</executions>
 				<configuration>
-					<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
-					<appServerDeployDir>${liferay.app.server.deploy.dir}</appServerDeployDir>
-					<appServerLibGlobalDir>${liferay.app.server.lib.global.dir}</appServerLibGlobalDir>
-					<appServerPortalDir>${liferay.app.server.portal.dir}</appServerPortalDir>
-					<liferayVersion>${liferay.version}</liferayVersion>
+<!-- 					<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir> -->
+<!-- 					<appServerDeployDir>${liferay.app.server.deploy.dir}</appServerDeployDir> -->
+<!-- 					<appServerLibGlobalDir>${liferay.app.server.lib.global.dir}</appServerLibGlobalDir> -->
+<!-- 					<appServerPortalDir>${liferay.app.server.portal.dir}</appServerPortalDir> -->
+<!-- 					<liferayVersion>${liferay.version}</liferayVersion> -->
 					<pluginType>portlet</pluginType>
 				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
+<!-- 				<configuration> -->
+<!-- 					<encoding>UTF-8</encoding> -->
+<!-- 					<source>1.6</source> -->
+<!-- 					<target>1.6</target> -->
+<!-- 				</configuration> -->
 			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -94,6 +96,12 @@
 			<groupId>com.paypal.sdk</groupId>
 			<artifactId>rest-api-sdk</artifactId>
 			<version>1.2.9</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.braintreepayments.gateway</groupId>
+			<artifactId>braintree-java</artifactId>
+			<version>2.52.0</version>
 		</dependency>
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.codehaus.jackson</groupId> -->

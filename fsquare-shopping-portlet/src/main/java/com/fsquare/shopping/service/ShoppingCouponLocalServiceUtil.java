@@ -263,6 +263,11 @@ public class ShoppingCouponLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static com.fsquare.shopping.model.ShoppingCoupon fetchByCode(
+        java.lang.String code) {
+        return getService().fetchByCode(code);
+    }
+
     public static java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
         java.lang.Long groupId) {
         return getService().findByGroupId(groupId);

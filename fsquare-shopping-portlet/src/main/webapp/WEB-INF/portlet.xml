@@ -123,4 +123,32 @@
 		</security-role-ref>
 	</portlet>
 	
+	<portlet>
+		<portlet-name>shopping-coupon-management</portlet-name>
+		<display-name>Shopping Coupon management</display-name>
+		<portlet-class>com.fsquare.shopping.portlet.shoppingcouponmanagement.CouponManagementPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/shopping-coupon-management/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Shopping Coupon management</title>
+			<short-title>Coupons</short-title>
+			<keywords>Shopping Coupon management</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
 </portlet-app>

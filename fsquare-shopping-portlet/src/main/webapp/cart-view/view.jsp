@@ -15,6 +15,7 @@
 --%>
 
 
+<%@page import="com.fsquare.shopping.model.ShoppingCoupon"%>
 <%@page import="javax.portlet.ActionRequest"%>
 <%@page import="com.liferay.portlet.journal.model.JournalArticle"%>
 <%@page import="com.liferay.portlet.journal.service.JournalArticleServiceUtil"%>
@@ -42,6 +43,12 @@ for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet())
 	total = total + orderItem.getQuantity() * orderItem.getPrice();
 }
 
+ShoppingCoupon shoppingCoupon = null;
+Object shoppingCouponObj = session.getAttribute(ShoppingPortletUtil.SESSION_CART_COUPON_CODE);
+if(shoppingCouponObj != null){
+	shoppingCoupon = (ShoppingCoupon)shoppingCouponObj;
+	total = ShoppingPortletUtil.applyCoupon(shoppingCoupon, total);
+}
 %>
 
 	
@@ -119,7 +126,7 @@ for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet())
 							<td colspan="5" align="right">
 								Coupon code (optional) &nbsp;
 								<a href="javascript:;" id="<portlet:namespace />coupon_apply_btn" class="btn coupon-apply-btn" >Apply</a> &nbsp;
-								<input type="text" id="<portlet:namespace />coupon_code" class="coupon-apply-input" value="">
+								<input type="text" id="<portlet:namespace />coupon_code" class="coupon-apply-input" value='<%= shoppingCoupon==null?StringPool.BLANK:shoppingCoupon.getCode() %>'>
 								<div id="coupon-tip" style="display:none;">Click "apply" when done</div>
 						  	</td>
 						</tr>
@@ -140,10 +147,9 @@ for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet())
 				</div>
 				<aui:script use="aui-base,selector-css3,aui-io-request">
 				
-					var checkoutBtn = A.one('#<portlet:namespace />checkout-btn');
-					checkoutBtn.on('click', function(event) {
+					A.on('click', function(event) {
 						//<portlet:namespace />checkout();
-					});
+					},'#<portlet:namespace />checkout-btn');
 					
 					Liferay.provide(window, '<portlet:namespace />checkout',
 						function() {
@@ -169,10 +175,9 @@ for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet())
 				    	['aui-base,selector-css3']);
 					
 				
-					var couponApplyBtn = A.one('#<portlet:namespace />coupon_apply_btn');
-					couponApplyBtn.on('click', function(event) {
+					A.on('click', function(event) {
 						<portlet:namespace />applyCoupon();
-					});
+					},'#<portlet:namespace />coupon_apply_btn');
 				
 					Liferay.provide(window, '<portlet:namespace />applyCoupon',
 						function() {
@@ -189,7 +194,7 @@ for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet())
 				                      	var response = this.get('responseData');
 				                      	
 				                      	if(response.success){
-				                      		var x;
+				                      		A.one('#<portlet:namespace />cart-total-price').set('text', response.total);
 				                      	}else{
 				                      		alert('Invalid coupon code');
 				                      	}
@@ -202,12 +207,11 @@ for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet())
 				        },
 				    	['aui-base,selector-css3']);
 					
-					var removeFromShoppingCartButton = A.all('.remove-from-shopping-cart-button');
-					removeFromShoppingCartButton.on('click', function(event) {
+					A.on('click', function(event) {
 						debug(this, A.one(this));
 						var articleId = this.getAttribute('data-article-id');
 						removeFromShoppingCart(articleId);
-					});
+					},'.remove-from-shopping-cart-button');
 				
 					Liferay.provide(window, 'removeFromShoppingCart',
 						function(articleId) {
@@ -236,13 +240,12 @@ for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet())
 				    	['aui-base,selector-css3']);
 					
 					
-					var updateQuantityButton = A.all('.update-quantity');
-					updateQuantityButton.on('click', function(event) {
+					A.on('click', function(event) {
 						debug(this, A.one(this));
 						var articleId = this.getAttribute('data-article-id');
 						var quantity = A.one('#<portlet:namespace />quantity_'+articleId).val();
 						updateQuantity(articleId, quantity);
-					});
+					}, '.update-quantity');
 				
 					Liferay.provide(window, 'updateQuantity',
 						function(articleId, quantity) {

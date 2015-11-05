@@ -2,6 +2,7 @@ package com.fsquare.shopping.portlet.cartview;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -113,14 +114,34 @@ public class CartViewPortlet extends MVCPortlet {
 
 	@SuppressWarnings("unchecked")
 	public void applyCoupon(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws Exception {
+		
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
+		HttpSession session = request.getSession();
+		
 		PrintWriter writer = resourceResponse.getWriter();
         JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
 		
         boolean success = false;
 		String couponCode = ParamUtil.getString(resourceRequest, "couponCode");
-//		ShoppingCoupon shoppingCoupon = ShoppingCouponLocalServiceUtil.
-        System.out.println("COUPON_CODE: "+couponCode);
+		ShoppingCoupon shoppingCoupon = ShoppingCouponLocalServiceUtil.fetchByCode(couponCode);
+		session.setAttribute(ShoppingPortletUtil.SESSION_CART_COUPON_CODE, shoppingCoupon);
+	        
+        Map<String,ShoppingOrderItem> shoppingOrderItemMap = (Map<String,ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
+        if(shoppingOrderItemMap == null){
+        	shoppingOrderItemMap = new HashMap<String,ShoppingOrderItem>();
+        }
 
+        double total = 0;
+        for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet()){
+        	ShoppingOrderItem orderItem = entry.getValue();
+        	total = total + orderItem.getQuantity() * orderItem.getPrice();
+        }
+        
+        total = ShoppingPortletUtil.applyCoupon(shoppingCoupon, total);
+        
+        jsonObject.put("total", total);
+        success = true;
+        
 		jsonObject.put("success", success);
 		writer.print(jsonObject.toString());
         writer.flush();

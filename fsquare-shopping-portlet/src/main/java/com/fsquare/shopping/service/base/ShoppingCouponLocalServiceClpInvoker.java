@@ -47,6 +47,8 @@ public class ShoppingCouponLocalServiceClpInvoker {
     private String[] _methodParameterTypes59;
     private String _methodName64;
     private String[] _methodParameterTypes64;
+    private String _methodName65;
+    private String[] _methodParameterTypes65;
 
     public ShoppingCouponLocalServiceClpInvoker() {
         _methodName0 = "addShoppingCoupon";
@@ -139,9 +141,13 @@ public class ShoppingCouponLocalServiceClpInvoker {
 
         _methodParameterTypes59 = new String[] { "java.lang.String" };
 
-        _methodName64 = "findByGroupId";
+        _methodName64 = "fetchByCode";
 
-        _methodParameterTypes64 = new String[] { "java.lang.Long" };
+        _methodParameterTypes64 = new String[] { "java.lang.String" };
+
+        _methodName65 = "findByGroupId";
+
+        _methodParameterTypes65 = new String[] { "java.lang.Long" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -247,6 +253,11 @@ public class ShoppingCouponLocalServiceClpInvoker {
 
         if (_methodName64.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+            return ShoppingCouponLocalServiceUtil.fetchByCode((java.lang.String) arguments[0]);
+        }
+
+        if (_methodName65.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.findByGroupId((java.lang.Long) arguments[0]);
         }
 

@@ -40,133 +40,13 @@ public class StorePortlet extends MVCPortlet{
 		try {
 			if (cmd.equals(ShoppingPortletUtil.CMD_SAVE_STORE)) {
 				saveStore(resourceRequest, resourceResponse);
-			}else if (cmd.equals(ShoppingPortletUtil.CMD_SAVE_COUPON)) {
-				saveCoupon(resourceRequest, resourceResponse);
-			}else if (cmd.equals(ShoppingPortletUtil.CMD_DELETE_COUPON)) {
-				deleteCoupon(resourceRequest, resourceResponse);
-			}else if (cmd.equals(ShoppingPortletUtil.CMD_OPEN_COUPON_FORM)) {
-				openCouponForm(resourceRequest, resourceResponse);
 			}
-			
 			
 		}
 		catch (Exception e) {
 		}
 	}
-	private void openCouponForm(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws PortletException, IOException, SystemException, PortalException {
-
-		Long couponId = ParamUtil.getLong(resourceRequest, "couponId");
-		PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
-		
-		ShoppingCoupon shoppingCoupon = null;
-        if(couponId == null || couponId == 0){
-	        couponId = CounterLocalServiceUtil.increment(ShoppingCoupon.class.getName());
-	        shoppingCoupon = ShoppingCouponLocalServiceUtil.createShoppingCoupon(couponId);
-	        //shoppingCoupon.setCreateDate(new Date());
-        }else{
-        	shoppingCoupon = ShoppingCouponLocalServiceUtil.getShoppingCoupon(couponId);
-        }
-		
-		String path = "/shopping-store/coupon-form.jsp";
-		PortletRequestDispatcher dispatcher = portletContext.getRequestDispatcher(path);
-		
-		resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_COUPON, shoppingCoupon);
-		dispatcher.include(resourceRequest, resourceResponse);
-	}
-
-	private void deleteCoupon(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException {
-		PrintWriter writer = resourceResponse.getWriter();
-        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
-        boolean success = false;
-        
-		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
-        Long couponId = ParamUtil.getLong(resourceRequest, "couponId");
-        try {
-			ShoppingCoupon shoppingCoupon = ShoppingCouponLocalServiceUtil.deleteShoppingCoupon(couponId);
-			success = true;
-		} catch (PortalException e) {
-			e.printStackTrace();
-			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-deleting-coupon"));
-		} catch (SystemException e) {
-			e.printStackTrace();
-			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-deleting-coupon"));
-		}
-        jsonObject.put("success", success);
-		writer.print(jsonObject.toString());
-        writer.flush();
-        writer.close();
-	}
-
-	private void saveCoupon(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException{
-		PrintWriter writer = resourceResponse.getWriter();
-        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
-        boolean success = true;
-		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
-		try{
-			boolean isNew = false;
-	        Long couponId = ParamUtil.getLong(resourceRequest, "couponId");
-	        String code = ParamUtil.getString(resourceRequest, "code");
-	        String name = ParamUtil.getString(resourceRequest, "name"); 
-	        String description = ParamUtil.getString(resourceRequest, "description"); 
-	        Date startDate = ParamUtil.getDate(resourceRequest, "startDate", DateFormatFactoryUtil.getSimpleDateFormat("")); 
-	        Date endDate = ParamUtil.getDate(resourceRequest, "endDate", DateFormatFactoryUtil.getSimpleDateFormat("")); 
-	        Boolean active = ParamUtil.getBoolean(resourceRequest, "active"); 
-	        String limitCategories = ParamUtil.getString(resourceRequest, "limitCategories"); 
-	        String limitSkus = ParamUtil.getString(resourceRequest, "limitSkus");
-	        Double minOrder = ParamUtil.getDouble(resourceRequest, "minOrder"); 
-	        Double discount = ParamUtil.getDouble(resourceRequest, "discount"); 
-	        String discountType = ParamUtil.getString(resourceRequest, "discountType"); 
-	        
-	        ShoppingCoupon shoppingCoupon = null;
-	        if(couponId == null || couponId == 0){
-		        couponId = CounterLocalServiceUtil.increment(ShoppingCoupon.class.getName());
-		        shoppingCoupon = ShoppingCouponLocalServiceUtil.createShoppingCoupon(couponId);	        
-				shoppingCoupon.setGroupId(themeDisplay.getScopeGroupId());
-				shoppingCoupon.setCreateDate(new Date());
-				shoppingCoupon.setCompanyId(themeDisplay.getCompanyId());
-				shoppingCoupon.setUserId(themeDisplay.getUserId());
-				User user = UserLocalServiceUtil.getUser(themeDisplay.getUserId());
-				shoppingCoupon.setUserName(user.getLogin());
-				isNew = true;
-		        
-	        }else{
-	        	shoppingCoupon = ShoppingCouponLocalServiceUtil.getShoppingCoupon(couponId);
-	        }
-	        
-	        jsonObject.put("isNew", isNew);
-	        
-	        shoppingCoupon.setActive(active);
-	        shoppingCoupon.setCode(code);
-	        shoppingCoupon.setName(name);
-	        shoppingCoupon.setDescription(description);
-	        shoppingCoupon.setStartDate(startDate);
-	        shoppingCoupon.setEndDate(endDate);
-	        shoppingCoupon.setLimitCategories(limitCategories);
-	        shoppingCoupon.setLimitSkus(limitSkus);
-	        shoppingCoupon.setMinOrder(minOrder);
-	        shoppingCoupon.setDiscount(discount);
-	        shoppingCoupon.setDiscountType(discountType);
-	        shoppingCoupon.setModifiedDate(new Date());
-	        
-	        shoppingCoupon = ShoppingCouponLocalServiceUtil.updateShoppingCoupon(shoppingCoupon);
-	        
-	        jsonObject.put("shoppingCouponJson", JSONFactoryUtil.looseSerialize(shoppingCoupon));
-
-		}catch(SystemException e){
-			success = false;
-			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-saving-coupon"));
-		}catch(PortalException e){
-			success = false;
-		}catch(Exception e){
-			success = false;
-		}
-        jsonObject.put("success", success);
-		writer.print(jsonObject.toString());
-        writer.flush();
-        writer.close();
-	}
+	
 
 	private void saveStore(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException, SystemException {
 		PrintWriter writer = resourceResponse.getWriter();

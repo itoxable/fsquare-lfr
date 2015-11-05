@@ -241,6 +241,10 @@ public interface ShoppingCouponLocalService extends BaseLocalService,
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable;
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public com.fsquare.shopping.model.ShoppingCoupon fetchByCode(
+        java.lang.String code);
+
     public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
         java.lang.Long groupId);
 }

@@ -8,24 +8,15 @@
 		<icon>/mini-cart/icon.png</icon>
 		<struts-path>minicart</struts-path>
 		<configuration-action-class>com.fsquare.shopping.portlet.minicart.action.ConfigurationActionImpl</configuration-action-class>
-		
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>minicart</friendly-url-mapping>
 		<friendly-url-routes>com/fsquare/shopping/portlet/minicart-friendly-url-routes.xml</friendly-url-routes>
-		
-		
-		
 		<preferences-company-wide>true</preferences-company-wide>
 		<instanceable>false</instanceable>
 		<requires-namespaced-parameters>false</requires-namespaced-parameters>
-		
-		
-		
 		<header-portlet-css>/mini-cart/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/mini-cart/js/main.js</footer-portlet-javascript>
-		
-				<add-default-resource>true</add-default-resource>
-		
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	
 	<portlet>
@@ -47,16 +38,36 @@
 		<instanceable>false</instanceable>		
 		<header-portlet-css>/cart-view/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/cart-view/js/main.js</footer-portlet-javascript>
+		<css-class-wrapper>cart-view</css-class-wrapper>
+		
 	</portlet>
+	
 	<portlet>
 		<portlet-name>shoppingstore</portlet-name>
 		<icon>/shopping-store/icon.png</icon>
 		<struts-path>shoppingstore</struts-path>
 		<configuration-action-class>com.fsquare.shopping.portlet.shoppingstore.action.ConfigurationActionImpl</configuration-action-class>
+<!-- 		<control-panel-entry-category>site_administration.shopping</control-panel-entry-category> -->
+<!--     	<control-panel-entry-weight>1.0</control-panel-entry-weight> -->
 		<preferences-company-wide>true</preferences-company-wide>
 		<instanceable>false</instanceable>		
-		<header-portlet-css>/shopping-store/css/main.css</header-portlet-css>
+		<header-portlet-css>/shopping-store/css/main.css</header-portlet-css> 
 		<footer-portlet-javascript>/shopping-store/js/main.js</footer-portlet-javascript>
+		<css-class-wrapper>shopping-store-settings</css-class-wrapper>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>shopping-coupon-management</portlet-name>
+		<icon>/shopping-coupon-management/icon.png</icon>
+		<struts-path>shopping-coupon-management</struts-path>
+		<configuration-action-class>com.fsquare.shopping.portlet.shoppingcouponmanagement.action.ConfigurationActionImpl</configuration-action-class>
+<!-- 		<control-panel-entry-category>site_administration.shopping</control-panel-entry-category> -->
+<!--     	<control-panel-entry-weight>2.0</control-panel-entry-weight> -->
+		<preferences-company-wide>true</preferences-company-wide>
+		<instanceable>false</instanceable>		
+		<header-portlet-css>/shopping-coupon-management/css/main.css</header-portlet-css> 
+		<footer-portlet-javascript>/shopping-coupon-management/js/main.js</footer-portlet-javascript>
+		<css-class-wrapper>shopping-coupon-management</css-class-wrapper>
 	</portlet>
 
 

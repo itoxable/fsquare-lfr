@@ -37,8 +37,10 @@ SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
 
 ShoppingStore shoppingStore = null;
 try{
+	//System.out.println("Searching for store with group Id = "+themeDisplay.getScopeGroupId());
 	shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
 }catch(NoSuchShoppingStoreException e){
+	//System.out.println("Store with group Id = "+themeDisplay.getScopeGroupId()+" does not exist");
 	shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
 }
 %>

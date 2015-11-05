@@ -1,10 +1,15 @@
 package com.fsquare.shopping.portlet.util;
 
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
+import com.fsquare.shopping.model.ShoppingCoupon;
+import com.fsquare.shopping.model.ShoppingOrderItem;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -18,7 +23,8 @@ public class ShoppingPortletUtil {
 
 	public static final String SESSION_CART_OBJECT = "session_cart_object";
 	public static final String SESSION_ORDER_OBJECT = "session_order_object";
-	
+	public static final String SESSION_CART_COUPON_CODE = "session_cart_coupon_code";
+
 	public static final String CMD_ADD_TO_CART = "addToCart";
 	public static final String CMD_REMOVE_FROM_CART = "removeFromCart";
 	public static final String CMD_SAVE_STORE = "saveStore";
@@ -28,6 +34,8 @@ public class ShoppingPortletUtil {
 	public static final String CMD_DELETE_COUPON = "deleteCoupon";
 	public static final String CMD_APPLY_COUPON = "applyCoupon";
 	public static final String CMD_OPEN_COUPON_FORM = "openCouponForm";
+	public static final String CMD_ACTIVATE_COUPON = "activateForm";
+
 	
 	public static final String PRODUCT_MAIN_IMAGE = "Main_Image";
 	public static final String PRODUCT_TEXT = "Text";
@@ -50,6 +58,10 @@ public class ShoppingPortletUtil {
 	public static final String ATTR_COUPON = "coupon";
 	
 	public static final String DATE_FORMAT = "dd/mm/yyyy";
+	
+	public static final String COUNPON_STATE_RUNNING = "coupon-running";
+	public static final String COUNPON_STATE_NOT_STARTED = "coupon-not-started";
+	public static final String COUNPON_STATE_EXPIRED = "coupon-expired";
 	
 	public static String getMainImageURL(JournalArticle journalArticle) {
 		String imagePath = StringPool.BLANK;
@@ -129,18 +141,54 @@ public class ShoppingPortletUtil {
 		return product;
 	}
 	
-//	<img alt="Main Image" src="${Main_Image.getData()}" />
-//	${Text.getData()}
-//	${Price.getData()}
-//	${Filter.getData()}
-//	${Quantity.getData()}
-//	${Type.getData()}
-//	${Size.getData()}
-//	${Author.getData()}
-//	${SKU.getData()}
-//	<#if Images.getSiblings()?has_content>
-//		<#list Images.getSiblings() as cur_Images>
-//			<img alt="Images" src="${cur_Images.getData()}" />
-//		</#list>
-//	</#if>
+	public static Double applyCoupon(ShoppingCoupon shoppingCoupon, Double total){
+		if(shoppingCoupon == null || !ShoppingPortletUtil.isCouponValid(shoppingCoupon)){
+			return total;
+		}
+		Double discount = shoppingCoupon.getDiscount();
+        String discountType = shoppingCoupon.getDiscountType();
+        
+        if(discountType.equals(ShoppingPortletUtil.DISCOUNT_TYPE_PERCENTAGE)){
+        	total = total * (1-(discount/100));
+        }else if(discountType.equals(ShoppingPortletUtil.DISCOUNT_TYPE_VALUE)){
+        	total = total - discount;
+        }
+        return total;
+	}
+	
+	public static boolean isCouponValid(ShoppingCoupon shoppingCoupon){
+		
+		if(!shoppingCoupon.isActive()){
+			return false;
+		}
+		
+		Calendar calendar = Calendar.getInstance();
+
+		boolean started = calendar.getTimeInMillis() >= shoppingCoupon.getStartDate().getTime();
+		boolean ended = calendar.getTimeInMillis() >= shoppingCoupon.getEndDate().getTime();
+
+		if(started && !ended){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public static String getCouponStatus(ShoppingCoupon shoppingCoupon){
+		Calendar calendar = Calendar.getInstance();
+
+		boolean started = calendar.getTimeInMillis() >= shoppingCoupon.getStartDate().getTime();
+		boolean ended = calendar.getTimeInMillis() >= shoppingCoupon.getEndDate().getTime();
+
+		if(started && !ended){
+			return COUNPON_STATE_RUNNING;
+		}else if(ended){
+			return COUNPON_STATE_EXPIRED;
+		}else if(!started){
+			return COUNPON_STATE_NOT_STARTED;
+		}
+		
+		return COUNPON_STATE_RUNNING;
+	}
+
 }

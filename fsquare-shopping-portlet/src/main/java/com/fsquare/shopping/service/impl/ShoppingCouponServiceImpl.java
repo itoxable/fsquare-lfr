@@ -27,16 +27,16 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
      * Never reference this interface directly. Always use {@link com.fsquare.shopping.service.ShoppingCouponServiceUtil} to access the shopping coupon remote service.
      */
 	
+	@Override
 	public ShoppingCoupon fetchByCode(String code){
 		try {
 			return shoppingCouponPersistence.fetchByCode(code);
 		} catch (SystemException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
+	@Override
 	public List<ShoppingCoupon> findByGroupId(Long groupId){
 		try {
 			return shoppingCouponPersistence.findByGroupId(groupId);

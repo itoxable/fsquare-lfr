@@ -28,6 +28,16 @@ public class ShoppingCouponLocalServiceImpl
      * Never reference this interface directly. Always use {@link com.fsquare.shopping.service.ShoppingCouponLocalServiceUtil} to access the shopping coupon local service.
      */
 	
+	//@Override
+	public ShoppingCoupon fetchByCode(String code){
+		try {
+			return shoppingCouponPersistence.fetchByCode(code);
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public List<ShoppingCoupon> findByGroupId(Long groupId){
 		try {
 			return shoppingCouponPersistence.findByGroupId(groupId);

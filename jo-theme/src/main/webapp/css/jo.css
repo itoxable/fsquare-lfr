@@ -811,90 +811,96 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	}
 	.add-to-cart-button{
 	}
-	.store-settings{
-		@include box-shadow(0 0 5px rgba(0, 0, 0, 0.5));
-		background-color: #FFF;
-		@include border-radius(2px);
-		padding: 40px 30px;
-		position: relative;
-		.open-coupon-btn, .open-new-coupon-btn{
-			display: inline-block;
-		}
-	}
+	
 	.error-message{
 		color: red;
 		text-align: center;
 	}
-	.cart-table-wrapper{
-		padding: 40px 30px;
-		@include box-shadow(0 0 5px rgba(0, 0, 0, 0.5));
-		background-color: #FFF;
-		@include border-radius(2px);
-		.cart-table{
-			width: 100%;
-	  		border-spacing: 0;
-			.table-header {
-				background: #f0f0f0;
-				padding: 15px 0;
-				td{
-					color: #333;
-		  			font-weight: bold;
-		  			font-size: 18px;
-				}
-			}
-			tr.product-row{
-				border-bottom: 1px solid #F0F0F0;
-			}
-			 td {
-				color: #333;
-				text-decoration: none;
-				font-size: 18px;
-				padding: 10px;
-	  			vertical-align: middle;
+
+/* 	.store-settings{ */
+/* 		@include box-shadow(0 0 5px rgba(0, 0, 0, 0.5)); */
+/* 		background-color: #FFF; */
+/* 		@include border-radius(2px); */
+/* 		padding: 40px 30px; */
+/* 		position: relative; */
+/* 		.open-coupon-btn, .open-new-coupon-btn{ */
+/* 			display: inline-block; */
+/* 		} */
+/* 	} */
+/* 	.error-message{ */
+/* 		color: red; */
+/* 		text-align: center; */
+/* 	} */
+/* 	.cart-table-wrapper{ */
+/* 		padding: 40px 30px; */
+/* 		@include box-shadow(0 0 5px rgba(0, 0, 0, 0.5)); */
+/* 		background-color: #FFF; */
+/* 		@include border-radius(2px); */
+/* 		.cart-table{ */
+/* 			width: 100%; */
+/* 	  		border-spacing: 0; */
+/* 			.table-header { */
+/* 				background: #f0f0f0; */
+/* 				padding: 15px 0; */
+/* 				td{ */
+/* 					color: #333; */
+/* 		  			font-weight: bold; */
+/* 		  			font-size: 18px; */
+/* 				} */
+/* 			} */
+/* 			tr.product-row{ */
+/* 				border-bottom: 1px solid #F0F0F0; */
+/* 			} */
+/* 			 td { */
+/* 				color: #333; */
+/* 				text-decoration: none; */
+/* 				font-size: 18px; */
+/* 				padding: 10px; */
+/* 	  			vertical-align: middle; */
 	  			
-	  			.remove-from-shopping-cart-button,.remove-from-shopping-cart-button:hover, .remove-from-shopping-cart-button:focus{
-	  				text-decoration: none;
-	  			}
-	  			input[type="number"]{
-	  				width: 30px;
-	  			}
-	  			&.product-row{
-	  				border-bottom: 1px solid #e1e1e1;
-	  			}
-	  			&.cart-price-cell{
-	  				text-align: right;
-	  			}
-	  			.update-quantity{
-	  				font-size: 12px;
-	  				display: block;
-	  				cursor: pointer;
-	  				width: 55px;
-	  			}
-			}
-			.remove-from-shopping-cart-button{
+/* 	  			.remove-from-shopping-cart-button,.remove-from-shopping-cart-button:hover, .remove-from-shopping-cart-button:focus{ */
+/* 	  				text-decoration: none; */
+/* 	  			} */
+/* 	  			input[type="number"]{ */
+/* 	  				width: 30px; */
+/* 	  			} */
+/* 	  			&.product-row{ */
+/* 	  				border-bottom: 1px solid #e1e1e1; */
+/* 	  			} */
+/* 	  			&.cart-price-cell{ */
+/* 	  				text-align: right; */
+/* 	  			} */
+/* 	  			.update-quantity{ */
+/* 	  				font-size: 12px; */
+/* 	  				display: block; */
+/* 	  				cursor: pointer; */
+/* 	  				width: 55px; */
+/* 	  			} */
+/* 			} */
+/* 			.remove-from-shopping-cart-button{ */
 			
-			}
-			.cart-item-img{
-				width: 70px;
-			}
-			.coupon-apply-input{
-				margin: 0;
-				padding: 3px;
-				width: 150px;
-			}
-		}
-		.checkout-btn-wrapper{
-			margin-top: 50px;
-			.checkout-btn{
-				float: right;
-			}
-		}
-		.cart-error-messages{
-			color: red;
-			text-align: center;
-		}
+/* 			} */
+/* 			.cart-item-img{ */
+/* 				width: 70px; */
+/* 			} */
+/* 			.coupon-apply-input{ */
+/* 				margin: 0; */
+/* 				padding: 3px; */
+/* 				width: 150px; */
+/* 			} */
+/* 		} */
+/* 		.checkout-btn-wrapper{ */
+/* 			margin-top: 50px; */
+/* 			.checkout-btn{ */
+/* 				float: right; */
+/* 			} */
+/* 		} */
+/* 		.cart-error-messages{ */
+/* 			color: red; */
+/* 			text-align: center; */
+/* 		} */
 		
-	}
+/* 	} */
 	.media-gallery-sliphover{
 		color: #FFF;
 	}.media-gallery-sliphover:HOVER, .media-gallery-sliphover:FOCUS{
