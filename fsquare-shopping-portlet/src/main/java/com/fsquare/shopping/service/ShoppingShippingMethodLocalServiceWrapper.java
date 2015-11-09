@@ -278,6 +278,28 @@ public class ShoppingShippingMethodLocalServiceWrapper
             parameterTypes, arguments);
     }
 
+    @Override
+    public java.lang.Long getShippingPrice(
+        com.fsquare.shopping.model.ShoppingShippingMethod shoppingShippingMethod,
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItems,
+        long total) {
+        return _shoppingShippingMethodLocalService.getShippingPrice(shoppingShippingMethod,
+            shoppingOrderItems, total);
+    }
+
+    @Override
+    public com.fsquare.shopping.model.ShoppingShippingMethod fetchDefaultShipping()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingShippingMethodLocalService.fetchDefaultShipping();
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupId(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingShippingMethodLocalService.findByGroupId(groupId);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

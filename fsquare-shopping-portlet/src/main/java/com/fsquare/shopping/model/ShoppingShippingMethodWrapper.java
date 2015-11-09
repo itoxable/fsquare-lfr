@@ -48,7 +48,11 @@ public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("price", getPrice());
         attributes.put("name", getName());
-        attributes.put("methodName", getMethodName());
+        attributes.put("description", getDescription());
+        attributes.put("freeQuantity", getFreeQuantity());
+        attributes.put("freeTotal", getFreeTotal());
+        attributes.put("weight", getWeight());
+        attributes.put("defaultShipping", getDefaultShipping());
 
         return attributes;
     }
@@ -109,10 +113,34 @@ public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
             setName(name);
         }
 
-        String methodName = (String) attributes.get("methodName");
+        String description = (String) attributes.get("description");
 
-        if (methodName != null) {
-            setMethodName(methodName);
+        if (description != null) {
+            setDescription(description);
+        }
+
+        Long freeQuantity = (Long) attributes.get("freeQuantity");
+
+        if (freeQuantity != null) {
+            setFreeQuantity(freeQuantity);
+        }
+
+        Double freeTotal = (Double) attributes.get("freeTotal");
+
+        if (freeTotal != null) {
+            setFreeTotal(freeTotal);
+        }
+
+        Double weight = (Double) attributes.get("weight");
+
+        if (weight != null) {
+            setWeight(weight);
+        }
+
+        Boolean defaultShipping = (Boolean) attributes.get("defaultShipping");
+
+        if (defaultShipping != null) {
+            setDefaultShipping(defaultShipping);
         }
     }
 
@@ -339,23 +367,113 @@ public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
     }
 
     /**
-    * Returns the method name of this shopping shipping method.
+    * Returns the description of this shopping shipping method.
     *
-    * @return the method name of this shopping shipping method
+    * @return the description of this shopping shipping method
     */
     @Override
-    public java.lang.String getMethodName() {
-        return _shoppingShippingMethod.getMethodName();
+    public java.lang.String getDescription() {
+        return _shoppingShippingMethod.getDescription();
     }
 
     /**
-    * Sets the method name of this shopping shipping method.
+    * Sets the description of this shopping shipping method.
     *
-    * @param methodName the method name of this shopping shipping method
+    * @param description the description of this shopping shipping method
     */
     @Override
-    public void setMethodName(java.lang.String methodName) {
-        _shoppingShippingMethod.setMethodName(methodName);
+    public void setDescription(java.lang.String description) {
+        _shoppingShippingMethod.setDescription(description);
+    }
+
+    /**
+    * Returns the free quantity of this shopping shipping method.
+    *
+    * @return the free quantity of this shopping shipping method
+    */
+    @Override
+    public long getFreeQuantity() {
+        return _shoppingShippingMethod.getFreeQuantity();
+    }
+
+    /**
+    * Sets the free quantity of this shopping shipping method.
+    *
+    * @param freeQuantity the free quantity of this shopping shipping method
+    */
+    @Override
+    public void setFreeQuantity(long freeQuantity) {
+        _shoppingShippingMethod.setFreeQuantity(freeQuantity);
+    }
+
+    /**
+    * Returns the free total of this shopping shipping method.
+    *
+    * @return the free total of this shopping shipping method
+    */
+    @Override
+    public double getFreeTotal() {
+        return _shoppingShippingMethod.getFreeTotal();
+    }
+
+    /**
+    * Sets the free total of this shopping shipping method.
+    *
+    * @param freeTotal the free total of this shopping shipping method
+    */
+    @Override
+    public void setFreeTotal(double freeTotal) {
+        _shoppingShippingMethod.setFreeTotal(freeTotal);
+    }
+
+    /**
+    * Returns the weight of this shopping shipping method.
+    *
+    * @return the weight of this shopping shipping method
+    */
+    @Override
+    public double getWeight() {
+        return _shoppingShippingMethod.getWeight();
+    }
+
+    /**
+    * Sets the weight of this shopping shipping method.
+    *
+    * @param weight the weight of this shopping shipping method
+    */
+    @Override
+    public void setWeight(double weight) {
+        _shoppingShippingMethod.setWeight(weight);
+    }
+
+    /**
+    * Returns the default shipping of this shopping shipping method.
+    *
+    * @return the default shipping of this shopping shipping method
+    */
+    @Override
+    public boolean getDefaultShipping() {
+        return _shoppingShippingMethod.getDefaultShipping();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping shipping method is default shipping.
+    *
+    * @return <code>true</code> if this shopping shipping method is default shipping; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isDefaultShipping() {
+        return _shoppingShippingMethod.isDefaultShipping();
+    }
+
+    /**
+    * Sets whether this shopping shipping method is default shipping.
+    *
+    * @param defaultShipping the default shipping of this shopping shipping method
+    */
+    @Override
+    public void setDefaultShipping(boolean defaultShipping) {
+        _shoppingShippingMethod.setDefaultShipping(defaultShipping);
     }
 
     @Override

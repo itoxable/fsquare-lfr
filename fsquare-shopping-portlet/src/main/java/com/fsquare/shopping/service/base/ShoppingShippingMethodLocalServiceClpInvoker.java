@@ -45,6 +45,12 @@ public class ShoppingShippingMethodLocalServiceClpInvoker {
     private String[] _methodParameterTypes58;
     private String _methodName59;
     private String[] _methodParameterTypes59;
+    private String _methodName64;
+    private String[] _methodParameterTypes64;
+    private String _methodName65;
+    private String[] _methodParameterTypes65;
+    private String _methodName66;
+    private String[] _methodParameterTypes66;
 
     public ShoppingShippingMethodLocalServiceClpInvoker() {
         _methodName0 = "addShoppingShippingMethod";
@@ -136,6 +142,21 @@ public class ShoppingShippingMethodLocalServiceClpInvoker {
         _methodName59 = "setBeanIdentifier";
 
         _methodParameterTypes59 = new String[] { "java.lang.String" };
+
+        _methodName64 = "getShippingPrice";
+
+        _methodParameterTypes64 = new String[] {
+                "com.fsquare.shopping.model.ShoppingShippingMethod",
+                "java.util.Collection", "long"
+            };
+
+        _methodName65 = "fetchDefaultShipping";
+
+        _methodParameterTypes65 = new String[] {  };
+
+        _methodName66 = "findByGroupId";
+
+        _methodParameterTypes66 = new String[] { "long" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -237,6 +258,23 @@ public class ShoppingShippingMethodLocalServiceClpInvoker {
             ShoppingShippingMethodLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
+        }
+
+        if (_methodName64.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+            return ShoppingShippingMethodLocalServiceUtil.getShippingPrice((com.fsquare.shopping.model.ShoppingShippingMethod) arguments[0],
+                (java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem>) arguments[1],
+                ((Long) arguments[2]).longValue());
+        }
+
+        if (_methodName65.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+            return ShoppingShippingMethodLocalServiceUtil.fetchDefaultShipping();
+        }
+
+        if (_methodName66.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+            return ShoppingShippingMethodLocalServiceUtil.findByGroupId(((Long) arguments[0]).longValue());
         }
 
         throw new UnsupportedOperationException();

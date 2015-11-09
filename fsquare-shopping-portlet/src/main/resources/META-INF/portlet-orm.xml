@@ -146,7 +146,11 @@
 			</basic>
 			<basic name="price" />
 			<basic name="name" />
-			<basic name="methodName" />
+			<basic name="description" />
+			<basic name="freeQuantity" />
+			<basic name="freeTotal" />
+			<basic name="weight" />
+			<basic name="defaultShipping" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

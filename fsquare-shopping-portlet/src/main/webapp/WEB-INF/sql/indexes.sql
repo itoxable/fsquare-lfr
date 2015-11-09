@@ -12,4 +12,7 @@ create index IX_8B900DB6 on FsquareShopping_ShoppingOrderItem (articleId);
 create index IX_B7B98546 on FsquareShopping_ShoppingOrderItem (shoppingOrderId);
 create index IX_40F32E79 on FsquareShopping_ShoppingOrderItem (shoppingOrderItemId);
 
+create index IX_DFCF186E on FsquareShopping_ShoppingShippingMethod (defaultShipping);
+create index IX_FAFCDB99 on FsquareShopping_ShoppingShippingMethod (groupId);
+
 create index IX_8BF11C1F on FsquareShopping_ShoppingStore (groupId);

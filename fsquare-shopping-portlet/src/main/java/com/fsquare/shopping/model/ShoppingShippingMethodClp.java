@@ -32,7 +32,11 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
     private Date _modifiedDate;
     private double _price;
     private String _name;
-    private String _methodName;
+    private String _description;
+    private long _freeQuantity;
+    private double _freeTotal;
+    private double _weight;
+    private boolean _defaultShipping;
     private BaseModel<?> _shoppingShippingMethodRemoteModel;
     private Class<?> _clpSerializerClass = com.fsquare.shopping.service.ClpSerializer.class;
 
@@ -82,7 +86,11 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("price", getPrice());
         attributes.put("name", getName());
-        attributes.put("methodName", getMethodName());
+        attributes.put("description", getDescription());
+        attributes.put("freeQuantity", getFreeQuantity());
+        attributes.put("freeTotal", getFreeTotal());
+        attributes.put("weight", getWeight());
+        attributes.put("defaultShipping", getDefaultShipping());
 
         return attributes;
     }
@@ -143,10 +151,34 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
             setName(name);
         }
 
-        String methodName = (String) attributes.get("methodName");
+        String description = (String) attributes.get("description");
 
-        if (methodName != null) {
-            setMethodName(methodName);
+        if (description != null) {
+            setDescription(description);
+        }
+
+        Long freeQuantity = (Long) attributes.get("freeQuantity");
+
+        if (freeQuantity != null) {
+            setFreeQuantity(freeQuantity);
+        }
+
+        Double freeTotal = (Double) attributes.get("freeTotal");
+
+        if (freeTotal != null) {
+            setFreeTotal(freeTotal);
+        }
+
+        Double weight = (Double) attributes.get("weight");
+
+        if (weight != null) {
+            setWeight(weight);
+        }
+
+        Boolean defaultShipping = (Boolean) attributes.get("defaultShipping");
+
+        if (defaultShipping != null) {
+            setDefaultShipping(defaultShipping);
         }
     }
 
@@ -361,21 +393,116 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
     }
 
     @Override
-    public String getMethodName() {
-        return _methodName;
+    public String getDescription() {
+        return _description;
     }
 
     @Override
-    public void setMethodName(String methodName) {
-        _methodName = methodName;
+    public void setDescription(String description) {
+        _description = description;
 
         if (_shoppingShippingMethodRemoteModel != null) {
             try {
                 Class<?> clazz = _shoppingShippingMethodRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setMethodName", String.class);
+                Method method = clazz.getMethod("setDescription", String.class);
 
-                method.invoke(_shoppingShippingMethodRemoteModel, methodName);
+                method.invoke(_shoppingShippingMethodRemoteModel, description);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public long getFreeQuantity() {
+        return _freeQuantity;
+    }
+
+    @Override
+    public void setFreeQuantity(long freeQuantity) {
+        _freeQuantity = freeQuantity;
+
+        if (_shoppingShippingMethodRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingShippingMethodRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setFreeQuantity", long.class);
+
+                method.invoke(_shoppingShippingMethodRemoteModel, freeQuantity);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public double getFreeTotal() {
+        return _freeTotal;
+    }
+
+    @Override
+    public void setFreeTotal(double freeTotal) {
+        _freeTotal = freeTotal;
+
+        if (_shoppingShippingMethodRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingShippingMethodRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setFreeTotal", double.class);
+
+                method.invoke(_shoppingShippingMethodRemoteModel, freeTotal);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public double getWeight() {
+        return _weight;
+    }
+
+    @Override
+    public void setWeight(double weight) {
+        _weight = weight;
+
+        if (_shoppingShippingMethodRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingShippingMethodRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setWeight", double.class);
+
+                method.invoke(_shoppingShippingMethodRemoteModel, weight);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public boolean getDefaultShipping() {
+        return _defaultShipping;
+    }
+
+    @Override
+    public boolean isDefaultShipping() {
+        return _defaultShipping;
+    }
+
+    @Override
+    public void setDefaultShipping(boolean defaultShipping) {
+        _defaultShipping = defaultShipping;
+
+        if (_shoppingShippingMethodRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingShippingMethodRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setDefaultShipping",
+                        boolean.class);
+
+                method.invoke(_shoppingShippingMethodRemoteModel,
+                    defaultShipping);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -460,7 +587,11 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         clone.setModifiedDate(getModifiedDate());
         clone.setPrice(getPrice());
         clone.setName(getName());
-        clone.setMethodName(getMethodName());
+        clone.setDescription(getDescription());
+        clone.setFreeQuantity(getFreeQuantity());
+        clone.setFreeTotal(getFreeTotal());
+        clone.setWeight(getWeight());
+        clone.setDefaultShipping(getDefaultShipping());
 
         return clone;
     }
@@ -510,7 +641,7 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(21);
+        StringBundler sb = new StringBundler(29);
 
         sb.append("{shippingMethodId=");
         sb.append(getShippingMethodId());
@@ -530,8 +661,16 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         sb.append(getPrice());
         sb.append(", name=");
         sb.append(getName());
-        sb.append(", methodName=");
-        sb.append(getMethodName());
+        sb.append(", description=");
+        sb.append(getDescription());
+        sb.append(", freeQuantity=");
+        sb.append(getFreeQuantity());
+        sb.append(", freeTotal=");
+        sb.append(getFreeTotal());
+        sb.append(", weight=");
+        sb.append(getWeight());
+        sb.append(", defaultShipping=");
+        sb.append(getDefaultShipping());
         sb.append("}");
 
         return sb.toString();
@@ -539,7 +678,7 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(34);
+        StringBundler sb = new StringBundler(46);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingShippingMethod");
@@ -582,8 +721,24 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         sb.append(getName());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>methodName</column-name><column-value><![CDATA[");
-        sb.append(getMethodName());
+            "<column><column-name>description</column-name><column-value><![CDATA[");
+        sb.append(getDescription());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>freeQuantity</column-name><column-value><![CDATA[");
+        sb.append(getFreeQuantity());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>freeTotal</column-name><column-value><![CDATA[");
+        sb.append(getFreeTotal());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>weight</column-name><column-value><![CDATA[");
+        sb.append(getWeight());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>defaultShipping</column-name><column-value><![CDATA[");
+        sb.append(getDefaultShipping());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

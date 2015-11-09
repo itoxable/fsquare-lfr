@@ -116,7 +116,11 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="price" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="methodName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="freeQuantity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="freeTotal" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="weight" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="defaultShipping" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.fsquare.shopping.model.impl.ShoppingStoreImpl" table="FsquareShopping_ShoppingStore">
 		<cache usage="read-write" />

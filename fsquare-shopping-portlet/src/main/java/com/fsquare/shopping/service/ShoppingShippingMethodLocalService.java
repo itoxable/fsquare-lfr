@@ -240,4 +240,18 @@ public interface ShoppingShippingMethodLocalService extends BaseLocalService,
     public java.lang.Object invokeMethod(java.lang.String name,
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.lang.Long getShippingPrice(
+        com.fsquare.shopping.model.ShoppingShippingMethod shoppingShippingMethod,
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItems,
+        long total);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public com.fsquare.shopping.model.ShoppingShippingMethod fetchDefaultShipping()
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupId(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -151,4 +151,32 @@
 		</security-role-ref>
 	</portlet>
 	
+	<portlet>
+		<portlet-name>shopping-shipping-management</portlet-name>
+		<display-name>Shopping shipping management</display-name>
+		<portlet-class>com.fsquare.shopping.portlet.shoppingshippingmanagement.ShippingManagementPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/shopping-shipping-management/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Shopping shipping management</title>
+			<short-title>shipping</short-title>
+			<keywords>Shopping shipping management</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
 </portlet-app>

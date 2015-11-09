@@ -98,7 +98,11 @@ create table FsquareShopping_ShoppingShippingMethod (
 	modifiedDate DATE null,
 	price DOUBLE,
 	name VARCHAR(75) null,
-	methodName VARCHAR(75) null
+	description VARCHAR(75) null,
+	freeQuantity LONG,
+	freeTotal DOUBLE,
+	weight DOUBLE,
+	defaultShipping BOOLEAN
 );
 
 create table FsquareShopping_ShoppingStore (

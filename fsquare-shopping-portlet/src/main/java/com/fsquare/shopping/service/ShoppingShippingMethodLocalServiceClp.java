@@ -45,6 +45,12 @@ public class ShoppingShippingMethodLocalServiceClp
     private String[] _methodParameterTypes16;
     private String _methodName17;
     private String[] _methodParameterTypes17;
+    private String _methodName19;
+    private String[] _methodParameterTypes19;
+    private String _methodName20;
+    private String[] _methodParameterTypes20;
+    private String _methodName21;
+    private String[] _methodParameterTypes21;
 
     public ShoppingShippingMethodLocalServiceClp(
         InvokableLocalService invokableLocalService) {
@@ -139,6 +145,21 @@ public class ShoppingShippingMethodLocalServiceClp
         _methodName17 = "setBeanIdentifier";
 
         _methodParameterTypes17 = new String[] { "java.lang.String" };
+
+        _methodName19 = "getShippingPrice";
+
+        _methodParameterTypes19 = new String[] {
+                "com.fsquare.shopping.model.ShoppingShippingMethod",
+                "java.util.Collection", "long"
+            };
+
+        _methodName20 = "fetchDefaultShipping";
+
+        _methodParameterTypes20 = new String[] {  };
+
+        _methodName21 = "findByGroupId";
+
+        _methodParameterTypes21 = new String[] { "long" };
     }
 
     @Override
@@ -659,5 +680,89 @@ public class ShoppingShippingMethodLocalServiceClp
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public java.lang.Long getShippingPrice(
+        com.fsquare.shopping.model.ShoppingShippingMethod shoppingShippingMethod,
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItems,
+        long total) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName19,
+                    _methodParameterTypes19,
+                    new Object[] {
+                        ClpSerializer.translateInput(shoppingShippingMethod),
+                        
+                    ClpSerializer.translateInput(shoppingOrderItems),
+                        
+                    total
+                    });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.lang.Long) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public com.fsquare.shopping.model.ShoppingShippingMethod fetchDefaultShipping()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName20,
+                    _methodParameterTypes20, new Object[] {  });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (com.fsquare.shopping.model.ShoppingShippingMethod) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupId(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName21,
+                    _methodParameterTypes21, new Object[] { groupId });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod>) ClpSerializer.translateOutput(returnObj);
     }
 }

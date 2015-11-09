@@ -124,24 +124,27 @@ public class CartViewPortlet extends MVCPortlet {
         boolean success = false;
 		String couponCode = ParamUtil.getString(resourceRequest, "couponCode");
 		ShoppingCoupon shoppingCoupon = ShoppingCouponLocalServiceUtil.fetchByCode(couponCode);
-		session.setAttribute(ShoppingPortletUtil.SESSION_CART_COUPON_CODE, shoppingCoupon);
+		if(shoppingCoupon != null){
+			session.setAttribute(ShoppingPortletUtil.SESSION_CART_COUPON_CODE, shoppingCoupon);
+		        
+	        Map<String,ShoppingOrderItem> shoppingOrderItemMap = (Map<String,ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
+	        if(shoppingOrderItemMap == null){
+	        	shoppingOrderItemMap = new HashMap<String,ShoppingOrderItem>();
+	        }
+	
+	        double total = 0;
+	        for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet()){
+	        	ShoppingOrderItem orderItem = entry.getValue();
+	        	total = total + orderItem.getQuantity() * orderItem.getPrice();
+	        }
 	        
-        Map<String,ShoppingOrderItem> shoppingOrderItemMap = (Map<String,ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
-        if(shoppingOrderItemMap == null){
-        	shoppingOrderItemMap = new HashMap<String,ShoppingOrderItem>();
-        }
-
-        double total = 0;
-        for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet()){
-        	ShoppingOrderItem orderItem = entry.getValue();
-        	total = total + orderItem.getQuantity() * orderItem.getPrice();
-        }
-        
-        total = ShoppingPortletUtil.applyCoupon(shoppingCoupon, total);
-        
-        jsonObject.put("total", total);
-        success = true;
-        
+	        total = ShoppingPortletUtil.applyCoupon(shoppingCoupon, total);
+	        
+	        jsonObject.put("total", total);
+	        success = true;
+		}else{
+			
+		}
 		jsonObject.put("success", success);
 		writer.print(jsonObject.toString());
         writer.flush();

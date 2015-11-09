@@ -71,7 +71,23 @@
 		
 		<column name="price" type="double" />
 		<column name="name" type="String" />
-		<column name="methodName" type="String" />
+<!-- 		<column name="methodName" type="String" /> -->
+		<column name="description" type="String" />
+		<column name="freeQuantity" type="long" />
+		<column name="freeTotal" type="double" />
+		<column name="weight" type="double" />
+		<column name="defaultShipping" type="boolean" />
+		
+		<finder name="defaultShipping" return-type="ShoppingShippingMethod">
+			<finder-column name="defaultShipping" />
+		</finder>
+		
+<!-- 		<finder name="GroupId" return-type="ShoppingStore"> -->
+<!-- 			<finder-column name="groupId" /> -->
+<!-- 		</finder> -->
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		
 	</entity>
 	<entity name="ShoppingOrder" local-service="true" remote-service="true">

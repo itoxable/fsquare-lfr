@@ -8,5 +8,7 @@
 		<portlet id="cartview" />
 		<portlet id="shoppingstore" />
 		<portlet id="shopping-coupon-management" />
+		<portlet id="shopping-shipping-management" />
+		
 	</category>
 </display>

@@ -61,9 +61,13 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
             { "modifiedDate", Types.TIMESTAMP },
             { "price", Types.DOUBLE },
             { "name", Types.VARCHAR },
-            { "methodName", Types.VARCHAR }
+            { "description", Types.VARCHAR },
+            { "freeQuantity", Types.BIGINT },
+            { "freeTotal", Types.DOUBLE },
+            { "weight", Types.DOUBLE },
+            { "defaultShipping", Types.BOOLEAN }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingShippingMethod (shippingMethodId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,price DOUBLE,name VARCHAR(75) null,methodName VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingShippingMethod (shippingMethodId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,price DOUBLE,name VARCHAR(75) null,description VARCHAR(75) null,freeQuantity LONG,freeTotal DOUBLE,weight DOUBLE,defaultShipping BOOLEAN)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingShippingMethod";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingShippingMethod.shippingMethodId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingShippingMethod.shippingMethodId ASC";
@@ -76,7 +80,12 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
     public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
                 "value.object.finder.cache.enabled.com.fsquare.shopping.model.ShoppingShippingMethod"),
             true);
-    public static final boolean COLUMN_BITMASK_ENABLED = false;
+    public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+                "value.object.column.bitmask.enabled.com.fsquare.shopping.model.ShoppingShippingMethod"),
+            true);
+    public static long DEFAULTSHIPPING_COLUMN_BITMASK = 1L;
+    public static long GROUPID_COLUMN_BITMASK = 2L;
+    public static long SHIPPINGMETHODID_COLUMN_BITMASK = 4L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.com.fsquare.shopping.model.ShoppingShippingMethod"));
     private static ClassLoader _classLoader = ShoppingShippingMethod.class.getClassLoader();
@@ -85,6 +94,8 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         };
     private long _shippingMethodId;
     private long _groupId;
+    private long _originalGroupId;
+    private boolean _setOriginalGroupId;
     private long _companyId;
     private long _userId;
     private String _userUuid;
@@ -93,7 +104,14 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
     private Date _modifiedDate;
     private double _price;
     private String _name;
-    private String _methodName;
+    private String _description;
+    private long _freeQuantity;
+    private double _freeTotal;
+    private double _weight;
+    private boolean _defaultShipping;
+    private boolean _originalDefaultShipping;
+    private boolean _setOriginalDefaultShipping;
+    private long _columnBitmask;
     private ShoppingShippingMethod _escapedModel;
 
     public ShoppingShippingMethodModelImpl() {
@@ -122,7 +140,11 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         model.setModifiedDate(soapModel.getModifiedDate());
         model.setPrice(soapModel.getPrice());
         model.setName(soapModel.getName());
-        model.setMethodName(soapModel.getMethodName());
+        model.setDescription(soapModel.getDescription());
+        model.setFreeQuantity(soapModel.getFreeQuantity());
+        model.setFreeTotal(soapModel.getFreeTotal());
+        model.setWeight(soapModel.getWeight());
+        model.setDefaultShipping(soapModel.getDefaultShipping());
 
         return model;
     }
@@ -191,7 +213,11 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("price", getPrice());
         attributes.put("name", getName());
-        attributes.put("methodName", getMethodName());
+        attributes.put("description", getDescription());
+        attributes.put("freeQuantity", getFreeQuantity());
+        attributes.put("freeTotal", getFreeTotal());
+        attributes.put("weight", getWeight());
+        attributes.put("defaultShipping", getDefaultShipping());
 
         return attributes;
     }
@@ -252,10 +278,34 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
             setName(name);
         }
 
-        String methodName = (String) attributes.get("methodName");
+        String description = (String) attributes.get("description");
 
-        if (methodName != null) {
-            setMethodName(methodName);
+        if (description != null) {
+            setDescription(description);
+        }
+
+        Long freeQuantity = (Long) attributes.get("freeQuantity");
+
+        if (freeQuantity != null) {
+            setFreeQuantity(freeQuantity);
+        }
+
+        Double freeTotal = (Double) attributes.get("freeTotal");
+
+        if (freeTotal != null) {
+            setFreeTotal(freeTotal);
+        }
+
+        Double weight = (Double) attributes.get("weight");
+
+        if (weight != null) {
+            setWeight(weight);
+        }
+
+        Boolean defaultShipping = (Boolean) attributes.get("defaultShipping");
+
+        if (defaultShipping != null) {
+            setDefaultShipping(defaultShipping);
         }
     }
 
@@ -278,7 +328,19 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
     @Override
     public void setGroupId(long groupId) {
+        _columnBitmask |= GROUPID_COLUMN_BITMASK;
+
+        if (!_setOriginalGroupId) {
+            _setOriginalGroupId = true;
+
+            _originalGroupId = _groupId;
+        }
+
         _groupId = groupId;
+    }
+
+    public long getOriginalGroupId() {
+        return _originalGroupId;
     }
 
     @JSON
@@ -378,17 +440,82 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
     @JSON
     @Override
-    public String getMethodName() {
-        if (_methodName == null) {
+    public String getDescription() {
+        if (_description == null) {
             return StringPool.BLANK;
         } else {
-            return _methodName;
+            return _description;
         }
     }
 
     @Override
-    public void setMethodName(String methodName) {
-        _methodName = methodName;
+    public void setDescription(String description) {
+        _description = description;
+    }
+
+    @JSON
+    @Override
+    public long getFreeQuantity() {
+        return _freeQuantity;
+    }
+
+    @Override
+    public void setFreeQuantity(long freeQuantity) {
+        _freeQuantity = freeQuantity;
+    }
+
+    @JSON
+    @Override
+    public double getFreeTotal() {
+        return _freeTotal;
+    }
+
+    @Override
+    public void setFreeTotal(double freeTotal) {
+        _freeTotal = freeTotal;
+    }
+
+    @JSON
+    @Override
+    public double getWeight() {
+        return _weight;
+    }
+
+    @Override
+    public void setWeight(double weight) {
+        _weight = weight;
+    }
+
+    @JSON
+    @Override
+    public boolean getDefaultShipping() {
+        return _defaultShipping;
+    }
+
+    @Override
+    public boolean isDefaultShipping() {
+        return _defaultShipping;
+    }
+
+    @Override
+    public void setDefaultShipping(boolean defaultShipping) {
+        _columnBitmask |= DEFAULTSHIPPING_COLUMN_BITMASK;
+
+        if (!_setOriginalDefaultShipping) {
+            _setOriginalDefaultShipping = true;
+
+            _originalDefaultShipping = _defaultShipping;
+        }
+
+        _defaultShipping = defaultShipping;
+    }
+
+    public boolean getOriginalDefaultShipping() {
+        return _originalDefaultShipping;
+    }
+
+    public long getColumnBitmask() {
+        return _columnBitmask;
     }
 
     @Override
@@ -427,7 +554,11 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         shoppingShippingMethodImpl.setModifiedDate(getModifiedDate());
         shoppingShippingMethodImpl.setPrice(getPrice());
         shoppingShippingMethodImpl.setName(getName());
-        shoppingShippingMethodImpl.setMethodName(getMethodName());
+        shoppingShippingMethodImpl.setDescription(getDescription());
+        shoppingShippingMethodImpl.setFreeQuantity(getFreeQuantity());
+        shoppingShippingMethodImpl.setFreeTotal(getFreeTotal());
+        shoppingShippingMethodImpl.setWeight(getWeight());
+        shoppingShippingMethodImpl.setDefaultShipping(getDefaultShipping());
 
         shoppingShippingMethodImpl.resetOriginalValues();
 
@@ -475,6 +606,17 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
     @Override
     public void resetOriginalValues() {
+        ShoppingShippingMethodModelImpl shoppingShippingMethodModelImpl = this;
+
+        shoppingShippingMethodModelImpl._originalGroupId = shoppingShippingMethodModelImpl._groupId;
+
+        shoppingShippingMethodModelImpl._setOriginalGroupId = false;
+
+        shoppingShippingMethodModelImpl._originalDefaultShipping = shoppingShippingMethodModelImpl._defaultShipping;
+
+        shoppingShippingMethodModelImpl._setOriginalDefaultShipping = false;
+
+        shoppingShippingMethodModelImpl._columnBitmask = 0;
     }
 
     @Override
@@ -523,20 +665,28 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
             shoppingShippingMethodCacheModel.name = null;
         }
 
-        shoppingShippingMethodCacheModel.methodName = getMethodName();
+        shoppingShippingMethodCacheModel.description = getDescription();
 
-        String methodName = shoppingShippingMethodCacheModel.methodName;
+        String description = shoppingShippingMethodCacheModel.description;
 
-        if ((methodName != null) && (methodName.length() == 0)) {
-            shoppingShippingMethodCacheModel.methodName = null;
+        if ((description != null) && (description.length() == 0)) {
+            shoppingShippingMethodCacheModel.description = null;
         }
+
+        shoppingShippingMethodCacheModel.freeQuantity = getFreeQuantity();
+
+        shoppingShippingMethodCacheModel.freeTotal = getFreeTotal();
+
+        shoppingShippingMethodCacheModel.weight = getWeight();
+
+        shoppingShippingMethodCacheModel.defaultShipping = getDefaultShipping();
 
         return shoppingShippingMethodCacheModel;
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(21);
+        StringBundler sb = new StringBundler(29);
 
         sb.append("{shippingMethodId=");
         sb.append(getShippingMethodId());
@@ -556,8 +706,16 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         sb.append(getPrice());
         sb.append(", name=");
         sb.append(getName());
-        sb.append(", methodName=");
-        sb.append(getMethodName());
+        sb.append(", description=");
+        sb.append(getDescription());
+        sb.append(", freeQuantity=");
+        sb.append(getFreeQuantity());
+        sb.append(", freeTotal=");
+        sb.append(getFreeTotal());
+        sb.append(", weight=");
+        sb.append(getWeight());
+        sb.append(", defaultShipping=");
+        sb.append(getDefaultShipping());
         sb.append("}");
 
         return sb.toString();
@@ -565,7 +723,7 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(34);
+        StringBundler sb = new StringBundler(46);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingShippingMethod");
@@ -608,8 +766,24 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         sb.append(getName());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>methodName</column-name><column-value><![CDATA[");
-        sb.append(getMethodName());
+            "<column><column-name>description</column-name><column-value><![CDATA[");
+        sb.append(getDescription());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>freeQuantity</column-name><column-value><![CDATA[");
+        sb.append(getFreeQuantity());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>freeTotal</column-name><column-value><![CDATA[");
+        sb.append(getFreeTotal());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>weight</column-name><column-value><![CDATA[");
+        sb.append(getWeight());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>defaultShipping</column-name><column-value><![CDATA[");
+        sb.append(getDefaultShipping());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

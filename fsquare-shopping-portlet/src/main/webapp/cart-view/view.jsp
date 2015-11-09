@@ -15,7 +15,8 @@
 --%>
 
 
-<%@page import="com.fsquare.shopping.model.ShoppingCoupon"%>
+<%@page import="com.fsquare.shopping.service.ShoppingShippingMethodLocalServiceUtil"%>
+<%@page import="com.fsquare.shopping.model.ShoppingShippingMethod"%>
 <%@page import="javax.portlet.ActionRequest"%>
 <%@page import="com.liferay.portlet.journal.model.JournalArticle"%>
 <%@page import="com.liferay.portlet.journal.service.JournalArticleServiceUtil"%>
@@ -49,7 +50,11 @@ if(shoppingCouponObj != null){
 	shoppingCoupon = (ShoppingCoupon)shoppingCouponObj;
 	total = ShoppingPortletUtil.applyCoupon(shoppingCoupon, total);
 }
+
+ShoppingShippingMethod selectedShoppingShippingMethod = ShoppingShippingMethodLocalServiceUtil.createShoppingShippingMethod(0L);
+List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethodLocalServiceUtil.getShoppingShippingMethods(-1, -1);
 %>
+
 
 	
 <div class="cart-table-wrapper">
@@ -122,6 +127,18 @@ if(shoppingCouponObj != null){
 				    	<%
 				    	}
 					  	%>
+					  	<tr class="shipping-row">
+					  		<td colspan="5"  align="right">
+					  			<aui:select name="shoppingShippingMethod">
+					  				<% for(ShoppingShippingMethod shoppingShippingMethod: shoppingShippingMethodList){ %>
+									<aui:option selected="<%= selectedShoppingShippingMethod.getShippingMethodId() == shoppingShippingMethod.getShippingMethodId() %>" value="<%= shoppingShippingMethod.getShippingMethodId() %>"><%=shoppingShippingMethod.getName() %></aui:option>
+									<% } %>
+								</aui:select>
+					  		</td>
+					  		<td>
+					  			<%= ShoppingShippingMethodLocalServiceUtil.getShippingPrice(selectedShoppingShippingMethod, shoppingOrderItemMap.entrySet(), total)  %>
+					  		</td>
+					  	</tr>
 				    	<tr class="coupon-row">
 							<td colspan="5" align="right">
 								Coupon code (optional) &nbsp;

@@ -23,7 +23,11 @@ public class ShoppingShippingMethodSoap implements Serializable {
     private Date _modifiedDate;
     private double _price;
     private String _name;
-    private String _methodName;
+    private String _description;
+    private long _freeQuantity;
+    private double _freeTotal;
+    private double _weight;
+    private boolean _defaultShipping;
 
     public ShoppingShippingMethodSoap() {
     }
@@ -41,7 +45,11 @@ public class ShoppingShippingMethodSoap implements Serializable {
         soapModel.setModifiedDate(model.getModifiedDate());
         soapModel.setPrice(model.getPrice());
         soapModel.setName(model.getName());
-        soapModel.setMethodName(model.getMethodName());
+        soapModel.setDescription(model.getDescription());
+        soapModel.setFreeQuantity(model.getFreeQuantity());
+        soapModel.setFreeTotal(model.getFreeTotal());
+        soapModel.setWeight(model.getWeight());
+        soapModel.setDefaultShipping(model.getDefaultShipping());
 
         return soapModel;
     }
@@ -165,11 +173,47 @@ public class ShoppingShippingMethodSoap implements Serializable {
         _name = name;
     }
 
-    public String getMethodName() {
-        return _methodName;
+    public String getDescription() {
+        return _description;
     }
 
-    public void setMethodName(String methodName) {
-        _methodName = methodName;
+    public void setDescription(String description) {
+        _description = description;
+    }
+
+    public long getFreeQuantity() {
+        return _freeQuantity;
+    }
+
+    public void setFreeQuantity(long freeQuantity) {
+        _freeQuantity = freeQuantity;
+    }
+
+    public double getFreeTotal() {
+        return _freeTotal;
+    }
+
+    public void setFreeTotal(double freeTotal) {
+        _freeTotal = freeTotal;
+    }
+
+    public double getWeight() {
+        return _weight;
+    }
+
+    public void setWeight(double weight) {
+        _weight = weight;
+    }
+
+    public boolean getDefaultShipping() {
+        return _defaultShipping;
+    }
+
+    public boolean isDefaultShipping() {
+        return _defaultShipping;
+    }
+
+    public void setDefaultShipping(boolean defaultShipping) {
+        _defaultShipping = defaultShipping;
     }
 }

@@ -31,11 +31,15 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
     public long modifiedDate;
     public double price;
     public String name;
-    public String methodName;
+    public String description;
+    public long freeQuantity;
+    public double freeTotal;
+    public double weight;
+    public boolean defaultShipping;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(21);
+        StringBundler sb = new StringBundler(29);
 
         sb.append("{shippingMethodId=");
         sb.append(shippingMethodId);
@@ -55,8 +59,16 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
         sb.append(price);
         sb.append(", name=");
         sb.append(name);
-        sb.append(", methodName=");
-        sb.append(methodName);
+        sb.append(", description=");
+        sb.append(description);
+        sb.append(", freeQuantity=");
+        sb.append(freeQuantity);
+        sb.append(", freeTotal=");
+        sb.append(freeTotal);
+        sb.append(", weight=");
+        sb.append(weight);
+        sb.append(", defaultShipping=");
+        sb.append(defaultShipping);
         sb.append("}");
 
         return sb.toString();
@@ -97,11 +109,16 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
             shoppingShippingMethodImpl.setName(name);
         }
 
-        if (methodName == null) {
-            shoppingShippingMethodImpl.setMethodName(StringPool.BLANK);
+        if (description == null) {
+            shoppingShippingMethodImpl.setDescription(StringPool.BLANK);
         } else {
-            shoppingShippingMethodImpl.setMethodName(methodName);
+            shoppingShippingMethodImpl.setDescription(description);
         }
+
+        shoppingShippingMethodImpl.setFreeQuantity(freeQuantity);
+        shoppingShippingMethodImpl.setFreeTotal(freeTotal);
+        shoppingShippingMethodImpl.setWeight(weight);
+        shoppingShippingMethodImpl.setDefaultShipping(defaultShipping);
 
         shoppingShippingMethodImpl.resetOriginalValues();
 
@@ -119,7 +136,11 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
         modifiedDate = objectInput.readLong();
         price = objectInput.readDouble();
         name = objectInput.readUTF();
-        methodName = objectInput.readUTF();
+        description = objectInput.readUTF();
+        freeQuantity = objectInput.readLong();
+        freeTotal = objectInput.readDouble();
+        weight = objectInput.readDouble();
+        defaultShipping = objectInput.readBoolean();
     }
 
     @Override
@@ -146,10 +167,15 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
             objectOutput.writeUTF(name);
         }
 
-        if (methodName == null) {
+        if (description == null) {
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
-            objectOutput.writeUTF(methodName);
+            objectOutput.writeUTF(description);
         }
+
+        objectOutput.writeLong(freeQuantity);
+        objectOutput.writeDouble(freeTotal);
+        objectOutput.writeDouble(weight);
+        objectOutput.writeBoolean(defaultShipping);
     }
 }

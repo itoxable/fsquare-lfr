@@ -263,6 +263,26 @@ public class ShoppingShippingMethodLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static java.lang.Long getShippingPrice(
+        com.fsquare.shopping.model.ShoppingShippingMethod shoppingShippingMethod,
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItems,
+        long total) {
+        return getService()
+                   .getShippingPrice(shoppingShippingMethod,
+            shoppingOrderItems, total);
+    }
+
+    public static com.fsquare.shopping.model.ShoppingShippingMethod fetchDefaultShipping()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().fetchDefaultShipping();
+    }
+
+    public static java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupId(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByGroupId(groupId);
+    }
+
     public static void clearService() {
         _service = null;
     }

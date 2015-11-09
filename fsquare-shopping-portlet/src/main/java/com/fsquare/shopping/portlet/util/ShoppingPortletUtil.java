@@ -35,7 +35,11 @@ public class ShoppingPortletUtil {
 	public static final String CMD_APPLY_COUPON = "applyCoupon";
 	public static final String CMD_OPEN_COUPON_FORM = "openCouponForm";
 	public static final String CMD_ACTIVATE_COUPON = "activateForm";
-
+	
+	public static final String CMD_SAVE_SHIPPING_METHOD = "saveShippingMethod";
+	public static final String CMD_DELETE_SHIPPING_METHOD = "deleteShippingMethod";
+	public static final String CMD_OPEN_SHIPPING_METHOD = "openShippingMethod";
+	public static final String CMD_SET_DEFAULT_SHIPPING_METHOD = "setDefault_shippingMethod";
 	
 	public static final String PRODUCT_MAIN_IMAGE = "Main_Image";
 	public static final String PRODUCT_TEXT = "Text";
@@ -56,6 +60,8 @@ public class ShoppingPortletUtil {
 	public static final String DISCOUNT_TYPE_PERCENTAGE = "percentage";
 	public static final String DISCOUNT_TYPE_VALUE = "value";
 	public static final String ATTR_COUPON = "coupon";
+	public static final String ATTR_SHIPPING = "shipping";
+	
 	
 	public static final String DATE_FORMAT = "dd/mm/yyyy";
 	

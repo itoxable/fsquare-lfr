@@ -101,6 +101,236 @@ public class ShoppingShippingMethodUtil {
     }
 
     /**
+    * Returns the shopping shipping method where defaultShipping = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingShippingMethodException} if it could not be found.
+    *
+    * @param defaultShipping the default shipping
+    * @return the matching shopping shipping method
+    * @throws com.fsquare.shopping.NoSuchShoppingShippingMethodException if a matching shopping shipping method could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod findBydefaultShipping(
+        boolean defaultShipping)
+        throws com.fsquare.shopping.NoSuchShoppingShippingMethodException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().findBydefaultShipping(defaultShipping);
+    }
+
+    /**
+    * Returns the shopping shipping method where defaultShipping = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+    *
+    * @param defaultShipping the default shipping
+    * @return the matching shopping shipping method, or <code>null</code> if a matching shopping shipping method could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod fetchBydefaultShipping(
+        boolean defaultShipping)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().fetchBydefaultShipping(defaultShipping);
+    }
+
+    /**
+    * Returns the shopping shipping method where defaultShipping = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+    *
+    * @param defaultShipping the default shipping
+    * @param retrieveFromCache whether to use the finder cache
+    * @return the matching shopping shipping method, or <code>null</code> if a matching shopping shipping method could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod fetchBydefaultShipping(
+        boolean defaultShipping, boolean retrieveFromCache)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .fetchBydefaultShipping(defaultShipping, retrieveFromCache);
+    }
+
+    /**
+    * Removes the shopping shipping method where defaultShipping = &#63; from the database.
+    *
+    * @param defaultShipping the default shipping
+    * @return the shopping shipping method that was removed
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod removeBydefaultShipping(
+        boolean defaultShipping)
+        throws com.fsquare.shopping.NoSuchShoppingShippingMethodException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().removeBydefaultShipping(defaultShipping);
+    }
+
+    /**
+    * Returns the number of shopping shipping methods where defaultShipping = &#63;.
+    *
+    * @param defaultShipping the default shipping
+    * @return the number of matching shopping shipping methods
+    * @throws SystemException if a system exception occurred
+    */
+    public static int countBydefaultShipping(boolean defaultShipping)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().countBydefaultShipping(defaultShipping);
+    }
+
+    /**
+    * Returns all the shopping shipping methods where groupId = &#63;.
+    *
+    * @param groupId the group ID
+    * @return the matching shopping shipping methods
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupId(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().findByGroupId(groupId);
+    }
+
+    /**
+    * Returns a range of all the shopping shipping methods where groupId = &#63;.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param groupId the group ID
+    * @param start the lower bound of the range of shopping shipping methods
+    * @param end the upper bound of the range of shopping shipping methods (not inclusive)
+    * @return the range of matching shopping shipping methods
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupId(
+        long groupId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().findByGroupId(groupId, start, end);
+    }
+
+    /**
+    * Returns an ordered range of all the shopping shipping methods where groupId = &#63;.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param groupId the group ID
+    * @param start the lower bound of the range of shopping shipping methods
+    * @param end the upper bound of the range of shopping shipping methods (not inclusive)
+    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+    * @return the ordered range of matching shopping shipping methods
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupId(
+        long groupId, int start, int end,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .findByGroupId(groupId, start, end, orderByComparator);
+    }
+
+    /**
+    * Returns the first shopping shipping method in the ordered set where groupId = &#63;.
+    *
+    * @param groupId the group ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the first matching shopping shipping method
+    * @throws com.fsquare.shopping.NoSuchShoppingShippingMethodException if a matching shopping shipping method could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod findByGroupId_First(
+        long groupId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.fsquare.shopping.NoSuchShoppingShippingMethodException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().findByGroupId_First(groupId, orderByComparator);
+    }
+
+    /**
+    * Returns the first shopping shipping method in the ordered set where groupId = &#63;.
+    *
+    * @param groupId the group ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the first matching shopping shipping method, or <code>null</code> if a matching shopping shipping method could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod fetchByGroupId_First(
+        long groupId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().fetchByGroupId_First(groupId, orderByComparator);
+    }
+
+    /**
+    * Returns the last shopping shipping method in the ordered set where groupId = &#63;.
+    *
+    * @param groupId the group ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the last matching shopping shipping method
+    * @throws com.fsquare.shopping.NoSuchShoppingShippingMethodException if a matching shopping shipping method could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod findByGroupId_Last(
+        long groupId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.fsquare.shopping.NoSuchShoppingShippingMethodException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().findByGroupId_Last(groupId, orderByComparator);
+    }
+
+    /**
+    * Returns the last shopping shipping method in the ordered set where groupId = &#63;.
+    *
+    * @param groupId the group ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the last matching shopping shipping method, or <code>null</code> if a matching shopping shipping method could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod fetchByGroupId_Last(
+        long groupId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
+    }
+
+    /**
+    * Returns the shopping shipping methods before and after the current shopping shipping method in the ordered set where groupId = &#63;.
+    *
+    * @param shippingMethodId the primary key of the current shopping shipping method
+    * @param groupId the group ID
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the previous, current, and next shopping shipping method
+    * @throws com.fsquare.shopping.NoSuchShoppingShippingMethodException if a shopping shipping method with the primary key could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod[] findByGroupId_PrevAndNext(
+        long shippingMethodId, long groupId,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.fsquare.shopping.NoSuchShoppingShippingMethodException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .findByGroupId_PrevAndNext(shippingMethodId, groupId,
+            orderByComparator);
+    }
+
+    /**
+    * Removes all the shopping shipping methods where groupId = &#63; from the database.
+    *
+    * @param groupId the group ID
+    * @throws SystemException if a system exception occurred
+    */
+    public static void removeByGroupId(long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        getPersistence().removeByGroupId(groupId);
+    }
+
+    /**
+    * Returns the number of shopping shipping methods where groupId = &#63;.
+    *
+    * @param groupId the group ID
+    * @return the number of matching shopping shipping methods
+    * @throws SystemException if a system exception occurred
+    */
+    public static int countByGroupId(long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().countByGroupId(groupId);
+    }
+
+    /**
     * Caches the shopping shipping method in the entity cache if it is enabled.
     *
     * @param shoppingShippingMethod the shopping shipping method

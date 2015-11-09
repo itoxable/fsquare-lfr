@@ -69,6 +69,20 @@
 		<footer-portlet-javascript>/shopping-coupon-management/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>shopping-coupon-management</css-class-wrapper>
 	</portlet>
+	
+	<portlet>
+		<portlet-name>shopping-shipping-management</portlet-name>
+		<icon>/shopping-shipping-management/icon.png</icon>
+		<struts-path>shopping-shipping-management</struts-path>
+		<configuration-action-class>com.fsquare.shopping.portlet.shoppingshippingmanagement.action.ConfigurationActionImpl</configuration-action-class>
+<!-- 		<control-panel-entry-category>site_administration.shopping</control-panel-entry-category> -->
+<!--     	<control-panel-entry-weight>3.0</control-panel-entry-weight> -->
+		<preferences-company-wide>true</preferences-company-wide>
+		<instanceable>false</instanceable>		
+		<header-portlet-css>/shopping-shipping-management/css/main.css</header-portlet-css> 
+		<footer-portlet-javascript>/shopping-shipping-management/js/main.js</footer-portlet-javascript>
+		<css-class-wrapper>shopping-shipping-management</css-class-wrapper>
+	</portlet>
 
 
 	

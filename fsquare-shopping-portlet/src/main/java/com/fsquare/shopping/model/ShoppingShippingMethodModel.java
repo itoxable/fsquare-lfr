@@ -206,19 +206,82 @@ public interface ShoppingShippingMethodModel extends BaseModel<ShoppingShippingM
     public void setName(String name);
 
     /**
-     * Returns the method name of this shopping shipping method.
+     * Returns the description of this shopping shipping method.
      *
-     * @return the method name of this shopping shipping method
+     * @return the description of this shopping shipping method
      */
     @AutoEscape
-    public String getMethodName();
+    public String getDescription();
 
     /**
-     * Sets the method name of this shopping shipping method.
+     * Sets the description of this shopping shipping method.
      *
-     * @param methodName the method name of this shopping shipping method
+     * @param description the description of this shopping shipping method
      */
-    public void setMethodName(String methodName);
+    public void setDescription(String description);
+
+    /**
+     * Returns the free quantity of this shopping shipping method.
+     *
+     * @return the free quantity of this shopping shipping method
+     */
+    public long getFreeQuantity();
+
+    /**
+     * Sets the free quantity of this shopping shipping method.
+     *
+     * @param freeQuantity the free quantity of this shopping shipping method
+     */
+    public void setFreeQuantity(long freeQuantity);
+
+    /**
+     * Returns the free total of this shopping shipping method.
+     *
+     * @return the free total of this shopping shipping method
+     */
+    public double getFreeTotal();
+
+    /**
+     * Sets the free total of this shopping shipping method.
+     *
+     * @param freeTotal the free total of this shopping shipping method
+     */
+    public void setFreeTotal(double freeTotal);
+
+    /**
+     * Returns the weight of this shopping shipping method.
+     *
+     * @return the weight of this shopping shipping method
+     */
+    public double getWeight();
+
+    /**
+     * Sets the weight of this shopping shipping method.
+     *
+     * @param weight the weight of this shopping shipping method
+     */
+    public void setWeight(double weight);
+
+    /**
+     * Returns the default shipping of this shopping shipping method.
+     *
+     * @return the default shipping of this shopping shipping method
+     */
+    public boolean getDefaultShipping();
+
+    /**
+     * Returns <code>true</code> if this shopping shipping method is default shipping.
+     *
+     * @return <code>true</code> if this shopping shipping method is default shipping; <code>false</code> otherwise
+     */
+    public boolean isDefaultShipping();
+
+    /**
+     * Sets whether this shopping shipping method is default shipping.
+     *
+     * @param defaultShipping the default shipping of this shopping shipping method
+     */
+    public void setDefaultShipping(boolean defaultShipping);
 
     @Override
     public boolean isNew();
