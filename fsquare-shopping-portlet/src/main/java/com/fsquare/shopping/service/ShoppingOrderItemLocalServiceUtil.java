@@ -263,6 +263,12 @@ public class ShoppingOrderItemLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrderItem> findByShoppingOrderId(
+        long shoppingOrderId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByShoppingOrderId(shoppingOrderId);
+    }
+
     public static void clearService() {
         _service = null;
     }

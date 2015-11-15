@@ -276,6 +276,13 @@ public class ShoppingOrderLocalServiceWrapper
             arguments);
     }
 
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByGroupId(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingOrderLocalService.findByGroupId(groupId);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

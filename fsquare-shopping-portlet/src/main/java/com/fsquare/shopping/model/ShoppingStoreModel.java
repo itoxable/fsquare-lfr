@@ -220,6 +220,138 @@ public interface ShoppingStoreModel extends AuditedModel,
      */
     public void setCurrency(String currency);
 
+    /**
+     * Returns the country of this shopping store.
+     *
+     * @return the country of this shopping store
+     */
+    @AutoEscape
+    public String getCountry();
+
+    /**
+     * Sets the country of this shopping store.
+     *
+     * @param country the country of this shopping store
+     */
+    public void setCountry(String country);
+
+    /**
+     * Returns the integrate with stripe of this shopping store.
+     *
+     * @return the integrate with stripe of this shopping store
+     */
+    public boolean getIntegrateWithStripe();
+
+    /**
+     * Returns <code>true</code> if this shopping store is integrate with stripe.
+     *
+     * @return <code>true</code> if this shopping store is integrate with stripe; <code>false</code> otherwise
+     */
+    public boolean isIntegrateWithStripe();
+
+    /**
+     * Sets whether this shopping store is integrate with stripe.
+     *
+     * @param integrateWithStripe the integrate with stripe of this shopping store
+     */
+    public void setIntegrateWithStripe(boolean integrateWithStripe);
+
+    /**
+     * Returns the stripe test secret key of this shopping store.
+     *
+     * @return the stripe test secret key of this shopping store
+     */
+    @AutoEscape
+    public String getStripeTestSecretKey();
+
+    /**
+     * Sets the stripe test secret key of this shopping store.
+     *
+     * @param stripeTestSecretKey the stripe test secret key of this shopping store
+     */
+    public void setStripeTestSecretKey(String stripeTestSecretKey);
+
+    /**
+     * Returns the stripe test publishable key of this shopping store.
+     *
+     * @return the stripe test publishable key of this shopping store
+     */
+    @AutoEscape
+    public String getStripeTestPublishableKey();
+
+    /**
+     * Sets the stripe test publishable key of this shopping store.
+     *
+     * @param stripeTestPublishableKey the stripe test publishable key of this shopping store
+     */
+    public void setStripeTestPublishableKey(String stripeTestPublishableKey);
+
+    /**
+     * Returns the stripe testing of this shopping store.
+     *
+     * @return the stripe testing of this shopping store
+     */
+    public boolean getStripeTesting();
+
+    /**
+     * Returns <code>true</code> if this shopping store is stripe testing.
+     *
+     * @return <code>true</code> if this shopping store is stripe testing; <code>false</code> otherwise
+     */
+    public boolean isStripeTesting();
+
+    /**
+     * Sets whether this shopping store is stripe testing.
+     *
+     * @param stripeTesting the stripe testing of this shopping store
+     */
+    public void setStripeTesting(boolean stripeTesting);
+
+    /**
+     * Returns the stripe live secret key of this shopping store.
+     *
+     * @return the stripe live secret key of this shopping store
+     */
+    @AutoEscape
+    public String getStripeLiveSecretKey();
+
+    /**
+     * Sets the stripe live secret key of this shopping store.
+     *
+     * @param stripeLiveSecretKey the stripe live secret key of this shopping store
+     */
+    public void setStripeLiveSecretKey(String stripeLiveSecretKey);
+
+    /**
+     * Returns the stripe live publishable key of this shopping store.
+     *
+     * @return the stripe live publishable key of this shopping store
+     */
+    @AutoEscape
+    public String getStripeLivePublishableKey();
+
+    /**
+     * Sets the stripe live publishable key of this shopping store.
+     *
+     * @param stripeLivePublishableKey the stripe live publishable key of this shopping store
+     */
+    public void setStripeLivePublishableKey(String stripeLivePublishableKey);
+
+    /**
+     * Returns the stripe api version of this shopping store.
+     *
+     * @return the stripe api version of this shopping store
+     */
+    @AutoEscape
+    public String getStripeApiVersion();
+
+    /**
+     * Sets the stripe api version of this shopping store.
+     *
+     * @param stripeApiVersion the stripe api version of this shopping store
+     */
+    public void setStripeApiVersion(String stripeApiVersion);
+
     @Override
     public boolean isNew();
 

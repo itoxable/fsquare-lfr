@@ -41,6 +41,19 @@ public class ShoppingPortletUtil {
 	public static final String CMD_OPEN_SHIPPING_METHOD = "openShippingMethod";
 	public static final String CMD_SET_DEFAULT_SHIPPING_METHOD = "setDefault_shippingMethod";
 	
+	public static final String CMD_OPEN_SHIPPING_ADDRESS = "openShippingAddress";
+	public static final String CMD_OPEN_ORDER_ITEMS = "openOrderItems";
+	public static final String CMD_UPDATE_ORDER_STATUS = "updatOrderStatus";
+
+	public static final String CMD_OPEN_TEST_STRIPE_FORM = "openTestStripeForm";
+	public static final String CMD_TEST_STRIPE = "testStripe";
+
+	public static final String CMD_SAVE_CHECKOUT_SHIPPING_ADDRESS = "saveCheckoutShippingAddress";
+	public static final String CMD_SAVE_CHECKOUT_SHIPPING_METHOD = "saveCheckoutShippingMethod";
+	public static final String CMD_SAVE_CHECKOUT_PAYMENT = "saveCheckoutPayment";
+
+	
+	
 	public static final String PRODUCT_MAIN_IMAGE = "Main_Image";
 	public static final String PRODUCT_TEXT = "Text";
 	public static final String PRODUCT_PRICE = "Price";
@@ -55,12 +68,20 @@ public class ShoppingPortletUtil {
 	public static final String ORDER_STATUS_PAID = "paid";
 	public static final String ORDER_STATUS_FULFILLED = "fulfilled";
 	
+	public static final String ORDER_STATUS_SHIPPED = "order_status_shipped";
+	public static final String ORDER_STATUS_PENDING = "order_status_pending";
+	public static final String ORDER_STATUS_CANCELED = "order_status_canceled";
+	public static final String ORDER_STATUS_RETURNED = "order_status_returned";
+	public static final String ORDER_STATUS_WAITING_PAYMENT = "order_status_waiting_payment";
+	
 	public static final String ON_ADD_TO_CART_JUMP_TO_CART = "jumpToCart";
 	
 	public static final String DISCOUNT_TYPE_PERCENTAGE = "percentage";
 	public static final String DISCOUNT_TYPE_VALUE = "value";
 	public static final String ATTR_COUPON = "coupon";
 	public static final String ATTR_SHIPPING = "shipping";
+	public static final String ATTR_ORDER = "order";
+	public static final String ATTR_ORDER_ITEMS = "order_items";
 	
 	
 	public static final String DATE_FORMAT = "dd/mm/yyyy";
@@ -68,6 +89,8 @@ public class ShoppingPortletUtil {
 	public static final String COUNPON_STATE_RUNNING = "coupon-running";
 	public static final String COUNPON_STATE_NOT_STARTED = "coupon-not-started";
 	public static final String COUNPON_STATE_EXPIRED = "coupon-expired";
+	public static final String ATTR_SHOPPING_STORE = "shopping_store";
+	public static final String ATTR_AVAILABLE_SHOPPING_SHIPPING_METHOD_LIST = "availableShoppingShippingMethodList";
 	
 	public static String getMainImageURL(JournalArticle journalArticle) {
 		String imagePath = StringPool.BLANK;
@@ -161,6 +184,24 @@ public class ShoppingPortletUtil {
         }
         return total;
 	}
+	
+//	public static String getMainImage(JournalArticle journalArticle) {
+//		String imagePath = StringPool.BLANK;
+//		Document document = null;
+//		try {
+//			document = SAXReaderUtil.read(journalArticle.getContent());
+//		
+//			if (Validator.isNotNull(document)) {
+//				Node fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Main_Image']/dynamic-content");
+//				if (fieldContent != null) {
+//					imagePath = fieldContent.getText();
+//				}
+//			}
+//		} catch (Exception de) {
+//			de.printStackTrace();
+//		}
+//		return imagePath;
+//	}
 	
 	public static boolean isCouponValid(ShoppingCoupon shoppingCoupon){
 		

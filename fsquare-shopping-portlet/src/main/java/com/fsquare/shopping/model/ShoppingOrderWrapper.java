@@ -49,12 +49,14 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
         attributes.put("number", getNumber());
         attributes.put("tax", getTax());
         attributes.put("shipping", getShipping());
+        attributes.put("totalPrice", getTotalPrice());
         attributes.put("altShipping", getAltShipping());
         attributes.put("requiresShipping", getRequiresShipping());
         attributes.put("insure", getInsure());
         attributes.put("insurance", getInsurance());
         attributes.put("couponCodes", getCouponCodes());
         attributes.put("couponDiscount", getCouponDiscount());
+        attributes.put("paymentStatus", getPaymentStatus());
         attributes.put("billingFirstName", getBillingFirstName());
         attributes.put("billingLastName", getBillingLastName());
         attributes.put("billingEmailAddress", getBillingEmailAddress());
@@ -71,9 +73,10 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
         attributes.put("shippingEmailAddress", getShippingEmailAddress());
         attributes.put("shippingCompany", getShippingCompany());
         attributes.put("shippingStreet", getShippingStreet());
+        attributes.put("shippingStreet2", getShippingStreet2());
         attributes.put("shippingCity", getShippingCity());
         attributes.put("shippingState", getShippingState());
-        attributes.put("shippingZip", getShippingZip());
+        attributes.put("shippingPostCode", getShippingPostCode());
         attributes.put("shippingCountry", getShippingCountry());
         attributes.put("shippingPhone", getShippingPhone());
         attributes.put("ccName", getCcName());
@@ -91,6 +94,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
         attributes.put("sendOrderEmail", getSendOrderEmail());
         attributes.put("sendShippingEmail", getSendShippingEmail());
         attributes.put("shippingMethodId", getShippingMethodId());
+        attributes.put("international", getInternational());
 
         return attributes;
     }
@@ -163,6 +167,12 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
             setShipping(shipping);
         }
 
+        Double totalPrice = (Double) attributes.get("totalPrice");
+
+        if (totalPrice != null) {
+            setTotalPrice(totalPrice);
+        }
+
         String altShipping = (String) attributes.get("altShipping");
 
         if (altShipping != null) {
@@ -197,6 +207,12 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
 
         if (couponDiscount != null) {
             setCouponDiscount(couponDiscount);
+        }
+
+        String paymentStatus = (String) attributes.get("paymentStatus");
+
+        if (paymentStatus != null) {
+            setPaymentStatus(paymentStatus);
         }
 
         String billingFirstName = (String) attributes.get("billingFirstName");
@@ -297,6 +313,12 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
             setShippingStreet(shippingStreet);
         }
 
+        String shippingStreet2 = (String) attributes.get("shippingStreet2");
+
+        if (shippingStreet2 != null) {
+            setShippingStreet2(shippingStreet2);
+        }
+
         String shippingCity = (String) attributes.get("shippingCity");
 
         if (shippingCity != null) {
@@ -309,10 +331,10 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
             setShippingState(shippingState);
         }
 
-        String shippingZip = (String) attributes.get("shippingZip");
+        String shippingPostCode = (String) attributes.get("shippingPostCode");
 
-        if (shippingZip != null) {
-            setShippingZip(shippingZip);
+        if (shippingPostCode != null) {
+            setShippingPostCode(shippingPostCode);
         }
 
         String shippingCountry = (String) attributes.get("shippingCountry");
@@ -416,6 +438,12 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
 
         if (shippingMethodId != null) {
             setShippingMethodId(shippingMethodId);
+        }
+
+        Boolean international = (Boolean) attributes.get("international");
+
+        if (international != null) {
+            setInternational(international);
         }
     }
 
@@ -682,6 +710,26 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
     }
 
     /**
+    * Returns the total price of this shopping order.
+    *
+    * @return the total price of this shopping order
+    */
+    @Override
+    public double getTotalPrice() {
+        return _shoppingOrder.getTotalPrice();
+    }
+
+    /**
+    * Sets the total price of this shopping order.
+    *
+    * @param totalPrice the total price of this shopping order
+    */
+    @Override
+    public void setTotalPrice(double totalPrice) {
+        _shoppingOrder.setTotalPrice(totalPrice);
+    }
+
+    /**
     * Returns the alt shipping of this shopping order.
     *
     * @return the alt shipping of this shopping order
@@ -819,6 +867,26 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
     @Override
     public void setCouponDiscount(double couponDiscount) {
         _shoppingOrder.setCouponDiscount(couponDiscount);
+    }
+
+    /**
+    * Returns the payment status of this shopping order.
+    *
+    * @return the payment status of this shopping order
+    */
+    @Override
+    public java.lang.String getPaymentStatus() {
+        return _shoppingOrder.getPaymentStatus();
+    }
+
+    /**
+    * Sets the payment status of this shopping order.
+    *
+    * @param paymentStatus the payment status of this shopping order
+    */
+    @Override
+    public void setPaymentStatus(java.lang.String paymentStatus) {
+        _shoppingOrder.setPaymentStatus(paymentStatus);
     }
 
     /**
@@ -1152,6 +1220,26 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
     }
 
     /**
+    * Returns the shipping street2 of this shopping order.
+    *
+    * @return the shipping street2 of this shopping order
+    */
+    @Override
+    public java.lang.String getShippingStreet2() {
+        return _shoppingOrder.getShippingStreet2();
+    }
+
+    /**
+    * Sets the shipping street2 of this shopping order.
+    *
+    * @param shippingStreet2 the shipping street2 of this shopping order
+    */
+    @Override
+    public void setShippingStreet2(java.lang.String shippingStreet2) {
+        _shoppingOrder.setShippingStreet2(shippingStreet2);
+    }
+
+    /**
     * Returns the shipping city of this shopping order.
     *
     * @return the shipping city of this shopping order
@@ -1192,23 +1280,23 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
     }
 
     /**
-    * Returns the shipping zip of this shopping order.
+    * Returns the shipping post code of this shopping order.
     *
-    * @return the shipping zip of this shopping order
+    * @return the shipping post code of this shopping order
     */
     @Override
-    public java.lang.String getShippingZip() {
-        return _shoppingOrder.getShippingZip();
+    public java.lang.String getShippingPostCode() {
+        return _shoppingOrder.getShippingPostCode();
     }
 
     /**
-    * Sets the shipping zip of this shopping order.
+    * Sets the shipping post code of this shopping order.
     *
-    * @param shippingZip the shipping zip of this shopping order
+    * @param shippingPostCode the shipping post code of this shopping order
     */
     @Override
-    public void setShippingZip(java.lang.String shippingZip) {
-        _shoppingOrder.setShippingZip(shippingZip);
+    public void setShippingPostCode(java.lang.String shippingPostCode) {
+        _shoppingOrder.setShippingPostCode(shippingPostCode);
     }
 
     /**
@@ -1569,6 +1657,36 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
     @Override
     public void setShippingMethodId(long shippingMethodId) {
         _shoppingOrder.setShippingMethodId(shippingMethodId);
+    }
+
+    /**
+    * Returns the international of this shopping order.
+    *
+    * @return the international of this shopping order
+    */
+    @Override
+    public boolean getInternational() {
+        return _shoppingOrder.getInternational();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping order is international.
+    *
+    * @return <code>true</code> if this shopping order is international; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isInternational() {
+        return _shoppingOrder.isInternational();
+    }
+
+    /**
+    * Sets whether this shopping order is international.
+    *
+    * @param international the international of this shopping order
+    */
+    @Override
+    public void setInternational(boolean international) {
+        _shoppingOrder.setInternational(international);
     }
 
     @Override

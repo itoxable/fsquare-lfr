@@ -30,7 +30,7 @@ public class ShoppingShippingMethodLocalServiceImpl
      * Never reference this interface directly. Always use {@link com.fsquare.shopping.service.ShoppingShippingMethodLocalServiceUtil} to access the shopping shipping method local service.
      */
 	
-	public Long getShippingPrice(ShoppingShippingMethod shoppingShippingMethod, Collection<ShoppingOrderItem> shoppingOrderItems, long total){
+	public double getShippingPrice(ShoppingShippingMethod shoppingShippingMethod, Collection<ShoppingOrderItem> shoppingOrderItems, double total){
 		return total;
 	}
 	

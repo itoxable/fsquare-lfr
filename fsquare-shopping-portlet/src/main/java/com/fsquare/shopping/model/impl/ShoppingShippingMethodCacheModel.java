@@ -36,10 +36,12 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
     public double freeTotal;
     public double weight;
     public boolean defaultShipping;
+    public boolean international;
+    public String shippingType;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(29);
+        StringBundler sb = new StringBundler(33);
 
         sb.append("{shippingMethodId=");
         sb.append(shippingMethodId);
@@ -69,6 +71,10 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
         sb.append(weight);
         sb.append(", defaultShipping=");
         sb.append(defaultShipping);
+        sb.append(", international=");
+        sb.append(international);
+        sb.append(", shippingType=");
+        sb.append(shippingType);
         sb.append("}");
 
         return sb.toString();
@@ -119,6 +125,13 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
         shoppingShippingMethodImpl.setFreeTotal(freeTotal);
         shoppingShippingMethodImpl.setWeight(weight);
         shoppingShippingMethodImpl.setDefaultShipping(defaultShipping);
+        shoppingShippingMethodImpl.setInternational(international);
+
+        if (shippingType == null) {
+            shoppingShippingMethodImpl.setShippingType(StringPool.BLANK);
+        } else {
+            shoppingShippingMethodImpl.setShippingType(shippingType);
+        }
 
         shoppingShippingMethodImpl.resetOriginalValues();
 
@@ -141,6 +154,8 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
         freeTotal = objectInput.readDouble();
         weight = objectInput.readDouble();
         defaultShipping = objectInput.readBoolean();
+        international = objectInput.readBoolean();
+        shippingType = objectInput.readUTF();
     }
 
     @Override
@@ -177,5 +192,12 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
         objectOutput.writeDouble(freeTotal);
         objectOutput.writeDouble(weight);
         objectOutput.writeBoolean(defaultShipping);
+        objectOutput.writeBoolean(international);
+
+        if (shippingType == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(shippingType);
+        }
     }
 }

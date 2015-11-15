@@ -139,7 +139,7 @@ public class CartViewPortlet extends MVCPortlet {
 	        }
 	        
 	        total = ShoppingPortletUtil.applyCoupon(shoppingCoupon, total);
-	        
+	        jsonObject.put("shoppingCouponJson", JSONFactoryUtil.looseSerialize(shoppingCoupon));
 	        jsonObject.put("total", total);
 	        success = true;
 		}else{
@@ -238,12 +238,25 @@ public class CartViewPortlet extends MVCPortlet {
 		
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(actionRequest);
-//		Long shoppingOrderId = CounterLocalServiceUtil.increment(ShoppingOrder.class.getName());
-//		ShoppingOrder shoppingOrder = ShoppingOrderLocalServiceUtil.createShoppingOrder(shoppingOrderId);
-//		shoppingOrder.setStatus(ShoppingPortletUtil.ORDER_STATUS_INITIAL);
+		HttpSession session = request.getSession();
+
+		Map<String,ShoppingOrderItem> shoppingOrderItemMap = (Map<String,ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
+		
+		ShoppingCoupon shoppingCoupon = (ShoppingCoupon)session.getAttribute(ShoppingPortletUtil.SESSION_CART_COUPON_CODE);
+		
+		Long shoppingOrderId = CounterLocalServiceUtil.increment(ShoppingOrder.class.getName());
 		ShoppingStore shoppingStore = null;
 		try{
 			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			
+			ShoppingOrder shoppingOrder = ShoppingOrderLocalServiceUtil.createShoppingOrder(shoppingOrderId);
+			
+			if(shoppingCoupon != null){
+				shoppingOrder.setCouponCodes(shoppingCoupon.getCode());
+			}
+			
+			session.setAttribute(ShoppingPortletUtil.SESSION_ORDER_OBJECT, shoppingOrder);
+			
 		}catch(NoSuchShoppingStoreException e){
 			shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
 		}

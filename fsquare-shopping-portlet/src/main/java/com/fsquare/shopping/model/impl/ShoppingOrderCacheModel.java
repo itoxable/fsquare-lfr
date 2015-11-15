@@ -33,12 +33,14 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
     public String number;
     public double tax;
     public double shipping;
+    public double totalPrice;
     public String altShipping;
     public boolean requiresShipping;
     public boolean insure;
     public double insurance;
     public String couponCodes;
     public double couponDiscount;
+    public String paymentStatus;
     public String billingFirstName;
     public String billingLastName;
     public String billingEmailAddress;
@@ -55,9 +57,10 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
     public String shippingEmailAddress;
     public String shippingCompany;
     public String shippingStreet;
+    public String shippingStreet2;
     public String shippingCity;
     public String shippingState;
-    public String shippingZip;
+    public String shippingPostCode;
     public String shippingCountry;
     public String shippingPhone;
     public String ccName;
@@ -75,10 +78,11 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
     public boolean sendOrderEmail;
     public boolean sendShippingEmail;
     public long shippingMethodId;
+    public boolean international;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(107);
+        StringBundler sb = new StringBundler(115);
 
         sb.append("{shoppingOrderId=");
         sb.append(shoppingOrderId);
@@ -102,6 +106,8 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         sb.append(tax);
         sb.append(", shipping=");
         sb.append(shipping);
+        sb.append(", totalPrice=");
+        sb.append(totalPrice);
         sb.append(", altShipping=");
         sb.append(altShipping);
         sb.append(", requiresShipping=");
@@ -114,6 +120,8 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         sb.append(couponCodes);
         sb.append(", couponDiscount=");
         sb.append(couponDiscount);
+        sb.append(", paymentStatus=");
+        sb.append(paymentStatus);
         sb.append(", billingFirstName=");
         sb.append(billingFirstName);
         sb.append(", billingLastName=");
@@ -146,12 +154,14 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         sb.append(shippingCompany);
         sb.append(", shippingStreet=");
         sb.append(shippingStreet);
+        sb.append(", shippingStreet2=");
+        sb.append(shippingStreet2);
         sb.append(", shippingCity=");
         sb.append(shippingCity);
         sb.append(", shippingState=");
         sb.append(shippingState);
-        sb.append(", shippingZip=");
-        sb.append(shippingZip);
+        sb.append(", shippingPostCode=");
+        sb.append(shippingPostCode);
         sb.append(", shippingCountry=");
         sb.append(shippingCountry);
         sb.append(", shippingPhone=");
@@ -186,6 +196,8 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         sb.append(sendShippingEmail);
         sb.append(", shippingMethodId=");
         sb.append(shippingMethodId);
+        sb.append(", international=");
+        sb.append(international);
         sb.append("}");
 
         return sb.toString();
@@ -232,6 +244,7 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
 
         shoppingOrderImpl.setTax(tax);
         shoppingOrderImpl.setShipping(shipping);
+        shoppingOrderImpl.setTotalPrice(totalPrice);
 
         if (altShipping == null) {
             shoppingOrderImpl.setAltShipping(StringPool.BLANK);
@@ -250,6 +263,12 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         }
 
         shoppingOrderImpl.setCouponDiscount(couponDiscount);
+
+        if (paymentStatus == null) {
+            shoppingOrderImpl.setPaymentStatus(StringPool.BLANK);
+        } else {
+            shoppingOrderImpl.setPaymentStatus(paymentStatus);
+        }
 
         if (billingFirstName == null) {
             shoppingOrderImpl.setBillingFirstName(StringPool.BLANK);
@@ -343,6 +362,12 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
             shoppingOrderImpl.setShippingStreet(shippingStreet);
         }
 
+        if (shippingStreet2 == null) {
+            shoppingOrderImpl.setShippingStreet2(StringPool.BLANK);
+        } else {
+            shoppingOrderImpl.setShippingStreet2(shippingStreet2);
+        }
+
         if (shippingCity == null) {
             shoppingOrderImpl.setShippingCity(StringPool.BLANK);
         } else {
@@ -355,10 +380,10 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
             shoppingOrderImpl.setShippingState(shippingState);
         }
 
-        if (shippingZip == null) {
-            shoppingOrderImpl.setShippingZip(StringPool.BLANK);
+        if (shippingPostCode == null) {
+            shoppingOrderImpl.setShippingPostCode(StringPool.BLANK);
         } else {
-            shoppingOrderImpl.setShippingZip(shippingZip);
+            shoppingOrderImpl.setShippingPostCode(shippingPostCode);
         }
 
         if (shippingCountry == null) {
@@ -435,6 +460,7 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         shoppingOrderImpl.setSendOrderEmail(sendOrderEmail);
         shoppingOrderImpl.setSendShippingEmail(sendShippingEmail);
         shoppingOrderImpl.setShippingMethodId(shippingMethodId);
+        shoppingOrderImpl.setInternational(international);
 
         shoppingOrderImpl.resetOriginalValues();
 
@@ -454,12 +480,14 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         number = objectInput.readUTF();
         tax = objectInput.readDouble();
         shipping = objectInput.readDouble();
+        totalPrice = objectInput.readDouble();
         altShipping = objectInput.readUTF();
         requiresShipping = objectInput.readBoolean();
         insure = objectInput.readBoolean();
         insurance = objectInput.readDouble();
         couponCodes = objectInput.readUTF();
         couponDiscount = objectInput.readDouble();
+        paymentStatus = objectInput.readUTF();
         billingFirstName = objectInput.readUTF();
         billingLastName = objectInput.readUTF();
         billingEmailAddress = objectInput.readUTF();
@@ -476,9 +504,10 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         shippingEmailAddress = objectInput.readUTF();
         shippingCompany = objectInput.readUTF();
         shippingStreet = objectInput.readUTF();
+        shippingStreet2 = objectInput.readUTF();
         shippingCity = objectInput.readUTF();
         shippingState = objectInput.readUTF();
-        shippingZip = objectInput.readUTF();
+        shippingPostCode = objectInput.readUTF();
         shippingCountry = objectInput.readUTF();
         shippingPhone = objectInput.readUTF();
         ccName = objectInput.readUTF();
@@ -496,6 +525,7 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         sendOrderEmail = objectInput.readBoolean();
         sendShippingEmail = objectInput.readBoolean();
         shippingMethodId = objectInput.readLong();
+        international = objectInput.readBoolean();
     }
 
     @Override
@@ -529,6 +559,7 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
 
         objectOutput.writeDouble(tax);
         objectOutput.writeDouble(shipping);
+        objectOutput.writeDouble(totalPrice);
 
         if (altShipping == null) {
             objectOutput.writeUTF(StringPool.BLANK);
@@ -547,6 +578,12 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         }
 
         objectOutput.writeDouble(couponDiscount);
+
+        if (paymentStatus == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(paymentStatus);
+        }
 
         if (billingFirstName == null) {
             objectOutput.writeUTF(StringPool.BLANK);
@@ -640,6 +677,12 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
             objectOutput.writeUTF(shippingStreet);
         }
 
+        if (shippingStreet2 == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(shippingStreet2);
+        }
+
         if (shippingCity == null) {
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
@@ -652,10 +695,10 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
             objectOutput.writeUTF(shippingState);
         }
 
-        if (shippingZip == null) {
+        if (shippingPostCode == null) {
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
-            objectOutput.writeUTF(shippingZip);
+            objectOutput.writeUTF(shippingPostCode);
         }
 
         if (shippingCountry == null) {
@@ -732,5 +775,6 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         objectOutput.writeBoolean(sendOrderEmail);
         objectOutput.writeBoolean(sendShippingEmail);
         objectOutput.writeLong(shippingMethodId);
+        objectOutput.writeBoolean(international);
     }
 }

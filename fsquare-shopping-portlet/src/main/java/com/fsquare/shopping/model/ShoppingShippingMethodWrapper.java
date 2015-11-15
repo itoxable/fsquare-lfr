@@ -53,6 +53,8 @@ public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
         attributes.put("freeTotal", getFreeTotal());
         attributes.put("weight", getWeight());
         attributes.put("defaultShipping", getDefaultShipping());
+        attributes.put("international", getInternational());
+        attributes.put("shippingType", getShippingType());
 
         return attributes;
     }
@@ -141,6 +143,18 @@ public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
 
         if (defaultShipping != null) {
             setDefaultShipping(defaultShipping);
+        }
+
+        Boolean international = (Boolean) attributes.get("international");
+
+        if (international != null) {
+            setInternational(international);
+        }
+
+        String shippingType = (String) attributes.get("shippingType");
+
+        if (shippingType != null) {
+            setShippingType(shippingType);
         }
     }
 
@@ -474,6 +488,56 @@ public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
     @Override
     public void setDefaultShipping(boolean defaultShipping) {
         _shoppingShippingMethod.setDefaultShipping(defaultShipping);
+    }
+
+    /**
+    * Returns the international of this shopping shipping method.
+    *
+    * @return the international of this shopping shipping method
+    */
+    @Override
+    public boolean getInternational() {
+        return _shoppingShippingMethod.getInternational();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping shipping method is international.
+    *
+    * @return <code>true</code> if this shopping shipping method is international; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isInternational() {
+        return _shoppingShippingMethod.isInternational();
+    }
+
+    /**
+    * Sets whether this shopping shipping method is international.
+    *
+    * @param international the international of this shopping shipping method
+    */
+    @Override
+    public void setInternational(boolean international) {
+        _shoppingShippingMethod.setInternational(international);
+    }
+
+    /**
+    * Returns the shipping type of this shopping shipping method.
+    *
+    * @return the shipping type of this shopping shipping method
+    */
+    @Override
+    public java.lang.String getShippingType() {
+        return _shoppingShippingMethod.getShippingType();
+    }
+
+    /**
+    * Sets the shipping type of this shopping shipping method.
+    *
+    * @param shippingType the shipping type of this shopping shipping method
+    */
+    @Override
+    public void setShippingType(java.lang.String shippingType) {
+        _shoppingShippingMethod.setShippingType(shippingType);
     }
 
     @Override

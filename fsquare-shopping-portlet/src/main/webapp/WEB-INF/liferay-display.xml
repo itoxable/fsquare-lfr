@@ -9,6 +9,8 @@
 		<portlet id="shoppingstore" />
 		<portlet id="shopping-coupon-management" />
 		<portlet id="shopping-shipping-management" />
+		<portlet id="shopping-orders-management" />
+		
 		
 	</category>
 </display>

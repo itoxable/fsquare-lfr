@@ -16,7 +16,7 @@
 	
 
 	<properties>
-		<liferay.home>/Users/ruic/Projects/Geoplace liferay-portal-6.2-ce-ga2</liferay.home>
+<!-- 		<liferay.home>/Users/ruic/Projects/Geoplace liferay-portal-6.2-ce-ga2</liferay.home> -->
 <!-- 		<liferay.home>/Users/ruic/Projects/jo-liferay-portal-6.2-ce-ga4</liferay.home> -->
 
 	</properties>
@@ -96,6 +96,12 @@
 			<groupId>com.paypal.sdk</groupId>
 			<artifactId>rest-api-sdk</artifactId>
 			<version>1.2.9</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>1.38.0</version>
 		</dependency>
 		
 		<dependency>

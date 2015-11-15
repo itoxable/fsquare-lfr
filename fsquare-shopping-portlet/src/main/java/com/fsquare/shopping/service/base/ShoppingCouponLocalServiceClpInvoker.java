@@ -41,14 +41,14 @@ public class ShoppingCouponLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName58;
-    private String[] _methodParameterTypes58;
-    private String _methodName59;
-    private String[] _methodParameterTypes59;
-    private String _methodName64;
-    private String[] _methodParameterTypes64;
-    private String _methodName65;
-    private String[] _methodParameterTypes65;
+    private String _methodName62;
+    private String[] _methodParameterTypes62;
+    private String _methodName63;
+    private String[] _methodParameterTypes63;
+    private String _methodName68;
+    private String[] _methodParameterTypes68;
+    private String _methodName69;
+    private String[] _methodParameterTypes69;
 
     public ShoppingCouponLocalServiceClpInvoker() {
         _methodName0 = "addShoppingCoupon";
@@ -133,21 +133,21 @@ public class ShoppingCouponLocalServiceClpInvoker {
                 "com.fsquare.shopping.model.ShoppingCoupon"
             };
 
-        _methodName58 = "getBeanIdentifier";
+        _methodName62 = "getBeanIdentifier";
 
-        _methodParameterTypes58 = new String[] {  };
+        _methodParameterTypes62 = new String[] {  };
 
-        _methodName59 = "setBeanIdentifier";
+        _methodName63 = "setBeanIdentifier";
 
-        _methodParameterTypes59 = new String[] { "java.lang.String" };
+        _methodParameterTypes63 = new String[] { "java.lang.String" };
 
-        _methodName64 = "fetchByCode";
+        _methodName68 = "fetchByCode";
 
-        _methodParameterTypes64 = new String[] { "java.lang.String" };
+        _methodParameterTypes68 = new String[] { "java.lang.String" };
 
-        _methodName65 = "findByGroupId";
+        _methodName69 = "findByGroupId";
 
-        _methodParameterTypes65 = new String[] { "java.lang.Long" };
+        _methodParameterTypes69 = new String[] { "java.lang.Long" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -239,25 +239,25 @@ public class ShoppingCouponLocalServiceClpInvoker {
             return ShoppingCouponLocalServiceUtil.updateShoppingCoupon((com.fsquare.shopping.model.ShoppingCoupon) arguments[0]);
         }
 
-        if (_methodName58.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+        if (_methodName62.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName59.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+        if (_methodName63.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
             ShoppingCouponLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
         }
 
-        if (_methodName64.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+        if (_methodName68.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.fetchByCode((java.lang.String) arguments[0]);
         }
 
-        if (_methodName65.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+        if (_methodName69.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.findByGroupId((java.lang.Long) arguments[0]);
         }
 

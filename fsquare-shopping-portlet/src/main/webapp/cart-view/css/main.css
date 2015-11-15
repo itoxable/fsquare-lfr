@@ -32,7 +32,7 @@
 	font-weight: bold;
 	font-size: 18px;
 }
-.aui .cart-view .cart-table-wrapper .cart-table tr.product-row{
+.aui .cart-view .cart-table-wrapper .cart-table tr.product-row, .aui .cart-view .cart-table-wrapper .cart-table tr.discount-row{
 	border-bottom: 1px solid #F0F0F0;
 }
 .aui .cart-view .cart-table-wrapper .cart-table td {

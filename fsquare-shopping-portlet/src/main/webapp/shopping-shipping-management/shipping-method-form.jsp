@@ -28,7 +28,7 @@ ShoppingShippingMethod shoppingShippingMethod = (ShoppingShippingMethod)request.
 				<aui:input name="freeTotal" type="text" value="<%= shoppingShippingMethod.getFreeTotal() %>" placeholder="freeTotal"/>
 				<aui:input name="weight" type="number" value="<%= shoppingShippingMethod.getWeight() %>" placeholder="weight"/>
 				<aui:input name="defaultShipping" type="checkbox" value="<%= shoppingShippingMethod.getDefaultShipping() %>"/>
-				
+				<aui:input name="internationalShipping" type="checkbox" value="<%= shoppingShippingMethod.isInternational() %>"/>
 			</div>
 			<div id="<portlet:namespace />shipping-form-error" class="error-message shipping-form-error">
 				

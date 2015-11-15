@@ -56,6 +56,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon,
         attributes.put("minOrder", getMinOrder());
         attributes.put("discount", getDiscount());
         attributes.put("discountType", getDiscountType());
+        attributes.put("maxUses", getMaxUses());
 
         return attributes;
     }
@@ -168,6 +169,12 @@ public class ShoppingCouponWrapper implements ShoppingCoupon,
 
         if (discountType != null) {
             setDiscountType(discountType);
+        }
+
+        Long maxUses = (Long) attributes.get("maxUses");
+
+        if (maxUses != null) {
+            setMaxUses(maxUses);
         }
     }
 
@@ -581,6 +588,26 @@ public class ShoppingCouponWrapper implements ShoppingCoupon,
     @Override
     public void setDiscountType(java.lang.String discountType) {
         _shoppingCoupon.setDiscountType(discountType);
+    }
+
+    /**
+    * Returns the max uses of this shopping coupon.
+    *
+    * @return the max uses of this shopping coupon
+    */
+    @Override
+    public long getMaxUses() {
+        return _shoppingCoupon.getMaxUses();
+    }
+
+    /**
+    * Sets the max uses of this shopping coupon.
+    *
+    * @param maxUses the max uses of this shopping coupon
+    */
+    @Override
+    public void setMaxUses(long maxUses) {
+        _shoppingCoupon.setMaxUses(maxUses);
     }
 
     @Override

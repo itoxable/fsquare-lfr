@@ -32,10 +32,18 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
     public String checkoutPageUuid;
     public String onAddToCart;
     public String currency;
+    public String country;
+    public boolean integrateWithStripe;
+    public String stripeTestSecretKey;
+    public String stripeTestPublishableKey;
+    public boolean stripeTesting;
+    public String stripeLiveSecretKey;
+    public String stripeLivePublishableKey;
+    public String stripeApiVersion;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(21);
+        StringBundler sb = new StringBundler(37);
 
         sb.append("{groupId=");
         sb.append(groupId);
@@ -57,6 +65,22 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         sb.append(onAddToCart);
         sb.append(", currency=");
         sb.append(currency);
+        sb.append(", country=");
+        sb.append(country);
+        sb.append(", integrateWithStripe=");
+        sb.append(integrateWithStripe);
+        sb.append(", stripeTestSecretKey=");
+        sb.append(stripeTestSecretKey);
+        sb.append(", stripeTestPublishableKey=");
+        sb.append(stripeTestPublishableKey);
+        sb.append(", stripeTesting=");
+        sb.append(stripeTesting);
+        sb.append(", stripeLiveSecretKey=");
+        sb.append(stripeLiveSecretKey);
+        sb.append(", stripeLivePublishableKey=");
+        sb.append(stripeLivePublishableKey);
+        sb.append(", stripeApiVersion=");
+        sb.append(stripeApiVersion);
         sb.append("}");
 
         return sb.toString();
@@ -112,6 +136,46 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             shoppingStoreImpl.setCurrency(currency);
         }
 
+        if (country == null) {
+            shoppingStoreImpl.setCountry(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setCountry(country);
+        }
+
+        shoppingStoreImpl.setIntegrateWithStripe(integrateWithStripe);
+
+        if (stripeTestSecretKey == null) {
+            shoppingStoreImpl.setStripeTestSecretKey(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setStripeTestSecretKey(stripeTestSecretKey);
+        }
+
+        if (stripeTestPublishableKey == null) {
+            shoppingStoreImpl.setStripeTestPublishableKey(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setStripeTestPublishableKey(stripeTestPublishableKey);
+        }
+
+        shoppingStoreImpl.setStripeTesting(stripeTesting);
+
+        if (stripeLiveSecretKey == null) {
+            shoppingStoreImpl.setStripeLiveSecretKey(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setStripeLiveSecretKey(stripeLiveSecretKey);
+        }
+
+        if (stripeLivePublishableKey == null) {
+            shoppingStoreImpl.setStripeLivePublishableKey(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setStripeLivePublishableKey(stripeLivePublishableKey);
+        }
+
+        if (stripeApiVersion == null) {
+            shoppingStoreImpl.setStripeApiVersion(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setStripeApiVersion(stripeApiVersion);
+        }
+
         shoppingStoreImpl.resetOriginalValues();
 
         return shoppingStoreImpl;
@@ -129,6 +193,14 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         checkoutPageUuid = objectInput.readUTF();
         onAddToCart = objectInput.readUTF();
         currency = objectInput.readUTF();
+        country = objectInput.readUTF();
+        integrateWithStripe = objectInput.readBoolean();
+        stripeTestSecretKey = objectInput.readUTF();
+        stripeTestPublishableKey = objectInput.readUTF();
+        stripeTesting = objectInput.readBoolean();
+        stripeLiveSecretKey = objectInput.readUTF();
+        stripeLivePublishableKey = objectInput.readUTF();
+        stripeApiVersion = objectInput.readUTF();
     }
 
     @Override
@@ -169,6 +241,46 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
             objectOutput.writeUTF(currency);
+        }
+
+        if (country == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(country);
+        }
+
+        objectOutput.writeBoolean(integrateWithStripe);
+
+        if (stripeTestSecretKey == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(stripeTestSecretKey);
+        }
+
+        if (stripeTestPublishableKey == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(stripeTestPublishableKey);
+        }
+
+        objectOutput.writeBoolean(stripeTesting);
+
+        if (stripeLiveSecretKey == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(stripeLiveSecretKey);
+        }
+
+        if (stripeLivePublishableKey == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(stripeLivePublishableKey);
+        }
+
+        if (stripeApiVersion == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(stripeApiVersion);
         }
     }
 }

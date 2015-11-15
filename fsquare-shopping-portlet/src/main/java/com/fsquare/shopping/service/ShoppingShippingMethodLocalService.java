@@ -242,10 +242,10 @@ public interface ShoppingShippingMethodLocalService extends BaseLocalService,
         throws java.lang.Throwable;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public java.lang.Long getShippingPrice(
+    public double getShippingPrice(
         com.fsquare.shopping.model.ShoppingShippingMethod shoppingShippingMethod,
         java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItems,
-        long total);
+        double total);
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public com.fsquare.shopping.model.ShoppingShippingMethod fetchDefaultShipping()

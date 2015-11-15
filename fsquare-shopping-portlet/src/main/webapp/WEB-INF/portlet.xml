@@ -69,7 +69,7 @@
 		<portlet-class>com.fsquare.shopping.portlet.shoppingorder.OrdersPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/order/view.jsp</value>
+			<value>/shopping-order/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -167,6 +167,34 @@
 			<title>Shopping shipping management</title>
 			<short-title>shipping</short-title>
 			<keywords>Shopping shipping management</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>shopping-orders-management</portlet-name>
+		<display-name>Shopping orders management</display-name>
+		<portlet-class>com.fsquare.shopping.portlet.shoppingordersmanagement.OrdersManagementPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/shopping-orders-management/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Shopping orders management</title>
+			<short-title>orders</short-title>
+			<keywords>Shopping orders management</keywords>
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>

@@ -28,6 +28,8 @@ public class ShoppingShippingMethodSoap implements Serializable {
     private double _freeTotal;
     private double _weight;
     private boolean _defaultShipping;
+    private boolean _international;
+    private String _shippingType;
 
     public ShoppingShippingMethodSoap() {
     }
@@ -50,6 +52,8 @@ public class ShoppingShippingMethodSoap implements Serializable {
         soapModel.setFreeTotal(model.getFreeTotal());
         soapModel.setWeight(model.getWeight());
         soapModel.setDefaultShipping(model.getDefaultShipping());
+        soapModel.setInternational(model.getInternational());
+        soapModel.setShippingType(model.getShippingType());
 
         return soapModel;
     }
@@ -215,5 +219,25 @@ public class ShoppingShippingMethodSoap implements Serializable {
 
     public void setDefaultShipping(boolean defaultShipping) {
         _defaultShipping = defaultShipping;
+    }
+
+    public boolean getInternational() {
+        return _international;
+    }
+
+    public boolean isInternational() {
+        return _international;
+    }
+
+    public void setInternational(boolean international) {
+        _international = international;
+    }
+
+    public String getShippingType() {
+        return _shippingType;
+    }
+
+    public void setShippingType(String shippingType) {
+        _shippingType = shippingType;
     }
 }

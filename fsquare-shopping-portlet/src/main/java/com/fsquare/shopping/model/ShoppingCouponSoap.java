@@ -32,6 +32,7 @@ public class ShoppingCouponSoap implements Serializable {
     private double _minOrder;
     private double _discount;
     private String _discountType;
+    private long _maxUses;
 
     public ShoppingCouponSoap() {
     }
@@ -57,6 +58,7 @@ public class ShoppingCouponSoap implements Serializable {
         soapModel.setMinOrder(model.getMinOrder());
         soapModel.setDiscount(model.getDiscount());
         soapModel.setDiscountType(model.getDiscountType());
+        soapModel.setMaxUses(model.getMaxUses());
 
         return soapModel;
     }
@@ -251,5 +253,13 @@ public class ShoppingCouponSoap implements Serializable {
 
     public void setDiscountType(String discountType) {
         _discountType = discountType;
+    }
+
+    public long getMaxUses() {
+        return _maxUses;
+    }
+
+    public void setMaxUses(long maxUses) {
+        _maxUses = maxUses;
     }
 }

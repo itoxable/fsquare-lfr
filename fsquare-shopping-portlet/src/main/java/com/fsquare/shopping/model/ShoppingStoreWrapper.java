@@ -48,6 +48,14 @@ public class ShoppingStoreWrapper implements ShoppingStore,
         attributes.put("checkoutPageUuid", getCheckoutPageUuid());
         attributes.put("onAddToCart", getOnAddToCart());
         attributes.put("currency", getCurrency());
+        attributes.put("country", getCountry());
+        attributes.put("integrateWithStripe", getIntegrateWithStripe());
+        attributes.put("stripeTestSecretKey", getStripeTestSecretKey());
+        attributes.put("stripeTestPublishableKey", getStripeTestPublishableKey());
+        attributes.put("stripeTesting", getStripeTesting());
+        attributes.put("stripeLiveSecretKey", getStripeLiveSecretKey());
+        attributes.put("stripeLivePublishableKey", getStripeLivePublishableKey());
+        attributes.put("stripeApiVersion", getStripeApiVersion());
 
         return attributes;
     }
@@ -112,6 +120,59 @@ public class ShoppingStoreWrapper implements ShoppingStore,
 
         if (currency != null) {
             setCurrency(currency);
+        }
+
+        String country = (String) attributes.get("country");
+
+        if (country != null) {
+            setCountry(country);
+        }
+
+        Boolean integrateWithStripe = (Boolean) attributes.get(
+                "integrateWithStripe");
+
+        if (integrateWithStripe != null) {
+            setIntegrateWithStripe(integrateWithStripe);
+        }
+
+        String stripeTestSecretKey = (String) attributes.get(
+                "stripeTestSecretKey");
+
+        if (stripeTestSecretKey != null) {
+            setStripeTestSecretKey(stripeTestSecretKey);
+        }
+
+        String stripeTestPublishableKey = (String) attributes.get(
+                "stripeTestPublishableKey");
+
+        if (stripeTestPublishableKey != null) {
+            setStripeTestPublishableKey(stripeTestPublishableKey);
+        }
+
+        Boolean stripeTesting = (Boolean) attributes.get("stripeTesting");
+
+        if (stripeTesting != null) {
+            setStripeTesting(stripeTesting);
+        }
+
+        String stripeLiveSecretKey = (String) attributes.get(
+                "stripeLiveSecretKey");
+
+        if (stripeLiveSecretKey != null) {
+            setStripeLiveSecretKey(stripeLiveSecretKey);
+        }
+
+        String stripeLivePublishableKey = (String) attributes.get(
+                "stripeLivePublishableKey");
+
+        if (stripeLivePublishableKey != null) {
+            setStripeLivePublishableKey(stripeLivePublishableKey);
+        }
+
+        String stripeApiVersion = (String) attributes.get("stripeApiVersion");
+
+        if (stripeApiVersion != null) {
+            setStripeApiVersion(stripeApiVersion);
         }
     }
 
@@ -355,6 +416,188 @@ public class ShoppingStoreWrapper implements ShoppingStore,
     @Override
     public void setCurrency(java.lang.String currency) {
         _shoppingStore.setCurrency(currency);
+    }
+
+    /**
+    * Returns the country of this shopping store.
+    *
+    * @return the country of this shopping store
+    */
+    @Override
+    public java.lang.String getCountry() {
+        return _shoppingStore.getCountry();
+    }
+
+    /**
+    * Sets the country of this shopping store.
+    *
+    * @param country the country of this shopping store
+    */
+    @Override
+    public void setCountry(java.lang.String country) {
+        _shoppingStore.setCountry(country);
+    }
+
+    /**
+    * Returns the integrate with stripe of this shopping store.
+    *
+    * @return the integrate with stripe of this shopping store
+    */
+    @Override
+    public boolean getIntegrateWithStripe() {
+        return _shoppingStore.getIntegrateWithStripe();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping store is integrate with stripe.
+    *
+    * @return <code>true</code> if this shopping store is integrate with stripe; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isIntegrateWithStripe() {
+        return _shoppingStore.isIntegrateWithStripe();
+    }
+
+    /**
+    * Sets whether this shopping store is integrate with stripe.
+    *
+    * @param integrateWithStripe the integrate with stripe of this shopping store
+    */
+    @Override
+    public void setIntegrateWithStripe(boolean integrateWithStripe) {
+        _shoppingStore.setIntegrateWithStripe(integrateWithStripe);
+    }
+
+    /**
+    * Returns the stripe test secret key of this shopping store.
+    *
+    * @return the stripe test secret key of this shopping store
+    */
+    @Override
+    public java.lang.String getStripeTestSecretKey() {
+        return _shoppingStore.getStripeTestSecretKey();
+    }
+
+    /**
+    * Sets the stripe test secret key of this shopping store.
+    *
+    * @param stripeTestSecretKey the stripe test secret key of this shopping store
+    */
+    @Override
+    public void setStripeTestSecretKey(java.lang.String stripeTestSecretKey) {
+        _shoppingStore.setStripeTestSecretKey(stripeTestSecretKey);
+    }
+
+    /**
+    * Returns the stripe test publishable key of this shopping store.
+    *
+    * @return the stripe test publishable key of this shopping store
+    */
+    @Override
+    public java.lang.String getStripeTestPublishableKey() {
+        return _shoppingStore.getStripeTestPublishableKey();
+    }
+
+    /**
+    * Sets the stripe test publishable key of this shopping store.
+    *
+    * @param stripeTestPublishableKey the stripe test publishable key of this shopping store
+    */
+    @Override
+    public void setStripeTestPublishableKey(
+        java.lang.String stripeTestPublishableKey) {
+        _shoppingStore.setStripeTestPublishableKey(stripeTestPublishableKey);
+    }
+
+    /**
+    * Returns the stripe testing of this shopping store.
+    *
+    * @return the stripe testing of this shopping store
+    */
+    @Override
+    public boolean getStripeTesting() {
+        return _shoppingStore.getStripeTesting();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping store is stripe testing.
+    *
+    * @return <code>true</code> if this shopping store is stripe testing; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isStripeTesting() {
+        return _shoppingStore.isStripeTesting();
+    }
+
+    /**
+    * Sets whether this shopping store is stripe testing.
+    *
+    * @param stripeTesting the stripe testing of this shopping store
+    */
+    @Override
+    public void setStripeTesting(boolean stripeTesting) {
+        _shoppingStore.setStripeTesting(stripeTesting);
+    }
+
+    /**
+    * Returns the stripe live secret key of this shopping store.
+    *
+    * @return the stripe live secret key of this shopping store
+    */
+    @Override
+    public java.lang.String getStripeLiveSecretKey() {
+        return _shoppingStore.getStripeLiveSecretKey();
+    }
+
+    /**
+    * Sets the stripe live secret key of this shopping store.
+    *
+    * @param stripeLiveSecretKey the stripe live secret key of this shopping store
+    */
+    @Override
+    public void setStripeLiveSecretKey(java.lang.String stripeLiveSecretKey) {
+        _shoppingStore.setStripeLiveSecretKey(stripeLiveSecretKey);
+    }
+
+    /**
+    * Returns the stripe live publishable key of this shopping store.
+    *
+    * @return the stripe live publishable key of this shopping store
+    */
+    @Override
+    public java.lang.String getStripeLivePublishableKey() {
+        return _shoppingStore.getStripeLivePublishableKey();
+    }
+
+    /**
+    * Sets the stripe live publishable key of this shopping store.
+    *
+    * @param stripeLivePublishableKey the stripe live publishable key of this shopping store
+    */
+    @Override
+    public void setStripeLivePublishableKey(
+        java.lang.String stripeLivePublishableKey) {
+        _shoppingStore.setStripeLivePublishableKey(stripeLivePublishableKey);
+    }
+
+    /**
+    * Returns the stripe api version of this shopping store.
+    *
+    * @return the stripe api version of this shopping store
+    */
+    @Override
+    public java.lang.String getStripeApiVersion() {
+        return _shoppingStore.getStripeApiVersion();
+    }
+
+    /**
+    * Sets the stripe api version of this shopping store.
+    *
+    * @param stripeApiVersion the stripe api version of this shopping store
+    */
+    @Override
+    public void setStripeApiVersion(java.lang.String stripeApiVersion) {
+        _shoppingStore.setStripeApiVersion(stripeApiVersion);
     }
 
     @Override

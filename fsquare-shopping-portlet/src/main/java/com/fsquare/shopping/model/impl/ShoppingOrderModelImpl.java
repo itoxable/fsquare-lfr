@@ -64,12 +64,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             { "number_", Types.VARCHAR },
             { "tax", Types.DOUBLE },
             { "shipping", Types.DOUBLE },
+            { "totalPrice", Types.DOUBLE },
             { "altShipping", Types.VARCHAR },
             { "requiresShipping", Types.BOOLEAN },
             { "insure", Types.BOOLEAN },
             { "insurance", Types.DOUBLE },
             { "couponCodes", Types.VARCHAR },
             { "couponDiscount", Types.DOUBLE },
+            { "paymentStatus", Types.VARCHAR },
             { "billingFirstName", Types.VARCHAR },
             { "billingLastName", Types.VARCHAR },
             { "billingEmailAddress", Types.VARCHAR },
@@ -86,9 +88,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             { "shippingEmailAddress", Types.VARCHAR },
             { "shippingCompany", Types.VARCHAR },
             { "shippingStreet", Types.VARCHAR },
+            { "shippingStreet2", Types.VARCHAR },
             { "shippingCity", Types.VARCHAR },
             { "shippingState", Types.VARCHAR },
-            { "shippingZip", Types.VARCHAR },
+            { "shippingPostCode", Types.VARCHAR },
             { "shippingCountry", Types.VARCHAR },
             { "shippingPhone", Types.VARCHAR },
             { "ccName", Types.VARCHAR },
@@ -105,9 +108,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             { "ppPayerEmail", Types.VARCHAR },
             { "sendOrderEmail", Types.BOOLEAN },
             { "sendShippingEmail", Types.BOOLEAN },
-            { "shippingMethodId", Types.BIGINT }
+            { "shippingMethodId", Types.BIGINT },
+            { "international", Types.BOOLEAN }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingOrder (shoppingOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status VARCHAR(75) null,number_ VARCHAR(75) null,tax DOUBLE,shipping DOUBLE,altShipping VARCHAR(75) null,requiresShipping BOOLEAN,insure BOOLEAN,insurance DOUBLE,couponCodes VARCHAR(75) null,couponDiscount DOUBLE,billingFirstName VARCHAR(75) null,billingLastName VARCHAR(75) null,billingEmailAddress VARCHAR(75) null,billingCompany VARCHAR(75) null,billingStreet VARCHAR(75) null,billingCity VARCHAR(75) null,billingState VARCHAR(75) null,billingZip VARCHAR(75) null,billingCountry VARCHAR(75) null,billingPhone VARCHAR(75) null,shipToBilling BOOLEAN,shippingFirstName VARCHAR(75) null,shippingLastName VARCHAR(75) null,shippingEmailAddress VARCHAR(75) null,shippingCompany VARCHAR(75) null,shippingStreet VARCHAR(75) null,shippingCity VARCHAR(75) null,shippingState VARCHAR(75) null,shippingZip VARCHAR(75) null,shippingCountry VARCHAR(75) null,shippingPhone VARCHAR(75) null,ccName VARCHAR(75) null,ccType VARCHAR(75) null,ccNumber VARCHAR(75) null,ccExpMonth INTEGER,ccExpYear INTEGER,ccVerNumber VARCHAR(75) null,comments VARCHAR(75) null,ppTxnId VARCHAR(75) null,ppPaymentStatus VARCHAR(75) null,ppPaymentGross DOUBLE,ppReceiverEmail VARCHAR(75) null,ppPayerEmail VARCHAR(75) null,sendOrderEmail BOOLEAN,sendShippingEmail BOOLEAN,shippingMethodId LONG)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingOrder (shoppingOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status VARCHAR(75) null,number_ VARCHAR(75) null,tax DOUBLE,shipping DOUBLE,totalPrice DOUBLE,altShipping VARCHAR(75) null,requiresShipping BOOLEAN,insure BOOLEAN,insurance DOUBLE,couponCodes VARCHAR(75) null,couponDiscount DOUBLE,paymentStatus VARCHAR(75) null,billingFirstName VARCHAR(75) null,billingLastName VARCHAR(75) null,billingEmailAddress VARCHAR(75) null,billingCompany VARCHAR(75) null,billingStreet VARCHAR(75) null,billingCity VARCHAR(75) null,billingState VARCHAR(75) null,billingZip VARCHAR(75) null,billingCountry VARCHAR(75) null,billingPhone VARCHAR(75) null,shipToBilling BOOLEAN,shippingFirstName VARCHAR(75) null,shippingLastName VARCHAR(75) null,shippingEmailAddress VARCHAR(75) null,shippingCompany VARCHAR(75) null,shippingStreet VARCHAR(75) null,shippingStreet2 VARCHAR(75) null,shippingCity VARCHAR(75) null,shippingState VARCHAR(75) null,shippingPostCode VARCHAR(75) null,shippingCountry VARCHAR(75) null,shippingPhone VARCHAR(75) null,ccName VARCHAR(75) null,ccType VARCHAR(75) null,ccNumber VARCHAR(75) null,ccExpMonth INTEGER,ccExpYear INTEGER,ccVerNumber VARCHAR(75) null,comments VARCHAR(75) null,ppTxnId VARCHAR(75) null,ppPaymentStatus VARCHAR(75) null,ppPaymentGross DOUBLE,ppReceiverEmail VARCHAR(75) null,ppPayerEmail VARCHAR(75) null,sendOrderEmail BOOLEAN,sendShippingEmail BOOLEAN,shippingMethodId LONG,international BOOLEAN)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingOrder";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingOrder.createDate DESC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingOrder.createDate DESC";
@@ -155,12 +159,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     private String _originalNumber;
     private double _tax;
     private double _shipping;
+    private double _totalPrice;
     private String _altShipping;
     private boolean _requiresShipping;
     private boolean _insure;
     private double _insurance;
     private String _couponCodes;
     private double _couponDiscount;
+    private String _paymentStatus;
     private String _billingFirstName;
     private String _billingLastName;
     private String _billingEmailAddress;
@@ -177,9 +183,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     private String _shippingEmailAddress;
     private String _shippingCompany;
     private String _shippingStreet;
+    private String _shippingStreet2;
     private String _shippingCity;
     private String _shippingState;
-    private String _shippingZip;
+    private String _shippingPostCode;
     private String _shippingCountry;
     private String _shippingPhone;
     private String _ccName;
@@ -201,6 +208,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     private long _shippingMethodId;
     private long _originalShippingMethodId;
     private boolean _setOriginalShippingMethodId;
+    private boolean _international;
     private long _columnBitmask;
     private ShoppingOrder _escapedModel;
 
@@ -231,12 +239,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         model.setNumber(soapModel.getNumber());
         model.setTax(soapModel.getTax());
         model.setShipping(soapModel.getShipping());
+        model.setTotalPrice(soapModel.getTotalPrice());
         model.setAltShipping(soapModel.getAltShipping());
         model.setRequiresShipping(soapModel.getRequiresShipping());
         model.setInsure(soapModel.getInsure());
         model.setInsurance(soapModel.getInsurance());
         model.setCouponCodes(soapModel.getCouponCodes());
         model.setCouponDiscount(soapModel.getCouponDiscount());
+        model.setPaymentStatus(soapModel.getPaymentStatus());
         model.setBillingFirstName(soapModel.getBillingFirstName());
         model.setBillingLastName(soapModel.getBillingLastName());
         model.setBillingEmailAddress(soapModel.getBillingEmailAddress());
@@ -253,9 +263,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         model.setShippingEmailAddress(soapModel.getShippingEmailAddress());
         model.setShippingCompany(soapModel.getShippingCompany());
         model.setShippingStreet(soapModel.getShippingStreet());
+        model.setShippingStreet2(soapModel.getShippingStreet2());
         model.setShippingCity(soapModel.getShippingCity());
         model.setShippingState(soapModel.getShippingState());
-        model.setShippingZip(soapModel.getShippingZip());
+        model.setShippingPostCode(soapModel.getShippingPostCode());
         model.setShippingCountry(soapModel.getShippingCountry());
         model.setShippingPhone(soapModel.getShippingPhone());
         model.setCcName(soapModel.getCcName());
@@ -273,6 +284,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         model.setSendOrderEmail(soapModel.getSendOrderEmail());
         model.setSendShippingEmail(soapModel.getSendShippingEmail());
         model.setShippingMethodId(soapModel.getShippingMethodId());
+        model.setInternational(soapModel.getInternational());
 
         return model;
     }
@@ -342,12 +354,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         attributes.put("number", getNumber());
         attributes.put("tax", getTax());
         attributes.put("shipping", getShipping());
+        attributes.put("totalPrice", getTotalPrice());
         attributes.put("altShipping", getAltShipping());
         attributes.put("requiresShipping", getRequiresShipping());
         attributes.put("insure", getInsure());
         attributes.put("insurance", getInsurance());
         attributes.put("couponCodes", getCouponCodes());
         attributes.put("couponDiscount", getCouponDiscount());
+        attributes.put("paymentStatus", getPaymentStatus());
         attributes.put("billingFirstName", getBillingFirstName());
         attributes.put("billingLastName", getBillingLastName());
         attributes.put("billingEmailAddress", getBillingEmailAddress());
@@ -364,9 +378,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         attributes.put("shippingEmailAddress", getShippingEmailAddress());
         attributes.put("shippingCompany", getShippingCompany());
         attributes.put("shippingStreet", getShippingStreet());
+        attributes.put("shippingStreet2", getShippingStreet2());
         attributes.put("shippingCity", getShippingCity());
         attributes.put("shippingState", getShippingState());
-        attributes.put("shippingZip", getShippingZip());
+        attributes.put("shippingPostCode", getShippingPostCode());
         attributes.put("shippingCountry", getShippingCountry());
         attributes.put("shippingPhone", getShippingPhone());
         attributes.put("ccName", getCcName());
@@ -384,6 +399,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         attributes.put("sendOrderEmail", getSendOrderEmail());
         attributes.put("sendShippingEmail", getSendShippingEmail());
         attributes.put("shippingMethodId", getShippingMethodId());
+        attributes.put("international", getInternational());
 
         return attributes;
     }
@@ -456,6 +472,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             setShipping(shipping);
         }
 
+        Double totalPrice = (Double) attributes.get("totalPrice");
+
+        if (totalPrice != null) {
+            setTotalPrice(totalPrice);
+        }
+
         String altShipping = (String) attributes.get("altShipping");
 
         if (altShipping != null) {
@@ -490,6 +512,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
         if (couponDiscount != null) {
             setCouponDiscount(couponDiscount);
+        }
+
+        String paymentStatus = (String) attributes.get("paymentStatus");
+
+        if (paymentStatus != null) {
+            setPaymentStatus(paymentStatus);
         }
 
         String billingFirstName = (String) attributes.get("billingFirstName");
@@ -590,6 +618,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             setShippingStreet(shippingStreet);
         }
 
+        String shippingStreet2 = (String) attributes.get("shippingStreet2");
+
+        if (shippingStreet2 != null) {
+            setShippingStreet2(shippingStreet2);
+        }
+
         String shippingCity = (String) attributes.get("shippingCity");
 
         if (shippingCity != null) {
@@ -602,10 +636,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             setShippingState(shippingState);
         }
 
-        String shippingZip = (String) attributes.get("shippingZip");
+        String shippingPostCode = (String) attributes.get("shippingPostCode");
 
-        if (shippingZip != null) {
-            setShippingZip(shippingZip);
+        if (shippingPostCode != null) {
+            setShippingPostCode(shippingPostCode);
         }
 
         String shippingCountry = (String) attributes.get("shippingCountry");
@@ -709,6 +743,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
         if (shippingMethodId != null) {
             setShippingMethodId(shippingMethodId);
+        }
+
+        Boolean international = (Boolean) attributes.get("international");
+
+        if (international != null) {
+            setInternational(international);
         }
     }
 
@@ -903,6 +943,17 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @JSON
     @Override
+    public double getTotalPrice() {
+        return _totalPrice;
+    }
+
+    @Override
+    public void setTotalPrice(double totalPrice) {
+        _totalPrice = totalPrice;
+    }
+
+    @JSON
+    @Override
     public String getAltShipping() {
         if (_altShipping == null) {
             return StringPool.BLANK;
@@ -983,6 +1034,21 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     @Override
     public void setCouponDiscount(double couponDiscount) {
         _couponDiscount = couponDiscount;
+    }
+
+    @JSON
+    @Override
+    public String getPaymentStatus() {
+        if (_paymentStatus == null) {
+            return StringPool.BLANK;
+        } else {
+            return _paymentStatus;
+        }
+    }
+
+    @Override
+    public void setPaymentStatus(String paymentStatus) {
+        _paymentStatus = paymentStatus;
     }
 
     @JSON
@@ -1228,6 +1294,21 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @JSON
     @Override
+    public String getShippingStreet2() {
+        if (_shippingStreet2 == null) {
+            return StringPool.BLANK;
+        } else {
+            return _shippingStreet2;
+        }
+    }
+
+    @Override
+    public void setShippingStreet2(String shippingStreet2) {
+        _shippingStreet2 = shippingStreet2;
+    }
+
+    @JSON
+    @Override
     public String getShippingCity() {
         if (_shippingCity == null) {
             return StringPool.BLANK;
@@ -1258,17 +1339,17 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @JSON
     @Override
-    public String getShippingZip() {
-        if (_shippingZip == null) {
+    public String getShippingPostCode() {
+        if (_shippingPostCode == null) {
             return StringPool.BLANK;
         } else {
-            return _shippingZip;
+            return _shippingPostCode;
         }
     }
 
     @Override
-    public void setShippingZip(String shippingZip) {
-        _shippingZip = shippingZip;
+    public void setShippingPostCode(String shippingPostCode) {
+        _shippingPostCode = shippingPostCode;
     }
 
     @JSON
@@ -1544,6 +1625,22 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         return _originalShippingMethodId;
     }
 
+    @JSON
+    @Override
+    public boolean getInternational() {
+        return _international;
+    }
+
+    @Override
+    public boolean isInternational() {
+        return _international;
+    }
+
+    @Override
+    public void setInternational(boolean international) {
+        _international = international;
+    }
+
     public long getColumnBitmask() {
         return _columnBitmask;
     }
@@ -1586,12 +1683,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         shoppingOrderImpl.setNumber(getNumber());
         shoppingOrderImpl.setTax(getTax());
         shoppingOrderImpl.setShipping(getShipping());
+        shoppingOrderImpl.setTotalPrice(getTotalPrice());
         shoppingOrderImpl.setAltShipping(getAltShipping());
         shoppingOrderImpl.setRequiresShipping(getRequiresShipping());
         shoppingOrderImpl.setInsure(getInsure());
         shoppingOrderImpl.setInsurance(getInsurance());
         shoppingOrderImpl.setCouponCodes(getCouponCodes());
         shoppingOrderImpl.setCouponDiscount(getCouponDiscount());
+        shoppingOrderImpl.setPaymentStatus(getPaymentStatus());
         shoppingOrderImpl.setBillingFirstName(getBillingFirstName());
         shoppingOrderImpl.setBillingLastName(getBillingLastName());
         shoppingOrderImpl.setBillingEmailAddress(getBillingEmailAddress());
@@ -1608,9 +1707,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         shoppingOrderImpl.setShippingEmailAddress(getShippingEmailAddress());
         shoppingOrderImpl.setShippingCompany(getShippingCompany());
         shoppingOrderImpl.setShippingStreet(getShippingStreet());
+        shoppingOrderImpl.setShippingStreet2(getShippingStreet2());
         shoppingOrderImpl.setShippingCity(getShippingCity());
         shoppingOrderImpl.setShippingState(getShippingState());
-        shoppingOrderImpl.setShippingZip(getShippingZip());
+        shoppingOrderImpl.setShippingPostCode(getShippingPostCode());
         shoppingOrderImpl.setShippingCountry(getShippingCountry());
         shoppingOrderImpl.setShippingPhone(getShippingPhone());
         shoppingOrderImpl.setCcName(getCcName());
@@ -1628,6 +1728,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         shoppingOrderImpl.setSendOrderEmail(getSendOrderEmail());
         shoppingOrderImpl.setSendShippingEmail(getSendShippingEmail());
         shoppingOrderImpl.setShippingMethodId(getShippingMethodId());
+        shoppingOrderImpl.setInternational(getInternational());
 
         shoppingOrderImpl.resetOriginalValues();
 
@@ -1759,6 +1860,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
         shoppingOrderCacheModel.shipping = getShipping();
 
+        shoppingOrderCacheModel.totalPrice = getTotalPrice();
+
         shoppingOrderCacheModel.altShipping = getAltShipping();
 
         String altShipping = shoppingOrderCacheModel.altShipping;
@@ -1782,6 +1885,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         }
 
         shoppingOrderCacheModel.couponDiscount = getCouponDiscount();
+
+        shoppingOrderCacheModel.paymentStatus = getPaymentStatus();
+
+        String paymentStatus = shoppingOrderCacheModel.paymentStatus;
+
+        if ((paymentStatus != null) && (paymentStatus.length() == 0)) {
+            shoppingOrderCacheModel.paymentStatus = null;
+        }
 
         shoppingOrderCacheModel.billingFirstName = getBillingFirstName();
 
@@ -1907,6 +2018,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             shoppingOrderCacheModel.shippingStreet = null;
         }
 
+        shoppingOrderCacheModel.shippingStreet2 = getShippingStreet2();
+
+        String shippingStreet2 = shoppingOrderCacheModel.shippingStreet2;
+
+        if ((shippingStreet2 != null) && (shippingStreet2.length() == 0)) {
+            shoppingOrderCacheModel.shippingStreet2 = null;
+        }
+
         shoppingOrderCacheModel.shippingCity = getShippingCity();
 
         String shippingCity = shoppingOrderCacheModel.shippingCity;
@@ -1923,12 +2042,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             shoppingOrderCacheModel.shippingState = null;
         }
 
-        shoppingOrderCacheModel.shippingZip = getShippingZip();
+        shoppingOrderCacheModel.shippingPostCode = getShippingPostCode();
 
-        String shippingZip = shoppingOrderCacheModel.shippingZip;
+        String shippingPostCode = shoppingOrderCacheModel.shippingPostCode;
 
-        if ((shippingZip != null) && (shippingZip.length() == 0)) {
-            shoppingOrderCacheModel.shippingZip = null;
+        if ((shippingPostCode != null) && (shippingPostCode.length() == 0)) {
+            shoppingOrderCacheModel.shippingPostCode = null;
         }
 
         shoppingOrderCacheModel.shippingCountry = getShippingCountry();
@@ -2031,12 +2150,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
         shoppingOrderCacheModel.shippingMethodId = getShippingMethodId();
 
+        shoppingOrderCacheModel.international = getInternational();
+
         return shoppingOrderCacheModel;
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(107);
+        StringBundler sb = new StringBundler(115);
 
         sb.append("{shoppingOrderId=");
         sb.append(getShoppingOrderId());
@@ -2060,6 +2181,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(getTax());
         sb.append(", shipping=");
         sb.append(getShipping());
+        sb.append(", totalPrice=");
+        sb.append(getTotalPrice());
         sb.append(", altShipping=");
         sb.append(getAltShipping());
         sb.append(", requiresShipping=");
@@ -2072,6 +2195,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(getCouponCodes());
         sb.append(", couponDiscount=");
         sb.append(getCouponDiscount());
+        sb.append(", paymentStatus=");
+        sb.append(getPaymentStatus());
         sb.append(", billingFirstName=");
         sb.append(getBillingFirstName());
         sb.append(", billingLastName=");
@@ -2104,12 +2229,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(getShippingCompany());
         sb.append(", shippingStreet=");
         sb.append(getShippingStreet());
+        sb.append(", shippingStreet2=");
+        sb.append(getShippingStreet2());
         sb.append(", shippingCity=");
         sb.append(getShippingCity());
         sb.append(", shippingState=");
         sb.append(getShippingState());
-        sb.append(", shippingZip=");
-        sb.append(getShippingZip());
+        sb.append(", shippingPostCode=");
+        sb.append(getShippingPostCode());
         sb.append(", shippingCountry=");
         sb.append(getShippingCountry());
         sb.append(", shippingPhone=");
@@ -2144,6 +2271,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(getSendShippingEmail());
         sb.append(", shippingMethodId=");
         sb.append(getShippingMethodId());
+        sb.append(", international=");
+        sb.append(getInternational());
         sb.append("}");
 
         return sb.toString();
@@ -2151,7 +2280,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(163);
+        StringBundler sb = new StringBundler(175);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingOrder");
@@ -2202,6 +2331,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(getShipping());
         sb.append("]]></column-value></column>");
         sb.append(
+            "<column><column-name>totalPrice</column-name><column-value><![CDATA[");
+        sb.append(getTotalPrice());
+        sb.append("]]></column-value></column>");
+        sb.append(
             "<column><column-name>altShipping</column-name><column-value><![CDATA[");
         sb.append(getAltShipping());
         sb.append("]]></column-value></column>");
@@ -2224,6 +2357,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(
             "<column><column-name>couponDiscount</column-name><column-value><![CDATA[");
         sb.append(getCouponDiscount());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>paymentStatus</column-name><column-value><![CDATA[");
+        sb.append(getPaymentStatus());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>billingFirstName</column-name><column-value><![CDATA[");
@@ -2290,6 +2427,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(getShippingStreet());
         sb.append("]]></column-value></column>");
         sb.append(
+            "<column><column-name>shippingStreet2</column-name><column-value><![CDATA[");
+        sb.append(getShippingStreet2());
+        sb.append("]]></column-value></column>");
+        sb.append(
             "<column><column-name>shippingCity</column-name><column-value><![CDATA[");
         sb.append(getShippingCity());
         sb.append("]]></column-value></column>");
@@ -2298,8 +2439,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(getShippingState());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>shippingZip</column-name><column-value><![CDATA[");
-        sb.append(getShippingZip());
+            "<column><column-name>shippingPostCode</column-name><column-value><![CDATA[");
+        sb.append(getShippingPostCode());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>shippingCountry</column-name><column-value><![CDATA[");
@@ -2368,6 +2509,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(
             "<column><column-name>shippingMethodId</column-name><column-value><![CDATA[");
         sb.append(getShippingMethodId());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>international</column-name><column-value><![CDATA[");
+        sb.append(getInternational());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

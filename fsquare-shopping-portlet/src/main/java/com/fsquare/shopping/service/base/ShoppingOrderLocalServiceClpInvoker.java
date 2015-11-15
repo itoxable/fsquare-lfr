@@ -41,10 +41,12 @@ public class ShoppingOrderLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName58;
-    private String[] _methodParameterTypes58;
-    private String _methodName59;
-    private String[] _methodParameterTypes59;
+    private String _methodName62;
+    private String[] _methodParameterTypes62;
+    private String _methodName63;
+    private String[] _methodParameterTypes63;
+    private String _methodName68;
+    private String[] _methodParameterTypes68;
 
     public ShoppingOrderLocalServiceClpInvoker() {
         _methodName0 = "addShoppingOrder";
@@ -129,13 +131,17 @@ public class ShoppingOrderLocalServiceClpInvoker {
                 "com.fsquare.shopping.model.ShoppingOrder"
             };
 
-        _methodName58 = "getBeanIdentifier";
+        _methodName62 = "getBeanIdentifier";
 
-        _methodParameterTypes58 = new String[] {  };
+        _methodParameterTypes62 = new String[] {  };
 
-        _methodName59 = "setBeanIdentifier";
+        _methodName63 = "setBeanIdentifier";
 
-        _methodParameterTypes59 = new String[] { "java.lang.String" };
+        _methodParameterTypes63 = new String[] { "java.lang.String" };
+
+        _methodName68 = "findByGroupId";
+
+        _methodParameterTypes68 = new String[] { "long" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -227,16 +233,21 @@ public class ShoppingOrderLocalServiceClpInvoker {
             return ShoppingOrderLocalServiceUtil.updateShoppingOrder((com.fsquare.shopping.model.ShoppingOrder) arguments[0]);
         }
 
-        if (_methodName58.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+        if (_methodName62.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
             return ShoppingOrderLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName59.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+        if (_methodName63.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
             ShoppingOrderLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
+        }
+
+        if (_methodName68.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+            return ShoppingOrderLocalServiceUtil.findByGroupId(((Long) arguments[0]).longValue());
         }
 
         throw new UnsupportedOperationException();

@@ -20,6 +20,7 @@
 		<field name="minOrder" type="double" />
 		<field name="discount" type="double" />
 		<field name="discountType" type="String" />
+		<field name="maxUses" type="long" />
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingOrder">
 		<field name="shoppingOrderId" type="long" />
@@ -33,12 +34,14 @@
 		<field name="number" type="String" />
 		<field name="tax" type="double" />
 		<field name="shipping" type="double" />
+		<field name="totalPrice" type="double" />
 		<field name="altShipping" type="String" />
 		<field name="requiresShipping" type="boolean" />
 		<field name="insure" type="boolean" />
 		<field name="insurance" type="double" />
 		<field name="couponCodes" type="String" />
 		<field name="couponDiscount" type="double" />
+		<field name="paymentStatus" type="String" />
 		<field name="billingFirstName" type="String" />
 		<field name="billingLastName" type="String" />
 		<field name="billingEmailAddress" type="String" />
@@ -55,9 +58,10 @@
 		<field name="shippingEmailAddress" type="String" />
 		<field name="shippingCompany" type="String" />
 		<field name="shippingStreet" type="String" />
+		<field name="shippingStreet2" type="String" />
 		<field name="shippingCity" type="String" />
 		<field name="shippingState" type="String" />
-		<field name="shippingZip" type="String" />
+		<field name="shippingPostCode" type="String" />
 		<field name="shippingCountry" type="String" />
 		<field name="shippingPhone" type="String" />
 		<field name="ccName" type="String" />
@@ -75,6 +79,7 @@
 		<field name="sendOrderEmail" type="boolean" />
 		<field name="sendShippingEmail" type="boolean" />
 		<field name="shippingMethodId" type="long" />
+		<field name="international" type="boolean" />
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingOrderItem">
 		<field name="shoppingOrderItemId" type="long" />
@@ -103,6 +108,8 @@
 		<field name="freeTotal" type="double" />
 		<field name="weight" type="double" />
 		<field name="defaultShipping" type="boolean" />
+		<field name="international" type="boolean" />
+		<field name="shippingType" type="String" />
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingStore">
 		<field name="groupId" type="long" />
@@ -115,5 +122,13 @@
 		<field name="checkoutPageUuid" type="String" />
 		<field name="onAddToCart" type="String" />
 		<field name="currency" type="String" />
+		<field name="country" type="String" />
+		<field name="integrateWithStripe" type="boolean" />
+		<field name="stripeTestSecretKey" type="String" />
+		<field name="stripeTestPublishableKey" type="String" />
+		<field name="stripeTesting" type="boolean" />
+		<field name="stripeLiveSecretKey" type="String" />
+		<field name="stripeLivePublishableKey" type="String" />
+		<field name="stripeApiVersion" type="String" />
 	</model>
 </model-hints>

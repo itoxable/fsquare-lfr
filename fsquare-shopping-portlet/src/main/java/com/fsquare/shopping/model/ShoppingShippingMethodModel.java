@@ -283,6 +283,42 @@ public interface ShoppingShippingMethodModel extends BaseModel<ShoppingShippingM
      */
     public void setDefaultShipping(boolean defaultShipping);
 
+    /**
+     * Returns the international of this shopping shipping method.
+     *
+     * @return the international of this shopping shipping method
+     */
+    public boolean getInternational();
+
+    /**
+     * Returns <code>true</code> if this shopping shipping method is international.
+     *
+     * @return <code>true</code> if this shopping shipping method is international; <code>false</code> otherwise
+     */
+    public boolean isInternational();
+
+    /**
+     * Sets whether this shopping shipping method is international.
+     *
+     * @param international the international of this shopping shipping method
+     */
+    public void setInternational(boolean international);
+
+    /**
+     * Returns the shipping type of this shopping shipping method.
+     *
+     * @return the shipping type of this shopping shipping method
+     */
+    @AutoEscape
+    public String getShippingType();
+
+    /**
+     * Sets the shipping type of this shopping shipping method.
+     *
+     * @param shippingType the shipping type of this shopping shipping method
+     */
+    public void setShippingType(String shippingType);
+
     @Override
     public boolean isNew();
 

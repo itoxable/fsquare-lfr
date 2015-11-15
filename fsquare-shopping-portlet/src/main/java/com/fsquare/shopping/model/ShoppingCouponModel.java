@@ -343,6 +343,20 @@ public interface ShoppingCouponModel extends BaseModel<ShoppingCoupon>,
      */
     public void setDiscountType(String discountType);
 
+    /**
+     * Returns the max uses of this shopping coupon.
+     *
+     * @return the max uses of this shopping coupon
+     */
+    public long getMaxUses();
+
+    /**
+     * Sets the max uses of this shopping coupon.
+     *
+     * @param maxUses the max uses of this shopping coupon
+     */
+    public void setMaxUses(long maxUses);
+
     @Override
     public boolean isNew();
 

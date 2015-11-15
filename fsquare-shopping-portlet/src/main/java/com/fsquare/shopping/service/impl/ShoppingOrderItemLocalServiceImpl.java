@@ -1,6 +1,11 @@
 package com.fsquare.shopping.service.impl;
 
+import java.util.List;
+
+import com.fsquare.shopping.model.ShoppingOrder;
+import com.fsquare.shopping.model.ShoppingOrderItem;
 import com.fsquare.shopping.service.base.ShoppingOrderItemLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the shopping order item local service.
@@ -23,4 +28,9 @@ public class ShoppingOrderItemLocalServiceImpl
      *
      * Never reference this interface directly. Always use {@link com.fsquare.shopping.service.ShoppingOrderItemLocalServiceUtil} to access the shopping order item local service.
      */
+	
+	public List<ShoppingOrderItem> findByShoppingOrderId(long shoppingOrderId) throws SystemException{
+		return shoppingOrderItemPersistence.findByShoppingOrderId(shoppingOrderId);
+	}
+	
 }

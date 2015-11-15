@@ -17,5 +17,7 @@
 
 
 <aui:script>
-	
+function <portlet:namespace />saveSettings() {
+	submitForm(window.document.<portlet:namespace />fm);
+}
 </aui:script> 

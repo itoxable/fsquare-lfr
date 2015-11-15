@@ -150,7 +150,7 @@ public class ShoppingShippingMethodLocalServiceClp
 
         _methodParameterTypes19 = new String[] {
                 "com.fsquare.shopping.model.ShoppingShippingMethod",
-                "java.util.Collection", "long"
+                "java.util.Collection", "double"
             };
 
         _methodName20 = "fetchDefaultShipping";
@@ -683,10 +683,10 @@ public class ShoppingShippingMethodLocalServiceClp
     }
 
     @Override
-    public java.lang.Long getShippingPrice(
+    public double getShippingPrice(
         com.fsquare.shopping.model.ShoppingShippingMethod shoppingShippingMethod,
         java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItems,
-        long total) {
+        double total) {
         Object returnObj = null;
 
         try {
@@ -710,7 +710,7 @@ public class ShoppingShippingMethodLocalServiceClp
             }
         }
 
-        return (java.lang.Long) ClpSerializer.translateOutput(returnObj);
+        return ((Double) returnObj).doubleValue();
     }
 
     @Override

@@ -279,10 +279,10 @@ public class ShoppingShippingMethodLocalServiceWrapper
     }
 
     @Override
-    public java.lang.Long getShippingPrice(
+    public double getShippingPrice(
         com.fsquare.shopping.model.ShoppingShippingMethod shoppingShippingMethod,
         java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItems,
-        long total) {
+        double total) {
         return _shoppingShippingMethodLocalService.getShippingPrice(shoppingShippingMethod,
             shoppingOrderItems, total);
     }

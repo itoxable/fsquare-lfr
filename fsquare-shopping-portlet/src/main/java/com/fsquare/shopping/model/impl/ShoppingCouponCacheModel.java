@@ -40,10 +40,11 @@ public class ShoppingCouponCacheModel implements CacheModel<ShoppingCoupon>,
     public double minOrder;
     public double discount;
     public String discountType;
+    public long maxUses;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(37);
+        StringBundler sb = new StringBundler(39);
 
         sb.append("{couponId=");
         sb.append(couponId);
@@ -81,6 +82,8 @@ public class ShoppingCouponCacheModel implements CacheModel<ShoppingCoupon>,
         sb.append(discount);
         sb.append(", discountType=");
         sb.append(discountType);
+        sb.append(", maxUses=");
+        sb.append(maxUses);
         sb.append("}");
 
         return sb.toString();
@@ -166,6 +169,8 @@ public class ShoppingCouponCacheModel implements CacheModel<ShoppingCoupon>,
             shoppingCouponImpl.setDiscountType(discountType);
         }
 
+        shoppingCouponImpl.setMaxUses(maxUses);
+
         shoppingCouponImpl.resetOriginalValues();
 
         return shoppingCouponImpl;
@@ -191,6 +196,7 @@ public class ShoppingCouponCacheModel implements CacheModel<ShoppingCoupon>,
         minOrder = objectInput.readDouble();
         discount = objectInput.readDouble();
         discountType = objectInput.readUTF();
+        maxUses = objectInput.readLong();
     }
 
     @Override
@@ -252,5 +258,7 @@ public class ShoppingCouponCacheModel implements CacheModel<ShoppingCoupon>,
         } else {
             objectOutput.writeUTF(discountType);
         }
+
+        objectOutput.writeLong(maxUses);
     }
 }

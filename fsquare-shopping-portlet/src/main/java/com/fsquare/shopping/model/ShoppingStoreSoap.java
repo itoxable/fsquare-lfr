@@ -24,6 +24,14 @@ public class ShoppingStoreSoap implements Serializable {
     private String _checkoutPageUuid;
     private String _onAddToCart;
     private String _currency;
+    private String _country;
+    private boolean _integrateWithStripe;
+    private String _stripeTestSecretKey;
+    private String _stripeTestPublishableKey;
+    private boolean _stripeTesting;
+    private String _stripeLiveSecretKey;
+    private String _stripeLivePublishableKey;
+    private String _stripeApiVersion;
 
     public ShoppingStoreSoap() {
     }
@@ -41,6 +49,14 @@ public class ShoppingStoreSoap implements Serializable {
         soapModel.setCheckoutPageUuid(model.getCheckoutPageUuid());
         soapModel.setOnAddToCart(model.getOnAddToCart());
         soapModel.setCurrency(model.getCurrency());
+        soapModel.setCountry(model.getCountry());
+        soapModel.setIntegrateWithStripe(model.getIntegrateWithStripe());
+        soapModel.setStripeTestSecretKey(model.getStripeTestSecretKey());
+        soapModel.setStripeTestPublishableKey(model.getStripeTestPublishableKey());
+        soapModel.setStripeTesting(model.getStripeTesting());
+        soapModel.setStripeLiveSecretKey(model.getStripeLiveSecretKey());
+        soapModel.setStripeLivePublishableKey(model.getStripeLivePublishableKey());
+        soapModel.setStripeApiVersion(model.getStripeApiVersion());
 
         return soapModel;
     }
@@ -167,5 +183,77 @@ public class ShoppingStoreSoap implements Serializable {
 
     public void setCurrency(String currency) {
         _currency = currency;
+    }
+
+    public String getCountry() {
+        return _country;
+    }
+
+    public void setCountry(String country) {
+        _country = country;
+    }
+
+    public boolean getIntegrateWithStripe() {
+        return _integrateWithStripe;
+    }
+
+    public boolean isIntegrateWithStripe() {
+        return _integrateWithStripe;
+    }
+
+    public void setIntegrateWithStripe(boolean integrateWithStripe) {
+        _integrateWithStripe = integrateWithStripe;
+    }
+
+    public String getStripeTestSecretKey() {
+        return _stripeTestSecretKey;
+    }
+
+    public void setStripeTestSecretKey(String stripeTestSecretKey) {
+        _stripeTestSecretKey = stripeTestSecretKey;
+    }
+
+    public String getStripeTestPublishableKey() {
+        return _stripeTestPublishableKey;
+    }
+
+    public void setStripeTestPublishableKey(String stripeTestPublishableKey) {
+        _stripeTestPublishableKey = stripeTestPublishableKey;
+    }
+
+    public boolean getStripeTesting() {
+        return _stripeTesting;
+    }
+
+    public boolean isStripeTesting() {
+        return _stripeTesting;
+    }
+
+    public void setStripeTesting(boolean stripeTesting) {
+        _stripeTesting = stripeTesting;
+    }
+
+    public String getStripeLiveSecretKey() {
+        return _stripeLiveSecretKey;
+    }
+
+    public void setStripeLiveSecretKey(String stripeLiveSecretKey) {
+        _stripeLiveSecretKey = stripeLiveSecretKey;
+    }
+
+    public String getStripeLivePublishableKey() {
+        return _stripeLivePublishableKey;
+    }
+
+    public void setStripeLivePublishableKey(String stripeLivePublishableKey) {
+        _stripeLivePublishableKey = stripeLivePublishableKey;
+    }
+
+    public String getStripeApiVersion() {
+        return _stripeApiVersion;
+    }
+
+    public void setStripeApiVersion(String stripeApiVersion) {
+        _stripeApiVersion = stripeApiVersion;
     }
 }

@@ -25,12 +25,14 @@ public class ShoppingOrderSoap implements Serializable {
     private String _number;
     private double _tax;
     private double _shipping;
+    private double _totalPrice;
     private String _altShipping;
     private boolean _requiresShipping;
     private boolean _insure;
     private double _insurance;
     private String _couponCodes;
     private double _couponDiscount;
+    private String _paymentStatus;
     private String _billingFirstName;
     private String _billingLastName;
     private String _billingEmailAddress;
@@ -47,9 +49,10 @@ public class ShoppingOrderSoap implements Serializable {
     private String _shippingEmailAddress;
     private String _shippingCompany;
     private String _shippingStreet;
+    private String _shippingStreet2;
     private String _shippingCity;
     private String _shippingState;
-    private String _shippingZip;
+    private String _shippingPostCode;
     private String _shippingCountry;
     private String _shippingPhone;
     private String _ccName;
@@ -67,6 +70,7 @@ public class ShoppingOrderSoap implements Serializable {
     private boolean _sendOrderEmail;
     private boolean _sendShippingEmail;
     private long _shippingMethodId;
+    private boolean _international;
 
     public ShoppingOrderSoap() {
     }
@@ -85,12 +89,14 @@ public class ShoppingOrderSoap implements Serializable {
         soapModel.setNumber(model.getNumber());
         soapModel.setTax(model.getTax());
         soapModel.setShipping(model.getShipping());
+        soapModel.setTotalPrice(model.getTotalPrice());
         soapModel.setAltShipping(model.getAltShipping());
         soapModel.setRequiresShipping(model.getRequiresShipping());
         soapModel.setInsure(model.getInsure());
         soapModel.setInsurance(model.getInsurance());
         soapModel.setCouponCodes(model.getCouponCodes());
         soapModel.setCouponDiscount(model.getCouponDiscount());
+        soapModel.setPaymentStatus(model.getPaymentStatus());
         soapModel.setBillingFirstName(model.getBillingFirstName());
         soapModel.setBillingLastName(model.getBillingLastName());
         soapModel.setBillingEmailAddress(model.getBillingEmailAddress());
@@ -107,9 +113,10 @@ public class ShoppingOrderSoap implements Serializable {
         soapModel.setShippingEmailAddress(model.getShippingEmailAddress());
         soapModel.setShippingCompany(model.getShippingCompany());
         soapModel.setShippingStreet(model.getShippingStreet());
+        soapModel.setShippingStreet2(model.getShippingStreet2());
         soapModel.setShippingCity(model.getShippingCity());
         soapModel.setShippingState(model.getShippingState());
-        soapModel.setShippingZip(model.getShippingZip());
+        soapModel.setShippingPostCode(model.getShippingPostCode());
         soapModel.setShippingCountry(model.getShippingCountry());
         soapModel.setShippingPhone(model.getShippingPhone());
         soapModel.setCcName(model.getCcName());
@@ -127,6 +134,7 @@ public class ShoppingOrderSoap implements Serializable {
         soapModel.setSendOrderEmail(model.getSendOrderEmail());
         soapModel.setSendShippingEmail(model.getSendShippingEmail());
         soapModel.setShippingMethodId(model.getShippingMethodId());
+        soapModel.setInternational(model.getInternational());
 
         return soapModel;
     }
@@ -263,6 +271,14 @@ public class ShoppingOrderSoap implements Serializable {
         _shipping = shipping;
     }
 
+    public double getTotalPrice() {
+        return _totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        _totalPrice = totalPrice;
+    }
+
     public String getAltShipping() {
         return _altShipping;
     }
@@ -317,6 +333,14 @@ public class ShoppingOrderSoap implements Serializable {
 
     public void setCouponDiscount(double couponDiscount) {
         _couponDiscount = couponDiscount;
+    }
+
+    public String getPaymentStatus() {
+        return _paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        _paymentStatus = paymentStatus;
     }
 
     public String getBillingFirstName() {
@@ -451,6 +475,14 @@ public class ShoppingOrderSoap implements Serializable {
         _shippingStreet = shippingStreet;
     }
 
+    public String getShippingStreet2() {
+        return _shippingStreet2;
+    }
+
+    public void setShippingStreet2(String shippingStreet2) {
+        _shippingStreet2 = shippingStreet2;
+    }
+
     public String getShippingCity() {
         return _shippingCity;
     }
@@ -467,12 +499,12 @@ public class ShoppingOrderSoap implements Serializable {
         _shippingState = shippingState;
     }
 
-    public String getShippingZip() {
-        return _shippingZip;
+    public String getShippingPostCode() {
+        return _shippingPostCode;
     }
 
-    public void setShippingZip(String shippingZip) {
-        _shippingZip = shippingZip;
+    public void setShippingPostCode(String shippingPostCode) {
+        _shippingPostCode = shippingPostCode;
     }
 
     public String getShippingCountry() {
@@ -617,5 +649,17 @@ public class ShoppingOrderSoap implements Serializable {
 
     public void setShippingMethodId(long shippingMethodId) {
         _shippingMethodId = shippingMethodId;
+    }
+
+    public boolean getInternational() {
+        return _international;
+    }
+
+    public boolean isInternational() {
+        return _international;
+    }
+
+    public void setInternational(boolean international) {
+        _international = international;
     }
 }

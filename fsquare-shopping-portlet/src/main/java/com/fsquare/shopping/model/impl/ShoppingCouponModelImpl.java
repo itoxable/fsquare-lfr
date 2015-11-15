@@ -70,9 +70,10 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
             { "limitSkus", Types.VARCHAR },
             { "minOrder", Types.DOUBLE },
             { "discount", Types.DOUBLE },
-            { "discountType", Types.VARCHAR }
+            { "discountType", Types.VARCHAR },
+            { "maxUses", Types.BIGINT }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingCoupon (couponId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(75) null,startDate DATE null,endDate DATE null,active_ BOOLEAN,limitCategories VARCHAR(75) null,limitSkus VARCHAR(75) null,minOrder DOUBLE,discount DOUBLE,discountType VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingCoupon (couponId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(75) null,startDate DATE null,endDate DATE null,active_ BOOLEAN,limitCategories VARCHAR(75) null,limitSkus VARCHAR(75) null,minOrder DOUBLE,discount DOUBLE,discountType VARCHAR(75) null,maxUses LONG)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingCoupon";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingCoupon.createDate ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingCoupon.createDate ASC";
@@ -119,6 +120,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
     private double _minOrder;
     private double _discount;
     private String _discountType;
+    private long _maxUses;
     private long _columnBitmask;
     private ShoppingCoupon _escapedModel;
 
@@ -156,6 +158,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
         model.setMinOrder(soapModel.getMinOrder());
         model.setDiscount(soapModel.getDiscount());
         model.setDiscountType(soapModel.getDiscountType());
+        model.setMaxUses(soapModel.getMaxUses());
 
         return model;
     }
@@ -232,6 +235,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
         attributes.put("minOrder", getMinOrder());
         attributes.put("discount", getDiscount());
         attributes.put("discountType", getDiscountType());
+        attributes.put("maxUses", getMaxUses());
 
         return attributes;
     }
@@ -344,6 +348,12 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 
         if (discountType != null) {
             setDiscountType(discountType);
+        }
+
+        Long maxUses = (Long) attributes.get("maxUses");
+
+        if (maxUses != null) {
+            setMaxUses(maxUses);
         }
     }
 
@@ -612,6 +622,17 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
         _discountType = discountType;
     }
 
+    @JSON
+    @Override
+    public long getMaxUses() {
+        return _maxUses;
+    }
+
+    @Override
+    public void setMaxUses(long maxUses) {
+        _maxUses = maxUses;
+    }
+
     public long getColumnBitmask() {
         return _columnBitmask;
     }
@@ -661,6 +682,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
         shoppingCouponImpl.setMinOrder(getMinOrder());
         shoppingCouponImpl.setDiscount(getDiscount());
         shoppingCouponImpl.setDiscountType(getDiscountType());
+        shoppingCouponImpl.setMaxUses(getMaxUses());
 
         shoppingCouponImpl.resetOriginalValues();
 
@@ -826,12 +848,14 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
             shoppingCouponCacheModel.discountType = null;
         }
 
+        shoppingCouponCacheModel.maxUses = getMaxUses();
+
         return shoppingCouponCacheModel;
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(37);
+        StringBundler sb = new StringBundler(39);
 
         sb.append("{couponId=");
         sb.append(getCouponId());
@@ -869,6 +893,8 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
         sb.append(getDiscount());
         sb.append(", discountType=");
         sb.append(getDiscountType());
+        sb.append(", maxUses=");
+        sb.append(getMaxUses());
         sb.append("}");
 
         return sb.toString();
@@ -876,7 +902,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(58);
+        StringBundler sb = new StringBundler(61);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingCoupon");
@@ -953,6 +979,10 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
         sb.append(
             "<column><column-name>discountType</column-name><column-value><![CDATA[");
         sb.append(getDiscountType());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>maxUses</column-name><column-value><![CDATA[");
+        sb.append(getMaxUses());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

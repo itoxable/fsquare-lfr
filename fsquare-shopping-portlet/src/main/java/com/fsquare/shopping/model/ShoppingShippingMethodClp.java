@@ -37,6 +37,8 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
     private double _freeTotal;
     private double _weight;
     private boolean _defaultShipping;
+    private boolean _international;
+    private String _shippingType;
     private BaseModel<?> _shoppingShippingMethodRemoteModel;
     private Class<?> _clpSerializerClass = com.fsquare.shopping.service.ClpSerializer.class;
 
@@ -91,6 +93,8 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         attributes.put("freeTotal", getFreeTotal());
         attributes.put("weight", getWeight());
         attributes.put("defaultShipping", getDefaultShipping());
+        attributes.put("international", getInternational());
+        attributes.put("shippingType", getShippingType());
 
         return attributes;
     }
@@ -179,6 +183,18 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
 
         if (defaultShipping != null) {
             setDefaultShipping(defaultShipping);
+        }
+
+        Boolean international = (Boolean) attributes.get("international");
+
+        if (international != null) {
+            setInternational(international);
+        }
+
+        String shippingType = (String) attributes.get("shippingType");
+
+        if (shippingType != null) {
+            setShippingType(shippingType);
         }
     }
 
@@ -509,6 +525,56 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         }
     }
 
+    @Override
+    public boolean getInternational() {
+        return _international;
+    }
+
+    @Override
+    public boolean isInternational() {
+        return _international;
+    }
+
+    @Override
+    public void setInternational(boolean international) {
+        _international = international;
+
+        if (_shoppingShippingMethodRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingShippingMethodRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setInternational",
+                        boolean.class);
+
+                method.invoke(_shoppingShippingMethodRemoteModel, international);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getShippingType() {
+        return _shippingType;
+    }
+
+    @Override
+    public void setShippingType(String shippingType) {
+        _shippingType = shippingType;
+
+        if (_shoppingShippingMethodRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingShippingMethodRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setShippingType", String.class);
+
+                method.invoke(_shoppingShippingMethodRemoteModel, shippingType);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
     public BaseModel<?> getShoppingShippingMethodRemoteModel() {
         return _shoppingShippingMethodRemoteModel;
     }
@@ -592,6 +658,8 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         clone.setFreeTotal(getFreeTotal());
         clone.setWeight(getWeight());
         clone.setDefaultShipping(getDefaultShipping());
+        clone.setInternational(getInternational());
+        clone.setShippingType(getShippingType());
 
         return clone;
     }
@@ -641,7 +709,7 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(29);
+        StringBundler sb = new StringBundler(33);
 
         sb.append("{shippingMethodId=");
         sb.append(getShippingMethodId());
@@ -671,6 +739,10 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         sb.append(getWeight());
         sb.append(", defaultShipping=");
         sb.append(getDefaultShipping());
+        sb.append(", international=");
+        sb.append(getInternational());
+        sb.append(", shippingType=");
+        sb.append(getShippingType());
         sb.append("}");
 
         return sb.toString();
@@ -678,7 +750,7 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(46);
+        StringBundler sb = new StringBundler(52);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingShippingMethod");
@@ -739,6 +811,14 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         sb.append(
             "<column><column-name>defaultShipping</column-name><column-value><![CDATA[");
         sb.append(getDefaultShipping());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>international</column-name><column-value><![CDATA[");
+        sb.append(getInternational());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>shippingType</column-name><column-value><![CDATA[");
+        sb.append(getShippingType());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

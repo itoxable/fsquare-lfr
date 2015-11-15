@@ -15,8 +15,7 @@
 --%>
 
 
-<%@page import="com.fsquare.shopping.service.ShoppingShippingMethodLocalServiceUtil"%>
-<%@page import="com.fsquare.shopping.model.ShoppingShippingMethod"%>
+<%@page import="com.fsquare.shopping.model.ShoppingCoupon"%>
 <%@page import="javax.portlet.ActionRequest"%>
 <%@page import="com.liferay.portlet.journal.model.JournalArticle"%>
 <%@page import="com.liferay.portlet.journal.service.JournalArticleServiceUtil"%>
@@ -28,6 +27,7 @@
 <%@page import="java.util.Map"%>
 <%@page import="com.fsquare.shopping.portlet.util.ShoppingPortletUtil"%>
 <%@page import="com.fsquare.shopping.model.ShoppingOrderItem"%>
+
 <%@ include file="/cart-view/init.jsp" %>
 
 <%
@@ -51,11 +51,7 @@ if(shoppingCouponObj != null){
 	total = ShoppingPortletUtil.applyCoupon(shoppingCoupon, total);
 }
 
-ShoppingShippingMethod selectedShoppingShippingMethod = ShoppingShippingMethodLocalServiceUtil.createShoppingShippingMethod(0L);
-List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethodLocalServiceUtil.getShoppingShippingMethods(-1, -1);
 %>
-
-
 	
 <div class="cart-table-wrapper">
 	<c:choose>
@@ -127,18 +123,16 @@ List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethod
 				    	<%
 				    	}
 					  	%>
-					  	<tr class="shipping-row">
-					  		<td colspan="5"  align="right">
-					  			<aui:select name="shoppingShippingMethod">
-					  				<% for(ShoppingShippingMethod shoppingShippingMethod: shoppingShippingMethodList){ %>
-									<aui:option selected="<%= selectedShoppingShippingMethod.getShippingMethodId() == shoppingShippingMethod.getShippingMethodId() %>" value="<%= shoppingShippingMethod.getShippingMethodId() %>"><%=shoppingShippingMethod.getName() %></aui:option>
-									<% } %>
-								</aui:select>
-					  		</td>
-					  		<td>
-					  			<%= ShoppingShippingMethodLocalServiceUtil.getShippingPrice(selectedShoppingShippingMethod, shoppingOrderItemMap.entrySet(), total)  %>
-					  		</td>
-					  	</tr>
+						
+					  	<tr class='discount-row <%= (shoppingCoupon != null)?"":"hide" %>'>
+							<td colspan="4" align="right">
+								<strong><span class="cart-discount-description"><%= (shoppingCoupon != null)?shoppingCoupon.getDescription():"" %></span></strong>
+						  	</td>
+						  	<td align="right">
+								<strong><span class="cart-discount">-<%= (shoppingCoupon != null)?shoppingCoupon.getDiscount():"" %><%= (shoppingCoupon != null)?(shoppingCoupon.getDiscountType().equals(ShoppingPortletUtil.DISCOUNT_TYPE_PERCENTAGE)?"%":"£"):"" %></span></strong>
+						  	</td>
+						</tr>
+					
 				    	<tr class="coupon-row">
 							<td colspan="5" align="right">
 								Coupon code (optional) &nbsp;
@@ -147,11 +141,14 @@ List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethod
 								<div id="coupon-tip" style="display:none;">Click "apply" when done</div>
 						  	</td>
 						</tr>
+						
 						<tr class="cart-summary-row">
 							<td colspan="4" align="right">
 								<strong>Total</strong>
 							</td>
-							<td class="cart-price-cell"><strong>GBP£<span id="<portlet:namespace />cart-total-price"><%= total %></span></strong></td>
+							<td class="cart-price-cell" align="right">
+								<strong>GBP£<span id="<portlet:namespace />cart-total-price"><%= total %></span></strong>
+							</td>
 						</tr>
 				  
 				  	</tbody>
@@ -212,6 +209,12 @@ List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethod
 				                      	
 				                      	if(response.success){
 				                      		A.one('#<portlet:namespace />cart-total-price').set('text', response.total);
+				                      		A.one('.cart-discount').set('text', response.shoppingCouponJson.description);
+				                      		A.one('.discount-row').removeClass("hide");
+				                      		var discountType = shoppingCouponJson.discountType == "percentage"?"%":"£";
+				                      		A.one('.cart-discount').set('text', "-"+shoppingCouponJson.discount +" "+ discountType);
+				                      		
+				                      		
 				                      	}else{
 				                      		alert('Invalid coupon code');
 				                      	}
@@ -297,24 +300,3 @@ List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethod
 	</c:choose>
 </div>
 
-<%!
-
-private String getMainImage(JournalArticle journalArticle) {
-	String imagePath = StringPool.BLANK;
-	Document document = null;
-	try {
-		document = SAXReaderUtil.read(journalArticle.getContent());
-	
-		if (Validator.isNotNull(document)) {
-			Node fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Main_Image']/dynamic-content");
-			if (fieldContent != null) {
-				imagePath = fieldContent.getText();
-			}
-		}
-	} catch (Exception de) {
-		de.printStackTrace();
-	}
-	return imagePath;
-}
-
-%>

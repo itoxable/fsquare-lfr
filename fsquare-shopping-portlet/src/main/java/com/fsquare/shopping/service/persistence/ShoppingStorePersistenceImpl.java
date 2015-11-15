@@ -341,6 +341,14 @@ public class ShoppingStorePersistenceImpl extends BasePersistenceImpl<ShoppingSt
         shoppingStoreImpl.setCheckoutPageUuid(shoppingStore.getCheckoutPageUuid());
         shoppingStoreImpl.setOnAddToCart(shoppingStore.getOnAddToCart());
         shoppingStoreImpl.setCurrency(shoppingStore.getCurrency());
+        shoppingStoreImpl.setCountry(shoppingStore.getCountry());
+        shoppingStoreImpl.setIntegrateWithStripe(shoppingStore.isIntegrateWithStripe());
+        shoppingStoreImpl.setStripeTestSecretKey(shoppingStore.getStripeTestSecretKey());
+        shoppingStoreImpl.setStripeTestPublishableKey(shoppingStore.getStripeTestPublishableKey());
+        shoppingStoreImpl.setStripeTesting(shoppingStore.isStripeTesting());
+        shoppingStoreImpl.setStripeLiveSecretKey(shoppingStore.getStripeLiveSecretKey());
+        shoppingStoreImpl.setStripeLivePublishableKey(shoppingStore.getStripeLivePublishableKey());
+        shoppingStoreImpl.setStripeApiVersion(shoppingStore.getStripeApiVersion());
 
         return shoppingStoreImpl;
     }

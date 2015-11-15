@@ -65,9 +65,11 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
             { "freeQuantity", Types.BIGINT },
             { "freeTotal", Types.DOUBLE },
             { "weight", Types.DOUBLE },
-            { "defaultShipping", Types.BOOLEAN }
+            { "defaultShipping", Types.BOOLEAN },
+            { "international", Types.BOOLEAN },
+            { "shippingType", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingShippingMethod (shippingMethodId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,price DOUBLE,name VARCHAR(75) null,description VARCHAR(75) null,freeQuantity LONG,freeTotal DOUBLE,weight DOUBLE,defaultShipping BOOLEAN)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingShippingMethod (shippingMethodId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,price DOUBLE,name VARCHAR(75) null,description VARCHAR(75) null,freeQuantity LONG,freeTotal DOUBLE,weight DOUBLE,defaultShipping BOOLEAN,international BOOLEAN,shippingType VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingShippingMethod";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingShippingMethod.shippingMethodId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingShippingMethod.shippingMethodId ASC";
@@ -111,6 +113,8 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
     private boolean _defaultShipping;
     private boolean _originalDefaultShipping;
     private boolean _setOriginalDefaultShipping;
+    private boolean _international;
+    private String _shippingType;
     private long _columnBitmask;
     private ShoppingShippingMethod _escapedModel;
 
@@ -145,6 +149,8 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         model.setFreeTotal(soapModel.getFreeTotal());
         model.setWeight(soapModel.getWeight());
         model.setDefaultShipping(soapModel.getDefaultShipping());
+        model.setInternational(soapModel.getInternational());
+        model.setShippingType(soapModel.getShippingType());
 
         return model;
     }
@@ -218,6 +224,8 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         attributes.put("freeTotal", getFreeTotal());
         attributes.put("weight", getWeight());
         attributes.put("defaultShipping", getDefaultShipping());
+        attributes.put("international", getInternational());
+        attributes.put("shippingType", getShippingType());
 
         return attributes;
     }
@@ -306,6 +314,18 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
         if (defaultShipping != null) {
             setDefaultShipping(defaultShipping);
+        }
+
+        Boolean international = (Boolean) attributes.get("international");
+
+        if (international != null) {
+            setInternational(international);
+        }
+
+        String shippingType = (String) attributes.get("shippingType");
+
+        if (shippingType != null) {
+            setShippingType(shippingType);
         }
     }
 
@@ -514,6 +534,37 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         return _originalDefaultShipping;
     }
 
+    @JSON
+    @Override
+    public boolean getInternational() {
+        return _international;
+    }
+
+    @Override
+    public boolean isInternational() {
+        return _international;
+    }
+
+    @Override
+    public void setInternational(boolean international) {
+        _international = international;
+    }
+
+    @JSON
+    @Override
+    public String getShippingType() {
+        if (_shippingType == null) {
+            return StringPool.BLANK;
+        } else {
+            return _shippingType;
+        }
+    }
+
+    @Override
+    public void setShippingType(String shippingType) {
+        _shippingType = shippingType;
+    }
+
     public long getColumnBitmask() {
         return _columnBitmask;
     }
@@ -559,6 +610,8 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         shoppingShippingMethodImpl.setFreeTotal(getFreeTotal());
         shoppingShippingMethodImpl.setWeight(getWeight());
         shoppingShippingMethodImpl.setDefaultShipping(getDefaultShipping());
+        shoppingShippingMethodImpl.setInternational(getInternational());
+        shoppingShippingMethodImpl.setShippingType(getShippingType());
 
         shoppingShippingMethodImpl.resetOriginalValues();
 
@@ -681,12 +734,22 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
         shoppingShippingMethodCacheModel.defaultShipping = getDefaultShipping();
 
+        shoppingShippingMethodCacheModel.international = getInternational();
+
+        shoppingShippingMethodCacheModel.shippingType = getShippingType();
+
+        String shippingType = shoppingShippingMethodCacheModel.shippingType;
+
+        if ((shippingType != null) && (shippingType.length() == 0)) {
+            shoppingShippingMethodCacheModel.shippingType = null;
+        }
+
         return shoppingShippingMethodCacheModel;
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(29);
+        StringBundler sb = new StringBundler(33);
 
         sb.append("{shippingMethodId=");
         sb.append(getShippingMethodId());
@@ -716,6 +779,10 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         sb.append(getWeight());
         sb.append(", defaultShipping=");
         sb.append(getDefaultShipping());
+        sb.append(", international=");
+        sb.append(getInternational());
+        sb.append(", shippingType=");
+        sb.append(getShippingType());
         sb.append("}");
 
         return sb.toString();
@@ -723,7 +790,7 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(46);
+        StringBundler sb = new StringBundler(52);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingShippingMethod");
@@ -784,6 +851,14 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         sb.append(
             "<column><column-name>defaultShipping</column-name><column-value><![CDATA[");
         sb.append(getDefaultShipping());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>international</column-name><column-value><![CDATA[");
+        sb.append(getInternational());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>shippingType</column-name><column-value><![CDATA[");
+        sb.append(getShippingType());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

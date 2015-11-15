@@ -1128,6 +1128,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
         shoppingCouponImpl.setMinOrder(shoppingCoupon.getMinOrder());
         shoppingCouponImpl.setDiscount(shoppingCoupon.getDiscount());
         shoppingCouponImpl.setDiscountType(shoppingCoupon.getDiscountType());
+        shoppingCouponImpl.setMaxUses(shoppingCoupon.getMaxUses());
 
         return shoppingCouponImpl;
     }

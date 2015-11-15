@@ -5,6 +5,7 @@
 	<import class="com.fsquare.shopping.model.ShoppingCoupon" />
 	<import class="com.fsquare.shopping.model.ShoppingOrder" />
 	<import class="com.fsquare.shopping.model.ShoppingOrderItem" />
+	<import class="com.fsquare.shopping.model.ShoppingPayment" />
 	<import class="com.fsquare.shopping.model.ShoppingShippingMethod" />
 	<import class="com.fsquare.shopping.model.ShoppingStore" />
 	<class name="com.fsquare.shopping.model.impl.ShoppingCouponImpl" table="FsquareShopping_ShoppingCoupon">
@@ -29,6 +30,7 @@
 		<property name="minOrder" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="discount" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="discountType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="maxUses" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.fsquare.shopping.model.impl.ShoppingOrderImpl" table="FsquareShopping_ShoppingOrder">
 		<cache usage="read-write" />
@@ -45,12 +47,14 @@
 		<property name="number" type="com.liferay.portal.dao.orm.hibernate.StringType" column="number_" />
 		<property name="tax" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="shipping" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="totalPrice" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="altShipping" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="requiresShipping" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="insure" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="insurance" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="couponCodes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="couponDiscount" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="paymentStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="billingFirstName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="billingLastName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="billingEmailAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -67,9 +71,10 @@
 		<property name="shippingEmailAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shippingCompany" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shippingStreet" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="shippingStreet2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shippingCity" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shippingState" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="shippingZip" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="shippingPostCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shippingCountry" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shippingPhone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="ccName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -87,6 +92,7 @@
 		<property name="sendOrderEmail" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="sendShippingEmail" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="shippingMethodId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="international" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.fsquare.shopping.model.impl.ShoppingOrderItemImpl" table="FsquareShopping_ShoppingOrderItem">
 		<cache usage="read-write" />
@@ -121,6 +127,8 @@
 		<property name="freeTotal" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="weight" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="defaultShipping" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="international" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="shippingType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.fsquare.shopping.model.impl.ShoppingStoreImpl" table="FsquareShopping_ShoppingStore">
 		<cache usage="read-write" />
@@ -136,5 +144,13 @@
 		<property name="checkoutPageUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="onAddToCart" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="currency" type="com.liferay.portal.dao.orm.hibernate.StringType" column="currency_" />
+		<property name="country" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="integrateWithStripe" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="stripeTestSecretKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="stripeTestPublishableKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="stripeTesting" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="stripeLiveSecretKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="stripeLivePublishableKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="stripeApiVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

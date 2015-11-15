@@ -34,6 +34,7 @@
 		<column name="minOrder" type="double" />
 		<column name="discount" type="double" />
 		<column name="discountType" type="String" />
+		<column name="maxUses" type="long" />
 
 		<!-- Order -->
 		<order by="asc">
@@ -71,20 +72,19 @@
 		
 		<column name="price" type="double" />
 		<column name="name" type="String" />
-<!-- 		<column name="methodName" type="String" /> -->
 		<column name="description" type="String" />
 		<column name="freeQuantity" type="long" />
 		<column name="freeTotal" type="double" />
 		<column name="weight" type="double" />
 		<column name="defaultShipping" type="boolean" />
+		<column name="international" type="boolean" />
+		
+		<column name="shippingType" type="String" />
 		
 		<finder name="defaultShipping" return-type="ShoppingShippingMethod">
 			<finder-column name="defaultShipping" />
 		</finder>
-		
-<!-- 		<finder name="GroupId" return-type="ShoppingStore"> -->
-<!-- 			<finder-column name="groupId" /> -->
-<!-- 		</finder> -->
+
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
@@ -114,12 +114,15 @@
 		<column name="number" type="String" />
 		<column name="tax" type="double" />
 		<column name="shipping" type="double" />
+		<column name="totalPrice" type="double" />
 		<column name="altShipping" type="String" />
 		<column name="requiresShipping" type="boolean" />
 		<column name="insure" type="boolean" />
 		<column name="insurance" type="double" />
 		<column name="couponCodes" type="String" />
 		<column name="couponDiscount" type="double" />
+		<column name="paymentStatus" type="String" />
+		
 		<column name="billingFirstName" type="String" />
 		<column name="billingLastName" type="String" />
 		<column name="billingEmailAddress" type="String" />
@@ -136,9 +139,10 @@
 		<column name="shippingEmailAddress" type="String" />
 		<column name="shippingCompany" type="String" />
 		<column name="shippingStreet" type="String" />
+		<column name="shippingStreet2" type="String" />
 		<column name="shippingCity" type="String" />
 		<column name="shippingState" type="String" />
-		<column name="shippingZip" type="String" />
+		<column name="shippingPostCode" type="String" />
 		<column name="shippingCountry" type="String" />
 		<column name="shippingPhone" type="String" />
 		<column name="ccName" type="String" />
@@ -156,6 +160,7 @@
 		<column name="sendOrderEmail" type="boolean" />
 		<column name="sendShippingEmail" type="boolean" />
 		<column name="shippingMethodId" type="long" />
+		<column name="international" type="boolean" />
 
 		<!-- Relationships -->
 
@@ -267,6 +272,17 @@
 		<column name="checkoutPageUuid" type="String" />
 		<column name="onAddToCart" type="String" />
 		<column name="currency" type="String" />
+		<column name="country" type="String" />
+		
+		<!-- Stripe API Fields -->
+		<column name="integrateWithStripe" type="boolean" />
+		<column name="stripeTestSecretKey" type="String" />
+		<column name="stripeTestPublishableKey" type="String" />
+		<column name="stripeTesting" type="boolean" />
+		
+		<column name="stripeLiveSecretKey" type="String" />
+		<column name="stripeLivePublishableKey" type="String" />
+		<column name="stripeApiVersion" type="String" />
 		
 		
 <!-- 		<finder name="GroupId" return-type="ShoppingStore"> -->
@@ -275,6 +291,9 @@
 		
 <!-- 		<reference package-path="com.liferay.portal.model" entity="Layout" /> -->
 		
+	</entity>
+	<entity name="ShoppingPayment" local-service="true" remote-service="true">
+<!-- 		<reference package-path="com.fsquare.shopping" entity="ShoppingOrder" /> -->
 	</entity>
 	
 	<exceptions>

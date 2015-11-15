@@ -92,6 +92,8 @@ List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethod
 						%>
 						<a class="open-shipping-btn fa fa-pencil-square" data-shipping-id="<%= shippingMethodId %>" title="edit" href="javascript:;"></a>
 						<a class="fa fa-times-circle delete-shipping-btn" data-shipping-id="<%= shippingMethodId %>" title="delete" href="javascript:;"></a>
+						
+						<i class='fa fa-plane <%= shoppingShippingMethod.isInternational()?"":"hide" %>' id='international-shipping<%= shippingMethodId %>'></i>
 					</td>
 				</tr>
 			<%
@@ -121,7 +123,8 @@ List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethod
 	            	  <portlet:namespace />freeQuantity : A.one('#<portlet:namespace />freeQuantity').val(),
 	            	  <portlet:namespace />freeTotal : A.one('#<portlet:namespace />freeTotal').val(),
 	            	  <portlet:namespace />weight : A.one('#<portlet:namespace />weight').val(),
-	            	  <portlet:namespace />defaultShipping : A.one('#<portlet:namespace />defaultShipping').val()
+	            	  <portlet:namespace />defaultShipping : A.one('#<portlet:namespace />defaultShipping').val(),
+	            	  <portlet:namespace />internationalShipping : A.one('#<portlet:namespace />internationalShipping').val()	            	  
 	              },
 	              on: {
 	                  success: function() {
@@ -143,12 +146,19 @@ List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethod
 	                  			
 	                  			if(shoppingShippingMethodJson.defaultShipping){
 	                  				newRow += "<a id='default-shipping"+shippingMethodId+"' title='default shipping' href='javascript:;' class='fa fa-star'></a>";
+	                  				newRow += "<a id='set-default-shipping"+shippingMethodId+"' data-shipping-id='"+shippingMethodId+"' title='set as default shipping' href='javascript:;' class='fa fa-star-o set-default-shipping hide'></a>";
+
 	                  			}else{
+	                  				newRow += "<a id='default-shipping"+shippingMethodId+"' title='default shipping' href='javascript:;' class='fa fa-star hide'></a>";
 	                  				newRow += "<a id='set-default-shipping"+shippingMethodId+"' data-shipping-id='"+shippingMethodId+"' title='set as default shipping' href='javascript:;' class='fa fa-star-o set-default-shipping'></a>";
 	                  			}
 	                  			
 	                  			newRow += "<a class='open-shipping-btn fa fa-pencil-square' data-shipping-id='"+shippingMethodId+"' title='edit' href='javascript:;'></a>";
 	                  			newRow += "<a class='fa fa-times-circle delete-shipping-btn' data-shipping-id='"+shippingMethodId+"' title='delete' href='javascript:;'></a>";
+	                  			
+	                  			newRow += "<i class='fa fa-plane "+ (shoppingShippingMethodJson.international?"":"hide") +"' id='international-shipping"+shippingMethodId+"'></i>";
+
+	                  			
 	                  			newRow += "</td>";
 	                  			newRow = newRow+"</tr>";
 	                  			A.one("#<portlet:namespace />shippings-table > tbody").append(newRow);
@@ -168,8 +178,17 @@ List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethod
 									A.one('#set-default-shipping'+shippingMethodId).removeClass('hide');
 									A.one('#default-shipping'+shippingMethodId).addClass('hide');
 								}
+	                  			
+	                  			if(shoppingShippingMethodJson.international){
+	                  				A.one('#international-shipping'+shippingMethodId).removeClass('hide');
+	                  			}else{
+	                  				A.one('#international-shipping'+shippingMethodId).addClass('hide');
+	                  			}
 	                  		}
-	                  		
+	                  		if(response.oldDefaultId && response.oldDefaultId > 0){
+								A.one('#set-default-shipping'+response.oldDefaultId).removeClass('hide');
+								A.one('#default-shipping'+response.oldDefaultId).addClass('hide');
+							}
 	                  	}else{
 	                  		A.one("#<portlet:namespace />shipping-form-error").text(response.errorMessage);
 	                  	}

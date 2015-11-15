@@ -84,7 +84,19 @@
 		<css-class-wrapper>shopping-shipping-management</css-class-wrapper>
 	</portlet>
 
-
+<portlet>
+		<portlet-name>shopping-orders-management</portlet-name>
+		<icon>/shopping-orders-management/icon.png</icon>
+		<struts-path>shopping-orders-management</struts-path>
+		<configuration-action-class>com.fsquare.shopping.portlet.shoppingordersmanagement.action.ConfigurationActionImpl</configuration-action-class>
+<!-- 		<control-panel-entry-category>site_administration.shopping</control-panel-entry-category> -->
+<!--     	<control-panel-entry-weight>3.0</control-panel-entry-weight> -->
+		<preferences-company-wide>true</preferences-company-wide>
+		<instanceable>false</instanceable>		
+		<header-portlet-css>/shopping-orders-management/css/main.css</header-portlet-css> 
+		<footer-portlet-javascript>/shopping-orders-management/js/main.js</footer-portlet-javascript>
+		<css-class-wrapper>shopping-orders-management</css-class-wrapper>
+	</portlet>
 	
 	<role-mapper>
 		<role-name>administrator</role-name>

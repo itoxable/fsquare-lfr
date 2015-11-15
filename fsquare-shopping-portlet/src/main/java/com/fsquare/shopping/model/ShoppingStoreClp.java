@@ -33,6 +33,14 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
     private String _checkoutPageUuid;
     private String _onAddToCart;
     private String _currency;
+    private String _country;
+    private boolean _integrateWithStripe;
+    private String _stripeTestSecretKey;
+    private String _stripeTestPublishableKey;
+    private boolean _stripeTesting;
+    private String _stripeLiveSecretKey;
+    private String _stripeLivePublishableKey;
+    private String _stripeApiVersion;
     private BaseModel<?> _shoppingStoreRemoteModel;
     private Class<?> _clpSerializerClass = com.fsquare.shopping.service.ClpSerializer.class;
 
@@ -83,6 +91,14 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         attributes.put("checkoutPageUuid", getCheckoutPageUuid());
         attributes.put("onAddToCart", getOnAddToCart());
         attributes.put("currency", getCurrency());
+        attributes.put("country", getCountry());
+        attributes.put("integrateWithStripe", getIntegrateWithStripe());
+        attributes.put("stripeTestSecretKey", getStripeTestSecretKey());
+        attributes.put("stripeTestPublishableKey", getStripeTestPublishableKey());
+        attributes.put("stripeTesting", getStripeTesting());
+        attributes.put("stripeLiveSecretKey", getStripeLiveSecretKey());
+        attributes.put("stripeLivePublishableKey", getStripeLivePublishableKey());
+        attributes.put("stripeApiVersion", getStripeApiVersion());
 
         return attributes;
     }
@@ -147,6 +163,59 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
         if (currency != null) {
             setCurrency(currency);
+        }
+
+        String country = (String) attributes.get("country");
+
+        if (country != null) {
+            setCountry(country);
+        }
+
+        Boolean integrateWithStripe = (Boolean) attributes.get(
+                "integrateWithStripe");
+
+        if (integrateWithStripe != null) {
+            setIntegrateWithStripe(integrateWithStripe);
+        }
+
+        String stripeTestSecretKey = (String) attributes.get(
+                "stripeTestSecretKey");
+
+        if (stripeTestSecretKey != null) {
+            setStripeTestSecretKey(stripeTestSecretKey);
+        }
+
+        String stripeTestPublishableKey = (String) attributes.get(
+                "stripeTestPublishableKey");
+
+        if (stripeTestPublishableKey != null) {
+            setStripeTestPublishableKey(stripeTestPublishableKey);
+        }
+
+        Boolean stripeTesting = (Boolean) attributes.get("stripeTesting");
+
+        if (stripeTesting != null) {
+            setStripeTesting(stripeTesting);
+        }
+
+        String stripeLiveSecretKey = (String) attributes.get(
+                "stripeLiveSecretKey");
+
+        if (stripeLiveSecretKey != null) {
+            setStripeLiveSecretKey(stripeLiveSecretKey);
+        }
+
+        String stripeLivePublishableKey = (String) attributes.get(
+                "stripeLivePublishableKey");
+
+        if (stripeLivePublishableKey != null) {
+            setStripeLivePublishableKey(stripeLivePublishableKey);
+        }
+
+        String stripeApiVersion = (String) attributes.get("stripeApiVersion");
+
+        if (stripeApiVersion != null) {
+            setStripeApiVersion(stripeApiVersion);
         }
     }
 
@@ -381,6 +450,201 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         }
     }
 
+    @Override
+    public String getCountry() {
+        return _country;
+    }
+
+    @Override
+    public void setCountry(String country) {
+        _country = country;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setCountry", String.class);
+
+                method.invoke(_shoppingStoreRemoteModel, country);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public boolean getIntegrateWithStripe() {
+        return _integrateWithStripe;
+    }
+
+    @Override
+    public boolean isIntegrateWithStripe() {
+        return _integrateWithStripe;
+    }
+
+    @Override
+    public void setIntegrateWithStripe(boolean integrateWithStripe) {
+        _integrateWithStripe = integrateWithStripe;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setIntegrateWithStripe",
+                        boolean.class);
+
+                method.invoke(_shoppingStoreRemoteModel, integrateWithStripe);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getStripeTestSecretKey() {
+        return _stripeTestSecretKey;
+    }
+
+    @Override
+    public void setStripeTestSecretKey(String stripeTestSecretKey) {
+        _stripeTestSecretKey = stripeTestSecretKey;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setStripeTestSecretKey",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel, stripeTestSecretKey);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getStripeTestPublishableKey() {
+        return _stripeTestPublishableKey;
+    }
+
+    @Override
+    public void setStripeTestPublishableKey(String stripeTestPublishableKey) {
+        _stripeTestPublishableKey = stripeTestPublishableKey;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setStripeTestPublishableKey",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel,
+                    stripeTestPublishableKey);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public boolean getStripeTesting() {
+        return _stripeTesting;
+    }
+
+    @Override
+    public boolean isStripeTesting() {
+        return _stripeTesting;
+    }
+
+    @Override
+    public void setStripeTesting(boolean stripeTesting) {
+        _stripeTesting = stripeTesting;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setStripeTesting",
+                        boolean.class);
+
+                method.invoke(_shoppingStoreRemoteModel, stripeTesting);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getStripeLiveSecretKey() {
+        return _stripeLiveSecretKey;
+    }
+
+    @Override
+    public void setStripeLiveSecretKey(String stripeLiveSecretKey) {
+        _stripeLiveSecretKey = stripeLiveSecretKey;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setStripeLiveSecretKey",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel, stripeLiveSecretKey);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getStripeLivePublishableKey() {
+        return _stripeLivePublishableKey;
+    }
+
+    @Override
+    public void setStripeLivePublishableKey(String stripeLivePublishableKey) {
+        _stripeLivePublishableKey = stripeLivePublishableKey;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setStripeLivePublishableKey",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel,
+                    stripeLivePublishableKey);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getStripeApiVersion() {
+        return _stripeApiVersion;
+    }
+
+    @Override
+    public void setStripeApiVersion(String stripeApiVersion) {
+        _stripeApiVersion = stripeApiVersion;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setStripeApiVersion",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel, stripeApiVersion);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
     public BaseModel<?> getShoppingStoreRemoteModel() {
         return _shoppingStoreRemoteModel;
     }
@@ -459,6 +723,14 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         clone.setCheckoutPageUuid(getCheckoutPageUuid());
         clone.setOnAddToCart(getOnAddToCart());
         clone.setCurrency(getCurrency());
+        clone.setCountry(getCountry());
+        clone.setIntegrateWithStripe(getIntegrateWithStripe());
+        clone.setStripeTestSecretKey(getStripeTestSecretKey());
+        clone.setStripeTestPublishableKey(getStripeTestPublishableKey());
+        clone.setStripeTesting(getStripeTesting());
+        clone.setStripeLiveSecretKey(getStripeLiveSecretKey());
+        clone.setStripeLivePublishableKey(getStripeLivePublishableKey());
+        clone.setStripeApiVersion(getStripeApiVersion());
 
         return clone;
     }
@@ -508,7 +780,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(21);
+        StringBundler sb = new StringBundler(37);
 
         sb.append("{groupId=");
         sb.append(getGroupId());
@@ -530,6 +802,22 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(getOnAddToCart());
         sb.append(", currency=");
         sb.append(getCurrency());
+        sb.append(", country=");
+        sb.append(getCountry());
+        sb.append(", integrateWithStripe=");
+        sb.append(getIntegrateWithStripe());
+        sb.append(", stripeTestSecretKey=");
+        sb.append(getStripeTestSecretKey());
+        sb.append(", stripeTestPublishableKey=");
+        sb.append(getStripeTestPublishableKey());
+        sb.append(", stripeTesting=");
+        sb.append(getStripeTesting());
+        sb.append(", stripeLiveSecretKey=");
+        sb.append(getStripeLiveSecretKey());
+        sb.append(", stripeLivePublishableKey=");
+        sb.append(getStripeLivePublishableKey());
+        sb.append(", stripeApiVersion=");
+        sb.append(getStripeApiVersion());
         sb.append("}");
 
         return sb.toString();
@@ -537,7 +825,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(34);
+        StringBundler sb = new StringBundler(58);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStore");
@@ -582,6 +870,38 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(
             "<column><column-name>currency</column-name><column-value><![CDATA[");
         sb.append(getCurrency());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>country</column-name><column-value><![CDATA[");
+        sb.append(getCountry());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>integrateWithStripe</column-name><column-value><![CDATA[");
+        sb.append(getIntegrateWithStripe());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>stripeTestSecretKey</column-name><column-value><![CDATA[");
+        sb.append(getStripeTestSecretKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>stripeTestPublishableKey</column-name><column-value><![CDATA[");
+        sb.append(getStripeTestPublishableKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>stripeTesting</column-name><column-value><![CDATA[");
+        sb.append(getStripeTesting());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>stripeLiveSecretKey</column-name><column-value><![CDATA[");
+        sb.append(getStripeLiveSecretKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>stripeLivePublishableKey</column-name><column-value><![CDATA[");
+        sb.append(getStripeLivePublishableKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>stripeApiVersion</column-name><column-value><![CDATA[");
+        sb.append(getStripeApiVersion());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

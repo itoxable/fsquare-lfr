@@ -235,6 +235,20 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
     public void setShipping(double shipping);
 
     /**
+     * Returns the total price of this shopping order.
+     *
+     * @return the total price of this shopping order
+     */
+    public double getTotalPrice();
+
+    /**
+     * Sets the total price of this shopping order.
+     *
+     * @param totalPrice the total price of this shopping order
+     */
+    public void setTotalPrice(double totalPrice);
+
+    /**
      * Returns the alt shipping of this shopping order.
      *
      * @return the alt shipping of this shopping order
@@ -333,6 +347,21 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
      * @param couponDiscount the coupon discount of this shopping order
      */
     public void setCouponDiscount(double couponDiscount);
+
+    /**
+     * Returns the payment status of this shopping order.
+     *
+     * @return the payment status of this shopping order
+     */
+    @AutoEscape
+    public String getPaymentStatus();
+
+    /**
+     * Sets the payment status of this shopping order.
+     *
+     * @param paymentStatus the payment status of this shopping order
+     */
+    public void setPaymentStatus(String paymentStatus);
 
     /**
      * Returns the billing first name of this shopping order.
@@ -581,6 +610,21 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
     public void setShippingStreet(String shippingStreet);
 
     /**
+     * Returns the shipping street2 of this shopping order.
+     *
+     * @return the shipping street2 of this shopping order
+     */
+    @AutoEscape
+    public String getShippingStreet2();
+
+    /**
+     * Sets the shipping street2 of this shopping order.
+     *
+     * @param shippingStreet2 the shipping street2 of this shopping order
+     */
+    public void setShippingStreet2(String shippingStreet2);
+
+    /**
      * Returns the shipping city of this shopping order.
      *
      * @return the shipping city of this shopping order
@@ -611,19 +655,19 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
     public void setShippingState(String shippingState);
 
     /**
-     * Returns the shipping zip of this shopping order.
+     * Returns the shipping post code of this shopping order.
      *
-     * @return the shipping zip of this shopping order
+     * @return the shipping post code of this shopping order
      */
     @AutoEscape
-    public String getShippingZip();
+    public String getShippingPostCode();
 
     /**
-     * Sets the shipping zip of this shopping order.
+     * Sets the shipping post code of this shopping order.
      *
-     * @param shippingZip the shipping zip of this shopping order
+     * @param shippingPostCode the shipping post code of this shopping order
      */
-    public void setShippingZip(String shippingZip);
+    public void setShippingPostCode(String shippingPostCode);
 
     /**
      * Returns the shipping country of this shopping order.
@@ -887,6 +931,27 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
      * @param shippingMethodId the shipping method ID of this shopping order
      */
     public void setShippingMethodId(long shippingMethodId);
+
+    /**
+     * Returns the international of this shopping order.
+     *
+     * @return the international of this shopping order
+     */
+    public boolean getInternational();
+
+    /**
+     * Returns <code>true</code> if this shopping order is international.
+     *
+     * @return <code>true</code> if this shopping order is international; <code>false</code> otherwise
+     */
+    public boolean isInternational();
+
+    /**
+     * Sets whether this shopping order is international.
+     *
+     * @param international the international of this shopping order
+     */
+    public void setInternational(boolean international);
 
     @Override
     public boolean isNew();

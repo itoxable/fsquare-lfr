@@ -53,12 +53,11 @@ public class CouponManagementPortlet extends MVCPortlet{
 
 		Long couponId = ParamUtil.getLong(resourceRequest, "couponId");
 		PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
-		//System.out.println("couponId: "+couponId);
+
 		ShoppingCoupon shoppingCoupon = null;
         if(couponId == null || couponId == 0){
 	        couponId = CounterLocalServiceUtil.increment(ShoppingCoupon.class.getName());
 	        shoppingCoupon = ShoppingCouponLocalServiceUtil.createShoppingCoupon(0);
-	        //shoppingCoupon.setCreateDate(new Date());
         }else{
         	shoppingCoupon = ShoppingCouponLocalServiceUtil.getShoppingCoupon(couponId);
         }

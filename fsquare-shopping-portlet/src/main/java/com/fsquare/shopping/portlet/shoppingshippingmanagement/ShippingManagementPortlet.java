@@ -146,13 +146,20 @@ public class ShippingManagementPortlet extends MVCPortlet{
 	        Double freeTotal = ParamUtil.getDouble(resourceRequest, "freeTotal"); 
 	        long freeQuantity = ParamUtil.getLong(resourceRequest, "freeQuantity"); 
 	        Double weight = ParamUtil.getDouble(resourceRequest, "weight"); 
+	        Boolean internationalShipping = ParamUtil.getBoolean(resourceRequest, "internationalShipping"); 
+
 	        
+	        long oldDefaultId = 0L;
 	        if(defaultShipping){
 	        	ShoppingShippingMethod defaultShoppingShippingMethod = ShoppingShippingMethodLocalServiceUtil.fetchDefaultShipping();
-				defaultShoppingShippingMethod.setDefaultShipping(false);
-				ShoppingShippingMethodLocalServiceUtil.updateShoppingShippingMethod(defaultShoppingShippingMethod);
+				if(defaultShoppingShippingMethod != null){
+					oldDefaultId = defaultShoppingShippingMethod.getShippingMethodId();
+					defaultShoppingShippingMethod.setDefaultShipping(false);
+					ShoppingShippingMethodLocalServiceUtil.updateShoppingShippingMethod(defaultShoppingShippingMethod);
+				}
+				
 	        }
-	        
+	        jsonObject.put("oldDefaultId", oldDefaultId);
 	        ShoppingShippingMethod shoppingShippingMethod = null;
 	        if(shippingMethodId == null || shippingMethodId == 0){
 	        	shippingMethodId = CounterLocalServiceUtil.increment(ShoppingShippingMethod.class.getName());
@@ -177,6 +184,7 @@ public class ShippingManagementPortlet extends MVCPortlet{
 	        shoppingShippingMethod.setFreeTotal(freeTotal);
 	        shoppingShippingMethod.setFreeQuantity(freeQuantity);
 	        shoppingShippingMethod.setName(name);
+	        shoppingShippingMethod.setInternational(internationalShipping);
 	        shoppingShippingMethod.setDescription(description);
 	        shoppingShippingMethod = ShoppingShippingMethodLocalServiceUtil.updateShoppingShippingMethod(shoppingShippingMethod);
 	        
@@ -187,8 +195,10 @@ public class ShippingManagementPortlet extends MVCPortlet{
 			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-saving-shipping-method"));
 		}catch(PortalException e){
 			success = false;
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-saving-shipping-method"));
 		}catch(Exception e){
 			success = false;
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-saving-shipping-method"));
 		}
         jsonObject.put("success", success);
 		writer.print(jsonObject.toString());

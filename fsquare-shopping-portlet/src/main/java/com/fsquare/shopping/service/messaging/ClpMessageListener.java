@@ -7,6 +7,8 @@ import com.fsquare.shopping.service.ShoppingOrderItemLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingOrderItemServiceUtil;
 import com.fsquare.shopping.service.ShoppingOrderLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingOrderServiceUtil;
+import com.fsquare.shopping.service.ShoppingPaymentLocalServiceUtil;
+import com.fsquare.shopping.service.ShoppingPaymentServiceUtil;
 import com.fsquare.shopping.service.ShoppingShippingMethodLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingShippingMethodServiceUtil;
 import com.fsquare.shopping.service.ShoppingStoreLocalServiceUtil;
@@ -37,6 +39,9 @@ public class ClpMessageListener extends BaseMessageListener {
             ShoppingOrderItemLocalServiceUtil.clearService();
 
             ShoppingOrderItemServiceUtil.clearService();
+            ShoppingPaymentLocalServiceUtil.clearService();
+
+            ShoppingPaymentServiceUtil.clearService();
             ShoppingShippingMethodLocalServiceUtil.clearService();
 
             ShoppingShippingMethodServiceUtil.clearService();

@@ -16,7 +16,8 @@ create table FsquareShopping_ShoppingCoupon (
 	limitSkus VARCHAR(75) null,
 	minOrder DOUBLE,
 	discount DOUBLE,
-	discountType VARCHAR(75) null
+	discountType VARCHAR(75) null,
+	maxUses LONG
 );
 
 create table FsquareShopping_ShoppingOrder (
@@ -31,12 +32,14 @@ create table FsquareShopping_ShoppingOrder (
 	number_ VARCHAR(75) null,
 	tax DOUBLE,
 	shipping DOUBLE,
+	totalPrice DOUBLE,
 	altShipping VARCHAR(75) null,
 	requiresShipping BOOLEAN,
 	insure BOOLEAN,
 	insurance DOUBLE,
 	couponCodes VARCHAR(75) null,
 	couponDiscount DOUBLE,
+	paymentStatus VARCHAR(75) null,
 	billingFirstName VARCHAR(75) null,
 	billingLastName VARCHAR(75) null,
 	billingEmailAddress VARCHAR(75) null,
@@ -53,9 +56,10 @@ create table FsquareShopping_ShoppingOrder (
 	shippingEmailAddress VARCHAR(75) null,
 	shippingCompany VARCHAR(75) null,
 	shippingStreet VARCHAR(75) null,
+	shippingStreet2 VARCHAR(75) null,
 	shippingCity VARCHAR(75) null,
 	shippingState VARCHAR(75) null,
-	shippingZip VARCHAR(75) null,
+	shippingPostCode VARCHAR(75) null,
 	shippingCountry VARCHAR(75) null,
 	shippingPhone VARCHAR(75) null,
 	ccName VARCHAR(75) null,
@@ -72,7 +76,8 @@ create table FsquareShopping_ShoppingOrder (
 	ppPayerEmail VARCHAR(75) null,
 	sendOrderEmail BOOLEAN,
 	sendShippingEmail BOOLEAN,
-	shippingMethodId LONG
+	shippingMethodId LONG,
+	international BOOLEAN
 );
 
 create table FsquareShopping_ShoppingOrderItem (
@@ -102,7 +107,9 @@ create table FsquareShopping_ShoppingShippingMethod (
 	freeQuantity LONG,
 	freeTotal DOUBLE,
 	weight DOUBLE,
-	defaultShipping BOOLEAN
+	defaultShipping BOOLEAN,
+	international BOOLEAN,
+	shippingType VARCHAR(75) null
 );
 
 create table FsquareShopping_ShoppingStore (
@@ -115,5 +122,13 @@ create table FsquareShopping_ShoppingStore (
 	cartPageUuid VARCHAR(75) null,
 	checkoutPageUuid VARCHAR(75) null,
 	onAddToCart VARCHAR(75) null,
-	currency_ VARCHAR(75) null
+	currency_ VARCHAR(75) null,
+	country VARCHAR(75) null,
+	integrateWithStripe BOOLEAN,
+	stripeTestSecretKey VARCHAR(75) null,
+	stripeTestPublishableKey VARCHAR(75) null,
+	stripeTesting BOOLEAN,
+	stripeLiveSecretKey VARCHAR(75) null,
+	stripeLivePublishableKey VARCHAR(75) null,
+	stripeApiVersion VARCHAR(75) null
 );

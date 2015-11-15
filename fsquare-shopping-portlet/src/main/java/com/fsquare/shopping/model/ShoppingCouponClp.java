@@ -42,6 +42,7 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
     private double _minOrder;
     private double _discount;
     private String _discountType;
+    private long _maxUses;
     private BaseModel<?> _shoppingCouponRemoteModel;
     private Class<?> _clpSerializerClass = com.fsquare.shopping.service.ClpSerializer.class;
 
@@ -100,6 +101,7 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
         attributes.put("minOrder", getMinOrder());
         attributes.put("discount", getDiscount());
         attributes.put("discountType", getDiscountType());
+        attributes.put("maxUses", getMaxUses());
 
         return attributes;
     }
@@ -212,6 +214,12 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
 
         if (discountType != null) {
             setDiscountType(discountType);
+        }
+
+        Long maxUses = (Long) attributes.get("maxUses");
+
+        if (maxUses != null) {
+            setMaxUses(maxUses);
         }
     }
 
@@ -627,6 +635,28 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
         }
     }
 
+    @Override
+    public long getMaxUses() {
+        return _maxUses;
+    }
+
+    @Override
+    public void setMaxUses(long maxUses) {
+        _maxUses = maxUses;
+
+        if (_shoppingCouponRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingCouponRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setMaxUses", long.class);
+
+                method.invoke(_shoppingCouponRemoteModel, maxUses);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
     public BaseModel<?> getShoppingCouponRemoteModel() {
         return _shoppingCouponRemoteModel;
     }
@@ -714,6 +744,7 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
         clone.setMinOrder(getMinOrder());
         clone.setDiscount(getDiscount());
         clone.setDiscountType(getDiscountType());
+        clone.setMaxUses(getMaxUses());
 
         return clone;
     }
@@ -764,7 +795,7 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(37);
+        StringBundler sb = new StringBundler(39);
 
         sb.append("{couponId=");
         sb.append(getCouponId());
@@ -802,6 +833,8 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
         sb.append(getDiscount());
         sb.append(", discountType=");
         sb.append(getDiscountType());
+        sb.append(", maxUses=");
+        sb.append(getMaxUses());
         sb.append("}");
 
         return sb.toString();
@@ -809,7 +842,7 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(58);
+        StringBundler sb = new StringBundler(61);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingCoupon");
@@ -886,6 +919,10 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
         sb.append(
             "<column><column-name>discountType</column-name><column-value><![CDATA[");
         sb.append(getDiscountType());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>maxUses</column-name><column-value><![CDATA[");
+        sb.append(getMaxUses());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

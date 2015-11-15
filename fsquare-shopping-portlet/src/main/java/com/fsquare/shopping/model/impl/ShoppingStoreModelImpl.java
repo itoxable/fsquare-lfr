@@ -61,9 +61,17 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             { "cartPageUuid", Types.VARCHAR },
             { "checkoutPageUuid", Types.VARCHAR },
             { "onAddToCart", Types.VARCHAR },
-            { "currency_", Types.VARCHAR }
+            { "currency_", Types.VARCHAR },
+            { "country", Types.VARCHAR },
+            { "integrateWithStripe", Types.BOOLEAN },
+            { "stripeTestSecretKey", Types.VARCHAR },
+            { "stripeTestPublishableKey", Types.VARCHAR },
+            { "stripeTesting", Types.BOOLEAN },
+            { "stripeLiveSecretKey", Types.VARCHAR },
+            { "stripeLivePublishableKey", Types.VARCHAR },
+            { "stripeApiVersion", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStore (groupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,cartPageUuid VARCHAR(75) null,checkoutPageUuid VARCHAR(75) null,onAddToCart VARCHAR(75) null,currency_ VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStore (groupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,cartPageUuid VARCHAR(75) null,checkoutPageUuid VARCHAR(75) null,onAddToCart VARCHAR(75) null,currency_ VARCHAR(75) null,country VARCHAR(75) null,integrateWithStripe BOOLEAN,stripeTestSecretKey VARCHAR(75) null,stripeTestPublishableKey VARCHAR(75) null,stripeTesting BOOLEAN,stripeLiveSecretKey VARCHAR(75) null,stripeLivePublishableKey VARCHAR(75) null,stripeApiVersion VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingStore";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingStore.groupId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingStore.groupId ASC";
@@ -94,6 +102,14 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
     private String _checkoutPageUuid;
     private String _onAddToCart;
     private String _currency;
+    private String _country;
+    private boolean _integrateWithStripe;
+    private String _stripeTestSecretKey;
+    private String _stripeTestPublishableKey;
+    private boolean _stripeTesting;
+    private String _stripeLiveSecretKey;
+    private String _stripeLivePublishableKey;
+    private String _stripeApiVersion;
     private ShoppingStore _escapedModel;
 
     public ShoppingStoreModelImpl() {
@@ -122,6 +138,14 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         model.setCheckoutPageUuid(soapModel.getCheckoutPageUuid());
         model.setOnAddToCart(soapModel.getOnAddToCart());
         model.setCurrency(soapModel.getCurrency());
+        model.setCountry(soapModel.getCountry());
+        model.setIntegrateWithStripe(soapModel.getIntegrateWithStripe());
+        model.setStripeTestSecretKey(soapModel.getStripeTestSecretKey());
+        model.setStripeTestPublishableKey(soapModel.getStripeTestPublishableKey());
+        model.setStripeTesting(soapModel.getStripeTesting());
+        model.setStripeLiveSecretKey(soapModel.getStripeLiveSecretKey());
+        model.setStripeLivePublishableKey(soapModel.getStripeLivePublishableKey());
+        model.setStripeApiVersion(soapModel.getStripeApiVersion());
 
         return model;
     }
@@ -190,6 +214,14 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         attributes.put("checkoutPageUuid", getCheckoutPageUuid());
         attributes.put("onAddToCart", getOnAddToCart());
         attributes.put("currency", getCurrency());
+        attributes.put("country", getCountry());
+        attributes.put("integrateWithStripe", getIntegrateWithStripe());
+        attributes.put("stripeTestSecretKey", getStripeTestSecretKey());
+        attributes.put("stripeTestPublishableKey", getStripeTestPublishableKey());
+        attributes.put("stripeTesting", getStripeTesting());
+        attributes.put("stripeLiveSecretKey", getStripeLiveSecretKey());
+        attributes.put("stripeLivePublishableKey", getStripeLivePublishableKey());
+        attributes.put("stripeApiVersion", getStripeApiVersion());
 
         return attributes;
     }
@@ -254,6 +286,59 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
         if (currency != null) {
             setCurrency(currency);
+        }
+
+        String country = (String) attributes.get("country");
+
+        if (country != null) {
+            setCountry(country);
+        }
+
+        Boolean integrateWithStripe = (Boolean) attributes.get(
+                "integrateWithStripe");
+
+        if (integrateWithStripe != null) {
+            setIntegrateWithStripe(integrateWithStripe);
+        }
+
+        String stripeTestSecretKey = (String) attributes.get(
+                "stripeTestSecretKey");
+
+        if (stripeTestSecretKey != null) {
+            setStripeTestSecretKey(stripeTestSecretKey);
+        }
+
+        String stripeTestPublishableKey = (String) attributes.get(
+                "stripeTestPublishableKey");
+
+        if (stripeTestPublishableKey != null) {
+            setStripeTestPublishableKey(stripeTestPublishableKey);
+        }
+
+        Boolean stripeTesting = (Boolean) attributes.get("stripeTesting");
+
+        if (stripeTesting != null) {
+            setStripeTesting(stripeTesting);
+        }
+
+        String stripeLiveSecretKey = (String) attributes.get(
+                "stripeLiveSecretKey");
+
+        if (stripeLiveSecretKey != null) {
+            setStripeLiveSecretKey(stripeLiveSecretKey);
+        }
+
+        String stripeLivePublishableKey = (String) attributes.get(
+                "stripeLivePublishableKey");
+
+        if (stripeLivePublishableKey != null) {
+            setStripeLivePublishableKey(stripeLivePublishableKey);
+        }
+
+        String stripeApiVersion = (String) attributes.get("stripeApiVersion");
+
+        if (stripeApiVersion != null) {
+            setStripeApiVersion(stripeApiVersion);
         }
     }
 
@@ -397,6 +482,128 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         _currency = currency;
     }
 
+    @JSON
+    @Override
+    public String getCountry() {
+        if (_country == null) {
+            return StringPool.BLANK;
+        } else {
+            return _country;
+        }
+    }
+
+    @Override
+    public void setCountry(String country) {
+        _country = country;
+    }
+
+    @JSON
+    @Override
+    public boolean getIntegrateWithStripe() {
+        return _integrateWithStripe;
+    }
+
+    @Override
+    public boolean isIntegrateWithStripe() {
+        return _integrateWithStripe;
+    }
+
+    @Override
+    public void setIntegrateWithStripe(boolean integrateWithStripe) {
+        _integrateWithStripe = integrateWithStripe;
+    }
+
+    @JSON
+    @Override
+    public String getStripeTestSecretKey() {
+        if (_stripeTestSecretKey == null) {
+            return StringPool.BLANK;
+        } else {
+            return _stripeTestSecretKey;
+        }
+    }
+
+    @Override
+    public void setStripeTestSecretKey(String stripeTestSecretKey) {
+        _stripeTestSecretKey = stripeTestSecretKey;
+    }
+
+    @JSON
+    @Override
+    public String getStripeTestPublishableKey() {
+        if (_stripeTestPublishableKey == null) {
+            return StringPool.BLANK;
+        } else {
+            return _stripeTestPublishableKey;
+        }
+    }
+
+    @Override
+    public void setStripeTestPublishableKey(String stripeTestPublishableKey) {
+        _stripeTestPublishableKey = stripeTestPublishableKey;
+    }
+
+    @JSON
+    @Override
+    public boolean getStripeTesting() {
+        return _stripeTesting;
+    }
+
+    @Override
+    public boolean isStripeTesting() {
+        return _stripeTesting;
+    }
+
+    @Override
+    public void setStripeTesting(boolean stripeTesting) {
+        _stripeTesting = stripeTesting;
+    }
+
+    @JSON
+    @Override
+    public String getStripeLiveSecretKey() {
+        if (_stripeLiveSecretKey == null) {
+            return StringPool.BLANK;
+        } else {
+            return _stripeLiveSecretKey;
+        }
+    }
+
+    @Override
+    public void setStripeLiveSecretKey(String stripeLiveSecretKey) {
+        _stripeLiveSecretKey = stripeLiveSecretKey;
+    }
+
+    @JSON
+    @Override
+    public String getStripeLivePublishableKey() {
+        if (_stripeLivePublishableKey == null) {
+            return StringPool.BLANK;
+        } else {
+            return _stripeLivePublishableKey;
+        }
+    }
+
+    @Override
+    public void setStripeLivePublishableKey(String stripeLivePublishableKey) {
+        _stripeLivePublishableKey = stripeLivePublishableKey;
+    }
+
+    @JSON
+    @Override
+    public String getStripeApiVersion() {
+        if (_stripeApiVersion == null) {
+            return StringPool.BLANK;
+        } else {
+            return _stripeApiVersion;
+        }
+    }
+
+    @Override
+    public void setStripeApiVersion(String stripeApiVersion) {
+        _stripeApiVersion = stripeApiVersion;
+    }
+
     @Override
     public ExpandoBridge getExpandoBridge() {
         return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -434,6 +641,14 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         shoppingStoreImpl.setCheckoutPageUuid(getCheckoutPageUuid());
         shoppingStoreImpl.setOnAddToCart(getOnAddToCart());
         shoppingStoreImpl.setCurrency(getCurrency());
+        shoppingStoreImpl.setCountry(getCountry());
+        shoppingStoreImpl.setIntegrateWithStripe(getIntegrateWithStripe());
+        shoppingStoreImpl.setStripeTestSecretKey(getStripeTestSecretKey());
+        shoppingStoreImpl.setStripeTestPublishableKey(getStripeTestPublishableKey());
+        shoppingStoreImpl.setStripeTesting(getStripeTesting());
+        shoppingStoreImpl.setStripeLiveSecretKey(getStripeLiveSecretKey());
+        shoppingStoreImpl.setStripeLivePublishableKey(getStripeLivePublishableKey());
+        shoppingStoreImpl.setStripeApiVersion(getStripeApiVersion());
 
         shoppingStoreImpl.resetOriginalValues();
 
@@ -549,12 +764,68 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             shoppingStoreCacheModel.currency = null;
         }
 
+        shoppingStoreCacheModel.country = getCountry();
+
+        String country = shoppingStoreCacheModel.country;
+
+        if ((country != null) && (country.length() == 0)) {
+            shoppingStoreCacheModel.country = null;
+        }
+
+        shoppingStoreCacheModel.integrateWithStripe = getIntegrateWithStripe();
+
+        shoppingStoreCacheModel.stripeTestSecretKey = getStripeTestSecretKey();
+
+        String stripeTestSecretKey = shoppingStoreCacheModel.stripeTestSecretKey;
+
+        if ((stripeTestSecretKey != null) &&
+                (stripeTestSecretKey.length() == 0)) {
+            shoppingStoreCacheModel.stripeTestSecretKey = null;
+        }
+
+        shoppingStoreCacheModel.stripeTestPublishableKey = getStripeTestPublishableKey();
+
+        String stripeTestPublishableKey = shoppingStoreCacheModel.stripeTestPublishableKey;
+
+        if ((stripeTestPublishableKey != null) &&
+                (stripeTestPublishableKey.length() == 0)) {
+            shoppingStoreCacheModel.stripeTestPublishableKey = null;
+        }
+
+        shoppingStoreCacheModel.stripeTesting = getStripeTesting();
+
+        shoppingStoreCacheModel.stripeLiveSecretKey = getStripeLiveSecretKey();
+
+        String stripeLiveSecretKey = shoppingStoreCacheModel.stripeLiveSecretKey;
+
+        if ((stripeLiveSecretKey != null) &&
+                (stripeLiveSecretKey.length() == 0)) {
+            shoppingStoreCacheModel.stripeLiveSecretKey = null;
+        }
+
+        shoppingStoreCacheModel.stripeLivePublishableKey = getStripeLivePublishableKey();
+
+        String stripeLivePublishableKey = shoppingStoreCacheModel.stripeLivePublishableKey;
+
+        if ((stripeLivePublishableKey != null) &&
+                (stripeLivePublishableKey.length() == 0)) {
+            shoppingStoreCacheModel.stripeLivePublishableKey = null;
+        }
+
+        shoppingStoreCacheModel.stripeApiVersion = getStripeApiVersion();
+
+        String stripeApiVersion = shoppingStoreCacheModel.stripeApiVersion;
+
+        if ((stripeApiVersion != null) && (stripeApiVersion.length() == 0)) {
+            shoppingStoreCacheModel.stripeApiVersion = null;
+        }
+
         return shoppingStoreCacheModel;
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(21);
+        StringBundler sb = new StringBundler(37);
 
         sb.append("{groupId=");
         sb.append(getGroupId());
@@ -576,6 +847,22 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(getOnAddToCart());
         sb.append(", currency=");
         sb.append(getCurrency());
+        sb.append(", country=");
+        sb.append(getCountry());
+        sb.append(", integrateWithStripe=");
+        sb.append(getIntegrateWithStripe());
+        sb.append(", stripeTestSecretKey=");
+        sb.append(getStripeTestSecretKey());
+        sb.append(", stripeTestPublishableKey=");
+        sb.append(getStripeTestPublishableKey());
+        sb.append(", stripeTesting=");
+        sb.append(getStripeTesting());
+        sb.append(", stripeLiveSecretKey=");
+        sb.append(getStripeLiveSecretKey());
+        sb.append(", stripeLivePublishableKey=");
+        sb.append(getStripeLivePublishableKey());
+        sb.append(", stripeApiVersion=");
+        sb.append(getStripeApiVersion());
         sb.append("}");
 
         return sb.toString();
@@ -583,7 +870,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(34);
+        StringBundler sb = new StringBundler(58);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStore");
@@ -628,6 +915,38 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(
             "<column><column-name>currency</column-name><column-value><![CDATA[");
         sb.append(getCurrency());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>country</column-name><column-value><![CDATA[");
+        sb.append(getCountry());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>integrateWithStripe</column-name><column-value><![CDATA[");
+        sb.append(getIntegrateWithStripe());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>stripeTestSecretKey</column-name><column-value><![CDATA[");
+        sb.append(getStripeTestSecretKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>stripeTestPublishableKey</column-name><column-value><![CDATA[");
+        sb.append(getStripeTestPublishableKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>stripeTesting</column-name><column-value><![CDATA[");
+        sb.append(getStripeTesting());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>stripeLiveSecretKey</column-name><column-value><![CDATA[");
+        sb.append(getStripeLiveSecretKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>stripeLivePublishableKey</column-name><column-value><![CDATA[");
+        sb.append(getStripeLivePublishableKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>stripeApiVersion</column-name><column-value><![CDATA[");
+        sb.append(getStripeApiVersion());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

@@ -1120,6 +1120,8 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
         shoppingShippingMethodImpl.setFreeTotal(shoppingShippingMethod.getFreeTotal());
         shoppingShippingMethodImpl.setWeight(shoppingShippingMethod.getWeight());
         shoppingShippingMethodImpl.setDefaultShipping(shoppingShippingMethod.isDefaultShipping());
+        shoppingShippingMethodImpl.setInternational(shoppingShippingMethod.isInternational());
+        shoppingShippingMethodImpl.setShippingType(shoppingShippingMethod.getShippingType());
 
         return shoppingShippingMethodImpl;
     }

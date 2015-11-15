@@ -15,6 +15,8 @@
 --%>
 
 
+<%@page import="com.liferay.portal.service.CountryServiceUtil"%>
+<%@page import="com.liferay.portal.model.Country"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="com.fsquare.shopping.model.ShoppingCoupon"%>
 <%@page import="com.fsquare.shopping.service.ShoppingCouponLocalServiceUtil"%>
@@ -28,10 +30,25 @@
 
 <%
 
+List<Country> countries = CountryServiceUtil.getCountries();
+
+
 String onAddToCart = shoppingStore.getOnAddToCart();
 String checkoutPageUuid = shoppingStore.getCheckoutPageUuid();
 String cartPageUuid = shoppingStore.getCartPageUuid();
 String currency = shoppingStore.getCurrency();
+
+
+String stripeLiveSecretKey = shoppingStore.getStripeLiveSecretKey();
+String stripeLivePublishableKey = shoppingStore.getStripeLivePublishableKey();
+String stripeTestSecretKey = shoppingStore.getStripeTestSecretKey();
+String stripeTestPublishableKey = shoppingStore.getStripeTestPublishableKey();
+String stripeApiVersion = shoppingStore.getStripeApiVersion();
+
+
+boolean stripeTesting = shoppingStore.getStripeTesting();
+boolean integrateWithStripe = shoppingStore.getIntegrateWithStripe();
+
 
 List<KeyValuePair> layoutsKeyValuePair = new ArrayList<KeyValuePair>();
 try {
@@ -45,33 +62,37 @@ try {
 	e.printStackTrace();
 }
 
-List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByGroupId(themeDisplay.getScopeGroupId());
 
+if(shoppingStore.getIntegrateWithStripe()){
+%>				
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<%
+}
 %>
 
 <liferay-portlet:resourceURL var="saveStoreResourceURL" secure="false">
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SAVE_STORE %>" />
 </liferay-portlet:resourceURL>
-<liferay-portlet:resourceURL var="deleteCouponURL" secure="false">
-	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_DELETE_COUPON %>" />
+<liferay-portlet:resourceURL var="openTestStripeFormURL" secure="false">
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_OPEN_TEST_STRIPE_FORM %>" />
 </liferay-portlet:resourceURL>
-<liferay-portlet:resourceURL var="openCouponFormURL" secure="false">
-	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_OPEN_COUPON_FORM %>" />
-</liferay-portlet:resourceURL>
-<liferay-portlet:resourceURL var="saveCouponURL" secure="false">
-	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SAVE_COUPON %>" />
-</liferay-portlet:resourceURL>
-<liferay-portlet:resourceURL var="activateCouponURL" secure="false">
-	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_ACTIVATE_COUPON %>" />
-</liferay-portlet:resourceURL>
-
-
 
 <liferay-portlet:actionURL var="saveStoreURL" />
 
-
 <aui:form action="<%= saveStoreURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveSettings();" %>'>
 	<div class="store-settings">
+		
+		<aui:field-wrapper label='countru' >
+			<fieldset >
+				<div class="form-inline priority-set-wrapper">
+					<aui:select name="storeCountry" label="country" >
+						<% for(Country country: countries) {%>
+							<aui:option selected="<%= country.getA2().equalsIgnoreCase(shoppingStore.getCountry()) %>" value="<%= country.getA2() %>" label="<%= country.getName(locale) %>"></aui:option>
+						<% } %>
+					</aui:select>
+				</div>
+			</fieldset>	
+		</aui:field-wrapper>
 		<aui:field-wrapper label='cart-display-page' >
 			<fieldset >
 				<div class="form-inline priority-set-wrapper">
@@ -131,22 +152,46 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 					<aui:select label="" name="currency" >
 						<aui:option value='' >Select...</aui:option>
 						
-							<aui:option selected='<%= "GBP".equals(currency) %>' value='GBP' >
-								GBP
-							</aui:option>
+							<aui:option selected='<%= "GBP".equals(currency) %>' value='GBP' label="GBP"></aui:option>
+							<aui:option selected='<%= "USD".equals(currency) %>' value='USD' label="USD"></aui:option>
+							<aui:option selected='<%= "EUR".equals(currency) %>' value='EUR' label="EUR"></aui:option>
+							
 						
 					</aui:select>
 				</div>
 			</fieldset>	
 		</aui:field-wrapper>
 		
+		<aui:field-wrapper label='stype-payment-method' >
+			<fieldset >
+				
+				<aui:input type="checkbox" value="<%= integrateWithStripe %>" name="integrateWithStripe" />
+				<aui:input type="text" value="<%= stripeTestSecretKey %>" name="stripeTestSecretKey" />
+				<aui:input type="text" value="<%= stripeTestPublishableKey %>" name="stripeTestPublishableKey" />
+				<aui:input type="text" value="<%= stripeLiveSecretKey %>" name="stripeLiveSecretKey" />
+				<aui:input type="text" value="<%= stripeLivePublishableKey %>" name="stripeLivePublishableKey" />
+				<aui:input type="text" value="<%= stripeApiVersion %>" name="stripeApiVersion" />
+				
+				
+				<aui:input type="checkbox" value="<%= stripeTesting %>" name="stripeTesting" ></aui:input>
+				<div style="margin-top: 10px">
+					<button type="button" id="<portlet:namespace />test-payment-btn" class="btn test-payment-btn" >Test Payment</button>
+				</div>
+			</fieldset>	
+		</aui:field-wrapper>
+		
+		<div id="<portlet:namespace />store_form_error" class="error-message store-form-error">
+		</div>
+		<div id="<portlet:namespace />store_form_success" class="error-message store-form-success">
+		</div>
+		
 		<div style="margin-top: 20px">
-			<button type="button" id="<portlet:namespace />save_store_btn" class="btn save-store-btn" >Save Ajax</button>
+			<button type="button" id="<portlet:namespace />save_store_btn" class="btn save-store-btn" >Save</button>
 		</div>
 	</div>
 </aui:form>
 
-<aui:script use="aui-base,selector-css3,aui-io-request,array-extras,querystring-stringify,aui-datatype,aui-datepicker">
+<aui:script use="aui-base,selector-css3,aui-io-request,array-extras,querystring-stringify,aui-datatype,aui-datepicker,liferay-dynamic-select">
 	
 	A.on('click', function(event) {
 		<portlet:namespace />saveStore();
@@ -163,17 +208,54 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
                 	  <portlet:namespace />cartDisplayPage : A.one('#<portlet:namespace />cartDisplayPage').val(),
                 	  <portlet:namespace />currency : A.one('#<portlet:namespace />currency').val(),
                 	  <portlet:namespace />onAddToCart : A.one('#<portlet:namespace />onAddToCart').val(),
-                	  <portlet:namespace />currency : A.one('#<portlet:namespace />currency').val()
+                	  <portlet:namespace />currency : A.one('#<portlet:namespace />currency').val(),
+                	  <portlet:namespace />integrateWithStripe : A.one('#<portlet:namespace />integrateWithStripe').val(),
+                	  <portlet:namespace />stripeTestSecretKey : A.one('#<portlet:namespace />stripeTestSecretKey').val(),
+                	  <portlet:namespace />stripeTestPublishableKey : A.one('#<portlet:namespace />stripeTestPublishableKey').val(),
+                	  <portlet:namespace />stripeLiveSecretKey : A.one('#<portlet:namespace />stripeLiveSecretKey').val(),
+                	  <portlet:namespace />stripeLivePublishableKey : A.one('#<portlet:namespace />stripeLivePublishableKey').val(),
+                	  <portlet:namespace />stripeTesting : A.one('#<portlet:namespace />stripeTesting').val(),
+                	  <portlet:namespace />stripeApiVersion : A.one('#<portlet:namespace />stripeApiVersion').val()               	  
                 	  
                   },
                   on: {
                       success: function() {
                       	var response = this.get('responseData');
+                      	A.one('#<portlet:namespace />store_form_success').text("");
+                      	A.one('#<portlet:namespace />store_form_error').text("");
+                  		if(response.success){
+                  			A.one('#<portlet:namespace />store_form_success').text(response.successMessage);
+                  		}
+                  		else{
+                  			A.one('#<portlet:namespace />store_form_error').text(response.errorMessage);
+  	                  	}
                       }
                   }
             });
         },
-    	['aui-base,selector-css3,array-extras,querystring-stringify']);
+    	['aui-base,selector-css3']);
+
+	A.on('click', function(event) {
+		<portlet:namespace />openTestStripe();
+	},'#<portlet:namespace />test-payment-btn');
+	
+	Liferay.provide(window, '<portlet:namespace />openTestStripe',
+			function() {
+				
+				A.io.request('<%= openTestStripeFormURL %>',{
+	                  dataType: 'json',
+	                  method: 'POST',
+	                  data: { 
+	                  },
+	                  on: {
+	                	  success: function() {
+	  	                  	var response = this.get('responseData');
+							$('.shopping-store-settings').append(response);
+	  	                  }
+	                  }
+	            });
+	        },
+	    	['aui-base,selector-css3']);
 
 </aui:script>
 

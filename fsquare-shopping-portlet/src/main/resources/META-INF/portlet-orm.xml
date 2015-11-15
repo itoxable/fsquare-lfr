@@ -39,6 +39,7 @@
 			<basic name="minOrder" />
 			<basic name="discount" />
 			<basic name="discountType" />
+			<basic name="maxUses" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -64,12 +65,14 @@
 			</basic>
 			<basic name="tax" />
 			<basic name="shipping" />
+			<basic name="totalPrice" />
 			<basic name="altShipping" />
 			<basic name="requiresShipping" />
 			<basic name="insure" />
 			<basic name="insurance" />
 			<basic name="couponCodes" />
 			<basic name="couponDiscount" />
+			<basic name="paymentStatus" />
 			<basic name="billingFirstName" />
 			<basic name="billingLastName" />
 			<basic name="billingEmailAddress" />
@@ -86,9 +89,10 @@
 			<basic name="shippingEmailAddress" />
 			<basic name="shippingCompany" />
 			<basic name="shippingStreet" />
+			<basic name="shippingStreet2" />
 			<basic name="shippingCity" />
 			<basic name="shippingState" />
-			<basic name="shippingZip" />
+			<basic name="shippingPostCode" />
 			<basic name="shippingCountry" />
 			<basic name="shippingPhone" />
 			<basic name="ccName" />
@@ -106,6 +110,7 @@
 			<basic name="sendOrderEmail" />
 			<basic name="sendShippingEmail" />
 			<basic name="shippingMethodId" />
+			<basic name="international" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -151,6 +156,8 @@
 			<basic name="freeTotal" />
 			<basic name="weight" />
 			<basic name="defaultShipping" />
+			<basic name="international" />
+			<basic name="shippingType" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -175,6 +182,14 @@
 			<basic name="currency">
 				<column name="CURRENCY_" />
 			</basic>
+			<basic name="country" />
+			<basic name="integrateWithStripe" />
+			<basic name="stripeTestSecretKey" />
+			<basic name="stripeTestPublishableKey" />
+			<basic name="stripeTesting" />
+			<basic name="stripeLiveSecretKey" />
+			<basic name="stripeLivePublishableKey" />
+			<basic name="stripeApiVersion" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

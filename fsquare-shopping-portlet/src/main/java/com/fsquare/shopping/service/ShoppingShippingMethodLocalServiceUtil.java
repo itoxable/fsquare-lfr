@@ -263,10 +263,10 @@ public class ShoppingShippingMethodLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
-    public static java.lang.Long getShippingPrice(
+    public static double getShippingPrice(
         com.fsquare.shopping.model.ShoppingShippingMethod shoppingShippingMethod,
         java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItems,
-        long total) {
+        double total) {
         return getService()
                    .getShippingPrice(shoppingShippingMethod,
             shoppingOrderItems, total);

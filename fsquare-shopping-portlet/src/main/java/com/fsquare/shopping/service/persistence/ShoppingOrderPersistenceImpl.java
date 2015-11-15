@@ -2779,12 +2779,14 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         shoppingOrderImpl.setNumber(shoppingOrder.getNumber());
         shoppingOrderImpl.setTax(shoppingOrder.getTax());
         shoppingOrderImpl.setShipping(shoppingOrder.getShipping());
+        shoppingOrderImpl.setTotalPrice(shoppingOrder.getTotalPrice());
         shoppingOrderImpl.setAltShipping(shoppingOrder.getAltShipping());
         shoppingOrderImpl.setRequiresShipping(shoppingOrder.isRequiresShipping());
         shoppingOrderImpl.setInsure(shoppingOrder.isInsure());
         shoppingOrderImpl.setInsurance(shoppingOrder.getInsurance());
         shoppingOrderImpl.setCouponCodes(shoppingOrder.getCouponCodes());
         shoppingOrderImpl.setCouponDiscount(shoppingOrder.getCouponDiscount());
+        shoppingOrderImpl.setPaymentStatus(shoppingOrder.getPaymentStatus());
         shoppingOrderImpl.setBillingFirstName(shoppingOrder.getBillingFirstName());
         shoppingOrderImpl.setBillingLastName(shoppingOrder.getBillingLastName());
         shoppingOrderImpl.setBillingEmailAddress(shoppingOrder.getBillingEmailAddress());
@@ -2801,9 +2803,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         shoppingOrderImpl.setShippingEmailAddress(shoppingOrder.getShippingEmailAddress());
         shoppingOrderImpl.setShippingCompany(shoppingOrder.getShippingCompany());
         shoppingOrderImpl.setShippingStreet(shoppingOrder.getShippingStreet());
+        shoppingOrderImpl.setShippingStreet2(shoppingOrder.getShippingStreet2());
         shoppingOrderImpl.setShippingCity(shoppingOrder.getShippingCity());
         shoppingOrderImpl.setShippingState(shoppingOrder.getShippingState());
-        shoppingOrderImpl.setShippingZip(shoppingOrder.getShippingZip());
+        shoppingOrderImpl.setShippingPostCode(shoppingOrder.getShippingPostCode());
         shoppingOrderImpl.setShippingCountry(shoppingOrder.getShippingCountry());
         shoppingOrderImpl.setShippingPhone(shoppingOrder.getShippingPhone());
         shoppingOrderImpl.setCcName(shoppingOrder.getCcName());
@@ -2821,6 +2824,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         shoppingOrderImpl.setSendOrderEmail(shoppingOrder.isSendOrderEmail());
         shoppingOrderImpl.setSendShippingEmail(shoppingOrder.isSendShippingEmail());
         shoppingOrderImpl.setShippingMethodId(shoppingOrder.getShippingMethodId());
+        shoppingOrderImpl.setInternational(shoppingOrder.isInternational());
 
         return shoppingOrderImpl;
     }

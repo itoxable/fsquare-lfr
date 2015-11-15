@@ -50,6 +50,10 @@ public abstract class ShoppingOrderServiceBaseImpl extends BaseServiceImpl
     protected com.fsquare.shopping.service.ShoppingOrderItemService shoppingOrderItemService;
     @BeanReference(type = ShoppingOrderItemPersistence.class)
     protected ShoppingOrderItemPersistence shoppingOrderItemPersistence;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingPaymentLocalService.class)
+    protected com.fsquare.shopping.service.ShoppingPaymentLocalService shoppingPaymentLocalService;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingPaymentService.class)
+    protected com.fsquare.shopping.service.ShoppingPaymentService shoppingPaymentService;
     @BeanReference(type = com.fsquare.shopping.service.ShoppingShippingMethodLocalService.class)
     protected com.fsquare.shopping.service.ShoppingShippingMethodLocalService shoppingShippingMethodLocalService;
     @BeanReference(type = com.fsquare.shopping.service.ShoppingShippingMethodService.class)
@@ -251,6 +255,44 @@ public abstract class ShoppingOrderServiceBaseImpl extends BaseServiceImpl
     public void setShoppingOrderItemPersistence(
         ShoppingOrderItemPersistence shoppingOrderItemPersistence) {
         this.shoppingOrderItemPersistence = shoppingOrderItemPersistence;
+    }
+
+    /**
+     * Returns the shopping payment local service.
+     *
+     * @return the shopping payment local service
+     */
+    public com.fsquare.shopping.service.ShoppingPaymentLocalService getShoppingPaymentLocalService() {
+        return shoppingPaymentLocalService;
+    }
+
+    /**
+     * Sets the shopping payment local service.
+     *
+     * @param shoppingPaymentLocalService the shopping payment local service
+     */
+    public void setShoppingPaymentLocalService(
+        com.fsquare.shopping.service.ShoppingPaymentLocalService shoppingPaymentLocalService) {
+        this.shoppingPaymentLocalService = shoppingPaymentLocalService;
+    }
+
+    /**
+     * Returns the shopping payment remote service.
+     *
+     * @return the shopping payment remote service
+     */
+    public com.fsquare.shopping.service.ShoppingPaymentService getShoppingPaymentService() {
+        return shoppingPaymentService;
+    }
+
+    /**
+     * Sets the shopping payment remote service.
+     *
+     * @param shoppingPaymentService the shopping payment remote service
+     */
+    public void setShoppingPaymentService(
+        com.fsquare.shopping.service.ShoppingPaymentService shoppingPaymentService) {
+        this.shoppingPaymentService = shoppingPaymentService;
     }
 
     /**
