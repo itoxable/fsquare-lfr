@@ -49,6 +49,7 @@ public class ShoppingStoreWrapper implements ShoppingStore,
         attributes.put("onAddToCart", getOnAddToCart());
         attributes.put("currency", getCurrency());
         attributes.put("country", getCountry());
+        attributes.put("userTypes", getUserTypes());
         attributes.put("integrateWithStripe", getIntegrateWithStripe());
         attributes.put("stripeTestSecretKey", getStripeTestSecretKey());
         attributes.put("stripeTestPublishableKey", getStripeTestPublishableKey());
@@ -126,6 +127,12 @@ public class ShoppingStoreWrapper implements ShoppingStore,
 
         if (country != null) {
             setCountry(country);
+        }
+
+        String userTypes = (String) attributes.get("userTypes");
+
+        if (userTypes != null) {
+            setUserTypes(userTypes);
         }
 
         Boolean integrateWithStripe = (Boolean) attributes.get(
@@ -436,6 +443,26 @@ public class ShoppingStoreWrapper implements ShoppingStore,
     @Override
     public void setCountry(java.lang.String country) {
         _shoppingStore.setCountry(country);
+    }
+
+    /**
+    * Returns the user types of this shopping store.
+    *
+    * @return the user types of this shopping store
+    */
+    @Override
+    public java.lang.String getUserTypes() {
+        return _shoppingStore.getUserTypes();
+    }
+
+    /**
+    * Sets the user types of this shopping store.
+    *
+    * @param userTypes the user types of this shopping store
+    */
+    @Override
+    public void setUserTypes(java.lang.String userTypes) {
+        _shoppingStore.setUserTypes(userTypes);
     }
 
     /**

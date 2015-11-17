@@ -273,6 +273,22 @@ public class ShoppingCouponLocalServiceUtil {
         return getService().findByGroupId(groupId);
     }
 
+    public static boolean isCouponValid(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon) {
+        return getService().isCouponValid(shoppingCoupon);
+    }
+
+    public static java.lang.String getCouponStatus(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon) {
+        return getService().getCouponStatus(shoppingCoupon);
+    }
+
+    public static java.lang.Double applyCoupon(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon,
+        java.lang.Double total) {
+        return getService().applyCoupon(shoppingCoupon, total);
+    }
+
     public static void clearService() {
         _service = null;
     }

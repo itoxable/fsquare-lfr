@@ -31,7 +31,11 @@ public class ShoppingShippingMethodLocalServiceImpl
      */
 	
 	public double getShippingPrice(ShoppingShippingMethod shoppingShippingMethod, Collection<ShoppingOrderItem> shoppingOrderItems, double total){
-		return total;
+		
+		if(shoppingShippingMethod == null || shoppingShippingMethod.getFreeTotal() > 0 && total >= shoppingShippingMethod.getFreeTotal()){
+			return 0;
+		}
+		return shoppingShippingMethod.getPrice();
 	}
 	
 	public ShoppingShippingMethod fetchDefaultShipping() throws SystemException{

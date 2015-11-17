@@ -6,6 +6,10 @@
 <%
 
 
+String displayType = "";
+String linkTemplate = "";
+
+String miniCartTemplate = "";
 
 List<Layout> layoutsx = themeDisplay.getLayouts();
 

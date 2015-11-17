@@ -1,6 +1,6 @@
 <%@page import="com.fsquare.shopping.model.ShoppingOrder"%>
 <%@page import="com.fsquare.shopping.service.ShoppingOrderLocalServiceUtil"%>
-<%@ include file="/shopping-order/init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <%
 

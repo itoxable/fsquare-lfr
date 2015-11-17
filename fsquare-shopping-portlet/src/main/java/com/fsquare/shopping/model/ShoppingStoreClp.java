@@ -34,6 +34,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
     private String _onAddToCart;
     private String _currency;
     private String _country;
+    private String _userTypes;
     private boolean _integrateWithStripe;
     private String _stripeTestSecretKey;
     private String _stripeTestPublishableKey;
@@ -92,6 +93,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         attributes.put("onAddToCart", getOnAddToCart());
         attributes.put("currency", getCurrency());
         attributes.put("country", getCountry());
+        attributes.put("userTypes", getUserTypes());
         attributes.put("integrateWithStripe", getIntegrateWithStripe());
         attributes.put("stripeTestSecretKey", getStripeTestSecretKey());
         attributes.put("stripeTestPublishableKey", getStripeTestPublishableKey());
@@ -169,6 +171,12 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
         if (country != null) {
             setCountry(country);
+        }
+
+        String userTypes = (String) attributes.get("userTypes");
+
+        if (userTypes != null) {
+            setUserTypes(userTypes);
         }
 
         Boolean integrateWithStripe = (Boolean) attributes.get(
@@ -473,6 +481,28 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
     }
 
     @Override
+    public String getUserTypes() {
+        return _userTypes;
+    }
+
+    @Override
+    public void setUserTypes(String userTypes) {
+        _userTypes = userTypes;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setUserTypes", String.class);
+
+                method.invoke(_shoppingStoreRemoteModel, userTypes);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
     public boolean getIntegrateWithStripe() {
         return _integrateWithStripe;
     }
@@ -724,6 +754,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         clone.setOnAddToCart(getOnAddToCart());
         clone.setCurrency(getCurrency());
         clone.setCountry(getCountry());
+        clone.setUserTypes(getUserTypes());
         clone.setIntegrateWithStripe(getIntegrateWithStripe());
         clone.setStripeTestSecretKey(getStripeTestSecretKey());
         clone.setStripeTestPublishableKey(getStripeTestPublishableKey());
@@ -780,7 +811,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(37);
+        StringBundler sb = new StringBundler(39);
 
         sb.append("{groupId=");
         sb.append(getGroupId());
@@ -804,6 +835,8 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(getCurrency());
         sb.append(", country=");
         sb.append(getCountry());
+        sb.append(", userTypes=");
+        sb.append(getUserTypes());
         sb.append(", integrateWithStripe=");
         sb.append(getIntegrateWithStripe());
         sb.append(", stripeTestSecretKey=");
@@ -825,7 +858,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(58);
+        StringBundler sb = new StringBundler(61);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStore");
@@ -874,6 +907,10 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(
             "<column><column-name>country</column-name><column-value><![CDATA[");
         sb.append(getCountry());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>userTypes</column-name><column-value><![CDATA[");
+        sb.append(getUserTypes());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>integrateWithStripe</column-name><column-value><![CDATA[");

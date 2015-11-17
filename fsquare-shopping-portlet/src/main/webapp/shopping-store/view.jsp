@@ -15,6 +15,7 @@
 --%>
 
 
+<%@page import="com.fsquare.shopping.ShoppingUtil"%>
 <%@page import="com.liferay.portal.service.CountryServiceUtil"%>
 <%@page import="com.liferay.portal.model.Country"%>
 <%@page import="java.util.Calendar"%>
@@ -44,6 +45,7 @@ String stripeLivePublishableKey = shoppingStore.getStripeLivePublishableKey();
 String stripeTestSecretKey = shoppingStore.getStripeTestSecretKey();
 String stripeTestPublishableKey = shoppingStore.getStripeTestPublishableKey();
 String stripeApiVersion = shoppingStore.getStripeApiVersion();
+String usersType = shoppingStore.getUserTypes();
 
 
 boolean stripeTesting = shoppingStore.getStripeTesting();
@@ -79,10 +81,10 @@ if(shoppingStore.getIntegrateWithStripe()){
 
 <liferay-portlet:actionURL var="saveStoreURL" />
 
-<aui:form action="<%= saveStoreURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveSettings();" %>'>
+<aui:form action="<%= saveStoreURL %>" method="post" name="store_settings_form" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveSettings();" %>'>
 	<div class="store-settings">
 		
-		<aui:field-wrapper label='countru' >
+		<aui:field-wrapper label='country' >
 			<fieldset >
 				<div class="form-inline priority-set-wrapper">
 					<aui:select name="storeCountry" label="country" >
@@ -151,11 +153,25 @@ if(shoppingStore.getIntegrateWithStripe()){
 				<div>
 					<aui:select label="" name="currency" >
 						<aui:option value='' >Select...</aui:option>
-						
 							<aui:option selected='<%= "GBP".equals(currency) %>' value='GBP' label="GBP"></aui:option>
 							<aui:option selected='<%= "USD".equals(currency) %>' value='USD' label="USD"></aui:option>
-							<aui:option selected='<%= "EUR".equals(currency) %>' value='EUR' label="EUR"></aui:option>
-							
+							<aui:option selected='<%= "EUR".equals(currency) %>' value='EUR' label="EUR"></aui:option>						
+					</aui:select>
+				</div>
+			</fieldset>	
+		</aui:field-wrapper>
+		
+		<aui:field-wrapper label='Type of users' >
+			<fieldset >
+				<div class="form-inline priority-set-wrapper">
+					<aui:select label="" name="usersType" >
+						
+						<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_ALL %>' label="<%= ShoppingUtil.USER_TYPES_ALL %>" >
+						</aui:option>
+						<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>' label="<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>" >
+						</aui:option>
+						<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>' label="<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>" >
+						</aui:option>
 						
 					</aui:select>
 				</div>
@@ -171,8 +187,6 @@ if(shoppingStore.getIntegrateWithStripe()){
 				<aui:input type="text" value="<%= stripeLiveSecretKey %>" name="stripeLiveSecretKey" />
 				<aui:input type="text" value="<%= stripeLivePublishableKey %>" name="stripeLivePublishableKey" />
 				<aui:input type="text" value="<%= stripeApiVersion %>" name="stripeApiVersion" />
-				
-				
 				<aui:input type="checkbox" value="<%= stripeTesting %>" name="stripeTesting" ></aui:input>
 				<div style="margin-top: 10px">
 					<button type="button" id="<portlet:namespace />test-payment-btn" class="btn test-payment-btn" >Test Payment</button>
@@ -200,24 +214,23 @@ if(shoppingStore.getIntegrateWithStripe()){
 	Liferay.provide(window, '<portlet:namespace />saveStore',
 		function() {
 			
+			var form = $('#<portlet:namespace />store_settings_form');
+			
+			var data = {};
+			form.find('input').each(function() {
+				data[$(this).attr('name')]=$(this).val();
+			});
+			form.find('select').each(function() {
+				data[$(this).attr('name')]=$(this).val();
+			});
+			form.find('textarea').each(function() {
+				data[$(this).attr('name')]=$(this).text();
+			});
+			
 			A.io.request('<%= saveStoreResourceURL %>',{
                   dataType: 'json',
                   method: 'POST',
-                  data: {
-                	  <portlet:namespace />checkoutDisplayPage : A.one('#<portlet:namespace />checkoutDisplayPage').val(),
-                	  <portlet:namespace />cartDisplayPage : A.one('#<portlet:namespace />cartDisplayPage').val(),
-                	  <portlet:namespace />currency : A.one('#<portlet:namespace />currency').val(),
-                	  <portlet:namespace />onAddToCart : A.one('#<portlet:namespace />onAddToCart').val(),
-                	  <portlet:namespace />currency : A.one('#<portlet:namespace />currency').val(),
-                	  <portlet:namespace />integrateWithStripe : A.one('#<portlet:namespace />integrateWithStripe').val(),
-                	  <portlet:namespace />stripeTestSecretKey : A.one('#<portlet:namespace />stripeTestSecretKey').val(),
-                	  <portlet:namespace />stripeTestPublishableKey : A.one('#<portlet:namespace />stripeTestPublishableKey').val(),
-                	  <portlet:namespace />stripeLiveSecretKey : A.one('#<portlet:namespace />stripeLiveSecretKey').val(),
-                	  <portlet:namespace />stripeLivePublishableKey : A.one('#<portlet:namespace />stripeLivePublishableKey').val(),
-                	  <portlet:namespace />stripeTesting : A.one('#<portlet:namespace />stripeTesting').val(),
-                	  <portlet:namespace />stripeApiVersion : A.one('#<portlet:namespace />stripeApiVersion').val()               	  
-                	  
-                  },
+                  data: data,
                   on: {
                       success: function() {
                       	var response = this.get('responseData');

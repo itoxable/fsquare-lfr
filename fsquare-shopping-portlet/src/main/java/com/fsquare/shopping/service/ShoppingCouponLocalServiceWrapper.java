@@ -288,6 +288,25 @@ public class ShoppingCouponLocalServiceWrapper
         return _shoppingCouponLocalService.findByGroupId(groupId);
     }
 
+    @Override
+    public boolean isCouponValid(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon) {
+        return _shoppingCouponLocalService.isCouponValid(shoppingCoupon);
+    }
+
+    @Override
+    public java.lang.String getCouponStatus(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon) {
+        return _shoppingCouponLocalService.getCouponStatus(shoppingCoupon);
+    }
+
+    @Override
+    public java.lang.Double applyCoupon(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon,
+        java.lang.Double total) {
+        return _shoppingCouponLocalService.applyCoupon(shoppingCoupon, total);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

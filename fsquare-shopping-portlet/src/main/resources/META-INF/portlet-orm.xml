@@ -183,6 +183,7 @@
 				<column name="CURRENCY_" />
 			</basic>
 			<basic name="country" />
+			<basic name="userTypes" />
 			<basic name="integrateWithStripe" />
 			<basic name="stripeTestSecretKey" />
 			<basic name="stripeTestPublishableKey" />

@@ -236,6 +236,21 @@ public interface ShoppingStoreModel extends AuditedModel,
     public void setCountry(String country);
 
     /**
+     * Returns the user types of this shopping store.
+     *
+     * @return the user types of this shopping store
+     */
+    @AutoEscape
+    public String getUserTypes();
+
+    /**
+     * Sets the user types of this shopping store.
+     *
+     * @param userTypes the user types of this shopping store
+     */
+    public void setUserTypes(String userTypes);
+
+    /**
      * Returns the integrate with stripe of this shopping store.
      *
      * @return the integrate with stripe of this shopping store

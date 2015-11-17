@@ -15,6 +15,10 @@
 --%>
 
 
+<%@page import="com.fsquare.shopping.portlet.ShoppingOrderProcessWrapper"%>
+<%@page import="com.fsquare.shopping.ShoppingUtil"%>
+<%@page import="com.fsquare.shopping.service.ShoppingOrderLocalServiceUtil"%>
+<%@page import="com.fsquare.shopping.service.ShoppingCouponLocalServiceUtil"%>
 <%@page import="com.fsquare.shopping.model.ShoppingCoupon"%>
 <%@page import="javax.portlet.ActionRequest"%>
 <%@page import="com.liferay.portlet.journal.model.JournalArticle"%>
@@ -32,24 +36,14 @@
 
 <%
 
+ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
 
-Map<String,ShoppingOrderItem> shoppingOrderItemMap = (Map<String,ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
-if(shoppingOrderItemMap == null){
-	shoppingOrderItemMap = new HashMap<String,ShoppingOrderItem>();
-}
+Map<String, ShoppingOrderItem> shoppingOrderItemMap = shoppingOrderProcessWrapper.getShoppingOrderItemMap();
 
-double total = 0;
-for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet()){
-	ShoppingOrderItem orderItem = entry.getValue();
-	total = total + orderItem.getQuantity() * orderItem.getPrice();
-}
+double total = shoppingOrderProcessWrapper.getTotalNoShipping();
 
-ShoppingCoupon shoppingCoupon = null;
-Object shoppingCouponObj = session.getAttribute(ShoppingPortletUtil.SESSION_CART_COUPON_CODE);
-if(shoppingCouponObj != null){
-	shoppingCoupon = (ShoppingCoupon)shoppingCouponObj;
-	total = ShoppingPortletUtil.applyCoupon(shoppingCoupon, total);
-}
+ShoppingCoupon shoppingCoupon = shoppingOrderProcessWrapper.getShoppingCoupon();
+total = ShoppingCouponLocalServiceUtil.applyCoupon(shoppingCoupon, total);
 
 %>
 	
@@ -129,7 +123,7 @@ if(shoppingCouponObj != null){
 								<strong><span class="cart-discount-description"><%= (shoppingCoupon != null)?shoppingCoupon.getDescription():"" %></span></strong>
 						  	</td>
 						  	<td align="right">
-								<strong><span class="cart-discount">-<%= (shoppingCoupon != null)?shoppingCoupon.getDiscount():"" %><%= (shoppingCoupon != null)?(shoppingCoupon.getDiscountType().equals(ShoppingPortletUtil.DISCOUNT_TYPE_PERCENTAGE)?"%":"£"):"" %></span></strong>
+								<strong><span class="cart-discount">-<%= (shoppingCoupon != null)?shoppingCoupon.getDiscount():"" %><%= (shoppingCoupon != null)?(shoppingCoupon.getDiscountType().equals(ShoppingUtil.DISCOUNT_TYPE_PERCENTAGE)?"%":"£"):"" %></span></strong>
 						  	</td>
 						</tr>
 					
@@ -218,8 +212,7 @@ if(shoppingCouponObj != null){
 				                      	}else{
 				                      		alert('Invalid coupon code');
 				                      	}
-				                      	//cart-row-
-				                      	//A.one('#<portlet:namespace />cart-size').set('text', response.size);
+
 				                      }
 				                  }
 				            });

@@ -25,6 +25,7 @@ public class ShoppingStoreSoap implements Serializable {
     private String _onAddToCart;
     private String _currency;
     private String _country;
+    private String _userTypes;
     private boolean _integrateWithStripe;
     private String _stripeTestSecretKey;
     private String _stripeTestPublishableKey;
@@ -50,6 +51,7 @@ public class ShoppingStoreSoap implements Serializable {
         soapModel.setOnAddToCart(model.getOnAddToCart());
         soapModel.setCurrency(model.getCurrency());
         soapModel.setCountry(model.getCountry());
+        soapModel.setUserTypes(model.getUserTypes());
         soapModel.setIntegrateWithStripe(model.getIntegrateWithStripe());
         soapModel.setStripeTestSecretKey(model.getStripeTestSecretKey());
         soapModel.setStripeTestPublishableKey(model.getStripeTestPublishableKey());
@@ -191,6 +193,14 @@ public class ShoppingStoreSoap implements Serializable {
 
     public void setCountry(String country) {
         _country = country;
+    }
+
+    public String getUserTypes() {
+        return _userTypes;
+    }
+
+    public void setUserTypes(String userTypes) {
+        _userTypes = userTypes;
     }
 
     public boolean getIntegrateWithStripe() {

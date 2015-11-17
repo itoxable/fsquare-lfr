@@ -33,6 +33,7 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
     public String onAddToCart;
     public String currency;
     public String country;
+    public String userTypes;
     public boolean integrateWithStripe;
     public String stripeTestSecretKey;
     public String stripeTestPublishableKey;
@@ -43,7 +44,7 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(37);
+        StringBundler sb = new StringBundler(39);
 
         sb.append("{groupId=");
         sb.append(groupId);
@@ -67,6 +68,8 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         sb.append(currency);
         sb.append(", country=");
         sb.append(country);
+        sb.append(", userTypes=");
+        sb.append(userTypes);
         sb.append(", integrateWithStripe=");
         sb.append(integrateWithStripe);
         sb.append(", stripeTestSecretKey=");
@@ -142,6 +145,12 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             shoppingStoreImpl.setCountry(country);
         }
 
+        if (userTypes == null) {
+            shoppingStoreImpl.setUserTypes(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setUserTypes(userTypes);
+        }
+
         shoppingStoreImpl.setIntegrateWithStripe(integrateWithStripe);
 
         if (stripeTestSecretKey == null) {
@@ -194,6 +203,7 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         onAddToCart = objectInput.readUTF();
         currency = objectInput.readUTF();
         country = objectInput.readUTF();
+        userTypes = objectInput.readUTF();
         integrateWithStripe = objectInput.readBoolean();
         stripeTestSecretKey = objectInput.readUTF();
         stripeTestPublishableKey = objectInput.readUTF();
@@ -247,6 +257,12 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
             objectOutput.writeUTF(country);
+        }
+
+        if (userTypes == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(userTypes);
         }
 
         objectOutput.writeBoolean(integrateWithStripe);

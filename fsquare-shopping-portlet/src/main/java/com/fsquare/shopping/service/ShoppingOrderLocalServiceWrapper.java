@@ -283,6 +283,12 @@ public class ShoppingOrderLocalServiceWrapper
         return _shoppingOrderLocalService.findByGroupId(groupId);
     }
 
+    @Override
+    public double getOrderTotal(
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList) {
+        return _shoppingOrderLocalService.getOrderTotal(shoppingOrderItemList);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

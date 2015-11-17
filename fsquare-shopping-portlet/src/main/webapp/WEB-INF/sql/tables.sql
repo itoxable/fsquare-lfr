@@ -124,6 +124,7 @@ create table FsquareShopping_ShoppingStore (
 	onAddToCart VARCHAR(75) null,
 	currency_ VARCHAR(75) null,
 	country VARCHAR(75) null,
+	userTypes VARCHAR(75) null,
 	integrateWithStripe BOOLEAN,
 	stripeTestSecretKey VARCHAR(75) null,
 	stripeTestPublishableKey VARCHAR(75) null,

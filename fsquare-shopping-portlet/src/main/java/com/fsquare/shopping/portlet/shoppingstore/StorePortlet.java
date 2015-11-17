@@ -217,6 +217,8 @@ public class StorePortlet extends MVCPortlet{
 			shoppingStore.setCurrency(currency);
 			String onAddToCart = ParamUtil.getString(resourceRequest, "onAddToCart");  
 			shoppingStore.setOnAddToCart(onAddToCart);
+			String usersType = ParamUtil.getString(resourceRequest, "usersType");  
+			shoppingStore.setUserTypes(usersType);
 			
 			
 			String stripeLiveSecretKey = ParamUtil.getString(resourceRequest, "stripeLiveSecretKey");  

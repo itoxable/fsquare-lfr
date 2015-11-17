@@ -123,6 +123,7 @@
 		<field name="onAddToCart" type="String" />
 		<field name="currency" type="String" />
 		<field name="country" type="String" />
+		<field name="userTypes" type="String" />
 		<field name="integrateWithStripe" type="boolean" />
 		<field name="stripeTestSecretKey" type="String" />
 		<field name="stripeTestPublishableKey" type="String" />

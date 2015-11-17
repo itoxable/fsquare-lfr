@@ -145,6 +145,7 @@
 		<property name="onAddToCart" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="currency" type="com.liferay.portal.dao.orm.hibernate.StringType" column="currency_" />
 		<property name="country" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userTypes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="integrateWithStripe" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="stripeTestSecretKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="stripeTestPublishableKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />

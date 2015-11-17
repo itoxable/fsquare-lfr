@@ -1,8 +1,13 @@
 package com.fsquare.shopping.service.impl;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
+import com.fsquare.shopping.model.ShoppingCoupon;
 import com.fsquare.shopping.model.ShoppingOrder;
+import com.fsquare.shopping.model.ShoppingOrderItem;
+import com.fsquare.shopping.portlet.util.ShoppingPortletUtil;
 import com.fsquare.shopping.service.base.ShoppingOrderLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.SystemException;
 
@@ -30,5 +35,19 @@ public class ShoppingOrderLocalServiceImpl
 	public List<ShoppingOrder> findByGroupId(long groupId) throws SystemException{
 		return shoppingOrderPersistence.findByGroupId(groupId);
 	}
+	
+	
+	public double getOrderTotal(Collection<ShoppingOrderItem> shoppingOrderItemList){
+		double total = 0;
+		for(ShoppingOrderItem shoppingOrderItem: shoppingOrderItemList){
+			total = total + shoppingOrderItem.getQuantity() * shoppingOrderItem.getPrice();
+		}
+		return total;
+	}
+	
+//	public ShoppingOrder setOrderTotal(ShoppingOrder shoppingOrder, Collection<ShoppingOrderItem> shoppingOrderItemList){
+//		shoppingOrder.setTotalPrice(totalPrice);
+//		return shoppingOrder;
+//	}
 	
 }

@@ -247,4 +247,16 @@ public interface ShoppingCouponLocalService extends BaseLocalService,
 
     public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
         java.lang.Long groupId);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public boolean isCouponValid(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.lang.String getCouponStatus(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon);
+
+    public java.lang.Double applyCoupon(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon,
+        java.lang.Double total);
 }

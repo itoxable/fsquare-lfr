@@ -15,6 +15,7 @@
 --%>
 
 
+<%@page import="com.fsquare.shopping.portlet.ShoppingOrderProcessWrapper"%>
 <%@page import="com.fsquare.shopping.model.ShoppingOrderItem"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.liferay.portlet.shopping.model.ShoppingCart" %>
@@ -26,14 +27,13 @@
 
 <%
 
+ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
 
-Map<Long,ShoppingOrderItem> shoppingOrderItemMap = (Map<Long,ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
+Map<String, ShoppingOrderItem> shoppingOrderItemMap = shoppingOrderProcessWrapper.getShoppingOrderItemMap();
+
 int quantity = 0;
-if(shoppingOrderItemMap != null){
-	for(Map.Entry<Long, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet()){
-		quantity = quantity + entry.getValue().getQuantity();
-	}
-}
+
+shoppingOrderProcessWrapper.getTotalNoShipping();
 
 
 Layout cartPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(shoppingStore.getCartPageUuid(), themeDisplay.getScopeGroupId(), false);

@@ -46,6 +46,8 @@ public class ShoppingOrderLocalServiceClp implements ShoppingOrderLocalService {
     private String[] _methodParameterTypes17;
     private String _methodName19;
     private String[] _methodParameterTypes19;
+    private String _methodName20;
+    private String[] _methodParameterTypes20;
 
     public ShoppingOrderLocalServiceClp(
         InvokableLocalService invokableLocalService) {
@@ -144,6 +146,10 @@ public class ShoppingOrderLocalServiceClp implements ShoppingOrderLocalService {
         _methodName19 = "findByGroupId";
 
         _methodParameterTypes19 = new String[] { "long" };
+
+        _methodName20 = "getOrderTotal";
+
+        _methodParameterTypes20 = new String[] { "java.util.Collection" };
     }
 
     @Override
@@ -685,5 +691,30 @@ public class ShoppingOrderLocalServiceClp implements ShoppingOrderLocalService {
         }
 
         return (java.util.List<com.fsquare.shopping.model.ShoppingOrder>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public double getOrderTotal(
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName20,
+                    _methodParameterTypes20,
+                    new Object[] {
+                        ClpSerializer.translateInput(shoppingOrderItemList)
+                    });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return ((Double) returnObj).doubleValue();
     }
 }

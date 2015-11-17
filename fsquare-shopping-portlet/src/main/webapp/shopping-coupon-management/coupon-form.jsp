@@ -1,3 +1,4 @@
+<%@page import="com.fsquare.shopping.ShoppingUtil"%>
 <%@page import="com.liferay.portal.kernel.util.CalendarFactoryUtil"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Calendar"%>
@@ -10,13 +11,8 @@
 
 ShoppingCoupon shoppingCoupon = (ShoppingCoupon)request.getAttribute(ShoppingPortletUtil.ATTR_COUPON);
 
-// System.out.println(" -- Coupon Form -- "+shoppingCoupon);
-// System.out.println("shoppingCoupon.getCouponId(): "+shoppingCoupon.getCouponId());
-
 Date endDate = shoppingCoupon.getEndDate();
 Date startDate = shoppingCoupon.getStartDate();
-
-//System.out.println("endDate")
 
 Calendar endCalendar = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
@@ -29,9 +25,7 @@ Calendar startCalendar = CalendarFactoryUtil.getCalendar(timeZone, locale);
 if (startDate != null) {
 	startCalendar.setTime(startDate);
 }
-// else {
-// 	startCalendar.add(Calendar.DATE, -1);
-// }
+
 %>
 
 <div class="modal" id="<portlet:namespace />coupon_form">
@@ -48,8 +42,8 @@ if (startDate != null) {
 				<aui:input name="description" type="text" value="<%= shoppingCoupon.getDescription() %>" placeholder="Description" />
 				<aui:input name="discount" type="text" value="<%= shoppingCoupon.getDiscount() %>" placeholder="Discount"/>
 				<aui:select label="discount-type" name="discountType">
-					<aui:option selected="<%= ShoppingPortletUtil.DISCOUNT_TYPE_PERCENTAGE.equals(shoppingCoupon.getDiscountType()) %>" value="<%= ShoppingPortletUtil.DISCOUNT_TYPE_PERCENTAGE %>">percentage</aui:option>
-					<aui:option selected="<%= ShoppingPortletUtil.DISCOUNT_TYPE_VALUE.equals(shoppingCoupon.getDiscountType()) %>" value="<%= ShoppingPortletUtil.DISCOUNT_TYPE_VALUE %>">value</aui:option>
+					<aui:option selected="<%= ShoppingUtil.DISCOUNT_TYPE_PERCENTAGE.equals(shoppingCoupon.getDiscountType()) %>" value="<%= ShoppingUtil.DISCOUNT_TYPE_PERCENTAGE %>">percentage</aui:option>
+					<aui:option selected="<%= ShoppingUtil.DISCOUNT_TYPE_VALUE.equals(shoppingCoupon.getDiscountType()) %>" value="<%= ShoppingUtil.DISCOUNT_TYPE_VALUE %>">value</aui:option>
 				</aui:select>
 				
 				<c:choose>

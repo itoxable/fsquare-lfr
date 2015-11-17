@@ -20,6 +20,7 @@ import com.fsquare.shopping.NoSuchShoppingStoreException;
 import com.fsquare.shopping.model.ShoppingOrderItem;
 import com.fsquare.shopping.model.ShoppingStore;
 import com.fsquare.shopping.model.impl.ShoppingOrderItemImpl;
+import com.fsquare.shopping.portlet.ShoppingOrderProcessWrapper;
 import com.fsquare.shopping.portlet.util.ShoppingPortletUtil;
 import com.fsquare.shopping.service.ShoppingStoreLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -74,17 +75,10 @@ public class MiniCartPortlet extends MVCPortlet {
 
 		try{
 			String articleId = ParamUtil.getString(resourceRequest, "articleId");
+			ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
+			Map<String, ShoppingOrderItem> shoppingOrderItemMap = shoppingOrderProcessWrapper.getShoppingOrderItemMap();
 			
-			Map<String,ShoppingOrderItem> shoppingOrderItemMap = (Map<String,ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
-			
-			ShoppingOrderItem shoppingOrderItem = null;
-			if(shoppingOrderItemMap == null){
-				shoppingOrderItemMap = new HashMap<String, ShoppingOrderItem>();
-			}
-			else{
-				shoppingOrderItem = shoppingOrderItemMap.get(articleId);
-			}
-			
+			ShoppingOrderItem shoppingOrderItem = shoppingOrderItemMap.get(articleId);
 			
 			if(shoppingOrderItem == null){
 				
@@ -113,7 +107,7 @@ public class MiniCartPortlet extends MVCPortlet {
 				quantity = quantity + entry.getValue().getQuantity();
 			}
 			
-			session.setAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT, shoppingOrderItemMap);
+			//session.setAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT, shoppingOrderItemMap);
 			
 			
 			ShoppingStore shoppingStore = null;

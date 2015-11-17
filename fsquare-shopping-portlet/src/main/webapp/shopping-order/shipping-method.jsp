@@ -4,13 +4,12 @@
 <%@page import="com.liferay.portal.kernel.util.CalendarFactoryUtil"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Calendar"%>
-<%@ include file="../init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="com.fsquare.shopping.portlet.util.ShoppingPortletUtil"%>
 <%
 
-List<ShoppingShippingMethod>  availableShoppingShippingMethodList = (List<ShoppingShippingMethod> )request.getAttribute(ShoppingPortletUtil.ATTR_AVAILABLE_SHOPPING_SHIPPING_METHOD_LIST);
 
 %>
 
@@ -20,9 +19,9 @@ List<ShoppingShippingMethod>  availableShoppingShippingMethodList = (List<Shoppi
 <div>
 	<aui:form id='shipping-method-form' name='shipping-method-form'>
 		<%
-			for(ShoppingShippingMethod shoppingShippingMethod : availableShoppingShippingMethodList){
+			for(ShoppingShippingMethod shippingMethod : availableShoppingShippingMethodList){
 		%>
-		<aui:input name="shippingMethodId" value="<%= shoppingShippingMethod.getShippingMethodId()%>" type="radio" label='<%= shoppingShippingMethod.getName() + StringPool.BLANK + "(" + shoppingStore.getCurrency() + shoppingShippingMethod.getPrice() + ")" %>'></aui:input>
+		<aui:input name="shippingMethodId" value="<%= shippingMethod.getShippingMethodId()%>" type="radio" label='<%= shippingMethod.getName() + StringPool.BLANK + "(" + shoppingStore.getCurrency() + shippingMethod.getPrice() + ")" %>'></aui:input>
 		<br>
 		<%
 			}
@@ -34,7 +33,9 @@ List<ShoppingShippingMethod>  availableShoppingShippingMethodList = (List<Shoppi
 	</aui:form>
 </div>
 <aui:script use="aui-base,selector-css3,aui-io-request,liferay-dynamic-select">
-A.on('click', function(event) {
+	A.on('click', function(event) {
+  		<portlet:namespace />showLoading('#<portlet:namespace />checkout-panel-shipping');
+  		<portlet:namespace />showLoading('#<portlet:namespace />checkout-order-summary');
 		<portlet:namespace />setShippingMethod();
 	},'#<portlet:namespace />set_shipping_method');
 
@@ -46,6 +47,9 @@ A.on('click', function(event) {
 			
 			var data = {};
 			form.find('input').each(function() {
+				data[$(this).attr('name')]=$(this).val();
+			});
+			form.find("input[type=radio]:checked").each(function() {
 				data[$(this).attr('name')]=$(this).val();
 			});
 			form.find('select').each(function() {
@@ -61,20 +65,41 @@ A.on('click', function(event) {
                   data: data,
                   on: {
                       success: function() {
-                      	var response = this.get('responseData');
-//                   		if(response.success){
-//                   			debug(response);
-                  			
-                  			
+                  	  	<portlet:namespace />hideLoading('#<portlet:namespace />checkout-panel-shipping');
+                  	  	
+                  	  	var response = this.get('responseData');
+                  	  	A.one('#<portlet:namespace />shipping-method-form-error').text("");
+                  		if(response.success){
+	                  	  	var shoppingShippingMethodJson = JSON.parse(response.shoppingShippingMethod);
+							var savedFieldSet = '<div class="saved-order-fields">';
+							
+							savedFieldSet += '<div>';
+							savedFieldSet += shoppingShippingMethodJson.name + " - " + shoppingShippingMethodJson.description + " (<%= shoppingStore.getCurrency()%>" +shoppingShippingMethodJson.price+")";
+							savedFieldSet += '</div>';
+							savedFieldSet += '<br>';
+							savedFieldSet += '</div>';
+							
+							
+							$('.order-summary-shipping-description').text(shoppingShippingMethodJson.description);
+							$('.order-summary-shipping-price').text('<%= shoppingStore.getCurrency()%>'+shoppingShippingMethodJson.price);
+							$('#<portlet:namespace />order-summary-total-price').text(response.total);
+                      		A.one('.shipping-method-row').removeClass("hide");
+
+							<portlet:namespace />hideLoading('#<portlet:namespace />checkout-order-summary');
+                  	  	
 							form.fadeOut(200, function(){
-								$('#<portlet:namespace />payment-form-wrapper').append(response);
+								var wrapper = form.closest('.checkout-panel');
+								wrapper.find('.checkout-edit-button').fadeIn(0);
+								wrapper.find('.checkout-item-wrapper').append(savedFieldSet);
+								form.remove();
+								//<portlet:namespace />calculateShippingPrice();
+								<portlet:namespace />loadStep(<%= ShoppingPortletUtil.CHECKOUT_STEP_PAYMENT_NR %>);
 							});
-                  			
-                  			
-//                   		}
-//                   		else{
-//                   			A.one('#<portlet:namespace />shipping-method-form-error').text(response.errorMessage);
-//   	                  	}
+						}
+						else{
+							A.one('#<portlet:namespace />shipping-method-form-error').text(response.errorMessage);
+						}
+                      
                       }
                   }
             });

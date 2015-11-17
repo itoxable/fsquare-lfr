@@ -15,6 +15,7 @@
 --%>
 
 
+<%@page import="com.fsquare.shopping.ShoppingUtil"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="com.fsquare.shopping.model.ShoppingCoupon"%>
 <%@page import="com.fsquare.shopping.service.ShoppingCouponLocalServiceUtil"%>
@@ -71,7 +72,7 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 				
 			<%
 			  	for(ShoppingCoupon shoppingCoupon: shoppingCouponList){
-			  		String couponStatus = ShoppingPortletUtil.getCouponStatus(shoppingCoupon);
+			  		String couponStatus = ShoppingCouponLocalServiceUtil.getCouponStatus(shoppingCoupon);
 		  	%>
 				
 				<tr id="<portlet:namespace />coupon-row-<%= shoppingCoupon.getCouponId() %>">
@@ -147,14 +148,14 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 	                  		var startDateFormated = A.DataType.Date.format(new Date(startDate), {format:'%d/%m/%Y'});
 	                  		var endDateFormated = A.DataType.Date.format(new Date(endDate), {format:'%d/%m/%Y'});
 	                  		
-	                  		var status = '<%= ShoppingPortletUtil.COUNPON_STATE_RUNNING %>';
-	                  		var statusDesc = '<%= LanguageUtil.get(locale, ShoppingPortletUtil.COUNPON_STATE_RUNNING) %>';
+	                  		var status = '<%= ShoppingUtil.COUNPON_STATE_RUNNING %>';
+	                  		var statusDesc = '<%= LanguageUtil.get(locale, ShoppingUtil.COUNPON_STATE_RUNNING) %>';
 							if(time > startDate){
-								status = '<%= ShoppingPortletUtil.COUNPON_STATE_NOT_STARTED %>';
-								statusDesc = '<%= LanguageUtil.get(locale, ShoppingPortletUtil.COUNPON_STATE_NOT_STARTED) %>';
+								status = '<%= ShoppingUtil.COUNPON_STATE_NOT_STARTED %>';
+								statusDesc = '<%= LanguageUtil.get(locale, ShoppingUtil.COUNPON_STATE_NOT_STARTED) %>';
                   			}else if(time > endDate){
-                  				status = '<%= ShoppingPortletUtil.COUNPON_STATE_EXPIRED %>';
-                  				statusDesc = '<%= LanguageUtil.get(locale, ShoppingPortletUtil.COUNPON_STATE_EXPIRED) %>';
+                  				status = '<%= ShoppingUtil.COUNPON_STATE_EXPIRED %>';
+                  				statusDesc = '<%= LanguageUtil.get(locale, ShoppingUtil.COUNPON_STATE_EXPIRED) %>';
                   			}
 							
 	                  		if(response.isNew){
@@ -197,9 +198,9 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 	                  			A.one('#coupon-minorder-'+couponId).text(shoppingCouponJson.minOrder);
 	                  			A.one('#coupon-discount-type-'+couponId).text(shoppingCouponJson.discountType);
 	                  			
-	                  			A.one('#coupon-status-'+couponId).removeClass('<%= ShoppingPortletUtil.COUNPON_STATE_RUNNING %>');
-	                  			A.one('#coupon-status-'+couponId).removeClass('<%= ShoppingPortletUtil.COUNPON_STATE_EXPIRED %>');
-	                  			A.one('#coupon-status-'+couponId).removeClass('<%= ShoppingPortletUtil.COUNPON_STATE_NOT_STARTED %>');
+	                  			A.one('#coupon-status-'+couponId).removeClass('<%= ShoppingUtil.COUNPON_STATE_RUNNING %>');
+	                  			A.one('#coupon-status-'+couponId).removeClass('<%= ShoppingUtil.COUNPON_STATE_EXPIRED %>');
+	                  			A.one('#coupon-status-'+couponId).removeClass('<%= ShoppingUtil.COUNPON_STATE_NOT_STARTED %>');
 	                  			
 	                  			A.one('#coupon-status-'+couponId).addClass(status);
 	                  			

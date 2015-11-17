@@ -48,6 +48,12 @@ public class ShoppingCouponLocalServiceClp implements ShoppingCouponLocalService
     private String[] _methodParameterTypes19;
     private String _methodName20;
     private String[] _methodParameterTypes20;
+    private String _methodName21;
+    private String[] _methodParameterTypes21;
+    private String _methodName22;
+    private String[] _methodParameterTypes22;
+    private String _methodName23;
+    private String[] _methodParameterTypes23;
 
     public ShoppingCouponLocalServiceClp(
         InvokableLocalService invokableLocalService) {
@@ -150,6 +156,24 @@ public class ShoppingCouponLocalServiceClp implements ShoppingCouponLocalService
         _methodName20 = "findByGroupId";
 
         _methodParameterTypes20 = new String[] { "java.lang.Long" };
+
+        _methodName21 = "isCouponValid";
+
+        _methodParameterTypes21 = new String[] {
+                "com.fsquare.shopping.model.ShoppingCoupon"
+            };
+
+        _methodName22 = "getCouponStatus";
+
+        _methodParameterTypes22 = new String[] {
+                "com.fsquare.shopping.model.ShoppingCoupon"
+            };
+
+        _methodName23 = "applyCoupon";
+
+        _methodParameterTypes23 = new String[] {
+                "com.fsquare.shopping.model.ShoppingCoupon", "java.lang.Double"
+            };
     }
 
     @Override
@@ -710,5 +734,79 @@ public class ShoppingCouponLocalServiceClp implements ShoppingCouponLocalService
         }
 
         return (java.util.List<com.fsquare.shopping.model.ShoppingCoupon>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public boolean isCouponValid(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName21,
+                    _methodParameterTypes21,
+                    new Object[] { ClpSerializer.translateInput(shoppingCoupon) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return ((Boolean) returnObj).booleanValue();
+    }
+
+    @Override
+    public java.lang.String getCouponStatus(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName22,
+                    _methodParameterTypes22,
+                    new Object[] { ClpSerializer.translateInput(shoppingCoupon) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.lang.String) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.lang.Double applyCoupon(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon,
+        java.lang.Double total) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName23,
+                    _methodParameterTypes23,
+                    new Object[] {
+                        ClpSerializer.translateInput(shoppingCoupon),
+                        
+                    ClpSerializer.translateInput(total)
+                    });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.lang.Double) ClpSerializer.translateOutput(returnObj);
     }
 }

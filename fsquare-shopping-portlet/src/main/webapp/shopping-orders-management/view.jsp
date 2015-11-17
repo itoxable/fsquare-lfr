@@ -2,7 +2,7 @@
 <%@page import="com.fsquare.shopping.service.ShoppingShippingMethodLocalServiceUtil"%>
 <%@page import="com.fsquare.shopping.model.ShoppingOrder"%>
 <%@page import="com.fsquare.shopping.service.ShoppingOrderLocalServiceUtil"%>
-<%@ include file="/shopping-order/init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <%
 
@@ -48,7 +48,7 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 						<a href class="icon-external-link-sign" data-order-id="<%= shoppingOrderId %>" title="View shipping address" href="javascript:;"></a>
 					</td>
 					
-					<td id="<%= "order-price-"+shoppingOrderId %>"><%= shoppingOrder.getNumber() %></td>
+					<td id="<%= "order-price-"+shoppingOrderId %>"><%= shoppingOrder.getTotalPrice()%></td>
 					
 					<td id="<%= "order-status-"+shoppingOrderId %>">
 						<select class="order-status" data-order-id="<%= shoppingOrderId %>">

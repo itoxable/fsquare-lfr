@@ -11,6 +11,8 @@ import java.util.Map;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequestDispatcher;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +24,11 @@ import com.fsquare.shopping.model.ShoppingOrder;
 import com.fsquare.shopping.model.ShoppingOrderItem;
 import com.fsquare.shopping.model.ShoppingShippingMethod;
 import com.fsquare.shopping.model.ShoppingStore;
+import com.fsquare.shopping.portlet.BaseShoppingPortlet;
+import com.fsquare.shopping.portlet.ShoppingOrderProcessWrapper;
 import com.fsquare.shopping.portlet.util.ShoppingPortletUtil;
+import com.fsquare.shopping.service.ShoppingCouponLocalServiceUtil;
+import com.fsquare.shopping.service.ShoppingOrderItemLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingOrderLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingShippingMethodLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingStoreLocalServiceUtil;
@@ -35,7 +41,9 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
+import com.liferay.portal.model.Country;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -49,7 +57,22 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.Charge;
 import com.stripe.net.RequestOptions;
 
-public class OrdersPortlet extends MVCPortlet {
+public class OrdersPortlet extends BaseShoppingPortlet {
+	
+	@Override
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException{
+		
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
+		HttpSession session = request.getSession();
+		ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
+		ShoppingOrder shoppingOrder = shoppingOrderProcessWrapper.getShoppingOrder();
+		
+		if(shoppingOrder == null){
+			shoppingOrder = ShoppingOrderLocalServiceUtil.createShoppingOrder(-1L);
+			shoppingOrderProcessWrapper.setShoppingOrder(shoppingOrder);
+		}
+		 super.doView(renderRequest, renderResponse);
+	}
 	
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
@@ -65,7 +88,20 @@ public class OrdersPortlet extends MVCPortlet {
 				saveCheckoutShippingMethod(resourceRequest, resourceResponse);
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_SAVE_CHECKOUT_PAYMENT)) {
 				saveCheckoutPayment(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_GET_CHECKOUT_STEP)) {
+				getCheckoutStep(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_GET_ORDER_TOTAL)) {
+				getOrderTotal(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_REMOVE_FROM_CART)) {
+				removeFromShoppingCart(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_APPLY_COUPON)) {
+				applyCoupon(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_UPDATE_CART)) {
+				updateCart(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_CALCULATE_SHIPPING_PRICE)) {
+				calculateShippingPrice(resourceRequest, resourceResponse);
 			}
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -77,7 +113,77 @@ public class OrdersPortlet extends MVCPortlet {
 		}
 	}
 
-	private void saveCheckoutPayment(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException, SystemException {
+	private void calculateShippingPrice(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException {
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        boolean success = false;
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
+		HttpSession session = request.getSession();
+		
+		ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
+		ShoppingShippingMethod shoppingShippingMethod = shoppingOrderProcessWrapper.getShoppingShippingMethod();
+
+		double total = ShoppingOrderLocalServiceUtil.getOrderTotal(shoppingOrderProcessWrapper.getShoppingOrderItemMap().values());
+		double shippingPrice = ShoppingShippingMethodLocalServiceUtil.getShippingPrice(shoppingOrderProcessWrapper.getShoppingShippingMethod(), shoppingOrderProcessWrapper.getShoppingOrderItemMap().values(), total);
+		
+		ShoppingCoupon shoppingCoupon = shoppingOrderProcessWrapper.getShoppingCoupon();
+		
+		double couponDiscount =  ShoppingCouponLocalServiceUtil.applyCoupon(shoppingCoupon, total);
+		
+		success = true;
+		jsonObject.put("success", success);
+		jsonObject.put("total", ((total+shippingPrice)-couponDiscount));
+
+		jsonObject.put("shoppingShippingMethod", JSONFactoryUtil.looseSerialize(shoppingShippingMethod));
+
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
+	}
+
+	@SuppressWarnings("unchecked")
+	private void getOrderTotal(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws PortalException, SystemException, IOException {
+		
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        boolean success = false;
+
+        HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
+		HttpSession session = request.getSession();
+
+		ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
+		double total = shoppingOrderProcessWrapper.getAbsoluteTotal();
+
+		//shoppingOrder.setTotalPrice(total);
+		success = true;
+		jsonObject.put("success", success);
+		//jsonObject.put("shoppingOrder", JSONFactoryUtil.looseSerialize(shoppingOrder));
+
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
+	}
+
+	private void getCheckoutStep(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws PortletException, IOException {
+		
+		PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
+		Integer step = ParamUtil.getInteger(resourceRequest, "step");
+		String path = "";
+		if(ShoppingPortletUtil.CHECKOUT_STEP_ADDRESS_NR == step){
+			path = ShoppingPortletUtil.CHECKOUT_STEP_ADDRESS_FORM;
+		}else if(ShoppingPortletUtil.CHECKOUT_STEP_PAYMENT_NR == step){
+			path = ShoppingPortletUtil.CHECKOUT_STEP_PAYMENT_FORM;
+		} if(ShoppingPortletUtil.CHECKOUT_STEP_SHIPPING_NR == step){
+			path = ShoppingPortletUtil.CHECKOUT_STEP_SHIPPING_METHOD;
+		}
+		
+		PortletRequestDispatcher dispatcher = portletContext.getRequestDispatcher(path);
+		dispatcher.include(resourceRequest, resourceResponse);
+		
+	}
+
+	private void saveCheckoutPayment(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException, SystemException, PortletException {
 		PrintWriter writer = resourceResponse.getWriter();
         JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
         boolean success = false;
@@ -86,13 +192,11 @@ public class OrdersPortlet extends MVCPortlet {
 		HttpSession session = request.getSession();
 		
 		ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
-		ShoppingOrder shoppingOrder = (ShoppingOrder)session.getAttribute(ShoppingPortletUtil.SESSION_ORDER_OBJECT);
 		
-		String cardNumber = ParamUtil.getString(resourceRequest, "cardNumber");
-		String cvc = ParamUtil.getString(resourceRequest, "cvc");
-		Integer expMonth = ParamUtil.getInteger(resourceRequest, "expMonth");
-		Integer expYear = ParamUtil.getInteger(resourceRequest, "expYear");
-		String description = ParamUtil.getString(resourceRequest, "description");
+		ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
+		
+		ShoppingOrder shoppingOrder = shoppingOrderProcessWrapper.getShoppingOrder();
+		
 		String statementDescription = ParamUtil.getString(resourceRequest, "statementDescription");
 		String billingCardHolderName = ParamUtil.getString(resourceRequest, "billingCardHolderName");
 		String billingStreet = ParamUtil.getString(resourceRequest, "billingStreet");
@@ -104,24 +208,13 @@ public class OrdersPortlet extends MVCPortlet {
 		String billingEmailReceipe = ParamUtil.getString(resourceRequest, "billingEmailReceipe");
 		String stripeToken = ParamUtil.getString(resourceRequest, "stripeToken");
 		Map<String, Object> chargeParams = new HashMap<String, Object>();
-		System.out.println(shoppingOrder.getTotalPrice());
-		Double t = 100*shoppingOrder.getTotalPrice();
-		System.out.println(t.intValue());
+		
+		double total = shoppingOrderProcessWrapper.getAbsoluteTotal();
+
+		Double t = 100*total;
+		
 		chargeParams.put("amount", t.intValue());//toString(shoppingOrder.getTotalPrice()));
-//		chargeParams.put("cardNumber", cardNumber);
-//		chargeParams.put("cvc", cvc);
-//		chargeParams.put("expMonth", expMonth);
-//		chargeParams.put("expYear", expYear);
-		chargeParams.put("description", description);
-//		chargeParams.put("statementDescription", statementDescription);
-//		chargeParams.put("billingCardHolderName", billingCardHolderName);
-//		chargeParams.put("billingStreet", billingStreet);
-//		chargeParams.put("billingStreet2", billingStreet2);
-//		chargeParams.put("billingCity", billingCity);
-//		chargeParams.put("billingPostCode", billingPostCode);
-//		chargeParams.put("billingStateProvince", billingStateProvince);
-//		chargeParams.put("billingCountry", billingCountry);
-//		chargeParams.put("billingEmailReceipe", billingEmailReceipe);
+
 		chargeParams.put("source", stripeToken);
 		chargeParams.put("currency", shoppingStore.getCurrency().toLowerCase());
 	
@@ -129,19 +222,37 @@ public class OrdersPortlet extends MVCPortlet {
 		Stripe.apiKey = shoppingStore.isStripeTesting()?shoppingStore.getStripeTestSecretKey():shoppingStore.getStripeLiveSecretKey();
 		Stripe.apiVersion = shoppingStore.getStripeApiVersion();
 		
-		RequestOptions options = RequestOptions.builder()
-				.setApiKey(Stripe.apiKey)
-				.setStripeVersion(Stripe.apiVersion)
-				.setIdempotencyKey(PortalUUIDUtil.generate()).build();
+		RequestOptions options = RequestOptions.builder().setApiKey(Stripe.apiKey).setStripeVersion(Stripe.apiVersion).setIdempotencyKey(PortalUUIDUtil.generate()).build();
 		
 		try {
+			shoppingOrder.setTotalPrice(total);
+			shoppingOrder.setGroupId(themeDisplay.getScopeGroupId());
+			shoppingOrder.setShoppingOrderId(CounterLocalServiceUtil.increment(ShoppingOrder.class.getName()));
+			shoppingOrder.setCouponCodes(shoppingOrderProcessWrapper.getShoppingCoupon()!=null?shoppingOrderProcessWrapper.getShoppingCoupon().getCode():"");
+			shoppingOrder.setShippingMethodId(shoppingOrderProcessWrapper.getShoppingShippingMethod().getShippingMethodId());
+			shoppingOrder.setNumber(Long.toString(shoppingOrder.getShoppingOrderId()));
+			shoppingOrder = ShoppingOrderLocalServiceUtil.updateShoppingOrder(shoppingOrder);
+			
+			for(ShoppingOrderItem shoppingOrderItem : shoppingOrderProcessWrapper.getShoppingOrderItemMap().values()){
+				shoppingOrderItem.setShoppingOrderId(shoppingOrder.getShoppingOrderId());
+				shoppingOrderItem.setShoppingOrderItemId(CounterLocalServiceUtil.increment(ShoppingOrderItem.class.getName()));
+				ShoppingOrderItemLocalServiceUtil.updateShoppingOrderItem(shoppingOrderItem);
+			}
+			
+			shoppingOrderProcessWrapper.setShoppingOrder(shoppingOrder);
+			chargeParams.put("description", "jo-walton.com painting shopping order id: "+shoppingOrder.getShoppingOrderId());
 
 			Charge charge = Charge.create(chargeParams, options);
-			System.out.println("charge.getStatus(): "+charge.getStatus());
-			System.out.println("charge: "+charge.toString());
-			System.out.println("charge: "+charge);
-			success = true;
-			jsonObject.put("successMessage", "STATUS: "+charge.getStatus()+"; TRANSFER: "+charge.getTransfer());
+
+			PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
+			String path = ShoppingPortletUtil.CHECKOUT_SUCCESS_SCREEN;
+			resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_SHOPPING_ORDER_PROCESS_WRAPPER, shoppingOrderProcessWrapper);
+			PortletRequestDispatcher dispatcher = portletContext.getRequestDispatcher(path);
+			dispatcher.include(resourceRequest, resourceResponse);
+			
+			ShoppingPortletUtil.setSessionShoppingOrderProcessWrapper(session, null);
+		
+		
 		} catch (AuthenticationException e) {
 			jsonObject.put("errorMessage", e.getMessage());
 			e.printStackTrace();
@@ -169,13 +280,16 @@ public class OrdersPortlet extends MVCPortlet {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
 		HttpSession session = request.getSession();
 		
+		ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
+		//double total = shoppingOrderProcessWrapper.getAbsoluteTotal();
+		
 		ShoppingStore shoppingStore = null;
 		try{
 			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
 		}catch(NoSuchShoppingStoreException e){
 			shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
 		}
-		String country = ParamUtil.getString(resourceRequest, "country");
+		String countryCode = ParamUtil.getString(resourceRequest, "country");
 		String email = ParamUtil.getString(resourceRequest, "email");
 		String city = ParamUtil.getString(resourceRequest, "city");
 		String phoneNumber = ParamUtil.getString(resourceRequest, "phoneNumber");
@@ -185,14 +299,18 @@ public class OrdersPortlet extends MVCPortlet {
 		String streetAddress1 = ParamUtil.getString(resourceRequest, "streetAddress1");
 		String streetAddress2 = ParamUtil.getString(resourceRequest, "streetAddress2");
 		
-		boolean iternational = !shoppingStore.getCountry().equalsIgnoreCase(country);
+		Country country = CountryServiceUtil.fetchCountryByA2(countryCode);
 		
-		ShoppingOrder shoppingOrder = (ShoppingOrder)session.getAttribute(ShoppingPortletUtil.SESSION_ORDER_OBJECT);
+		shoppingOrderProcessWrapper.setShippingCountry(country);
+		
+		boolean iternational = !shoppingStore.getCountry().equalsIgnoreCase(countryCode);
+		
+		ShoppingOrder shoppingOrder = shoppingOrderProcessWrapper.getShoppingOrder();
 		if(shoppingOrder == null){
-			shoppingOrder = ShoppingOrderLocalServiceUtil.createShoppingOrder(CounterLocalServiceUtil.increment(ShoppingOrder.class.getName()));
+			shoppingOrder = ShoppingOrderLocalServiceUtil.createShoppingOrder(-1L);
 		}
 		shoppingOrder.setShippingCity(city);
-		shoppingOrder.setShippingCountry(country);
+		shoppingOrder.setShippingCountry(countryCode);
 		shoppingOrder.setShippingEmailAddress(email);
 		shoppingOrder.setShippingPhone(phoneNumber);
 		shoppingOrder.setShippingPostCode(postCode);
@@ -202,7 +320,6 @@ public class OrdersPortlet extends MVCPortlet {
 		shoppingOrder.setShippingStreet2(streetAddress2);
 		shoppingOrder.setInternational(iternational);
 		success = true;
-		session.setAttribute(ShoppingPortletUtil.SESSION_ORDER_OBJECT, shoppingOrder);
 
 		List<ShoppingShippingMethod> availableShoppingShippingMethodList = new ArrayList<ShoppingShippingMethod>();
 		List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethodLocalServiceUtil.findByGroupId(themeDisplay.getScopeGroupId());
@@ -215,72 +332,42 @@ public class OrdersPortlet extends MVCPortlet {
 			}
 		}
 		
-		resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_AVAILABLE_SHOPPING_SHIPPING_METHOD_LIST, availableShoppingShippingMethodList);
-		PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
-		String path = "/shopping-order/shipping-method.jsp";
-		PortletRequestDispatcher dispatcher = portletContext.getRequestDispatcher(path);
-		dispatcher.include(resourceRequest, resourceResponse);
+		shoppingOrderProcessWrapper.setAvailableShoppingShippingMethodList(availableShoppingShippingMethodList);
 		
-//		jsonObject.put("success", success);
-//		jsonObject.put("shoppingOrder", JSONFactoryUtil.looseSerialize(shoppingOrder));
-//
-//		writer.print(jsonObject.toString());
-//        writer.flush();
-//        writer.close();
+		jsonObject.put("success", country.getName(themeDisplay.getLocale()));
+		jsonObject.put("countryName", success);
+		jsonObject.put("shoppingOrder", JSONFactoryUtil.looseSerialize(shoppingOrder));
+
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void saveCheckoutShippingMethod(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException, PortalException, SystemException {
 		PrintWriter writer = resourceResponse.getWriter();
         JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
         boolean success = false;
-		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
 		HttpSession session = request.getSession();
 		
-		ShoppingOrder shoppingOrder = (ShoppingOrder)session.getAttribute(ShoppingPortletUtil.SESSION_ORDER_OBJECT);
+		ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
 		
 		long shippingMethodId = ParamUtil.getLong(resourceRequest, "shippingMethodId");
-
 		ShoppingShippingMethod shoppingShippingMethod = ShoppingShippingMethodLocalServiceUtil.getShoppingShippingMethod(shippingMethodId);
+		shoppingOrderProcessWrapper.setShoppingShippingMethod(shoppingShippingMethod);
 		
-		
-		Map<String,ShoppingOrderItem> shoppingOrderItemMap = (Map<String,ShoppingOrderItem>)session.getAttribute(ShoppingPortletUtil.SESSION_CART_OBJECT);
-		if(shoppingOrderItemMap == null){
-			shoppingOrderItemMap = new HashMap<String,ShoppingOrderItem>();
-		}
+		double total = shoppingOrderProcessWrapper.getAbsoluteTotal();
+	
+		success = true;
+		jsonObject.put("total", total);
+		jsonObject.put("success", success);
+		jsonObject.put("shoppingShippingMethod", JSONFactoryUtil.looseSerialize(shoppingShippingMethod));
 
-		double total = 0;
-		for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet()){
-			ShoppingOrderItem orderItem = entry.getValue();
-			total = total + orderItem.getQuantity() * orderItem.getPrice();
-		}
-
-		ShoppingCoupon shoppingCoupon = null;
-		Object shoppingCouponObj = session.getAttribute(ShoppingPortletUtil.SESSION_CART_COUPON_CODE);
-		if(shoppingCouponObj != null){
-			shoppingCoupon = (ShoppingCoupon)shoppingCouponObj;
-			total = ShoppingPortletUtil.applyCoupon(shoppingCoupon, total);
-		}
-		
-		
-		double shipping = ShoppingShippingMethodLocalServiceUtil.getShippingPrice(shoppingShippingMethod, shoppingOrderItemMap.values(), total);
-		total = total + shipping;
-		shoppingOrder.setShippingMethodId(shippingMethodId);
-		shoppingOrder.setTotalPrice(total);
-		
-		session.setAttribute(ShoppingPortletUtil.SESSION_ORDER_OBJECT, shoppingOrder);
-
-		PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
-		String path = "/shopping-order/payment-form.jsp";
-		PortletRequestDispatcher dispatcher = portletContext.getRequestDispatcher(path);
-		dispatcher.include(resourceRequest, resourceResponse);
-		
-//		jsonObject.put("success", success);
-//		jsonObject.put("shoppingOrder", JSONFactoryUtil.looseSerialize(shoppingOrder));
-//
-//		writer.print(jsonObject.toString());
-//        writer.flush();
-//        writer.close();
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
 	}
+	
 
 }

@@ -273,6 +273,8 @@
 		<column name="onAddToCart" type="String" />
 		<column name="currency" type="String" />
 		<column name="country" type="String" />
+		<column name="userTypes" type="String" />
+		
 		
 		<!-- Stripe API Fields -->
 		<column name="integrateWithStripe" type="boolean" />

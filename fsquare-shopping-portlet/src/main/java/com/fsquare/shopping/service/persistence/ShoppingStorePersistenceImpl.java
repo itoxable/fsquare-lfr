@@ -342,6 +342,7 @@ public class ShoppingStorePersistenceImpl extends BasePersistenceImpl<ShoppingSt
         shoppingStoreImpl.setOnAddToCart(shoppingStore.getOnAddToCart());
         shoppingStoreImpl.setCurrency(shoppingStore.getCurrency());
         shoppingStoreImpl.setCountry(shoppingStore.getCountry());
+        shoppingStoreImpl.setUserTypes(shoppingStore.getUserTypes());
         shoppingStoreImpl.setIntegrateWithStripe(shoppingStore.isIntegrateWithStripe());
         shoppingStoreImpl.setStripeTestSecretKey(shoppingStore.getStripeTestSecretKey());
         shoppingStoreImpl.setStripeTestPublishableKey(shoppingStore.getStripeTestPublishableKey());

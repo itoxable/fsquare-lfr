@@ -63,6 +63,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             { "onAddToCart", Types.VARCHAR },
             { "currency_", Types.VARCHAR },
             { "country", Types.VARCHAR },
+            { "userTypes", Types.VARCHAR },
             { "integrateWithStripe", Types.BOOLEAN },
             { "stripeTestSecretKey", Types.VARCHAR },
             { "stripeTestPublishableKey", Types.VARCHAR },
@@ -71,7 +72,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             { "stripeLivePublishableKey", Types.VARCHAR },
             { "stripeApiVersion", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStore (groupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,cartPageUuid VARCHAR(75) null,checkoutPageUuid VARCHAR(75) null,onAddToCart VARCHAR(75) null,currency_ VARCHAR(75) null,country VARCHAR(75) null,integrateWithStripe BOOLEAN,stripeTestSecretKey VARCHAR(75) null,stripeTestPublishableKey VARCHAR(75) null,stripeTesting BOOLEAN,stripeLiveSecretKey VARCHAR(75) null,stripeLivePublishableKey VARCHAR(75) null,stripeApiVersion VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStore (groupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,cartPageUuid VARCHAR(75) null,checkoutPageUuid VARCHAR(75) null,onAddToCart VARCHAR(75) null,currency_ VARCHAR(75) null,country VARCHAR(75) null,userTypes VARCHAR(75) null,integrateWithStripe BOOLEAN,stripeTestSecretKey VARCHAR(75) null,stripeTestPublishableKey VARCHAR(75) null,stripeTesting BOOLEAN,stripeLiveSecretKey VARCHAR(75) null,stripeLivePublishableKey VARCHAR(75) null,stripeApiVersion VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingStore";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingStore.groupId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingStore.groupId ASC";
@@ -103,6 +104,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
     private String _onAddToCart;
     private String _currency;
     private String _country;
+    private String _userTypes;
     private boolean _integrateWithStripe;
     private String _stripeTestSecretKey;
     private String _stripeTestPublishableKey;
@@ -139,6 +141,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         model.setOnAddToCart(soapModel.getOnAddToCart());
         model.setCurrency(soapModel.getCurrency());
         model.setCountry(soapModel.getCountry());
+        model.setUserTypes(soapModel.getUserTypes());
         model.setIntegrateWithStripe(soapModel.getIntegrateWithStripe());
         model.setStripeTestSecretKey(soapModel.getStripeTestSecretKey());
         model.setStripeTestPublishableKey(soapModel.getStripeTestPublishableKey());
@@ -215,6 +218,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         attributes.put("onAddToCart", getOnAddToCart());
         attributes.put("currency", getCurrency());
         attributes.put("country", getCountry());
+        attributes.put("userTypes", getUserTypes());
         attributes.put("integrateWithStripe", getIntegrateWithStripe());
         attributes.put("stripeTestSecretKey", getStripeTestSecretKey());
         attributes.put("stripeTestPublishableKey", getStripeTestPublishableKey());
@@ -292,6 +296,12 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
         if (country != null) {
             setCountry(country);
+        }
+
+        String userTypes = (String) attributes.get("userTypes");
+
+        if (userTypes != null) {
+            setUserTypes(userTypes);
         }
 
         Boolean integrateWithStripe = (Boolean) attributes.get(
@@ -499,6 +509,21 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @JSON
     @Override
+    public String getUserTypes() {
+        if (_userTypes == null) {
+            return StringPool.BLANK;
+        } else {
+            return _userTypes;
+        }
+    }
+
+    @Override
+    public void setUserTypes(String userTypes) {
+        _userTypes = userTypes;
+    }
+
+    @JSON
+    @Override
     public boolean getIntegrateWithStripe() {
         return _integrateWithStripe;
     }
@@ -642,6 +667,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         shoppingStoreImpl.setOnAddToCart(getOnAddToCart());
         shoppingStoreImpl.setCurrency(getCurrency());
         shoppingStoreImpl.setCountry(getCountry());
+        shoppingStoreImpl.setUserTypes(getUserTypes());
         shoppingStoreImpl.setIntegrateWithStripe(getIntegrateWithStripe());
         shoppingStoreImpl.setStripeTestSecretKey(getStripeTestSecretKey());
         shoppingStoreImpl.setStripeTestPublishableKey(getStripeTestPublishableKey());
@@ -772,6 +798,14 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             shoppingStoreCacheModel.country = null;
         }
 
+        shoppingStoreCacheModel.userTypes = getUserTypes();
+
+        String userTypes = shoppingStoreCacheModel.userTypes;
+
+        if ((userTypes != null) && (userTypes.length() == 0)) {
+            shoppingStoreCacheModel.userTypes = null;
+        }
+
         shoppingStoreCacheModel.integrateWithStripe = getIntegrateWithStripe();
 
         shoppingStoreCacheModel.stripeTestSecretKey = getStripeTestSecretKey();
@@ -825,7 +859,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(37);
+        StringBundler sb = new StringBundler(39);
 
         sb.append("{groupId=");
         sb.append(getGroupId());
@@ -849,6 +883,8 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(getCurrency());
         sb.append(", country=");
         sb.append(getCountry());
+        sb.append(", userTypes=");
+        sb.append(getUserTypes());
         sb.append(", integrateWithStripe=");
         sb.append(getIntegrateWithStripe());
         sb.append(", stripeTestSecretKey=");
@@ -870,7 +906,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(58);
+        StringBundler sb = new StringBundler(61);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStore");
@@ -919,6 +955,10 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(
             "<column><column-name>country</column-name><column-value><![CDATA[");
         sb.append(getCountry());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>userTypes</column-name><column-value><![CDATA[");
+        sb.append(getUserTypes());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>integrateWithStripe</column-name><column-value><![CDATA[");

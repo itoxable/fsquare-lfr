@@ -52,12 +52,11 @@ public class ShippingManagementPortlet extends MVCPortlet{
 
 		Long shippingMethodId = ParamUtil.getLong(resourceRequest, "shippingMethodId");
 		PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
-		//System.out.println("couponId: "+couponId);
+
 		ShoppingShippingMethod shoppingShippingMethod = null;
         if(shippingMethodId == null || shippingMethodId == 0){
         	shippingMethodId = CounterLocalServiceUtil.increment(ShoppingShippingMethod.class.getName());
         	shoppingShippingMethod = ShoppingShippingMethodLocalServiceUtil.createShoppingShippingMethod(0);
-	        //shoppingCoupon.setCreateDate(new Date());
         }else{
         	shoppingShippingMethod = ShoppingShippingMethodLocalServiceUtil.getShoppingShippingMethod(shippingMethodId);
         }
