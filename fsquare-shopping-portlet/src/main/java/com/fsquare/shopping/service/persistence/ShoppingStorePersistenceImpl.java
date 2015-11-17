@@ -343,6 +343,10 @@ public class ShoppingStorePersistenceImpl extends BasePersistenceImpl<ShoppingSt
         shoppingStoreImpl.setCurrency(shoppingStore.getCurrency());
         shoppingStoreImpl.setCountry(shoppingStore.getCountry());
         shoppingStoreImpl.setUserTypes(shoppingStore.getUserTypes());
+        shoppingStoreImpl.setOrderCreatedEmailTemplate(shoppingStore.getOrderCreatedEmailTemplate());
+        shoppingStoreImpl.setOrderShippedEmailTemplate(shoppingStore.getOrderShippedEmailTemplate());
+        shoppingStoreImpl.setOrderCreatedEmailSubject(shoppingStore.getOrderCreatedEmailSubject());
+        shoppingStoreImpl.setOrderCreatedEmailFromAddress(shoppingStore.getOrderCreatedEmailFromAddress());
         shoppingStoreImpl.setIntegrateWithStripe(shoppingStore.isIntegrateWithStripe());
         shoppingStoreImpl.setStripeTestSecretKey(shoppingStore.getStripeTestSecretKey());
         shoppingStoreImpl.setStripeTestPublishableKey(shoppingStore.getStripeTestPublishableKey());

@@ -26,6 +26,10 @@ public class ShoppingStoreSoap implements Serializable {
     private String _currency;
     private String _country;
     private String _userTypes;
+    private String _orderCreatedEmailTemplate;
+    private String _orderShippedEmailTemplate;
+    private String _orderCreatedEmailSubject;
+    private String _orderCreatedEmailFromAddress;
     private boolean _integrateWithStripe;
     private String _stripeTestSecretKey;
     private String _stripeTestPublishableKey;
@@ -52,6 +56,10 @@ public class ShoppingStoreSoap implements Serializable {
         soapModel.setCurrency(model.getCurrency());
         soapModel.setCountry(model.getCountry());
         soapModel.setUserTypes(model.getUserTypes());
+        soapModel.setOrderCreatedEmailTemplate(model.getOrderCreatedEmailTemplate());
+        soapModel.setOrderShippedEmailTemplate(model.getOrderShippedEmailTemplate());
+        soapModel.setOrderCreatedEmailSubject(model.getOrderCreatedEmailSubject());
+        soapModel.setOrderCreatedEmailFromAddress(model.getOrderCreatedEmailFromAddress());
         soapModel.setIntegrateWithStripe(model.getIntegrateWithStripe());
         soapModel.setStripeTestSecretKey(model.getStripeTestSecretKey());
         soapModel.setStripeTestPublishableKey(model.getStripeTestPublishableKey());
@@ -201,6 +209,39 @@ public class ShoppingStoreSoap implements Serializable {
 
     public void setUserTypes(String userTypes) {
         _userTypes = userTypes;
+    }
+
+    public String getOrderCreatedEmailTemplate() {
+        return _orderCreatedEmailTemplate;
+    }
+
+    public void setOrderCreatedEmailTemplate(String orderCreatedEmailTemplate) {
+        _orderCreatedEmailTemplate = orderCreatedEmailTemplate;
+    }
+
+    public String getOrderShippedEmailTemplate() {
+        return _orderShippedEmailTemplate;
+    }
+
+    public void setOrderShippedEmailTemplate(String orderShippedEmailTemplate) {
+        _orderShippedEmailTemplate = orderShippedEmailTemplate;
+    }
+
+    public String getOrderCreatedEmailSubject() {
+        return _orderCreatedEmailSubject;
+    }
+
+    public void setOrderCreatedEmailSubject(String orderCreatedEmailSubject) {
+        _orderCreatedEmailSubject = orderCreatedEmailSubject;
+    }
+
+    public String getOrderCreatedEmailFromAddress() {
+        return _orderCreatedEmailFromAddress;
+    }
+
+    public void setOrderCreatedEmailFromAddress(
+        String orderCreatedEmailFromAddress) {
+        _orderCreatedEmailFromAddress = orderCreatedEmailFromAddress;
     }
 
     public boolean getIntegrateWithStripe() {

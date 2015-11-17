@@ -64,6 +64,10 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             { "currency_", Types.VARCHAR },
             { "country", Types.VARCHAR },
             { "userTypes", Types.VARCHAR },
+            { "orderCreatedEmailTemplate", Types.VARCHAR },
+            { "orderShippedEmailTemplate", Types.VARCHAR },
+            { "orderCreatedEmailSubject", Types.VARCHAR },
+            { "orderCreatedEmailFromAddress", Types.VARCHAR },
             { "integrateWithStripe", Types.BOOLEAN },
             { "stripeTestSecretKey", Types.VARCHAR },
             { "stripeTestPublishableKey", Types.VARCHAR },
@@ -72,7 +76,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             { "stripeLivePublishableKey", Types.VARCHAR },
             { "stripeApiVersion", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStore (groupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,cartPageUuid VARCHAR(75) null,checkoutPageUuid VARCHAR(75) null,onAddToCart VARCHAR(75) null,currency_ VARCHAR(75) null,country VARCHAR(75) null,userTypes VARCHAR(75) null,integrateWithStripe BOOLEAN,stripeTestSecretKey VARCHAR(75) null,stripeTestPublishableKey VARCHAR(75) null,stripeTesting BOOLEAN,stripeLiveSecretKey VARCHAR(75) null,stripeLivePublishableKey VARCHAR(75) null,stripeApiVersion VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStore (groupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,cartPageUuid VARCHAR(75) null,checkoutPageUuid VARCHAR(75) null,onAddToCart VARCHAR(75) null,currency_ VARCHAR(75) null,country VARCHAR(75) null,userTypes VARCHAR(75) null,orderCreatedEmailTemplate VARCHAR(75) null,orderShippedEmailTemplate VARCHAR(75) null,orderCreatedEmailSubject VARCHAR(75) null,orderCreatedEmailFromAddress VARCHAR(75) null,integrateWithStripe BOOLEAN,stripeTestSecretKey VARCHAR(75) null,stripeTestPublishableKey VARCHAR(75) null,stripeTesting BOOLEAN,stripeLiveSecretKey VARCHAR(75) null,stripeLivePublishableKey VARCHAR(75) null,stripeApiVersion VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingStore";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingStore.groupId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingStore.groupId ASC";
@@ -105,6 +109,10 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
     private String _currency;
     private String _country;
     private String _userTypes;
+    private String _orderCreatedEmailTemplate;
+    private String _orderShippedEmailTemplate;
+    private String _orderCreatedEmailSubject;
+    private String _orderCreatedEmailFromAddress;
     private boolean _integrateWithStripe;
     private String _stripeTestSecretKey;
     private String _stripeTestPublishableKey;
@@ -142,6 +150,10 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         model.setCurrency(soapModel.getCurrency());
         model.setCountry(soapModel.getCountry());
         model.setUserTypes(soapModel.getUserTypes());
+        model.setOrderCreatedEmailTemplate(soapModel.getOrderCreatedEmailTemplate());
+        model.setOrderShippedEmailTemplate(soapModel.getOrderShippedEmailTemplate());
+        model.setOrderCreatedEmailSubject(soapModel.getOrderCreatedEmailSubject());
+        model.setOrderCreatedEmailFromAddress(soapModel.getOrderCreatedEmailFromAddress());
         model.setIntegrateWithStripe(soapModel.getIntegrateWithStripe());
         model.setStripeTestSecretKey(soapModel.getStripeTestSecretKey());
         model.setStripeTestPublishableKey(soapModel.getStripeTestPublishableKey());
@@ -219,6 +231,13 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         attributes.put("currency", getCurrency());
         attributes.put("country", getCountry());
         attributes.put("userTypes", getUserTypes());
+        attributes.put("orderCreatedEmailTemplate",
+            getOrderCreatedEmailTemplate());
+        attributes.put("orderShippedEmailTemplate",
+            getOrderShippedEmailTemplate());
+        attributes.put("orderCreatedEmailSubject", getOrderCreatedEmailSubject());
+        attributes.put("orderCreatedEmailFromAddress",
+            getOrderCreatedEmailFromAddress());
         attributes.put("integrateWithStripe", getIntegrateWithStripe());
         attributes.put("stripeTestSecretKey", getStripeTestSecretKey());
         attributes.put("stripeTestPublishableKey", getStripeTestPublishableKey());
@@ -302,6 +321,34 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
         if (userTypes != null) {
             setUserTypes(userTypes);
+        }
+
+        String orderCreatedEmailTemplate = (String) attributes.get(
+                "orderCreatedEmailTemplate");
+
+        if (orderCreatedEmailTemplate != null) {
+            setOrderCreatedEmailTemplate(orderCreatedEmailTemplate);
+        }
+
+        String orderShippedEmailTemplate = (String) attributes.get(
+                "orderShippedEmailTemplate");
+
+        if (orderShippedEmailTemplate != null) {
+            setOrderShippedEmailTemplate(orderShippedEmailTemplate);
+        }
+
+        String orderCreatedEmailSubject = (String) attributes.get(
+                "orderCreatedEmailSubject");
+
+        if (orderCreatedEmailSubject != null) {
+            setOrderCreatedEmailSubject(orderCreatedEmailSubject);
+        }
+
+        String orderCreatedEmailFromAddress = (String) attributes.get(
+                "orderCreatedEmailFromAddress");
+
+        if (orderCreatedEmailFromAddress != null) {
+            setOrderCreatedEmailFromAddress(orderCreatedEmailFromAddress);
         }
 
         Boolean integrateWithStripe = (Boolean) attributes.get(
@@ -524,6 +571,67 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @JSON
     @Override
+    public String getOrderCreatedEmailTemplate() {
+        if (_orderCreatedEmailTemplate == null) {
+            return StringPool.BLANK;
+        } else {
+            return _orderCreatedEmailTemplate;
+        }
+    }
+
+    @Override
+    public void setOrderCreatedEmailTemplate(String orderCreatedEmailTemplate) {
+        _orderCreatedEmailTemplate = orderCreatedEmailTemplate;
+    }
+
+    @JSON
+    @Override
+    public String getOrderShippedEmailTemplate() {
+        if (_orderShippedEmailTemplate == null) {
+            return StringPool.BLANK;
+        } else {
+            return _orderShippedEmailTemplate;
+        }
+    }
+
+    @Override
+    public void setOrderShippedEmailTemplate(String orderShippedEmailTemplate) {
+        _orderShippedEmailTemplate = orderShippedEmailTemplate;
+    }
+
+    @JSON
+    @Override
+    public String getOrderCreatedEmailSubject() {
+        if (_orderCreatedEmailSubject == null) {
+            return StringPool.BLANK;
+        } else {
+            return _orderCreatedEmailSubject;
+        }
+    }
+
+    @Override
+    public void setOrderCreatedEmailSubject(String orderCreatedEmailSubject) {
+        _orderCreatedEmailSubject = orderCreatedEmailSubject;
+    }
+
+    @JSON
+    @Override
+    public String getOrderCreatedEmailFromAddress() {
+        if (_orderCreatedEmailFromAddress == null) {
+            return StringPool.BLANK;
+        } else {
+            return _orderCreatedEmailFromAddress;
+        }
+    }
+
+    @Override
+    public void setOrderCreatedEmailFromAddress(
+        String orderCreatedEmailFromAddress) {
+        _orderCreatedEmailFromAddress = orderCreatedEmailFromAddress;
+    }
+
+    @JSON
+    @Override
     public boolean getIntegrateWithStripe() {
         return _integrateWithStripe;
     }
@@ -668,6 +776,10 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         shoppingStoreImpl.setCurrency(getCurrency());
         shoppingStoreImpl.setCountry(getCountry());
         shoppingStoreImpl.setUserTypes(getUserTypes());
+        shoppingStoreImpl.setOrderCreatedEmailTemplate(getOrderCreatedEmailTemplate());
+        shoppingStoreImpl.setOrderShippedEmailTemplate(getOrderShippedEmailTemplate());
+        shoppingStoreImpl.setOrderCreatedEmailSubject(getOrderCreatedEmailSubject());
+        shoppingStoreImpl.setOrderCreatedEmailFromAddress(getOrderCreatedEmailFromAddress());
         shoppingStoreImpl.setIntegrateWithStripe(getIntegrateWithStripe());
         shoppingStoreImpl.setStripeTestSecretKey(getStripeTestSecretKey());
         shoppingStoreImpl.setStripeTestPublishableKey(getStripeTestPublishableKey());
@@ -806,6 +918,42 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             shoppingStoreCacheModel.userTypes = null;
         }
 
+        shoppingStoreCacheModel.orderCreatedEmailTemplate = getOrderCreatedEmailTemplate();
+
+        String orderCreatedEmailTemplate = shoppingStoreCacheModel.orderCreatedEmailTemplate;
+
+        if ((orderCreatedEmailTemplate != null) &&
+                (orderCreatedEmailTemplate.length() == 0)) {
+            shoppingStoreCacheModel.orderCreatedEmailTemplate = null;
+        }
+
+        shoppingStoreCacheModel.orderShippedEmailTemplate = getOrderShippedEmailTemplate();
+
+        String orderShippedEmailTemplate = shoppingStoreCacheModel.orderShippedEmailTemplate;
+
+        if ((orderShippedEmailTemplate != null) &&
+                (orderShippedEmailTemplate.length() == 0)) {
+            shoppingStoreCacheModel.orderShippedEmailTemplate = null;
+        }
+
+        shoppingStoreCacheModel.orderCreatedEmailSubject = getOrderCreatedEmailSubject();
+
+        String orderCreatedEmailSubject = shoppingStoreCacheModel.orderCreatedEmailSubject;
+
+        if ((orderCreatedEmailSubject != null) &&
+                (orderCreatedEmailSubject.length() == 0)) {
+            shoppingStoreCacheModel.orderCreatedEmailSubject = null;
+        }
+
+        shoppingStoreCacheModel.orderCreatedEmailFromAddress = getOrderCreatedEmailFromAddress();
+
+        String orderCreatedEmailFromAddress = shoppingStoreCacheModel.orderCreatedEmailFromAddress;
+
+        if ((orderCreatedEmailFromAddress != null) &&
+                (orderCreatedEmailFromAddress.length() == 0)) {
+            shoppingStoreCacheModel.orderCreatedEmailFromAddress = null;
+        }
+
         shoppingStoreCacheModel.integrateWithStripe = getIntegrateWithStripe();
 
         shoppingStoreCacheModel.stripeTestSecretKey = getStripeTestSecretKey();
@@ -859,7 +1007,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(39);
+        StringBundler sb = new StringBundler(47);
 
         sb.append("{groupId=");
         sb.append(getGroupId());
@@ -885,6 +1033,14 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(getCountry());
         sb.append(", userTypes=");
         sb.append(getUserTypes());
+        sb.append(", orderCreatedEmailTemplate=");
+        sb.append(getOrderCreatedEmailTemplate());
+        sb.append(", orderShippedEmailTemplate=");
+        sb.append(getOrderShippedEmailTemplate());
+        sb.append(", orderCreatedEmailSubject=");
+        sb.append(getOrderCreatedEmailSubject());
+        sb.append(", orderCreatedEmailFromAddress=");
+        sb.append(getOrderCreatedEmailFromAddress());
         sb.append(", integrateWithStripe=");
         sb.append(getIntegrateWithStripe());
         sb.append(", stripeTestSecretKey=");
@@ -906,7 +1062,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(61);
+        StringBundler sb = new StringBundler(73);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStore");
@@ -959,6 +1115,22 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(
             "<column><column-name>userTypes</column-name><column-value><![CDATA[");
         sb.append(getUserTypes());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>orderCreatedEmailTemplate</column-name><column-value><![CDATA[");
+        sb.append(getOrderCreatedEmailTemplate());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>orderShippedEmailTemplate</column-name><column-value><![CDATA[");
+        sb.append(getOrderShippedEmailTemplate());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>orderCreatedEmailSubject</column-name><column-value><![CDATA[");
+        sb.append(getOrderCreatedEmailSubject());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>orderCreatedEmailFromAddress</column-name><column-value><![CDATA[");
+        sb.append(getOrderCreatedEmailFromAddress());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>integrateWithStripe</column-name><column-value><![CDATA[");

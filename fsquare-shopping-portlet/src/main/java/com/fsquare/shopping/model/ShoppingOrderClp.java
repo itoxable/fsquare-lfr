@@ -72,6 +72,7 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
     private int _ccExpYear;
     private String _ccVerNumber;
     private String _comments;
+    private String _externalPaymentId;
     private String _ppTxnId;
     private String _ppPaymentStatus;
     private double _ppPaymentGross;
@@ -169,6 +170,7 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
         attributes.put("ccExpYear", getCcExpYear());
         attributes.put("ccVerNumber", getCcVerNumber());
         attributes.put("comments", getComments());
+        attributes.put("externalPaymentId", getExternalPaymentId());
         attributes.put("ppTxnId", getPpTxnId());
         attributes.put("ppPaymentStatus", getPpPaymentStatus());
         attributes.put("ppPaymentGross", getPpPaymentGross());
@@ -472,6 +474,12 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
 
         if (comments != null) {
             setComments(comments);
+        }
+
+        String externalPaymentId = (String) attributes.get("externalPaymentId");
+
+        if (externalPaymentId != null) {
+            setExternalPaymentId(externalPaymentId);
         }
 
         String ppTxnId = (String) attributes.get("ppTxnId");
@@ -1628,6 +1636,29 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
     }
 
     @Override
+    public String getExternalPaymentId() {
+        return _externalPaymentId;
+    }
+
+    @Override
+    public void setExternalPaymentId(String externalPaymentId) {
+        _externalPaymentId = externalPaymentId;
+
+        if (_shoppingOrderRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingOrderRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setExternalPaymentId",
+                        String.class);
+
+                method.invoke(_shoppingOrderRemoteModel, externalPaymentId);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
     public String getPpTxnId() {
         return _ppTxnId;
     }
@@ -1963,6 +1994,7 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
         clone.setCcExpYear(getCcExpYear());
         clone.setCcVerNumber(getCcVerNumber());
         clone.setComments(getComments());
+        clone.setExternalPaymentId(getExternalPaymentId());
         clone.setPpTxnId(getPpTxnId());
         clone.setPpPaymentStatus(getPpPaymentStatus());
         clone.setPpPaymentGross(getPpPaymentGross());
@@ -2024,7 +2056,7 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(115);
+        StringBundler sb = new StringBundler(117);
 
         sb.append("{shoppingOrderId=");
         sb.append(getShoppingOrderId());
@@ -2122,6 +2154,8 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
         sb.append(getCcVerNumber());
         sb.append(", comments=");
         sb.append(getComments());
+        sb.append(", externalPaymentId=");
+        sb.append(getExternalPaymentId());
         sb.append(", ppTxnId=");
         sb.append(getPpTxnId());
         sb.append(", ppPaymentStatus=");
@@ -2147,7 +2181,7 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(175);
+        StringBundler sb = new StringBundler(178);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingOrder");
@@ -2344,6 +2378,10 @@ public class ShoppingOrderClp extends BaseModelImpl<ShoppingOrder>
         sb.append(
             "<column><column-name>comments</column-name><column-value><![CDATA[");
         sb.append(getComments());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>externalPaymentId</column-name><column-value><![CDATA[");
+        sb.append(getExternalPaymentId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>ppTxnId</column-name><column-value><![CDATA[");

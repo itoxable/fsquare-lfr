@@ -35,6 +35,10 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
     private String _currency;
     private String _country;
     private String _userTypes;
+    private String _orderCreatedEmailTemplate;
+    private String _orderShippedEmailTemplate;
+    private String _orderCreatedEmailSubject;
+    private String _orderCreatedEmailFromAddress;
     private boolean _integrateWithStripe;
     private String _stripeTestSecretKey;
     private String _stripeTestPublishableKey;
@@ -94,6 +98,13 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         attributes.put("currency", getCurrency());
         attributes.put("country", getCountry());
         attributes.put("userTypes", getUserTypes());
+        attributes.put("orderCreatedEmailTemplate",
+            getOrderCreatedEmailTemplate());
+        attributes.put("orderShippedEmailTemplate",
+            getOrderShippedEmailTemplate());
+        attributes.put("orderCreatedEmailSubject", getOrderCreatedEmailSubject());
+        attributes.put("orderCreatedEmailFromAddress",
+            getOrderCreatedEmailFromAddress());
         attributes.put("integrateWithStripe", getIntegrateWithStripe());
         attributes.put("stripeTestSecretKey", getStripeTestSecretKey());
         attributes.put("stripeTestPublishableKey", getStripeTestPublishableKey());
@@ -177,6 +188,34 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
         if (userTypes != null) {
             setUserTypes(userTypes);
+        }
+
+        String orderCreatedEmailTemplate = (String) attributes.get(
+                "orderCreatedEmailTemplate");
+
+        if (orderCreatedEmailTemplate != null) {
+            setOrderCreatedEmailTemplate(orderCreatedEmailTemplate);
+        }
+
+        String orderShippedEmailTemplate = (String) attributes.get(
+                "orderShippedEmailTemplate");
+
+        if (orderShippedEmailTemplate != null) {
+            setOrderShippedEmailTemplate(orderShippedEmailTemplate);
+        }
+
+        String orderCreatedEmailSubject = (String) attributes.get(
+                "orderCreatedEmailSubject");
+
+        if (orderCreatedEmailSubject != null) {
+            setOrderCreatedEmailSubject(orderCreatedEmailSubject);
+        }
+
+        String orderCreatedEmailFromAddress = (String) attributes.get(
+                "orderCreatedEmailFromAddress");
+
+        if (orderCreatedEmailFromAddress != null) {
+            setOrderCreatedEmailFromAddress(orderCreatedEmailFromAddress);
         }
 
         Boolean integrateWithStripe = (Boolean) attributes.get(
@@ -503,6 +542,103 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
     }
 
     @Override
+    public String getOrderCreatedEmailTemplate() {
+        return _orderCreatedEmailTemplate;
+    }
+
+    @Override
+    public void setOrderCreatedEmailTemplate(String orderCreatedEmailTemplate) {
+        _orderCreatedEmailTemplate = orderCreatedEmailTemplate;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setOrderCreatedEmailTemplate",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel,
+                    orderCreatedEmailTemplate);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getOrderShippedEmailTemplate() {
+        return _orderShippedEmailTemplate;
+    }
+
+    @Override
+    public void setOrderShippedEmailTemplate(String orderShippedEmailTemplate) {
+        _orderShippedEmailTemplate = orderShippedEmailTemplate;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setOrderShippedEmailTemplate",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel,
+                    orderShippedEmailTemplate);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getOrderCreatedEmailSubject() {
+        return _orderCreatedEmailSubject;
+    }
+
+    @Override
+    public void setOrderCreatedEmailSubject(String orderCreatedEmailSubject) {
+        _orderCreatedEmailSubject = orderCreatedEmailSubject;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setOrderCreatedEmailSubject",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel,
+                    orderCreatedEmailSubject);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getOrderCreatedEmailFromAddress() {
+        return _orderCreatedEmailFromAddress;
+    }
+
+    @Override
+    public void setOrderCreatedEmailFromAddress(
+        String orderCreatedEmailFromAddress) {
+        _orderCreatedEmailFromAddress = orderCreatedEmailFromAddress;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setOrderCreatedEmailFromAddress",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel,
+                    orderCreatedEmailFromAddress);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
     public boolean getIntegrateWithStripe() {
         return _integrateWithStripe;
     }
@@ -755,6 +891,10 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         clone.setCurrency(getCurrency());
         clone.setCountry(getCountry());
         clone.setUserTypes(getUserTypes());
+        clone.setOrderCreatedEmailTemplate(getOrderCreatedEmailTemplate());
+        clone.setOrderShippedEmailTemplate(getOrderShippedEmailTemplate());
+        clone.setOrderCreatedEmailSubject(getOrderCreatedEmailSubject());
+        clone.setOrderCreatedEmailFromAddress(getOrderCreatedEmailFromAddress());
         clone.setIntegrateWithStripe(getIntegrateWithStripe());
         clone.setStripeTestSecretKey(getStripeTestSecretKey());
         clone.setStripeTestPublishableKey(getStripeTestPublishableKey());
@@ -811,7 +951,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(39);
+        StringBundler sb = new StringBundler(47);
 
         sb.append("{groupId=");
         sb.append(getGroupId());
@@ -837,6 +977,14 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(getCountry());
         sb.append(", userTypes=");
         sb.append(getUserTypes());
+        sb.append(", orderCreatedEmailTemplate=");
+        sb.append(getOrderCreatedEmailTemplate());
+        sb.append(", orderShippedEmailTemplate=");
+        sb.append(getOrderShippedEmailTemplate());
+        sb.append(", orderCreatedEmailSubject=");
+        sb.append(getOrderCreatedEmailSubject());
+        sb.append(", orderCreatedEmailFromAddress=");
+        sb.append(getOrderCreatedEmailFromAddress());
         sb.append(", integrateWithStripe=");
         sb.append(getIntegrateWithStripe());
         sb.append(", stripeTestSecretKey=");
@@ -858,7 +1006,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(61);
+        StringBundler sb = new StringBundler(73);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStore");
@@ -911,6 +1059,22 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(
             "<column><column-name>userTypes</column-name><column-value><![CDATA[");
         sb.append(getUserTypes());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>orderCreatedEmailTemplate</column-name><column-value><![CDATA[");
+        sb.append(getOrderCreatedEmailTemplate());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>orderShippedEmailTemplate</column-name><column-value><![CDATA[");
+        sb.append(getOrderShippedEmailTemplate());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>orderCreatedEmailSubject</column-name><column-value><![CDATA[");
+        sb.append(getOrderCreatedEmailSubject());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>orderCreatedEmailFromAddress</column-name><column-value><![CDATA[");
+        sb.append(getOrderCreatedEmailFromAddress());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>integrateWithStripe</column-name><column-value><![CDATA[");

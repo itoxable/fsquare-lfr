@@ -15,6 +15,7 @@
 --%>
 
 
+<%@page import="com.liferay.portal.kernel.editor.EditorUtil"%>
 <%@page import="com.fsquare.shopping.ShoppingUtil"%>
 <%@page import="com.liferay.portal.service.CountryServiceUtil"%>
 <%@page import="com.liferay.portal.model.Country"%>
@@ -46,6 +47,12 @@ String stripeTestSecretKey = shoppingStore.getStripeTestSecretKey();
 String stripeTestPublishableKey = shoppingStore.getStripeTestPublishableKey();
 String stripeApiVersion = shoppingStore.getStripeApiVersion();
 String usersType = shoppingStore.getUserTypes();
+
+String orderCreatedEmailTemplate = shoppingStore.getOrderCreatedEmailTemplate();
+String orderShippedEmailTemplate = shoppingStore.getOrderShippedEmailTemplate();
+String orderCreatedEmailSubject = shoppingStore.getOrderCreatedEmailSubject();
+String orderCreatedEmailFromAddress = shoppingStore.getOrderCreatedEmailFromAddress();
+
 
 
 boolean stripeTesting = shoppingStore.getStripeTesting();
@@ -178,6 +185,17 @@ if(shoppingStore.getIntegrateWithStripe()){
 			</fieldset>	
 		</aui:field-wrapper>
 		
+<%-- 		<aui:field-wrapper label='XXX' > --%>
+<!-- 			<fieldset > -->
+<!-- 				<div class="XXX"> -->
+<%-- 					<label for="<portlet:namespace />order_success_email_editor">Email Template</label> --%>
+<%-- 			    	<div id="<portlet:namespace />order_success_email_editor"><%= orderCreatedMailTemplate %></div> --%>
+<%-- 			    	<aui:input name="orderCreatedMailTemplate" type="hidden" value="<%= orderCreatedMailTemplate %>" /> --%>
+			    	
+<!-- 			    </div> -->
+<!-- 			</fieldset>	 -->
+<%-- 		</aui:field-wrapper> --%>
+		
 		<aui:field-wrapper label='stype-payment-method' >
 			<fieldset >
 				
@@ -205,8 +223,10 @@ if(shoppingStore.getIntegrateWithStripe()){
 	</div>
 </aui:form>
 
-<aui:script use="aui-base,selector-css3,aui-io-request,array-extras,querystring-stringify,aui-datatype,aui-datepicker,liferay-dynamic-select">
-	
+<aui:script use="aui-base,selector-css3,aui-io-request,aui-datatype,aui-datepicker,liferay-dynamic-select,">
+
+
+
 	A.on('click', function(event) {
 		<portlet:namespace />saveStore();
 	},'#<portlet:namespace />save_store_btn');
@@ -226,6 +246,8 @@ if(shoppingStore.getIntegrateWithStripe()){
 			form.find('textarea').each(function() {
 				data[$(this).attr('name')]=$(this).text();
 			});
+			
+			
 			
 			A.io.request('<%= saveStoreResourceURL %>',{
                   dataType: 'json',
@@ -269,6 +291,35 @@ if(shoppingStore.getIntegrateWithStripe()){
 	            });
 	        },
 	    	['aui-base,selector-css3']);
+</aui:script>
+
+<aui:script use="aui-ace-autocomplete-freemarker,aui-ace-autocomplete-plugin,aui-ace-autocomplete-velocity,aui-toggler,aui-popover,resize,transition,aui-io-request">
+
+	Liferay.provide(window, '<portlet:namespace />openEditor',
+		function() {
+		
+	},['aui-base,selector-css3']);
+
+	var richrOderSuccessEmailEditor;
+	var orderSuccessEmailEditor = A.one('#<portlet:namespace />order_success_email_editor');
+	var orderCreatedMailTemplate = A.one('#<portlet:namespace />orderCreatedMailTemplate');
+	A.on('domready', function(event) {
+		richrOderSuccessEmailEditor = new A.AceEditor(
+			{
+				boundingBox: orderSuccessEmailEditor,
+				height: 400,
+				mode: '<%= EditorUtil.getEditorMode("xml") %>',
+				width: '100%'
+			}
+		).render();
+		richrOderSuccessEmailEditor.on('change', function() {
+     	});
+	})
+	function getEditorContent(editor) {
+		var content = editor.getSession().getValue();
+		return content;
+	}
+
 
 </aui:script>
 

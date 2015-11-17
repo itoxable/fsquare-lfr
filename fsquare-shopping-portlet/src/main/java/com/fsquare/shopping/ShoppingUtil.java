@@ -11,6 +11,13 @@ public class ShoppingUtil {
 	public static final String USER_TYPES_GUEST_ONLY = "guest_only";
 	public static final String USER_TYPES_REGISTERED_ONLY = "registered_only";
 	public static final String USER_TYPES_ALL = "all";
-
 	
+	
+	public static final String ORDER_STATUS_SHIPPED = "order_status_shipped";
+	public static final String ORDER_ORDER_MAIL_FAILED = "order_order_mail_failed";
+	public static final String ORDER_STATUS_PENDING = "order_status_pending";
+	public static final String ORDER_STATUS_CANCELED = "order_status_canceled";
+	public static final String ORDER_STATUS_RETURNED = "order_status_returned";
+	public static final String ORDER_STATUS_WAITING_PAYMENT = "order_status_waiting_payment";
+
 }

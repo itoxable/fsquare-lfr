@@ -84,6 +84,7 @@
 		<property name="ccExpYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="ccVerNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="externalPaymentId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="ppTxnId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="ppPaymentStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="ppPaymentGross" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
@@ -146,6 +147,10 @@
 		<property name="currency" type="com.liferay.portal.dao.orm.hibernate.StringType" column="currency_" />
 		<property name="country" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="userTypes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="orderCreatedEmailTemplate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="orderShippedEmailTemplate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="orderCreatedEmailSubject" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="orderCreatedEmailFromAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="integrateWithStripe" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="stripeTestSecretKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="stripeTestPublishableKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />

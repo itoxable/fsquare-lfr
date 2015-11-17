@@ -34,6 +34,10 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
     public String currency;
     public String country;
     public String userTypes;
+    public String orderCreatedEmailTemplate;
+    public String orderShippedEmailTemplate;
+    public String orderCreatedEmailSubject;
+    public String orderCreatedEmailFromAddress;
     public boolean integrateWithStripe;
     public String stripeTestSecretKey;
     public String stripeTestPublishableKey;
@@ -44,7 +48,7 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(39);
+        StringBundler sb = new StringBundler(47);
 
         sb.append("{groupId=");
         sb.append(groupId);
@@ -70,6 +74,14 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         sb.append(country);
         sb.append(", userTypes=");
         sb.append(userTypes);
+        sb.append(", orderCreatedEmailTemplate=");
+        sb.append(orderCreatedEmailTemplate);
+        sb.append(", orderShippedEmailTemplate=");
+        sb.append(orderShippedEmailTemplate);
+        sb.append(", orderCreatedEmailSubject=");
+        sb.append(orderCreatedEmailSubject);
+        sb.append(", orderCreatedEmailFromAddress=");
+        sb.append(orderCreatedEmailFromAddress);
         sb.append(", integrateWithStripe=");
         sb.append(integrateWithStripe);
         sb.append(", stripeTestSecretKey=");
@@ -151,6 +163,30 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             shoppingStoreImpl.setUserTypes(userTypes);
         }
 
+        if (orderCreatedEmailTemplate == null) {
+            shoppingStoreImpl.setOrderCreatedEmailTemplate(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setOrderCreatedEmailTemplate(orderCreatedEmailTemplate);
+        }
+
+        if (orderShippedEmailTemplate == null) {
+            shoppingStoreImpl.setOrderShippedEmailTemplate(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setOrderShippedEmailTemplate(orderShippedEmailTemplate);
+        }
+
+        if (orderCreatedEmailSubject == null) {
+            shoppingStoreImpl.setOrderCreatedEmailSubject(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setOrderCreatedEmailSubject(orderCreatedEmailSubject);
+        }
+
+        if (orderCreatedEmailFromAddress == null) {
+            shoppingStoreImpl.setOrderCreatedEmailFromAddress(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setOrderCreatedEmailFromAddress(orderCreatedEmailFromAddress);
+        }
+
         shoppingStoreImpl.setIntegrateWithStripe(integrateWithStripe);
 
         if (stripeTestSecretKey == null) {
@@ -204,6 +240,10 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         currency = objectInput.readUTF();
         country = objectInput.readUTF();
         userTypes = objectInput.readUTF();
+        orderCreatedEmailTemplate = objectInput.readUTF();
+        orderShippedEmailTemplate = objectInput.readUTF();
+        orderCreatedEmailSubject = objectInput.readUTF();
+        orderCreatedEmailFromAddress = objectInput.readUTF();
         integrateWithStripe = objectInput.readBoolean();
         stripeTestSecretKey = objectInput.readUTF();
         stripeTestPublishableKey = objectInput.readUTF();
@@ -263,6 +303,30 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
             objectOutput.writeUTF(userTypes);
+        }
+
+        if (orderCreatedEmailTemplate == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(orderCreatedEmailTemplate);
+        }
+
+        if (orderShippedEmailTemplate == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(orderShippedEmailTemplate);
+        }
+
+        if (orderCreatedEmailSubject == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(orderCreatedEmailSubject);
+        }
+
+        if (orderCreatedEmailFromAddress == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(orderCreatedEmailFromAddress);
         }
 
         objectOutput.writeBoolean(integrateWithStripe);

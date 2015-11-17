@@ -50,6 +50,13 @@ public class ShoppingStoreWrapper implements ShoppingStore,
         attributes.put("currency", getCurrency());
         attributes.put("country", getCountry());
         attributes.put("userTypes", getUserTypes());
+        attributes.put("orderCreatedEmailTemplate",
+            getOrderCreatedEmailTemplate());
+        attributes.put("orderShippedEmailTemplate",
+            getOrderShippedEmailTemplate());
+        attributes.put("orderCreatedEmailSubject", getOrderCreatedEmailSubject());
+        attributes.put("orderCreatedEmailFromAddress",
+            getOrderCreatedEmailFromAddress());
         attributes.put("integrateWithStripe", getIntegrateWithStripe());
         attributes.put("stripeTestSecretKey", getStripeTestSecretKey());
         attributes.put("stripeTestPublishableKey", getStripeTestPublishableKey());
@@ -133,6 +140,34 @@ public class ShoppingStoreWrapper implements ShoppingStore,
 
         if (userTypes != null) {
             setUserTypes(userTypes);
+        }
+
+        String orderCreatedEmailTemplate = (String) attributes.get(
+                "orderCreatedEmailTemplate");
+
+        if (orderCreatedEmailTemplate != null) {
+            setOrderCreatedEmailTemplate(orderCreatedEmailTemplate);
+        }
+
+        String orderShippedEmailTemplate = (String) attributes.get(
+                "orderShippedEmailTemplate");
+
+        if (orderShippedEmailTemplate != null) {
+            setOrderShippedEmailTemplate(orderShippedEmailTemplate);
+        }
+
+        String orderCreatedEmailSubject = (String) attributes.get(
+                "orderCreatedEmailSubject");
+
+        if (orderCreatedEmailSubject != null) {
+            setOrderCreatedEmailSubject(orderCreatedEmailSubject);
+        }
+
+        String orderCreatedEmailFromAddress = (String) attributes.get(
+                "orderCreatedEmailFromAddress");
+
+        if (orderCreatedEmailFromAddress != null) {
+            setOrderCreatedEmailFromAddress(orderCreatedEmailFromAddress);
         }
 
         Boolean integrateWithStripe = (Boolean) attributes.get(
@@ -463,6 +498,90 @@ public class ShoppingStoreWrapper implements ShoppingStore,
     @Override
     public void setUserTypes(java.lang.String userTypes) {
         _shoppingStore.setUserTypes(userTypes);
+    }
+
+    /**
+    * Returns the order created email template of this shopping store.
+    *
+    * @return the order created email template of this shopping store
+    */
+    @Override
+    public java.lang.String getOrderCreatedEmailTemplate() {
+        return _shoppingStore.getOrderCreatedEmailTemplate();
+    }
+
+    /**
+    * Sets the order created email template of this shopping store.
+    *
+    * @param orderCreatedEmailTemplate the order created email template of this shopping store
+    */
+    @Override
+    public void setOrderCreatedEmailTemplate(
+        java.lang.String orderCreatedEmailTemplate) {
+        _shoppingStore.setOrderCreatedEmailTemplate(orderCreatedEmailTemplate);
+    }
+
+    /**
+    * Returns the order shipped email template of this shopping store.
+    *
+    * @return the order shipped email template of this shopping store
+    */
+    @Override
+    public java.lang.String getOrderShippedEmailTemplate() {
+        return _shoppingStore.getOrderShippedEmailTemplate();
+    }
+
+    /**
+    * Sets the order shipped email template of this shopping store.
+    *
+    * @param orderShippedEmailTemplate the order shipped email template of this shopping store
+    */
+    @Override
+    public void setOrderShippedEmailTemplate(
+        java.lang.String orderShippedEmailTemplate) {
+        _shoppingStore.setOrderShippedEmailTemplate(orderShippedEmailTemplate);
+    }
+
+    /**
+    * Returns the order created email subject of this shopping store.
+    *
+    * @return the order created email subject of this shopping store
+    */
+    @Override
+    public java.lang.String getOrderCreatedEmailSubject() {
+        return _shoppingStore.getOrderCreatedEmailSubject();
+    }
+
+    /**
+    * Sets the order created email subject of this shopping store.
+    *
+    * @param orderCreatedEmailSubject the order created email subject of this shopping store
+    */
+    @Override
+    public void setOrderCreatedEmailSubject(
+        java.lang.String orderCreatedEmailSubject) {
+        _shoppingStore.setOrderCreatedEmailSubject(orderCreatedEmailSubject);
+    }
+
+    /**
+    * Returns the order created email from address of this shopping store.
+    *
+    * @return the order created email from address of this shopping store
+    */
+    @Override
+    public java.lang.String getOrderCreatedEmailFromAddress() {
+        return _shoppingStore.getOrderCreatedEmailFromAddress();
+    }
+
+    /**
+    * Sets the order created email from address of this shopping store.
+    *
+    * @param orderCreatedEmailFromAddress the order created email from address of this shopping store
+    */
+    @Override
+    public void setOrderCreatedEmailFromAddress(
+        java.lang.String orderCreatedEmailFromAddress) {
+        _shoppingStore.setOrderCreatedEmailFromAddress(orderCreatedEmailFromAddress);
     }
 
     /**

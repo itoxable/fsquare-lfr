@@ -101,6 +101,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             { "ccExpYear", Types.INTEGER },
             { "ccVerNumber", Types.VARCHAR },
             { "comments", Types.VARCHAR },
+            { "externalPaymentId", Types.VARCHAR },
             { "ppTxnId", Types.VARCHAR },
             { "ppPaymentStatus", Types.VARCHAR },
             { "ppPaymentGross", Types.DOUBLE },
@@ -111,7 +112,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             { "shippingMethodId", Types.BIGINT },
             { "international", Types.BOOLEAN }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingOrder (shoppingOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status VARCHAR(75) null,number_ VARCHAR(75) null,tax DOUBLE,shipping DOUBLE,totalPrice DOUBLE,altShipping VARCHAR(75) null,requiresShipping BOOLEAN,insure BOOLEAN,insurance DOUBLE,couponCodes VARCHAR(75) null,couponDiscount DOUBLE,paymentStatus VARCHAR(75) null,billingFirstName VARCHAR(75) null,billingLastName VARCHAR(75) null,billingEmailAddress VARCHAR(75) null,billingCompany VARCHAR(75) null,billingStreet VARCHAR(75) null,billingCity VARCHAR(75) null,billingState VARCHAR(75) null,billingZip VARCHAR(75) null,billingCountry VARCHAR(75) null,billingPhone VARCHAR(75) null,shipToBilling BOOLEAN,shippingFirstName VARCHAR(75) null,shippingLastName VARCHAR(75) null,shippingEmailAddress VARCHAR(75) null,shippingCompany VARCHAR(75) null,shippingStreet VARCHAR(75) null,shippingStreet2 VARCHAR(75) null,shippingCity VARCHAR(75) null,shippingState VARCHAR(75) null,shippingPostCode VARCHAR(75) null,shippingCountry VARCHAR(75) null,shippingPhone VARCHAR(75) null,ccName VARCHAR(75) null,ccType VARCHAR(75) null,ccNumber VARCHAR(75) null,ccExpMonth INTEGER,ccExpYear INTEGER,ccVerNumber VARCHAR(75) null,comments VARCHAR(75) null,ppTxnId VARCHAR(75) null,ppPaymentStatus VARCHAR(75) null,ppPaymentGross DOUBLE,ppReceiverEmail VARCHAR(75) null,ppPayerEmail VARCHAR(75) null,sendOrderEmail BOOLEAN,sendShippingEmail BOOLEAN,shippingMethodId LONG,international BOOLEAN)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingOrder (shoppingOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status VARCHAR(75) null,number_ VARCHAR(75) null,tax DOUBLE,shipping DOUBLE,totalPrice DOUBLE,altShipping VARCHAR(75) null,requiresShipping BOOLEAN,insure BOOLEAN,insurance DOUBLE,couponCodes VARCHAR(75) null,couponDiscount DOUBLE,paymentStatus VARCHAR(75) null,billingFirstName VARCHAR(75) null,billingLastName VARCHAR(75) null,billingEmailAddress VARCHAR(75) null,billingCompany VARCHAR(75) null,billingStreet VARCHAR(75) null,billingCity VARCHAR(75) null,billingState VARCHAR(75) null,billingZip VARCHAR(75) null,billingCountry VARCHAR(75) null,billingPhone VARCHAR(75) null,shipToBilling BOOLEAN,shippingFirstName VARCHAR(75) null,shippingLastName VARCHAR(75) null,shippingEmailAddress VARCHAR(75) null,shippingCompany VARCHAR(75) null,shippingStreet VARCHAR(75) null,shippingStreet2 VARCHAR(75) null,shippingCity VARCHAR(75) null,shippingState VARCHAR(75) null,shippingPostCode VARCHAR(75) null,shippingCountry VARCHAR(75) null,shippingPhone VARCHAR(75) null,ccName VARCHAR(75) null,ccType VARCHAR(75) null,ccNumber VARCHAR(75) null,ccExpMonth INTEGER,ccExpYear INTEGER,ccVerNumber VARCHAR(75) null,comments VARCHAR(75) null,externalPaymentId VARCHAR(75) null,ppTxnId VARCHAR(75) null,ppPaymentStatus VARCHAR(75) null,ppPaymentGross DOUBLE,ppReceiverEmail VARCHAR(75) null,ppPayerEmail VARCHAR(75) null,sendOrderEmail BOOLEAN,sendShippingEmail BOOLEAN,shippingMethodId LONG,international BOOLEAN)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingOrder";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingOrder.createDate DESC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingOrder.createDate DESC";
@@ -196,6 +197,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     private int _ccExpYear;
     private String _ccVerNumber;
     private String _comments;
+    private String _externalPaymentId;
     private String _ppTxnId;
     private String _originalPpTxnId;
     private String _ppPaymentStatus;
@@ -276,6 +278,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         model.setCcExpYear(soapModel.getCcExpYear());
         model.setCcVerNumber(soapModel.getCcVerNumber());
         model.setComments(soapModel.getComments());
+        model.setExternalPaymentId(soapModel.getExternalPaymentId());
         model.setPpTxnId(soapModel.getPpTxnId());
         model.setPpPaymentStatus(soapModel.getPpPaymentStatus());
         model.setPpPaymentGross(soapModel.getPpPaymentGross());
@@ -391,6 +394,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         attributes.put("ccExpYear", getCcExpYear());
         attributes.put("ccVerNumber", getCcVerNumber());
         attributes.put("comments", getComments());
+        attributes.put("externalPaymentId", getExternalPaymentId());
         attributes.put("ppTxnId", getPpTxnId());
         attributes.put("ppPaymentStatus", getPpPaymentStatus());
         attributes.put("ppPaymentGross", getPpPaymentGross());
@@ -694,6 +698,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
         if (comments != null) {
             setComments(comments);
+        }
+
+        String externalPaymentId = (String) attributes.get("externalPaymentId");
+
+        if (externalPaymentId != null) {
+            setExternalPaymentId(externalPaymentId);
         }
 
         String ppTxnId = (String) attributes.get("ppTxnId");
@@ -1481,6 +1491,21 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @JSON
     @Override
+    public String getExternalPaymentId() {
+        if (_externalPaymentId == null) {
+            return StringPool.BLANK;
+        } else {
+            return _externalPaymentId;
+        }
+    }
+
+    @Override
+    public void setExternalPaymentId(String externalPaymentId) {
+        _externalPaymentId = externalPaymentId;
+    }
+
+    @JSON
+    @Override
     public String getPpTxnId() {
         if (_ppTxnId == null) {
             return StringPool.BLANK;
@@ -1720,6 +1745,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         shoppingOrderImpl.setCcExpYear(getCcExpYear());
         shoppingOrderImpl.setCcVerNumber(getCcVerNumber());
         shoppingOrderImpl.setComments(getComments());
+        shoppingOrderImpl.setExternalPaymentId(getExternalPaymentId());
         shoppingOrderImpl.setPpTxnId(getPpTxnId());
         shoppingOrderImpl.setPpPaymentStatus(getPpPaymentStatus());
         shoppingOrderImpl.setPpPaymentGross(getPpPaymentGross());
@@ -2110,6 +2136,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             shoppingOrderCacheModel.comments = null;
         }
 
+        shoppingOrderCacheModel.externalPaymentId = getExternalPaymentId();
+
+        String externalPaymentId = shoppingOrderCacheModel.externalPaymentId;
+
+        if ((externalPaymentId != null) && (externalPaymentId.length() == 0)) {
+            shoppingOrderCacheModel.externalPaymentId = null;
+        }
+
         shoppingOrderCacheModel.ppTxnId = getPpTxnId();
 
         String ppTxnId = shoppingOrderCacheModel.ppTxnId;
@@ -2157,7 +2191,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(115);
+        StringBundler sb = new StringBundler(117);
 
         sb.append("{shoppingOrderId=");
         sb.append(getShoppingOrderId());
@@ -2255,6 +2289,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(getCcVerNumber());
         sb.append(", comments=");
         sb.append(getComments());
+        sb.append(", externalPaymentId=");
+        sb.append(getExternalPaymentId());
         sb.append(", ppTxnId=");
         sb.append(getPpTxnId());
         sb.append(", ppPaymentStatus=");
@@ -2280,7 +2316,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(175);
+        StringBundler sb = new StringBundler(178);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingOrder");
@@ -2477,6 +2513,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(
             "<column><column-name>comments</column-name><column-value><![CDATA[");
         sb.append(getComments());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>externalPaymentId</column-name><column-value><![CDATA[");
+        sb.append(getExternalPaymentId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>ppTxnId</column-name><column-value><![CDATA[");

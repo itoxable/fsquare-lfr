@@ -220,6 +220,16 @@ public class StorePortlet extends MVCPortlet{
 			String usersType = ParamUtil.getString(resourceRequest, "usersType");  
 			shoppingStore.setUserTypes(usersType);
 			
+			String orderCreatedEmailTemplate = ParamUtil.getString(resourceRequest, "orderCreatedEmailTemplate");  
+			String orderShippedEmailTemplate = ParamUtil.getString(resourceRequest, "orderShippedEmailTemplate");  
+			String orderCreatedEmailSubject = ParamUtil.getString(resourceRequest, "orderCreatedEmailSubject");  
+			String orderCreatedEmailFromAddress = ParamUtil.getString(resourceRequest, "orderCreatedEmailFromAddress");  
+
+			shoppingStore.setOrderCreatedEmailTemplate(orderCreatedEmailTemplate);
+			shoppingStore.setOrderShippedEmailTemplate(orderShippedEmailTemplate);
+			shoppingStore.setOrderCreatedEmailSubject(orderCreatedEmailSubject);
+			shoppingStore.setOrderCreatedEmailFromAddress(orderCreatedEmailFromAddress);
+			
 			
 			String stripeLiveSecretKey = ParamUtil.getString(resourceRequest, "stripeLiveSecretKey");  
 			shoppingStore.setStripeLiveSecretKey(stripeLiveSecretKey);

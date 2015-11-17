@@ -62,6 +62,7 @@ public class ShoppingOrderSoap implements Serializable {
     private int _ccExpYear;
     private String _ccVerNumber;
     private String _comments;
+    private String _externalPaymentId;
     private String _ppTxnId;
     private String _ppPaymentStatus;
     private double _ppPaymentGross;
@@ -126,6 +127,7 @@ public class ShoppingOrderSoap implements Serializable {
         soapModel.setCcExpYear(model.getCcExpYear());
         soapModel.setCcVerNumber(model.getCcVerNumber());
         soapModel.setComments(model.getComments());
+        soapModel.setExternalPaymentId(model.getExternalPaymentId());
         soapModel.setPpTxnId(model.getPpTxnId());
         soapModel.setPpPaymentStatus(model.getPpPaymentStatus());
         soapModel.setPpPaymentGross(model.getPpPaymentGross());
@@ -577,6 +579,14 @@ public class ShoppingOrderSoap implements Serializable {
 
     public void setComments(String comments) {
         _comments = comments;
+    }
+
+    public String getExternalPaymentId() {
+        return _externalPaymentId;
+    }
+
+    public void setExternalPaymentId(String externalPaymentId) {
+        _externalPaymentId = externalPaymentId;
     }
 
     public String getPpTxnId() {

@@ -2816,6 +2816,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         shoppingOrderImpl.setCcExpYear(shoppingOrder.getCcExpYear());
         shoppingOrderImpl.setCcVerNumber(shoppingOrder.getCcVerNumber());
         shoppingOrderImpl.setComments(shoppingOrder.getComments());
+        shoppingOrderImpl.setExternalPaymentId(shoppingOrder.getExternalPaymentId());
         shoppingOrderImpl.setPpTxnId(shoppingOrder.getPpTxnId());
         shoppingOrderImpl.setPpPaymentStatus(shoppingOrder.getPpPaymentStatus());
         shoppingOrderImpl.setPpPaymentGross(shoppingOrder.getPpPaymentGross());

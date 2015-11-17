@@ -1,3 +1,4 @@
+<%@page import="com.fsquare.shopping.ShoppingUtil"%>
 <%@page import="com.fsquare.shopping.model.ShoppingShippingMethod"%>
 <%@page import="com.fsquare.shopping.service.ShoppingShippingMethodLocalServiceUtil"%>
 <%@page import="com.fsquare.shopping.model.ShoppingOrder"%>
@@ -19,6 +20,11 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 <liferay-portlet:resourceURL var="openOrderItemsURL" secure="false">
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_OPEN_ORDER_ITEMS %>" />
 </liferay-portlet:resourceURL>
+<liferay-portlet:resourceURL var="sendStatusEmailURL" secure="false">
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SEND_STATUS_EMAIL %>" />
+</liferay-portlet:resourceURL>
+
+
 <div>
 	<h3>Orders</h3>
 	<div class="orders-table-wrapper" >
@@ -45,21 +51,26 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 				
 					<td id="<%= "order-number-"+shoppingOrderId %>"><%= shoppingOrder.getNumber() %></td>
 					<td id="<%= "order-shipping-"+shoppingOrderId %>"><%= shoppingShippingMethod.getName() %> (<%= shoppingOrder.getShipping()%>)
-						<a href class="icon-external-link-sign" data-order-id="<%= shoppingOrderId %>" title="View shipping address" href="javascript:;"></a>
+						<a class="icon-external-link-sign order-shipping-address" data-order-id="<%= shoppingOrderId %>" title="View shipping address" href="javascript:;"></a>
 					</td>
 					
-					<td id="<%= "order-price-"+shoppingOrderId %>"><%= shoppingOrder.getTotalPrice()%></td>
+					<td id="<%= "order-price-"+shoppingOrderId %>"><%= shoppingOrder.getTotalPrice()%>
+						<a class="icon-external-link-sign order-items" data-order-id="<%= shoppingOrderId %>" title="View Items" href="javascript:;"></a>
+					</td>
 					
 					<td id="<%= "order-status-"+shoppingOrderId %>">
 						<select class="order-status" data-order-id="<%= shoppingOrderId %>">
-							<option selected="<%= ShoppingPortletUtil.ORDER_STATUS_SHIPPED.equals(shoppingOrder.getStatus()) %>" value="<%= ShoppingPortletUtil.ORDER_STATUS_SHIPPED %>">shipped</option>
-							<option selected="<%= ShoppingPortletUtil.ORDER_STATUS_PENDING.equals(shoppingOrder.getStatus()) %>" value="<%= ShoppingPortletUtil.ORDER_STATUS_PENDING %>">pending</option>
-							<option selected="<%= ShoppingPortletUtil.ORDER_STATUS_CANCELED.equals(shoppingOrder.getStatus()) %>" value="<%= ShoppingPortletUtil.ORDER_STATUS_CANCELED %>">canceled</option>
-							<option selected="<%= ShoppingPortletUtil.ORDER_STATUS_RETURNED.equals(shoppingOrder.getStatus()) %>" value="<%= ShoppingPortletUtil.ORDER_STATUS_RETURNED %>">returned</option>
+							<option selected="<%= ShoppingUtil.ORDER_STATUS_SHIPPED.equals(shoppingOrder.getStatus()) %>" value="<%= ShoppingUtil.ORDER_STATUS_SHIPPED %>">shipped</option>
+							<option selected="<%= ShoppingUtil.ORDER_STATUS_PENDING.equals(shoppingOrder.getStatus()) %>" value="<%= ShoppingUtil.ORDER_STATUS_PENDING %>">pending</option>
+							<option selected="<%= ShoppingUtil.ORDER_STATUS_CANCELED.equals(shoppingOrder.getStatus()) %>" value="<%= ShoppingUtil.ORDER_STATUS_CANCELED %>">canceled</option>
+							<option selected="<%= ShoppingUtil.ORDER_STATUS_RETURNED.equals(shoppingOrder.getStatus()) %>" value="<%= ShoppingUtil.ORDER_STATUS_RETURNED %>">returned</option>
 						</select>
 					</td>
 					
-					<td></td>
+					<td>
+						<a class="icon-external-link-sign send-order-status" data-order-id="<%= shoppingOrderId %>" title="Send Order Status" href="javascript:;"></a>
+					
+					</td>
 				</tr>
 			<%
 			  	}		  	
@@ -72,7 +83,7 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 </div>
 <aui:script use="aui-base,selector-css3,aui-io-request,array-extras,querystring-stringify,aui-datatype,aui-datepicker">
 	
-	A.on('change', function(event) {
+	A.on('click', function(event) {
 		<portlet:namespace />openOrderItems(this.getAttribute('data-order-id'));
 	}, '.order-items');
 	Liferay.provide(window, '<portlet:namespace />openOrderItems',
@@ -87,7 +98,6 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 	                  success: function() {
 	                  	var response = this.get('responseData');
 	                  	var form = A.Node.create(response);
-	                  	form.delegate();
 	                  	form.appendTo(A.one('.shopping-orders-management'));
 	                  }
 	              }
@@ -96,7 +106,7 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 	    },
 		['aui-base,selector-css3,aui-datepicker']);
 	
-	A.on('change', function(event) {
+	A.on('click', function(event) {
 		<portlet:namespace />openShippingAddress(this.getAttribute('data-order-id'));
 	}, '.order-shipping-address');
 	
@@ -142,6 +152,33 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 						if(response.success){
 														
 						}else{
+						}
+                  	}
+	              }
+	        });
+			
+	    },
+		['aui-base,selector-css3']);
+	
+	A.on('click', function(event) {
+		<portlet:namespace />sendStatusEmail(this.getAttribute('data-order-id'));
+	}, '.send-order-status');
+	
+	Liferay.provide(window, '<portlet:namespace />sendStatusEmail',
+		function(shoppingOrderId, orderStatus) {
+			A.io.request('<%= sendStatusEmailURL %>',{
+	              dataType: 'json',
+	              method: 'POST',
+	              data: {
+	            	  <portlet:namespace />shoppingOrderId : shoppingOrderId,
+	              },
+	              on: {
+                  	success: function() {
+						var response = this.get('responseData');
+						if(response.success){
+							console.log(response.successText);							
+						}else{
+							console.log(response.errorText);		
 						}
                   	}
 	              }

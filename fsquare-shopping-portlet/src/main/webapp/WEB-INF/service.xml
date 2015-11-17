@@ -152,6 +152,8 @@
 		<column name="ccExpYear" type="int" />
 		<column name="ccVerNumber" type="String" />
 		<column name="comments" type="String" />
+		<column name="externalPaymentId" type="String" />
+		
 		<column name="ppTxnId" type="String" />
 		<column name="ppPaymentStatus" type="String" />
 		<column name="ppPaymentGross" type="double" />
@@ -250,9 +252,6 @@
 	</entity>
 	
 	<entity name="ShoppingStore" local-service="true" remote-service="true">
-		<!-- PK fields -->
-
-<!-- 		<column name="shoppingStoreId" type="long" primary="true" /> -->
 
 		<!-- Group instance -->
 
@@ -275,6 +274,10 @@
 		<column name="country" type="String" />
 		<column name="userTypes" type="String" />
 		
+		<column name="orderCreatedEmailTemplate" type="String" />
+		<column name="orderShippedEmailTemplate" type="String" />
+		<column name="orderCreatedEmailSubject" type="String" />
+		<column name="orderCreatedEmailFromAddress" type="String" />
 		
 		<!-- Stripe API Fields -->
 		<column name="integrateWithStripe" type="boolean" />
@@ -335,5 +338,7 @@
 		<exception>ShippingState</exception>
 		<exception>ShippingStreet</exception>
 		<exception>ShippingZip</exception>
+		<exception>StoreConfiguration</exception>
+		
 	</exceptions>
 </service-builder>

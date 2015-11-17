@@ -803,6 +803,21 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
     public void setComments(String comments);
 
     /**
+     * Returns the external payment ID of this shopping order.
+     *
+     * @return the external payment ID of this shopping order
+     */
+    @AutoEscape
+    public String getExternalPaymentId();
+
+    /**
+     * Sets the external payment ID of this shopping order.
+     *
+     * @param externalPaymentId the external payment ID of this shopping order
+     */
+    public void setExternalPaymentId(String externalPaymentId);
+
+    /**
      * Returns the pp txn ID of this shopping order.
      *
      * @return the pp txn ID of this shopping order

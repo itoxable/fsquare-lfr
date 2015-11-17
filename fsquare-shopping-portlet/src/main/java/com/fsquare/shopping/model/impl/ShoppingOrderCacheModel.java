@@ -70,6 +70,7 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
     public int ccExpYear;
     public String ccVerNumber;
     public String comments;
+    public String externalPaymentId;
     public String ppTxnId;
     public String ppPaymentStatus;
     public double ppPaymentGross;
@@ -82,7 +83,7 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(115);
+        StringBundler sb = new StringBundler(117);
 
         sb.append("{shoppingOrderId=");
         sb.append(shoppingOrderId);
@@ -180,6 +181,8 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         sb.append(ccVerNumber);
         sb.append(", comments=");
         sb.append(comments);
+        sb.append(", externalPaymentId=");
+        sb.append(externalPaymentId);
         sb.append(", ppTxnId=");
         sb.append(ppTxnId);
         sb.append(", ppPaymentStatus=");
@@ -431,6 +434,12 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
             shoppingOrderImpl.setComments(comments);
         }
 
+        if (externalPaymentId == null) {
+            shoppingOrderImpl.setExternalPaymentId(StringPool.BLANK);
+        } else {
+            shoppingOrderImpl.setExternalPaymentId(externalPaymentId);
+        }
+
         if (ppTxnId == null) {
             shoppingOrderImpl.setPpTxnId(StringPool.BLANK);
         } else {
@@ -517,6 +526,7 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         ccExpYear = objectInput.readInt();
         ccVerNumber = objectInput.readUTF();
         comments = objectInput.readUTF();
+        externalPaymentId = objectInput.readUTF();
         ppTxnId = objectInput.readUTF();
         ppPaymentStatus = objectInput.readUTF();
         ppPaymentGross = objectInput.readDouble();
@@ -744,6 +754,12 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
             objectOutput.writeUTF(comments);
+        }
+
+        if (externalPaymentId == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(externalPaymentId);
         }
 
         if (ppTxnId == null) {

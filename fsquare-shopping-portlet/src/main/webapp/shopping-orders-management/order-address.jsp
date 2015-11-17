@@ -1,47 +1,44 @@
+<%@page import="com.liferay.portal.service.CountryServiceUtil"%>
+<%@page import="com.liferay.portal.model.Country"%>
+<%@page import="com.fsquare.shopping.model.ShoppingShippingMethod"%>
 <%@page import="com.fsquare.shopping.model.ShoppingOrder"%>
 <%@page import="com.fsquare.shopping.service.ShoppingOrderLocalServiceUtil"%>
 <%@ include file="init.jsp" %>
 
 <%
 
-List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGroupId(themeDisplay.getScopeGroupId());
+ShoppingShippingMethod shoppingShippingMethod = (ShoppingShippingMethod)request.getAttribute(ShoppingPortletUtil.ATTR_SHIPPING);
+ShoppingOrder shoppingOrder = (ShoppingOrder)request.getAttribute(ShoppingPortletUtil.ATTR_SHOPPING_ORDER);
 
-
+Country country = CountryServiceUtil.fetchCountryByA2(shoppingOrder.getShippingCountry());
 %>
-<liferay-portlet:resourceURL var="setDefaultShippingMethodURL" secure="false">
-	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SET_DEFAULT_SHIPPING_METHOD %>" />
-</liferay-portlet:resourceURL>
 
-
-<div>
-	<h3>Orders</h3>
-	<div class="orders-table-wrapper" >
-		<table class="orders-table table table-bordered table-striped" id="<portlet:namespace />orders-table" >
-			<thead>
-				<tr>
-					<td>Name</td>
-					<td>Description</td>
-					<td>price</td>
-					<td>freeQuantity</td>
-					<td>freeTotal</td>
-					<td>weight</td>
-					<td></td>
-				</tr>
-			</thead>
-			<tbody>
-				
-			<%
-			  	for(ShoppingOrder shoppingOrder: shoppingOrderList){
-		  	%>
-				
-			<%
-			  	}		  	
-			 %>
-			</tbody>
-		
-		</table>
+<div class="modal" id="<portlet:namespace />shipping_address">
+	<div class="modal-header">
+		<button type="button" class="close" onclick="jQuery('#<portlet:namespace />shipping_address').remove();">×</button>
+		<h3>Shipping</h3>
 	</div>
-	<div id="<portlet:namespace />orders-table-error" class="error-message orders-table-error"></div>
+	<div class="modal-body">
+		<div class="shipping-method">
+			<span><%=shoppingShippingMethod.getName()+" - "+ shoppingShippingMethod.getDescription() %></span>
+		</div>
+		<h4>To:</h4>
+		<div class="address-fields">
+			<h5 class="subtitle">Your Email Address</h5>
+			<div><%=shoppingOrder.getShippingEmailAddress() %></div>
+			<br>
+			<h5 class="subtitle">Shipping Address</h5>
+			<div><%=shoppingOrder.getShippingFirstName() +" "+ shoppingOrder.getShippingLastName()  %> </div>
+			<div><%=shoppingOrder.getShippingStreet() %></div>
+			<div><%=shoppingOrder.getShippingStreet2() %></div>
+			<div><%=shoppingOrder.getShippingCity() +" "+ shoppingOrder.getShippingPostCode() %></div>
+			<div><%=country.getName(themeDisplay.getLocale()) %></div>
+			<div><%=shoppingOrder.getShippingPhone() %></div>
+		</div>
+		
+	</div>
+	<div class="modal-footer">
+		<button class="btn" type="button" onclick="jQuery('#<portlet:namespace />shipping_address').remove();" >Close</button>
+	</div>
+	
 </div>
-<aui:script use="aui-base,selector-css3,aui-io-request,array-extras,querystring-stringify,aui-datatype,aui-datepicker">
-</aui:script>

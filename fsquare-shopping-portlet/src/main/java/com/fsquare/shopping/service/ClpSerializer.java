@@ -592,6 +592,10 @@ public class ClpSerializer {
             return new com.fsquare.shopping.ShippingZipException();
         }
 
+        if (className.equals("com.fsquare.shopping.StoreConfigurationException")) {
+            return new com.fsquare.shopping.StoreConfigurationException();
+        }
+
         if (className.equals(
                     "com.fsquare.shopping.NoSuchShoppingCouponException")) {
             return new com.fsquare.shopping.NoSuchShoppingCouponException();

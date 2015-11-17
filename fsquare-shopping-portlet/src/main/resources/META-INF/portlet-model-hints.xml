@@ -71,6 +71,7 @@
 		<field name="ccExpYear" type="int" />
 		<field name="ccVerNumber" type="String" />
 		<field name="comments" type="String" />
+		<field name="externalPaymentId" type="String" />
 		<field name="ppTxnId" type="String" />
 		<field name="ppPaymentStatus" type="String" />
 		<field name="ppPaymentGross" type="double" />
@@ -124,6 +125,10 @@
 		<field name="currency" type="String" />
 		<field name="country" type="String" />
 		<field name="userTypes" type="String" />
+		<field name="orderCreatedEmailTemplate" type="String" />
+		<field name="orderShippedEmailTemplate" type="String" />
+		<field name="orderCreatedEmailSubject" type="String" />
+		<field name="orderCreatedEmailFromAddress" type="String" />
 		<field name="integrateWithStripe" type="boolean" />
 		<field name="stripeTestSecretKey" type="String" />
 		<field name="stripeTestPublishableKey" type="String" />

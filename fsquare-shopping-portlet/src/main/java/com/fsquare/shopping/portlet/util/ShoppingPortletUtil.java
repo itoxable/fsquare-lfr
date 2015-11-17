@@ -70,6 +70,9 @@ public class ShoppingPortletUtil {
 	public static final String CMD_GET_CHECKOUT_STEP = "getCheckoutStep";
 	public static final String CMD_CALCULATE_SHIPPING_PRICE = "calculateShippingPrice";
 
+	public static final String CMD_SEND_STATUS_EMAIL = "sendStatusEmail";
+
+	
 	
 	public static final String PRODUCT_MAIN_IMAGE = "Main_Image";
 	public static final String PRODUCT_TEXT = "Text";
@@ -85,21 +88,15 @@ public class ShoppingPortletUtil {
 	public static final String ORDER_STATUS_PAID = "paid";
 	public static final String ORDER_STATUS_FULFILLED = "fulfilled";
 	
-	public static final String ORDER_STATUS_SHIPPED = "order_status_shipped";
-	public static final String ORDER_STATUS_PENDING = "order_status_pending";
-	public static final String ORDER_STATUS_CANCELED = "order_status_canceled";
-	public static final String ORDER_STATUS_RETURNED = "order_status_returned";
-	public static final String ORDER_STATUS_WAITING_PAYMENT = "order_status_waiting_payment";
-	
 	public static final String ON_ADD_TO_CART_JUMP_TO_CART = "jumpToCart";
 	
 	
 	public static final String ATTR_COUPON = "coupon";
 	public static final String ATTR_SHIPPING = "shipping";
-	public static final String ATTR_ORDER = "order";
+//	public static final String ATTR_ORDER = "order";
 	public static final String ATTR_ORDER_ITEMS = "order_items";
 	public static final String ATTR_SHOPPING_ORDER_PROCESS_WRAPPER = "attr_shoppingOrderProcessWrapper";
-
+	public static final String ATTR_SHOPPING_ORDER = "attr_shopping_order";
 	
 	public static final String DATE_FORMAT = "dd/mm/yyyy";
 	

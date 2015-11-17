@@ -86,6 +86,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
         attributes.put("ccExpYear", getCcExpYear());
         attributes.put("ccVerNumber", getCcVerNumber());
         attributes.put("comments", getComments());
+        attributes.put("externalPaymentId", getExternalPaymentId());
         attributes.put("ppTxnId", getPpTxnId());
         attributes.put("ppPaymentStatus", getPpPaymentStatus());
         attributes.put("ppPaymentGross", getPpPaymentGross());
@@ -389,6 +390,12 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
 
         if (comments != null) {
             setComments(comments);
+        }
+
+        String externalPaymentId = (String) attributes.get("externalPaymentId");
+
+        if (externalPaymentId != null) {
+            setExternalPaymentId(externalPaymentId);
         }
 
         String ppTxnId = (String) attributes.get("ppTxnId");
@@ -1477,6 +1484,26 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
     @Override
     public void setComments(java.lang.String comments) {
         _shoppingOrder.setComments(comments);
+    }
+
+    /**
+    * Returns the external payment ID of this shopping order.
+    *
+    * @return the external payment ID of this shopping order
+    */
+    @Override
+    public java.lang.String getExternalPaymentId() {
+        return _shoppingOrder.getExternalPaymentId();
+    }
+
+    /**
+    * Sets the external payment ID of this shopping order.
+    *
+    * @param externalPaymentId the external payment ID of this shopping order
+    */
+    @Override
+    public void setExternalPaymentId(java.lang.String externalPaymentId) {
+        _shoppingOrder.setExternalPaymentId(externalPaymentId);
     }
 
     /**

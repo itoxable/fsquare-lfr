@@ -251,6 +251,67 @@ public interface ShoppingStoreModel extends AuditedModel,
     public void setUserTypes(String userTypes);
 
     /**
+     * Returns the order created email template of this shopping store.
+     *
+     * @return the order created email template of this shopping store
+     */
+    @AutoEscape
+    public String getOrderCreatedEmailTemplate();
+
+    /**
+     * Sets the order created email template of this shopping store.
+     *
+     * @param orderCreatedEmailTemplate the order created email template of this shopping store
+     */
+    public void setOrderCreatedEmailTemplate(String orderCreatedEmailTemplate);
+
+    /**
+     * Returns the order shipped email template of this shopping store.
+     *
+     * @return the order shipped email template of this shopping store
+     */
+    @AutoEscape
+    public String getOrderShippedEmailTemplate();
+
+    /**
+     * Sets the order shipped email template of this shopping store.
+     *
+     * @param orderShippedEmailTemplate the order shipped email template of this shopping store
+     */
+    public void setOrderShippedEmailTemplate(String orderShippedEmailTemplate);
+
+    /**
+     * Returns the order created email subject of this shopping store.
+     *
+     * @return the order created email subject of this shopping store
+     */
+    @AutoEscape
+    public String getOrderCreatedEmailSubject();
+
+    /**
+     * Sets the order created email subject of this shopping store.
+     *
+     * @param orderCreatedEmailSubject the order created email subject of this shopping store
+     */
+    public void setOrderCreatedEmailSubject(String orderCreatedEmailSubject);
+
+    /**
+     * Returns the order created email from address of this shopping store.
+     *
+     * @return the order created email from address of this shopping store
+     */
+    @AutoEscape
+    public String getOrderCreatedEmailFromAddress();
+
+    /**
+     * Sets the order created email from address of this shopping store.
+     *
+     * @param orderCreatedEmailFromAddress the order created email from address of this shopping store
+     */
+    public void setOrderCreatedEmailFromAddress(
+        String orderCreatedEmailFromAddress);
+
+    /**
      * Returns the integrate with stripe of this shopping store.
      *
      * @return the integrate with stripe of this shopping store

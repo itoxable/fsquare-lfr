@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.fsquare.shopping.NoSuchShoppingStoreException;
+import com.fsquare.shopping.ShoppingUtil;
+import com.fsquare.shopping.messaging.Destinations;
 import com.fsquare.shopping.model.ShoppingCoupon;
 import com.fsquare.shopping.model.ShoppingOrder;
 import com.fsquare.shopping.model.ShoppingOrderItem;
@@ -37,6 +39,9 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -243,7 +248,15 @@ public class OrdersPortlet extends BaseShoppingPortlet {
 			chargeParams.put("description", "jo-walton.com painting shopping order id: "+shoppingOrder.getShoppingOrderId());
 
 			Charge charge = Charge.create(chargeParams, options);
-
+			//charge.g
+			Message message = new Message();
+			message.put("shoppingOrder", shoppingOrder);
+			message.put("shoppingStore", shoppingStore);
+			MessageBusUtil.sendMessage(Destinations.SHOPPING_SUCCESS_ORDER_MAIL, message);
+			
+			shoppingOrder.setExternalPaymentId(charge.getId());
+			shoppingOrder = ShoppingOrderLocalServiceUtil.updateShoppingOrder(shoppingOrder);
+			
 			PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
 			String path = ShoppingPortletUtil.CHECKOUT_SUCCESS_SCREEN;
 			resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_SHOPPING_ORDER_PROCESS_WRAPPER, shoppingOrderProcessWrapper);
@@ -334,8 +347,8 @@ public class OrdersPortlet extends BaseShoppingPortlet {
 		
 		shoppingOrderProcessWrapper.setAvailableShoppingShippingMethodList(availableShoppingShippingMethodList);
 		
-		jsonObject.put("success", country.getName(themeDisplay.getLocale()));
-		jsonObject.put("countryName", success);
+		jsonObject.put("success", success);
+		jsonObject.put("countryName", country.getName(themeDisplay.getLocale()));
 		jsonObject.put("shoppingOrder", JSONFactoryUtil.looseSerialize(shoppingOrder));
 
 		writer.print(jsonObject.toString());
