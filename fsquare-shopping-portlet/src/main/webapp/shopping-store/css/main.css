@@ -17,6 +17,13 @@
 	position: relative;
 	
 }
+.aui .shopping-store-settings .email-settings{
+	margin: 20px 0;
+}
+.aui .shopping-store-settings .email-settings .email-editor-wrapper{
+	  border: 1px solid #ccc;
+	  margin: 5px 0;
+}
 
 .aui .payment-test-fields-wrap{
 	float: left;

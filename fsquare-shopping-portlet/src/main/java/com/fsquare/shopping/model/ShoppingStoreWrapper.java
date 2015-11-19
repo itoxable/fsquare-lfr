@@ -44,6 +44,7 @@ public class ShoppingStoreWrapper implements ShoppingStore,
         attributes.put("userName", getUserName());
         attributes.put("createDate", getCreateDate());
         attributes.put("modifiedDate", getModifiedDate());
+        attributes.put("name", getName());
         attributes.put("cartPageUuid", getCartPageUuid());
         attributes.put("checkoutPageUuid", getCheckoutPageUuid());
         attributes.put("onAddToCart", getOnAddToCart());
@@ -104,6 +105,12 @@ public class ShoppingStoreWrapper implements ShoppingStore,
 
         if (modifiedDate != null) {
             setModifiedDate(modifiedDate);
+        }
+
+        String name = (String) attributes.get("name");
+
+        if (name != null) {
+            setName(name);
         }
 
         String cartPageUuid = (String) attributes.get("cartPageUuid");
@@ -378,6 +385,26 @@ public class ShoppingStoreWrapper implements ShoppingStore,
     @Override
     public void setModifiedDate(java.util.Date modifiedDate) {
         _shoppingStore.setModifiedDate(modifiedDate);
+    }
+
+    /**
+    * Returns the name of this shopping store.
+    *
+    * @return the name of this shopping store
+    */
+    @Override
+    public java.lang.String getName() {
+        return _shoppingStore.getName();
+    }
+
+    /**
+    * Sets the name of this shopping store.
+    *
+    * @param name the name of this shopping store
+    */
+    @Override
+    public void setName(java.lang.String name) {
+        _shoppingStore.setName(name);
     }
 
     /**

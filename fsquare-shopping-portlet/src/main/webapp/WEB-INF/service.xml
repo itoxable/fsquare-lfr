@@ -266,7 +266,7 @@
 		<column name="modifiedDate" type="Date" />
 
 		<!-- Other fields -->
-
+		<column name="name" type="String" />
 		<column name="cartPageUuid" type="String" />
 		<column name="checkoutPageUuid" type="String" />
 		<column name="onAddToCart" type="String" />

@@ -119,14 +119,19 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
 		<field name="cartPageUuid" type="String" />
 		<field name="checkoutPageUuid" type="String" />
 		<field name="onAddToCart" type="String" />
 		<field name="currency" type="String" />
 		<field name="country" type="String" />
 		<field name="userTypes" type="String" />
-		<field name="orderCreatedEmailTemplate" type="String" />
-		<field name="orderShippedEmailTemplate" type="String" />
+		<field name="orderCreatedEmailTemplate" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="orderShippedEmailTemplate" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 		<field name="orderCreatedEmailSubject" type="String" />
 		<field name="orderCreatedEmailFromAddress" type="String" />
 		<field name="integrateWithStripe" type="boolean" />

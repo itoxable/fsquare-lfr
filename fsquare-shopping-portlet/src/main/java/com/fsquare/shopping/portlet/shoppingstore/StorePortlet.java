@@ -2,6 +2,7 @@ package com.fsquare.shopping.portlet.shoppingstore;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Blob;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,20 +14,28 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 import com.fsquare.shopping.NoSuchShoppingStoreException;
+import com.fsquare.shopping.messaging.Destinations;
 import com.fsquare.shopping.model.ShoppingCoupon;
+import com.fsquare.shopping.model.ShoppingOrder;
 import com.fsquare.shopping.model.ShoppingStore;
+import com.fsquare.shopping.model.impl.ShoppingOrderImpl;
 import com.fsquare.shopping.portlet.util.ShoppingPortletUtil;
 import com.fsquare.shopping.service.ShoppingCouponLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingStoreLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.jdbc.OutputBlob;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.User;
@@ -58,13 +67,42 @@ public class StorePortlet extends MVCPortlet{
 				openTestStripeForm(resourceRequest, resourceResponse);
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_TEST_STRIPE)) {
 				testStripePayment(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_SEND_TEST_EMAIL)) {
+				sendTestEmail(resourceRequest, resourceResponse);
 			}
 			
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
+
+	private void sendTestEmail(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException, SystemException {
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        boolean success = false;
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+        ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+        ShoppingOrder shoppingOrder = new ShoppingOrderImpl();
+        
+        shoppingOrder.setShippingEmailAddress(themeDisplay.getUser().getDisplayEmailAddress());
+        
+        success = true;
+        Message message = new Message();
+        
+		message.put("shoppingOrder", shoppingOrder);
+		message.put("shoppingStore", shoppingStore);
+		MessageBusUtil.sendMessage(Destinations.SHOPPING_SUCCESS_ORDER_MAIL, message);
+        
+        
+        jsonObject.put("success", success);
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
+	}
+
 
 	private void testStripePayment(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException, SystemException, PortletException {
 		PrintWriter writer = resourceResponse.getWriter();
@@ -200,13 +238,14 @@ public class StorePortlet extends MVCPortlet{
 			shoppingStore.setCreateDate(new Date());
 			shoppingStore.setCompanyId(themeDisplay.getCompanyId());
 			shoppingStore.setUserId(themeDisplay.getUserId());
-			User user = UserLocalServiceUtil.getUser(themeDisplay.getUserId());
+			User user = themeDisplay.getUser();
 			shoppingStore.setUserName(user.getLogin());
 			
 		}
 		try{
 			shoppingStore.setModifiedDate(new Date());
-			
+			String name = ParamUtil.getString(resourceRequest, "name");
+			shoppingStore.setName(name);
 			String storeCountry = ParamUtil.getString(resourceRequest, "storeCountry");
 			shoppingStore.setCountry(storeCountry);
 			String checkoutDisplayPage = ParamUtil.getString(resourceRequest, "checkoutDisplayPage"); 
@@ -225,6 +264,13 @@ public class StorePortlet extends MVCPortlet{
 			String orderCreatedEmailSubject = ParamUtil.getString(resourceRequest, "orderCreatedEmailSubject");  
 			String orderCreatedEmailFromAddress = ParamUtil.getString(resourceRequest, "orderCreatedEmailFromAddress");  
 
+//			byte[] orderCreatedEmailTemplateBytes = orderCreatedEmailTemplate.getBytes(StringPool.UTF8);
+//			Blob orderCreatedEmailTemplateBlob = new OutputBlob(new UnsyncByteArrayInputStream(orderCreatedEmailTemplateBytes), orderCreatedEmailTemplateBytes.length);
+//			
+//			byte[] orderShippedEmailTemplateBytes = orderShippedEmailTemplate.getBytes(StringPool.UTF8);
+//			Blob orderShippedEmailTemplateBlob = new OutputBlob(new UnsyncByteArrayInputStream(orderShippedEmailTemplateBytes), orderShippedEmailTemplateBytes.length);
+			
+			
 			shoppingStore.setOrderCreatedEmailTemplate(orderCreatedEmailTemplate);
 			shoppingStore.setOrderShippedEmailTemplate(orderShippedEmailTemplate);
 			shoppingStore.setOrderCreatedEmailSubject(orderCreatedEmailSubject);

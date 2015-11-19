@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.fsquare.shopping.NoSuchShoppingStoreException;
+import com.fsquare.shopping.ShoppingUtil;
 import com.fsquare.shopping.model.ShoppingOrderItem;
 import com.fsquare.shopping.model.ShoppingStore;
 import com.fsquare.shopping.model.impl.ShoppingOrderItemImpl;
@@ -117,7 +118,7 @@ public class MiniCartPortlet extends MVCPortlet {
 				shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
 			}
 			
-			jsonObject.put("redirect", ShoppingPortletUtil.ON_ADD_TO_CART_JUMP_TO_CART.equals(shoppingStore.getOnAddToCart()));
+			jsonObject.put("redirect", ShoppingUtil.ON_ADD_TO_CART_JUMP_TO_CART.equals(shoppingStore.getOnAddToCart()));
 			
 		}catch(Exception e){
 			e.printStackTrace();

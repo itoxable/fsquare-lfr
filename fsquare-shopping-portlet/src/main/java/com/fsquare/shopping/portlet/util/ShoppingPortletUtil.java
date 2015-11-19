@@ -88,9 +88,6 @@ public class ShoppingPortletUtil {
 	public static final String ORDER_STATUS_PAID = "paid";
 	public static final String ORDER_STATUS_FULFILLED = "fulfilled";
 	
-	public static final String ON_ADD_TO_CART_JUMP_TO_CART = "jumpToCart";
-	
-	
 	public static final String ATTR_COUPON = "coupon";
 	public static final String ATTR_SHIPPING = "shipping";
 //	public static final String ATTR_ORDER = "order";
@@ -115,15 +112,8 @@ public class ShoppingPortletUtil {
 	public static final String CMD_GET_ORDER_TOTAL = "getOrderTotal";
 
 
+	public static final String CMD_SEND_TEST_EMAIL = "sendTestEmail";
 
-//	public static enum CHECKOUT_STEP {
-//	ADDRESS(1), SHIPPING_METHOD(2), PAYMENT_FORM(3);
-//	private int index;
-//
-//	private CHECKOUT_STEP(int index) {
-//		this.index = index; 
-//	}
-//}SESSION_SHOPPING_ORDER_PROCESS_WRAPPER
 
 	public static ShoppingOrderProcessWrapper getSessionShoppingOrderProcessWrapper(HttpSession session){
 		Object shoppingOrderProcessWrapperObj = session.getAttribute(ShoppingPortletUtil.SESSION_SHOPPING_ORDER_PROCESS_WRAPPER);

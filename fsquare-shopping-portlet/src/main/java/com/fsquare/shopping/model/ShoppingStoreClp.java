@@ -29,6 +29,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
     private String _userName;
     private Date _createDate;
     private Date _modifiedDate;
+    private String _name;
     private String _cartPageUuid;
     private String _checkoutPageUuid;
     private String _onAddToCart;
@@ -92,6 +93,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         attributes.put("userName", getUserName());
         attributes.put("createDate", getCreateDate());
         attributes.put("modifiedDate", getModifiedDate());
+        attributes.put("name", getName());
         attributes.put("cartPageUuid", getCartPageUuid());
         attributes.put("checkoutPageUuid", getCheckoutPageUuid());
         attributes.put("onAddToCart", getOnAddToCart());
@@ -152,6 +154,12 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
         if (modifiedDate != null) {
             setModifiedDate(modifiedDate);
+        }
+
+        String name = (String) attributes.get("name");
+
+        if (name != null) {
+            setName(name);
         }
 
         String cartPageUuid = (String) attributes.get("cartPageUuid");
@@ -402,6 +410,28 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
                 Method method = clazz.getMethod("setModifiedDate", Date.class);
 
                 method.invoke(_shoppingStoreRemoteModel, modifiedDate);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getName() {
+        return _name;
+    }
+
+    @Override
+    public void setName(String name) {
+        _name = name;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setName", String.class);
+
+                method.invoke(_shoppingStoreRemoteModel, name);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -885,6 +915,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         clone.setUserName(getUserName());
         clone.setCreateDate(getCreateDate());
         clone.setModifiedDate(getModifiedDate());
+        clone.setName(getName());
         clone.setCartPageUuid(getCartPageUuid());
         clone.setCheckoutPageUuid(getCheckoutPageUuid());
         clone.setOnAddToCart(getOnAddToCart());
@@ -951,7 +982,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(47);
+        StringBundler sb = new StringBundler(49);
 
         sb.append("{groupId=");
         sb.append(getGroupId());
@@ -965,6 +996,8 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(getCreateDate());
         sb.append(", modifiedDate=");
         sb.append(getModifiedDate());
+        sb.append(", name=");
+        sb.append(getName());
         sb.append(", cartPageUuid=");
         sb.append(getCartPageUuid());
         sb.append(", checkoutPageUuid=");
@@ -1006,7 +1039,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(73);
+        StringBundler sb = new StringBundler(76);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStore");
@@ -1035,6 +1068,10 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(
             "<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
         sb.append(getModifiedDate());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>name</column-name><column-value><![CDATA[");
+        sb.append(getName());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>cartPageUuid</column-name><column-value><![CDATA[");

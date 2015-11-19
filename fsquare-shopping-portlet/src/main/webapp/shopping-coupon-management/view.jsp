@@ -147,16 +147,9 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 
 	                  		var startDateFormated = A.DataType.Date.format(new Date(startDate), {format:'%d/%m/%Y'});
 	                  		var endDateFormated = A.DataType.Date.format(new Date(endDate), {format:'%d/%m/%Y'});
-	                  		
-	                  		var status = '<%= ShoppingUtil.COUNPON_STATE_RUNNING %>';
-	                  		var statusDesc = '<%= LanguageUtil.get(locale, ShoppingUtil.COUNPON_STATE_RUNNING) %>';
-							if(time > startDate){
-								status = '<%= ShoppingUtil.COUNPON_STATE_NOT_STARTED %>';
-								statusDesc = '<%= LanguageUtil.get(locale, ShoppingUtil.COUNPON_STATE_NOT_STARTED) %>';
-                  			}else if(time > endDate){
-                  				status = '<%= ShoppingUtil.COUNPON_STATE_EXPIRED %>';
-                  				statusDesc = '<%= LanguageUtil.get(locale, ShoppingUtil.COUNPON_STATE_EXPIRED) %>';
-                  			}
+
+							var status = response.couponStatus;
+							var statusDesc = response.statusDescription;
 							
 	                  		if(response.isNew){
 								debug(A,A.Date);
@@ -204,9 +197,6 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 	                  			
 	                  			A.one('#coupon-status-'+couponId).addClass(status);
 	                  			
-	                  			
-	                  			
-	                  			 
 	                  			A.one('#coupon-status-'+couponId).set('title', statusDesc);
 	                  			
 	                  			if(shoppingCouponJson.active){

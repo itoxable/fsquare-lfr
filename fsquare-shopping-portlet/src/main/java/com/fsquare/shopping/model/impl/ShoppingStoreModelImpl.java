@@ -58,6 +58,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             { "userName", Types.VARCHAR },
             { "createDate", Types.TIMESTAMP },
             { "modifiedDate", Types.TIMESTAMP },
+            { "name", Types.VARCHAR },
             { "cartPageUuid", Types.VARCHAR },
             { "checkoutPageUuid", Types.VARCHAR },
             { "onAddToCart", Types.VARCHAR },
@@ -76,7 +77,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             { "stripeLivePublishableKey", Types.VARCHAR },
             { "stripeApiVersion", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStore (groupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,cartPageUuid VARCHAR(75) null,checkoutPageUuid VARCHAR(75) null,onAddToCart VARCHAR(75) null,currency_ VARCHAR(75) null,country VARCHAR(75) null,userTypes VARCHAR(75) null,orderCreatedEmailTemplate VARCHAR(75) null,orderShippedEmailTemplate VARCHAR(75) null,orderCreatedEmailSubject VARCHAR(75) null,orderCreatedEmailFromAddress VARCHAR(75) null,integrateWithStripe BOOLEAN,stripeTestSecretKey VARCHAR(75) null,stripeTestPublishableKey VARCHAR(75) null,stripeTesting BOOLEAN,stripeLiveSecretKey VARCHAR(75) null,stripeLivePublishableKey VARCHAR(75) null,stripeApiVersion VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStore (groupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,cartPageUuid VARCHAR(75) null,checkoutPageUuid VARCHAR(75) null,onAddToCart VARCHAR(75) null,currency_ VARCHAR(75) null,country VARCHAR(75) null,userTypes VARCHAR(75) null,orderCreatedEmailTemplate TEXT null,orderShippedEmailTemplate TEXT null,orderCreatedEmailSubject VARCHAR(75) null,orderCreatedEmailFromAddress VARCHAR(75) null,integrateWithStripe BOOLEAN,stripeTestSecretKey VARCHAR(75) null,stripeTestPublishableKey VARCHAR(75) null,stripeTesting BOOLEAN,stripeLiveSecretKey VARCHAR(75) null,stripeLivePublishableKey VARCHAR(75) null,stripeApiVersion VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingStore";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingStore.groupId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingStore.groupId ASC";
@@ -103,6 +104,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
     private String _userName;
     private Date _createDate;
     private Date _modifiedDate;
+    private String _name;
     private String _cartPageUuid;
     private String _checkoutPageUuid;
     private String _onAddToCart;
@@ -144,6 +146,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         model.setUserName(soapModel.getUserName());
         model.setCreateDate(soapModel.getCreateDate());
         model.setModifiedDate(soapModel.getModifiedDate());
+        model.setName(soapModel.getName());
         model.setCartPageUuid(soapModel.getCartPageUuid());
         model.setCheckoutPageUuid(soapModel.getCheckoutPageUuid());
         model.setOnAddToCart(soapModel.getOnAddToCart());
@@ -225,6 +228,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         attributes.put("userName", getUserName());
         attributes.put("createDate", getCreateDate());
         attributes.put("modifiedDate", getModifiedDate());
+        attributes.put("name", getName());
         attributes.put("cartPageUuid", getCartPageUuid());
         attributes.put("checkoutPageUuid", getCheckoutPageUuid());
         attributes.put("onAddToCart", getOnAddToCart());
@@ -285,6 +289,12 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
         if (modifiedDate != null) {
             setModifiedDate(modifiedDate);
+        }
+
+        String name = (String) attributes.get("name");
+
+        if (name != null) {
+            setName(name);
         }
 
         String cartPageUuid = (String) attributes.get("cartPageUuid");
@@ -477,6 +487,21 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
     @Override
     public void setModifiedDate(Date modifiedDate) {
         _modifiedDate = modifiedDate;
+    }
+
+    @JSON
+    @Override
+    public String getName() {
+        if (_name == null) {
+            return StringPool.BLANK;
+        } else {
+            return _name;
+        }
+    }
+
+    @Override
+    public void setName(String name) {
+        _name = name;
     }
 
     @JSON
@@ -770,6 +795,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         shoppingStoreImpl.setUserName(getUserName());
         shoppingStoreImpl.setCreateDate(getCreateDate());
         shoppingStoreImpl.setModifiedDate(getModifiedDate());
+        shoppingStoreImpl.setName(getName());
         shoppingStoreImpl.setCartPageUuid(getCartPageUuid());
         shoppingStoreImpl.setCheckoutPageUuid(getCheckoutPageUuid());
         shoppingStoreImpl.setOnAddToCart(getOnAddToCart());
@@ -868,6 +894,14 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             shoppingStoreCacheModel.modifiedDate = modifiedDate.getTime();
         } else {
             shoppingStoreCacheModel.modifiedDate = Long.MIN_VALUE;
+        }
+
+        shoppingStoreCacheModel.name = getName();
+
+        String name = shoppingStoreCacheModel.name;
+
+        if ((name != null) && (name.length() == 0)) {
+            shoppingStoreCacheModel.name = null;
         }
 
         shoppingStoreCacheModel.cartPageUuid = getCartPageUuid();
@@ -1007,7 +1041,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(47);
+        StringBundler sb = new StringBundler(49);
 
         sb.append("{groupId=");
         sb.append(getGroupId());
@@ -1021,6 +1055,8 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(getCreateDate());
         sb.append(", modifiedDate=");
         sb.append(getModifiedDate());
+        sb.append(", name=");
+        sb.append(getName());
         sb.append(", cartPageUuid=");
         sb.append(getCartPageUuid());
         sb.append(", checkoutPageUuid=");
@@ -1062,7 +1098,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(73);
+        StringBundler sb = new StringBundler(76);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStore");
@@ -1091,6 +1127,10 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(
             "<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
         sb.append(getModifiedDate());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>name</column-name><column-value><![CDATA[");
+        sb.append(getName());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>cartPageUuid</column-name><column-value><![CDATA[");

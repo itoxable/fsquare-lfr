@@ -176,6 +176,13 @@ public class CouponManagementPortlet extends MVCPortlet{
 		        
 		        shoppingCoupon = ShoppingCouponLocalServiceUtil.updateShoppingCoupon(shoppingCoupon);
 		        
+		        String couponStatus = ShoppingCouponLocalServiceUtil.getCouponStatus(shoppingCoupon);
+		        
+		        jsonObject.put("couponStatus", couponStatus);
+		        
+		        jsonObject.put("statusDescription", LanguageUtil.get(themeDisplay.getLocale(), couponStatus));
+
+
 		        jsonObject.put("shoppingCouponJson", JSONFactoryUtil.looseSerialize(shoppingCoupon));
 	        }else{
 	        	success = false;

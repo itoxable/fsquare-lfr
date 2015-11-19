@@ -177,6 +177,7 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="name" />
 			<basic name="cartPageUuid" />
 			<basic name="checkoutPageUuid" />
 			<basic name="onAddToCart" />

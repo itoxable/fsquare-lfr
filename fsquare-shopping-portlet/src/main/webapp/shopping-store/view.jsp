@@ -39,6 +39,7 @@ String onAddToCart = shoppingStore.getOnAddToCart();
 String checkoutPageUuid = shoppingStore.getCheckoutPageUuid();
 String cartPageUuid = shoppingStore.getCartPageUuid();
 String currency = shoppingStore.getCurrency();
+String name = shoppingStore.getName();
 
 
 String stripeLiveSecretKey = shoppingStore.getStripeLiveSecretKey();
@@ -85,129 +86,99 @@ if(shoppingStore.getIntegrateWithStripe()){
 <liferay-portlet:resourceURL var="openTestStripeFormURL" secure="false">
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_OPEN_TEST_STRIPE_FORM %>" />
 </liferay-portlet:resourceURL>
+<liferay-portlet:resourceURL var="sendTestEmailURL" secure="false">
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SEND_TEST_EMAIL %>" />
+</liferay-portlet:resourceURL>
 
 <liferay-portlet:actionURL var="saveStoreURL" />
 
 <aui:form action="<%= saveStoreURL %>" method="post" name="store_settings_form" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveSettings();" %>'>
 	<div class="store-settings">
 		
-		<aui:field-wrapper label='country' >
-			<fieldset >
-				<div class="form-inline priority-set-wrapper">
-					<aui:select name="storeCountry" label="country" >
-						<% for(Country country: countries) {%>
-							<aui:option selected="<%= country.getA2().equalsIgnoreCase(shoppingStore.getCountry()) %>" value="<%= country.getA2() %>" label="<%= country.getName(locale) %>"></aui:option>
-						<% } %>
-					</aui:select>
-				</div>
-			</fieldset>	
-		</aui:field-wrapper>
-		<aui:field-wrapper label='cart-display-page' >
-			<fieldset >
-				<div class="form-inline priority-set-wrapper">
-					<aui:select label="" name="cartDisplayPage" >
-						<aui:option value='' >Select...</aui:option>
-						<%
-						for (KeyValuePair keyValuePair : layoutsKeyValuePair) {
-						%>
-							<aui:option selected='<%= keyValuePair.getKey().equals(cartPageUuid) %>' value='<%= keyValuePair.getKey()%>' >
-								<%= keyValuePair.getValue() %>
-							</aui:option>
-						<%
-						}
-						%>
-					</aui:select>
-				</div>
-			</fieldset>	
-		</aui:field-wrapper>
+		<aui:input type="text" value="<%= name %>" name="name" />
+
+		<aui:select name="storeCountry" label="country" >
+			<% for(Country country: countries) {%>
+				<aui:option selected="<%= country.getA2().equalsIgnoreCase(shoppingStore.getCountry()) %>" value="<%= country.getA2() %>" label="<%= country.getName(locale) %>"></aui:option>
+			<% } %>
+		</aui:select>
+
+	
+		<aui:select name="cartDisplayPage" >
+			<aui:option value='' >Select...</aui:option>
+			<%
+			for (KeyValuePair keyValuePair : layoutsKeyValuePair) {
+			%>
+				<aui:option selected='<%= keyValuePair.getKey().equals(cartPageUuid) %>' value='<%= keyValuePair.getKey()%>' >
+					<%= keyValuePair.getValue() %>
+				</aui:option>
+			<%
+			}
+			%>
+		</aui:select>
+
+		<aui:select name="checkoutDisplayPage" >
+			<aui:option value='' >Select...</aui:option>
+			<%
+			for (KeyValuePair keyValuePair : layoutsKeyValuePair) {
+			%>
+				<aui:option selected='<%= keyValuePair.getKey().equals(checkoutPageUuid) %>' value='<%= keyValuePair.getKey()%>' >
+					<%= keyValuePair.getValue() %>
+				</aui:option>
+			<%
+			}
+			%>
+		</aui:select>
+
+		<aui:select name="onAddToCart" >
+			<aui:option value='' >Select...</aui:option>
+				<aui:option selected='<%= ShoppingUtil.ON_ADD_TO_CART_JUMP_TO_CART.equals(onAddToCart) %>' value='<%= ShoppingUtil.ON_ADD_TO_CART_JUMP_TO_CART %>' >
+					<%= ShoppingUtil.ON_ADD_TO_CART_JUMP_TO_CART %>
+				</aui:option>
+			
+		</aui:select>
+	
+		<aui:select name="currency" >
+			<aui:option value='' >Select...</aui:option>
+				<aui:option selected='<%= "GBP".equals(currency) %>' value='GBP' label="GBP"></aui:option>
+				<aui:option selected='<%= "USD".equals(currency) %>' value='USD' label="USD"></aui:option>
+				<aui:option selected='<%= "EUR".equals(currency) %>' value='EUR' label="EUR"></aui:option>						
+		</aui:select>
+	
+		<aui:select name="usersType" >
+			<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_ALL %>' label="<%= ShoppingUtil.USER_TYPES_ALL %>" />
+			<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>' label="<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>" />
+			<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>' label="<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>" />			
+		</aui:select>
 		
-		<aui:field-wrapper label='checkout-display-page' >
+		<aui:field-wrapper label='order-created-email-settings' >
 			<fieldset >
-				<div>
-					<aui:select label="" name="checkoutDisplayPage" >
-						<aui:option value='' >Select...</aui:option>
-						<%
-						for (KeyValuePair keyValuePair : layoutsKeyValuePair) {
-						%>
-							<aui:option selected='<%= keyValuePair.getKey().equals(checkoutPageUuid) %>' value='<%= keyValuePair.getKey()%>' >
-								<%= keyValuePair.getValue() %>
-							</aui:option>
-						<%
-						}
-						%>
-					</aui:select>
-				</div>
-			</fieldset>	
-		</aui:field-wrapper>
-		
-		<aui:field-wrapper label='on-add-to-cart' >
-			<fieldset >
-				<div>
-					<aui:select label="" name="onAddToCart" >
-						<aui:option value='' >Select...</aui:option>
-						
-							<aui:option selected='<%= ShoppingPortletUtil.ON_ADD_TO_CART_JUMP_TO_CART.equals(onAddToCart) %>' value='<%= ShoppingPortletUtil.ON_ADD_TO_CART_JUMP_TO_CART %>' >
-								<%= ShoppingPortletUtil.ON_ADD_TO_CART_JUMP_TO_CART %>
-							</aui:option>
-						
-					</aui:select>
-				</div>
-			</fieldset>	
-		</aui:field-wrapper>
-		
-		<aui:field-wrapper label='currency' >
-			<fieldset >
-				<div>
-					<aui:select label="" name="currency" >
-						<aui:option value='' >Select...</aui:option>
-							<aui:option selected='<%= "GBP".equals(currency) %>' value='GBP' label="GBP"></aui:option>
-							<aui:option selected='<%= "USD".equals(currency) %>' value='USD' label="USD"></aui:option>
-							<aui:option selected='<%= "EUR".equals(currency) %>' value='EUR' label="EUR"></aui:option>						
-					</aui:select>
-				</div>
-			</fieldset>	
-		</aui:field-wrapper>
-		
-		<aui:field-wrapper label='Type of users' >
-			<fieldset >
-				<div class="form-inline priority-set-wrapper">
-					<aui:select label="" name="usersType" >
-						
-						<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_ALL %>' label="<%= ShoppingUtil.USER_TYPES_ALL %>" >
-						</aui:option>
-						<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>' label="<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>" >
-						</aui:option>
-						<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>' label="<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>" >
-						</aui:option>
-						
-					</aui:select>
-				</div>
-			</fieldset>	
-		</aui:field-wrapper>
-		
-<%-- 		<aui:field-wrapper label='XXX' > --%>
-<!-- 			<fieldset > -->
-<!-- 				<div class="XXX"> -->
-<%-- 					<label for="<portlet:namespace />order_success_email_editor">Email Template</label> --%>
-<%-- 			    	<div id="<portlet:namespace />order_success_email_editor"><%= orderCreatedMailTemplate %></div> --%>
-<%-- 			    	<aui:input name="orderCreatedMailTemplate" type="hidden" value="<%= orderCreatedMailTemplate %>" /> --%>
+				<div class="email-settings">
+			    	<aui:input type="email" value="<%= orderCreatedEmailFromAddress %>" name="orderCreatedEmailFromAddress" />
+			    	<aui:input type="text" value="<%= orderCreatedEmailSubject %>" name="orderCreatedEmailSubject" />
+			    	<div class="email-editor-wrapper">
+				    	<div id="<portlet:namespace />order_success_email_editor"><%= orderCreatedEmailTemplate %></div>
+			    	</div>
+			    	<aui:input name="orderCreatedEmailTemplate" type="hidden" value="<%= orderCreatedEmailTemplate %>" />
+			    	<button type="button" class="btn send-test-email" >Test Email</button>
 			    	
-<!-- 			    </div> -->
-<!-- 			</fieldset>	 -->
-<%-- 		</aui:field-wrapper> --%>
+			    </div>
+			</fieldset>	
+		</aui:field-wrapper>
 		
 		<aui:field-wrapper label='stype-payment-method' >
 			<fieldset >
-				
 				<aui:input type="checkbox" value="<%= integrateWithStripe %>" name="integrateWithStripe" />
-				<aui:input type="text" value="<%= stripeTestSecretKey %>" name="stripeTestSecretKey" />
-				<aui:input type="text" value="<%= stripeTestPublishableKey %>" name="stripeTestPublishableKey" />
-				<aui:input type="text" value="<%= stripeLiveSecretKey %>" name="stripeLiveSecretKey" />
-				<aui:input type="text" value="<%= stripeLivePublishableKey %>" name="stripeLivePublishableKey" />
-				<aui:input type="text" value="<%= stripeApiVersion %>" name="stripeApiVersion" />
-				<aui:input type="checkbox" value="<%= stripeTesting %>" name="stripeTesting" ></aui:input>
-				<div style="margin-top: 10px">
-					<button type="button" id="<portlet:namespace />test-payment-btn" class="btn test-payment-btn" >Test Payment</button>
+				<div class="stripe-integration">
+					<aui:input type="text" value="<%= stripeTestSecretKey %>" name="stripeTestSecretKey" />
+					<aui:input type="text" value="<%= stripeTestPublishableKey %>" name="stripeTestPublishableKey" />
+					<aui:input type="text" value="<%= stripeLiveSecretKey %>" name="stripeLiveSecretKey" />
+					<aui:input type="text" value="<%= stripeLivePublishableKey %>" name="stripeLivePublishableKey" />
+					<aui:input type="text" value="<%= stripeApiVersion %>" name="stripeApiVersion" />
+					<aui:input type="checkbox" value="<%= stripeTesting %>" name="stripeTesting" ></aui:input>
+					<div style="margin-top: 10px">
+						<button type="button" id="<portlet:namespace />test-payment-btn" class="btn test-payment-btn" >Test Payment</button>
+					</div>
 				</div>
 			</fieldset>	
 		</aui:field-wrapper>
@@ -225,6 +196,34 @@ if(shoppingStore.getIntegrateWithStripe()){
 
 <aui:script use="aui-base,selector-css3,aui-io-request,aui-datatype,aui-datepicker,liferay-dynamic-select,">
 
+
+
+	A.on('click', function(event) {
+		<portlet:namespace />sendTestEmail();
+	},'.send-test-email');
+	Liferay.provide(window, '<portlet:namespace />sendTestEmail',
+			function() {
+				
+				A.io.request('<%= sendTestEmailURL %>',{
+	                  dataType: 'json',
+	                  method: 'POST',
+	                  data: { 
+	                  },
+	                  on: {
+	                	  success: function() {
+	  	                  	var response = this.get('responseData');
+	  	                  if(response.success){
+	                  			A.one('#<portlet:namespace />store_form_success').text("Message sent");
+	                  		}
+	                  		else{
+	                  			A.one('#<portlet:namespace />store_form_error').text("Error sending message");
+	  	                  	}
+	  	                  }
+	                  }
+	            });
+	        },
+	    	['aui-base,selector-css3']);
+	
 
 
 	A.on('click', function(event) {
@@ -300,11 +299,11 @@ if(shoppingStore.getIntegrateWithStripe()){
 		
 	},['aui-base,selector-css3']);
 
-	var richrOderSuccessEmailEditor;
+	var richOderSuccessEmailEditor;
 	var orderSuccessEmailEditor = A.one('#<portlet:namespace />order_success_email_editor');
-	var orderCreatedMailTemplate = A.one('#<portlet:namespace />orderCreatedMailTemplate');
+	var orderCreatedEmailTemplate = A.one('#<portlet:namespace />orderCreatedEmailTemplate');
 	A.on('domready', function(event) {
-		richrOderSuccessEmailEditor = new A.AceEditor(
+		richOderSuccessEmailEditor = new A.AceEditor(
 			{
 				boundingBox: orderSuccessEmailEditor,
 				height: 400,
@@ -312,8 +311,12 @@ if(shoppingStore.getIntegrateWithStripe()){
 				width: '100%'
 			}
 		).render();
-		richrOderSuccessEmailEditor.on('change', function() {
-     	});
+
+		richOderSuccessEmailEditor.getEditor().setValue(orderCreatedEmailTemplate.val());
+
+		richOderSuccessEmailEditor.getEditor().on('change', function() {
+			orderCreatedEmailTemplate.val(richOderSuccessEmailEditor.getSession().getValue())
+        });
 	})
 	function getEditorContent(editor) {
 		var content = editor.getSession().getValue();

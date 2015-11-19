@@ -16,19 +16,24 @@ import com.fsquare.shopping.model.ShoppingCoupon;
 import com.fsquare.shopping.model.ShoppingOrder;
 import com.fsquare.shopping.model.ShoppingOrderItem;
 import com.fsquare.shopping.model.ShoppingShippingMethod;
+import com.fsquare.shopping.model.ShoppingStore;
 import com.fsquare.shopping.portlet.util.ShoppingPortletUtil;
 import com.fsquare.shopping.service.ShoppingCouponLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingOrderItemLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingOrderLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingShippingMethodLocalServiceUtil;
+import com.fsquare.shopping.service.ShoppingStoreLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 public class OrdersManagementPortlet extends MVCPortlet {
@@ -54,7 +59,7 @@ public class OrdersManagementPortlet extends MVCPortlet {
 		}
 	}
 
-	private void sendStatusEmail(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException {
+	private void sendStatusEmail(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException {
 		PrintWriter writer = resourceResponse.getWriter();
         JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
         boolean success = false;
@@ -62,11 +67,15 @@ public class OrdersManagementPortlet extends MVCPortlet {
 		Long shoppingOrderId = ParamUtil.getLong(resourceRequest, "shoppingOrderId");
 
 		try {
-			
+			ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
 			System.out.println("BEFORE");
 			ShoppingOrder shoppingOrder = ShoppingOrderLocalServiceUtil.fetchShoppingOrder(shoppingOrderId);
-		
-			MessageBusUtil.sendMessage(Destinations.SHOPPING_SUCCESS_ORDER_MAIL, shoppingOrder);
+			Message message = new Message();
+			ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			message.put("shoppingOrder", shoppingOrder);
+			message.put("shoppingStore", shoppingStore);
+			MessageBusUtil.sendMessage(Destinations.SHOPPING_SUCCESS_ORDER_MAIL, message);
 			System.out.println("AFTER");
 			success = true;
 			jsonObject.put("successText", "Sent");

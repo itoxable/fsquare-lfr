@@ -141,6 +141,7 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cartPageUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="checkoutPageUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="onAddToCart" type="com.liferay.portal.dao.orm.hibernate.StringType" />

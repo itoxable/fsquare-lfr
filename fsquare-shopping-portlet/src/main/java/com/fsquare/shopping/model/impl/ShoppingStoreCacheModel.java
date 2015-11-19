@@ -28,6 +28,7 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
     public String userName;
     public long createDate;
     public long modifiedDate;
+    public String name;
     public String cartPageUuid;
     public String checkoutPageUuid;
     public String onAddToCart;
@@ -48,7 +49,7 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(47);
+        StringBundler sb = new StringBundler(49);
 
         sb.append("{groupId=");
         sb.append(groupId);
@@ -62,6 +63,8 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         sb.append(createDate);
         sb.append(", modifiedDate=");
         sb.append(modifiedDate);
+        sb.append(", name=");
+        sb.append(name);
         sb.append(", cartPageUuid=");
         sb.append(cartPageUuid);
         sb.append(", checkoutPageUuid=");
@@ -125,6 +128,12 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             shoppingStoreImpl.setModifiedDate(null);
         } else {
             shoppingStoreImpl.setModifiedDate(new Date(modifiedDate));
+        }
+
+        if (name == null) {
+            shoppingStoreImpl.setName(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setName(name);
         }
 
         if (cartPageUuid == null) {
@@ -234,6 +243,7 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         userName = objectInput.readUTF();
         createDate = objectInput.readLong();
         modifiedDate = objectInput.readLong();
+        name = objectInput.readUTF();
         cartPageUuid = objectInput.readUTF();
         checkoutPageUuid = objectInput.readUTF();
         onAddToCart = objectInput.readUTF();
@@ -268,6 +278,12 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
 
         objectOutput.writeLong(createDate);
         objectOutput.writeLong(modifiedDate);
+
+        if (name == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(name);
+        }
 
         if (cartPageUuid == null) {
             objectOutput.writeUTF(StringPool.BLANK);

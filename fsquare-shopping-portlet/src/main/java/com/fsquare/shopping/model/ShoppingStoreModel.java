@@ -161,6 +161,21 @@ public interface ShoppingStoreModel extends AuditedModel,
     public void setModifiedDate(Date modifiedDate);
 
     /**
+     * Returns the name of this shopping store.
+     *
+     * @return the name of this shopping store
+     */
+    @AutoEscape
+    public String getName();
+
+    /**
+     * Sets the name of this shopping store.
+     *
+     * @param name the name of this shopping store
+     */
+    public void setName(String name);
+
+    /**
      * Returns the cart page uuid of this shopping store.
      *
      * @return the cart page uuid of this shopping store

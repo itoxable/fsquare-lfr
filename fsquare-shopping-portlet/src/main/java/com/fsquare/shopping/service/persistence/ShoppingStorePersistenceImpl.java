@@ -337,6 +337,7 @@ public class ShoppingStorePersistenceImpl extends BasePersistenceImpl<ShoppingSt
         shoppingStoreImpl.setUserName(shoppingStore.getUserName());
         shoppingStoreImpl.setCreateDate(shoppingStore.getCreateDate());
         shoppingStoreImpl.setModifiedDate(shoppingStore.getModifiedDate());
+        shoppingStoreImpl.setName(shoppingStore.getName());
         shoppingStoreImpl.setCartPageUuid(shoppingStore.getCartPageUuid());
         shoppingStoreImpl.setCheckoutPageUuid(shoppingStore.getCheckoutPageUuid());
         shoppingStoreImpl.setOnAddToCart(shoppingStore.getOnAddToCart());
