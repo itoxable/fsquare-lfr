@@ -60,9 +60,16 @@ AUI().ready(
 	This function gets loaded when all the HTML, not including the portlets, is
 	loaded.
 	*/
-
-	function() {
-	}
+		function() {
+			$.cookieBar({
+				message:"This website uses cookies. By continuing to browse the site you are agreeing to our use of cookies.",
+				acceptText:"×",
+				policyButton: true,
+				policyText: 'Find out more here'
+			});
+		}
+//	function() {
+//	}
 );
 
 Liferay.Portlet.ready(
@@ -87,11 +94,11 @@ Liferay.on(
 	*/
 
 	function() {
-		$.cookieBar({
-			message:"This website uses cookies. By continuing to browse the site you are agreeing to our use of cookies.",
-			acceptText:"×",
-			policyButton: true,
-			policyText: 'Find out more here'
-		});
+//		$.cookieBar({
+//			message:"This website uses cookies. By continuing to browse the site you are agreeing to our use of cookies.",
+//			acceptText:"×",
+//			policyButton: true,
+//			policyText: 'Find out more here'
+//		});
 	}
 );

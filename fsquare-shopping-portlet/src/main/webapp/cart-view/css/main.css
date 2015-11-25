@@ -6,15 +6,16 @@
 .aui .cart-view .cart-table-wrapper{
 	padding: 40px 30px;
 
-	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+/* 	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); */
+/* 	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); */
+/* 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); */
 	
 	background-color: #FFF;
 	
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
+/* 	-webkit-border-radius: 2px; */
+/* 	-moz-border-radius: 2px; */
+/* 	border-radius: 2px; */
+	border: 1px solid #ddd;
 }
 
 .aui .cart-view .cart-table-wrapper .cart-table{

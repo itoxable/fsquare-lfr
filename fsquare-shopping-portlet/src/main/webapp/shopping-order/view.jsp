@@ -24,9 +24,9 @@
 <%@ include file="init.jsp" %>
 
 <%
-// System.out.println("XXisCartEmpty: "+isCartEmpty);
 
 if(shoppingStore.getIntegrateWithStripe() && !isCartEmpty){
+
 %>				
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <%
@@ -34,7 +34,9 @@ if(shoppingStore.getIntegrateWithStripe() && !isCartEmpty){
 %>
 <c:choose>
 	<c:when test="<%= isCartEmpty %>">
-		<h2>Empty Cart</h2>
+		<div class="checkout-panel" >
+			<h2>Empty Cart</h2>
+		</div>
 	</c:when>
 	<c:otherwise>
 		<liferay-portlet:resourceURL var="getCheckoutStepURL" secure="false">

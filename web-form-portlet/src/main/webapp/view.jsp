@@ -43,77 +43,7 @@ String instanceId = portlet.getInstanceId();
 
 boolean showPortletActions = portletDisplay.isShowConfigurationIcon();
 
-boolean preferencesStored = GetterUtil.getBoolean(portletPreferences.getValue(ConfigurationActionImpl.PREFERENCES_STORED, StringPool.BLANK));
-boolean prefsFromQueryString = ParamUtil.getBoolean(request, "prefsFromQueryString", false);
-boolean prefsResetFromQueryString = ParamUtil.getBoolean(request, "prefsResetFromQueryString", false);
 
-if((!preferencesStored && prefsFromQueryString) || prefsResetFromQueryString){
-	System.out.println("----prefsFromQueryString-----");
-
-	for(String name : portletPreferences.getMap().keySet()){
-		portletPreferences.reset(name);
-	}
-	portletPreferences.store();
-	
-	LocalizationUtil.setPreferencesValue(portletPreferences, "title", themeDisplay.getLanguageId(), ParamUtil.getString(request, "title", StringPool.BLANK));
-	LocalizationUtil.setPreferencesValue(portletPreferences, "description", themeDisplay.getLanguageId(), ParamUtil.getString(request, "description", StringPool.BLANK));
-	LocalizationUtil.setPreferencesValue(portletPreferences, "submitButtonLabel", themeDisplay.getLanguageId(), ParamUtil.getString(request, "submitButtonLabel", StringPool.BLANK));
-
-	portletPreferences.setValue("requireCaptcha", ParamUtil.getString(request, "requireCaptcha", StringPool.BLANK));
-	portletPreferences.setValue("successURL", ParamUtil.getString(request, "successURL", StringPool.BLANK));
-	portletPreferences.setValue("sendAsEmail", ParamUtil.getString(request, "sendAsEmail", StringPool.BLANK));
-	portletPreferences.setValue("sendAckEmail", ParamUtil.getString(request, "sendAckEmail", StringPool.BLANK));
-	portletPreferences.setValue("saveToDatabase", ParamUtil.getString(request, "saveToDatabase", StringPool.BLANK));
-	portletPreferences.setValue("saveToFile", ParamUtil.getString(request, "saveToFile", StringPool.BLANK));
-	portletPreferences.setValue("fileName", ParamUtil.getString(request, "fileName", StringPool.BLANK));
-	LocalizationUtil.setPreferencesValue(portletPreferences, "successMessage", themeDisplay.getLanguageId(), ParamUtil.getString(request, "successMessage", StringPool.BLANK));
-
-	portletPreferences.setValue("emailFromName", ParamUtil.getString(request, "emailFromName", StringPool.BLANK));
-	portletPreferences.setValue("emailFromAddress", ParamUtil.getString(request, "emailFromAddress", StringPool.BLANK));
-	portletPreferences.setValue("emailAddress", ParamUtil.getString(request, "emailAddress", StringPool.BLANK));
-	portletPreferences.setValue("subject", ParamUtil.getString(request, "subject", StringPool.BLANK));
-	portletPreferences.setValue("ackEmailSubject", ParamUtil.getString(request, "ackEmailSubject", StringPool.BLANK));
-	portletPreferences.setValue("ackEmailText", ParamUtil.getString(request, "ackEmailText", StringPool.BLANK));
-	
-	portletPreferences.setValue("isWizard", ParamUtil.getString(request, "isWizard", StringPool.BLANK));
-	String wizardNrSteps_ = ParamUtil.getString(request, "wizardNrSteps", StringPool.BLANK);
-	portletPreferences.setValue("wizardNrSteps", wizardNrSteps_);
-	int nrSteps = 1;
-	if(wizardNrSteps_ != null && wizardNrSteps_ != ""){
-		nrSteps = Integer.parseInt(wizardNrSteps_);
-	}
-	
-	for(int stepIndex = 0; stepIndex < nrSteps; stepIndex++) {
-		if(nrSteps > 1){
-			LocalizationUtil.setPreferencesValue(portletPreferences, "title" + stepIndex, themeDisplay.getLanguageId(), ParamUtil.getString(request, "title"+stepIndex, StringPool.BLANK));		
-			LocalizationUtil.setPreferencesValue(portletPreferences, "description" + stepIndex, themeDisplay.getLanguageId(), ParamUtil.getString(request, "description"+stepIndex, StringPool.BLANK));
-		}
-		portletPreferences.setValue("wizardStepFields"+stepIndex, ParamUtil.getString(request, "wizardStepFields"+stepIndex, StringPool.BLANK));
-		int[] formFieldsIndexes = StringUtil.split(ParamUtil.getString(request, "wizardStepFields"+stepIndex, StringPool.BLANK), 0);
-		for (int i : formFieldsIndexes) {
-			LocalizationUtil.setPreferencesValue(portletPreferences, "fieldLabel" + i, themeDisplay.getLanguageId(), ParamUtil.getString(request, "fieldLabel"+i, StringPool.BLANK));
-			portletPreferences.setValue("fieldLabel"+i, ParamUtil.getString(request, "fieldLabel"+i, StringPool.BLANK));
-			
-			portletPreferences.setValue("fieldOptional"+i, ParamUtil.getString(request, "fieldOptional"+i, StringPool.BLANK));
-			portletPreferences.setValue("fieldReadOnly"+i, ParamUtil.getString(request, "fieldReadOnly"+i, StringPool.BLANK));
-			portletPreferences.setValue("fieldPlaceHolder"+i, ParamUtil.getString(request, "fieldPlaceHolder"+i, StringPool.BLANK));
-			portletPreferences.setValue("fieldType"+i, ParamUtil.getString(request, "fieldType"+i, StringPool.BLANK));
-			LocalizationUtil.setPreferencesValue(portletPreferences, "fieldOptions" + i, themeDisplay.getLanguageId(), ParamUtil.getString(request, "fieldOptions"+i, StringPool.BLANK));
-			portletPreferences.setValue("fieldOptions"+i, ParamUtil.getString(request, "fieldOptions"+i, StringPool.BLANK));
-			
-			LocalizationUtil.setPreferencesValue(portletPreferences, "fieldBlankOption" + i, themeDisplay.getLanguageId(), ParamUtil.getString(request, "fieldBlankOption"+i, StringPool.BLANK));
-			portletPreferences.setValue("fieldBlankOption"+i, ParamUtil.getString(request, "fieldBlankOption"+i, StringPool.BLANK));
-
-			
-			portletPreferences.setValue("fieldValidationScript"+i, ParamUtil.getString(request, "fieldValidationScript"+i, StringPool.BLANK));
-			portletPreferences.setValue("fieldValidationErrorMessage"+i, ParamUtil.getString(request, "fieldValidationErrorMessage"+i, StringPool.BLANK));
-			portletPreferences.setValue("fieldOnSelectScript"+i, ParamUtil.getString(request, "fieldOnSelectScript"+i, StringPool.BLANK));
-		}
-	}
-	
-	portletPreferences.setValue(ConfigurationActionImpl.PREFERENCES_STORED, String.valueOf(true));
-	portletPreferences.store();
-}
 String formValidationScript = portletPreferences.getValue("formValidationScript", StringPool.BLANK);
 String onFormLoadScript = portletPreferences.getValue("onFormLoadScript", StringPool.BLANK);
 
@@ -135,14 +65,14 @@ if(saveButtonLabel == null || saveButtonLabel.equals("")){
 	saveButtonLabel = LanguageUtil.get(locale, "save-button-label");
 }
 
-boolean isWizard = GetterUtil.getBoolean(portletPreferences.getValue("isWizard", StringPool.BLANK));
-String wizardNrSteps = portletPreferences.getValue("wizardNrSteps", StringPool.BLANK);
-int nrSteps = 1;
-if(wizardNrSteps != null && wizardNrSteps!= ""){
-	nrSteps = Integer.parseInt(wizardNrSteps);
-}
+// boolean isWizard = GetterUtil.getBoolean(portletPreferences.getValue("isWizard", StringPool.BLANK));
+// String wizardNrSteps = portletPreferences.getValue("wizardNrSteps", StringPool.BLANK);
+// int nrSteps = 1;
+// if(wizardNrSteps != null && wizardNrSteps!= ""){
+// 	nrSteps = Integer.parseInt(wizardNrSteps);
+// }
 
-boolean isReallyWizard = nrSteps > 1;
+// boolean isReallyWizard = nrSteps > 1;
 
 String successMessage = LocalizationUtil.getPreferencesValue(portletPreferences, "successMessage", themeDisplay.getLanguageId());
 if(successMessage == null || successMessage.equals("")){
@@ -166,9 +96,6 @@ String databaseTableName = portletPreferences.getValue("databaseTableName", Stri
 if (WebFormUtil.getTableRowsCount(company.getCompanyId(), databaseTableName) > 0) {
 	databaseTableExists = true;
 }
-
-//boolean showSuccessTextOnly = GetterUtil.getBoolean(portletPreferences.getValue("showSuccessTextOnly", StringPool.BLANK));
-//boolean showSuccessTextReadonlyFields = GetterUtil.getBoolean(portletPreferences.getValue("showSuccessTextReadonlyFields", StringPool.BLANK));
 
 boolean isFindUPRN = false;
 boolean isFindPostcode = false;
@@ -201,26 +128,6 @@ String saveButtonStyleClass = portletPreferences.getValue("saveButtonStyleClass"
 	<link href='//fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 </c:if>			
 
-
-
-<c:if test="<%= showPortletActions %>">
-	<c:choose>
-		<c:when test="<%= databaseTableExists %>">
-			<liferay-portlet:resourceURL var="exportURL">
-				<portlet:param name="<%= Constants.CMD %>" value="export" />
-			</liferay-portlet:resourceURL>
-		
-			<%
-			String taglibExport = "submitForm(document.hrefFm, '" + exportURL + "', false);";
-			%>
-			
-			<aui:button onClick="<%= taglibExport %>" value="download-data" />
-		</c:when>
-		<c:otherwise>
-			<aui:button value="export-data" title="no-data" disabled="true"/>
-		</c:otherwise>
-	</c:choose>
-</c:if>
 
 <c:choose>
 
@@ -287,380 +194,345 @@ String saveButtonStyleClass = portletPreferences.getValue("saveButtonStyleClass"
 		
 		<aui:form action="<%= saveDataURL %>" method="post" name="fm" enctype="multipart/form-data">
 			<div class="form-wrapper">
-		
-			<% for(int stepIndex = 0; stepIndex < nrSteps; stepIndex++) {
-				if(nrSteps > 1){
-					title = LocalizationUtil.getPreferencesValue(portletPreferences, "title"+stepIndex, themeDisplay.getLanguageId());
-					description = LocalizationUtil.getPreferencesValue(portletPreferences, "description"+stepIndex, themeDisplay.getLanguageId());
-				}
-				String stepFields = portletPreferences.getValue("wizardStepFields"+stepIndex, StringPool.BLANK);
 				
-				int[] formFieldsIndexes = StringUtil.split(stepFields, 0);
-			%>
+				<c:if test="<%= Validator.isNotNull(rowId) %>">
+					<aui:input name="EDITING_ROW" type="hidden" value="<%= rowId %>" />
+				</c:if>
+				
+				<c:if test="<%= Validator.isNull(successURL) %>">
+					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+				</c:if>
 			
-				<div class='wizard-step wizard-step-<%= stepIndex %> <%= (!isReallyWizard || stepIndex==0)?"wizard-step-active":"" %>'>
-								
-					<c:if test="<%= Validator.isNotNull(rowId) %>">
-						<aui:input name="EDITING_ROW" type="hidden" value="<%= rowId %>" />
-					</c:if>
+				<aui:input name="inputFileName" type="hidden"></aui:input>
+		
+				<aui:fieldset>
 					
-					<c:if test="<%= Validator.isNull(successURL) %>">
-						<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-					</c:if>
-				
-					<aui:input name="inputFileName" type="hidden"></aui:input>
-			
-					<aui:fieldset>
+					<div class="form-notices">
+						<liferay-ui:error exception="<%= CaptchaMaxChallengesException.class %>" message="maximum-number-of-captcha-attempts-exceeded" />
+						<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 						
-						<div class="form-head">
-							<c:if test="<%= Validator.isNotNull(title) %>">
-								<h2 id="form-title"><%= HtmlUtil.escape(title).replace("{current}", (stepIndex+1)+"").replace("{total}", nrSteps+"") %></h2>
-							</c:if>
-							<c:if test="<%= Validator.isNotNull(description) %>">
-								<p class="description"><%= HtmlUtil.escape(description).replace("{current}", (stepIndex+1)+"").replace("{total}", nrSteps+"") %></p>
-							</c:if>
-						</div>
-				
-						<div class="form-notices">
-							<liferay-ui:error exception="<%= CaptchaMaxChallengesException.class %>" message="maximum-number-of-captcha-attempts-exceeded" />
-							<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
-							
-							<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_ERROR %>" message="an-error-occurred-while-sending-the-form-information" />
-							
-							<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_ERROR %>" message="temporary-data-error" />
-							<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_ERROR_NO_ROW %>" message="temporary-data-error-no-row" />
-							<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_ERROR_NO_TABLE %>" message="temporary-data-error-no-table" />
-							<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_ERROR_INVALID_ROW_ID%>" message="temporary-data-error-no-table" />
-							
-							
-							
-							<c:if test='<%= SessionMessages.contains(liferayPortletRequest, WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_SUCCESS)%>' >
-							
-								<%
-									Date formDate = (Date)SessionMessages.get(liferayPortletRequest, WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_SUCCESS);
-								 %>
-													
-								<div class="alert alert-success"><%= LanguageUtil.format(locale, "temporary-data-success", new Object[]{formDate}) %></div>
-							</c:if>
-						</div>
-				
-						<div class="form-body">
-							<c:if test='<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED && SessionErrors.contains(renderRequest, "validationScriptError") %>'>
-								<liferay-util:include page="/script_error.jsp" />
-							</c:if>
-				
+						<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_ERROR %>" message="an-error-occurred-while-sending-the-form-information" />
+						
+						<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_ERROR %>" message="temporary-data-error" />
+						<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_ERROR_NO_ROW %>" message="temporary-data-error-no-row" />
+						<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_ERROR_NO_TABLE %>" message="temporary-data-error-no-table" />
+						<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_ERROR_INVALID_ROW_ID%>" message="temporary-data-error-no-table" />
+						
+						
+						
+						<c:if test='<%= SessionMessages.contains(liferayPortletRequest, WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_SUCCESS)%>' >
+						
 							<%
-							for (int i : formFieldsIndexes) {
-							
-								String fieldName = "field" + i;
-								String fieldLabel = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldLabel" + i, themeDisplay.getLanguageId());
-								boolean fieldOptional = PrefsParamUtil.getBoolean(portletPreferences, request, "fieldOptional" + i, false);
-								boolean fieldReadOnly = PrefsParamUtil.getBoolean(portletPreferences, request, "fieldReadOnly" + i, false);
-								String tempVal = valuesMap.get(fieldName);
-				
-								HttpServletRequest originalRequest = PortalUtil.getOriginalServletRequest(request);
-								String valFromOriginalRequest = originalRequest.getParameter(fieldName);
-								String fieldValue = ParamUtil.getString(request, fieldName,  tempVal==null?(valFromOriginalRequest==null?StringPool.BLANK:valFromOriginalRequest):tempVal);
-								String value = portletPreferences.getValue("fieldValue" + i, StringPool.BLANK);
-								if(Validator.isNull(fieldValue)){
-									fieldValue = value;
-								}
-								String fieldPlaceHolder = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldPlaceHolder" + i, themeDisplay.getLanguageId());
-								String fieldType = portletPreferences.getValue("fieldType" + i, "text");
-								String fieldOptions = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldOptions" + i, themeDisplay.getLanguageId());
-								String fieldBlankOption = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldBlankOption" + i, themeDisplay.getLanguageId());
-		
-								String fieldValidationScript = portletPreferences.getValue("fieldValidationScript" + i, StringPool.BLANK);
-								String fieldValidationErrorMessage = portletPreferences.getValue("fieldValidationErrorMessage" + i, StringPool.BLANK);
-								
-								String fieldOnSelectScript = portletPreferences.getValue("fieldOnSelectScript" + i, StringPool.BLANK);
-								String onAddressSelect = portletPreferences.getValue("onAddressSelect" + i, StringPool.BLANK);
-								String fieldStyle = portletPreferences.getValue("fieldStyle" + i, StringPool.BLANK);
-								String fieldStyleClass = " "+portletPreferences.getValue("fieldStyleClass" + i, StringPool.BLANK);
-								String fieldWrapperStyle = portletPreferences.getValue("fieldWrapperStyle" + i, StringPool.BLANK);
-								String fieldWrapperStyleClass = " "+portletPreferences.getValue("fieldWrapperStyleClass" + i, StringPool.BLANK);
-								
-								String fieldDataHelper = " "+portletPreferences.getValue("fieldDataHelper" + i, StringPool.BLANK);
-								
-								boolean countrySelect = PrefsParamUtil.getBoolean(portletPreferences, request, "countrySelect" + i, false);
-								boolean nsgOrganisation = PrefsParamUtil.getBoolean(portletPreferences, request, "nsgOrganisation" + i, false);
-		
-							%>
-								<c:if test='<%= fieldType.equals("hidden") %>'>
-									<aui:input data-helper='<%= fieldDataHelper %>'  cssClass='<%= fieldStyleClass %>' type="<%= fieldType %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" />
-									
-								</c:if>
-									<%
-									if(fieldType.equals("hidden")){
-										continue;
-									}
-									%>
-								<div class="field-wrapper field-wrapper-<%= i %>  field-type-<%= fieldType + fieldWrapperStyleClass %>" style="<%= fieldWrapperStyle %>">
-				
-									<c:choose>
-										
-										<c:when test='<%= fieldType.equals("paragraph") %>'>
-											<p style="<%= fieldStyle %>" class="lfr-webform" id="<portlet:namespace /><%= fieldName %>"><%= fieldOptions %></p>
-										</c:when>
-										<c:when test='<%= fieldType.equals("text") %>'>
-											<aui:input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" />
-										</c:when>
-										<c:when test='<%= fieldType.equals("tel")  %>'>
-											<aui:input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" type="tel" cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" />
-										</c:when>
-										<c:when test='<%= fieldType.equals("postcode")  %>'>
-											
-											<div class="control-group"> 
-												<div class="postcode-search">
-													<label class="control-label"  for="<portlet:namespace/><%= fieldName %>"> 
-														<%= HtmlUtil.escape(fieldLabel) %> 
-													</label> 
-	
-													<input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" type="text" id="<portlet:namespace/><%= fieldName %>"
-													class='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass %>' name="<portlet:namespace/><%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" />
-													<a href="javascript:;" onclick="<portlet:namespace />findPostcode('<%= fieldName %>'); return false" class="btn btn-primary" >find address</a>
-												</div>
-											
-												<div class="postcode-search-result-wrapper hide" id="<%= fieldName %>selectDropdownDiv">
-							                        <label class="control-label" for="<%= fieldName %>addressListSelect">Select an Address:</label>
-							                        <select id="<%= fieldName %>addressListSelect" onchange="<portlet:namespace />addressSelect(this,function(result){<%= onAddressSelect %>})"></select>
-							                    </div>
-						                    </div>
-											
-											<% 
-												isFindPostcode = true; 
-											%>
-
-										</c:when>
-										<c:when test='<%= fieldType.equals("uprn")  %>'>
-											<aui:input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" type="text" cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" />
-											<a href="javascript:;"  onclick="<portlet:namespace />findUPRN('<%= fieldName %>'); return false" class="btn btn-primary" type="submit">find address</a>
-											
-											<div id="<%= fieldName %>selectDropdownDiv">
-						                        <label class="control-label" for="<%= fieldName %>addressListSelect">Select an Address:</label>
-						                        <select id="<%= fieldName %>addressListSelect"></select>
-						                    </div>
-											
-											<% isFindUPRN = true; %>
-										</c:when>
-										<c:when test='<%= fieldType.equals("email") %>'>
-											<aui:input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" type="email" cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" >
-												<aui:validator name="email"/>
-											</aui:input>
-										</c:when>
-										<c:when test='<%= fieldType.equals("textarea") %>'>
-											<aui:input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" cssClass='<%= "lfr-textarea-container" + (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass%>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" type="textarea" value="<%= HtmlUtil.escape(fieldValue) %>" wrap="soft" />
-										</c:when>
-										<c:when test='<%= fieldType.equals("checkbox") %>'>
-											<aui:input style="<%= fieldStyle %>" data-helper='<%= fieldDataHelper %>' onChange='<%= fieldOnSelectScript%>' cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass  %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" type="checkbox" value='<%= GetterUtil.getBoolean(fieldValue) %>' />
-										</c:when>
-										
-										<c:when test='<%= fieldType.equals("multiple-checkbox") %>'>
-											
-											<aui:field-wrapper  cssClass='<%= fieldOptional ? "optional" : StringPool.BLANK %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name='<%= fieldName + "_title" %>'>
-											
-												<%
-												int checkBoxIndex = 0;
-												for (String fieldOptionValue : WebFormUtil.split(fieldOptions)) {
-													String checkboxfieldName = fieldName+"_"+checkBoxIndex;
-													String checkboxfieldValue = ParamUtil.getString(request, checkboxfieldName, valuesMap.get(checkboxfieldName));
-													fieldOptionValue = fieldOptionValue.trim();
-													checkBoxIndex++;
-												%>
-													<aui:input wrapperCssClass="<%= fieldStyle %>"  cssClass='<%= fieldStyleClass %>' onChange='<%= fieldOnSelectScript%>' checked="<%= fieldValue.equals(fieldOptionValue) %>" label="<%= HtmlUtil.escape(fieldOptionValue) %>" name="<%= checkboxfieldName %>" type="checkbox" value="<%= GetterUtil.getBoolean(checkboxfieldValue)  %>" />
-												<%
-												}
-												%>	
-												<aui:input name='<%= fieldName %>' type="hidden" value="<%= checkBoxIndex %>" />
+								Date formDate = (Date)SessionMessages.get(liferayPortletRequest, WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_SUCCESS);
+							 %>
 												
-												<c:if test="<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED %>">
-													<liferay-ui:error key='<%= "error" + fieldLabel %>' message="<%= fieldValidationErrorMessage %>" />
+							<div class="alert alert-success"><%= LanguageUtil.format(locale, "temporary-data-success", new Object[]{formDate}) %></div>
+						</c:if>
+					</div>
+			
+					<div class="form-body">
+						<c:if test='<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED && SessionErrors.contains(renderRequest, "validationScriptError") %>'>
+							<liferay-util:include page="/script_error.jsp" />
+						</c:if>
+			
+						<%
+						int i = 1;
+						String fieldName = "field" + i;
+						String fieldLabel = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldLabel" + i, themeDisplay.getLanguageId());
 							
-													<c:if test="<%= Validator.isNotNull(fieldValidationScript) %>">
-														<div class="hide" id="<portlet:namespace/>validationError<%= fieldName %>">
-															<span class="alert alert-error"><%= fieldValidationErrorMessage %></span>
-														</div>
-													</c:if>
-												</c:if>	
-											</aui:field-wrapper>
-										</c:when>
+						while ((i == 1) || Validator.isNotNull(fieldLabel)) {
+							
+							
+							boolean fieldOptional = PrefsParamUtil.getBoolean(portletPreferences, request, "fieldOptional" + i, false);
+							boolean fieldReadOnly = PrefsParamUtil.getBoolean(portletPreferences, request, "fieldReadOnly" + i, false);
+							String tempVal = valuesMap.get(fieldName);
+			
+							HttpServletRequest originalRequest = PortalUtil.getOriginalServletRequest(request);
+							String valFromOriginalRequest = originalRequest.getParameter(fieldName);
+							String fieldValue = ParamUtil.getString(request, fieldName,  tempVal==null?(valFromOriginalRequest==null?StringPool.BLANK:valFromOriginalRequest):tempVal);
+							String value = portletPreferences.getValue("fieldValue" + i, StringPool.BLANK);
+							if(Validator.isNull(fieldValue)){
+								fieldValue = value;
+							}
+							String fieldPlaceHolder = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldPlaceHolder" + i, themeDisplay.getLanguageId());
+							String fieldType = portletPreferences.getValue("fieldType" + i, "text");
+							String fieldOptions = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldOptions" + i, themeDisplay.getLanguageId());
+							String fieldBlankOption = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldBlankOption" + i, themeDisplay.getLanguageId());
+	
+							String fieldValidationScript = portletPreferences.getValue("fieldValidationScript" + i, StringPool.BLANK);
+							String fieldValidationErrorMessage = portletPreferences.getValue("fieldValidationErrorMessage" + i, StringPool.BLANK);
+							
+							String fieldOnSelectScript = portletPreferences.getValue("fieldOnSelectScript" + i, StringPool.BLANK);
+							String onAddressSelect = portletPreferences.getValue("onAddressSelect" + i, StringPool.BLANK);
+							String fieldStyle = portletPreferences.getValue("fieldStyle" + i, StringPool.BLANK);
+							String fieldStyleClass = " "+portletPreferences.getValue("fieldStyleClass" + i, StringPool.BLANK);
+							String fieldWrapperStyle = portletPreferences.getValue("fieldWrapperStyle" + i, StringPool.BLANK);
+							String fieldWrapperStyleClass = " "+portletPreferences.getValue("fieldWrapperStyleClass" + i, StringPool.BLANK);
+							
+							String fieldDataHelper = " "+portletPreferences.getValue("fieldDataHelper" + i, StringPool.BLANK);
+							
+							boolean countrySelect = PrefsParamUtil.getBoolean(portletPreferences, request, "countrySelect" + i, false);
+	
+						%>
+							<c:if test='<%= fieldType.equals("hidden") %>'>
+								<aui:input data-helper='<%= fieldDataHelper %>'  cssClass='<%= fieldStyleClass %>' type="<%= fieldType %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" />
+								
+							</c:if>
+								<%
+								if(fieldType.equals("hidden")){
+									continue;
+								}
+								%>
+							<div class="field-wrapper field-wrapper-<%= i %>  field-type-<%= fieldType + fieldWrapperStyleClass %>" style="<%= fieldWrapperStyle %>">
+			
+								<c:choose>
+									
+									<c:when test='<%= fieldType.equals("paragraph") %>'>
+										<p style="<%= fieldStyle %>" class="lfr-webform" id="<portlet:namespace /><%= fieldName %>"><%= fieldOptions %></p>
+									</c:when>
+									<c:when test='<%= fieldType.equals("text") %>'>
+										<aui:input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" />
+									</c:when>
+									<c:when test='<%= fieldType.equals("tel")  %>'>
+										<aui:input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" type="tel" cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" />
+									</c:when>
+									<c:when test='<%= fieldType.equals("postcode")  %>'>
 										
-										<c:when test='<%= fieldType.equals("radio") %>'>
-											<aui:field-wrapper  cssClass='<%= fieldOptional ? "optional" : StringPool.BLANK %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name='<%= fieldName + "_title" %>'>
+										<div class="control-group"> 
+											<div class="postcode-search">
+												<label class="control-label"  for="<portlet:namespace/><%= fieldName %>"> 
+													<%= HtmlUtil.escape(fieldLabel) %> 
+												</label> 
+
+												<input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" type="text" id="<portlet:namespace/><%= fieldName %>"
+												class='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass %>' name="<portlet:namespace/><%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" />
+												<a href="javascript:;" onclick="<portlet:namespace />findPostcode('<%= fieldName %>'); return false" class="btn btn-primary" >find address</a>
+											</div>
+										
+											<div class="postcode-search-result-wrapper hide" id="<%= fieldName %>selectDropdownDiv">
+						                        <label class="control-label" for="<%= fieldName %>addressListSelect">Select an Address:</label>
+						                        <select id="<%= fieldName %>addressListSelect" onchange="<portlet:namespace />addressSelect(this,function(result){<%= onAddressSelect %>})"></select>
+						                    </div>
+					                    </div>
+										
+										<% 
+											isFindPostcode = true; 
+										%>
+
+									</c:when>
+									<c:when test='<%= fieldType.equals("uprn")  %>'>
+										<aui:input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" type="text" cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" />
+										<a href="javascript:;"  onclick="<portlet:namespace />findUPRN('<%= fieldName %>'); return false" class="btn btn-primary" type="submit">find address</a>
+										
+										<div id="<%= fieldName %>selectDropdownDiv">
+					                        <label class="control-label" for="<%= fieldName %>addressListSelect">Select an Address:</label>
+					                        <select id="<%= fieldName %>addressListSelect"></select>
+					                    </div>
+										
+										<% isFindUPRN = true; %>
+									</c:when>
+									<c:when test='<%= fieldType.equals("email") %>'>
+										<aui:input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" type="email" cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" >
+											<aui:validator name="email"/>
+										</aui:input>
+									</c:when>
+									<c:when test='<%= fieldType.equals("textarea") %>'>
+										<aui:input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" cssClass='<%= "lfr-textarea-container" + (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass%>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" type="textarea" value="<%= HtmlUtil.escape(fieldValue) %>" wrap="soft" />
+									</c:when>
+									<c:when test='<%= fieldType.equals("checkbox") %>'>
+										<aui:input style="<%= fieldStyle %>" data-helper='<%= fieldDataHelper %>' onChange='<%= fieldOnSelectScript%>' cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass  %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" type="checkbox" value='<%= GetterUtil.getBoolean(fieldValue) %>' />
+									</c:when>
+									
+									<c:when test='<%= fieldType.equals("multiple-checkbox") %>'>
+										
+										<aui:field-wrapper  cssClass='<%= fieldOptional ? "optional" : StringPool.BLANK %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name='<%= fieldName + "_title" %>'>
+										
+											<%
+											int checkBoxIndex = 0;
+											for (String fieldOptionValue : WebFormUtil.split(fieldOptions)) {
+												String checkboxfieldName = fieldName+"_"+checkBoxIndex;
+												String checkboxfieldValue = ParamUtil.getString(request, checkboxfieldName, valuesMap.get(checkboxfieldName));
+												fieldOptionValue = fieldOptionValue.trim();
+												checkBoxIndex++;
+											%>
+												<aui:input wrapperCssClass="<%= fieldStyle %>"  cssClass='<%= fieldStyleClass %>' onChange='<%= fieldOnSelectScript%>' checked="<%= fieldValue.equals(fieldOptionValue) %>" label="<%= HtmlUtil.escape(fieldOptionValue) %>" name="<%= checkboxfieldName %>" type="checkbox" value="<%= GetterUtil.getBoolean(checkboxfieldValue)  %>" />
+											<%
+											}
+											%>	
+											<aui:input name='<%= fieldName %>' type="hidden" value="<%= checkBoxIndex %>" />
 											
-												<%
+											<c:if test="<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED %>">
+												<liferay-ui:error key='<%= "error" + fieldLabel %>' message="<%= fieldValidationErrorMessage %>" />
+						
+												<c:if test="<%= Validator.isNotNull(fieldValidationScript) %>">
+													<div class="hide" id="<portlet:namespace/>validationError<%= fieldName %>">
+														<span class="alert alert-error"><%= fieldValidationErrorMessage %></span>
+													</div>
+												</c:if>
+											</c:if>	
+										</aui:field-wrapper>
+									</c:when>
+									
+									<c:when test='<%= fieldType.equals("radio") %>'>
+										<aui:field-wrapper  cssClass='<%= fieldOptional ? "optional" : StringPool.BLANK %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name='<%= fieldName + "_title" %>'>
+										
+											<%
+											for (String fieldOptionValue : WebFormUtil.split(fieldOptions)) {
+												fieldOptionValue = fieldOptionValue.trim();
+											%>
+												<aui:input onChange='<%= fieldOnSelectScript%>' cssClass='<portlet:namespace /><%= fieldName %>' checked="<%= fieldValue.equals(fieldOptionValue) %>" label="<%= HtmlUtil.escape(fieldOptionValue) %>" name="<%= fieldName %>" type="radio" value="<%= HtmlUtil.escape(fieldOptionValue) %>" />
+											<%
+											}
+											%>
+											<c:if test="<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED %>">
+												<liferay-ui:error key='<%= "error" + fieldLabel %>' message="<%= fieldValidationErrorMessage %>" />
+						
+												<c:if test="<%= Validator.isNotNull(fieldValidationScript) %>">
+													<div class="hide" id="<portlet:namespace/>validationError<%= fieldName %>">
+														<span class="alert alert-error"><%= fieldValidationErrorMessage %></span>
+													</div>
+												</c:if>
+											</c:if>
+										</aui:field-wrapper>
+									</c:when>
+									<c:when test='<%= fieldType.equals("options") %>'>
+										<aui:select style="<%= fieldStyle %>" onChange='<%= "onSelectChange(this);"+ fieldOnSelectScript %>'  disabled="<%= fieldReadOnly %>" cssClass='<%= fieldOptional ? "optional field-blank-option" : StringPool.BLANK+" field-blank-option" %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>">
+											<%
+											if(Validator.isNotNull(fieldBlankOption)){
+											%>
+												<aui:option value=""><%= HtmlUtil.escape(fieldBlankOption) %></aui:option>
+											<%
+											}
+											if(countrySelect){
+												countrySelectionFields.add(fieldName);
+											}else{
 												for (String fieldOptionValue : WebFormUtil.split(fieldOptions)) {
 													fieldOptionValue = fieldOptionValue.trim();
 												%>
-													<aui:input onChange='<%= fieldOnSelectScript%>' cssClass='<portlet:namespace /><%= fieldName %>' checked="<%= fieldValue.equals(fieldOptionValue) %>" label="<%= HtmlUtil.escape(fieldOptionValue) %>" name="<%= fieldName %>" type="radio" value="<%= HtmlUtil.escape(fieldOptionValue) %>" />
+													<aui:option selected="<%= fieldValue.equals(fieldOptionValue) %>" value="<%= HtmlUtil.escape(fieldOptionValue) %>"><%= HtmlUtil.escape(fieldOptionValue) %></aui:option>
 												<%
 												}
-												%>
-												<c:if test="<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED %>">
-													<liferay-ui:error key='<%= "error" + fieldLabel %>' message="<%= fieldValidationErrorMessage %>" />
-							
-													<c:if test="<%= Validator.isNotNull(fieldValidationScript) %>">
-														<div class="hide" id="<portlet:namespace/>validationError<%= fieldName %>">
-															<span class="alert alert-error"><%= fieldValidationErrorMessage %></span>
-														</div>
-													</c:if>
-												</c:if>
-											</aui:field-wrapper>
-										</c:when>
-										<c:when test='<%= fieldType.equals("options") %>'>
-											<aui:select style="<%= fieldStyle %>" onChange='<%= "onSelectChange(this);"+ fieldOnSelectScript %>'  disabled="<%= fieldReadOnly %>" cssClass='<%= fieldOptional ? "optional field-blank-option" : StringPool.BLANK+" field-blank-option" %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>">
-												<%
-												if(Validator.isNotNull(fieldBlankOption)){
-												%>
-													<aui:option value=""><%= HtmlUtil.escape(fieldBlankOption) %></aui:option>
-												<%
-												}
-												if(countrySelect){
-													countrySelectionFields.add(fieldName);
-												}
-												else if(nsgOrganisation){
-													String nsgOrganisationOptions = (String)renderRequest.getAttribute("nsgOrganisation"+i);
-													%>
-													<%= nsgOrganisationOptions %>
-													<%
-												}else{
-													for (String fieldOptionValue : WebFormUtil.split(fieldOptions)) {
-														fieldOptionValue = fieldOptionValue.trim();
-													%>
-														<aui:option selected="<%= fieldValue.equals(fieldOptionValue) %>" value="<%= HtmlUtil.escape(fieldOptionValue) %>"><%= HtmlUtil.escape(fieldOptionValue) %></aui:option>
-													<%
-													}
-												}
-												%>
-				
-				
-											</aui:select>
-											
-										</c:when>
-										<c:when test='<%= fieldType.equals("fileupload") %>'>
-											 <aui:input name="fileupload" type="file" label="<%= HtmlUtil.escape(fieldLabel) %>" />
-										</c:when>
+											}
+											%>
+			
+			
+										</aui:select>
 										
-										<c:when test='<%= fieldType.equals("date") %>'>								   
-											<div class="control-group"> 						
-												<label class="control-label" for='<%= fieldName %>'> <%= HtmlUtil.escape(fieldLabel) %> </label>
-												<liferay-ui:input-date 
-													dayValue='<%= today.get(Calendar.DATE) %>' 
-													monthValue='<%= today.get(Calendar.MONTH) %>' 
-													yearValue='<%= today.get(Calendar.YEAR) %>'
-													name='<%= fieldName %>'
-													dayParam='<%= fieldName + "Day" %>'
-													disabled='<%= false %>'
-													monthParam='<%= fieldName + "Month" %>'
-													yearParam='<%= fieldName + "Year" %>'
-												/>
-											</div>
-											<div style="clear: both"></div>
-										</c:when>
-										
-										<c:when test='<%= fieldType.equals("dateTime") %>'>								   
-											<div class="control-group date-time-group"> 
-												<label class="control-label" for='<%= fieldName %>'> <%= HtmlUtil.escape(fieldLabel) %> </label>
-												<liferay-ui:input-date 
-													dayValue='<%= today.get(Calendar.DATE) %>' 
-													monthValue='<%= today.get(Calendar.MONTH) %>' 
-													yearValue='<%= today.get(Calendar.YEAR) %>'
-													name='<%= fieldName %>'
-													dayParam='<%= fieldName + "Day"  %>'
-													disabled='<%= false %>'
-													monthParam='<%= fieldName + "Month"  %>'
-													yearParam='<%= fieldName + "Year"  %>'
-												/>
-												<liferay-ui:input-time
-					 								amPmParam='<%= fieldName + "AmPm"  %>' 
-					 								amPmValue="<%= today.get(Calendar.AM_PM) %>" 
-					 								disabled="<%= false %>" 
-					 								name='<%= fieldName + "_time" %>'
-					 								hourParam='<%= fieldName + "Hour"  %>' 
-					 								hourValue="<%= today.get(Calendar.HOUR) %>" 
-					 								minuteInterval="<%= 30 %>" 
-					 								minuteParam='<%= fieldName + "Minute"  %>' 
-					 								minuteValue="<%= today.get(Calendar.MINUTE) %>" 
-					 							/> 
-					 							<input id='<%= fieldName %>' name='<%= fieldName %>' type="hidden">
-					 							
-											</div>
-										</c:when>
-										
-										<c:when test='<%= fieldType.equals("richText") %>'>	
-											<div class="control-group"> 
-												<label class="control-label" for='<%= fieldName   %>'> <%= HtmlUtil.escape(fieldLabel) %> </label>
-												<liferay-ui:input-editor
-													resizable="false"
-													editorImpl="ckeditor"
-													initMethod='<%= fieldName + \"InitEditor\" %>'
-													name="<%= fieldName   %>"
-													toolbarSet="simple"
-												/> 
-											</div>
-											<aui:script>
-												function <portlet:namespace /><%= fieldName   %>InitEditor() {}
-											</aui:script>
-										</c:when>
-										
-									</c:choose>
-									<div class="alert-wrapper">
-										<span class="alert alert-error hide field-optional-error" id="<portlet:namespace/>fieldOptionalError<%= fieldName %>">
-											<liferay-ui:message key="this-field-is-mandatory" />
-										</span>
-									</div>
+									</c:when>
+									<c:when test='<%= fieldType.equals("fileupload") %>'>
+										 <aui:input name="fileupload" type="file" label="<%= HtmlUtil.escape(fieldLabel) %>" />
+									</c:when>
 									
-									<c:if test='<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED  && !fieldType.equals("multiple-checkbox")  %>'>
-										<liferay-ui:error key='<%= "error" + fieldLabel %>' message="<%= fieldValidationErrorMessage %>" />
-										<c:if test="<%= Validator.isNotNull(fieldValidationScript) %>">
-											<div class="hide" id="<portlet:namespace/>validationError<%= fieldName %>">
-												<span class="alert alert-error"><%= fieldValidationErrorMessage %></span>
-											</div>
-										</c:if>
-									</c:if>
+									<c:when test='<%= fieldType.equals("date") %>'>								   
+										<div class="control-group"> 						
+											<label class="control-label" for='<%= fieldName %>'> <%= HtmlUtil.escape(fieldLabel) %> </label>
+											<liferay-ui:input-date 
+												dayValue='<%= today.get(Calendar.DATE) %>' 
+												monthValue='<%= today.get(Calendar.MONTH) %>' 
+												yearValue='<%= today.get(Calendar.YEAR) %>'
+												name='<%= fieldName %>'
+												dayParam='<%= fieldName + "Day" %>'
+												disabled='<%= false %>'
+												monthParam='<%= fieldName + "Month" %>'
+												yearParam='<%= fieldName + "Year" %>'
+											/>
+										</div>
+										<div style="clear: both"></div>
+									</c:when>
 									
+									<c:when test='<%= fieldType.equals("dateTime") %>'>								   
+										<div class="control-group date-time-group"> 
+											<label class="control-label" for='<%= fieldName %>'> <%= HtmlUtil.escape(fieldLabel) %> </label>
+											<liferay-ui:input-date 
+												dayValue='<%= today.get(Calendar.DATE) %>' 
+												monthValue='<%= today.get(Calendar.MONTH) %>' 
+												yearValue='<%= today.get(Calendar.YEAR) %>'
+												name='<%= fieldName %>'
+												dayParam='<%= fieldName + "Day"  %>'
+												disabled='<%= false %>'
+												monthParam='<%= fieldName + "Month"  %>'
+												yearParam='<%= fieldName + "Year"  %>'
+											/>
+											<liferay-ui:input-time
+				 								amPmParam='<%= fieldName + "AmPm"  %>' 
+				 								amPmValue="<%= today.get(Calendar.AM_PM) %>" 
+				 								disabled="<%= false %>" 
+				 								name='<%= fieldName + "_time" %>'
+				 								hourParam='<%= fieldName + "Hour"  %>' 
+				 								hourValue="<%= today.get(Calendar.HOUR) %>" 
+				 								minuteInterval="<%= 30 %>" 
+				 								minuteParam='<%= fieldName + "Minute"  %>' 
+				 								minuteValue="<%= today.get(Calendar.MINUTE) %>" 
+				 							/> 
+				 							<input id='<%= fieldName %>' name='<%= fieldName %>' type="hidden">
+				 							
+										</div>
+									</c:when>
+									
+									<c:when test='<%= fieldType.equals("richText") %>'>	
+										<div class="control-group"> 
+											<label class="control-label" for='<%= fieldName   %>'> <%= HtmlUtil.escape(fieldLabel) %> </label>
+											<liferay-ui:input-editor
+												resizable="false"
+												editorImpl="ckeditor"
+												initMethod='<%= fieldName + \"InitEditor\" %>'
+												name="<%= fieldName   %>"
+												toolbarSet="simple"
+											/> 
+										</div>
+										<aui:script>
+											function <portlet:namespace /><%= fieldName   %>InitEditor() {}
+										</aui:script>
+									</c:when>
+									
+								</c:choose>
+								<div class="alert-wrapper">
+									<span class="alert alert-error hide field-optional-error" id="<portlet:namespace/>fieldOptionalError<%= fieldName %>">
+										<liferay-ui:message key="this-field-is-mandatory" />
+									</span>
 								</div>
-				
-							<%
-							}
-							%>
-				
-						</div>
-				
-					</aui:fieldset>
-				
-					<c:if test="<%= requireCaptcha && stepIndex == (nrSteps-1) %>">
-						<portlet:resourceURL var="captchaURL">
-							<portlet:param name="<%= Constants.CMD %>" value="captcha" />
-						</portlet:resourceURL>
-				
-						<liferay-ui:captcha url="<%= captchaURL %>" />
-					</c:if>
+								
+								<c:if test='<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED  && !fieldType.equals("multiple-checkbox")  %>'>
+									<liferay-ui:error key='<%= "error" + fieldLabel %>' message="<%= fieldValidationErrorMessage %>" />
+									<c:if test="<%= Validator.isNotNull(fieldValidationScript) %>">
+										<div class="hide" id="<portlet:namespace/>validationError<%= fieldName %>">
+											<span class="alert alert-error"><%= fieldValidationErrorMessage %></span>
+										</div>
+									</c:if>
+								</c:if>
+								
+							</div>
+			
+						<%
+							i++;
+	
+							fieldName = "field" + i;
+							fieldLabel = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldLabel" + i, themeDisplay.getLanguageId());
+// 							fieldOptional = PrefsParamUtil.getBoolean(portletPreferences, request, "fieldOptional" + i, false);
+// 							fieldReadOnly = PrefsParamUtil.getBoolean(portletPreferences, request, "fieldReadOnly" + i, false);
+// 							fieldValue = ParamUtil.getString(request, fieldName);
 						
-					<c:if test="<%= isReallyWizard && stepIndex > 0 %>">
-						<button class="btn wizard-button back-button" onclick="<portlet:namespace/>wizardBack(<%= stepIndex %>)" type="button">
-							<i class="icon-caret-left" style="margin-right: 5px;" ></i>
-							Back
-						</button>
-					</c:if>
-					
-					<c:if test="<%= isReallyWizard && stepIndex < (nrSteps-1) %>">
-						<button class="btn wizard-button next-button" onclick="<portlet:namespace/>wizardNext(<%= stepIndex %>,'<%= stepFields %>')" type="button"> 
-							Next 
-							<i class="icon-caret-right" style="margin-left: 5px;" ></i>
-						</button>
-					</c:if>
-				
-					<c:if test="<%= !isReallyWizard || stepIndex == (nrSteps-1) %>">
-						<aui:button cssClass="wizard-button submit-button" onClick="" type="submit" value="<%= submitButtonLabel %>" />
-						<c:if test="<%= saveTempEnable %>">						
-							<a href="javascript:;" id="<portlet:namespace />save_for_later" style="<%= saveButtonStyle %>" class="btn wizard-button btn-primary <%= saveButtonStyleClass %>" onClick="" ><%= saveButtonLabel%> </a>
-						</c:if>
+						}
+						%>
+			
+					</div>
+			
+				</aui:fieldset>
+			
+				<c:if test="<%= requireCaptcha %>">
+					<portlet:resourceURL var="captchaURL">
+						<portlet:param name="<%= Constants.CMD %>" value="captcha" />
+					</portlet:resourceURL>
+			
+					<liferay-ui:captcha url="<%= captchaURL %>" />
+				</c:if>
+			
+				<aui:button cssClass="wizard-button submit-button" onClick="" type="submit" value="<%= submitButtonLabel %>" />
+				<c:if test="<%= saveTempEnable %>">						
+					<a href="javascript:;" id="<portlet:namespace />save_for_later" style="<%= saveButtonStyle %>" class="btn wizard-button btn-primary <%= saveButtonStyleClass %>" onClick="" ><%= saveButtonLabel%> </a>
+				</c:if>
 						
-					</c:if>
 				
-				</div>
-			<% } %>
 			</div>
 		</aui:form>
 		
@@ -786,197 +658,6 @@ String saveButtonStyleClass = portletPreferences.getValue("saveButtonStyleClass"
 				]
 			);	
 			
-		</aui:script>
-		
-		<aui:script use="aui-base,selector-css3">
-		
-			Liferay.provide(window, '<portlet:namespace />wizardBack',
-		        function(stepIndex) {
-		        	$(".wizard-step-"+(stepIndex)).removeClass("wizard-step-active");
-					$(".wizard-step-"+(stepIndex-1)).addClass("wizard-step-active");
-					$(".wizard-step-"+(stepIndex-1)).find('#form-title').focus();
-					
-					var firstFieldWrapper = $(".wizard-step-"+(stepIndex-1)).find('.field-wrapper:first');
-					var field = firstFieldWrapper.find('input:first');
-					if(field.length == 0){
-						field = firstFieldWrapper.find('select');
-						if(field.length == 0){
-							field = firstFieldWrapper.find('textarea');
-						}
-					}
-					if(field.length > 0){
-						field.focus();
-					}
-					
-		        },
-		        ['aui-base,selector-css3']
-		    );
-		
-			
-			Liferay.provide(window, '<portlet:namespace />wizardNext',
-		        function(stepIndex, stepFields) {
-		
-		        	var validationErrors = false;
-					var keys = [];
-					var stepFieldsArr = stepFields.split(",");
-					var fieldLabels = {};
-					var fieldOptional = {};
-					var fieldValidationErrorMessages = {};
-					var fieldValidationFunctions = {};
-					var fieldsMap = {};
-					
-					<%
-					for(int stepIndex = 0; stepIndex < nrSteps; stepIndex++) {
-						String stepFields = portletPreferences.getValue("wizardStepFields"+stepIndex, StringPool.BLANK);
-						int[] formFieldsIndexes = StringUtil.split(stepFields, 0);
-						
-						for (int i : formFieldsIndexes) {
-							String fieldName = "field" + i;
-							String fieldLabel = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldLabel" + i, themeDisplay.getLanguageId());
-							boolean fieldOptional = PrefsParamUtil.getBoolean(portletPreferences, request, "fieldOptional" + i, false);
-							boolean fieldReadOnly = PrefsParamUtil.getBoolean(portletPreferences, request, "fieldReadOnly" + i, false);
-							String fieldValue = ParamUtil.getString(request, fieldName);
-							
-							String fieldPlaceHolder = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldPlaceHolder" + i, themeDisplay.getLanguageId());
-							String fieldType = portletPreferences.getValue("fieldType" + i, "text");
-							
-							if(fieldType.equals("paragraph") || fieldType.equals("hidden") || (fieldType.equals("multiple-checkbox"))){
-								fieldOptional = true;
-							}
-							
-							String fieldOptions = LocalizationUtil.getPreferencesValue(portletPreferences, "fieldOptions" + i, themeDisplay.getLanguageId());
-							String fieldValidationScript = portletPreferences.getValue("fieldValidationScript" + i, StringPool.BLANK);
-							String fieldValidationErrorMessage = portletPreferences.getValue("fieldValidationErrorMessage" + i, StringPool.BLANK);
-							
-						%>
-									
-							var key = "<%= fieldName %>";
-							
-							keys[<%= i %>] = key;
-							
-							fieldLabels[key] = "<%= HtmlUtil.escape(fieldLabel) %>";
-							fieldValidationErrorMessages[key] = "<%= fieldValidationErrorMessage %>";
-		
-							function fieldValidationFunction<%= i %>(currentFieldValue, fieldsMap) {
-								<c:choose>
-									<c:when test="<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED && Validator.isNotNull(fieldValidationScript) %>">
-										try{
-											<%= fieldValidationScript %>
-										}catch(e){}
-									</c:when>
-									<c:otherwise>
-										return true;
-									</c:otherwise>
-								</c:choose>
-							};
-							
-							fieldOptional[key] = <%= fieldOptional %>;
-							fieldValidationFunctions[key] = fieldValidationFunction<%= i %>;
-		
-							<c:choose>
-								<c:when test='<%= fieldType.equals("radio") %>'>
-									var radioButton = A.one('input[name=<portlet:namespace />field<%= i %>]:checked');
-		
-									fieldsMap[key] = '';
-		
-									if (radioButton) {
-										fieldsMap[key] = radioButton.val();
-									}
-								</c:when>
-								<c:otherwise>
-									var inputField = A.one('#<portlet:namespace />field<%= i %>');
-		
-									fieldsMap[key] = (inputField && inputField.val()) || '';
-								</c:otherwise>
-							</c:choose>
-			
-					<%	
-						}
-					}
-					%>
-					
-					for (var i = 1; i < keys.length; i++) {
-						var key = keys[i];
-						
-						var isInStep = false;
-						for (var j = 0; j < stepFieldsArr.length; j++) {
-							if('field'+stepFieldsArr[j] == key){
-								isInStep = true;
-							}	
-						}
-						
-						if(!isInStep){
-							continue;
-						}
-						
-						var currentFieldValue = fieldsMap[key];
-			
-						var optionalFieldError = A.one('#<portlet:namespace />fieldOptionalError' + key);
-						var validationError = A.one('#<portlet:namespace />validationError' + key);
-						var field = A.one('#<portlet:namespace />' + key);
-						
-						if(field){
-							field.removeClass('input-error');
-						}
-						
-						if (!fieldOptional[key] && currentFieldValue.match(/^\s*$/)) {
-							validationErrors = true;
-			
-							A.all('.alert-success').hide();
-			
-							if (optionalFieldError) {
-								optionalFieldError.show();
-								A.one('#<portlet:namespace />' + key).addClass('input-error');
-							}
-						}
-						else if (!fieldValidationFunctions[key](currentFieldValue, fieldsMap)) {
-							validationErrors = true;
-			
-							A.all('.alert-success').hide();
-			
-							if (optionalFieldError) {
-								optionalFieldError.hide();
-							}
-			
-							if (validationError) {
-								validationError.show();
-								A.one('#<portlet:namespace />' + key).addClass('input-error');
-							}
-						}
-						else {
-							if (optionalFieldError) {
-								optionalFieldError.hide();
-							}
-			
-							if (validationError) {
-								validationError.hide();
-							}
-						}
-					}
-					
-					if(!(validationErrors)){
-						$(".wizard-step-"+(stepIndex)).removeClass("wizard-step-active");
-						$(".wizard-step-"+(stepIndex+1)).addClass("wizard-step-active");
-						
-						var firstFieldWrapper = $(".wizard-step-"+(stepIndex+1)).find('.field-wrapper:first');
-						var field = firstFieldWrapper.find('input:first');
-						if(field.length == 0){
-							field = firstFieldWrapper.find('select');
-							if(field.length == 0){
-								field = firstFieldWrapper.find('textarea');
-							}
-						}
-						if(field.length > 0){
-							field.focus();
-						}
-						
-					}
-		        	
-		        },
-		        ['aui-base,selector-css3']
-		    );
-		
-		
 		</aui:script>
 		
 		<aui:script use="aui-base,selector-css3,node-load">

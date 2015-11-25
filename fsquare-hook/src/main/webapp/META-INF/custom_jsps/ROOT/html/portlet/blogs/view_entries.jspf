@@ -14,6 +14,7 @@
  */
 --%>
 
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%
 boolean showAddEntryButton = BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY);
 boolean showPermissionsButton = BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
@@ -58,7 +59,6 @@ showSearch = showSearch && !results.isEmpty();
 	<div class="form-search pull-right">
 		<liferay-ui:input-search autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" id="keywords1" name="keywords" placeholder='<%= LanguageUtil.get(locale, "keywords") %>' />
 	</div>
-	<div style="clear: both;"></div>
 </c:if>
 
 <div class="subscribe">
@@ -84,11 +84,8 @@ showSearch = showSearch && !results.isEmpty();
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon
-					image="unsubscribe"
-					label="<%= true %>"
-					url="<%= unsubscribeURL %>"
-				/>
+				<a href='<%= unsubscribeURL %>' class="unsubscribe-btn"><%= LanguageUtil.get(locale, "unsubscribe") %></a>
+				
 			</c:when>
 			<c:otherwise>
 				<portlet:actionURL var="subscribeURL">
@@ -97,15 +94,14 @@ showSearch = showSearch && !results.isEmpty();
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon
-					image="subscribe"
-					label="<%= true %>"
-					url="<%= subscribeURL %>"
-				/>
+				<a href='<%= subscribeURL %>' class="subscribe-btn"><%= LanguageUtil.get(locale, "subscribe") %></a>
+				
 			</c:otherwise>
 		</c:choose>
 	</c:if>
 </div>
+
+<div style="clear: both;"></div>
 
 <liferay-ui:categorization-filter
 	assetType="entries"

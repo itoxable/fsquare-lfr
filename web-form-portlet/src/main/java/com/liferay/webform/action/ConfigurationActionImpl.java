@@ -100,111 +100,84 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "successMessage");
 		LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "submitButtonLabel");
 		
-		String wizardNrSteps = preferences.getValue("wizardNrSteps", StringPool.BLANK);
-		int nrSteps = 1;
-		if(wizardNrSteps != null && wizardNrSteps!= ""){
-			nrSteps = Integer.parseInt(wizardNrSteps);
-		}
 		if (updateFields) {
 			int i = 1;
 			String databaseTableName = WebFormUtil.getNewDatabaseTableName(portletResource);
 			preferences.setValue("databaseTableName", databaseTableName);
 			
 			
-			for(int stepIndex = 0; stepIndex < nrSteps; stepIndex++) {
-				LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "title"+stepIndex);
-				LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "description"+stepIndex);
-			
-			
-				int[] formFieldsIndexes = StringUtil.split(ParamUtil.getString(actionRequest, "formFieldsIndexes"+stepIndex), 0);
-	
-				
-				String stepFields = "";
-				
-				for (int formFieldsIndex : formFieldsIndexes) {
-					Map<Locale, String> fieldLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldLabel" + formFieldsIndex);
-	
-					if (Validator.isNull(fieldLabelMap.get(defaultLocale))) {
-						continue;
-					}
-	
-					String fieldType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex);
-					
-					boolean fieldOptional = ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
-					boolean isAckEmail = ParamUtil.getBoolean(actionRequest, "isAckEmail" + formFieldsIndex);
-					
-					if(fieldType.equals("paragraph") || fieldType.equals("hidden")){
-						fieldOptional = true;
-					}
-					
-					String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
-					
-					Map<Locale, String> fieldOptionsMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptions" + formFieldsIndex);
-					
-					Map<Locale, String> fieldBlankOptionMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldBlankOption" + formFieldsIndex);
-					
-					Map<Locale, String> fieldPlaceHolderMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldPlaceHolder" + formFieldsIndex);
-					
-					String fieldOnSelectScript = ParamUtil.getString(actionRequest, "fieldOnSelectScript" + formFieldsIndex);
-					
-					String fieldValue = ParamUtil.getString(actionRequest, "fieldValue" + formFieldsIndex);
+			LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "title");
+			LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "description");
+		
+		
+			int[] formFieldsIndexes = StringUtil.split(ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
 
-					String fieldName = ParamUtil.getString(actionRequest, "fieldName" + formFieldsIndex);
+			for (int formFieldsIndex : formFieldsIndexes) {
+				Map<Locale, String> fieldLabelMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldLabel" + formFieldsIndex);
 
-					
-					String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
-					
-					boolean fieldReadOnly = ParamUtil.getBoolean(actionRequest, "fieldReadOnly" + formFieldsIndex);
-						
-					String fieldStyle = ParamUtil.getString(actionRequest, "fieldStyle" + formFieldsIndex);
-					
-					String fieldStyleClass = ParamUtil.getString(actionRequest, "fieldStyleClass" + formFieldsIndex);
-					
-					String fieldWrapperStyle = ParamUtil.getString(actionRequest, "fieldWrapperStyle" + formFieldsIndex);
-					String fieldWrapperStyleClass = ParamUtil.getString(actionRequest, "fieldWrapperStyleClass" + formFieldsIndex);
-					String fieldDataHelper = ParamUtil.getString(actionRequest, "fieldDataHelper" + formFieldsIndex);
-					String onAddressSelect = ParamUtil.getString(actionRequest, "onAddressSelect" + formFieldsIndex);
-					
-					if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
-	
-						SessionErrors.add(actionRequest, "validationDefinitionInvalid" + i);
-					}
-	
-					boolean countrySelect = ParamUtil.getBoolean(actionRequest, "countrySelect" + formFieldsIndex);
-					boolean nsgOrganisation = ParamUtil.getBoolean(actionRequest, "nsgOrganisation" + formFieldsIndex);
-					
-					updateModifiedLocales("fieldLabel" + i, fieldLabelMap, preferences);
-					updateModifiedLocales("fieldOptions" + i, fieldOptionsMap, preferences);
-					updateModifiedLocales("fieldBlankOption" + i, fieldBlankOptionMap, preferences);
-					updateModifiedLocales("fieldPlaceHolder" + i, fieldPlaceHolderMap, preferences);
-					
-					preferences.setValue("fieldType" + i, fieldType);
-					preferences.setValue("fieldOptional" + i, String.valueOf(fieldOptional));
-					preferences.setValue("isAckEmail" + i, String.valueOf(isAckEmail));
-					
-					preferences.setValue("fieldValidationScript" + i, fieldValidationScript);
-					preferences.setValue("fieldOnSelectScript" + i, fieldOnSelectScript);
-					preferences.setValue("fieldValue" + i, fieldValue);
-					preferences.setValue("fieldName" + i, fieldName);
-					preferences.setValue("fieldValidationErrorMessage" + i, fieldValidationErrorMessage);
-					preferences.setValue("fieldReadOnly" + i, String.valueOf(fieldReadOnly));
-					preferences.setValue("fieldStyle" + i, fieldStyle);
-					preferences.setValue("fieldStyleClass" + i, fieldStyleClass);
-					preferences.setValue("fieldWrapperStyle" + i, fieldWrapperStyle);
-					preferences.setValue("fieldWrapperStyleClass" + i, fieldWrapperStyleClass);					
-					preferences.setValue("fieldDataHelper" + i, fieldDataHelper);
-					preferences.setValue("onAddressSelect" + i, onAddressSelect);
-										
-					preferences.setValue("countrySelect" + i, String.valueOf(countrySelect));
-					preferences.setValue("nsgOrganisation" + i, String.valueOf(nsgOrganisation));
-
-					
-					stepFields = (!stepFields.equals("")?stepFields+",":"")+i;
-					
-					i++;
+				if (Validator.isNull(fieldLabelMap.get(defaultLocale))) {
+					continue;
 				}
 
-				preferences.setValue("wizardStepFields" + stepIndex, stepFields);
+				String fieldType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex);
+				
+				boolean fieldOptional = ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
+				boolean isAckEmail = ParamUtil.getBoolean(actionRequest, "isAckEmail" + formFieldsIndex);
+				
+				if(fieldType.equals("paragraph") || fieldType.equals("hidden")){
+					fieldOptional = true;
+				}
+				
+				String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
+				
+				Map<Locale, String> fieldOptionsMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldOptions" + formFieldsIndex);
+				Map<Locale, String> fieldBlankOptionMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldBlankOption" + formFieldsIndex);
+				Map<Locale, String> fieldPlaceHolderMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldPlaceHolder" + formFieldsIndex);
+				
+				String fieldOnSelectScript = ParamUtil.getString(actionRequest, "fieldOnSelectScript" + formFieldsIndex);
+				String fieldValue = ParamUtil.getString(actionRequest, "fieldValue" + formFieldsIndex);
+				String fieldName = ParamUtil.getString(actionRequest, "fieldName" + formFieldsIndex);				
+				String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
+				boolean fieldReadOnly = ParamUtil.getBoolean(actionRequest, "fieldReadOnly" + formFieldsIndex);
+				String fieldStyle = ParamUtil.getString(actionRequest, "fieldStyle" + formFieldsIndex);
+				String fieldStyleClass = ParamUtil.getString(actionRequest, "fieldStyleClass" + formFieldsIndex);
+				String fieldWrapperStyle = ParamUtil.getString(actionRequest, "fieldWrapperStyle" + formFieldsIndex);
+				String fieldWrapperStyleClass = ParamUtil.getString(actionRequest, "fieldWrapperStyleClass" + formFieldsIndex);
+				String fieldDataHelper = ParamUtil.getString(actionRequest, "fieldDataHelper" + formFieldsIndex);
+				String onAddressSelect = ParamUtil.getString(actionRequest, "onAddressSelect" + formFieldsIndex);
+				
+				if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
+					SessionErrors.add(actionRequest, "validationDefinitionInvalid" + i);
+				}
+
+				boolean countrySelect = ParamUtil.getBoolean(actionRequest, "countrySelect" + formFieldsIndex);
+				
+				updateModifiedLocales("fieldLabel" + i, fieldLabelMap, preferences);
+				updateModifiedLocales("fieldOptions" + i, fieldOptionsMap, preferences);
+				updateModifiedLocales("fieldBlankOption" + i, fieldBlankOptionMap, preferences);
+				updateModifiedLocales("fieldPlaceHolder" + i, fieldPlaceHolderMap, preferences);
+				
+				preferences.setValue("fieldType" + i, fieldType);
+				preferences.setValue("fieldOptional" + i, String.valueOf(fieldOptional));
+				preferences.setValue("isAckEmail" + i, String.valueOf(isAckEmail));
+				
+				preferences.setValue("fieldValidationScript" + i, fieldValidationScript);
+				preferences.setValue("fieldOnSelectScript" + i, fieldOnSelectScript);
+				preferences.setValue("fieldValue" + i, fieldValue);
+				preferences.setValue("fieldName" + i, fieldName);
+				preferences.setValue("fieldValidationErrorMessage" + i, fieldValidationErrorMessage);
+				preferences.setValue("fieldReadOnly" + i, String.valueOf(fieldReadOnly));
+				preferences.setValue("fieldStyle" + i, fieldStyle);
+				preferences.setValue("fieldStyleClass" + i, fieldStyleClass);
+				preferences.setValue("fieldWrapperStyle" + i, fieldWrapperStyle);
+				preferences.setValue("fieldWrapperStyleClass" + i, fieldWrapperStyleClass);					
+				preferences.setValue("fieldDataHelper" + i, fieldDataHelper);
+				preferences.setValue("onAddressSelect" + i, onAddressSelect);
+									
+				preferences.setValue("countrySelect" + i, String.valueOf(countrySelect));
+								
+				i++;
+
 			}
 			
 			if (!SessionErrors.isEmpty(actionRequest)) {
@@ -220,13 +193,9 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 				for (Locale locale : fieldLabelMap.keySet()) {
 					String languageId = LocaleUtil.toLanguageId(locale);
-
 					LocalizationUtil.setPreferencesValue(preferences, "fieldLabel" + i, languageId, StringPool.BLANK);
-
 					LocalizationUtil.setPreferencesValue(preferences, "fieldOptions" + i, languageId, StringPool.BLANK);
-					
 					LocalizationUtil.setPreferencesValue(preferences, "fieldBlankOption" + i, languageId, StringPool.BLANK);
-					
 					LocalizationUtil.setPreferencesValue(preferences, "fieldPlaceHolder" + i, languageId, StringPool.BLANK);
 				}
 								
@@ -248,7 +217,6 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				preferences.setValue("onAddressSelect" + i, StringPool.BLANK);
 				
 				preferences.setValue("countrySelect" + i, StringPool.BLANK);
-				preferences.setValue("nsgOrganisation" + i, StringPool.BLANK);
 				
 				i++;
 
@@ -257,84 +225,64 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			
 		}else{
 			
+			LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "title");
+			LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "description");
+			int[] formFieldsIndexes = StringUtil.split(ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
+
 			
-			for(int stepIndex = 0; stepIndex < nrSteps; stepIndex++) {
-				LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "title"+stepIndex);
-				LocalizationUtil.setLocalizedPreferencesValues(actionRequest, preferences, "description"+stepIndex);
-			
-				int[] formFieldsIndexes = StringUtil.split(ParamUtil.getString(actionRequest, "formFieldsIndexes"+stepIndex), 0);
-	
+			for (int formFieldsIndex : formFieldsIndexes) {
+
+				Map<Locale, String> fieldPlaceHolderMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldPlaceHolder" + formFieldsIndex);
+				String fieldType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex);
+				boolean fieldOptional = ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
+				boolean isAckEmail = ParamUtil.getBoolean(actionRequest, "isAckEmail" + formFieldsIndex);
 				
-				for (int formFieldsIndex : formFieldsIndexes) {
-	
-					Map<Locale, String> fieldPlaceHolderMap = LocalizationUtil.getLocalizationMap(actionRequest, "fieldPlaceHolder" + formFieldsIndex);
-					
-					String fieldType = ParamUtil.getString(actionRequest, "fieldType" + formFieldsIndex);
-					
-					boolean fieldOptional = ParamUtil.getBoolean(actionRequest, "fieldOptional" + formFieldsIndex);
-					
-					boolean isAckEmail = ParamUtil.getBoolean(actionRequest, "isAckEmail" + formFieldsIndex);
-					
-					
-					if(fieldType.equals("paragraph") || fieldType.equals("hidden")){
-						fieldOptional = true;
-					}
-					
-					String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
-					
-					String fieldOnSelectScript = ParamUtil.getString(actionRequest, "fieldOnSelectScript" + formFieldsIndex);
-					
-					String fieldValue = ParamUtil.getString(actionRequest, "fieldValue" + formFieldsIndex);
-					
-					String fieldName = ParamUtil.getString(actionRequest, "fieldName" + formFieldsIndex);
-
-					String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
-					
-					boolean fieldReadOnly = ParamUtil.getBoolean(actionRequest, "fieldReadOnly" + formFieldsIndex);
-						
-					String fieldStyle = ParamUtil.getString(actionRequest, "fieldStyle" + formFieldsIndex);
-					
-					String fieldStyleClass = ParamUtil.getString(actionRequest, "fieldStyleClass" + formFieldsIndex);
-					
-					String fieldWrapperStyle = ParamUtil.getString(actionRequest, "fieldWrapperStyle" + formFieldsIndex);
-					String fieldWrapperStyleClass = ParamUtil.getString(actionRequest, "fieldWrapperStyleClass" + formFieldsIndex);
-					
-					String fieldDataHelper = ParamUtil.getString(actionRequest, "fieldDataHelper" + formFieldsIndex);
-					
-					String onAddressSelect = ParamUtil.getString(actionRequest, "onAddressSelect" + formFieldsIndex);
-					
-					if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
-	
-						SessionErrors.add(actionRequest, "validationDefinitionInvalid" + formFieldsIndex);
-					}
-					
-					boolean countrySelect = ParamUtil.getBoolean(actionRequest, "countrySelect" + formFieldsIndex);
-					boolean nsgOrganisation = ParamUtil.getBoolean(actionRequest, "nsgOrganisation" + formFieldsIndex);
-
-					preferences.setValue("fieldOptional" + formFieldsIndex, String.valueOf(fieldOptional));
-					preferences.setValue("isAckEmail" + formFieldsIndex, String.valueOf(isAckEmail));
-					preferences.setValue("fieldValidationScript" + formFieldsIndex, fieldValidationScript);
-					preferences.setValue("fieldOnSelectScript" + formFieldsIndex, fieldOnSelectScript);
-					preferences.setValue("fieldValue" + formFieldsIndex, fieldValue);
-					preferences.setValue("fieldName" + formFieldsIndex, fieldName);
-					preferences.setValue("fieldValidationErrorMessage" + formFieldsIndex, fieldValidationErrorMessage);
-					preferences.setValue("fieldReadOnly" + formFieldsIndex, String.valueOf(fieldReadOnly));
-					preferences.setValue("fieldStyle" + formFieldsIndex, String.valueOf(fieldStyle));
-					preferences.setValue("fieldStyleClass" + formFieldsIndex, String.valueOf(fieldStyleClass));
-					preferences.setValue("fieldDataHelper" + formFieldsIndex, String.valueOf(fieldDataHelper));
-					preferences.setValue("onAddressSelect" + formFieldsIndex, String.valueOf(onAddressSelect));
-					preferences.setValue("fieldWrapperStyle" + formFieldsIndex, String.valueOf(fieldWrapperStyle));
-					preferences.setValue("fieldWrapperStyleClass" + formFieldsIndex, String.valueOf(fieldWrapperStyleClass));
-					preferences.setValue("countrySelect" + formFieldsIndex, String.valueOf(countrySelect));
-					preferences.setValue("nsgOrganisation" + formFieldsIndex, String.valueOf(nsgOrganisation));
-
-					updateModifiedLocales("fieldPlaceHolder" + formFieldsIndex, fieldPlaceHolderMap, preferences);
-					
+				if(fieldType.equals("paragraph") || fieldType.equals("hidden")){
+					fieldOptional = true;
 				}
+				
+				String fieldValidationScript = ParamUtil.getString(actionRequest, "fieldValidationScript" + formFieldsIndex);
+				String fieldOnSelectScript = ParamUtil.getString(actionRequest, "fieldOnSelectScript" + formFieldsIndex);
+				String fieldValue = ParamUtil.getString(actionRequest, "fieldValue" + formFieldsIndex);
+				String fieldName = ParamUtil.getString(actionRequest, "fieldName" + formFieldsIndex);
+				String fieldValidationErrorMessage = ParamUtil.getString(actionRequest, "fieldValidationErrorMessage" + formFieldsIndex);
+				boolean fieldReadOnly = ParamUtil.getBoolean(actionRequest, "fieldReadOnly" + formFieldsIndex);
+				String fieldStyle = ParamUtil.getString(actionRequest, "fieldStyle" + formFieldsIndex);
+				String fieldStyleClass = ParamUtil.getString(actionRequest, "fieldStyleClass" + formFieldsIndex);
+				String fieldWrapperStyle = ParamUtil.getString(actionRequest, "fieldWrapperStyle" + formFieldsIndex);
+				String fieldWrapperStyleClass = ParamUtil.getString(actionRequest, "fieldWrapperStyleClass" + formFieldsIndex);
+				String fieldDataHelper = ParamUtil.getString(actionRequest, "fieldDataHelper" + formFieldsIndex);
+				String onAddressSelect = ParamUtil.getString(actionRequest, "onAddressSelect" + formFieldsIndex);
+				
+				if (Validator.isNotNull(fieldValidationScript) ^ Validator.isNotNull(fieldValidationErrorMessage)) {
 
+					SessionErrors.add(actionRequest, "validationDefinitionInvalid" + formFieldsIndex);
+				}
+				
+				boolean countrySelect = ParamUtil.getBoolean(actionRequest, "countrySelect" + formFieldsIndex);
+
+				preferences.setValue("fieldOptional" + formFieldsIndex, String.valueOf(fieldOptional));
+				preferences.setValue("isAckEmail" + formFieldsIndex, String.valueOf(isAckEmail));
+				preferences.setValue("fieldValidationScript" + formFieldsIndex, fieldValidationScript);
+				preferences.setValue("fieldOnSelectScript" + formFieldsIndex, fieldOnSelectScript);
+				preferences.setValue("fieldValue" + formFieldsIndex, fieldValue);
+				preferences.setValue("fieldName" + formFieldsIndex, fieldName);
+				preferences.setValue("fieldValidationErrorMessage" + formFieldsIndex, fieldValidationErrorMessage);
+				preferences.setValue("fieldReadOnly" + formFieldsIndex, String.valueOf(fieldReadOnly));
+				preferences.setValue("fieldStyle" + formFieldsIndex, String.valueOf(fieldStyle));
+				preferences.setValue("fieldStyleClass" + formFieldsIndex, String.valueOf(fieldStyleClass));
+				preferences.setValue("fieldDataHelper" + formFieldsIndex, String.valueOf(fieldDataHelper));
+				preferences.setValue("onAddressSelect" + formFieldsIndex, String.valueOf(onAddressSelect));
+				preferences.setValue("fieldWrapperStyle" + formFieldsIndex, String.valueOf(fieldWrapperStyle));
+				preferences.setValue("fieldWrapperStyleClass" + formFieldsIndex, String.valueOf(fieldWrapperStyleClass));
+				preferences.setValue("countrySelect" + formFieldsIndex, String.valueOf(countrySelect));
+
+				updateModifiedLocales("fieldPlaceHolder" + formFieldsIndex, fieldPlaceHolderMap, preferences);
+				
 			}
-			
+
 		}
+			
 
 		if (SessionErrors.isEmpty(actionRequest)) {
 			preferences.setValue(ConfigurationActionImpl.PREFERENCES_STORED, ConfigurationActionImpl.PREFERENCES_STORED);
@@ -472,13 +420,13 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 		Set<String> localizedUniqueFieldNames = new HashSet<String>();
 		PortletPreferences preferences = actionRequest.getPreferences();
-		String wizardNrSteps = preferences.getValue("wizardNrSteps", StringPool.BLANK);
-		int nrSteps = 1;
-		if(wizardNrSteps != null && wizardNrSteps!= ""){
-			nrSteps = Integer.parseInt(wizardNrSteps);
-		}
-		for(int stepIndex = 0; stepIndex < nrSteps; stepIndex++) {
-			int[] formFieldsIndexes = StringUtil.split(ParamUtil.getString(actionRequest, "formFieldsIndexes"+stepIndex), 0);
+//		String wizardNrSteps = preferences.getValue("wizardNrSteps", StringPool.BLANK);
+//		int nrSteps = 1;
+//		if(wizardNrSteps != null && wizardNrSteps!= ""){
+//			nrSteps = Integer.parseInt(wizardNrSteps);
+//		}
+//		for(int stepIndex = 0; stepIndex < nrSteps; stepIndex++) {
+			int[] formFieldsIndexes = StringUtil.split(ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
 
 			for (int formFieldsIndex : formFieldsIndexes) {
 				Map<Locale, String> fieldLabelMap =
@@ -503,7 +451,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					}
 				}
 			}
-		}
+//		}
 		
 		return true;
 	}

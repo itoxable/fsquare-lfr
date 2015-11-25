@@ -69,6 +69,8 @@ public class StorePortlet extends MVCPortlet{
 				testStripePayment(resourceRequest, resourceResponse);
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_SEND_TEST_EMAIL)) {
 				sendTestEmail(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_STRIPE_WEBHOOK)) {
+				stripeWebhook(resourceRequest, resourceResponse);
 			}
 			
 		}
@@ -77,6 +79,12 @@ public class StorePortlet extends MVCPortlet{
 		}
 	}
 	
+
+	private void stripeWebhook(ResourceRequest resourceRequest, ResourceResponse resourceResponse) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	private void sendTestEmail(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException, SystemException {
 		PrintWriter writer = resourceResponse.getWriter();
@@ -94,8 +102,9 @@ public class StorePortlet extends MVCPortlet{
         
 		message.put("shoppingOrder", shoppingOrder);
 		message.put("shoppingStore", shoppingStore);
+		System.out.println("START");
 		MessageBusUtil.sendMessage(Destinations.SHOPPING_SUCCESS_ORDER_MAIL, message);
-        
+		System.out.println("END");
         
         jsonObject.put("success", success);
 		writer.print(jsonObject.toString());

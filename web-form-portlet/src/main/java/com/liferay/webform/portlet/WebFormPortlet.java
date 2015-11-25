@@ -98,6 +98,7 @@ public class WebFormPortlet extends MVCPortlet {
 	
 	private String inputFileName = null;
 	private String ackEmailAddress = null;
+	
 	public void deleteData(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {

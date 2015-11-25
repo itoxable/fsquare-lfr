@@ -49,6 +49,8 @@ public class ShoppingOrderLocalServiceClpInvoker {
     private String[] _methodParameterTypes68;
     private String _methodName69;
     private String[] _methodParameterTypes69;
+    private String _methodName70;
+    private String[] _methodParameterTypes70;
 
     public ShoppingOrderLocalServiceClpInvoker() {
         _methodName0 = "addShoppingOrder";
@@ -148,6 +150,10 @@ public class ShoppingOrderLocalServiceClpInvoker {
         _methodName69 = "getOrderTotal";
 
         _methodParameterTypes69 = new String[] { "java.util.Collection" };
+
+        _methodName70 = "getOrderItemsCount";
+
+        _methodParameterTypes70 = new String[] { "java.util.Collection" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -259,6 +265,11 @@ public class ShoppingOrderLocalServiceClpInvoker {
         if (_methodName69.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
             return ShoppingOrderLocalServiceUtil.getOrderTotal((java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem>) arguments[0]);
+        }
+
+        if (_methodName70.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+            return ShoppingOrderLocalServiceUtil.getOrderItemsCount((java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem>) arguments[0]);
         }
 
         throw new UnsupportedOperationException();

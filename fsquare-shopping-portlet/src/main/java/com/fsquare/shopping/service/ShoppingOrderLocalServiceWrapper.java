@@ -289,6 +289,12 @@ public class ShoppingOrderLocalServiceWrapper
         return _shoppingOrderLocalService.getOrderTotal(shoppingOrderItemList);
     }
 
+    @Override
+    public int getOrderItemsCount(
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList) {
+        return _shoppingOrderLocalService.getOrderItemsCount(shoppingOrderItemList);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

@@ -14,7 +14,7 @@
 
     <!-- Destinations -->
 
-    <bean id="fsquareShopping.order.success.mail" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
+    <bean id="fsquareShopping.order.success.mail" class="com.liferay.portal.kernel.messaging.ParallelDestination">
         <property name="name" value="fsquareShopping/order/success/mail" />
     </bean>
 

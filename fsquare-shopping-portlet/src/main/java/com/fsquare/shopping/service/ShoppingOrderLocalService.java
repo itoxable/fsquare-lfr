@@ -248,4 +248,8 @@ public interface ShoppingOrderLocalService extends BaseLocalService,
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public double getOrderTotal(
         java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public int getOrderItemsCount(
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList);
 }

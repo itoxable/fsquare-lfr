@@ -72,7 +72,8 @@ public class ShoppingPortletUtil {
 
 	public static final String CMD_SEND_STATUS_EMAIL = "sendStatusEmail";
 
-	
+	public static final String CMD_STRIPE_WEBHOOK = "stripeWebhook";
+
 	
 	public static final String PRODUCT_MAIN_IMAGE = "Main_Image";
 	public static final String PRODUCT_TEXT = "Text";
@@ -113,6 +114,8 @@ public class ShoppingPortletUtil {
 
 
 	public static final String CMD_SEND_TEST_EMAIL = "sendTestEmail";
+
+
 
 
 	public static ShoppingOrderProcessWrapper getSessionShoppingOrderProcessWrapper(HttpSession session){

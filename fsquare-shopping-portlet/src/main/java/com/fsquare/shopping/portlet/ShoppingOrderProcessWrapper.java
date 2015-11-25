@@ -71,6 +71,10 @@ public class ShoppingOrderProcessWrapper implements Serializable {
 		return total;
 	}
 	
+	public Integer getTotalItems(){
+		Integer total = ShoppingOrderLocalServiceUtil.getOrderItemsCount(shoppingOrderItemMap.values());
+		return total;
+	}
 	
 	public Map<String, ShoppingOrderItem> getShoppingOrderItemMap() {
 		return shoppingOrderItemMap;

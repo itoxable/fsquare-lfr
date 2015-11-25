@@ -148,18 +148,12 @@
 </c:if>
 
 	<div class='<%= layoutColumns + " " + filterType %>' id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>" >
-		
 		<c:if test='<%= assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker()) %>'>
 			<%@ include file="/html/portlet/asset_publisher/display/item_actions.jspf" %>
 		</c:if>
-		
 		<a href="<%= viewURL %>" class='gallery-item '  >
-			<div class="gallery-item-poster">
-				<img src="<%= imagePath %>" data-caption="<a class='media-gallery-sliphover' href='<%= PortalUtil.escapeRedirect(viewURL) %>' ><h2><%= title %></h2></a>" ></img>
-				<div class="gallery-item-details">
-					<div><%= title %></div>
-				</div>
-			</div>
+			<span class="gallery-item-poster" style="background-image: url('<%= imagePath %>')" data-caption="<a class='media-gallery-sliphover' href='<%= PortalUtil.escapeRedirect(viewURL) %>' ><h2><%= title %></h2></a>">
+			</span>
 	 	</a>
 	</div>
 	
@@ -181,6 +175,7 @@
 	</c:if>
 	$('#media-gallery-<%=portletId %>').sliphover({
 		caption: 'data-caption',
+		target:'.gallery-item-poster'
 	});
 	</script>
 </c:if>

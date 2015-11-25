@@ -97,9 +97,9 @@
 	.web-form-portlet {
 		position: relative;
 		background-color: #FFF;
-		-webkit-box-shadow: 0 0 15px rgba(0,0,0,0.5);
-	    -moz-box-shadow: 0 0 15px rgba(0,0,0,0.5);
-	    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+/* 		-webkit-box-shadow: 0 0 15px rgba(0,0,0,0.5); */
+/* 	    -moz-box-shadow: 0 0 15px rgba(0,0,0,0.5); */
+/* 	    box-shadow: 0 0 15px rgba(0,0,0,0.5); */
 	   
 		form, .form-only-notices-wrapper{
 			position: relative;

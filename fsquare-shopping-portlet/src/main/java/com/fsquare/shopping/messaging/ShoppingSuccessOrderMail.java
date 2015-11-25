@@ -44,15 +44,21 @@ public class ShoppingSuccessOrderMail implements MessageListener {
 	}
 	
 	protected void doReceive(Message message) throws Exception {
-		
+
 		ShoppingOrder shoppingOrder = (ShoppingOrder)message.get("shoppingOrder");
 		ShoppingStore shoppingStore = (ShoppingStore)message.get("shoppingStore");
 
 		String orderCreatedEmailTemplate = shoppingStore.getOrderCreatedEmailTemplate().toString();
 		String orderCreatedEmailSubject = shoppingStore.getOrderCreatedEmailSubject();
 		String orderCreatedEmailFromAddress = shoppingStore.getOrderCreatedEmailFromAddress();
+		
 		if(Validator.isNull(orderCreatedEmailTemplate) || Validator.isNull(orderCreatedEmailSubject) || Validator.isNull(orderCreatedEmailFromAddress)){
-			throw new StoreConfigurationException("Email Configuration missing");
+			throw new StoreConfigurationException("Email Configuration missing "
+					+ "[EMAIL_TEMPLATE: '"+(Validator.isNull(orderCreatedEmailTemplate)?"null":"not null")
+					+"', EMAIL_SUBJECT:'"+(Validator.isNull(orderCreatedEmailSubject)?"null":"not null")
+					+"', EMAIL_FROM_ADDRESS:'"+(Validator.isNull(orderCreatedEmailFromAddress)?"null":"not null")+"',]");
+			
+			
 		}
 
 		List<ShoppingOrderItem> shoppingOrderItems = ShoppingOrderItemLocalServiceUtil.findByShoppingOrderId(shoppingOrder.getShoppingOrderId());		

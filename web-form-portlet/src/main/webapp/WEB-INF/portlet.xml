@@ -29,9 +29,9 @@
 		</supports>
 		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
-			<title>Web Form</title>
+			<title>Contact Fom</title>
 			<short-title>Web Form</short-title>
-			<keywords>Web Form</keywords>
+			<keywords>Contact Form</keywords>
 		</portlet-info>
 		<portlet-preferences>
 			<preference>

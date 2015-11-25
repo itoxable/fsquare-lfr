@@ -65,7 +65,6 @@ String fieldWrapperStyleClass = PrefsParamUtil.getString(portletPreferences, ren
 
 
 boolean countrySelect = PrefsParamUtil.getBoolean(portletPreferences, renderRequest, "countrySelect" + formFieldsIndex);
-boolean nsgOrganisation = PrefsParamUtil.getBoolean(portletPreferences, renderRequest, "nsgOrganisation" + formFieldsIndex);
 
 String onAddressSelect = PrefsParamUtil.getString(portletPreferences, renderRequest, "onAddressSelect" + formFieldsIndex);
 String fieldDataHelper = PrefsParamUtil.getString(portletPreferences, renderRequest, "fieldDataHelper" + formFieldsIndex);
@@ -251,7 +250,6 @@ String fieldName = PrefsParamUtil.getString(portletPreferences, renderRequest, "
 				
 				<div class='available-lists <%= fieldType.equals("paragraph")? " hide" : StringPool.BLANK %>' style="margin-top: 10px;">
 					<aui:input style="line-height: 10px;" cssClass="country-select" label="country-select" name='<%= "countrySelect" + index %>' type="checkbox" value="<%= countrySelect %>" data-helper="<%= index %>"/>
-					<aui:input style="line-height: 10px;" cssClass="nsg-organisation-select" label="nsg-organisation-select" name='<%= "nsgOrganisation" + index %>' type="checkbox" value="<%= nsgOrganisation%>" data-helper="<%= index %>"/>
 				</divf>
 			</dd>
 		</dl>

@@ -22,7 +22,5 @@ List<ShoppingShippingMethod> availableShoppingShippingMethodList = shoppingOrder
 ShoppingShippingMethod shoppingShippingMethod = shoppingOrderProcessWrapper.getShoppingShippingMethod();
 
 boolean isCartEmpty = (shoppingOrderItemMap == null || shoppingOrderItemMap.isEmpty());
-// System.out.println("isCartEmpty: "+isCartEmpty);
-// System.out.println("shoppingOrderItemMap == null: "+shoppingOrderItemMap == null);
-// System.out.println("shoppingOrderItemMap.isEmpty(): "+shoppingOrderItemMap.isEmpty());
+
 %>

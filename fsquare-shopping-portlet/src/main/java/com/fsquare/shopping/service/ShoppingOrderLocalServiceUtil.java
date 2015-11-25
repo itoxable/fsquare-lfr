@@ -274,6 +274,11 @@ public class ShoppingOrderLocalServiceUtil {
         return getService().getOrderTotal(shoppingOrderItemList);
     }
 
+    public static int getOrderItemsCount(
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList) {
+        return getService().getOrderItemsCount(shoppingOrderItemList);
+    }
+
     public static void clearService() {
         _service = null;
     }

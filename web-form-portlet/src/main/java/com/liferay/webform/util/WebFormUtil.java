@@ -51,10 +51,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletPreferences;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
-
 /**
  * @author Daniel Weisser
  * @author Jorge Ferrer
@@ -245,78 +241,78 @@ public class WebFormUtil {
 		return nodeValues.toArray(new String[nodeValues.size()]);
 	}
 
-	public static boolean validate(
-			String currentFieldValue, Map<String, String> fieldsMap,
-			String validationScript)
-		throws Exception {
-
-		boolean validationResult = false;
-
-		Context context = Context.enter();
-
-		StringBundler sb = new StringBundler();
-
-		sb.append("currentFieldValue = String('");
-		sb.append(HtmlUtil.escapeJS(currentFieldValue));
-		sb.append("');\n");
-
-		sb.append("var fieldsMap = {};\n");
-
-		for (String key : fieldsMap.keySet()) {
-			sb.append("fieldsMap['");
-			sb.append(key);
-			sb.append("'] = '");
-
-			String value = StringUtil.replace(
-				fieldsMap.get(key), new String[] {"\r\n", "\r", "\n"},
-				new String[] {"\\n", "\\n", "\\n"});
-
-			sb.append(HtmlUtil.escapeJS(value));
-			sb.append("';\n");
-		}
-
-		sb.append("function validation(currentFieldValue, fieldsMap) {\n");
-		sb.append(validationScript);
-		sb.append("}\n");
-		sb.append("internalValidationResult = ");
-		sb.append("validation(currentFieldValue, fieldsMap);");
-
-		String script = sb.toString();
-
-		try {
-			Scriptable scope = context.initStandardObjects();
-
-			Object jsFieldsMap = Context.javaToJS(fieldsMap, scope);
-
-			ScriptableObject.putProperty(scope, "jsFieldsMap", jsFieldsMap);
-
-			context.evaluateString(scope, script, "Validation Script", 1, null);
-
-			Object obj = ScriptableObject.getProperty(
-				scope, "internalValidationResult");
-
-			if (obj instanceof Boolean) {
-				validationResult = (Boolean)obj;
-			}
-			else {
-				throw new Exception("The script must return a boolean value");
-			}
-		}
-		catch (Exception e) {
-			String msg =
-				"The following script has execution errors:\n" +
-					validationScript + "\n" + e.getMessage();
-
-			_log.error(msg);
-
-			throw new Exception(msg, e);
-		}
-		finally {
-			Context.exit();
-		}
-
-		return validationResult;
-	}
+//	public static boolean validate(
+//			String currentFieldValue, Map<String, String> fieldsMap,
+//			String validationScript)
+//		throws Exception {
+//
+//		boolean validationResult = false;
+//
+//		Context context = Context.enter();
+//
+//		StringBundler sb = new StringBundler();
+//
+//		sb.append("currentFieldValue = String('");
+//		sb.append(HtmlUtil.escapeJS(currentFieldValue));
+//		sb.append("');\n");
+//
+//		sb.append("var fieldsMap = {};\n");
+//
+//		for (String key : fieldsMap.keySet()) {
+//			sb.append("fieldsMap['");
+//			sb.append(key);
+//			sb.append("'] = '");
+//
+//			String value = StringUtil.replace(
+//				fieldsMap.get(key), new String[] {"\r\n", "\r", "\n"},
+//				new String[] {"\\n", "\\n", "\\n"});
+//
+//			sb.append(HtmlUtil.escapeJS(value));
+//			sb.append("';\n");
+//		}
+//
+//		sb.append("function validation(currentFieldValue, fieldsMap) {\n");
+//		sb.append(validationScript);
+//		sb.append("}\n");
+//		sb.append("internalValidationResult = ");
+//		sb.append("validation(currentFieldValue, fieldsMap);");
+//
+//		String script = sb.toString();
+//
+//		try {
+//			Scriptable scope = context.initStandardObjects();
+//
+//			Object jsFieldsMap = Context.javaToJS(fieldsMap, scope);
+//
+//			ScriptableObject.putProperty(scope, "jsFieldsMap", jsFieldsMap);
+//
+//			context.evaluateString(scope, script, "Validation Script", 1, null);
+//
+//			Object obj = ScriptableObject.getProperty(
+//				scope, "internalValidationResult");
+//
+//			if (obj instanceof Boolean) {
+//				validationResult = (Boolean)obj;
+//			}
+//			else {
+//				throw new Exception("The script must return a boolean value");
+//			}
+//		}
+//		catch (Exception e) {
+//			String msg =
+//				"The following script has execution errors:\n" +
+//					validationScript + "\n" + e.getMessage();
+//
+//			_log.error(msg);
+//
+//			throw new Exception(msg, e);
+//		}
+//		finally {
+//			Context.exit();
+//		}
+//
+//		return validationResult;
+//	}
 	
 	public static String leftHandPad(String _target, char padChar, int targetLength){
         String target = _target;

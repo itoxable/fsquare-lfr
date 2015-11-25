@@ -45,6 +45,14 @@ public class ShoppingOrderLocalServiceImpl
 		return total;
 	}
 	
+	public int getOrderItemsCount(Collection<ShoppingOrderItem> shoppingOrderItemList){
+		int total = 0;
+		for(ShoppingOrderItem shoppingOrderItem: shoppingOrderItemList){
+			total = total + shoppingOrderItem.getQuantity();
+		}
+		return total;
+	}
+	
 //	public ShoppingOrder setOrderTotal(ShoppingOrder shoppingOrder, Collection<ShoppingOrderItem> shoppingOrderItemList){
 //		shoppingOrder.setTotalPrice(totalPrice);
 //		return shoppingOrder;

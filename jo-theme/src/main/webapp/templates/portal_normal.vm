@@ -45,33 +45,25 @@
 							
 								#if (!$is_signed_in)
 									<a data-redirect="$is_login_redirect_required" href="$sign_in_url" rel="nofollow">$sign_in_text</a>
+								#else
+									<a data-redirect="$is_login_redirect_required" href="$sign_out_url" rel="nofollow"><span class="icon-off" style="margin-right: 2px;"></span>$sign_out_text</a>
 								#end
-							
-								#set ($VOID = $velocityPortletPreferences.setValue('portletSetupShowBorders', 'false'))
-								$theme.runtime("minicart_WAR_fsquareshoppingportlet", "", $velocityPortletPreferences.toString())
-								$velocityPortletPreferences.reset()
-<!-- 								<div style="clear: both;"></div> -->
+								<div class="cart-place">
+									#set ($VOID = $velocityPortletPreferences.setValue('portletSetupShowBorders', 'false'))
+									$theme.runtime("minicart_WAR_fsquareshoppingportlet", "", $velocityPortletPreferences.toString())
+									$velocityPortletPreferences.reset()
+								</div>
 							</div>
 							<div id="heading">
-								<h1 class="site-title">
-									<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
+								<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
 <!-- 										<img alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" /> -->
-										<div id="logo">Joey Walton</div>
-										#if ($show_site_name)
-											<span class="site-name" title="#language_format ("go-to-x", [$site_name])">
-												$site_name
-											</span>
-										#end
-									</a>
-					
-								</h1>
-					
-								<h2 class="page-title">
-									<span>$the_title</span>
-								</h2>
-								
-								
-								
+									<span id="logo">Joey Walton</span>
+									#if ($show_site_name)
+										<span class="site-name" title="#language_format ("go-to-x", [$site_name])">
+											$site_name
+										</span>
+									#end
+								</a>
 								
 							</div>
 					
@@ -107,31 +99,18 @@
 					<div class="row">
 						<footer id="footer" role="contentinfo">
 							<div class="social">
-								<a class="facebook" href="" target="_blank">
-									<img width="20" src="$images_folder/social/facebook.svg">
-									<img class="hover" width="20" src="$images_folder/social/facebook-hover.svg">
+								<a class="fa fa-facebook" href="" target="_blank">
 								</a>
-								<a class="twitter" href="//twitter.com/WithingsUK" target="_blank">
-									<img width="20" src="$images_folder/social/twitter.svg">
-									<img class="hover" width="20" src="$images_folder/social/twitter-hover.svg">
+								<a class="fa fa-twitter" href="" target="_blank">
 								</a>
-								<a class="c2" href="//plus.google.com/+withings" target="_blank">
-									<img width="20" src="$images_folder/social/google-plus.svg">
-									<img class="hover" width="20" src="$images_folder/social/google-plus-hover.svg">
+								<a class="fa fa-google-plus" href="" target="_blank">
 								</a>
-								<a class="c3" href="//youtube.com/user/withingsFR" target="_blank">
-									<img width="20" src="$images_folder/social/youtube.svg">
-									<img class="hover" width="20" src="$images_folder/social/youtube-hover.svg">
+								<a class="fa fa-instagram" href="" target="_blank">
 								</a>
-								<a class="c4" href="//instagram.com/withings" target="_blank">
-									<img width="20" src="$images_folder/social/instagram.png">
-									<img class="hover" width="20" src="$images_folder/social/instagram-hover.svg">
+								<a class="fa fa-pinterest" href="" target="_blank">
 								</a>
-								<a class="c4" href="https://www.linkedin.com/company/withings" target="_blank">
-									<img width="20" src="$images_folder/social/linkedin.png">
-									<img class="hover" width="20" src="$images_folder/social/linkedin-hover.png">
+								<a class="fa fa-linkedin" href="" target="_blank">
 								</a>
-								<br><br>
 							</div>
 							#if (!$is_signed_in)
 								<a data-redirect="$is_login_redirect_required" href="$sign_in_url" rel="nofollow">$sign_in_text</a>

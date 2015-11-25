@@ -59,13 +59,13 @@ String submitButtonLabel = LocalizationUtil.getLocalization(submitButtonLabelXml
 String saveButtonLabelXml = LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "saveButtonLabelXml");
 String saveButtonLabel = LocalizationUtil.getLocalization(saveButtonLabelXml, themeDisplay.getLanguageId());
 
-boolean isWizard = GetterUtil.getBoolean(portletPreferences.getValue("isWizard", StringPool.BLANK));
-String wizardNrSteps = portletPreferences.getValue("wizardNrSteps", StringPool.BLANK);
-int nrSteps = 1;
+// boolean isWizard = GetterUtil.getBoolean(portletPreferences.getValue("isWizard", StringPool.BLANK));
+// String wizardNrSteps = portletPreferences.getValue("wizardNrSteps", StringPool.BLANK);
+// int nrSteps = 1;
 
-if(wizardNrSteps != null && wizardNrSteps!= ""){
-	nrSteps = Integer.parseInt(wizardNrSteps);
-}
+// if(wizardNrSteps != null && wizardNrSteps!= ""){
+// 	nrSteps = Integer.parseInt(wizardNrSteps);
+// }
 
 // boolean showSuccessTextOnly = GetterUtil.getBoolean(portletPreferences.getValue("showSuccessTextOnly", StringPool.BLANK));
 // boolean showSuccessTextReadonlyFields = GetterUtil.getBoolean(portletPreferences.getValue("showSuccessTextReadonlyFields", StringPool.BLANK));
@@ -111,12 +111,12 @@ boolean isPostToURL = GetterUtil.getBoolean(portletPreferences.getValue("isPostT
 						<aui:input cssClass="lfr-input-text-container" label="redirect-url-on-success" name="preferences--successURL--" value="<%= HtmlUtil.toInputSafe(successURL) %>" />
 					</aui:fieldset>
 					
-					<aui:fieldset cssClass="handle-data" label="isWizard">
-						<aui:input name="preferences--isWizard--" type="checkbox" value="<%= isWizard %>" />
-						<aui:fieldset id="wizard_details" cssClass='<%=isWizard?StringPool.BLANK:"hide" %>'>
-							<aui:input cssClass="lfr-input-text-container" label="wizard-steps" name="preferences--wizardNrSteps--" value="<%= wizardNrSteps %>"  />
-						</aui:fieldset>
-					</aui:fieldset>
+<%-- 					<aui:fieldset cssClass="handle-data" label="isWizard"> --%>
+<%-- 						<aui:input name="preferences--isWizard--" type="checkbox" value="<%= isWizard %>" /> --%>
+<%-- 						<aui:fieldset id="wizard_details" cssClass='<%=isWizard?StringPool.BLANK:"hide" %>'> --%>
+<%-- 							<aui:input cssClass="lfr-input-text-container" label="wizard-steps" name="preferences--wizardNrSteps--" value="<%= wizardNrSteps %>"  /> --%>
+<%-- 						</aui:fieldset> --%>
+<%-- 					</aui:fieldset> --%>
 					
 				</liferay-ui:panel>
 		
@@ -266,80 +266,99 @@ boolean isPostToURL = GetterUtil.getBoolean(portletPreferences.getValue("isPostT
 					</c:if>
 				</liferay-ui:panel>
 				
-					
-					<% 
-					int index = 1;
-					for(int stepIndex = 0; stepIndex < nrSteps; stepIndex++) {
-						if(nrSteps > 1){
-							titleXml = LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "title" + stepIndex);
-							descriptionXml = LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "description" + stepIndex);
-						}
-					
-					%>
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='<%= "webFormFields"+stepIndex %>' persistState="<%= true %>" title='<%= nrSteps<2?"form-fields":"form-fields-step-" + (stepIndex+1) %>'>
-							
-							<c:if test="<%= nrSteps > 1 %>">
-								<aui:field-wrapper cssClass="lfr-input-text-container" label="title">
-									<liferay-ui:input-localized name='<%= "title" + stepIndex %>' xml="<%= titleXml %>" />
-								</aui:field-wrapper>
-								<aui:field-wrapper cssClass="lfr-textarea-container" label="description">
-									<liferay-ui:input-localized name='<%= "description" + stepIndex %>' type="textarea" xml="<%= descriptionXml %>" />
-								</aui:field-wrapper>
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="webFormFields" persistState="<%= true %>" title="form-fields">
+					<aui:fieldset cssClass="rows-container webFields">
+						<c:if test="<%= fieldsEditingDisabled %>">
+							<div class="alert">
+								<liferay-ui:message key="there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields" />
+							</div>
+		
+							<c:if test="<%= layoutTypePortlet.hasPortletId(portletResource) %>">
+								<liferay-portlet:resourceURL portletName="<%= portletResource %>" var="exportURL">
+									<portlet:param name="<%= Constants.CMD %>" value="export" />
+								</liferay-portlet:resourceURL>
+		
+								<%
+								String taglibExport = "submitForm(document.hrefFm, '" + exportURL + "', false);";
+								%>
+		
+								<aui:button onClick="<%= taglibExport %>" value="export-data" />
+		
+								<liferay-portlet:actionURL portletName="<%= portletResource %>" var="deleteURL">
+									<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="deleteData" />
+									<portlet:param name="redirect" value="<%= currentURL %>" />
+								</liferay-portlet:actionURL>
+		
+								<%
+								String taglibDelete = "submitForm(document." + renderResponse.getNamespace() + "fm, '" + deleteURL + "');";
+								%>
+		
+								<aui:button onClick="<%= taglibDelete %>" value="delete-data" />
 							</c:if>
-							
-							
-							<div class='<%= "webFields"+stepIndex %>'>
-							
-								<aui:fieldset cssClass='rows-container webFields'>
-									<%
-									String formFieldsIndexesParam = ParamUtil.getString(renderRequest, "formFieldsIndexes"+stepIndex) ;
-									
-									int[] formFieldsIndexes = null;
 		
-									if (Validator.isNotNull(formFieldsIndexesParam)) {
-										formFieldsIndexes = StringUtil.split(formFieldsIndexesParam, 0);
-									}
-									else {
-										
-										formFieldsIndexesParam = portletPreferences.getValue("wizardStepFields"+stepIndex, StringPool.BLANK);
+							<br /><br />
+						</c:if>
 		
-										if(formFieldsIndexesParam == null || formFieldsIndexesParam.equals("")){
-											formFieldsIndexesParam = ""+index;
-										}
-										formFieldsIndexes = StringUtil.split(formFieldsIndexesParam, 0);
-										
-									}
-									%>
-									<c:if test="<%= fieldsEditingDisabled %>">
-										<aui:input name='<%= "formFieldsIndexes"+stepIndex %>' type="hidden" value="<%= formFieldsIndexesParam %>" />
-									</c:if>
-									<%
-									
-									for (int formFieldsIndex : formFieldsIndexes) {
-										
-										request.setAttribute("configuration.jsp-index", String.valueOf(index));
-										request.setAttribute("configuration.jsp-formFieldsIndex", String.valueOf(formFieldsIndex));
-										request.setAttribute("configuration.jsp-fieldsEditingDisabled", String.valueOf(fieldsEditingDisabled));
-										request.setAttribute("configuration.jsp-wizardStep", String.valueOf(stepIndex));
-									%>	
-									
-										<div class="lfr-form-row" id="<portlet:namespace/>fieldset<%= formFieldsIndex %>">
-											<div class="row-fields">
-												<liferay-util:include page="/edit_field.jsp" servletContext="<%= application %>" />
-											</div>
-										</div>
-									
-									<%
-										index++;
-									}
-									
-									%>
-									
-								</div>
-							</aui:fieldset>
-						</liferay-ui:panel>
+						<aui:input name="updateFields" type="hidden" value="<%= !fieldsEditingDisabled %>" />
+		
+						<%
+						String formFieldsIndexesParam = ParamUtil.getString(renderRequest, "formFieldsIndexes") ;
+		
+						int[] formFieldsIndexes = null;
+		
+						if (Validator.isNotNull(formFieldsIndexesParam)) {
+							formFieldsIndexes = StringUtil.split(formFieldsIndexesParam, 0);
+						}
+						else {
+							formFieldsIndexes = new int[0];
+		
+							for (int i = 1; true; i++) {
+								String fieldLabel = PrefsParamUtil.getString(portletPreferences, request, "fieldLabel" + i);
+		
+								if (Validator.isNull(fieldLabel)) {
+									break;
+								}
+								
+								formFieldsIndexesParam = ((formFieldsIndexesParam != null && !formFieldsIndexesParam.equals(""))?formFieldsIndexesParam+",":"")+i;
+								
+								formFieldsIndexes = ArrayUtil.append(formFieldsIndexes, i);
+							}
+		
+							if (formFieldsIndexes.length == 0) {
+								formFieldsIndexes = ArrayUtil.append(formFieldsIndexes, -1);
+							}
+						}
+		
+						int index = 1;
+		
+						%>
 						
-					<% } %>
+						<c:if test="<%= fieldsEditingDisabled %>">
+							<aui:input name='<%= "formFieldsIndexes" %>' type="hidden" value="<%= formFieldsIndexesParam %>" />
+						</c:if>
+						
+						<%
+						
+						for (int formFieldsIndex : formFieldsIndexes) {
+							request.setAttribute("configuration.jsp-index", String.valueOf(index));
+							request.setAttribute("configuration.jsp-formFieldsIndex", String.valueOf(formFieldsIndex));
+							request.setAttribute("configuration.jsp-fieldsEditingDisabled", String.valueOf(fieldsEditingDisabled));
+						%>
+		
+							<div class="lfr-form-row" id="<portlet:namespace/>fieldset<%= formFieldsIndex %>">
+								<div class="row-fields">
+									<liferay-util:include page="/edit_field.jsp" servletContext="<%= application %>" />
+								</div>
+							</div>
+		
+						<%
+							index++;
+						}
+						%>
+		
+					</aui:fieldset>
+				</liferay-ui:panel>
+							
 				
 				</liferay-ui:panel-container>
 		
@@ -505,16 +524,16 @@ boolean isPostToURL = GetterUtil.getBoolean(portletPreferences.getValue("isPostT
 					}
 				}
 			};
-			var toggleWizardSteps = function(event) {
-				var checkbox = A.one(this);
-				if (checkbox) {
-					if(checkbox.previous().val() == 'true'){
-						A.one('#<portlet:namespace />wizard_details').show();
-					}else{
-						A.one('#<portlet:namespace />wizard_details').hide();
-					}
-				}
-			};
+// 			var toggleWizardSteps = function(event) {
+// 				var checkbox = A.one(this);
+// 				if (checkbox) {
+// 					if(checkbox.previous().val() == 'true'){
+// 						A.one('#<portlet:namespace />wizard_details').show();
+// 					}else{
+// 						A.one('#<portlet:namespace />wizard_details').hide();
+// 					}
+// 				}
+// 			};
 			
 			var toggleSendAsEmail = function(event) {
 				var checkbox = A.one(this);
@@ -550,7 +569,7 @@ boolean isPostToURL = GetterUtil.getBoolean(portletPreferences.getValue("isPostT
 			
 			A.one('#<portlet:namespace />sendAckCheckbox').on('click', toggleSendAckEmail);
 			A.one('#<portlet:namespace />saveToFileCheckbox').on('click', toggleSaveToFile);
-			A.one('#<portlet:namespace />isWizardCheckbox').on('click', toggleWizardSteps);
+// 			A.one('#<portlet:namespace />isWizardCheckbox').on('click', toggleWizardSteps);
 			A.one('#<portlet:namespace />sendAsEmailCheckbox').on('click', toggleSendAsEmail);
 			A.one('#<portlet:namespace />saveTempEnableCheckbox').on('click', toggleSaveTemp);
 			A.one('#<portlet:namespace />isPostToURLCheckbox').on('click', togglePostToURL);
@@ -560,44 +579,39 @@ boolean isPostToURL = GetterUtil.getBoolean(portletPreferences.getValue("isPostT
 			</liferay-portlet:renderURL>
 			
 			
-			<% for(int stepIndex = 0; stepIndex < nrSteps; stepIndex++) { %>
-				var stepIndex = '<%= stepIndex %>';
+			var webFields = A.one('.webFields');
+	
+			webFields.all('select').each(toggleOptions);
+			webFields.delegate('click', toggleAdvancedSettingsBox, '.advanced-settings-link');
+			webFields.delegate('click', toggleCountrySelect, '.country-select');
+			
+			<c:if test="<%= !fieldsEditingDisabled %>">
+				webFields.delegate(['change', 'click', 'keydown'], toggleOptions, 'select');
 				
-				var webFields = A.one('<%= ".webFields"+stepIndex %> .webFields');
+				webFields.delegate(
+					'change',
+					function(event) {
+						var input = event.currentTarget;
+						var row = input.ancestor('.field-row');
+						var label = row.one('.field-title');
 		
-				webFields.all('select').each(toggleOptions);
-				webFields.delegate('click', toggleAdvancedSettingsBox, '.advanced-settings-link');
-				webFields.delegate('click', toggleCountrySelect, '.country-select');
-				webFields.delegate('click', toggleCountrySelect, '.nsg-organisation-select');
-				
-				<c:if test="<%= !fieldsEditingDisabled %>">
-					webFields.delegate(['change', 'click', 'keydown'], toggleOptions, 'select');
-					
-					webFields.delegate(
-						'change',
-						function(event) {
-							var input = event.currentTarget;
-							var row = input.ancestor('.field-row');
-							var label = row.one('.field-title');
-			
-							if (label) {
-								label.html(input.get('value'));
-							}
-						},
-						'.label-name input'
-					);
-			
-					new Liferay.AutoFields(
-						{
-							contentBox: webFields,
-							fieldIndexes: '<portlet:namespace />formFieldsIndexes'+stepIndex,
-							sortable: true,
-							sortableHandle: '.field-label',
-							url: '<%= editFieldURL %>'
+						if (label) {
+							label.html(input.get('value'));
 						}
-					).render();
-				</c:if>	
-			<% } %>
+					},
+					'.label-name input'
+				);
+		
+				new Liferay.AutoFields(
+					{
+						contentBox: webFields,
+						fieldIndexes: '<portlet:namespace />formFieldsIndexes',
+						sortable: true,
+						sortableHandle: '.field-label',
+						url: '<%= editFieldURL %>'
+					}
+				).render();
+			</c:if>	
 			
 		</aui:script>
 	</liferay-ui:section>

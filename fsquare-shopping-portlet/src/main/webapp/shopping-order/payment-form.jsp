@@ -24,13 +24,13 @@ int thisYear = cal.get(Calendar.YEAR);
 <aui:form id='checkout-payment-form'  name="checkout-payment-form">
 
 	<aui:fieldset cssClass="payment-test-fields-wrap" label="billing-address">
-		<aui:input name="billingCardHolderName" type="text" value="" placeholder="Card Holder Name"/>
-		<aui:input name="billingStreet" type="text" value="" placeholder="Street"/>
-		<aui:input name="billingStreet2" type="text" value="" placeholder="Street (line 2)"/>
-		<aui:input name="billingCity" type="text" value="" placeholder=""/>
-		<aui:input name="billingPostCode" type="text" value="" placeholder=""/>
+		<aui:input name="billingCardHolderName" type="text" data-stripe="name" placeholder="Card Holder Name"/>
+		<aui:input name="billingStreet" type="text" data-stripe="address_line1" placeholder="Street"/>
+		<aui:input name="billingStreet2" type="text" data-stripe="address_line2" placeholder="Street (line 2)"/>
+		<aui:input name="billingCity" type="text" data-stripe="address_city" placeholder=""/>
+		<aui:input name="billingPostCode" type="text" data-stripe="address_zip" placeholder=""/>
 		<aui:input name="billingStateProvince" type="text" value="" placeholder=""/>
-		<aui:select name="billingCountry" label="country" >
+		<aui:select name="billingCountry" label="country" data-stripe="address_country">
 			<% for(Country country: countries) {%>
 				<aui:option selected="<%= country.getA2().equalsIgnoreCase(locale.getCountry()) %>" value="<%= country.getA2() %>" label="<%= country.getName(locale) %>"></aui:option>
 			<% } %>

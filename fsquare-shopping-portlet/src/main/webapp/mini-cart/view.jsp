@@ -31,7 +31,7 @@ ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.ge
 
 Map<String, ShoppingOrderItem> shoppingOrderItemMap = shoppingOrderProcessWrapper.getShoppingOrderItemMap();
 
-int quantity = 0;
+int quantity = shoppingOrderProcessWrapper.getTotalItems();
 
 shoppingOrderProcessWrapper.getTotalNoShipping();
 
@@ -49,10 +49,10 @@ NavItem checkoutPageNavItem = new NavItem(request, checkoutPageLayout, null);
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_ADD_TO_CART %>" />
 </liferay-portlet:resourceURL>
 
-<a href="<%= cartPageNavItem.getURL() %>" id="<portlet:namespace />shopping-cart-link" class="shopping-cart-link" style='<%= quantity==0?"display:none":""%>'>
+<a href="<%= cartPageNavItem.getURL() %>" id="<portlet:namespace />shopping-cart-link" class="shopping-cart-link" >
 	<span class="fa fa-shopping-cart cart-icon"></span>
 	<span>Cart</span>
-	<span id="<portlet:namespace />cart-size">(<%=quantity %>)</span>
+	<span style='<%= quantity==0?"display:none":""%>' id="<portlet:namespace />cart-size">(<%=quantity %>)</span>
 </a>
 
 <aui:script use="aui-base,selector-css3,aui-io-request">
@@ -74,7 +74,7 @@ NavItem checkoutPageNavItem = new NavItem(request, checkoutPageLayout, null);
 							if(response.redirect){
 								window.location.href = '<%= cartPageNavItem.getRegularURL() %>';
 							}else{
-								A.one('#<portlet:namespace />shopping-cart-link').setStyle('display', 'block');
+								A.one('#<portlet:namespace />cart-size').setStyle('display', 'block');
 							}
                       	}
                       		

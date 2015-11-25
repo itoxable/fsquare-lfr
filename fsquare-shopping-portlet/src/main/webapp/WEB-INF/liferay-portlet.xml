@@ -47,6 +47,11 @@
 		<icon>/shopping-store/icon.png</icon>
 		<struts-path>shoppingstore</struts-path>
 		<configuration-action-class>com.fsquare.shopping.portlet.shoppingstore.action.ConfigurationActionImpl</configuration-action-class>
+		
+		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
+		<friendly-url-mapping>shopping-store</friendly-url-mapping>
+		<friendly-url-routes>com/fsquare/shopping/portlet/shopping-store-friendly-url-routes.xml</friendly-url-routes>
+		
 <!-- 		<control-panel-entry-category>site_administration.shopping</control-panel-entry-category> -->
 <!--     	<control-panel-entry-weight>1.0</control-panel-entry-weight> -->
 		<preferences-company-wide>true</preferences-company-wide>
@@ -75,6 +80,7 @@
 		<icon>/shopping-shipping-management/icon.png</icon>
 		<struts-path>shopping-shipping-management</struts-path>
 		<configuration-action-class>com.fsquare.shopping.portlet.shoppingshippingmanagement.action.ConfigurationActionImpl</configuration-action-class>
+		
 <!-- 		<control-panel-entry-category>site_administration.shopping</control-panel-entry-category> -->
 <!--     	<control-panel-entry-weight>3.0</control-panel-entry-weight> -->
 		<preferences-company-wide>true</preferences-company-wide>
