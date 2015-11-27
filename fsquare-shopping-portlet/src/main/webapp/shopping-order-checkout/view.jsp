@@ -53,7 +53,7 @@ if(shoppingStore.getIntegrateWithStripe() && !isCartEmpty){
 				<div class="checkout-panel" id='<portlet:namespace />checkout-panel-address'>
 					<div class="checkout-panel-title"><h3>Shipping address</h3><a class="checkout-edit-button" data-step="1" >edit</a></div>
 					<div id='<portlet:namespace />shipping-address-wrapper' class="checkout-item-wrapper">
-						<jsp:include page="/shopping-order/address-form.jsp" />
+						<jsp:include page="address-form.jsp" />
 					</div>
 				</div>
 				
@@ -72,7 +72,7 @@ if(shoppingStore.getIntegrateWithStripe() && !isCartEmpty){
 			<div class="span5">
 				<div class="checkout-panel" id='<portlet:namespace />checkout-order-summary'>
 				<div class="checkout-panel-title"><h3>Summary</h3></div>
-					<jsp:include page="/shopping-order/order_summary.jsp" />
+					<jsp:include page="order_summary.jsp" />
 				</div>
 			</div>
 		</div>

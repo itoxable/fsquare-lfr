@@ -3,7 +3,7 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="com.fsquare.shopping.model.ShoppingCoupon"%>
-<%@ include file="../init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="com.fsquare.shopping.portlet.util.ShoppingPortletUtil"%>

@@ -4,7 +4,7 @@
 <liferay-portlet-app>
 	
 	<portlet>
-		<portlet-name>minicart</portlet-name>
+		<portlet-name>mini-cart</portlet-name>
 		<icon>/mini-cart/icon.png</icon>
 		<struts-path>minicart</struts-path>
 		<configuration-action-class>com.fsquare.shopping.portlet.minicart.action.ConfigurationActionImpl</configuration-action-class>
@@ -20,17 +20,17 @@
 	</portlet>
 	
 	<portlet>
-		<portlet-name>shoppingorder</portlet-name>
-		<icon>/shopping-order/icon.png</icon>
-		<configuration-action-class>com.fsquare.shopping.portlet.shoppingorder.action.ConfigurationActionImpl</configuration-action-class>
+		<portlet-name>shopping-order-checkout</portlet-name>
+		<icon>/shopping-order-checkout/icon.png</icon>
+		<configuration-action-class>com.fsquare.shopping.portlet.shoppingordercheckout.action.ConfigurationActionImpl</configuration-action-class>
 		<preferences-company-wide>true</preferences-company-wide>
 		<instanceable>false</instanceable>
-		<header-portlet-css>/shopping-order/css/main.css</header-portlet-css>
-		<footer-portlet-javascript>/shopping-order/js/main.js</footer-portlet-javascript>
+		<header-portlet-css>/shopping-order-checkout/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>/shopping-order-checkout/js/main.js</footer-portlet-javascript>
 	</portlet>
 	
 	<portlet>
-		<portlet-name>cartview</portlet-name>
+		<portlet-name>cart-view</portlet-name>
 		<icon>/cart-view/icon.png</icon>
 		<struts-path>cart</struts-path>
 		<configuration-action-class>com.fsquare.shopping.portlet.cartview.action.ConfigurationActionImpl</configuration-action-class>
@@ -43,7 +43,7 @@
 	</portlet>
 	
 	<portlet>
-		<portlet-name>shoppingstore</portlet-name>
+		<portlet-name>shopping-store</portlet-name>
 		<icon>/shopping-store/icon.png</icon>
 		<struts-path>shoppingstore</struts-path>
 		<configuration-action-class>com.fsquare.shopping.portlet.shoppingstore.action.ConfigurationActionImpl</configuration-action-class>

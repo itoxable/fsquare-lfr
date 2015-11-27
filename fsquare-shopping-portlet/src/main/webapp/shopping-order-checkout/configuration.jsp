@@ -1,4 +1,4 @@
-<%@ include file="/shopping-order/init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 

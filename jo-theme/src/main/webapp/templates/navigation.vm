@@ -1,3 +1,6 @@
+
+
+
 <nav class="$nav_css_class navbar site-navigation" id="navigation" role="navigation">
 	<div class="navbar-inner">
 		<div class="collapse nav-collapse">
@@ -50,4 +53,8 @@
 
 <script>
 	Liferay.Data.NAV_LIST_SELECTOR = '.navbar-inner .nav-collapse > ul';
+	$('#menu-toggle').click(function(){
+		$('#navigation').toggleClass('open')
+	})
+	
 </script>

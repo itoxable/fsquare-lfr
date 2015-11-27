@@ -74,7 +74,11 @@
   .row-fluid [class*="offset"]:first-child {
     margin-left: 0;
   }
-
+  
+  // Input grid
+  @include grid-fluid-span-xs-x($gridColumns, $fluidGridColumnWidth767, $fluidGridGutterWidth767);
+  
+ 
   // FORM FIELDS
   // -----------
   // Make span* classes full width

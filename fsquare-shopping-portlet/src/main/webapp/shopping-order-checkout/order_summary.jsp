@@ -19,7 +19,7 @@
 <%@page import="com.fsquare.shopping.ShoppingUtil"%>
 <%@page import="com.liferay.portlet.journal.service.JournalArticleServiceUtil"%>
 <%@page import="com.liferay.portlet.journal.model.JournalArticle"%>
-<%@ include file="/shopping-order/init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <%
 

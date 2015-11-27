@@ -23,7 +23,7 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
-<%@ include file="/mini-cart/init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <%
 

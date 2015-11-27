@@ -2,7 +2,7 @@
 
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
 	<portlet>
-		<portlet-name>minicart</portlet-name>
+		<portlet-name>mini-cart</portlet-name>
 		<display-name>Mini cart</display-name>
 		<portlet-class>com.fsquare.shopping.portlet.minicart.MiniCartPortlet</portlet-class>
 		<init-param>
@@ -33,7 +33,7 @@
 	</portlet>
 	
 	<portlet>
-		<portlet-name>cartview</portlet-name>
+		<portlet-name>cart-view</portlet-name>
 		<display-name>Cart View</display-name>
 		<portlet-class>com.fsquare.shopping.portlet.cartview.CartViewPortlet</portlet-class>
 		<init-param>
@@ -64,21 +64,21 @@
 	</portlet>
 	
 	<portlet>
-		<portlet-name>shoppingorder</portlet-name>
-		<display-name>Shopping Order</display-name>
-		<portlet-class>com.fsquare.shopping.portlet.shoppingorder.OrdersPortlet</portlet-class>
+		<portlet-name>shopping-order-checkout</portlet-name>
+		<display-name>Shopping Order Checkout</display-name>
+		<portlet-class>com.fsquare.shopping.portlet.shoppingordercheckout.OrdersPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/shopping-order/view.jsp</value>
+			<value>/shopping-order-checkout/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
 		<portlet-info>
-			<title>Shopping Order</title>
-			<short-title>Shopping Order</short-title>
-			<keywords>Shopping Order</keywords>
+			<title>Shopping Order Checkout</title>
+			<short-title>Order Checkout</short-title>
+			<keywords>Shopping Order Checkout</keywords>
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>
@@ -96,7 +96,7 @@
 	
 	
 	<portlet>
-		<portlet-name>shoppingstore</portlet-name>
+		<portlet-name>shopping-store</portlet-name>
 		<display-name>Shopping Store</display-name>
 		<portlet-class>com.fsquare.shopping.portlet.shoppingstore.StorePortlet</portlet-class>
 		<init-param>

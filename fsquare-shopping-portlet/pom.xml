@@ -17,8 +17,6 @@
 
 	<properties>
 <!-- 		<liferay.home>/Users/ruic/Projects/Geoplace liferay-portal-6.2-ce-ga2</liferay.home> -->
-<!-- 		<liferay.home>/Users/ruic/Projects/jo-liferay-portal-6.2-ce-ga4</liferay.home> -->
-
 	</properties>
 	
 	<build>

@@ -1,3 +1,12 @@
+<%@page import="com.liferay.portlet.asset.model.AssetCategoryConstants"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil"%>
+<%@page import="com.liferay.portlet.asset.model.AssetCategory"%>
+<%@page import="java.util.List"%>
+<%@page import="com.liferay.portal.kernel.util.OrderByComparator"%>
+<%@page import="com.liferay.portal.kernel.dao.orm.QueryUtil"%>
+<%@page import="com.liferay.portlet.asset.model.AssetVocabulary"%>
+<%@page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil"%>
 <%@page import="com.liferay.portal.util.PortalUtil"%>
 <%@page import="javax.portlet.PortletURL"%>
 <%@page import="com.liferay.portal.kernel.portlet.LiferayPortletResponse"%>
@@ -48,6 +57,15 @@
 	AssetRendererFactory assetRendererFactory = (AssetRendererFactory)request.getAttribute("view.jsp-assetRendererFactory");
 	AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
 	
+	List<AssetCategory> assetEntryCategories =  AssetCategoryLocalServiceUtil.getAssetEntryAssetCategories(assetEntry.getEntryId());
+	StringBuilder catFilters = new StringBuilder();
+	for(AssetCategory assetCategory: assetEntryCategories){
+		if(assetCategory.getVocabularyId() == filterVocabularyId){
+			catFilters.append(assetCategory.getName().replaceAll(" ", StringPool.UNDERLINE).toLowerCase()).append(StringPool.SPACE);
+		}
+		
+		
+	}
 	JournalArticleResource journalArticleResource = null;
 	JournalArticle journalArticle = null;
 	
@@ -112,7 +130,10 @@
 	} catch (SystemException e2) {
 		e2.printStackTrace();
 	}
-	
+	List<AssetCategory> assetCategoryList = new ArrayList<AssetCategory>();
+	if(Validator.isNotNull(filterVocabularyId)){
+		assetCategoryList = AssetCategoryLocalServiceUtil.getVocabularyCategories(AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID,filterVocabularyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
 %>
 
 
@@ -130,11 +151,12 @@
 				
 				String[] filtersArr = filterSettings.split(StringPool.SEMICOLON);
 				int index = 1;
-				for(String filter: filtersArr){
-					String[] filterArr = filter.split(StringPool.DASH);
+				for(AssetCategory assetCategory: assetCategoryList){
+					String filter = assetCategory.getName();
+					System.out.println(filter);
 					%>
 				        <span class='<%= index == filtersArr.length?"gallery-filter-last":StringPool.BLANK %>'>
-				        	<a href="javascript:;" class="gallery-filter-item" data-filter=".<%= filterArr.length>1?filterArr[1]:filterArr[0] %>"><%= filterArr[0] %></a>
+				        	<a href="javascript:;" class="gallery-filter-item" data-filter=".<%= assetCategory.getName().replaceAll(" ", StringPool.UNDERLINE).toLowerCase() %>"><%= filter %></a>
 				        </span>
 					<%
 					index++;			
@@ -147,7 +169,7 @@
 	<div class="row media-gallery media-gallery-<%=portletId %>" id='media-gallery-<%=portletId %>'>
 </c:if>
 
-	<div class='<%= layoutColumns + " " + filterType %>' id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>" >
+	<div class='<%= layoutColumns + " " + catFilters.toString() %>' id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>" >
 		<c:if test='<%= assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker()) %>'>
 			<%@ include file="/html/portlet/asset_publisher/display/item_actions.jspf" %>
 		</c:if>

@@ -3,14 +3,12 @@
 
 <display>
 	<category name="category.fsquare.shopping.portlets">
-		<portlet id="minicart" />
-		<portlet id="shoppingorder" />
-		<portlet id="cartview" />
-		<portlet id="shoppingstore" />
+		<portlet id="mini-cart" />
+		<portlet id="shopping-order-checkout" />
+		<portlet id="cart-view" />
+		<portlet id="shopping-store" />
 		<portlet id="shopping-coupon-management" />
 		<portlet id="shopping-shipping-management" />
 		<portlet id="shopping-orders-management" />
-		
-		
 	</category>
 </display>

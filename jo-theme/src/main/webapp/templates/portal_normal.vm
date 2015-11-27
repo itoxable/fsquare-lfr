@@ -13,18 +13,20 @@
 		
 		#js("$javascript_folder/vendor/jquery-1.11.3.min.js")
 		#js("$javascript_folder/vendor/jquery-ui.js")
-		#js("$javascript_folder/vendor/hammer.js")
-		#js("$javascript_folder/vendor/jquery.hammer.js")
-		#js("$javascript_folder/vendor/jquery.mousewheel.min.js")
+<!-- 		#js("$javascript_folder/vendor/hammer.js") -->
+<!-- 		#js("$javascript_folder/vendor/jquery.hammer.js") -->
+<!-- 		#js("$javascript_folder/vendor/jquery.mousewheel.min.js") -->
 		#js("$javascript_folder/vendor/slick.js")
 		#js("$javascript_folder/vendor/isotope.pkgd.js")
 		#js("$javascript_folder/vendor/fit-columns.js")	
-		#js("$javascript_folder/vendor/layzr.js")
-		#js("$javascript_folder/vendor/jquery.sliphover.js")
+<!-- 		#js("$javascript_folder/vendor/layzr.js") -->
+<!-- 		#js("$javascript_folder/vendor/jquery.sliphover.js") -->
 		
 		#set ($js_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$javascript_folder/vendor/jquery.magnific-popup.js")))
 		#js ("$js_file")
-			
+		
+		<link href='//fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+		
 <!-- UI JS file -->
 	</head>
 	
@@ -44,15 +46,19 @@
 							<div class="header-links">
 							
 								#if (!$is_signed_in)
-									<a data-redirect="$is_login_redirect_required" href="$sign_in_url" rel="nofollow">$sign_in_text</a>
+									<a class="sign-in-btn" data-redirect="$is_login_redirect_required" href="$sign_in_url" rel="nofollow">$sign_in_text</a>
 								#else
-									<a data-redirect="$is_login_redirect_required" href="$sign_out_url" rel="nofollow"><span class="icon-off" style="margin-right: 2px;"></span>$sign_out_text</a>
+									<a class="sign-in-btn" data-redirect="$is_login_redirect_required" href="$sign_out_url" rel="nofollow"><span class="icon-off" style="margin-right: 2px;"></span>$sign_out_text</a>
 								#end
 								<div class="cart-place">
 									#set ($VOID = $velocityPortletPreferences.setValue('portletSetupShowBorders', 'false'))
 									$theme.runtime("minicart_WAR_fsquareshoppingportlet", "", $velocityPortletPreferences.toString())
 									$velocityPortletPreferences.reset()
 								</div>
+								
+								<a href="javascript:;" id="menu-toggle" class="p-event-menu" >Menu<span class="fa fa-bars"></span></a>
+								
+								
 							</div>
 							<div id="heading">
 								<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
@@ -64,7 +70,7 @@
 										</span>
 									#end
 								</a>
-								
+								<div style="clear: both;" ></div>
 							</div>
 					
 							#if ($has_navigation || $is_signed_in)

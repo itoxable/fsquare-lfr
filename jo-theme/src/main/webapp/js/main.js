@@ -61,6 +61,7 @@ AUI().ready(
 	loaded.
 	*/
 		function() {
+			
 			$.cookieBar({
 				message:"This website uses cookies. By continuing to browse the site you are agreeing to our use of cookies.",
 				acceptText:"×",

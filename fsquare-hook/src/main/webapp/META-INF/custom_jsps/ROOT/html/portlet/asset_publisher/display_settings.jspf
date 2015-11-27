@@ -14,6 +14,10 @@
  */
 --%>
 
+<%@page import="com.liferay.portal.kernel.dao.orm.QueryUtil"%>
+<%@page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil"%>
+<%@page import="com.liferay.portlet.asset.model.AssetVocabulary"%>
+<%@page import="java.util.List"%>
 <%@page import="com.liferay.portal.kernel.json.JSONException"%>
 <aui:fieldset cssClass="general-display-settings">
 	<c:if test="<%= !rootPortletId.equals(PortletKeys.HIGHEST_RATED_ASSETS) && !rootPortletId.equals(PortletKeys.MOST_VIEWED_ASSETS) %>">
@@ -118,6 +122,24 @@
 		%>
 
 			<aui:option label="<%= currentDelta %>" selected="<%= (delta == currentDelta) %>" />
+
+		<%
+		}
+		%>
+
+	</aui:select>
+	
+	<%
+	List<AssetVocabulary> assetVocabularyList = AssetVocabularyLocalServiceUtil.getAssetVocabularies(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	%>
+	<aui:select helpMessage="filter-vocabulary-id-help" label="filter-vocabulary-id" name="preferences--filterVocabularyId--">
+		<aui:option value="" label="Select..."  />
+		<%
+
+		for (AssetVocabulary assetVocabulary: assetVocabularyList) {
+		%>
+		
+		<aui:option value="<%= assetVocabulary.getVocabularyId() %>" label="<%= assetVocabulary.getName() %>" selected="<%= assetVocabulary.getVocabularyId() == filterVocabularyId %>" />
 
 		<%
 		}

@@ -28,7 +28,7 @@
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="com.liferay.portal.kernel.util.StringBundler"%>
 <%@page import="com.fsquare.shopping.NoSuchShoppingStoreException"%>
-<%@ include file="/shopping-store/init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <%
 

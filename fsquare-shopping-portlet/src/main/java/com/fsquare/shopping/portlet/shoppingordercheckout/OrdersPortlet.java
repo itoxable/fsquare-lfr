@@ -1,4 +1,4 @@
-package com.fsquare.shopping.portlet.shoppingorder;
+package com.fsquare.shopping.portlet.shoppingordercheckout;
 
 import java.io.IOException;
 import java.io.PrintWriter;
