@@ -131,9 +131,6 @@
 	} catch (SystemException e2) {
 		e2.printStackTrace();
 	}
-// 	System.out.println("columns: "+columns);
-// 	System.out.println("assetEntryIndex: "+assetEntryIndex);
-// 	System.out.println(""+((assetEntryIndex+1) % columns));
 	
 %>
 
@@ -143,7 +140,7 @@
 	<div class="row">
 </c:if>
 
-	<div class="<%= rows %> span-xs-4 big-link-wrapper" id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>">
+	<div class="<%= rows %> big-link-wrapper" id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>">
 		
 		<c:if test='<%= assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker()) %>'>
 			<%@ include file="/html/portlet/asset_publisher/display/item_actions.jspf" %>

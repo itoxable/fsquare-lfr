@@ -141,35 +141,39 @@
 	
 	<c:if test='<%= Validator.isNotNull(filterSettings) %>'>
 		<div class="row">
-		<div class="span12">
-			<div class="filter-separator"></div>
-			<div class="gallery-filter">
-				<span class="gallery-filter-first">
-		        	<a href="javascript:;" class="gallery-filter-item" data-filter="*">All</a>
-		        </span>
-				<%
+			<div class="span12">
+				<div class="filter-separator"></div>
 				
-				String[] filtersArr = filterSettings.split(StringPool.SEMICOLON);
-				int index = 1;
-				for(AssetCategory assetCategory: assetCategoryList){
-					String filter = assetCategory.getName();
-					System.out.println(filter);
-					%>
-				        <span class='<%= index == filtersArr.length?"gallery-filter-last":StringPool.BLANK %>'>
-				        	<a href="javascript:;" class="gallery-filter-item" data-filter=".<%= assetCategory.getName().replaceAll(" ", StringPool.UNDERLINE).toLowerCase() %>"><%= filter %></a>
+				<div class="gallery-filter">
+					<a href="javascript:;" id="category-toggle-<%=portletId %>" class="category-toggle-mobile p-event-menu" >Categories<span class="fa fa-bars"></span></a>
+					<div class="gallery-filter-wrapper" id="gallery-filter-wrapper-<%=portletId %>">
+						<span class="gallery-filter-item-wrapper gallery-filter-first">
+				        	<a href="javascript:;" class="gallery-filter-item" data-filter="*">All</a>
 				        </span>
-					<%
-					index++;			
-				}
-				%>
+						<%
+						
+						String[] filtersArr = filterSettings.split(StringPool.SEMICOLON);
+						int index = 1;
+						for(AssetCategory assetCategory: assetCategoryList){
+							String filter = assetCategory.getName();
+							%>
+						        <span class='gallery-filter-item-wrapper <%= index == filtersArr.length?"gallery-filter-last":StringPool.BLANK %>'>
+						        	<a href="javascript:;" class="gallery-filter-item" data-filter=".<%= assetCategory.getName().replaceAll(" ", StringPool.UNDERLINE).toLowerCase() %>"><%= filter %></a>
+						        </span>
+							<%
+							index++;			
+						}
+						%>
+					</div>
+				</div>
+				
 			</div>
-		</div>
 		</div>
 	</c:if>
 	<div class="row media-gallery media-gallery-<%=portletId %>" id='media-gallery-<%=portletId %>'>
 </c:if>
 
-	<div class='<%= layoutColumns + " " + catFilters.toString() %>' id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>" >
+	<div class='media-gallery-item <%= layoutColumns + " " + catFilters.toString() %> span-xs-6'  id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>" >
 		<c:if test='<%= assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker()) %>'>
 			<%@ include file="/html/portlet/asset_publisher/display/item_actions.jspf" %>
 		</c:if>
@@ -183,21 +187,39 @@
 	</div>
 
 	<script type="text/javascript" charset="utf-8">
-	<c:if test='<%= Validator.isNotNull(filterSettings) %>'>
+		<c:if test='<%= Validator.isNotNull(filterSettings) %>'>
+			
+			$('#media-gallery-<%=portletId %>').ready(function() {
+				window.mediaGallery<%=portletId %> = $('#media-gallery-<%=portletId %>').isotope({});
+			});
+			
+			
+			$('.gallery-filter-item').click(function(){
+				var filter = $(this).attr('data-filter');
+				window.mediaGallery<%=portletId %>.isotope({ filter: filter});
+				if(window.innerWidth < 768){
+					$('#gallery-filter-wrapper-<%=portletId %>').fadeOut(0);
+				}
+			});
+			
+		</c:if>
 		
-		$('#media-gallery-<%=portletId %>').ready(function() {
-			window.mediaGallery<%=portletId %> = $('#media-gallery-<%=portletId %>').isotope({});
+		/*$('#media-gallery-<%=portletId %>').sliphover({
+			caption: 'data-caption',
+			target:'.gallery-item-poster'
+		});*/
+		
+		$('#category-toggle-<%= portletId %>').click(function(){
+			$('#gallery-filter-wrapper-<%= portletId %>').slideToggle();
 		});
-		/*window.mediaGallery<%=portletId %>.isotope({ filter: '*' })*/
-		$('.gallery-filter-item').click(function(){
-			var filter = $(this).attr('data-filter');
-			console.log("filter: "+filter);
-			window.mediaGallery<%=portletId %>.isotope({ filter: filter})
+		
+		$(window).resize(function(){
+			if(window.innerWidth > 767){
+				$('#gallery-filter-wrapper-<%= portletId %>').fadeIn();
+			}else{
+				$('#gallery-filter-wrapper-<%= portletId %>').fadeOut();
+			}
 		});
-	</c:if>
-	$('#media-gallery-<%=portletId %>').sliphover({
-		caption: 'data-caption',
-		target:'.gallery-item-poster'
-	});
+		
 	</script>
 </c:if>

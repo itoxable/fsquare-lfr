@@ -76,7 +76,7 @@
   }
   
   // Input grid
-  @include grid-fluid-span-xs-x($gridColumns, $fluidGridColumnWidth767, $fluidGridGutterWidth767);
+  @include grid-fluid-span-xs-x($gridColumns, $fluidGridGutterWidth767);
   
  
   // FORM FIELDS

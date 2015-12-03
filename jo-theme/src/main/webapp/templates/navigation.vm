@@ -2,6 +2,8 @@
 
 
 <nav class="$nav_css_class navbar site-navigation" id="navigation" role="navigation">
+	<a href="javascript:;" class="navigation-close" id="navigation-close">×</a>
+	<div class="clearfix"></div>
 	<div class="navbar-inner">
 		<div class="collapse nav-collapse">
 			<ul aria-label="#language ("site-pages")" class="nav nav-collapse" role="menubar">
@@ -54,7 +56,10 @@
 <script>
 	Liferay.Data.NAV_LIST_SELECTOR = '.navbar-inner .nav-collapse > ul';
 	$('#menu-toggle').click(function(){
-		$('#navigation').toggleClass('open')
-	})
+		$('#navigation').addClass('open');
+	});
+	$('#navigation-close').click(function(){
+		$('#navigation').removeClass('open');
+	});
 	
 </script>

@@ -20,7 +20,7 @@
 		#js("$javascript_folder/vendor/isotope.pkgd.js")
 		#js("$javascript_folder/vendor/fit-columns.js")	
 <!-- 		#js("$javascript_folder/vendor/layzr.js") -->
-<!-- 		#js("$javascript_folder/vendor/jquery.sliphover.js") -->
+		#js("$javascript_folder/vendor/jquery.sliphover.js")
 		
 		#set ($js_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$javascript_folder/vendor/jquery.magnific-popup.js")))
 		#js ("$js_file")
@@ -70,9 +70,9 @@
 										</span>
 									#end
 								</a>
-								<div style="clear: both;" ></div>
+								<div class="clearfix"></div>
 							</div>
-					
+							<div class="clearfix" ></div>
 							#if ($has_navigation || $is_signed_in)
 								#parse ("$full_templates_path/navigation.vm")
 							#end

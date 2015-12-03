@@ -1,14 +1,7 @@
 //
 // Variables
 // --------------------------------------------------
-/*
-$breakpoint_phone: 1024px !default;
-$breakpoint_tablet: 1280px !default;
-*/
 
-$breakpoint_phone: 768px !default;
-$breakpoint_tablet: 992px !default;
-$breakpoint_desktop: 1200px !default;
 
 // Global values
 // --------------------------------------------------
@@ -51,7 +44,7 @@ $linkColorHover:        darken($linkColor, 15%) !default;
 
 // Typography
 // -------------------------
-$sansFontFamily:        "AvenirNextLTW01-Medium","Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$sansFontFamily:        "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $serifFontFamily:       Georgia, "Times New Roman", Times, serif !default;
 $monoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace !default;
 
@@ -61,7 +54,7 @@ $baseLineHeight:        20px !default;
 $altFontFamily:         $serifFontFamily !default;
 
 $headingsFontFamily:    inherit !default; // empty to use BS default, $baseFontFamily
-$headingsFontWeight:    normal !default;    // instead of browser default, bold
+$headingsFontWeight:    bold !default;    // instead of browser default, bold
 $headingsColor:         inherit !default; // empty to use BS default, $textColor
 
 
@@ -184,7 +177,7 @@ $wellBackground:                  #f5f5f5 !default;
 
 // Navbar
 // -------------------------
-$navbarCollapseWidth:             ($breakpoint_tablet - 1)px !default;
+$navbarCollapseWidth:             979px !default;
 $navbarCollapseDesktopWidth:      $navbarCollapseWidth + 1;
 
 $navbarHeight:                    40px !default;
@@ -294,29 +287,27 @@ $popoverArrowOuterColor:  rgba(0,0,0,.25) !default;
 // --------------------------------------------------
 
 
-// Default Phone grid
+// Default 940px grid
 // -------------------------
 $gridColumns:             12 !default;
-
 $gridColumnWidth:         60px !default;
 $gridGutterWidth:         20px !default;
 $gridRowWidth:            ($gridColumns * $gridColumnWidth) + ($gridGutterWidth * ($gridColumns - 1)) !default;
 
-// Desktop
-$gridColumnWidthDesktop:     67px !default;
-$gridGutterWidthDesktop:     30px !default;
-$gridRowWidthDesktop:        ($gridColumns * $gridColumnWidthDesktop) + ($gridGutterWidthDesktop * $gridColumns) !default; //1200
+// 1200px min
+$gridColumnWidth1200:     70px !default;
+$gridGutterWidth1200:     30px !default;
+$gridRowWidth1200:        ($gridColumns * $gridColumnWidth1200) + ($gridGutterWidth1200 * ($gridColumns - 1)) !default;
 
-/*// Small Desktop/Tablet Landscape
-$gridColumnWidthSmlDesktop:     77px !default;
-$gridGutterWidthSmlDesktop:     20px !default;
-$gridRowWidthSmlDesktop:        ($gridColumns * $gridColumnWidthSmlDesktop) + ($gridGutterWidthSmlDesktop * ($gridColumns - 1)) !default;//1144px
-*/
+// 768px-979px
+$gridColumnWidth768:      42px !default;
+$gridGutterWidth768:      20px !default;
+$gridRowWidth768:         ($gridColumns * $gridColumnWidth768) + ($gridGutterWidth768 * ($gridColumns - 1)) !default;
 
-// Tablet
-$gridColumnWidthTablet:      51px !default;
-$gridGutterWidthTablet:      30px !default;
-$gridRowWidthTablet:         ($gridColumns * $gridColumnWidthTablet) + ($gridGutterWidthTablet * ($gridColumns - 1)) !default;//1024px
+// 0-768px
+/* $gridColumnWidth767:      100 !default; */
+/* $gridGutterWidth767:      5px !default; */
+/* $gridRowWidth767:         ($gridColumns * $gridColumnWidth767) + ($gridColumnWidth767 * ($gridColumns - 1)) !default; */
 
 
 // Fluid grid
@@ -324,14 +315,14 @@ $gridRowWidthTablet:         ($gridColumns * $gridColumnWidthTablet) + ($gridGut
 $fluidGridColumnWidth:    percentage($gridColumnWidth/$gridRowWidth) !default;
 $fluidGridGutterWidth:    percentage($gridGutterWidth/$gridRowWidth) !default;
 
-// Desktop
-$fluidGridColumnWidthDesktop:     percentage($gridColumnWidthDesktop/$gridRowWidthDesktop) !default;
-$fluidGridGutterWidthDesktop:     percentage($gridGutterWidthDesktop/$gridRowWidthDesktop) !default;
+// 1200px min
+$fluidGridColumnWidth1200:     percentage($gridColumnWidth1200/$gridRowWidth1200) !default;
+$fluidGridGutterWidth1200:     percentage($gridGutterWidth1200/$gridRowWidth1200) !default;
 
-/*// Small Desktop/Tablet Landscape
-$fluidGridColumnWidthSmlDesktop:     percentage($gridColumnWidthSmlDesktop/$gridRowWidthSmlDesktop) !default;
-$fluidGridGutterWidthSmlDesktop:     percentage($gridGutterWidthSmlDesktop/$gridRowWidthSmlDesktop) !default;
-*/
-//Tablet
-$fluidGridColumnWidthTablet:      percentage($gridColumnWidthTablet/$gridRowWidthTablet) !default;
-$fluidGridGutterWidthTablet:      percentage($gridGutterWidthTablet/$gridRowWidthTablet) !default;
+// 768px-979px
+$fluidGridColumnWidth768:      percentage($gridColumnWidth768/$gridRowWidth768) !default;
+$fluidGridGutterWidth768:      percentage($gridGutterWidth768/$gridRowWidth768) !default;
+
+// 0-768px
+//$fluidGridColumnWidth767:      percentage($gridColumnWidth767/$gridRowWidth767) !default;
+$fluidGridGutterWidth767:      7px !default;

@@ -663,23 +663,21 @@
   *margin-left: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (.5 / $gridRowWidth * 100px * 1%) + $fluidGridGutterWidth - (.5 / $gridRowWidth * 100px * 1%);
 }
 
-@mixin grid-fluid-span-xs($columns, $fluidGridColumnWidth, $fluidGridGutterWidth) {
-/*   width: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)); */
-/*   *width: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1)) - (.5 / $gridRowWidth * 100px * 1%); */
-  
-  width: ((100/12)*4)*1%;
-  
+@mixin grid-fluid-span-xs($columns, $fluidGridGutterWidth) {
+  width: ((100/12)*$columns)*1%;
   display: block;
-  padding: 5px;
+  padding: $fluidGridGutterWidth;
   @include box-sizing(border-box);
   float: left;
-/*   margin-left: $fluidGridGutterWidth; */
-/*   *margin-left: $fluidGridGutterWidth - (.5 / $gridRowWidth * 100px * 1%); */
+
 }
 
-@mixin grid-fluid-span-xs-x($gridColumns, $fluidGridColumnWidth, $fluidGridGutterWidth) {
+@mixin grid-fluid-span-xs-x($gridColumns, $fluidGridGutterWidth) {
   @for $i from 1 through $gridColumns {
-    .span-xs-#{$i} { @include grid-fluid-span-xs($i, $fluidGridColumnWidth, $fluidGridGutterWidth); }
+    .span-xs-#{$i} { @include grid-fluid-span-xs($i, $fluidGridGutterWidth); }
+  }
+  [class*="span-xs"]:first-child {
+     // margin-left: $fluidGridGutterWidth*-1;
   }
 }
 
