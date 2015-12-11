@@ -21,37 +21,47 @@
 
 	<aui:form id='shipping-address-form' name='shipping-address-form'>
 		<aui:fieldset>
-			<aui:input name="email" type="email" value="<%=shoppingOrder.getShippingEmailAddress() %>" placeholder="Name"/>
+			<aui:input name="email" showRequiredLabel="<%= false %>" required="<%= true %>"  type="email" inlineLabel="left" value="<%=shoppingOrder.getShippingEmailAddress() %>" placeholder="email"/>
 		</aui:fieldset>
-		<aui:fieldset>
-			<aui:input name="firstName" type="text" value="<%= shoppingOrder.getShippingFirstName() %>" placeholder="First Name" />
-			<aui:input name="lastName" type="text" value="<%= shoppingOrder.getShippingLastName() %>" placeholder="Last Name" />
+		<aui:fieldset style="margin-top: 20px">
+			<aui:input  autoSize="<%= true %>" showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="firstName" type="text" value="<%= shoppingOrder.getShippingFirstName() %>" placeholder="First Name" />
+			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="lastName" type="text" value="<%= shoppingOrder.getShippingLastName() %>" placeholder="Last Name" />
 			
-			<aui:input name="streetAddress1" type="text" value="<%=shoppingOrder.getShippingStreet() %>" placeholder="Street Address 1"/>
-			<aui:input name="streetAddress2" type="text" value="<%=shoppingOrder.getShippingStreet2() %>" placeholder="Street Address 2"/>
+			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="streetAddress1" type="text" value="<%=shoppingOrder.getShippingStreet() %>" placeholder="Street Address 1"/>
+			<aui:input inlineLabel="left" name="streetAddress2" type="text" value="<%=shoppingOrder.getShippingStreet2() %>" placeholder="Street Address 2"/>
 			
-			<aui:input name="city" type="text" value="<%= shoppingOrder.getShippingCity() %>" placeholder="City"/>
-			<aui:input name="postCode" type="text" value="<%= shoppingOrder.getShippingPostCode()%>" placeholder="Post Code"/>
-			<aui:select name="country" label="country" >
+			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="city" type="text" value="<%= shoppingOrder.getShippingCity() %>" placeholder="City"/>
+			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="postCode" type="text" value="<%= shoppingOrder.getShippingPostCode()%>" placeholder="Post Code"/>
+			<aui:select showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="country" label="country" >
 				<% for(Country country: countries) {%>
-					<aui:option selected="<%= country.getA2().equalsIgnoreCase(shoppingOrder.getShippingCountry()) %>" value="<%= country.getA2() %>" label="<%= country.getName(locale) %>"></aui:option>
+					<aui:option selected="<%= country.getA2().equalsIgnoreCase(shoppingOrder.getShippingCountry()!=null?shoppingOrder.getShippingCountry():shoppingStore.getCountry()) %>" value="<%= country.getA2() %>" label="<%= country.getName(locale) %>"></aui:option>
 				<% } %>
 			</aui:select>
-			<aui:input name="phoneNumber" type="phone" value="<%=shoppingOrder.getShippingPhone() %>" placeholder="Phone Number"/>
+			
+			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="phoneNumber" type="phone" value="<%=shoppingOrder.getShippingPhone() %>" placeholder="Phone Number"/>
 			
 			<div id="<portlet:namespace />shipping-address-form-error" class="error-message shipping-address-form-error">
 			</div>
-			<button class="btn btn-primary" type="button" id="<portlet:namespace />save_shipping_address">Continue</button>
+			<button class="btn btn-primary checkout-button" style="margin-top: 30px;" type="submit" id="<portlet:namespace />save_shipping_address">Continue</button>
 			
 		</aui:fieldset>
 	</aui:form>
 <aui:script use="aui-base,selector-css3,aui-io-request,liferay-dynamic-select">
 	
-	A.on('click', function(event) {
-	  	<portlet:namespace />showLoading('#<portlet:namespace />checkout-panel-address');
-		<portlet:namespace />saveShippingAddress();
-	},'#<portlet:namespace />save_shipping_address');
 
+	A.one('#<portlet:namespace />shipping-address-form').on(
+		'submit',
+		function(event) {
+			event.halt();
+			event.stopImmediatePropagation();
+			var error = this.one('.error-field');
+			if(!error || error == null){
+				<portlet:namespace />showLoading('#<portlet:namespace />checkout-panel-address');
+				<portlet:namespace />saveShippingAddress();
+			}
+		}
+	);
+	
 	Liferay.provide(window, '<portlet:namespace />saveShippingAddress',
 		function() {
 			var form = $('#<portlet:namespace />shipping-address-form');
@@ -122,6 +132,9 @@
 								});
 							}
 							else{
+								if(response.failValidation){
+									
+								}
 								A.one('#<portlet:namespace />shipping-address-form-error').text(response.errorMessage);
 							}
                       }

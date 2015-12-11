@@ -31,7 +31,7 @@ if (startDate != null) {
 <div class="modal" id="<portlet:namespace />coupon_form">
 	<div class="modal-header">
 		<button type="button" class="close" onclick="jQuery('#<portlet:namespace />coupon_form').remove();">×</button>
-		<h3>Modal Heading</h3>
+		<h3><%= LanguageUtil.get(locale, "coupon") %></h3>
 	</div>
 	<div class="modal-body">
 		<aui:form id='coupon-form'>
@@ -39,7 +39,7 @@ if (startDate != null) {
 				<aui:input name="couponId" type="hidden" value="<%= shoppingCoupon.getCouponId() %>" />
 				<aui:input name="code" type="text" value="<%= shoppingCoupon.getCode() %>" placeholder="Code"/>
 				<aui:input name="name" type="text" value="<%= shoppingCoupon.getName() %>" placeholder="Name"/>
-				<aui:input name="description" type="text" value="<%= shoppingCoupon.getDescription() %>" placeholder="Description" />
+				<aui:input cssClass="text-area" name="description" type="textarea" value="<%= shoppingCoupon.getDescription() %>" placeholder="Description" />
 				<aui:input name="discount" type="text" value="<%= shoppingCoupon.getDiscount() %>" placeholder="Discount"/>
 				<aui:select label="discount-type" name="discountType">
 					<aui:option selected="<%= ShoppingUtil.DISCOUNT_TYPE_PERCENTAGE.equals(shoppingCoupon.getDiscountType()) %>" value="<%= ShoppingUtil.DISCOUNT_TYPE_PERCENTAGE %>">percentage</aui:option>
@@ -49,13 +49,13 @@ if (startDate != null) {
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(startDate) %>">
 						<div class="control-group">
-							<label class="control-label" for="<portlet:namespace/>startDate"><%=LanguageUtil.get(locale, "start-date") %><label>
+							<label class="control-label" for="<portlet:namespace/>startDate"><%=LanguageUtil.get(locale, "start-date") %></label>
 							<liferay-ui:input-date dayParam="startDateDay" dayValue="<%= startCalendar.get(Calendar.DATE) %>" firstDayOfWeek="<%= startCalendar.getFirstDayOfWeek() %>" monthParam="startDateMonth" monthValue="<%= startCalendar.get(Calendar.MONTH) %>" name="startDate" yearParam="startDateYear" yearValue="<%= startCalendar.get(Calendar.YEAR) %>"></liferay-ui:input-date>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="control-group">
-							<label class="control-label" for="<portlet:namespace/>startDate"><%=LanguageUtil.get(locale, "start-date") %><label>
+							<label class="control-label" for="<portlet:namespace/>startDate"><%=LanguageUtil.get(locale, "start-date") %></label>
 							<liferay-ui:input-date dayParam="startDateDay" disabled="<%= false %>" monthParam="startDateMonth" name="startDate" yearParam="startDateYear"></liferay-ui:input-date>
 						</div>
 					</c:otherwise>
@@ -64,13 +64,13 @@ if (startDate != null) {
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(endDate) %>">
 						<div class="control-group">
-							<label class="control-label" for="<portlet:namespace/>endDate"><%=LanguageUtil.get(locale, "end-date") %><label>
+							<label class="control-label" for="<portlet:namespace/>endDate"><%=LanguageUtil.get(locale, "end-date") %></label>
 							<liferay-ui:input-date dayParam="endDateDay" dayValue="<%= endCalendar.get(Calendar.DATE) %>" firstDayOfWeek="<%= endCalendar.getFirstDayOfWeek() %>" monthParam="endDateMonth" monthValue="<%= endCalendar.get(Calendar.MONTH) %>" name="endDate" yearParam="endDateYear" yearValue="<%= endCalendar.get(Calendar.YEAR) %>"></liferay-ui:input-date>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="control-group">
-							<label class="control-label" for="<portlet:namespace/>endDate"><%=LanguageUtil.get(locale, "end-date") %><label>
+							<label class="control-label" for="<portlet:namespace/>endDate"><%=LanguageUtil.get(locale, "end-date") %></label>
 						<liferay-ui:input-date dayParam="endDateDay" disabled="<%= false %>" monthParam="endDateMonth" name="endDate" yearParam="startDateYear"></liferay-ui:input-date>
 						</div>
 					</c:otherwise>
@@ -80,7 +80,7 @@ if (startDate != null) {
 				<aui:input name="limitSkus" type="text" value="<%= shoppingCoupon.getLimitSkus() %>" placeholder="Limit Skus"/>
 				<aui:input name="minOrder" type="number" value="<%= shoppingCoupon.getMinOrder() %>" placeholder="Min Order"/>
 				<aui:input name="active" type="checkbox" value="<%= shoppingCoupon.getActive() %>"/>
-				
+				<div class="clearfix"></div>
 			</div>
 			<div id="<portlet:namespace />coupon-form-error" class="error-message coupon-form-error">
 				

@@ -700,94 +700,6 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
     public void setShippingPhone(String shippingPhone);
 
     /**
-     * Returns the cc name of this shopping order.
-     *
-     * @return the cc name of this shopping order
-     */
-    @AutoEscape
-    public String getCcName();
-
-    /**
-     * Sets the cc name of this shopping order.
-     *
-     * @param ccName the cc name of this shopping order
-     */
-    public void setCcName(String ccName);
-
-    /**
-     * Returns the cc type of this shopping order.
-     *
-     * @return the cc type of this shopping order
-     */
-    @AutoEscape
-    public String getCcType();
-
-    /**
-     * Sets the cc type of this shopping order.
-     *
-     * @param ccType the cc type of this shopping order
-     */
-    public void setCcType(String ccType);
-
-    /**
-     * Returns the cc number of this shopping order.
-     *
-     * @return the cc number of this shopping order
-     */
-    @AutoEscape
-    public String getCcNumber();
-
-    /**
-     * Sets the cc number of this shopping order.
-     *
-     * @param ccNumber the cc number of this shopping order
-     */
-    public void setCcNumber(String ccNumber);
-
-    /**
-     * Returns the cc exp month of this shopping order.
-     *
-     * @return the cc exp month of this shopping order
-     */
-    public int getCcExpMonth();
-
-    /**
-     * Sets the cc exp month of this shopping order.
-     *
-     * @param ccExpMonth the cc exp month of this shopping order
-     */
-    public void setCcExpMonth(int ccExpMonth);
-
-    /**
-     * Returns the cc exp year of this shopping order.
-     *
-     * @return the cc exp year of this shopping order
-     */
-    public int getCcExpYear();
-
-    /**
-     * Sets the cc exp year of this shopping order.
-     *
-     * @param ccExpYear the cc exp year of this shopping order
-     */
-    public void setCcExpYear(int ccExpYear);
-
-    /**
-     * Returns the cc ver number of this shopping order.
-     *
-     * @return the cc ver number of this shopping order
-     */
-    @AutoEscape
-    public String getCcVerNumber();
-
-    /**
-     * Sets the cc ver number of this shopping order.
-     *
-     * @param ccVerNumber the cc ver number of this shopping order
-     */
-    public void setCcVerNumber(String ccVerNumber);
-
-    /**
      * Returns the comments of this shopping order.
      *
      * @return the comments of this shopping order
@@ -818,78 +730,19 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
     public void setExternalPaymentId(String externalPaymentId);
 
     /**
-     * Returns the pp txn ID of this shopping order.
+     * Returns the payment type of this shopping order.
      *
-     * @return the pp txn ID of this shopping order
+     * @return the payment type of this shopping order
      */
     @AutoEscape
-    public String getPpTxnId();
+    public String getPaymentType();
 
     /**
-     * Sets the pp txn ID of this shopping order.
+     * Sets the payment type of this shopping order.
      *
-     * @param ppTxnId the pp txn ID of this shopping order
+     * @param paymentType the payment type of this shopping order
      */
-    public void setPpTxnId(String ppTxnId);
-
-    /**
-     * Returns the pp payment status of this shopping order.
-     *
-     * @return the pp payment status of this shopping order
-     */
-    @AutoEscape
-    public String getPpPaymentStatus();
-
-    /**
-     * Sets the pp payment status of this shopping order.
-     *
-     * @param ppPaymentStatus the pp payment status of this shopping order
-     */
-    public void setPpPaymentStatus(String ppPaymentStatus);
-
-    /**
-     * Returns the pp payment gross of this shopping order.
-     *
-     * @return the pp payment gross of this shopping order
-     */
-    public double getPpPaymentGross();
-
-    /**
-     * Sets the pp payment gross of this shopping order.
-     *
-     * @param ppPaymentGross the pp payment gross of this shopping order
-     */
-    public void setPpPaymentGross(double ppPaymentGross);
-
-    /**
-     * Returns the pp receiver email of this shopping order.
-     *
-     * @return the pp receiver email of this shopping order
-     */
-    @AutoEscape
-    public String getPpReceiverEmail();
-
-    /**
-     * Sets the pp receiver email of this shopping order.
-     *
-     * @param ppReceiverEmail the pp receiver email of this shopping order
-     */
-    public void setPpReceiverEmail(String ppReceiverEmail);
-
-    /**
-     * Returns the pp payer email of this shopping order.
-     *
-     * @return the pp payer email of this shopping order
-     */
-    @AutoEscape
-    public String getPpPayerEmail();
-
-    /**
-     * Sets the pp payer email of this shopping order.
-     *
-     * @param ppPayerEmail the pp payer email of this shopping order
-     */
-    public void setPpPayerEmail(String ppPayerEmail);
+    public void setPaymentType(String paymentType);
 
     /**
      * Returns the send order email of this shopping order.

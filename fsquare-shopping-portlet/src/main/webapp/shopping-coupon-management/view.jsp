@@ -50,7 +50,7 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 <div>
 	<h3>Coupons</h3>
 	<div class="coupons-table-wrapper" >
-		<table class="coupons-table table table-bordered table-striped" id="<portlet:namespace />coupons-table" >
+		<table class="settings-table coupons-table table table-bordered table-striped" id="<portlet:namespace />coupons-table" >
 			<thead>
 				<tr>
 					<td>Code</td>
@@ -91,7 +91,7 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 						<i id="<%= "coupon-status-"+shoppingCoupon.getCouponId() %>" class="fa fa-circle <%= couponStatus %>" title="<%= LanguageUtil.get(locale, couponStatus) %>"></i>
 					</td>
 					
-					<td class="coupon-actions">
+					<td class="settings-actions">
 						<a class="open-coupon-btn fa fa-pencil-square" data-coupon-id="<%= shoppingCoupon.getCouponId() %>" title="edit" href="javascript:;"></a>
 						<a class='fa fa-toggle-on deactivate-coupon-btn deactivate-coupon-btn<%= shoppingCoupon.getCouponId() %> <%= !shoppingCoupon.getActive()?" hide":StringPool.BLANK %>' data-coupon-id="<%= shoppingCoupon.getCouponId() %>" title="deactivate" href="javascript:;"></a>
 						<a class='fa fa-toggle-off activate-coupon-btn activate-coupon-btn<%= shoppingCoupon.getCouponId() %>  <%= shoppingCoupon.getActive()?" hide":StringPool.BLANK %>' data-coupon-id="<%= shoppingCoupon.getCouponId() %>" title="activate" href="javascript:;"></a>
@@ -109,6 +109,22 @@ List<ShoppingCoupon> shoppingCouponList = ShoppingCouponLocalServiceUtil.findByG
 	<a class="btn open-new-coupon-btn" data-coupon-id="" href="javascript:;"><span class="fa fa-pencil-square"></span><span>New Coupon</span></a>
 </div>
 <aui:script use="aui-base,selector-css3,aui-io-request,array-extras,querystring-stringify,aui-datatype,aui-datepicker">
+	
+	Liferay.provide(window, '<portlet:namespace />showLoading',
+		function(wrapper) {
+		if(!wrapper){
+			wrapper = '#p_p_id<portlet:namespace />';
+		}
+		$(wrapper).append('<div class="store-loading"><div class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div></div>')	
+	},['aui-base,selector-css3']);
+	
+	Liferay.provide(window, '<portlet:namespace />hideLoading',
+		function(wrapper) {
+		if(!wrapper){
+			wrapper = '#p_p_id<portlet:namespace />'
+		}
+		$(wrapper).find(".store-loading").remove()
+	},['aui-base,selector-css3']);
 	
 	Liferay.provide(window, '<portlet:namespace />saveCoupon',
 		function() {

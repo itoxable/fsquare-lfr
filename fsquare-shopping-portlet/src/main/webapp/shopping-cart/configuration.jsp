@@ -1,5 +1,5 @@
 
-<%@ include file="/cart-view/init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 

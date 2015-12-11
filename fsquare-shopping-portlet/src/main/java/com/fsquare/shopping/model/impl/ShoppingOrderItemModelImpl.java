@@ -61,7 +61,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
             { "quantity", Types.INTEGER },
             { "shippedDate", Types.TIMESTAMP }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingOrderItem (shoppingOrderItemId LONG not null primary key,shoppingOrderId LONG,articleId VARCHAR(75) null,sku VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(75) null,properties VARCHAR(75) null,price DOUBLE,quantity INTEGER,shippedDate DATE null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingOrderItem (shoppingOrderItemId LONG not null primary key,shoppingOrderId LONG,articleId VARCHAR(75) null,sku VARCHAR(75) null,name VARCHAR(200) null,description VARCHAR(1000) null,properties VARCHAR(75) null,price DOUBLE,quantity INTEGER,shippedDate DATE null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingOrderItem";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingOrderItem.name ASC, shoppingOrderItem.description ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingOrderItem.name ASC, FsquareShopping_ShoppingOrderItem.description ASC";

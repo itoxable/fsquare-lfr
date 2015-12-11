@@ -10,7 +10,12 @@
 <%@page import="com.fsquare.shopping.portlet.util.ShoppingPortletUtil"%>
 <%
 
+ShoppingShippingMethod selectedShoppingShippingMethod = shoppingOrderProcessWrapper.getShoppingShippingMethod();
 
+long selectedId = -1L;
+if(selectedShoppingShippingMethod != null){
+	selectedId = selectedShoppingShippingMethod.getShippingMethodId();
+}
 %>
 
 <liferay-portlet:resourceURL var="setShippingMethodURL" secure="false">
@@ -21,14 +26,18 @@
 		<%
 			for(ShoppingShippingMethod shippingMethod : availableShoppingShippingMethodList){
 		%>
-		<aui:input name="shippingMethodId" value="<%= shippingMethod.getShippingMethodId()%>" type="radio" label='<%= shippingMethod.getName() + StringPool.BLANK + "(" + shoppingStore.getCurrency() + shippingMethod.getPrice() + ")" %>'></aui:input>
-		<br>
+		<aui:input name="shippingMethodId" checked="<%= selectedId == shippingMethod.getShippingMethodId() %>" value="<%= shippingMethod.getShippingMethodId()%>" type="radio" label='<%= shippingMethod.getName() + StringPool.SPACE + "(" + shoppingStore.getCurrency() + shippingMethod.getPrice() + ")" %>'></aui:input>
+		
+		<p class="shipping-method-description">
+			<%= shippingMethod.getDescription() %>
+		</p>
+		
 		<%
 			}
 		%>
 		<div id="<portlet:namespace />shipping-method-form-error" class="error-message shipping-method-form-error">
 		</div>
-		<button class="btn btn-primary" type="button" id="<portlet:namespace />set_shipping_method">Continue</button>
+		<button class="btn btn-primary checkout-button" style="margin-top: 30px;" type="button" id="<portlet:namespace />set_shipping_method">Continue</button>
 		
 	</aui:form>
 </div>
@@ -73,14 +82,15 @@
 	                  	  	var shoppingShippingMethodJson = JSON.parse(response.shoppingShippingMethod);
 							var savedFieldSet = '<div class="saved-order-fields">';
 							
+							savedFieldSet += '<h5 class="subtitle">';
+							savedFieldSet += shoppingShippingMethodJson.name + " (<%= shoppingStore.getCurrency()%>" +shoppingShippingMethodJson.price+")";
+							savedFieldSet += '</h5>';
 							savedFieldSet += '<div>';
-							savedFieldSet += shoppingShippingMethodJson.name + " - " + shoppingShippingMethodJson.description + " (<%= shoppingStore.getCurrency()%>" +shoppingShippingMethodJson.price+")";
+							savedFieldSet += shoppingShippingMethodJson.description;
 							savedFieldSet += '</div>';
-							savedFieldSet += '<br>';
 							savedFieldSet += '</div>';
 							
-							
-							$('.order-summary-shipping-description').text(shoppingShippingMethodJson.description);
+							$('.order-summary-shipping-description').text(shoppingShippingMethodJson.name);
 							$('.order-summary-shipping-price').text('<%= shoppingStore.getCurrency()%>'+shoppingShippingMethodJson.price);
 							$('#<portlet:namespace />order-summary-total-price').text(response.total);
                       		A.one('.shipping-method-row').removeClass("hide");

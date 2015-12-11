@@ -29,12 +29,16 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
     public long createDate;
     public long modifiedDate;
     public String name;
+    public String defaultEmailAddress;
+    public String productsMainPageUuid;
     public String cartPageUuid;
     public String checkoutPageUuid;
     public String onAddToCart;
     public String currency;
     public String country;
     public String userTypes;
+    public boolean checkoutPageFullscreen;
+    public String checkoutCompletePageTemplate;
     public String orderCreatedEmailTemplate;
     public String orderShippedEmailTemplate;
     public String orderCreatedEmailSubject;
@@ -46,10 +50,18 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
     public String stripeLiveSecretKey;
     public String stripeLivePublishableKey;
     public String stripeApiVersion;
+    public boolean integrateWithBraintree;
+    public String braintreePrivateKey;
+    public String braintreePublicKey;
+    public String braintreeMerchantId;
+    public boolean useBraintreeSandbox;
+    public String braintreeSandboxMerchantId;
+    public String braintreeSandboxPrivateKey;
+    public String braintreeSandboxPublicKey;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(49);
+        StringBundler sb = new StringBundler(73);
 
         sb.append("{groupId=");
         sb.append(groupId);
@@ -65,6 +77,10 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         sb.append(modifiedDate);
         sb.append(", name=");
         sb.append(name);
+        sb.append(", defaultEmailAddress=");
+        sb.append(defaultEmailAddress);
+        sb.append(", productsMainPageUuid=");
+        sb.append(productsMainPageUuid);
         sb.append(", cartPageUuid=");
         sb.append(cartPageUuid);
         sb.append(", checkoutPageUuid=");
@@ -77,6 +93,10 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         sb.append(country);
         sb.append(", userTypes=");
         sb.append(userTypes);
+        sb.append(", checkoutPageFullscreen=");
+        sb.append(checkoutPageFullscreen);
+        sb.append(", checkoutCompletePageTemplate=");
+        sb.append(checkoutCompletePageTemplate);
         sb.append(", orderCreatedEmailTemplate=");
         sb.append(orderCreatedEmailTemplate);
         sb.append(", orderShippedEmailTemplate=");
@@ -99,6 +119,22 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         sb.append(stripeLivePublishableKey);
         sb.append(", stripeApiVersion=");
         sb.append(stripeApiVersion);
+        sb.append(", integrateWithBraintree=");
+        sb.append(integrateWithBraintree);
+        sb.append(", braintreePrivateKey=");
+        sb.append(braintreePrivateKey);
+        sb.append(", braintreePublicKey=");
+        sb.append(braintreePublicKey);
+        sb.append(", braintreeMerchantId=");
+        sb.append(braintreeMerchantId);
+        sb.append(", useBraintreeSandbox=");
+        sb.append(useBraintreeSandbox);
+        sb.append(", braintreeSandboxMerchantId=");
+        sb.append(braintreeSandboxMerchantId);
+        sb.append(", braintreeSandboxPrivateKey=");
+        sb.append(braintreeSandboxPrivateKey);
+        sb.append(", braintreeSandboxPublicKey=");
+        sb.append(braintreeSandboxPublicKey);
         sb.append("}");
 
         return sb.toString();
@@ -136,6 +172,18 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             shoppingStoreImpl.setName(name);
         }
 
+        if (defaultEmailAddress == null) {
+            shoppingStoreImpl.setDefaultEmailAddress(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setDefaultEmailAddress(defaultEmailAddress);
+        }
+
+        if (productsMainPageUuid == null) {
+            shoppingStoreImpl.setProductsMainPageUuid(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setProductsMainPageUuid(productsMainPageUuid);
+        }
+
         if (cartPageUuid == null) {
             shoppingStoreImpl.setCartPageUuid(StringPool.BLANK);
         } else {
@@ -170,6 +218,14 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             shoppingStoreImpl.setUserTypes(StringPool.BLANK);
         } else {
             shoppingStoreImpl.setUserTypes(userTypes);
+        }
+
+        shoppingStoreImpl.setCheckoutPageFullscreen(checkoutPageFullscreen);
+
+        if (checkoutCompletePageTemplate == null) {
+            shoppingStoreImpl.setCheckoutCompletePageTemplate(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setCheckoutCompletePageTemplate(checkoutCompletePageTemplate);
         }
 
         if (orderCreatedEmailTemplate == null) {
@@ -230,6 +286,46 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             shoppingStoreImpl.setStripeApiVersion(stripeApiVersion);
         }
 
+        shoppingStoreImpl.setIntegrateWithBraintree(integrateWithBraintree);
+
+        if (braintreePrivateKey == null) {
+            shoppingStoreImpl.setBraintreePrivateKey(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setBraintreePrivateKey(braintreePrivateKey);
+        }
+
+        if (braintreePublicKey == null) {
+            shoppingStoreImpl.setBraintreePublicKey(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setBraintreePublicKey(braintreePublicKey);
+        }
+
+        if (braintreeMerchantId == null) {
+            shoppingStoreImpl.setBraintreeMerchantId(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setBraintreeMerchantId(braintreeMerchantId);
+        }
+
+        shoppingStoreImpl.setUseBraintreeSandbox(useBraintreeSandbox);
+
+        if (braintreeSandboxMerchantId == null) {
+            shoppingStoreImpl.setBraintreeSandboxMerchantId(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setBraintreeSandboxMerchantId(braintreeSandboxMerchantId);
+        }
+
+        if (braintreeSandboxPrivateKey == null) {
+            shoppingStoreImpl.setBraintreeSandboxPrivateKey(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setBraintreeSandboxPrivateKey(braintreeSandboxPrivateKey);
+        }
+
+        if (braintreeSandboxPublicKey == null) {
+            shoppingStoreImpl.setBraintreeSandboxPublicKey(StringPool.BLANK);
+        } else {
+            shoppingStoreImpl.setBraintreeSandboxPublicKey(braintreeSandboxPublicKey);
+        }
+
         shoppingStoreImpl.resetOriginalValues();
 
         return shoppingStoreImpl;
@@ -244,12 +340,16 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         createDate = objectInput.readLong();
         modifiedDate = objectInput.readLong();
         name = objectInput.readUTF();
+        defaultEmailAddress = objectInput.readUTF();
+        productsMainPageUuid = objectInput.readUTF();
         cartPageUuid = objectInput.readUTF();
         checkoutPageUuid = objectInput.readUTF();
         onAddToCart = objectInput.readUTF();
         currency = objectInput.readUTF();
         country = objectInput.readUTF();
         userTypes = objectInput.readUTF();
+        checkoutPageFullscreen = objectInput.readBoolean();
+        checkoutCompletePageTemplate = objectInput.readUTF();
         orderCreatedEmailTemplate = objectInput.readUTF();
         orderShippedEmailTemplate = objectInput.readUTF();
         orderCreatedEmailSubject = objectInput.readUTF();
@@ -261,6 +361,14 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
         stripeLiveSecretKey = objectInput.readUTF();
         stripeLivePublishableKey = objectInput.readUTF();
         stripeApiVersion = objectInput.readUTF();
+        integrateWithBraintree = objectInput.readBoolean();
+        braintreePrivateKey = objectInput.readUTF();
+        braintreePublicKey = objectInput.readUTF();
+        braintreeMerchantId = objectInput.readUTF();
+        useBraintreeSandbox = objectInput.readBoolean();
+        braintreeSandboxMerchantId = objectInput.readUTF();
+        braintreeSandboxPrivateKey = objectInput.readUTF();
+        braintreeSandboxPublicKey = objectInput.readUTF();
     }
 
     @Override
@@ -283,6 +391,18 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
             objectOutput.writeUTF(name);
+        }
+
+        if (defaultEmailAddress == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(defaultEmailAddress);
+        }
+
+        if (productsMainPageUuid == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(productsMainPageUuid);
         }
 
         if (cartPageUuid == null) {
@@ -319,6 +439,14 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
             objectOutput.writeUTF(userTypes);
+        }
+
+        objectOutput.writeBoolean(checkoutPageFullscreen);
+
+        if (checkoutCompletePageTemplate == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(checkoutCompletePageTemplate);
         }
 
         if (orderCreatedEmailTemplate == null) {
@@ -377,6 +505,46 @@ public class ShoppingStoreCacheModel implements CacheModel<ShoppingStore>,
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
             objectOutput.writeUTF(stripeApiVersion);
+        }
+
+        objectOutput.writeBoolean(integrateWithBraintree);
+
+        if (braintreePrivateKey == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(braintreePrivateKey);
+        }
+
+        if (braintreePublicKey == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(braintreePublicKey);
+        }
+
+        if (braintreeMerchantId == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(braintreeMerchantId);
+        }
+
+        objectOutput.writeBoolean(useBraintreeSandbox);
+
+        if (braintreeSandboxMerchantId == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(braintreeSandboxMerchantId);
+        }
+
+        if (braintreeSandboxPrivateKey == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(braintreeSandboxPrivateKey);
+        }
+
+        if (braintreeSandboxPublicKey == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(braintreeSandboxPublicKey);
         }
     }
 }

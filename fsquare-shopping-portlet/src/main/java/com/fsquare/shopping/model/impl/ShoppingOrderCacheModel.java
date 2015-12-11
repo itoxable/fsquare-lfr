@@ -63,19 +63,9 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
     public String shippingPostCode;
     public String shippingCountry;
     public String shippingPhone;
-    public String ccName;
-    public String ccType;
-    public String ccNumber;
-    public int ccExpMonth;
-    public int ccExpYear;
-    public String ccVerNumber;
     public String comments;
     public String externalPaymentId;
-    public String ppTxnId;
-    public String ppPaymentStatus;
-    public double ppPaymentGross;
-    public String ppReceiverEmail;
-    public String ppPayerEmail;
+    public String paymentType;
     public boolean sendOrderEmail;
     public boolean sendShippingEmail;
     public long shippingMethodId;
@@ -83,7 +73,7 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(117);
+        StringBundler sb = new StringBundler(97);
 
         sb.append("{shoppingOrderId=");
         sb.append(shoppingOrderId);
@@ -167,32 +157,12 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         sb.append(shippingCountry);
         sb.append(", shippingPhone=");
         sb.append(shippingPhone);
-        sb.append(", ccName=");
-        sb.append(ccName);
-        sb.append(", ccType=");
-        sb.append(ccType);
-        sb.append(", ccNumber=");
-        sb.append(ccNumber);
-        sb.append(", ccExpMonth=");
-        sb.append(ccExpMonth);
-        sb.append(", ccExpYear=");
-        sb.append(ccExpYear);
-        sb.append(", ccVerNumber=");
-        sb.append(ccVerNumber);
         sb.append(", comments=");
         sb.append(comments);
         sb.append(", externalPaymentId=");
         sb.append(externalPaymentId);
-        sb.append(", ppTxnId=");
-        sb.append(ppTxnId);
-        sb.append(", ppPaymentStatus=");
-        sb.append(ppPaymentStatus);
-        sb.append(", ppPaymentGross=");
-        sb.append(ppPaymentGross);
-        sb.append(", ppReceiverEmail=");
-        sb.append(ppReceiverEmail);
-        sb.append(", ppPayerEmail=");
-        sb.append(ppPayerEmail);
+        sb.append(", paymentType=");
+        sb.append(paymentType);
         sb.append(", sendOrderEmail=");
         sb.append(sendOrderEmail);
         sb.append(", sendShippingEmail=");
@@ -401,33 +371,6 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
             shoppingOrderImpl.setShippingPhone(shippingPhone);
         }
 
-        if (ccName == null) {
-            shoppingOrderImpl.setCcName(StringPool.BLANK);
-        } else {
-            shoppingOrderImpl.setCcName(ccName);
-        }
-
-        if (ccType == null) {
-            shoppingOrderImpl.setCcType(StringPool.BLANK);
-        } else {
-            shoppingOrderImpl.setCcType(ccType);
-        }
-
-        if (ccNumber == null) {
-            shoppingOrderImpl.setCcNumber(StringPool.BLANK);
-        } else {
-            shoppingOrderImpl.setCcNumber(ccNumber);
-        }
-
-        shoppingOrderImpl.setCcExpMonth(ccExpMonth);
-        shoppingOrderImpl.setCcExpYear(ccExpYear);
-
-        if (ccVerNumber == null) {
-            shoppingOrderImpl.setCcVerNumber(StringPool.BLANK);
-        } else {
-            shoppingOrderImpl.setCcVerNumber(ccVerNumber);
-        }
-
         if (comments == null) {
             shoppingOrderImpl.setComments(StringPool.BLANK);
         } else {
@@ -440,30 +383,10 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
             shoppingOrderImpl.setExternalPaymentId(externalPaymentId);
         }
 
-        if (ppTxnId == null) {
-            shoppingOrderImpl.setPpTxnId(StringPool.BLANK);
+        if (paymentType == null) {
+            shoppingOrderImpl.setPaymentType(StringPool.BLANK);
         } else {
-            shoppingOrderImpl.setPpTxnId(ppTxnId);
-        }
-
-        if (ppPaymentStatus == null) {
-            shoppingOrderImpl.setPpPaymentStatus(StringPool.BLANK);
-        } else {
-            shoppingOrderImpl.setPpPaymentStatus(ppPaymentStatus);
-        }
-
-        shoppingOrderImpl.setPpPaymentGross(ppPaymentGross);
-
-        if (ppReceiverEmail == null) {
-            shoppingOrderImpl.setPpReceiverEmail(StringPool.BLANK);
-        } else {
-            shoppingOrderImpl.setPpReceiverEmail(ppReceiverEmail);
-        }
-
-        if (ppPayerEmail == null) {
-            shoppingOrderImpl.setPpPayerEmail(StringPool.BLANK);
-        } else {
-            shoppingOrderImpl.setPpPayerEmail(ppPayerEmail);
+            shoppingOrderImpl.setPaymentType(paymentType);
         }
 
         shoppingOrderImpl.setSendOrderEmail(sendOrderEmail);
@@ -519,19 +442,9 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         shippingPostCode = objectInput.readUTF();
         shippingCountry = objectInput.readUTF();
         shippingPhone = objectInput.readUTF();
-        ccName = objectInput.readUTF();
-        ccType = objectInput.readUTF();
-        ccNumber = objectInput.readUTF();
-        ccExpMonth = objectInput.readInt();
-        ccExpYear = objectInput.readInt();
-        ccVerNumber = objectInput.readUTF();
         comments = objectInput.readUTF();
         externalPaymentId = objectInput.readUTF();
-        ppTxnId = objectInput.readUTF();
-        ppPaymentStatus = objectInput.readUTF();
-        ppPaymentGross = objectInput.readDouble();
-        ppReceiverEmail = objectInput.readUTF();
-        ppPayerEmail = objectInput.readUTF();
+        paymentType = objectInput.readUTF();
         sendOrderEmail = objectInput.readBoolean();
         sendShippingEmail = objectInput.readBoolean();
         shippingMethodId = objectInput.readLong();
@@ -723,33 +636,6 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
             objectOutput.writeUTF(shippingPhone);
         }
 
-        if (ccName == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(ccName);
-        }
-
-        if (ccType == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(ccType);
-        }
-
-        if (ccNumber == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(ccNumber);
-        }
-
-        objectOutput.writeInt(ccExpMonth);
-        objectOutput.writeInt(ccExpYear);
-
-        if (ccVerNumber == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(ccVerNumber);
-        }
-
         if (comments == null) {
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
@@ -762,30 +648,10 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
             objectOutput.writeUTF(externalPaymentId);
         }
 
-        if (ppTxnId == null) {
+        if (paymentType == null) {
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
-            objectOutput.writeUTF(ppTxnId);
-        }
-
-        if (ppPaymentStatus == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(ppPaymentStatus);
-        }
-
-        objectOutput.writeDouble(ppPaymentGross);
-
-        if (ppReceiverEmail == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(ppReceiverEmail);
-        }
-
-        if (ppPayerEmail == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(ppPayerEmail);
+            objectOutput.writeUTF(paymentType);
         }
 
         objectOutput.writeBoolean(sendOrderEmail);

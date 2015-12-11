@@ -77,19 +77,9 @@
 		<property name="shippingPostCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shippingCountry" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shippingPhone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="ccName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="ccType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="ccNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="ccExpMonth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="ccExpYear" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="ccVerNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="externalPaymentId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="ppTxnId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="ppPaymentStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="ppPaymentGross" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="ppReceiverEmail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="ppPayerEmail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="paymentType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sendOrderEmail" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="sendShippingEmail" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="shippingMethodId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -142,12 +132,16 @@
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="defaultEmailAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="productsMainPageUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cartPageUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="checkoutPageUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="onAddToCart" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="currency" type="com.liferay.portal.dao.orm.hibernate.StringType" column="currency_" />
 		<property name="country" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="userTypes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="checkoutPageFullscreen" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="checkoutCompletePageTemplate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="orderCreatedEmailTemplate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="orderShippedEmailTemplate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="orderCreatedEmailSubject" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -159,5 +153,13 @@
 		<property name="stripeLiveSecretKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="stripeLivePublishableKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="stripeApiVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="integrateWithBraintree" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="braintreePrivateKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="braintreePublicKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="braintreeMerchantId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="useBraintreeSandbox" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="braintreeSandboxMerchantId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="braintreeSandboxPrivateKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="braintreeSandboxPublicKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

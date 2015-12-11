@@ -59,12 +59,16 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             { "createDate", Types.TIMESTAMP },
             { "modifiedDate", Types.TIMESTAMP },
             { "name", Types.VARCHAR },
+            { "defaultEmailAddress", Types.VARCHAR },
+            { "productsMainPageUuid", Types.VARCHAR },
             { "cartPageUuid", Types.VARCHAR },
             { "checkoutPageUuid", Types.VARCHAR },
             { "onAddToCart", Types.VARCHAR },
             { "currency_", Types.VARCHAR },
             { "country", Types.VARCHAR },
             { "userTypes", Types.VARCHAR },
+            { "checkoutPageFullscreen", Types.BOOLEAN },
+            { "checkoutCompletePageTemplate", Types.VARCHAR },
             { "orderCreatedEmailTemplate", Types.VARCHAR },
             { "orderShippedEmailTemplate", Types.VARCHAR },
             { "orderCreatedEmailSubject", Types.VARCHAR },
@@ -75,9 +79,17 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             { "stripeTesting", Types.BOOLEAN },
             { "stripeLiveSecretKey", Types.VARCHAR },
             { "stripeLivePublishableKey", Types.VARCHAR },
-            { "stripeApiVersion", Types.VARCHAR }
+            { "stripeApiVersion", Types.VARCHAR },
+            { "integrateWithBraintree", Types.BOOLEAN },
+            { "braintreePrivateKey", Types.VARCHAR },
+            { "braintreePublicKey", Types.VARCHAR },
+            { "braintreeMerchantId", Types.VARCHAR },
+            { "useBraintreeSandbox", Types.BOOLEAN },
+            { "braintreeSandboxMerchantId", Types.VARCHAR },
+            { "braintreeSandboxPrivateKey", Types.VARCHAR },
+            { "braintreeSandboxPublicKey", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStore (groupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,cartPageUuid VARCHAR(75) null,checkoutPageUuid VARCHAR(75) null,onAddToCart VARCHAR(75) null,currency_ VARCHAR(75) null,country VARCHAR(75) null,userTypes VARCHAR(75) null,orderCreatedEmailTemplate TEXT null,orderShippedEmailTemplate TEXT null,orderCreatedEmailSubject VARCHAR(75) null,orderCreatedEmailFromAddress VARCHAR(75) null,integrateWithStripe BOOLEAN,stripeTestSecretKey VARCHAR(75) null,stripeTestPublishableKey VARCHAR(75) null,stripeTesting BOOLEAN,stripeLiveSecretKey VARCHAR(75) null,stripeLivePublishableKey VARCHAR(75) null,stripeApiVersion VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStore (groupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(200) null,defaultEmailAddress VARCHAR(75) null,productsMainPageUuid VARCHAR(75) null,cartPageUuid VARCHAR(75) null,checkoutPageUuid VARCHAR(75) null,onAddToCart VARCHAR(75) null,currency_ VARCHAR(75) null,country VARCHAR(75) null,userTypes VARCHAR(75) null,checkoutPageFullscreen BOOLEAN,checkoutCompletePageTemplate TEXT null,orderCreatedEmailTemplate TEXT null,orderShippedEmailTemplate TEXT null,orderCreatedEmailSubject VARCHAR(75) null,orderCreatedEmailFromAddress VARCHAR(75) null,integrateWithStripe BOOLEAN,stripeTestSecretKey VARCHAR(75) null,stripeTestPublishableKey VARCHAR(75) null,stripeTesting BOOLEAN,stripeLiveSecretKey VARCHAR(75) null,stripeLivePublishableKey VARCHAR(75) null,stripeApiVersion VARCHAR(75) null,integrateWithBraintree BOOLEAN,braintreePrivateKey VARCHAR(75) null,braintreePublicKey VARCHAR(75) null,braintreeMerchantId VARCHAR(75) null,useBraintreeSandbox BOOLEAN,braintreeSandboxMerchantId VARCHAR(75) null,braintreeSandboxPrivateKey VARCHAR(75) null,braintreeSandboxPublicKey VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingStore";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingStore.groupId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingStore.groupId ASC";
@@ -105,12 +117,16 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
     private Date _createDate;
     private Date _modifiedDate;
     private String _name;
+    private String _defaultEmailAddress;
+    private String _productsMainPageUuid;
     private String _cartPageUuid;
     private String _checkoutPageUuid;
     private String _onAddToCart;
     private String _currency;
     private String _country;
     private String _userTypes;
+    private boolean _checkoutPageFullscreen;
+    private String _checkoutCompletePageTemplate;
     private String _orderCreatedEmailTemplate;
     private String _orderShippedEmailTemplate;
     private String _orderCreatedEmailSubject;
@@ -122,6 +138,14 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
     private String _stripeLiveSecretKey;
     private String _stripeLivePublishableKey;
     private String _stripeApiVersion;
+    private boolean _integrateWithBraintree;
+    private String _braintreePrivateKey;
+    private String _braintreePublicKey;
+    private String _braintreeMerchantId;
+    private boolean _useBraintreeSandbox;
+    private String _braintreeSandboxMerchantId;
+    private String _braintreeSandboxPrivateKey;
+    private String _braintreeSandboxPublicKey;
     private ShoppingStore _escapedModel;
 
     public ShoppingStoreModelImpl() {
@@ -147,12 +171,16 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         model.setCreateDate(soapModel.getCreateDate());
         model.setModifiedDate(soapModel.getModifiedDate());
         model.setName(soapModel.getName());
+        model.setDefaultEmailAddress(soapModel.getDefaultEmailAddress());
+        model.setProductsMainPageUuid(soapModel.getProductsMainPageUuid());
         model.setCartPageUuid(soapModel.getCartPageUuid());
         model.setCheckoutPageUuid(soapModel.getCheckoutPageUuid());
         model.setOnAddToCart(soapModel.getOnAddToCart());
         model.setCurrency(soapModel.getCurrency());
         model.setCountry(soapModel.getCountry());
         model.setUserTypes(soapModel.getUserTypes());
+        model.setCheckoutPageFullscreen(soapModel.getCheckoutPageFullscreen());
+        model.setCheckoutCompletePageTemplate(soapModel.getCheckoutCompletePageTemplate());
         model.setOrderCreatedEmailTemplate(soapModel.getOrderCreatedEmailTemplate());
         model.setOrderShippedEmailTemplate(soapModel.getOrderShippedEmailTemplate());
         model.setOrderCreatedEmailSubject(soapModel.getOrderCreatedEmailSubject());
@@ -164,6 +192,14 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         model.setStripeLiveSecretKey(soapModel.getStripeLiveSecretKey());
         model.setStripeLivePublishableKey(soapModel.getStripeLivePublishableKey());
         model.setStripeApiVersion(soapModel.getStripeApiVersion());
+        model.setIntegrateWithBraintree(soapModel.getIntegrateWithBraintree());
+        model.setBraintreePrivateKey(soapModel.getBraintreePrivateKey());
+        model.setBraintreePublicKey(soapModel.getBraintreePublicKey());
+        model.setBraintreeMerchantId(soapModel.getBraintreeMerchantId());
+        model.setUseBraintreeSandbox(soapModel.getUseBraintreeSandbox());
+        model.setBraintreeSandboxMerchantId(soapModel.getBraintreeSandboxMerchantId());
+        model.setBraintreeSandboxPrivateKey(soapModel.getBraintreeSandboxPrivateKey());
+        model.setBraintreeSandboxPublicKey(soapModel.getBraintreeSandboxPublicKey());
 
         return model;
     }
@@ -229,12 +265,17 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         attributes.put("createDate", getCreateDate());
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("name", getName());
+        attributes.put("defaultEmailAddress", getDefaultEmailAddress());
+        attributes.put("productsMainPageUuid", getProductsMainPageUuid());
         attributes.put("cartPageUuid", getCartPageUuid());
         attributes.put("checkoutPageUuid", getCheckoutPageUuid());
         attributes.put("onAddToCart", getOnAddToCart());
         attributes.put("currency", getCurrency());
         attributes.put("country", getCountry());
         attributes.put("userTypes", getUserTypes());
+        attributes.put("checkoutPageFullscreen", getCheckoutPageFullscreen());
+        attributes.put("checkoutCompletePageTemplate",
+            getCheckoutCompletePageTemplate());
         attributes.put("orderCreatedEmailTemplate",
             getOrderCreatedEmailTemplate());
         attributes.put("orderShippedEmailTemplate",
@@ -249,6 +290,17 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         attributes.put("stripeLiveSecretKey", getStripeLiveSecretKey());
         attributes.put("stripeLivePublishableKey", getStripeLivePublishableKey());
         attributes.put("stripeApiVersion", getStripeApiVersion());
+        attributes.put("integrateWithBraintree", getIntegrateWithBraintree());
+        attributes.put("braintreePrivateKey", getBraintreePrivateKey());
+        attributes.put("braintreePublicKey", getBraintreePublicKey());
+        attributes.put("braintreeMerchantId", getBraintreeMerchantId());
+        attributes.put("useBraintreeSandbox", getUseBraintreeSandbox());
+        attributes.put("braintreeSandboxMerchantId",
+            getBraintreeSandboxMerchantId());
+        attributes.put("braintreeSandboxPrivateKey",
+            getBraintreeSandboxPrivateKey());
+        attributes.put("braintreeSandboxPublicKey",
+            getBraintreeSandboxPublicKey());
 
         return attributes;
     }
@@ -297,6 +349,20 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             setName(name);
         }
 
+        String defaultEmailAddress = (String) attributes.get(
+                "defaultEmailAddress");
+
+        if (defaultEmailAddress != null) {
+            setDefaultEmailAddress(defaultEmailAddress);
+        }
+
+        String productsMainPageUuid = (String) attributes.get(
+                "productsMainPageUuid");
+
+        if (productsMainPageUuid != null) {
+            setProductsMainPageUuid(productsMainPageUuid);
+        }
+
         String cartPageUuid = (String) attributes.get("cartPageUuid");
 
         if (cartPageUuid != null) {
@@ -331,6 +397,20 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
         if (userTypes != null) {
             setUserTypes(userTypes);
+        }
+
+        Boolean checkoutPageFullscreen = (Boolean) attributes.get(
+                "checkoutPageFullscreen");
+
+        if (checkoutPageFullscreen != null) {
+            setCheckoutPageFullscreen(checkoutPageFullscreen);
+        }
+
+        String checkoutCompletePageTemplate = (String) attributes.get(
+                "checkoutCompletePageTemplate");
+
+        if (checkoutCompletePageTemplate != null) {
+            setCheckoutCompletePageTemplate(checkoutCompletePageTemplate);
         }
 
         String orderCreatedEmailTemplate = (String) attributes.get(
@@ -406,6 +486,62 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
         if (stripeApiVersion != null) {
             setStripeApiVersion(stripeApiVersion);
+        }
+
+        Boolean integrateWithBraintree = (Boolean) attributes.get(
+                "integrateWithBraintree");
+
+        if (integrateWithBraintree != null) {
+            setIntegrateWithBraintree(integrateWithBraintree);
+        }
+
+        String braintreePrivateKey = (String) attributes.get(
+                "braintreePrivateKey");
+
+        if (braintreePrivateKey != null) {
+            setBraintreePrivateKey(braintreePrivateKey);
+        }
+
+        String braintreePublicKey = (String) attributes.get(
+                "braintreePublicKey");
+
+        if (braintreePublicKey != null) {
+            setBraintreePublicKey(braintreePublicKey);
+        }
+
+        String braintreeMerchantId = (String) attributes.get(
+                "braintreeMerchantId");
+
+        if (braintreeMerchantId != null) {
+            setBraintreeMerchantId(braintreeMerchantId);
+        }
+
+        Boolean useBraintreeSandbox = (Boolean) attributes.get(
+                "useBraintreeSandbox");
+
+        if (useBraintreeSandbox != null) {
+            setUseBraintreeSandbox(useBraintreeSandbox);
+        }
+
+        String braintreeSandboxMerchantId = (String) attributes.get(
+                "braintreeSandboxMerchantId");
+
+        if (braintreeSandboxMerchantId != null) {
+            setBraintreeSandboxMerchantId(braintreeSandboxMerchantId);
+        }
+
+        String braintreeSandboxPrivateKey = (String) attributes.get(
+                "braintreeSandboxPrivateKey");
+
+        if (braintreeSandboxPrivateKey != null) {
+            setBraintreeSandboxPrivateKey(braintreeSandboxPrivateKey);
+        }
+
+        String braintreeSandboxPublicKey = (String) attributes.get(
+                "braintreeSandboxPublicKey");
+
+        if (braintreeSandboxPublicKey != null) {
+            setBraintreeSandboxPublicKey(braintreeSandboxPublicKey);
         }
     }
 
@@ -506,6 +642,36 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @JSON
     @Override
+    public String getDefaultEmailAddress() {
+        if (_defaultEmailAddress == null) {
+            return StringPool.BLANK;
+        } else {
+            return _defaultEmailAddress;
+        }
+    }
+
+    @Override
+    public void setDefaultEmailAddress(String defaultEmailAddress) {
+        _defaultEmailAddress = defaultEmailAddress;
+    }
+
+    @JSON
+    @Override
+    public String getProductsMainPageUuid() {
+        if (_productsMainPageUuid == null) {
+            return StringPool.BLANK;
+        } else {
+            return _productsMainPageUuid;
+        }
+    }
+
+    @Override
+    public void setProductsMainPageUuid(String productsMainPageUuid) {
+        _productsMainPageUuid = productsMainPageUuid;
+    }
+
+    @JSON
+    @Override
     public String getCartPageUuid() {
         if (_cartPageUuid == null) {
             return StringPool.BLANK;
@@ -592,6 +758,38 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
     @Override
     public void setUserTypes(String userTypes) {
         _userTypes = userTypes;
+    }
+
+    @JSON
+    @Override
+    public boolean getCheckoutPageFullscreen() {
+        return _checkoutPageFullscreen;
+    }
+
+    @Override
+    public boolean isCheckoutPageFullscreen() {
+        return _checkoutPageFullscreen;
+    }
+
+    @Override
+    public void setCheckoutPageFullscreen(boolean checkoutPageFullscreen) {
+        _checkoutPageFullscreen = checkoutPageFullscreen;
+    }
+
+    @JSON
+    @Override
+    public String getCheckoutCompletePageTemplate() {
+        if (_checkoutCompletePageTemplate == null) {
+            return StringPool.BLANK;
+        } else {
+            return _checkoutCompletePageTemplate;
+        }
+    }
+
+    @Override
+    public void setCheckoutCompletePageTemplate(
+        String checkoutCompletePageTemplate) {
+        _checkoutCompletePageTemplate = checkoutCompletePageTemplate;
     }
 
     @JSON
@@ -762,6 +960,128 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         _stripeApiVersion = stripeApiVersion;
     }
 
+    @JSON
+    @Override
+    public boolean getIntegrateWithBraintree() {
+        return _integrateWithBraintree;
+    }
+
+    @Override
+    public boolean isIntegrateWithBraintree() {
+        return _integrateWithBraintree;
+    }
+
+    @Override
+    public void setIntegrateWithBraintree(boolean integrateWithBraintree) {
+        _integrateWithBraintree = integrateWithBraintree;
+    }
+
+    @JSON
+    @Override
+    public String getBraintreePrivateKey() {
+        if (_braintreePrivateKey == null) {
+            return StringPool.BLANK;
+        } else {
+            return _braintreePrivateKey;
+        }
+    }
+
+    @Override
+    public void setBraintreePrivateKey(String braintreePrivateKey) {
+        _braintreePrivateKey = braintreePrivateKey;
+    }
+
+    @JSON
+    @Override
+    public String getBraintreePublicKey() {
+        if (_braintreePublicKey == null) {
+            return StringPool.BLANK;
+        } else {
+            return _braintreePublicKey;
+        }
+    }
+
+    @Override
+    public void setBraintreePublicKey(String braintreePublicKey) {
+        _braintreePublicKey = braintreePublicKey;
+    }
+
+    @JSON
+    @Override
+    public String getBraintreeMerchantId() {
+        if (_braintreeMerchantId == null) {
+            return StringPool.BLANK;
+        } else {
+            return _braintreeMerchantId;
+        }
+    }
+
+    @Override
+    public void setBraintreeMerchantId(String braintreeMerchantId) {
+        _braintreeMerchantId = braintreeMerchantId;
+    }
+
+    @JSON
+    @Override
+    public boolean getUseBraintreeSandbox() {
+        return _useBraintreeSandbox;
+    }
+
+    @Override
+    public boolean isUseBraintreeSandbox() {
+        return _useBraintreeSandbox;
+    }
+
+    @Override
+    public void setUseBraintreeSandbox(boolean useBraintreeSandbox) {
+        _useBraintreeSandbox = useBraintreeSandbox;
+    }
+
+    @JSON
+    @Override
+    public String getBraintreeSandboxMerchantId() {
+        if (_braintreeSandboxMerchantId == null) {
+            return StringPool.BLANK;
+        } else {
+            return _braintreeSandboxMerchantId;
+        }
+    }
+
+    @Override
+    public void setBraintreeSandboxMerchantId(String braintreeSandboxMerchantId) {
+        _braintreeSandboxMerchantId = braintreeSandboxMerchantId;
+    }
+
+    @JSON
+    @Override
+    public String getBraintreeSandboxPrivateKey() {
+        if (_braintreeSandboxPrivateKey == null) {
+            return StringPool.BLANK;
+        } else {
+            return _braintreeSandboxPrivateKey;
+        }
+    }
+
+    @Override
+    public void setBraintreeSandboxPrivateKey(String braintreeSandboxPrivateKey) {
+        _braintreeSandboxPrivateKey = braintreeSandboxPrivateKey;
+    }
+
+    @JSON
+    @Override
+    public String getBraintreeSandboxPublicKey() {
+        if (_braintreeSandboxPublicKey == null) {
+            return StringPool.BLANK;
+        } else {
+            return _braintreeSandboxPublicKey;
+        }
+    }
+
+    @Override
+    public void setBraintreeSandboxPublicKey(String braintreeSandboxPublicKey) {
+        _braintreeSandboxPublicKey = braintreeSandboxPublicKey;
+    }
+
     @Override
     public ExpandoBridge getExpandoBridge() {
         return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -796,12 +1116,16 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         shoppingStoreImpl.setCreateDate(getCreateDate());
         shoppingStoreImpl.setModifiedDate(getModifiedDate());
         shoppingStoreImpl.setName(getName());
+        shoppingStoreImpl.setDefaultEmailAddress(getDefaultEmailAddress());
+        shoppingStoreImpl.setProductsMainPageUuid(getProductsMainPageUuid());
         shoppingStoreImpl.setCartPageUuid(getCartPageUuid());
         shoppingStoreImpl.setCheckoutPageUuid(getCheckoutPageUuid());
         shoppingStoreImpl.setOnAddToCart(getOnAddToCart());
         shoppingStoreImpl.setCurrency(getCurrency());
         shoppingStoreImpl.setCountry(getCountry());
         shoppingStoreImpl.setUserTypes(getUserTypes());
+        shoppingStoreImpl.setCheckoutPageFullscreen(getCheckoutPageFullscreen());
+        shoppingStoreImpl.setCheckoutCompletePageTemplate(getCheckoutCompletePageTemplate());
         shoppingStoreImpl.setOrderCreatedEmailTemplate(getOrderCreatedEmailTemplate());
         shoppingStoreImpl.setOrderShippedEmailTemplate(getOrderShippedEmailTemplate());
         shoppingStoreImpl.setOrderCreatedEmailSubject(getOrderCreatedEmailSubject());
@@ -813,6 +1137,14 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         shoppingStoreImpl.setStripeLiveSecretKey(getStripeLiveSecretKey());
         shoppingStoreImpl.setStripeLivePublishableKey(getStripeLivePublishableKey());
         shoppingStoreImpl.setStripeApiVersion(getStripeApiVersion());
+        shoppingStoreImpl.setIntegrateWithBraintree(getIntegrateWithBraintree());
+        shoppingStoreImpl.setBraintreePrivateKey(getBraintreePrivateKey());
+        shoppingStoreImpl.setBraintreePublicKey(getBraintreePublicKey());
+        shoppingStoreImpl.setBraintreeMerchantId(getBraintreeMerchantId());
+        shoppingStoreImpl.setUseBraintreeSandbox(getUseBraintreeSandbox());
+        shoppingStoreImpl.setBraintreeSandboxMerchantId(getBraintreeSandboxMerchantId());
+        shoppingStoreImpl.setBraintreeSandboxPrivateKey(getBraintreeSandboxPrivateKey());
+        shoppingStoreImpl.setBraintreeSandboxPublicKey(getBraintreeSandboxPublicKey());
 
         shoppingStoreImpl.resetOriginalValues();
 
@@ -904,6 +1236,24 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             shoppingStoreCacheModel.name = null;
         }
 
+        shoppingStoreCacheModel.defaultEmailAddress = getDefaultEmailAddress();
+
+        String defaultEmailAddress = shoppingStoreCacheModel.defaultEmailAddress;
+
+        if ((defaultEmailAddress != null) &&
+                (defaultEmailAddress.length() == 0)) {
+            shoppingStoreCacheModel.defaultEmailAddress = null;
+        }
+
+        shoppingStoreCacheModel.productsMainPageUuid = getProductsMainPageUuid();
+
+        String productsMainPageUuid = shoppingStoreCacheModel.productsMainPageUuid;
+
+        if ((productsMainPageUuid != null) &&
+                (productsMainPageUuid.length() == 0)) {
+            shoppingStoreCacheModel.productsMainPageUuid = null;
+        }
+
         shoppingStoreCacheModel.cartPageUuid = getCartPageUuid();
 
         String cartPageUuid = shoppingStoreCacheModel.cartPageUuid;
@@ -950,6 +1300,17 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
         if ((userTypes != null) && (userTypes.length() == 0)) {
             shoppingStoreCacheModel.userTypes = null;
+        }
+
+        shoppingStoreCacheModel.checkoutPageFullscreen = getCheckoutPageFullscreen();
+
+        shoppingStoreCacheModel.checkoutCompletePageTemplate = getCheckoutCompletePageTemplate();
+
+        String checkoutCompletePageTemplate = shoppingStoreCacheModel.checkoutCompletePageTemplate;
+
+        if ((checkoutCompletePageTemplate != null) &&
+                (checkoutCompletePageTemplate.length() == 0)) {
+            shoppingStoreCacheModel.checkoutCompletePageTemplate = null;
         }
 
         shoppingStoreCacheModel.orderCreatedEmailTemplate = getOrderCreatedEmailTemplate();
@@ -1036,12 +1397,69 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             shoppingStoreCacheModel.stripeApiVersion = null;
         }
 
+        shoppingStoreCacheModel.integrateWithBraintree = getIntegrateWithBraintree();
+
+        shoppingStoreCacheModel.braintreePrivateKey = getBraintreePrivateKey();
+
+        String braintreePrivateKey = shoppingStoreCacheModel.braintreePrivateKey;
+
+        if ((braintreePrivateKey != null) &&
+                (braintreePrivateKey.length() == 0)) {
+            shoppingStoreCacheModel.braintreePrivateKey = null;
+        }
+
+        shoppingStoreCacheModel.braintreePublicKey = getBraintreePublicKey();
+
+        String braintreePublicKey = shoppingStoreCacheModel.braintreePublicKey;
+
+        if ((braintreePublicKey != null) && (braintreePublicKey.length() == 0)) {
+            shoppingStoreCacheModel.braintreePublicKey = null;
+        }
+
+        shoppingStoreCacheModel.braintreeMerchantId = getBraintreeMerchantId();
+
+        String braintreeMerchantId = shoppingStoreCacheModel.braintreeMerchantId;
+
+        if ((braintreeMerchantId != null) &&
+                (braintreeMerchantId.length() == 0)) {
+            shoppingStoreCacheModel.braintreeMerchantId = null;
+        }
+
+        shoppingStoreCacheModel.useBraintreeSandbox = getUseBraintreeSandbox();
+
+        shoppingStoreCacheModel.braintreeSandboxMerchantId = getBraintreeSandboxMerchantId();
+
+        String braintreeSandboxMerchantId = shoppingStoreCacheModel.braintreeSandboxMerchantId;
+
+        if ((braintreeSandboxMerchantId != null) &&
+                (braintreeSandboxMerchantId.length() == 0)) {
+            shoppingStoreCacheModel.braintreeSandboxMerchantId = null;
+        }
+
+        shoppingStoreCacheModel.braintreeSandboxPrivateKey = getBraintreeSandboxPrivateKey();
+
+        String braintreeSandboxPrivateKey = shoppingStoreCacheModel.braintreeSandboxPrivateKey;
+
+        if ((braintreeSandboxPrivateKey != null) &&
+                (braintreeSandboxPrivateKey.length() == 0)) {
+            shoppingStoreCacheModel.braintreeSandboxPrivateKey = null;
+        }
+
+        shoppingStoreCacheModel.braintreeSandboxPublicKey = getBraintreeSandboxPublicKey();
+
+        String braintreeSandboxPublicKey = shoppingStoreCacheModel.braintreeSandboxPublicKey;
+
+        if ((braintreeSandboxPublicKey != null) &&
+                (braintreeSandboxPublicKey.length() == 0)) {
+            shoppingStoreCacheModel.braintreeSandboxPublicKey = null;
+        }
+
         return shoppingStoreCacheModel;
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(49);
+        StringBundler sb = new StringBundler(73);
 
         sb.append("{groupId=");
         sb.append(getGroupId());
@@ -1057,6 +1475,10 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(getModifiedDate());
         sb.append(", name=");
         sb.append(getName());
+        sb.append(", defaultEmailAddress=");
+        sb.append(getDefaultEmailAddress());
+        sb.append(", productsMainPageUuid=");
+        sb.append(getProductsMainPageUuid());
         sb.append(", cartPageUuid=");
         sb.append(getCartPageUuid());
         sb.append(", checkoutPageUuid=");
@@ -1069,6 +1491,10 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(getCountry());
         sb.append(", userTypes=");
         sb.append(getUserTypes());
+        sb.append(", checkoutPageFullscreen=");
+        sb.append(getCheckoutPageFullscreen());
+        sb.append(", checkoutCompletePageTemplate=");
+        sb.append(getCheckoutCompletePageTemplate());
         sb.append(", orderCreatedEmailTemplate=");
         sb.append(getOrderCreatedEmailTemplate());
         sb.append(", orderShippedEmailTemplate=");
@@ -1091,6 +1517,22 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(getStripeLivePublishableKey());
         sb.append(", stripeApiVersion=");
         sb.append(getStripeApiVersion());
+        sb.append(", integrateWithBraintree=");
+        sb.append(getIntegrateWithBraintree());
+        sb.append(", braintreePrivateKey=");
+        sb.append(getBraintreePrivateKey());
+        sb.append(", braintreePublicKey=");
+        sb.append(getBraintreePublicKey());
+        sb.append(", braintreeMerchantId=");
+        sb.append(getBraintreeMerchantId());
+        sb.append(", useBraintreeSandbox=");
+        sb.append(getUseBraintreeSandbox());
+        sb.append(", braintreeSandboxMerchantId=");
+        sb.append(getBraintreeSandboxMerchantId());
+        sb.append(", braintreeSandboxPrivateKey=");
+        sb.append(getBraintreeSandboxPrivateKey());
+        sb.append(", braintreeSandboxPublicKey=");
+        sb.append(getBraintreeSandboxPublicKey());
         sb.append("}");
 
         return sb.toString();
@@ -1098,7 +1540,7 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(76);
+        StringBundler sb = new StringBundler(112);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStore");
@@ -1133,6 +1575,14 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(getName());
         sb.append("]]></column-value></column>");
         sb.append(
+            "<column><column-name>defaultEmailAddress</column-name><column-value><![CDATA[");
+        sb.append(getDefaultEmailAddress());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>productsMainPageUuid</column-name><column-value><![CDATA[");
+        sb.append(getProductsMainPageUuid());
+        sb.append("]]></column-value></column>");
+        sb.append(
             "<column><column-name>cartPageUuid</column-name><column-value><![CDATA[");
         sb.append(getCartPageUuid());
         sb.append("]]></column-value></column>");
@@ -1155,6 +1605,14 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(
             "<column><column-name>userTypes</column-name><column-value><![CDATA[");
         sb.append(getUserTypes());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>checkoutPageFullscreen</column-name><column-value><![CDATA[");
+        sb.append(getCheckoutPageFullscreen());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>checkoutCompletePageTemplate</column-name><column-value><![CDATA[");
+        sb.append(getCheckoutCompletePageTemplate());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>orderCreatedEmailTemplate</column-name><column-value><![CDATA[");
@@ -1199,6 +1657,38 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         sb.append(
             "<column><column-name>stripeApiVersion</column-name><column-value><![CDATA[");
         sb.append(getStripeApiVersion());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>integrateWithBraintree</column-name><column-value><![CDATA[");
+        sb.append(getIntegrateWithBraintree());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>braintreePrivateKey</column-name><column-value><![CDATA[");
+        sb.append(getBraintreePrivateKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>braintreePublicKey</column-name><column-value><![CDATA[");
+        sb.append(getBraintreePublicKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>braintreeMerchantId</column-name><column-value><![CDATA[");
+        sb.append(getBraintreeMerchantId());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>useBraintreeSandbox</column-name><column-value><![CDATA[");
+        sb.append(getUseBraintreeSandbox());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>braintreeSandboxMerchantId</column-name><column-value><![CDATA[");
+        sb.append(getBraintreeSandboxMerchantId());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>braintreeSandboxPrivateKey</column-name><column-value><![CDATA[");
+        sb.append(getBraintreeSandboxPrivateKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>braintreeSandboxPublicKey</column-name><column-value><![CDATA[");
+        sb.append(getBraintreeSandboxPublicKey());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

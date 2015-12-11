@@ -2,9 +2,11 @@ package com.fsquare.shopping.portlet.shoppingstore;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.sql.Blob;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletContext;
@@ -13,17 +15,28 @@ import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import com.braintreegateway.BraintreeGateway;
+import com.braintreegateway.ClientTokenRequest;
+import com.braintreegateway.Environment;
+import com.braintreegateway.Result;
+import com.braintreegateway.Transaction;
+import com.braintreegateway.Transaction.GatewayRejectionReason;
+import com.braintreegateway.TransactionRequest;
 import com.fsquare.shopping.NoSuchShoppingStoreException;
 import com.fsquare.shopping.messaging.Destinations;
 import com.fsquare.shopping.model.ShoppingCoupon;
 import com.fsquare.shopping.model.ShoppingOrder;
+import com.fsquare.shopping.model.ShoppingOrderItem;
 import com.fsquare.shopping.model.ShoppingStore;
 import com.fsquare.shopping.model.impl.ShoppingOrderImpl;
+import com.fsquare.shopping.model.impl.ShoppingOrderItemImpl;
+import com.fsquare.shopping.portlet.BraintreePayment;
 import com.fsquare.shopping.portlet.util.ShoppingPortletUtil;
 import com.fsquare.shopping.service.ShoppingCouponLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingStoreLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.OutputBlob;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
@@ -34,13 +47,22 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
+import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ClassNameLocalService;
+import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinderUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
@@ -71,6 +93,12 @@ public class StorePortlet extends MVCPortlet{
 				sendTestEmail(resourceRequest, resourceResponse);
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_STRIPE_WEBHOOK)) {
 				stripeWebhook(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_OPEN_TEST_BRAINTREE_PAYPAL)) {
+				openTestBraintreePaypalForm(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_GET_BRAINTREE_CLIENT_TOKEN)) {
+				getBraintreeClientToken(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_BRAINTREE_TRANSACTION)) {
+				doBraintreeTransaction(resourceRequest, resourceResponse);
 			}
 			
 		}
@@ -79,6 +107,98 @@ public class StorePortlet extends MVCPortlet{
 		}
 	}
 	
+	private BraintreePayment braintreePayment;
+	
+	private void doBraintreeTransaction(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException, SystemException {
+
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        boolean success = false;
+
+		String nonce = ParamUtil.getString(resourceRequest, "nonce");
+		String amount = ParamUtil.getString(resourceRequest, "amount");
+		
+		Result<Transaction> result = getBraintreeGateway(resourceRequest).doBraintreeTransaction(nonce, amount);
+		
+        jsonObject.put("braintreeResult", JSONFactoryUtil.looseSerialize(result));
+        success = true;
+		
+		jsonObject.put("success", success);
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
+	}
+
+	private BraintreePayment getBraintreeGateway(ResourceRequest resourceRequest) throws PortalException, SystemException{
+		if(braintreePayment == null){
+			System.out.println("--- BraintreePayment ---");
+			ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			braintreePayment = new BraintreePayment(shoppingStore);
+		}
+		return braintreePayment;
+	}
+	
+	private void getBraintreeClientToken(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException, SystemException {
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        boolean success = false;
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+		ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+
+        String clientToken = getBraintreeGateway(resourceRequest).getBraintreeClientToken("");
+        jsonObject.put("braintreeClientToken", clientToken);
+        
+        success = true;
+        
+        jsonObject.put("success", success);
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
+	}
+
+
+	private void openTestBraintreePaypalForm(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws PortalException, SystemException, PortletException, IOException {
+		PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+		ShoppingStore shoppingStore = null;
+		try{
+			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_SHOPPING_STORE, shoppingStore);
+			ClassName journalArticleClassName =  ClassNameLocalServiceUtil.getClassName(JournalArticle.class.getName());
+			List<DDMStructure> structureList = DDMStructureLocalServiceUtil.getClassStructures(themeDisplay.getCompanyId(), journalArticleClassName.getClassNameId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			DDMStructure ddmStructure = null;
+			for(DDMStructure structure: structureList){
+				if("product".equalsIgnoreCase(structure.getName(themeDisplay.getLocale()))){
+					ddmStructure = structure;
+					break;
+				}
+			}
+			if(ddmStructure != null){
+				List<JournalArticle> artilceList = JournalArticleServiceUtil.getArticlesByStructureId(themeDisplay.getScopeGroupId(), ddmStructure.getStructureKey(), 0, 1, (OrderByComparator)null);
+				JournalArticle journalArticle = artilceList.get(0);
+				if(journalArticle != null){
+					ShoppingOrderItem shoppingOrderItem = new ShoppingOrderItemImpl();
+					Map<String, String> productMap = ShoppingPortletUtil.getProductDetails(journalArticle);
+					shoppingOrderItem.setArticleId(journalArticle.getArticleId());
+					shoppingOrderItem.setPrice(Double.parseDouble(productMap.get(ShoppingPortletUtil.PRODUCT_PRICE)));
+					shoppingOrderItem.setQuantity(1);
+					shoppingOrderItem.setSku(productMap.get(ShoppingPortletUtil.PRODUCT_SKU));
+					resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_ORDER_ITEM, shoppingOrderItem);
+				}
+			}
+			
+			
+		}catch(NoSuchShoppingStoreException e){}
+		
+		String path = "/shopping-store/test-braintree-paypal-form.jsp";
+		PortletRequestDispatcher dispatcher = portletContext.getRequestDispatcher(path);
+		dispatcher.include(resourceRequest, resourceResponse);
+		
+	}
+
 
 	private void stripeWebhook(ResourceRequest resourceRequest, ResourceResponse resourceResponse) {
 		// TODO Auto-generated method stub
@@ -126,38 +246,14 @@ public class StorePortlet extends MVCPortlet{
 			resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_SHOPPING_STORE, shoppingStore);
 		
 			Long amount = ParamUtil.getLong(resourceRequest, "amount");
-			String cardNumber = ParamUtil.getString(resourceRequest, "cardNumber");
-			String cvc = ParamUtil.getString(resourceRequest, "cvc");
-			Integer expMonth = ParamUtil.getInteger(resourceRequest, "expMonth");
-			Integer expYear = ParamUtil.getInteger(resourceRequest, "expYear");
+			
 			String description = ParamUtil.getString(resourceRequest, "description");
-			String statementDescription = ParamUtil.getString(resourceRequest, "statementDescription");
-			String billingCardHolderName = ParamUtil.getString(resourceRequest, "billingCardHolderName");
-			String billingStreet = ParamUtil.getString(resourceRequest, "billingStreet");
-			String billingStreet2 = ParamUtil.getString(resourceRequest, "billingStreet2");
-			String billingCity = ParamUtil.getString(resourceRequest, "billingCity");
-			String billingPostCode = ParamUtil.getString(resourceRequest, "billingPostCode");
-			String billingStateProvince = ParamUtil.getString(resourceRequest, "billingStateProvince");
-			String billingCountry = ParamUtil.getString(resourceRequest, "billingCountry");
-			String billingEmailReceipe = ParamUtil.getString(resourceRequest, "billingEmailReceipe");
+			
 			String stripeToken = ParamUtil.getString(resourceRequest, "stripeToken");
 			
 			Map<String, Object> chargeParams = new HashMap<String, Object>();
 			chargeParams.put("amount", amount);
-//			chargeParams.put("cardNumber", cardNumber);
-//			chargeParams.put("cvc", cvc);
-//			chargeParams.put("expMonth", expMonth);
-//			chargeParams.put("expYear", expYear);
 			chargeParams.put("description", description);
-//			chargeParams.put("statementDescription", statementDescription);
-//			chargeParams.put("billingCardHolderName", billingCardHolderName);
-//			chargeParams.put("billingStreet", billingStreet);
-//			chargeParams.put("billingStreet2", billingStreet2);
-//			chargeParams.put("billingCity", billingCity);
-//			chargeParams.put("billingPostCode", billingPostCode);
-//			chargeParams.put("billingStateProvince", billingStateProvince);
-//			chargeParams.put("billingCountry", billingCountry);
-//			chargeParams.put("billingEmailReceipe", billingEmailReceipe);
 			chargeParams.put("source", stripeToken);
 			chargeParams.put("currency", shoppingStore.getCurrency().toLowerCase());
 		
@@ -169,7 +265,6 @@ public class StorePortlet extends MVCPortlet{
 					.setApiKey(Stripe.apiKey)
 					.setStripeVersion(Stripe.apiVersion)
 					.setIdempotencyKey(PortalUUIDUtil.generate()).build();
-			
 			
 			try {
 
@@ -207,10 +302,6 @@ public class StorePortlet extends MVCPortlet{
 			jsonObject.put("errorMessage", e.getMessage());
 		}
 		
-//		jsonObject.put("success", success);
-//		writer.print(jsonObject.toString());
-//        writer.flush();
-//        writer.close();
 	}
 
 
@@ -255,12 +346,25 @@ public class StorePortlet extends MVCPortlet{
 			shoppingStore.setModifiedDate(new Date());
 			String name = ParamUtil.getString(resourceRequest, "name");
 			shoppingStore.setName(name);
+			
+			String defaultEmailAddress = ParamUtil.getString(resourceRequest, "defaultEmailAddress");
+			shoppingStore.setDefaultEmailAddress(defaultEmailAddress);;
+			
 			String storeCountry = ParamUtil.getString(resourceRequest, "storeCountry");
 			shoppingStore.setCountry(storeCountry);
 			String checkoutDisplayPage = ParamUtil.getString(resourceRequest, "checkoutDisplayPage"); 
 			shoppingStore.setCheckoutPageUuid(checkoutDisplayPage);
 	        String cartDisplayPage = ParamUtil.getString(resourceRequest, "cartDisplayPage");  
 			shoppingStore.setCartPageUuid(cartDisplayPage);
+			String productsMainPage = ParamUtil.getString(resourceRequest, "productsMainPage");  
+			shoppingStore.setProductsMainPageUuid(productsMainPage);
+			
+			boolean checkoutPageFullscreen = ParamUtil.getBoolean(resourceRequest, "checkoutPageFullscreen");  
+			shoppingStore.setCheckoutPageFullscreen(checkoutPageFullscreen);
+			
+			String checkoutCompletePageTemplate = ParamUtil.getString(resourceRequest, "checkoutCompletePageTemplate");  
+			shoppingStore.setCheckoutCompletePageTemplate(checkoutCompletePageTemplate);
+			
 			String currency = ParamUtil.getString(resourceRequest, "currency");  
 			shoppingStore.setCurrency(currency);
 			String onAddToCart = ParamUtil.getString(resourceRequest, "onAddToCart");  
@@ -273,13 +377,6 @@ public class StorePortlet extends MVCPortlet{
 			String orderCreatedEmailSubject = ParamUtil.getString(resourceRequest, "orderCreatedEmailSubject");  
 			String orderCreatedEmailFromAddress = ParamUtil.getString(resourceRequest, "orderCreatedEmailFromAddress");  
 
-//			byte[] orderCreatedEmailTemplateBytes = orderCreatedEmailTemplate.getBytes(StringPool.UTF8);
-//			Blob orderCreatedEmailTemplateBlob = new OutputBlob(new UnsyncByteArrayInputStream(orderCreatedEmailTemplateBytes), orderCreatedEmailTemplateBytes.length);
-//			
-//			byte[] orderShippedEmailTemplateBytes = orderShippedEmailTemplate.getBytes(StringPool.UTF8);
-//			Blob orderShippedEmailTemplateBlob = new OutputBlob(new UnsyncByteArrayInputStream(orderShippedEmailTemplateBytes), orderShippedEmailTemplateBytes.length);
-			
-			
 			shoppingStore.setOrderCreatedEmailTemplate(orderCreatedEmailTemplate);
 			shoppingStore.setOrderShippedEmailTemplate(orderShippedEmailTemplate);
 			shoppingStore.setOrderCreatedEmailSubject(orderCreatedEmailSubject);
@@ -300,6 +397,24 @@ public class StorePortlet extends MVCPortlet{
 			shoppingStore.setIntegrateWithStripe(integrateWithStripe);
 			String stripeApiVersion = ParamUtil.getString(resourceRequest, "stripeApiVersion");  
 			shoppingStore.setStripeApiVersion(stripeApiVersion);
+		
+			boolean integrateWithBraintree = ParamUtil.getBoolean(resourceRequest, "integrateWithBraintree");  
+			shoppingStore.setIntegrateWithBraintree(integrateWithBraintree);
+			String braintreePrivateKey = ParamUtil.getString(resourceRequest, "braintreePrivateKey"); 
+			shoppingStore.setBraintreePrivateKey(braintreePrivateKey);
+			String braintreePublicKey = ParamUtil.getString(resourceRequest, "braintreePublicKey"); 
+			shoppingStore.setBraintreePublicKey(braintreePublicKey);
+			String braintreeMerchantId = ParamUtil.getString(resourceRequest, "braintreeMerchantId"); 
+			shoppingStore.setBraintreeMerchantId(braintreeMerchantId);
+			
+			boolean useBraintreeSandbox = ParamUtil.getBoolean(resourceRequest, "useBraintreeSandbox");  
+			shoppingStore.setUseBraintreeSandbox(useBraintreeSandbox);;
+			String braintreeSandboxPrivateKey = ParamUtil.getString(resourceRequest, "braintreeSandboxPrivateKey"); 
+			shoppingStore.setBraintreeSandboxPrivateKey(braintreeSandboxPrivateKey);
+			String braintreeSandboxPublicKey = ParamUtil.getString(resourceRequest, "braintreeSandboxPublicKey");
+			shoppingStore.setBraintreeSandboxPublicKey(braintreeSandboxPublicKey);
+			String braintreeSandboxMerchantId = ParamUtil.getString(resourceRequest, "braintreeSandboxMerchantId"); 
+			shoppingStore.setBraintreeSandboxMerchantId(braintreeSandboxMerchantId);
 			
 			ShoppingStoreLocalServiceUtil.updateShoppingStore(shoppingStore);
 	        jsonObject.put("successMessage", "Success");

@@ -1,0 +1,185 @@
+.aui{
+
+	.shopping-store-settings{
+		-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+		-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+		background-color: #FFF;
+		
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+		
+		padding: 40px 30px;
+		position: relative;
+		margin-bottom: 20px;
+		
+		.control-group {
+		 	margin-bottom: 10px;
+		 	&.form-inline{
+		 		.control-label{
+		 			width: 170px;
+					font-weight: 600;
+		 		}
+		 	}
+		}
+		.email-settings{
+			margin: 20px 0;
+			.email-editor-wrapper{
+				  border: 1px solid #ccc;
+				  margin: 5px 0;
+			}
+		}
+		
+		.payment-test-fields-wrap{
+			float: left;
+			margin: 10px;
+			border: 1px solid #CCC;
+			padding: 5px;
+		}
+		
+		.settings-section-wrapper{
+			margin-bottom: 20px;
+			.settings-section-title{
+				color: inherit;
+				font-size: 18px;
+				display: block;
+				font-weight: 600;
+			}
+			.settings-section{
+				margin-left: 15px;
+				margin-top: 20px;
+				.settings-sub-section{
+					margin-left: 15px;
+				}
+			}
+			.settings-section-title:hover,.settings-section-title:hover{
+				color: inherit;
+				text-decoration: none;
+			}
+		}
+		
+		.store-loading{
+			position: absolute;
+		 	width: 100%;
+		 	height: 100%;
+		 	top: 0;
+		 	left: 0;
+		 	z-index: 10;
+		 	background-color: rgba(255,255,255, 0.5);
+			
+			.spinner {
+				margin: 0 auto;
+				width: 70px;
+				height: 70px;
+				text-align: center;
+				font-size: 10px;
+			    top: 50%;
+			    margin-top: -35px;
+			    position: relative;
+			}
+			
+			.spinner > div {
+				background-color: rgb(148, 80, 148);
+				height: 100%;
+				width: 6px;
+				display: inline-block;
+				margin: 2px;
+				-webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+				animation: sk-stretchdelay 1.2s infinite ease-in-out;
+			}
+			.spinner {
+				.rect2 {
+					-webkit-animation-delay: -1.1s;
+					animation-delay: -1.1s;
+				}
+				
+				.rect3 {
+					-webkit-animation-delay: -1.0s;
+					animation-delay: -1.0s;
+				}
+				
+				.rect4 {
+					-webkit-animation-delay: -0.9s;
+					animation-delay: -0.9s;
+				}
+				
+				.rect5 {
+					-webkit-animation-delay: -0.8s;
+					animation-delay: -0.8s;
+				}
+			}
+		
+		}
+		
+		table.settings-table{
+			thead{
+				td{
+					font-weight: 500;
+				}
+			}
+			td{
+				padding: 5px;
+				overflow: hidden;
+			}
+			td.settings-actions{
+				width: 50px;
+				a{
+					display: inline-block;
+					text-decoration: none;
+				}
+				a:HOVER {
+					text-decoration: none;
+				}
+			}
+		
+		}
+	}
+	.shopping-coupon-management{
+		 .control-group input,  .control-group select{
+			margin: 0;
+			width: 100%;
+		}
+		
+		 .open-coupon-btn, .open-new-coupon-btn{
+			display: inline-block;
+		}
+		
+		 .coupon-running{
+			color: green;
+		}
+		 .coupon-not-started{
+			color: blue;
+		}
+		 .coupon-expired{
+			color: red;
+		}
+	}
+	
+	
+	.shopping-shipping-management{
+		
+	}
+
+	
+}
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% { 
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% { 
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
+
+
+
+
+
+

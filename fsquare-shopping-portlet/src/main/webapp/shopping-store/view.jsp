@@ -38,6 +38,8 @@ List<Country> countries = CountryServiceUtil.getCountries();
 String onAddToCart = shoppingStore.getOnAddToCart();
 String checkoutPageUuid = shoppingStore.getCheckoutPageUuid();
 String cartPageUuid = shoppingStore.getCartPageUuid();
+String productsMainPageUuid = shoppingStore.getProductsMainPageUuid();
+
 String currency = shoppingStore.getCurrency();
 String name = shoppingStore.getName();
 
@@ -54,11 +56,23 @@ String orderShippedEmailTemplate = shoppingStore.getOrderShippedEmailTemplate();
 String orderCreatedEmailSubject = shoppingStore.getOrderCreatedEmailSubject();
 String orderCreatedEmailFromAddress = shoppingStore.getOrderCreatedEmailFromAddress();
 
-
+boolean checkoutPageFullscreen = shoppingStore.getCheckoutPageFullscreen();
+String checkoutCompletePageTemplate = shoppingStore.getCheckoutCompletePageTemplate();
 
 boolean stripeTesting = shoppingStore.getStripeTesting();
 boolean integrateWithStripe = shoppingStore.getIntegrateWithStripe();
 
+boolean integrateWithBraintree = shoppingStore.getIntegrateWithBraintree();
+String braintreePublicKey = shoppingStore.getBraintreePublicKey();
+String braintreePrivateKey = shoppingStore.getBraintreePrivateKey();
+String braintreeMerchantId = shoppingStore.getBraintreeMerchantId(); 
+
+String defaultEmailAddress = shoppingStore.getDefaultEmailAddress();
+
+boolean useBraintreeSandbox = shoppingStore.isUseBraintreeSandbox();
+String braintreeSandboxPublicKey = shoppingStore.getBraintreeSandboxPublicKey();
+String braintreeSandboxPrivateKey = shoppingStore.getBraintreeSandboxPrivateKey();
+String braintreeSandboxMerchantId = shoppingStore.getBraintreeSandboxMerchantId(); 
 
 List<KeyValuePair> layoutsKeyValuePair = new ArrayList<KeyValuePair>();
 try {
@@ -73,9 +87,15 @@ try {
 }
 
 
-if(shoppingStore.getIntegrateWithStripe()){
+if(integrateWithStripe){
 %>				
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<%
+}
+if(integrateWithBraintree){
+%>	
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+
 <%
 }
 %>
@@ -86,6 +106,9 @@ if(shoppingStore.getIntegrateWithStripe()){
 <liferay-portlet:resourceURL var="openTestStripeFormURL" secure="false">
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_OPEN_TEST_STRIPE_FORM %>" />
 </liferay-portlet:resourceURL>
+<liferay-portlet:resourceURL var="openTestBraintreePaypalFormURL" secure="false">
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_OPEN_TEST_BRAINTREE_PAYPAL %>" />
+</liferay-portlet:resourceURL>
 <liferay-portlet:resourceURL var="sendTestEmailURL" secure="false">
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SEND_TEST_EMAIL %>" />
 </liferay-portlet:resourceURL>
@@ -95,16 +118,33 @@ if(shoppingStore.getIntegrateWithStripe()){
 <aui:form action="<%= saveStoreURL %>" method="post" name="store_settings_form" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveSettings();" %>'>
 	<div class="store-settings">
 		
-		<aui:input type="text" value="<%= name %>" name="name" />
+		<aui:input inlineLabel="left"  type="text" value="<%= name %>" name="name" />
 
-		<aui:select name="storeCountry" label="country" >
+		<aui:input inlineLabel="left"  type="text" value="<%= defaultEmailAddress %>" name="defaultEmailAddress" />
+
+		<aui:select inlineLabel="left" name="storeCountry" label="country" >
 			<% for(Country country: countries) {%>
 				<aui:option selected="<%= country.getA2().equalsIgnoreCase(shoppingStore.getCountry()) %>" value="<%= country.getA2() %>" label="<%= country.getName(locale) %>"></aui:option>
 			<% } %>
 		</aui:select>
 
+
+		<aui:select inlineLabel="left" name="productsMainPage">
+			<aui:option value='' >Select...</aui:option>
+			<%
+			for (KeyValuePair keyValuePair : layoutsKeyValuePair) {
+			%>
+				<aui:option selected='<%= keyValuePair.getKey().equals(productsMainPageUuid) %>' value='<%= keyValuePair.getKey()%>' >
+					<%= keyValuePair.getValue() %>
+				</aui:option>
+			<%
+			}
+			%>
+		</aui:select>
+
+
 	
-		<aui:select name="cartDisplayPage" >
+		<aui:select inlineLabel="left" name="cartDisplayPage">
 			<aui:option value='' >Select...</aui:option>
 			<%
 			for (KeyValuePair keyValuePair : layoutsKeyValuePair) {
@@ -117,7 +157,7 @@ if(shoppingStore.getIntegrateWithStripe()){
 			%>
 		</aui:select>
 
-		<aui:select name="checkoutDisplayPage" >
+		<aui:select inlineLabel="left" name="checkoutDisplayPage" >
 			<aui:option value='' >Select...</aui:option>
 			<%
 			for (KeyValuePair keyValuePair : layoutsKeyValuePair) {
@@ -129,33 +169,53 @@ if(shoppingStore.getIntegrateWithStripe()){
 			}
 			%>
 		</aui:select>
-
-		<aui:select name="onAddToCart" >
+		
+		<aui:input type="checkbox" value="<%= checkoutPageFullscreen %>" name="checkoutPageFullscreen" />
+		
+		<div class="settings-section-wrapper">
+			<a class="settings-section-title" href="javascrip:;">
+				<span class="icon-caret-right"></span>
+				<span><%= LanguageUtil.get(locale, "checkout-complete-page-template") %></span>
+			</a>
+			<div class="settings-section hide">
+				<div class="checkout-page-template">
+			    	<div class="checkout-page-template-editor-wrapper">
+				    	<div id="<portlet:namespace />checkout-complete-page-template"><%= checkoutCompletePageTemplate %></div>
+			    	</div>
+			    	<aui:input name="checkoutCompletePageTemplate" type="hidden" value="<%= checkoutCompletePageTemplate %>" />			    	
+			    </div>
+			</div>	
+		</div>
+		
+		<aui:select inlineLabel="left" name="onAddToCart" >
 			<aui:option value='' >Select...</aui:option>
-				<aui:option selected='<%= ShoppingUtil.ON_ADD_TO_CART_JUMP_TO_CART.equals(onAddToCart) %>' value='<%= ShoppingUtil.ON_ADD_TO_CART_JUMP_TO_CART %>' >
-					<%= ShoppingUtil.ON_ADD_TO_CART_JUMP_TO_CART %>
-				</aui:option>
-			
+			<aui:option selected='<%= ShoppingUtil.ON_ADD_TO_CART_JUMP_TO_CART.equals(onAddToCart) %>' value='<%= ShoppingUtil.ON_ADD_TO_CART_JUMP_TO_CART %>' >
+				<%= ShoppingUtil.ON_ADD_TO_CART_JUMP_TO_CART %>
+			</aui:option>
 		</aui:select>
 	
-		<aui:select name="currency" >
-			<aui:option value='' >Select...</aui:option>
-				<aui:option selected='<%= "GBP".equals(currency) %>' value='GBP' label="GBP"></aui:option>
-				<aui:option selected='<%= "USD".equals(currency) %>' value='USD' label="USD"></aui:option>
-				<aui:option selected='<%= "EUR".equals(currency) %>' value='EUR' label="EUR"></aui:option>						
+		<aui:select inlineLabel="left" name="currency" >
+			<aui:option  value='' >Select...</aui:option>
+			<aui:option selected='<%= "GBP".equals(currency) %>' value='GBP' label="GBP"></aui:option>
+			<aui:option selected='<%= "USD".equals(currency) %>' value='USD' label="USD"></aui:option>
+			<aui:option selected='<%= "EUR".equals(currency) %>' value='EUR' label="EUR"></aui:option>						
 		</aui:select>
 	
-		<aui:select name="usersType" >
+		<aui:select inlineLabel="left"  name="usersType" >
 			<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_ALL %>' label="<%= ShoppingUtil.USER_TYPES_ALL %>" />
 			<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>' label="<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>" />
 			<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>' label="<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>" />			
 		</aui:select>
 		
-		<aui:field-wrapper label='order-created-email-settings' >
-			<fieldset >
+		<div class="settings-section-wrapper">
+			<a class="settings-section-title" href="javascrip:;">
+				<span class="icon-caret-right"></span>
+				<span><%= LanguageUtil.get(locale, "order-created-email-settings") %></span>
+			</a>
+			<div class="settings-section hide">
 				<div class="email-settings">
-			    	<aui:input type="email" value="<%= orderCreatedEmailFromAddress %>" name="orderCreatedEmailFromAddress" />
-			    	<aui:input type="text" value="<%= orderCreatedEmailSubject %>" name="orderCreatedEmailSubject" />
+			    	<aui:input inlineLabel="left" type="email" value="<%= orderCreatedEmailFromAddress %>" name="orderCreatedEmailFromAddress" />
+			    	<aui:input inlineLabel="left" type="text" value="<%= orderCreatedEmailSubject %>" name="orderCreatedEmailSubject" />
 			    	<div class="email-editor-wrapper">
 				    	<div id="<portlet:namespace />order_success_email_editor"><%= orderCreatedEmailTemplate %></div>
 			    	</div>
@@ -163,25 +223,56 @@ if(shoppingStore.getIntegrateWithStripe()){
 			    	<button type="button" class="btn send-test-email" >Test Email</button>
 			    	
 			    </div>
-			</fieldset>	
-		</aui:field-wrapper>
+			</div>	
+		</div>
 		
-		<aui:field-wrapper label='stype-payment-method' >
-			<fieldset >
-				<aui:input type="checkbox" value="<%= integrateWithStripe %>" name="integrateWithStripe" />
-				<div class="stripe-integration">
-					<aui:input type="text" value="<%= stripeTestSecretKey %>" name="stripeTestSecretKey" />
-					<aui:input type="text" value="<%= stripeTestPublishableKey %>" name="stripeTestPublishableKey" />
-					<aui:input type="text" value="<%= stripeLiveSecretKey %>" name="stripeLiveSecretKey" />
-					<aui:input type="text" value="<%= stripeLivePublishableKey %>" name="stripeLivePublishableKey" />
-					<aui:input type="text" value="<%= stripeApiVersion %>" name="stripeApiVersion" />
-					<aui:input type="checkbox" value="<%= stripeTesting %>" name="stripeTesting" ></aui:input>
+		<div class="settings-section-wrapper">
+			<aui:input type="checkbox" value="<%= integrateWithStripe %>" name="integrateWithStripe" />
+			<a class="settings-section-title" href="javascrip:;">
+				<span class="icon-caret-right"></span>
+				<span><%= LanguageUtil.get(locale, "stripe-payment-method") %></span>
+			</a>
+			
+			<div class="settings-section hide">
+				<aui:input inlineLabel="left" type="text" value="<%= stripeApiVersion %>" name="stripeApiVersion" />
+				<aui:input inlineLabel="left" type="text" value="<%= stripeLiveSecretKey %>" name="stripeLiveSecretKey" />
+				<aui:input inlineLabel="left" type="text" value="<%= stripeLivePublishableKey %>" name="stripeLivePublishableKey" />
+				
+				<aui:input inlineLabel="left" type="checkbox" value="<%= stripeTesting %>" name="stripeTesting" ></aui:input>
+				<div class="settings-sub-section">
+					<aui:input inlineLabel="left" type="text" value="<%= stripeTestSecretKey %>" name="stripeTestSecretKey" />
+					<aui:input inlineLabel="left" type="text" value="<%= stripeTestPublishableKey %>" name="stripeTestPublishableKey" />
+				</div>
+				<div style="margin-top: 10px">
+					<button type="button" id="<portlet:namespace />test-payment-btn" class="btn test-payment-btn" >Test Payment</button>
+				</div>
+			</div>	
+		</div>
+		
+		<div class="settings-section-wrapper">
+			<aui:input type="checkbox" value="<%= integrateWithBraintree %>" name="integrateWithBraintree" />
+			<a class="settings-section-title" href="javascrip:;">
+				<span class="icon-caret-right"></span>
+				<span><%= LanguageUtil.get(locale, "braintree-paypal-method") %></span>
+			</a>
+			<div class="settings-section hide">
+				<div class="settings-section">
+					<aui:input inlineLabel="left"  type="text" value="<%= braintreeMerchantId %>" name="braintreeMerchantId" />
+					<aui:input inlineLabel="left" type="text" value="<%= braintreePublicKey %>" name="braintreePublicKey" />
+					<aui:input inlineLabel="left"  type="text" value="<%= braintreePrivateKey %>" name="braintreePrivateKey" />
+					
+					<aui:input type="checkbox" value="<%= useBraintreeSandbox %>" name="useBraintreeSandbox" />
+					<div class="settings-sub-section">
+						<aui:input inlineLabel="left"  type="text" value="<%= braintreeSandboxMerchantId %>" name="braintreeSandboxMerchantId" />
+						<aui:input inlineLabel="left"  type="text" value="<%= braintreeSandboxPublicKey %>" name="braintreeSandboxPublicKey" />
+						<aui:input inlineLabel="left"  type="text" value="<%= braintreeSandboxPrivateKey %>" name="braintreeSandboxPrivateKey" />
+					</div>
 					<div style="margin-top: 10px">
-						<button type="button" id="<portlet:namespace />test-payment-btn" class="btn test-payment-btn" >Test Payment</button>
+						<button type="button" id="<portlet:namespace />test-paypal-payment-btn" class="btn test-paypal-payment-btn" >Test Payment</button>
 					</div>
 				</div>
-			</fieldset>	
-		</aui:field-wrapper>
+			</div>	
+		</div>
 		
 		<div id="<portlet:namespace />store_form_error" class="error-message store-form-error">
 		</div>
@@ -196,6 +287,27 @@ if(shoppingStore.getIntegrateWithStripe()){
 
 <aui:script use="aui-base,selector-css3,aui-io-request,aui-datatype,aui-datepicker,liferay-dynamic-select,">
 
+	A.on('click', function(event) {
+		var section = this.get('parentNode').one('.settings-section');
+		section.toggleClass('hide');
+	},'.settings-section-title');
+
+
+	Liferay.provide(window, '<portlet:namespace />showLoading',
+		function(wrapper) {
+		if(!wrapper){
+			wrapper = '#p_p_id<portlet:namespace />';
+		}
+		$(wrapper).append('<div class="store-loading"><div class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div></div>')	
+	},['aui-base,selector-css3']);
+	
+	Liferay.provide(window, '<portlet:namespace />hideLoading',
+		function(wrapper) {
+		if(!wrapper){
+			wrapper = '#p_p_id<portlet:namespace />'
+		}
+		$(wrapper).find(".store-loading").remove()
+	},['aui-base,selector-css3']);
 
 
 	A.on('click', function(event) {
@@ -227,6 +339,7 @@ if(shoppingStore.getIntegrateWithStripe()){
 
 
 	A.on('click', function(event) {
+		<portlet:namespace />showLoading();
 		<portlet:namespace />saveStore();
 	},'#<portlet:namespace />save_store_btn');
 
@@ -246,14 +359,13 @@ if(shoppingStore.getIntegrateWithStripe()){
 				data[$(this).attr('name')]=$(this).text();
 			});
 			
-			
-			
 			A.io.request('<%= saveStoreResourceURL %>',{
                   dataType: 'json',
                   method: 'POST',
                   data: data,
                   on: {
                       success: function() {
+                    	<portlet:namespace />hideLoading();
                       	var response = this.get('responseData');
                       	A.one('#<portlet:namespace />store_form_success').text("");
                       	A.one('#<portlet:namespace />store_form_error').text("");
@@ -290,6 +402,28 @@ if(shoppingStore.getIntegrateWithStripe()){
 	            });
 	        },
 	    	['aui-base,selector-css3']);
+	
+	A.on('click', function(event) {
+		<portlet:namespace />openTestBraintreePaypalForm();
+	},'#<portlet:namespace />test-paypal-payment-btn');
+	
+	Liferay.provide(window, '<portlet:namespace />openTestBraintreePaypalForm',
+			function() {
+				
+				A.io.request('<%= openTestBraintreePaypalFormURL %>',{
+	                  dataType: 'json',
+	                  method: 'POST',
+	                  data: { 
+	                  },
+	                  on: {
+	                	  success: function() {
+	  	                  	var response = this.get('responseData');
+							$('.shopping-store-settings').append(response);
+	  	                  }
+	                  }
+	            });
+	        },
+	    	['aui-base,selector-css3']);
 </aui:script>
 
 <aui:script use="aui-ace-autocomplete-freemarker,aui-ace-autocomplete-plugin,aui-ace-autocomplete-velocity,aui-toggler,aui-popover,resize,transition,aui-io-request">
@@ -302,7 +436,16 @@ if(shoppingStore.getIntegrateWithStripe()){
 	var richOderSuccessEmailEditor;
 	var orderSuccessEmailEditor = A.one('#<portlet:namespace />order_success_email_editor');
 	var orderCreatedEmailTemplate = A.one('#<portlet:namespace />orderCreatedEmailTemplate');
+
+	
+
+	var richCheckoutCompletePage;
+	var checkoutCompletePageEditor = A.one('#<portlet:namespace />checkout-complete-page-template');
+	var checkoutCompletePageTemplate = A.one('#<portlet:namespace />checkoutCompletePageTemplate');
+	
+	
 	A.on('domready', function(event) {
+		
 		richOderSuccessEmailEditor = new A.AceEditor(
 			{
 				boundingBox: orderSuccessEmailEditor,
@@ -311,13 +454,27 @@ if(shoppingStore.getIntegrateWithStripe()){
 				width: '100%'
 			}
 		).render();
-
 		richOderSuccessEmailEditor.getEditor().setValue(orderCreatedEmailTemplate.val());
-
 		richOderSuccessEmailEditor.getEditor().on('change', function() {
-			orderCreatedEmailTemplate.val(richOderSuccessEmailEditor.getSession().getValue())
+			orderCreatedEmailTemplate.val(richOderSuccessEmailEditor.getSession().getValue());
         });
-	})
+		
+		
+		richCheckoutCompletePage = new A.AceEditor(
+			{
+				boundingBox: checkoutCompletePageEditor,
+				height: 400,
+				mode: '<%= EditorUtil.getEditorMode("xml") %>',
+				width: '100%'
+			}
+		).render();
+		richCheckoutCompletePage.getEditor().setValue(checkoutCompletePageTemplate.val());
+		richCheckoutCompletePage.getEditor().on('change', function() {
+			checkoutCompletePageTemplate.val(richCheckoutCompletePage.getSession().getValue());
+        });
+	});
+	
+	
 	function getEditorContent(editor) {
 		var content = editor.getSession().getValue();
 		return content;

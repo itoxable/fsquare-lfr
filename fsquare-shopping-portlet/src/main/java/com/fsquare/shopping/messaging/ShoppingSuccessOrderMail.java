@@ -82,7 +82,7 @@ public class ShoppingSuccessOrderMail implements MessageListener {
 		
 		InternetAddress toAddress = new InternetAddress(shoppingOrder.getShippingEmailAddress());
 		InternetAddress fromAddress = new InternetAddress(orderCreatedEmailFromAddress);
-		_log.info(unsyncStringWriter.toString());
+		//_log.info(unsyncStringWriter.toString());
 		MailMessage mailMessage = new MailMessage(fromAddress, toAddress, orderCreatedEmailSubject, unsyncStringWriter.toString(), true);
 		MailServiceUtil.sendEmail(mailMessage);
 		

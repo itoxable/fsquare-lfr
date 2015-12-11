@@ -21,12 +21,16 @@ public class ShoppingStoreSoap implements Serializable {
     private Date _createDate;
     private Date _modifiedDate;
     private String _name;
+    private String _defaultEmailAddress;
+    private String _productsMainPageUuid;
     private String _cartPageUuid;
     private String _checkoutPageUuid;
     private String _onAddToCart;
     private String _currency;
     private String _country;
     private String _userTypes;
+    private boolean _checkoutPageFullscreen;
+    private String _checkoutCompletePageTemplate;
     private String _orderCreatedEmailTemplate;
     private String _orderShippedEmailTemplate;
     private String _orderCreatedEmailSubject;
@@ -38,6 +42,14 @@ public class ShoppingStoreSoap implements Serializable {
     private String _stripeLiveSecretKey;
     private String _stripeLivePublishableKey;
     private String _stripeApiVersion;
+    private boolean _integrateWithBraintree;
+    private String _braintreePrivateKey;
+    private String _braintreePublicKey;
+    private String _braintreeMerchantId;
+    private boolean _useBraintreeSandbox;
+    private String _braintreeSandboxMerchantId;
+    private String _braintreeSandboxPrivateKey;
+    private String _braintreeSandboxPublicKey;
 
     public ShoppingStoreSoap() {
     }
@@ -52,12 +64,16 @@ public class ShoppingStoreSoap implements Serializable {
         soapModel.setCreateDate(model.getCreateDate());
         soapModel.setModifiedDate(model.getModifiedDate());
         soapModel.setName(model.getName());
+        soapModel.setDefaultEmailAddress(model.getDefaultEmailAddress());
+        soapModel.setProductsMainPageUuid(model.getProductsMainPageUuid());
         soapModel.setCartPageUuid(model.getCartPageUuid());
         soapModel.setCheckoutPageUuid(model.getCheckoutPageUuid());
         soapModel.setOnAddToCart(model.getOnAddToCart());
         soapModel.setCurrency(model.getCurrency());
         soapModel.setCountry(model.getCountry());
         soapModel.setUserTypes(model.getUserTypes());
+        soapModel.setCheckoutPageFullscreen(model.getCheckoutPageFullscreen());
+        soapModel.setCheckoutCompletePageTemplate(model.getCheckoutCompletePageTemplate());
         soapModel.setOrderCreatedEmailTemplate(model.getOrderCreatedEmailTemplate());
         soapModel.setOrderShippedEmailTemplate(model.getOrderShippedEmailTemplate());
         soapModel.setOrderCreatedEmailSubject(model.getOrderCreatedEmailSubject());
@@ -69,6 +85,14 @@ public class ShoppingStoreSoap implements Serializable {
         soapModel.setStripeLiveSecretKey(model.getStripeLiveSecretKey());
         soapModel.setStripeLivePublishableKey(model.getStripeLivePublishableKey());
         soapModel.setStripeApiVersion(model.getStripeApiVersion());
+        soapModel.setIntegrateWithBraintree(model.getIntegrateWithBraintree());
+        soapModel.setBraintreePrivateKey(model.getBraintreePrivateKey());
+        soapModel.setBraintreePublicKey(model.getBraintreePublicKey());
+        soapModel.setBraintreeMerchantId(model.getBraintreeMerchantId());
+        soapModel.setUseBraintreeSandbox(model.getUseBraintreeSandbox());
+        soapModel.setBraintreeSandboxMerchantId(model.getBraintreeSandboxMerchantId());
+        soapModel.setBraintreeSandboxPrivateKey(model.getBraintreeSandboxPrivateKey());
+        soapModel.setBraintreeSandboxPublicKey(model.getBraintreeSandboxPublicKey());
 
         return soapModel;
     }
@@ -173,6 +197,22 @@ public class ShoppingStoreSoap implements Serializable {
         _name = name;
     }
 
+    public String getDefaultEmailAddress() {
+        return _defaultEmailAddress;
+    }
+
+    public void setDefaultEmailAddress(String defaultEmailAddress) {
+        _defaultEmailAddress = defaultEmailAddress;
+    }
+
+    public String getProductsMainPageUuid() {
+        return _productsMainPageUuid;
+    }
+
+    public void setProductsMainPageUuid(String productsMainPageUuid) {
+        _productsMainPageUuid = productsMainPageUuid;
+    }
+
     public String getCartPageUuid() {
         return _cartPageUuid;
     }
@@ -219,6 +259,27 @@ public class ShoppingStoreSoap implements Serializable {
 
     public void setUserTypes(String userTypes) {
         _userTypes = userTypes;
+    }
+
+    public boolean getCheckoutPageFullscreen() {
+        return _checkoutPageFullscreen;
+    }
+
+    public boolean isCheckoutPageFullscreen() {
+        return _checkoutPageFullscreen;
+    }
+
+    public void setCheckoutPageFullscreen(boolean checkoutPageFullscreen) {
+        _checkoutPageFullscreen = checkoutPageFullscreen;
+    }
+
+    public String getCheckoutCompletePageTemplate() {
+        return _checkoutCompletePageTemplate;
+    }
+
+    public void setCheckoutCompletePageTemplate(
+        String checkoutCompletePageTemplate) {
+        _checkoutCompletePageTemplate = checkoutCompletePageTemplate;
     }
 
     public String getOrderCreatedEmailTemplate() {
@@ -316,5 +377,77 @@ public class ShoppingStoreSoap implements Serializable {
 
     public void setStripeApiVersion(String stripeApiVersion) {
         _stripeApiVersion = stripeApiVersion;
+    }
+
+    public boolean getIntegrateWithBraintree() {
+        return _integrateWithBraintree;
+    }
+
+    public boolean isIntegrateWithBraintree() {
+        return _integrateWithBraintree;
+    }
+
+    public void setIntegrateWithBraintree(boolean integrateWithBraintree) {
+        _integrateWithBraintree = integrateWithBraintree;
+    }
+
+    public String getBraintreePrivateKey() {
+        return _braintreePrivateKey;
+    }
+
+    public void setBraintreePrivateKey(String braintreePrivateKey) {
+        _braintreePrivateKey = braintreePrivateKey;
+    }
+
+    public String getBraintreePublicKey() {
+        return _braintreePublicKey;
+    }
+
+    public void setBraintreePublicKey(String braintreePublicKey) {
+        _braintreePublicKey = braintreePublicKey;
+    }
+
+    public String getBraintreeMerchantId() {
+        return _braintreeMerchantId;
+    }
+
+    public void setBraintreeMerchantId(String braintreeMerchantId) {
+        _braintreeMerchantId = braintreeMerchantId;
+    }
+
+    public boolean getUseBraintreeSandbox() {
+        return _useBraintreeSandbox;
+    }
+
+    public boolean isUseBraintreeSandbox() {
+        return _useBraintreeSandbox;
+    }
+
+    public void setUseBraintreeSandbox(boolean useBraintreeSandbox) {
+        _useBraintreeSandbox = useBraintreeSandbox;
+    }
+
+    public String getBraintreeSandboxMerchantId() {
+        return _braintreeSandboxMerchantId;
+    }
+
+    public void setBraintreeSandboxMerchantId(String braintreeSandboxMerchantId) {
+        _braintreeSandboxMerchantId = braintreeSandboxMerchantId;
+    }
+
+    public String getBraintreeSandboxPrivateKey() {
+        return _braintreeSandboxPrivateKey;
+    }
+
+    public void setBraintreeSandboxPrivateKey(String braintreeSandboxPrivateKey) {
+        _braintreeSandboxPrivateKey = braintreeSandboxPrivateKey;
+    }
+
+    public String getBraintreeSandboxPublicKey() {
+        return _braintreeSandboxPublicKey;
+    }
+
+    public void setBraintreeSandboxPublicKey(String braintreeSandboxPublicKey) {
+        _braintreeSandboxPublicKey = braintreeSandboxPublicKey;
     }
 }

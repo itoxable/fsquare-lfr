@@ -73,7 +73,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
             { "discountType", Types.VARCHAR },
             { "maxUses", Types.BIGINT }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingCoupon (couponId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(75) null,startDate DATE null,endDate DATE null,active_ BOOLEAN,limitCategories VARCHAR(75) null,limitSkus VARCHAR(75) null,minOrder DOUBLE,discount DOUBLE,discountType VARCHAR(75) null,maxUses LONG)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingCoupon (couponId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(1000) null,startDate DATE null,endDate DATE null,active_ BOOLEAN,limitCategories VARCHAR(75) null,limitSkus VARCHAR(75) null,minOrder DOUBLE,discount DOUBLE,discountType VARCHAR(75) null,maxUses LONG)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingCoupon";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingCoupon.createDate ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingCoupon.createDate ASC";

@@ -30,12 +30,16 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
     private Date _createDate;
     private Date _modifiedDate;
     private String _name;
+    private String _defaultEmailAddress;
+    private String _productsMainPageUuid;
     private String _cartPageUuid;
     private String _checkoutPageUuid;
     private String _onAddToCart;
     private String _currency;
     private String _country;
     private String _userTypes;
+    private boolean _checkoutPageFullscreen;
+    private String _checkoutCompletePageTemplate;
     private String _orderCreatedEmailTemplate;
     private String _orderShippedEmailTemplate;
     private String _orderCreatedEmailSubject;
@@ -47,6 +51,14 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
     private String _stripeLiveSecretKey;
     private String _stripeLivePublishableKey;
     private String _stripeApiVersion;
+    private boolean _integrateWithBraintree;
+    private String _braintreePrivateKey;
+    private String _braintreePublicKey;
+    private String _braintreeMerchantId;
+    private boolean _useBraintreeSandbox;
+    private String _braintreeSandboxMerchantId;
+    private String _braintreeSandboxPrivateKey;
+    private String _braintreeSandboxPublicKey;
     private BaseModel<?> _shoppingStoreRemoteModel;
     private Class<?> _clpSerializerClass = com.fsquare.shopping.service.ClpSerializer.class;
 
@@ -94,12 +106,17 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         attributes.put("createDate", getCreateDate());
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("name", getName());
+        attributes.put("defaultEmailAddress", getDefaultEmailAddress());
+        attributes.put("productsMainPageUuid", getProductsMainPageUuid());
         attributes.put("cartPageUuid", getCartPageUuid());
         attributes.put("checkoutPageUuid", getCheckoutPageUuid());
         attributes.put("onAddToCart", getOnAddToCart());
         attributes.put("currency", getCurrency());
         attributes.put("country", getCountry());
         attributes.put("userTypes", getUserTypes());
+        attributes.put("checkoutPageFullscreen", getCheckoutPageFullscreen());
+        attributes.put("checkoutCompletePageTemplate",
+            getCheckoutCompletePageTemplate());
         attributes.put("orderCreatedEmailTemplate",
             getOrderCreatedEmailTemplate());
         attributes.put("orderShippedEmailTemplate",
@@ -114,6 +131,17 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         attributes.put("stripeLiveSecretKey", getStripeLiveSecretKey());
         attributes.put("stripeLivePublishableKey", getStripeLivePublishableKey());
         attributes.put("stripeApiVersion", getStripeApiVersion());
+        attributes.put("integrateWithBraintree", getIntegrateWithBraintree());
+        attributes.put("braintreePrivateKey", getBraintreePrivateKey());
+        attributes.put("braintreePublicKey", getBraintreePublicKey());
+        attributes.put("braintreeMerchantId", getBraintreeMerchantId());
+        attributes.put("useBraintreeSandbox", getUseBraintreeSandbox());
+        attributes.put("braintreeSandboxMerchantId",
+            getBraintreeSandboxMerchantId());
+        attributes.put("braintreeSandboxPrivateKey",
+            getBraintreeSandboxPrivateKey());
+        attributes.put("braintreeSandboxPublicKey",
+            getBraintreeSandboxPublicKey());
 
         return attributes;
     }
@@ -162,6 +190,20 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
             setName(name);
         }
 
+        String defaultEmailAddress = (String) attributes.get(
+                "defaultEmailAddress");
+
+        if (defaultEmailAddress != null) {
+            setDefaultEmailAddress(defaultEmailAddress);
+        }
+
+        String productsMainPageUuid = (String) attributes.get(
+                "productsMainPageUuid");
+
+        if (productsMainPageUuid != null) {
+            setProductsMainPageUuid(productsMainPageUuid);
+        }
+
         String cartPageUuid = (String) attributes.get("cartPageUuid");
 
         if (cartPageUuid != null) {
@@ -196,6 +238,20 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
         if (userTypes != null) {
             setUserTypes(userTypes);
+        }
+
+        Boolean checkoutPageFullscreen = (Boolean) attributes.get(
+                "checkoutPageFullscreen");
+
+        if (checkoutPageFullscreen != null) {
+            setCheckoutPageFullscreen(checkoutPageFullscreen);
+        }
+
+        String checkoutCompletePageTemplate = (String) attributes.get(
+                "checkoutCompletePageTemplate");
+
+        if (checkoutCompletePageTemplate != null) {
+            setCheckoutCompletePageTemplate(checkoutCompletePageTemplate);
         }
 
         String orderCreatedEmailTemplate = (String) attributes.get(
@@ -271,6 +327,62 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
         if (stripeApiVersion != null) {
             setStripeApiVersion(stripeApiVersion);
+        }
+
+        Boolean integrateWithBraintree = (Boolean) attributes.get(
+                "integrateWithBraintree");
+
+        if (integrateWithBraintree != null) {
+            setIntegrateWithBraintree(integrateWithBraintree);
+        }
+
+        String braintreePrivateKey = (String) attributes.get(
+                "braintreePrivateKey");
+
+        if (braintreePrivateKey != null) {
+            setBraintreePrivateKey(braintreePrivateKey);
+        }
+
+        String braintreePublicKey = (String) attributes.get(
+                "braintreePublicKey");
+
+        if (braintreePublicKey != null) {
+            setBraintreePublicKey(braintreePublicKey);
+        }
+
+        String braintreeMerchantId = (String) attributes.get(
+                "braintreeMerchantId");
+
+        if (braintreeMerchantId != null) {
+            setBraintreeMerchantId(braintreeMerchantId);
+        }
+
+        Boolean useBraintreeSandbox = (Boolean) attributes.get(
+                "useBraintreeSandbox");
+
+        if (useBraintreeSandbox != null) {
+            setUseBraintreeSandbox(useBraintreeSandbox);
+        }
+
+        String braintreeSandboxMerchantId = (String) attributes.get(
+                "braintreeSandboxMerchantId");
+
+        if (braintreeSandboxMerchantId != null) {
+            setBraintreeSandboxMerchantId(braintreeSandboxMerchantId);
+        }
+
+        String braintreeSandboxPrivateKey = (String) attributes.get(
+                "braintreeSandboxPrivateKey");
+
+        if (braintreeSandboxPrivateKey != null) {
+            setBraintreeSandboxPrivateKey(braintreeSandboxPrivateKey);
+        }
+
+        String braintreeSandboxPublicKey = (String) attributes.get(
+                "braintreeSandboxPublicKey");
+
+        if (braintreeSandboxPublicKey != null) {
+            setBraintreeSandboxPublicKey(braintreeSandboxPublicKey);
         }
     }
 
@@ -439,6 +551,52 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
     }
 
     @Override
+    public String getDefaultEmailAddress() {
+        return _defaultEmailAddress;
+    }
+
+    @Override
+    public void setDefaultEmailAddress(String defaultEmailAddress) {
+        _defaultEmailAddress = defaultEmailAddress;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setDefaultEmailAddress",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel, defaultEmailAddress);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getProductsMainPageUuid() {
+        return _productsMainPageUuid;
+    }
+
+    @Override
+    public void setProductsMainPageUuid(String productsMainPageUuid) {
+        _productsMainPageUuid = productsMainPageUuid;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setProductsMainPageUuid",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel, productsMainPageUuid);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
     public String getCartPageUuid() {
         return _cartPageUuid;
     }
@@ -565,6 +723,59 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
                 Method method = clazz.getMethod("setUserTypes", String.class);
 
                 method.invoke(_shoppingStoreRemoteModel, userTypes);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public boolean getCheckoutPageFullscreen() {
+        return _checkoutPageFullscreen;
+    }
+
+    @Override
+    public boolean isCheckoutPageFullscreen() {
+        return _checkoutPageFullscreen;
+    }
+
+    @Override
+    public void setCheckoutPageFullscreen(boolean checkoutPageFullscreen) {
+        _checkoutPageFullscreen = checkoutPageFullscreen;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setCheckoutPageFullscreen",
+                        boolean.class);
+
+                method.invoke(_shoppingStoreRemoteModel, checkoutPageFullscreen);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getCheckoutCompletePageTemplate() {
+        return _checkoutCompletePageTemplate;
+    }
+
+    @Override
+    public void setCheckoutCompletePageTemplate(
+        String checkoutCompletePageTemplate) {
+        _checkoutCompletePageTemplate = checkoutCompletePageTemplate;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setCheckoutCompletePageTemplate",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel,
+                    checkoutCompletePageTemplate);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -841,6 +1052,203 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         }
     }
 
+    @Override
+    public boolean getIntegrateWithBraintree() {
+        return _integrateWithBraintree;
+    }
+
+    @Override
+    public boolean isIntegrateWithBraintree() {
+        return _integrateWithBraintree;
+    }
+
+    @Override
+    public void setIntegrateWithBraintree(boolean integrateWithBraintree) {
+        _integrateWithBraintree = integrateWithBraintree;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setIntegrateWithBraintree",
+                        boolean.class);
+
+                method.invoke(_shoppingStoreRemoteModel, integrateWithBraintree);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getBraintreePrivateKey() {
+        return _braintreePrivateKey;
+    }
+
+    @Override
+    public void setBraintreePrivateKey(String braintreePrivateKey) {
+        _braintreePrivateKey = braintreePrivateKey;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setBraintreePrivateKey",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel, braintreePrivateKey);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getBraintreePublicKey() {
+        return _braintreePublicKey;
+    }
+
+    @Override
+    public void setBraintreePublicKey(String braintreePublicKey) {
+        _braintreePublicKey = braintreePublicKey;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setBraintreePublicKey",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel, braintreePublicKey);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getBraintreeMerchantId() {
+        return _braintreeMerchantId;
+    }
+
+    @Override
+    public void setBraintreeMerchantId(String braintreeMerchantId) {
+        _braintreeMerchantId = braintreeMerchantId;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setBraintreeMerchantId",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel, braintreeMerchantId);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public boolean getUseBraintreeSandbox() {
+        return _useBraintreeSandbox;
+    }
+
+    @Override
+    public boolean isUseBraintreeSandbox() {
+        return _useBraintreeSandbox;
+    }
+
+    @Override
+    public void setUseBraintreeSandbox(boolean useBraintreeSandbox) {
+        _useBraintreeSandbox = useBraintreeSandbox;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setUseBraintreeSandbox",
+                        boolean.class);
+
+                method.invoke(_shoppingStoreRemoteModel, useBraintreeSandbox);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getBraintreeSandboxMerchantId() {
+        return _braintreeSandboxMerchantId;
+    }
+
+    @Override
+    public void setBraintreeSandboxMerchantId(String braintreeSandboxMerchantId) {
+        _braintreeSandboxMerchantId = braintreeSandboxMerchantId;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setBraintreeSandboxMerchantId",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel,
+                    braintreeSandboxMerchantId);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getBraintreeSandboxPrivateKey() {
+        return _braintreeSandboxPrivateKey;
+    }
+
+    @Override
+    public void setBraintreeSandboxPrivateKey(String braintreeSandboxPrivateKey) {
+        _braintreeSandboxPrivateKey = braintreeSandboxPrivateKey;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setBraintreeSandboxPrivateKey",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel,
+                    braintreeSandboxPrivateKey);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getBraintreeSandboxPublicKey() {
+        return _braintreeSandboxPublicKey;
+    }
+
+    @Override
+    public void setBraintreeSandboxPublicKey(String braintreeSandboxPublicKey) {
+        _braintreeSandboxPublicKey = braintreeSandboxPublicKey;
+
+        if (_shoppingStoreRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setBraintreeSandboxPublicKey",
+                        String.class);
+
+                method.invoke(_shoppingStoreRemoteModel,
+                    braintreeSandboxPublicKey);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
     public BaseModel<?> getShoppingStoreRemoteModel() {
         return _shoppingStoreRemoteModel;
     }
@@ -916,12 +1324,16 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         clone.setCreateDate(getCreateDate());
         clone.setModifiedDate(getModifiedDate());
         clone.setName(getName());
+        clone.setDefaultEmailAddress(getDefaultEmailAddress());
+        clone.setProductsMainPageUuid(getProductsMainPageUuid());
         clone.setCartPageUuid(getCartPageUuid());
         clone.setCheckoutPageUuid(getCheckoutPageUuid());
         clone.setOnAddToCart(getOnAddToCart());
         clone.setCurrency(getCurrency());
         clone.setCountry(getCountry());
         clone.setUserTypes(getUserTypes());
+        clone.setCheckoutPageFullscreen(getCheckoutPageFullscreen());
+        clone.setCheckoutCompletePageTemplate(getCheckoutCompletePageTemplate());
         clone.setOrderCreatedEmailTemplate(getOrderCreatedEmailTemplate());
         clone.setOrderShippedEmailTemplate(getOrderShippedEmailTemplate());
         clone.setOrderCreatedEmailSubject(getOrderCreatedEmailSubject());
@@ -933,6 +1345,14 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         clone.setStripeLiveSecretKey(getStripeLiveSecretKey());
         clone.setStripeLivePublishableKey(getStripeLivePublishableKey());
         clone.setStripeApiVersion(getStripeApiVersion());
+        clone.setIntegrateWithBraintree(getIntegrateWithBraintree());
+        clone.setBraintreePrivateKey(getBraintreePrivateKey());
+        clone.setBraintreePublicKey(getBraintreePublicKey());
+        clone.setBraintreeMerchantId(getBraintreeMerchantId());
+        clone.setUseBraintreeSandbox(getUseBraintreeSandbox());
+        clone.setBraintreeSandboxMerchantId(getBraintreeSandboxMerchantId());
+        clone.setBraintreeSandboxPrivateKey(getBraintreeSandboxPrivateKey());
+        clone.setBraintreeSandboxPublicKey(getBraintreeSandboxPublicKey());
 
         return clone;
     }
@@ -982,7 +1402,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(49);
+        StringBundler sb = new StringBundler(73);
 
         sb.append("{groupId=");
         sb.append(getGroupId());
@@ -998,6 +1418,10 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(getModifiedDate());
         sb.append(", name=");
         sb.append(getName());
+        sb.append(", defaultEmailAddress=");
+        sb.append(getDefaultEmailAddress());
+        sb.append(", productsMainPageUuid=");
+        sb.append(getProductsMainPageUuid());
         sb.append(", cartPageUuid=");
         sb.append(getCartPageUuid());
         sb.append(", checkoutPageUuid=");
@@ -1010,6 +1434,10 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(getCountry());
         sb.append(", userTypes=");
         sb.append(getUserTypes());
+        sb.append(", checkoutPageFullscreen=");
+        sb.append(getCheckoutPageFullscreen());
+        sb.append(", checkoutCompletePageTemplate=");
+        sb.append(getCheckoutCompletePageTemplate());
         sb.append(", orderCreatedEmailTemplate=");
         sb.append(getOrderCreatedEmailTemplate());
         sb.append(", orderShippedEmailTemplate=");
@@ -1032,6 +1460,22 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(getStripeLivePublishableKey());
         sb.append(", stripeApiVersion=");
         sb.append(getStripeApiVersion());
+        sb.append(", integrateWithBraintree=");
+        sb.append(getIntegrateWithBraintree());
+        sb.append(", braintreePrivateKey=");
+        sb.append(getBraintreePrivateKey());
+        sb.append(", braintreePublicKey=");
+        sb.append(getBraintreePublicKey());
+        sb.append(", braintreeMerchantId=");
+        sb.append(getBraintreeMerchantId());
+        sb.append(", useBraintreeSandbox=");
+        sb.append(getUseBraintreeSandbox());
+        sb.append(", braintreeSandboxMerchantId=");
+        sb.append(getBraintreeSandboxMerchantId());
+        sb.append(", braintreeSandboxPrivateKey=");
+        sb.append(getBraintreeSandboxPrivateKey());
+        sb.append(", braintreeSandboxPublicKey=");
+        sb.append(getBraintreeSandboxPublicKey());
         sb.append("}");
 
         return sb.toString();
@@ -1039,7 +1483,7 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(76);
+        StringBundler sb = new StringBundler(112);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStore");
@@ -1074,6 +1518,14 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(getName());
         sb.append("]]></column-value></column>");
         sb.append(
+            "<column><column-name>defaultEmailAddress</column-name><column-value><![CDATA[");
+        sb.append(getDefaultEmailAddress());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>productsMainPageUuid</column-name><column-value><![CDATA[");
+        sb.append(getProductsMainPageUuid());
+        sb.append("]]></column-value></column>");
+        sb.append(
             "<column><column-name>cartPageUuid</column-name><column-value><![CDATA[");
         sb.append(getCartPageUuid());
         sb.append("]]></column-value></column>");
@@ -1096,6 +1548,14 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(
             "<column><column-name>userTypes</column-name><column-value><![CDATA[");
         sb.append(getUserTypes());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>checkoutPageFullscreen</column-name><column-value><![CDATA[");
+        sb.append(getCheckoutPageFullscreen());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>checkoutCompletePageTemplate</column-name><column-value><![CDATA[");
+        sb.append(getCheckoutCompletePageTemplate());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>orderCreatedEmailTemplate</column-name><column-value><![CDATA[");
@@ -1140,6 +1600,38 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
         sb.append(
             "<column><column-name>stripeApiVersion</column-name><column-value><![CDATA[");
         sb.append(getStripeApiVersion());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>integrateWithBraintree</column-name><column-value><![CDATA[");
+        sb.append(getIntegrateWithBraintree());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>braintreePrivateKey</column-name><column-value><![CDATA[");
+        sb.append(getBraintreePrivateKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>braintreePublicKey</column-name><column-value><![CDATA[");
+        sb.append(getBraintreePublicKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>braintreeMerchantId</column-name><column-value><![CDATA[");
+        sb.append(getBraintreeMerchantId());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>useBraintreeSandbox</column-name><column-value><![CDATA[");
+        sb.append(getUseBraintreeSandbox());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>braintreeSandboxMerchantId</column-name><column-value><![CDATA[");
+        sb.append(getBraintreeSandboxMerchantId());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>braintreeSandboxPrivateKey</column-name><column-value><![CDATA[");
+        sb.append(getBraintreeSandboxPrivateKey());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>braintreeSandboxPublicKey</column-name><column-value><![CDATA[");
+        sb.append(getBraintreeSandboxPublicKey());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

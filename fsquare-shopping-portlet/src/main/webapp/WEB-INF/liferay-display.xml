@@ -5,7 +5,7 @@
 	<category name="category.fsquare.shopping.portlets">
 		<portlet id="mini-cart" />
 		<portlet id="shopping-order-checkout" />
-		<portlet id="cart-view" />
+		<portlet id="shopping-cart" />
 		<portlet id="shopping-store" />
 		<portlet id="shopping-coupon-management" />
 		<portlet id="shopping-shipping-management" />

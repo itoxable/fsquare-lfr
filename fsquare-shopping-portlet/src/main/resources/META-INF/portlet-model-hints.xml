@@ -11,7 +11,9 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="code" type="String" />
 		<field name="name" type="String" />
-		<field name="description" type="String" />
+		<field name="description" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
 		<field name="startDate" type="Date" />
 		<field name="endDate" type="Date" />
 		<field name="active" type="boolean" />
@@ -64,19 +66,11 @@
 		<field name="shippingPostCode" type="String" />
 		<field name="shippingCountry" type="String" />
 		<field name="shippingPhone" type="String" />
-		<field name="ccName" type="String" />
-		<field name="ccType" type="String" />
-		<field name="ccNumber" type="String" />
-		<field name="ccExpMonth" type="int" />
-		<field name="ccExpYear" type="int" />
-		<field name="ccVerNumber" type="String" />
-		<field name="comments" type="String" />
+		<field name="comments" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
 		<field name="externalPaymentId" type="String" />
-		<field name="ppTxnId" type="String" />
-		<field name="ppPaymentStatus" type="String" />
-		<field name="ppPaymentGross" type="double" />
-		<field name="ppReceiverEmail" type="String" />
-		<field name="ppPayerEmail" type="String" />
+		<field name="paymentType" type="String" />
 		<field name="sendOrderEmail" type="boolean" />
 		<field name="sendShippingEmail" type="boolean" />
 		<field name="shippingMethodId" type="long" />
@@ -87,8 +81,12 @@
 		<field name="shoppingOrderId" type="long" />
 		<field name="articleId" type="String" />
 		<field name="sku" type="String" />
-		<field name="name" type="String" />
-		<field name="description" type="String" />
+		<field name="name" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="description" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
 		<field name="properties" type="String" />
 		<field name="price" type="double" />
 		<field name="quantity" type="int" />
@@ -104,7 +102,9 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="price" type="double" />
 		<field name="name" type="String" />
-		<field name="description" type="String" />
+		<field name="description" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
 		<field name="freeQuantity" type="long" />
 		<field name="freeTotal" type="double" />
 		<field name="weight" type="double" />
@@ -119,13 +119,21 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="defaultEmailAddress" type="String" />
+		<field name="productsMainPageUuid" type="String" />
 		<field name="cartPageUuid" type="String" />
 		<field name="checkoutPageUuid" type="String" />
 		<field name="onAddToCart" type="String" />
 		<field name="currency" type="String" />
 		<field name="country" type="String" />
 		<field name="userTypes" type="String" />
+		<field name="checkoutPageFullscreen" type="boolean" />
+		<field name="checkoutCompletePageTemplate" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 		<field name="orderCreatedEmailTemplate" type="String">
 			<hint name="max-length">10000</hint>
 		</field>
@@ -141,5 +149,13 @@
 		<field name="stripeLiveSecretKey" type="String" />
 		<field name="stripeLivePublishableKey" type="String" />
 		<field name="stripeApiVersion" type="String" />
+		<field name="integrateWithBraintree" type="boolean" />
+		<field name="braintreePrivateKey" type="String" />
+		<field name="braintreePublicKey" type="String" />
+		<field name="braintreeMerchantId" type="String" />
+		<field name="useBraintreeSandbox" type="boolean" />
+		<field name="braintreeSandboxMerchantId" type="String" />
+		<field name="braintreeSandboxPrivateKey" type="String" />
+		<field name="braintreeSandboxPublicKey" type="String" />
 	</model>
 </model-hints>

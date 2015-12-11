@@ -55,19 +55,9 @@ public class ShoppingOrderSoap implements Serializable {
     private String _shippingPostCode;
     private String _shippingCountry;
     private String _shippingPhone;
-    private String _ccName;
-    private String _ccType;
-    private String _ccNumber;
-    private int _ccExpMonth;
-    private int _ccExpYear;
-    private String _ccVerNumber;
     private String _comments;
     private String _externalPaymentId;
-    private String _ppTxnId;
-    private String _ppPaymentStatus;
-    private double _ppPaymentGross;
-    private String _ppReceiverEmail;
-    private String _ppPayerEmail;
+    private String _paymentType;
     private boolean _sendOrderEmail;
     private boolean _sendShippingEmail;
     private long _shippingMethodId;
@@ -120,19 +110,9 @@ public class ShoppingOrderSoap implements Serializable {
         soapModel.setShippingPostCode(model.getShippingPostCode());
         soapModel.setShippingCountry(model.getShippingCountry());
         soapModel.setShippingPhone(model.getShippingPhone());
-        soapModel.setCcName(model.getCcName());
-        soapModel.setCcType(model.getCcType());
-        soapModel.setCcNumber(model.getCcNumber());
-        soapModel.setCcExpMonth(model.getCcExpMonth());
-        soapModel.setCcExpYear(model.getCcExpYear());
-        soapModel.setCcVerNumber(model.getCcVerNumber());
         soapModel.setComments(model.getComments());
         soapModel.setExternalPaymentId(model.getExternalPaymentId());
-        soapModel.setPpTxnId(model.getPpTxnId());
-        soapModel.setPpPaymentStatus(model.getPpPaymentStatus());
-        soapModel.setPpPaymentGross(model.getPpPaymentGross());
-        soapModel.setPpReceiverEmail(model.getPpReceiverEmail());
-        soapModel.setPpPayerEmail(model.getPpPayerEmail());
+        soapModel.setPaymentType(model.getPaymentType());
         soapModel.setSendOrderEmail(model.getSendOrderEmail());
         soapModel.setSendShippingEmail(model.getSendShippingEmail());
         soapModel.setShippingMethodId(model.getShippingMethodId());
@@ -525,54 +505,6 @@ public class ShoppingOrderSoap implements Serializable {
         _shippingPhone = shippingPhone;
     }
 
-    public String getCcName() {
-        return _ccName;
-    }
-
-    public void setCcName(String ccName) {
-        _ccName = ccName;
-    }
-
-    public String getCcType() {
-        return _ccType;
-    }
-
-    public void setCcType(String ccType) {
-        _ccType = ccType;
-    }
-
-    public String getCcNumber() {
-        return _ccNumber;
-    }
-
-    public void setCcNumber(String ccNumber) {
-        _ccNumber = ccNumber;
-    }
-
-    public int getCcExpMonth() {
-        return _ccExpMonth;
-    }
-
-    public void setCcExpMonth(int ccExpMonth) {
-        _ccExpMonth = ccExpMonth;
-    }
-
-    public int getCcExpYear() {
-        return _ccExpYear;
-    }
-
-    public void setCcExpYear(int ccExpYear) {
-        _ccExpYear = ccExpYear;
-    }
-
-    public String getCcVerNumber() {
-        return _ccVerNumber;
-    }
-
-    public void setCcVerNumber(String ccVerNumber) {
-        _ccVerNumber = ccVerNumber;
-    }
-
     public String getComments() {
         return _comments;
     }
@@ -589,44 +521,12 @@ public class ShoppingOrderSoap implements Serializable {
         _externalPaymentId = externalPaymentId;
     }
 
-    public String getPpTxnId() {
-        return _ppTxnId;
+    public String getPaymentType() {
+        return _paymentType;
     }
 
-    public void setPpTxnId(String ppTxnId) {
-        _ppTxnId = ppTxnId;
-    }
-
-    public String getPpPaymentStatus() {
-        return _ppPaymentStatus;
-    }
-
-    public void setPpPaymentStatus(String ppPaymentStatus) {
-        _ppPaymentStatus = ppPaymentStatus;
-    }
-
-    public double getPpPaymentGross() {
-        return _ppPaymentGross;
-    }
-
-    public void setPpPaymentGross(double ppPaymentGross) {
-        _ppPaymentGross = ppPaymentGross;
-    }
-
-    public String getPpReceiverEmail() {
-        return _ppReceiverEmail;
-    }
-
-    public void setPpReceiverEmail(String ppReceiverEmail) {
-        _ppReceiverEmail = ppReceiverEmail;
-    }
-
-    public String getPpPayerEmail() {
-        return _ppPayerEmail;
-    }
-
-    public void setPpPayerEmail(String ppPayerEmail) {
-        _ppPayerEmail = ppPayerEmail;
+    public void setPaymentType(String paymentType) {
+        _paymentType = paymentType;
     }
 
     public boolean getSendOrderEmail() {

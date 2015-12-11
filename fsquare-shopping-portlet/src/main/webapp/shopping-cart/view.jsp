@@ -15,6 +15,7 @@
 --%>
 
 
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="com.fsquare.shopping.portlet.ShoppingOrderProcessWrapper"%>
 <%@page import="com.fsquare.shopping.ShoppingUtil"%>
 <%@page import="com.fsquare.shopping.service.ShoppingOrderLocalServiceUtil"%>
@@ -32,7 +33,7 @@
 <%@page import="com.fsquare.shopping.portlet.util.ShoppingPortletUtil"%>
 <%@page import="com.fsquare.shopping.model.ShoppingOrderItem"%>
 
-<%@ include file="/cart-view/init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <%
 
@@ -50,7 +51,13 @@ total = ShoppingCouponLocalServiceUtil.applyCoupon(shoppingCoupon, total);
 <div class="cart-table-wrapper">
 	<c:choose>
 		<c:when test="<%= shoppingOrderItemMap == null || shoppingOrderItemMap.isEmpty() %>">
-			<h2>Empty Cart</h2>
+			<h2><%=LanguageUtil.get(locale, "empty-cart")%></h2>
+			<%
+			Layout productsMainPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(shoppingStore.getProductsMainPageUuid(), themeDisplay.getScopeGroupId(), false);
+			NavItem productsMainPageItem = new NavItem(request, productsMainPageLayout, null);
+			
+			%>
+			<a class="btn btn-primary" href="<%= productsMainPageItem.getURL()%>"><%= LanguageUtil.get(locale, "continue-shopping") %></a>
 		</c:when>
 		<c:otherwise>
 			<portlet:actionURL var="checkoutActionURL">

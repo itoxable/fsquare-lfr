@@ -15,10 +15,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	
 
-	<properties>
-<!-- 		<liferay.home>/Users/ruic/Projects/Geoplace liferay-portal-6.2-ce-ga2</liferay.home> -->
-	</properties>
-	
 	<build>
 		<plugins>
 			<plugin>
@@ -33,11 +29,6 @@
 					</execution>
 				</executions>
 				<configuration>
-<!-- 					<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir> -->
-<!-- 					<appServerDeployDir>${liferay.app.server.deploy.dir}</appServerDeployDir> -->
-<!-- 					<appServerLibGlobalDir>${liferay.app.server.lib.global.dir}</appServerLibGlobalDir> -->
-<!-- 					<appServerPortalDir>${liferay.app.server.portal.dir}</appServerPortalDir> -->
-<!-- 					<liferayVersion>${liferay.version}</liferayVersion> -->
 					<pluginType>portlet</pluginType>
 				</configuration>
 			</plugin>
@@ -115,7 +106,7 @@
 		<dependency>
 			<groupId>com.braintreepayments.gateway</groupId>
 			<artifactId>braintree-java</artifactId>
-			<version>2.52.0</version>
+			<version>2.53.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.xhtmlrenderer</groupId>

@@ -357,7 +357,23 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		}
 	}
 	.media-gallery-item{
+		.gallery-item.animate{
+			-webkit-transform: scale(0.6);
+			transform: scale(0.6);
+			-webkit-animation: scaleUp 0.65s ease-in-out forwards;
+			animation: scaleUp 0.65s ease-in-out forwards;
+			animation-duration: 0.642985s;
+		}
 		.gallery-item{
+			
+			
+/* 			opacity: 0; */
+/* 			-webkit-transition: opacity .25s linear; */
+/* 			-moz-transition: opacity .25s linear; */
+/* 			-ms-transition: opacity .25s linear; */
+/* 			-o-transition: opacity .25s linear; */
+/* 			transition: opacity .25s linear; */
+			
 			margin-bottom: 40px;
 			display: block;
 			img{
@@ -767,9 +783,6 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	}
 	.page-header {
   		border: none;
-/*   		font-family: FaithAndGloryTwo; */
-/*   		font-family: Stringbeans; */
-/*   		font-family: Hunterswood; */
 		font-family: Lato;
 		text-align: center;
 	}
@@ -948,27 +961,18 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 			padding-right: 15px;
 		}
 		
-		
-/* 		.portlet-body{ */
-/* 			margin-left: 15px; */
-/* 			margin-right: 15px; */
-/* 		} */
-/* 		.mobile-full-width{ */
-/* 			.portlet-body{ */
-/* 				margin-left: 0; */
-/* 				margin-right: 0; */
-/* 			} */
-/* 		} */
 		.mobile-full-width-margin{
 			margin-left: 15px;
 			margin-right: 15px;
 		}
 		
 		.page-header{
+			text-align: left;
 			padding-bottom: 0;
 			margin-bottom: 0;
 			margin-top: 0;
 			h1{
+				font-size: 30px;
 				font-weight: normal;
 				margin: 0;
 			}
@@ -1042,7 +1046,9 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 			right: 0;
 			z-index: 999999;
 			height: 100%;
-			width: 80%;
+			width: 300px;
+			max-width: 100%;
+			overflow-y: auto;
 			background-color: rgba(0,0,0,0.8);
 			.navigation-close{
     			display: block;
@@ -1057,24 +1063,22 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
     		}
 			.navbar-inner {
 				padding: 0;
-/* 				height: 100%; */
 				padding-top: 40px;
 				padding-bottom: 30px;
 				margin: 0;
-/* 		  		background-color: rgba(0,0,0,0.8); */
 	
 		  		min-height: 0;
 	  		    margin-bottom: 0;
 	    		margin-top: 0;
 	    		border-top: 0;
 	    		border-bottom: 0;
+	    			margin-left: 30px;
 	    		li a{
 	    			color: #FFF;
 	    			padding: 5px 0;
 	    		}
 	    		
 	    		ul{
-/* 	    			text-align: center; */
 	    			float: none;
 	    			margin: 0;
 	    			text-transform: uppercase;
@@ -1087,6 +1091,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 					display: list-item;
 		   			border-bottom: 0;
 		   			margin-bottom: -1px;
+		   			text-align: left; 
 		   			&.selected.active a {
 					  	font-weight: 600;
 					}

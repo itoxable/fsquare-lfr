@@ -145,20 +145,11 @@
 		<column name="shippingPostCode" type="String" />
 		<column name="shippingCountry" type="String" />
 		<column name="shippingPhone" type="String" />
-		<column name="ccName" type="String" />
-		<column name="ccType" type="String" />
-		<column name="ccNumber" type="String" />
-		<column name="ccExpMonth" type="int" />
-		<column name="ccExpYear" type="int" />
-		<column name="ccVerNumber" type="String" />
+		
 		<column name="comments" type="String" />
 		<column name="externalPaymentId" type="String" />
-		
-		<column name="ppTxnId" type="String" />
-		<column name="ppPaymentStatus" type="String" />
-		<column name="ppPaymentGross" type="double" />
-		<column name="ppReceiverEmail" type="String" />
-		<column name="ppPayerEmail" type="String" />
+		<column name="paymentType" type="String" />
+
 		<column name="sendOrderEmail" type="boolean" />
 		<column name="sendShippingEmail" type="boolean" />
 		<column name="shippingMethodId" type="long" />
@@ -182,19 +173,24 @@
 		<finder name="Number" return-type="ShoppingOrder" unique="true">
 			<finder-column name="number" />
 		</finder>
-		<finder name="PPTxnId" return-type="ShoppingOrder">
-			<finder-column name="ppTxnId" />
+		
+		<finder name="PaymentType" return-type="Collection">
+			<finder-column name="paymentType" />
+		</finder>
+		
+		<finder name="ExternalPaymentId" return-type="ShoppingOrder">
+			<finder-column name="externalPaymentId" />
 		</finder>
 		
 		<finder name="Status" return-type="ShoppingOrder">
 			<finder-column name="status" />
 		</finder>
 		
-		<finder name="G_U_PPPS" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="userId" />
-			<finder-column name="ppPaymentStatus" />
-		</finder>
+<!-- 		<finder name="G_U_PPPS" return-type="Collection"> -->
+<!-- 			<finder-column name="groupId" /> -->
+<!-- 			<finder-column name="userId" /> -->
+<!-- 			<finder-column name="ppPaymentStatus" /> -->
+<!-- 		</finder> -->
 
 		<finder name="ShippingMethodId" return-type="Collection">
 			<finder-column name="shippingMethodId" />
@@ -267,12 +263,18 @@
 
 		<!-- Other fields -->
 		<column name="name" type="String" />
+		<column name="defaultEmailAddress" type="String" />
+		<column name="productsMainPageUuid" type="String" />
+		
 		<column name="cartPageUuid" type="String" />
 		<column name="checkoutPageUuid" type="String" />
 		<column name="onAddToCart" type="String" />
 		<column name="currency" type="String" />
 		<column name="country" type="String" />
 		<column name="userTypes" type="String" />
+		
+		<column name="checkoutPageFullscreen" type="boolean" />
+		<column name="checkoutCompletePageTemplate" type="String" />
 		
 		<column name="orderCreatedEmailTemplate" type="String" />
 		<column name="orderShippedEmailTemplate" type="String" />
@@ -289,16 +291,18 @@
 		<column name="stripeLivePublishableKey" type="String" />
 		<column name="stripeApiVersion" type="String" />
 		
+		<column name="integrateWithBraintree" type="boolean" />
+		<column name="braintreePrivateKey" type="String" />
+		<column name="braintreePublicKey" type="String" />
+		<column name="braintreeMerchantId" type="String" />
 		
-<!-- 		<finder name="GroupId" return-type="ShoppingStore"> -->
-<!-- 			<finder-column name="groupId" /> -->
-<!-- 		</finder> -->
-		
-<!-- 		<reference package-path="com.liferay.portal.model" entity="Layout" /> -->
+		<column name="useBraintreeSandbox" type="boolean" />
+		<column name="braintreeSandboxMerchantId" type="String" />
+		<column name="braintreeSandboxPrivateKey" type="String" />
+		<column name="braintreeSandboxPublicKey" type="String" />
 		
 	</entity>
 	<entity name="ShoppingPayment" local-service="true" remote-service="true">
-<!-- 		<reference package-path="com.fsquare.shopping" entity="ShoppingOrder" /> -->
 	</entity>
 	
 	<exceptions>

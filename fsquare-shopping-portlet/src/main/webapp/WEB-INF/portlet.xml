@@ -33,21 +33,21 @@
 	</portlet>
 	
 	<portlet>
-		<portlet-name>cart-view</portlet-name>
-		<display-name>Cart View</display-name>
-		<portlet-class>com.fsquare.shopping.portlet.cartview.CartViewPortlet</portlet-class>
+		<portlet-name>shopping-cart</portlet-name>
+		<display-name>Shopping Cart</display-name>
+		<portlet-class>com.fsquare.shopping.portlet.shoppingcart.ShoppingCartPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/cart-view/view.jsp</value>
+			<value>/shopping-cart/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
 		<portlet-info>
-			<title>Cart View</title>
+			<title>Shopping Cart</title>
 			<short-title>Cart</short-title>
-			<keywords>Cart View</keywords>
+			<keywords>Shopping Cart</keywords>
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>
@@ -66,7 +66,7 @@
 	<portlet>
 		<portlet-name>shopping-order-checkout</portlet-name>
 		<display-name>Shopping Order Checkout</display-name>
-		<portlet-class>com.fsquare.shopping.portlet.shoppingordercheckout.OrdersPortlet</portlet-class>
+		<portlet-class>com.fsquare.shopping.portlet.shoppingordercheckout.OrderCheckoutPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/shopping-order-checkout/view.jsp</value>
@@ -118,9 +118,6 @@
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
 	</portlet>
 	
 	<portlet>
@@ -145,9 +142,6 @@
 		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
 	
@@ -174,9 +168,6 @@
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
 	</portlet>
 	
 	<portlet>
@@ -201,9 +192,6 @@
 		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
 	

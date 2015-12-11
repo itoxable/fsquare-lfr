@@ -95,19 +95,9 @@
 			<basic name="shippingPostCode" />
 			<basic name="shippingCountry" />
 			<basic name="shippingPhone" />
-			<basic name="ccName" />
-			<basic name="ccType" />
-			<basic name="ccNumber" />
-			<basic name="ccExpMonth" />
-			<basic name="ccExpYear" />
-			<basic name="ccVerNumber" />
 			<basic name="comments" />
 			<basic name="externalPaymentId" />
-			<basic name="ppTxnId" />
-			<basic name="ppPaymentStatus" />
-			<basic name="ppPaymentGross" />
-			<basic name="ppReceiverEmail" />
-			<basic name="ppPayerEmail" />
+			<basic name="paymentType" />
 			<basic name="sendOrderEmail" />
 			<basic name="sendShippingEmail" />
 			<basic name="shippingMethodId" />
@@ -178,6 +168,8 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="name" />
+			<basic name="defaultEmailAddress" />
+			<basic name="productsMainPageUuid" />
 			<basic name="cartPageUuid" />
 			<basic name="checkoutPageUuid" />
 			<basic name="onAddToCart" />
@@ -186,6 +178,8 @@
 			</basic>
 			<basic name="country" />
 			<basic name="userTypes" />
+			<basic name="checkoutPageFullscreen" />
+			<basic name="checkoutCompletePageTemplate" />
 			<basic name="orderCreatedEmailTemplate" />
 			<basic name="orderShippedEmailTemplate" />
 			<basic name="orderCreatedEmailSubject" />
@@ -197,6 +191,14 @@
 			<basic name="stripeLiveSecretKey" />
 			<basic name="stripeLivePublishableKey" />
 			<basic name="stripeApiVersion" />
+			<basic name="integrateWithBraintree" />
+			<basic name="braintreePrivateKey" />
+			<basic name="braintreePublicKey" />
+			<basic name="braintreeMerchantId" />
+			<basic name="useBraintreeSandbox" />
+			<basic name="braintreeSandboxMerchantId" />
+			<basic name="braintreeSandboxPrivateKey" />
+			<basic name="braintreeSandboxPublicKey" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

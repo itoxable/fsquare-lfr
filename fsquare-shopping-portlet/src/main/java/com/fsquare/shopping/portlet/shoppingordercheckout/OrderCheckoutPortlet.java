@@ -18,6 +18,9 @@ import javax.portlet.ResourceResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.braintreegateway.PaymentInstrumentType;
+import com.braintreegateway.Result;
+import com.braintreegateway.Transaction;
 import com.fsquare.shopping.NoSuchShoppingStoreException;
 import com.fsquare.shopping.ShoppingUtil;
 import com.fsquare.shopping.messaging.Destinations;
@@ -27,7 +30,9 @@ import com.fsquare.shopping.model.ShoppingOrderItem;
 import com.fsquare.shopping.model.ShoppingShippingMethod;
 import com.fsquare.shopping.model.ShoppingStore;
 import com.fsquare.shopping.portlet.BaseShoppingPortlet;
+import com.fsquare.shopping.portlet.BraintreePayment;
 import com.fsquare.shopping.portlet.ShoppingOrderProcessWrapper;
+import com.fsquare.shopping.portlet.StripePaymet;
 import com.fsquare.shopping.portlet.util.ShoppingPortletUtil;
 import com.fsquare.shopping.service.ShoppingCouponLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingOrderItemLocalServiceUtil;
@@ -44,6 +49,7 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Country;
@@ -62,7 +68,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.Charge;
 import com.stripe.net.RequestOptions;
 
-public class OrdersPortlet extends BaseShoppingPortlet {
+public class OrderCheckoutPortlet extends BaseShoppingPortlet {
 	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException{
@@ -105,6 +111,10 @@ public class OrdersPortlet extends BaseShoppingPortlet {
 				updateCart(resourceRequest, resourceResponse);
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_CALCULATE_SHIPPING_PRICE)) {
 				calculateShippingPrice(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_GET_BRAINTREE_CLIENT_TOKEN)) {
+				getBraintreeClientToken(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_BRAINTREE_TRANSACTION)) {
+				doBraintreeTransaction(resourceRequest, resourceResponse);
 			}
 			
 		}
@@ -118,6 +128,118 @@ public class OrdersPortlet extends BaseShoppingPortlet {
 		}
 	}
 
+	private BraintreePayment braintreePayment;
+	
+	private void doBraintreeTransaction(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException, SystemException {
+
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+        
+		String nonce = ParamUtil.getString(resourceRequest, "nonce");
+		
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
+		HttpSession session = request.getSession();
+
+		ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
+		Double amount = shoppingOrderProcessWrapper.getAbsoluteTotal();
+				
+		Result<Transaction> result = getBraintreeGateway(resourceRequest).doBraintreeTransaction(nonce, amount.toString());
+		ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+		ShoppingOrder shoppingOrder = shoppingOrderProcessWrapper.getShoppingOrder();
+		
+		if(result.isSuccess()){
+		
+			try {
+				shoppingOrder.setTotalPrice(amount);
+				shoppingOrder.setGroupId(themeDisplay.getScopeGroupId());
+				shoppingOrder.setShoppingOrderId(CounterLocalServiceUtil.increment(ShoppingOrder.class.getName()));
+				shoppingOrder.setCouponCodes(shoppingOrderProcessWrapper.getShoppingCoupon()!=null?shoppingOrderProcessWrapper.getShoppingCoupon().getCode():"");
+				shoppingOrder.setShippingMethodId(shoppingOrderProcessWrapper.getShoppingShippingMethod().getShippingMethodId());
+				shoppingOrder.setNumber(Long.toString(shoppingOrder.getShoppingOrderId()));
+				shoppingOrder = ShoppingOrderLocalServiceUtil.updateShoppingOrder(shoppingOrder);
+
+				if(PaymentInstrumentType.PAYPAL_ACCOUNT.equals(result.getTarget().getPaymentInstrumentType())){
+					shoppingOrder.setPaymentType(BraintreePayment.PAYMENT_METHOD_PAYPAL);
+				}else if(PaymentInstrumentType.CREDIT_CARD.equals(result.getTarget().getPaymentInstrumentType())){
+					shoppingOrder.setPaymentType(BraintreePayment.PAYMENT_METHOD_CREDIT_CARD);
+				}
+				//result.getErrors().
+				for(ShoppingOrderItem shoppingOrderItem : shoppingOrderProcessWrapper.getShoppingOrderItemMap().values()){
+					shoppingOrderItem.setShoppingOrderId(shoppingOrder.getShoppingOrderId());
+					shoppingOrderItem.setShoppingOrderItemId(CounterLocalServiceUtil.increment(ShoppingOrderItem.class.getName()));
+					ShoppingOrderItemLocalServiceUtil.updateShoppingOrderItem(shoppingOrderItem);
+				}
+				
+				shoppingOrderProcessWrapper.setShoppingOrder(shoppingOrder);
+				
+				Message message = new Message();
+				message.put("shoppingOrder", shoppingOrder);
+				message.put("shoppingStore", shoppingStore);
+				MessageBusUtil.sendMessage(Destinations.SHOPPING_SUCCESS_ORDER_MAIL, message);
+				
+				shoppingOrder.setExternalPaymentId(result.getTarget().getId());
+				shoppingOrder = ShoppingOrderLocalServiceUtil.updateShoppingOrder(shoppingOrder);
+				
+				PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
+				String path = ShoppingPortletUtil.CHECKOUT_SUCCESS_SCREEN;
+				resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_SHOPPING_ORDER_PROCESS_WRAPPER, shoppingOrderProcessWrapper);
+				PortletRequestDispatcher dispatcher = portletContext.getRequestDispatcher(path);
+				
+				dispatcher.include(resourceRequest, resourceResponse);
+				
+				ShoppingPortletUtil.setSessionShoppingOrderProcessWrapper(session, null);
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+				jsonObject.put("braintreeResult", JSONFactoryUtil.looseSerialize(result));
+				writer.print(jsonObject.toString());
+		        writer.flush();
+		        writer.close();
+			}
+		}else{
+			jsonObject.put("braintreeResult", JSONFactoryUtil.looseSerialize(result));
+			jsonObject.put("success", false);
+			writer.print(jsonObject.toString());
+	        writer.flush();
+	        writer.close();
+		}
+		
+	}
+
+	private BraintreePayment getBraintreeGateway(ResourceRequest resourceRequest) throws PortalException, SystemException{
+		if(braintreePayment == null){
+			System.out.println("--- BraintreePayment ---");
+			ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			braintreePayment = new BraintreePayment(shoppingStore);
+		}
+		return braintreePayment;
+	}
+	
+	private void getBraintreeClientToken(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException, SystemException {
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        boolean success = false;
+
+        String clientToken = getBraintreeGateway(resourceRequest).getBraintreeClientToken("");
+        jsonObject.put("braintreeClientToken", clientToken);
+        
+        HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
+		HttpSession session = request.getSession();
+
+		ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
+		Double amount = shoppingOrderProcessWrapper.getAbsoluteTotal();
+		jsonObject.put("amount", amount);
+        
+        success = true;
+        
+        jsonObject.put("success", success);
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
+	}
+	
 	private void calculateShippingPrice(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException {
 		PrintWriter writer = resourceResponse.getWriter();
         JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
@@ -160,10 +282,9 @@ public class OrdersPortlet extends BaseShoppingPortlet {
 		ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
 		double total = shoppingOrderProcessWrapper.getAbsoluteTotal();
 
-		//shoppingOrder.setTotalPrice(total);
 		success = true;
 		jsonObject.put("success", success);
-		//jsonObject.put("shoppingOrder", JSONFactoryUtil.looseSerialize(shoppingOrder));
+		jsonObject.put("total", total);
 
 		writer.print(jsonObject.toString());
         writer.flush();
@@ -238,6 +359,9 @@ public class OrdersPortlet extends BaseShoppingPortlet {
 			shoppingOrder.setNumber(Long.toString(shoppingOrder.getShoppingOrderId()));
 			shoppingOrder = ShoppingOrderLocalServiceUtil.updateShoppingOrder(shoppingOrder);
 			
+			shoppingOrder.setPaymentType(StripePaymet.PAYMENT_METHOD_CREDIT_CARD);
+
+			
 			for(ShoppingOrderItem shoppingOrderItem : shoppingOrderProcessWrapper.getShoppingOrderItemMap().values()){
 				shoppingOrderItem.setShoppingOrderId(shoppingOrder.getShoppingOrderId());
 				shoppingOrderItem.setShoppingOrderItemId(CounterLocalServiceUtil.increment(ShoppingOrderItem.class.getName()));
@@ -248,7 +372,7 @@ public class OrdersPortlet extends BaseShoppingPortlet {
 			chargeParams.put("description", "jo-walton.com painting shopping order id: "+shoppingOrder.getShoppingOrderId());
 
 			Charge charge = Charge.create(chargeParams, options);
-			//charge.g
+			
 			Message message = new Message();
 			message.put("shoppingOrder", shoppingOrder);
 			message.put("shoppingStore", shoppingStore);
@@ -289,68 +413,100 @@ public class OrdersPortlet extends BaseShoppingPortlet {
 		PrintWriter writer = resourceResponse.getWriter();
         JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
         boolean success = false;
+        boolean failValidation = false;
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
 		HttpSession session = request.getSession();
 		
 		ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
-		//double total = shoppingOrderProcessWrapper.getAbsoluteTotal();
 		
-		ShoppingStore shoppingStore = null;
-		try{
-			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
-		}catch(NoSuchShoppingStoreException e){
-			shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
-		}
+		
+		
 		String countryCode = ParamUtil.getString(resourceRequest, "country");
+		if(Validator.isNull(countryCode)){
+			failValidation = true;
+		}
 		String email = ParamUtil.getString(resourceRequest, "email");
+		if(Validator.isNull(email)){
+			failValidation = true;
+		}
 		String city = ParamUtil.getString(resourceRequest, "city");
+		if(Validator.isNull(city)){
+			failValidation = true;
+		}
 		String phoneNumber = ParamUtil.getString(resourceRequest, "phoneNumber");
+		if(Validator.isNull(phoneNumber)){
+			failValidation = true;
+		}
 		String postCode = ParamUtil.getString(resourceRequest, "postCode");
+		if(Validator.isNull(postCode)){
+			failValidation = true;
+		}
 		String firstName = ParamUtil.getString(resourceRequest, "firstName");
+		if(Validator.isNull(firstName)){
+			failValidation = true;
+		}
 		String lastName = ParamUtil.getString(resourceRequest, "lastName");
+		if(Validator.isNull(lastName)){
+			failValidation = true;
+		}
 		String streetAddress1 = ParamUtil.getString(resourceRequest, "streetAddress1");
-		String streetAddress2 = ParamUtil.getString(resourceRequest, "streetAddress2");
-		
-		Country country = CountryServiceUtil.fetchCountryByA2(countryCode);
-		
-		shoppingOrderProcessWrapper.setShippingCountry(country);
-		
-		boolean iternational = !shoppingStore.getCountry().equalsIgnoreCase(countryCode);
-		
-		ShoppingOrder shoppingOrder = shoppingOrderProcessWrapper.getShoppingOrder();
-		if(shoppingOrder == null){
-			shoppingOrder = ShoppingOrderLocalServiceUtil.createShoppingOrder(-1L);
+		if(Validator.isNull(streetAddress1)){
+			failValidation = true;
 		}
-		shoppingOrder.setShippingCity(city);
-		shoppingOrder.setShippingCountry(countryCode);
-		shoppingOrder.setShippingEmailAddress(email);
-		shoppingOrder.setShippingPhone(phoneNumber);
-		shoppingOrder.setShippingPostCode(postCode);
-		shoppingOrder.setShippingFirstName(firstName);
-		shoppingOrder.setShippingLastName(lastName);
-		shoppingOrder.setShippingStreet(streetAddress1);
-		shoppingOrder.setShippingStreet2(streetAddress2);
-		shoppingOrder.setInternational(iternational);
-		success = true;
-
-		List<ShoppingShippingMethod> availableShoppingShippingMethodList = new ArrayList<ShoppingShippingMethod>();
-		List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethodLocalServiceUtil.findByGroupId(themeDisplay.getScopeGroupId());
 		
-		for(ShoppingShippingMethod shoppingShippingMethod : shoppingShippingMethodList){
-			if(iternational && shoppingShippingMethod.isInternational()){
-				availableShoppingShippingMethodList.add(shoppingShippingMethod);
-			}else if(!iternational && !shoppingShippingMethod.isInternational()){
-				availableShoppingShippingMethodList.add(shoppingShippingMethod);
+		if(!failValidation){
+			
+			ShoppingStore shoppingStore = null;
+			try{
+				shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			}catch(NoSuchShoppingStoreException e){
+				shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
 			}
+			
+			String streetAddress2 = ParamUtil.getString(resourceRequest, "streetAddress2");
+			
+			Country country = CountryServiceUtil.fetchCountryByA2(countryCode);
+			
+			shoppingOrderProcessWrapper.setShippingCountry(country);
+			
+			boolean iternational = !shoppingStore.getCountry().equalsIgnoreCase(countryCode);
+			
+			ShoppingOrder shoppingOrder = shoppingOrderProcessWrapper.getShoppingOrder();
+			if(shoppingOrder == null){
+				shoppingOrder = ShoppingOrderLocalServiceUtil.createShoppingOrder(-1L);
+			}
+			shoppingOrder.setShippingCity(city);
+			shoppingOrder.setShippingCountry(countryCode);
+			shoppingOrder.setShippingEmailAddress(email);
+			shoppingOrder.setShippingPhone(phoneNumber);
+			shoppingOrder.setShippingPostCode(postCode);
+			shoppingOrder.setShippingFirstName(firstName);
+			shoppingOrder.setShippingLastName(lastName);
+			shoppingOrder.setShippingStreet(streetAddress1);
+			shoppingOrder.setShippingStreet2(streetAddress2);
+			shoppingOrder.setInternational(iternational);
+			
+	
+			List<ShoppingShippingMethod> availableShoppingShippingMethodList = new ArrayList<ShoppingShippingMethod>();
+			List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethodLocalServiceUtil.findByGroupId(themeDisplay.getScopeGroupId());
+			
+			for(ShoppingShippingMethod shoppingShippingMethod : shoppingShippingMethodList){
+				if(iternational && shoppingShippingMethod.isInternational()){
+					availableShoppingShippingMethodList.add(shoppingShippingMethod);
+				}else if(!iternational && !shoppingShippingMethod.isInternational()){
+					availableShoppingShippingMethodList.add(shoppingShippingMethod);
+				}
+			}
+			
+			shoppingOrderProcessWrapper.setAvailableShoppingShippingMethodList(availableShoppingShippingMethodList);
+			success = true;
+			
+			jsonObject.put("countryName", country.getName(themeDisplay.getLocale()));
+			jsonObject.put("shoppingOrder", JSONFactoryUtil.looseSerialize(shoppingOrder));
 		}
-		
-		shoppingOrderProcessWrapper.setAvailableShoppingShippingMethodList(availableShoppingShippingMethodList);
-		
 		jsonObject.put("success", success);
-		jsonObject.put("countryName", country.getName(themeDisplay.getLocale()));
-		jsonObject.put("shoppingOrder", JSONFactoryUtil.looseSerialize(shoppingOrder));
-
+		jsonObject.put("failValidation", failValidation);
 		writer.print(jsonObject.toString());
         writer.flush();
         writer.close();

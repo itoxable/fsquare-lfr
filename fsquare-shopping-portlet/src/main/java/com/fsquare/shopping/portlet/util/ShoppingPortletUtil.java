@@ -59,10 +59,18 @@ public class ShoppingPortletUtil {
 	
 	public static final String CMD_OPEN_SHIPPING_ADDRESS = "openShippingAddress";
 	public static final String CMD_OPEN_ORDER_ITEMS = "openOrderItems";
-	public static final String CMD_UPDATE_ORDER_STATUS = "updatOrderStatus";
-
+	public static final String CMD_UPDATE_ORDER_STATUS = "updateOrderStatus";
+	public static final String CMD_CHECK_PAYMENT_STATUS = "checkPaymentStatus";
+	
+	
 	public static final String CMD_OPEN_TEST_STRIPE_FORM = "openTestStripeForm";
 	public static final String CMD_TEST_STRIPE = "testStripe";
+	
+	public static final String CMD_OPEN_TEST_BRAINTREE_PAYPAL = "cmd_open_test_braintree_paypal";
+	public static final String CMD_TEST_BRAINTREE_PAYPAL = "cmd_test_braintree_paypal";
+	public static final String CMD_GET_BRAINTREE_CLIENT_TOKEN = "cmd_get_braintree_client_token";
+	public static final String CMD_BRAINTREE_TRANSACTION = "cmd_braintree_transaction";
+
 
 	public static final String CMD_SAVE_CHECKOUT_SHIPPING_ADDRESS = "saveCheckoutShippingAddress";
 	public static final String CMD_SAVE_CHECKOUT_SHIPPING_METHOD = "saveCheckoutShippingMethod";
@@ -93,6 +101,8 @@ public class ShoppingPortletUtil {
 	public static final String ATTR_SHIPPING = "shipping";
 //	public static final String ATTR_ORDER = "order";
 	public static final String ATTR_ORDER_ITEMS = "order_items";
+	public static final String ATTR_ORDER_ITEM = "order_item";
+
 	public static final String ATTR_SHOPPING_ORDER_PROCESS_WRAPPER = "attr_shoppingOrderProcessWrapper";
 	public static final String ATTR_SHOPPING_ORDER = "attr_shopping_order";
 	
@@ -105,17 +115,17 @@ public class ShoppingPortletUtil {
 	public static final int CHECKOUT_STEP_PAYMENT_NR= 3;
 	public static final int CHECKOUT_STEP_ADDRESS_NR = 1;
 
-	public static final String CHECKOUT_STEP_SHIPPING_METHOD = "/shopping-order/shipping-method.jsp";
-	public static final String CHECKOUT_STEP_PAYMENT_FORM= "/shopping-order/payment-form.jsp";
-	public static final String CHECKOUT_STEP_ADDRESS_FORM = "/shopping-order/address-form.jsp";
-	public static final String CHECKOUT_SUCCESS_SCREEN = "/shopping-order/checkout-success.jsp";
+	public static final String CHECKOUT_STEP_SHIPPING_METHOD = "/shopping-order-checkout/shipping-method.jsp";
+	public static final String CHECKOUT_STEP_PAYMENT_FORM_BRAINTREE = "/shopping-order-checkout/payment-form-braintree.jsp";
+	public static final String CHECKOUT_STEP_PAYMENT_FORM = "/shopping-order-checkout/payment-form.jsp";
+	public static final String CHECKOUT_STEP_PAYMENT_FORM_STRIPE = "/shopping-order-checkout/payment-form-stripe.jsp";
+	public static final String CHECKOUT_STEP_ADDRESS_FORM = "/shopping-order-checkout/address-form.jsp";
+	public static final String CHECKOUT_SUCCESS_SCREEN = "/shopping-order-checkout/checkout-success.jsp";
 
 	public static final String CMD_GET_ORDER_TOTAL = "getOrderTotal";
 
 
 	public static final String CMD_SEND_TEST_EMAIL = "sendTestEmail";
-
-
 
 
 	public static ShoppingOrderProcessWrapper getSessionShoppingOrderProcessWrapper(HttpSession session){

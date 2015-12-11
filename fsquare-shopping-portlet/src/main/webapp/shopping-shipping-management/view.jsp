@@ -49,7 +49,7 @@ List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethod
 <div>
 	<h3>Shipping Methods</h3>
 	<div class="shippings-table-wrapper" >
-		<table class="shippings-table table table-bordered table-striped" id="<portlet:namespace />shippings-table" >
+		<table class="settings-table shippings-table table table-bordered table-striped" id="<portlet:namespace />shippings-table" >
 			<thead>
 				<tr>
 					<td>Name</td>
@@ -76,7 +76,7 @@ List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethod
 					<td id="<%= "shipping-free-total-"+shippingMethodId %>"><%= shoppingShippingMethod.getFreeTotal() %></td>
 					<td id="<%= "shipping-weight-"+shippingMethodId %>"><%= shoppingShippingMethod.getWeight()%></td>
 					
-					<td class="shipping-actions">
+					<td class="settings-actions">
 					
 						<% if(shoppingShippingMethod.getDefaultShipping()){ %>
 							<a id='default-shipping<%= shippingMethodId %>' title="default shipping" href="javascript:;" class='fa fa-star'></a>	
@@ -107,6 +107,23 @@ List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethod
 	<a class="btn open-new-shipping-btn" data-shipping-id="" href="javascript:;"><span class="fa fa-pencil-square"></span><span>New shipping method</span></a>
 </div>
 <aui:script use="aui-base,selector-css3,aui-io-request,array-extras,querystring-stringify,aui-datatype,aui-datepicker">
+	
+	Liferay.provide(window, '<portlet:namespace />showLoading',
+		function(wrapper) {
+		if(!wrapper){
+			wrapper = '#p_p_id<portlet:namespace />';
+		}
+		$(wrapper).append('<div class="store-loading"><div class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div></div>')	
+	},['aui-base,selector-css3']);
+	
+	Liferay.provide(window, '<portlet:namespace />hideLoading',
+		function(wrapper) {
+		if(!wrapper){
+			wrapper = '#p_p_id<portlet:namespace />'
+		}
+		$(wrapper).find(".store-loading").remove()
+	},['aui-base,selector-css3']);
+	
 	
 	Liferay.provide(window, '<portlet:namespace />saveShipping',
 		function() {

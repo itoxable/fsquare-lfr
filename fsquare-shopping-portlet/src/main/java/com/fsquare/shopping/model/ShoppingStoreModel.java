@@ -176,6 +176,36 @@ public interface ShoppingStoreModel extends AuditedModel,
     public void setName(String name);
 
     /**
+     * Returns the default email address of this shopping store.
+     *
+     * @return the default email address of this shopping store
+     */
+    @AutoEscape
+    public String getDefaultEmailAddress();
+
+    /**
+     * Sets the default email address of this shopping store.
+     *
+     * @param defaultEmailAddress the default email address of this shopping store
+     */
+    public void setDefaultEmailAddress(String defaultEmailAddress);
+
+    /**
+     * Returns the products main page uuid of this shopping store.
+     *
+     * @return the products main page uuid of this shopping store
+     */
+    @AutoEscape
+    public String getProductsMainPageUuid();
+
+    /**
+     * Sets the products main page uuid of this shopping store.
+     *
+     * @param productsMainPageUuid the products main page uuid of this shopping store
+     */
+    public void setProductsMainPageUuid(String productsMainPageUuid);
+
+    /**
      * Returns the cart page uuid of this shopping store.
      *
      * @return the cart page uuid of this shopping store
@@ -264,6 +294,43 @@ public interface ShoppingStoreModel extends AuditedModel,
      * @param userTypes the user types of this shopping store
      */
     public void setUserTypes(String userTypes);
+
+    /**
+     * Returns the checkout page fullscreen of this shopping store.
+     *
+     * @return the checkout page fullscreen of this shopping store
+     */
+    public boolean getCheckoutPageFullscreen();
+
+    /**
+     * Returns <code>true</code> if this shopping store is checkout page fullscreen.
+     *
+     * @return <code>true</code> if this shopping store is checkout page fullscreen; <code>false</code> otherwise
+     */
+    public boolean isCheckoutPageFullscreen();
+
+    /**
+     * Sets whether this shopping store is checkout page fullscreen.
+     *
+     * @param checkoutPageFullscreen the checkout page fullscreen of this shopping store
+     */
+    public void setCheckoutPageFullscreen(boolean checkoutPageFullscreen);
+
+    /**
+     * Returns the checkout complete page template of this shopping store.
+     *
+     * @return the checkout complete page template of this shopping store
+     */
+    @AutoEscape
+    public String getCheckoutCompletePageTemplate();
+
+    /**
+     * Sets the checkout complete page template of this shopping store.
+     *
+     * @param checkoutCompletePageTemplate the checkout complete page template of this shopping store
+     */
+    public void setCheckoutCompletePageTemplate(
+        String checkoutCompletePageTemplate);
 
     /**
      * Returns the order created email template of this shopping store.
@@ -442,6 +509,138 @@ public interface ShoppingStoreModel extends AuditedModel,
      * @param stripeApiVersion the stripe api version of this shopping store
      */
     public void setStripeApiVersion(String stripeApiVersion);
+
+    /**
+     * Returns the integrate with braintree of this shopping store.
+     *
+     * @return the integrate with braintree of this shopping store
+     */
+    public boolean getIntegrateWithBraintree();
+
+    /**
+     * Returns <code>true</code> if this shopping store is integrate with braintree.
+     *
+     * @return <code>true</code> if this shopping store is integrate with braintree; <code>false</code> otherwise
+     */
+    public boolean isIntegrateWithBraintree();
+
+    /**
+     * Sets whether this shopping store is integrate with braintree.
+     *
+     * @param integrateWithBraintree the integrate with braintree of this shopping store
+     */
+    public void setIntegrateWithBraintree(boolean integrateWithBraintree);
+
+    /**
+     * Returns the braintree private key of this shopping store.
+     *
+     * @return the braintree private key of this shopping store
+     */
+    @AutoEscape
+    public String getBraintreePrivateKey();
+
+    /**
+     * Sets the braintree private key of this shopping store.
+     *
+     * @param braintreePrivateKey the braintree private key of this shopping store
+     */
+    public void setBraintreePrivateKey(String braintreePrivateKey);
+
+    /**
+     * Returns the braintree public key of this shopping store.
+     *
+     * @return the braintree public key of this shopping store
+     */
+    @AutoEscape
+    public String getBraintreePublicKey();
+
+    /**
+     * Sets the braintree public key of this shopping store.
+     *
+     * @param braintreePublicKey the braintree public key of this shopping store
+     */
+    public void setBraintreePublicKey(String braintreePublicKey);
+
+    /**
+     * Returns the braintree merchant ID of this shopping store.
+     *
+     * @return the braintree merchant ID of this shopping store
+     */
+    @AutoEscape
+    public String getBraintreeMerchantId();
+
+    /**
+     * Sets the braintree merchant ID of this shopping store.
+     *
+     * @param braintreeMerchantId the braintree merchant ID of this shopping store
+     */
+    public void setBraintreeMerchantId(String braintreeMerchantId);
+
+    /**
+     * Returns the use braintree sandbox of this shopping store.
+     *
+     * @return the use braintree sandbox of this shopping store
+     */
+    public boolean getUseBraintreeSandbox();
+
+    /**
+     * Returns <code>true</code> if this shopping store is use braintree sandbox.
+     *
+     * @return <code>true</code> if this shopping store is use braintree sandbox; <code>false</code> otherwise
+     */
+    public boolean isUseBraintreeSandbox();
+
+    /**
+     * Sets whether this shopping store is use braintree sandbox.
+     *
+     * @param useBraintreeSandbox the use braintree sandbox of this shopping store
+     */
+    public void setUseBraintreeSandbox(boolean useBraintreeSandbox);
+
+    /**
+     * Returns the braintree sandbox merchant ID of this shopping store.
+     *
+     * @return the braintree sandbox merchant ID of this shopping store
+     */
+    @AutoEscape
+    public String getBraintreeSandboxMerchantId();
+
+    /**
+     * Sets the braintree sandbox merchant ID of this shopping store.
+     *
+     * @param braintreeSandboxMerchantId the braintree sandbox merchant ID of this shopping store
+     */
+    public void setBraintreeSandboxMerchantId(String braintreeSandboxMerchantId);
+
+    /**
+     * Returns the braintree sandbox private key of this shopping store.
+     *
+     * @return the braintree sandbox private key of this shopping store
+     */
+    @AutoEscape
+    public String getBraintreeSandboxPrivateKey();
+
+    /**
+     * Sets the braintree sandbox private key of this shopping store.
+     *
+     * @param braintreeSandboxPrivateKey the braintree sandbox private key of this shopping store
+     */
+    public void setBraintreeSandboxPrivateKey(String braintreeSandboxPrivateKey);
+
+    /**
+     * Returns the braintree sandbox public key of this shopping store.
+     *
+     * @return the braintree sandbox public key of this shopping store
+     */
+    @AutoEscape
+    public String getBraintreeSandboxPublicKey();
+
+    /**
+     * Sets the braintree sandbox public key of this shopping store.
+     *
+     * @param braintreeSandboxPublicKey the braintree sandbox public key of this shopping store
+     */
+    public void setBraintreeSandboxPublicKey(String braintreeSandboxPublicKey);
 
     @Override
     public boolean isNew();

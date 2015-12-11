@@ -94,25 +94,15 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             { "shippingPostCode", Types.VARCHAR },
             { "shippingCountry", Types.VARCHAR },
             { "shippingPhone", Types.VARCHAR },
-            { "ccName", Types.VARCHAR },
-            { "ccType", Types.VARCHAR },
-            { "ccNumber", Types.VARCHAR },
-            { "ccExpMonth", Types.INTEGER },
-            { "ccExpYear", Types.INTEGER },
-            { "ccVerNumber", Types.VARCHAR },
             { "comments", Types.VARCHAR },
             { "externalPaymentId", Types.VARCHAR },
-            { "ppTxnId", Types.VARCHAR },
-            { "ppPaymentStatus", Types.VARCHAR },
-            { "ppPaymentGross", Types.DOUBLE },
-            { "ppReceiverEmail", Types.VARCHAR },
-            { "ppPayerEmail", Types.VARCHAR },
+            { "paymentType", Types.VARCHAR },
             { "sendOrderEmail", Types.BOOLEAN },
             { "sendShippingEmail", Types.BOOLEAN },
             { "shippingMethodId", Types.BIGINT },
             { "international", Types.BOOLEAN }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingOrder (shoppingOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status VARCHAR(75) null,number_ VARCHAR(75) null,tax DOUBLE,shipping DOUBLE,totalPrice DOUBLE,altShipping VARCHAR(75) null,requiresShipping BOOLEAN,insure BOOLEAN,insurance DOUBLE,couponCodes VARCHAR(75) null,couponDiscount DOUBLE,paymentStatus VARCHAR(75) null,billingFirstName VARCHAR(75) null,billingLastName VARCHAR(75) null,billingEmailAddress VARCHAR(75) null,billingCompany VARCHAR(75) null,billingStreet VARCHAR(75) null,billingCity VARCHAR(75) null,billingState VARCHAR(75) null,billingZip VARCHAR(75) null,billingCountry VARCHAR(75) null,billingPhone VARCHAR(75) null,shipToBilling BOOLEAN,shippingFirstName VARCHAR(75) null,shippingLastName VARCHAR(75) null,shippingEmailAddress VARCHAR(75) null,shippingCompany VARCHAR(75) null,shippingStreet VARCHAR(75) null,shippingStreet2 VARCHAR(75) null,shippingCity VARCHAR(75) null,shippingState VARCHAR(75) null,shippingPostCode VARCHAR(75) null,shippingCountry VARCHAR(75) null,shippingPhone VARCHAR(75) null,ccName VARCHAR(75) null,ccType VARCHAR(75) null,ccNumber VARCHAR(75) null,ccExpMonth INTEGER,ccExpYear INTEGER,ccVerNumber VARCHAR(75) null,comments VARCHAR(75) null,externalPaymentId VARCHAR(75) null,ppTxnId VARCHAR(75) null,ppPaymentStatus VARCHAR(75) null,ppPaymentGross DOUBLE,ppReceiverEmail VARCHAR(75) null,ppPayerEmail VARCHAR(75) null,sendOrderEmail BOOLEAN,sendShippingEmail BOOLEAN,shippingMethodId LONG,international BOOLEAN)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingOrder (shoppingOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status VARCHAR(75) null,number_ VARCHAR(75) null,tax DOUBLE,shipping DOUBLE,totalPrice DOUBLE,altShipping VARCHAR(75) null,requiresShipping BOOLEAN,insure BOOLEAN,insurance DOUBLE,couponCodes VARCHAR(75) null,couponDiscount DOUBLE,paymentStatus VARCHAR(75) null,billingFirstName VARCHAR(75) null,billingLastName VARCHAR(75) null,billingEmailAddress VARCHAR(75) null,billingCompany VARCHAR(75) null,billingStreet VARCHAR(75) null,billingCity VARCHAR(75) null,billingState VARCHAR(75) null,billingZip VARCHAR(75) null,billingCountry VARCHAR(75) null,billingPhone VARCHAR(75) null,shipToBilling BOOLEAN,shippingFirstName VARCHAR(75) null,shippingLastName VARCHAR(75) null,shippingEmailAddress VARCHAR(75) null,shippingCompany VARCHAR(75) null,shippingStreet VARCHAR(75) null,shippingStreet2 VARCHAR(75) null,shippingCity VARCHAR(75) null,shippingState VARCHAR(75) null,shippingPostCode VARCHAR(75) null,shippingCountry VARCHAR(75) null,shippingPhone VARCHAR(75) null,comments VARCHAR(1000) null,externalPaymentId VARCHAR(75) null,paymentType VARCHAR(75) null,sendOrderEmail BOOLEAN,sendShippingEmail BOOLEAN,shippingMethodId LONG,international BOOLEAN)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingOrder";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingOrder.createDate DESC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingOrder.createDate DESC";
@@ -128,14 +118,13 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
                 "value.object.column.bitmask.enabled.com.fsquare.shopping.model.ShoppingOrder"),
             true);
-    public static long GROUPID_COLUMN_BITMASK = 1L;
-    public static long NUMBER_COLUMN_BITMASK = 2L;
-    public static long PPPAYMENTSTATUS_COLUMN_BITMASK = 4L;
-    public static long PPTXNID_COLUMN_BITMASK = 8L;
+    public static long EXTERNALPAYMENTID_COLUMN_BITMASK = 1L;
+    public static long GROUPID_COLUMN_BITMASK = 2L;
+    public static long NUMBER_COLUMN_BITMASK = 4L;
+    public static long PAYMENTTYPE_COLUMN_BITMASK = 8L;
     public static long SHIPPINGMETHODID_COLUMN_BITMASK = 16L;
     public static long STATUS_COLUMN_BITMASK = 32L;
-    public static long USERID_COLUMN_BITMASK = 64L;
-    public static long CREATEDATE_COLUMN_BITMASK = 128L;
+    public static long CREATEDATE_COLUMN_BITMASK = 64L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.com.fsquare.shopping.model.ShoppingOrder"));
     private static ClassLoader _classLoader = ShoppingOrder.class.getClassLoader();
@@ -149,8 +138,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     private long _companyId;
     private long _userId;
     private String _userUuid;
-    private long _originalUserId;
-    private boolean _setOriginalUserId;
     private String _userName;
     private Date _createDate;
     private Date _modifiedDate;
@@ -190,21 +177,11 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     private String _shippingPostCode;
     private String _shippingCountry;
     private String _shippingPhone;
-    private String _ccName;
-    private String _ccType;
-    private String _ccNumber;
-    private int _ccExpMonth;
-    private int _ccExpYear;
-    private String _ccVerNumber;
     private String _comments;
     private String _externalPaymentId;
-    private String _ppTxnId;
-    private String _originalPpTxnId;
-    private String _ppPaymentStatus;
-    private String _originalPpPaymentStatus;
-    private double _ppPaymentGross;
-    private String _ppReceiverEmail;
-    private String _ppPayerEmail;
+    private String _originalExternalPaymentId;
+    private String _paymentType;
+    private String _originalPaymentType;
     private boolean _sendOrderEmail;
     private boolean _sendShippingEmail;
     private long _shippingMethodId;
@@ -271,19 +248,9 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         model.setShippingPostCode(soapModel.getShippingPostCode());
         model.setShippingCountry(soapModel.getShippingCountry());
         model.setShippingPhone(soapModel.getShippingPhone());
-        model.setCcName(soapModel.getCcName());
-        model.setCcType(soapModel.getCcType());
-        model.setCcNumber(soapModel.getCcNumber());
-        model.setCcExpMonth(soapModel.getCcExpMonth());
-        model.setCcExpYear(soapModel.getCcExpYear());
-        model.setCcVerNumber(soapModel.getCcVerNumber());
         model.setComments(soapModel.getComments());
         model.setExternalPaymentId(soapModel.getExternalPaymentId());
-        model.setPpTxnId(soapModel.getPpTxnId());
-        model.setPpPaymentStatus(soapModel.getPpPaymentStatus());
-        model.setPpPaymentGross(soapModel.getPpPaymentGross());
-        model.setPpReceiverEmail(soapModel.getPpReceiverEmail());
-        model.setPpPayerEmail(soapModel.getPpPayerEmail());
+        model.setPaymentType(soapModel.getPaymentType());
         model.setSendOrderEmail(soapModel.getSendOrderEmail());
         model.setSendShippingEmail(soapModel.getSendShippingEmail());
         model.setShippingMethodId(soapModel.getShippingMethodId());
@@ -387,19 +354,9 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         attributes.put("shippingPostCode", getShippingPostCode());
         attributes.put("shippingCountry", getShippingCountry());
         attributes.put("shippingPhone", getShippingPhone());
-        attributes.put("ccName", getCcName());
-        attributes.put("ccType", getCcType());
-        attributes.put("ccNumber", getCcNumber());
-        attributes.put("ccExpMonth", getCcExpMonth());
-        attributes.put("ccExpYear", getCcExpYear());
-        attributes.put("ccVerNumber", getCcVerNumber());
         attributes.put("comments", getComments());
         attributes.put("externalPaymentId", getExternalPaymentId());
-        attributes.put("ppTxnId", getPpTxnId());
-        attributes.put("ppPaymentStatus", getPpPaymentStatus());
-        attributes.put("ppPaymentGross", getPpPaymentGross());
-        attributes.put("ppReceiverEmail", getPpReceiverEmail());
-        attributes.put("ppPayerEmail", getPpPayerEmail());
+        attributes.put("paymentType", getPaymentType());
         attributes.put("sendOrderEmail", getSendOrderEmail());
         attributes.put("sendShippingEmail", getSendShippingEmail());
         attributes.put("shippingMethodId", getShippingMethodId());
@@ -658,42 +615,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             setShippingPhone(shippingPhone);
         }
 
-        String ccName = (String) attributes.get("ccName");
-
-        if (ccName != null) {
-            setCcName(ccName);
-        }
-
-        String ccType = (String) attributes.get("ccType");
-
-        if (ccType != null) {
-            setCcType(ccType);
-        }
-
-        String ccNumber = (String) attributes.get("ccNumber");
-
-        if (ccNumber != null) {
-            setCcNumber(ccNumber);
-        }
-
-        Integer ccExpMonth = (Integer) attributes.get("ccExpMonth");
-
-        if (ccExpMonth != null) {
-            setCcExpMonth(ccExpMonth);
-        }
-
-        Integer ccExpYear = (Integer) attributes.get("ccExpYear");
-
-        if (ccExpYear != null) {
-            setCcExpYear(ccExpYear);
-        }
-
-        String ccVerNumber = (String) attributes.get("ccVerNumber");
-
-        if (ccVerNumber != null) {
-            setCcVerNumber(ccVerNumber);
-        }
-
         String comments = (String) attributes.get("comments");
 
         if (comments != null) {
@@ -706,34 +627,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             setExternalPaymentId(externalPaymentId);
         }
 
-        String ppTxnId = (String) attributes.get("ppTxnId");
+        String paymentType = (String) attributes.get("paymentType");
 
-        if (ppTxnId != null) {
-            setPpTxnId(ppTxnId);
-        }
-
-        String ppPaymentStatus = (String) attributes.get("ppPaymentStatus");
-
-        if (ppPaymentStatus != null) {
-            setPpPaymentStatus(ppPaymentStatus);
-        }
-
-        Double ppPaymentGross = (Double) attributes.get("ppPaymentGross");
-
-        if (ppPaymentGross != null) {
-            setPpPaymentGross(ppPaymentGross);
-        }
-
-        String ppReceiverEmail = (String) attributes.get("ppReceiverEmail");
-
-        if (ppReceiverEmail != null) {
-            setPpReceiverEmail(ppReceiverEmail);
-        }
-
-        String ppPayerEmail = (String) attributes.get("ppPayerEmail");
-
-        if (ppPayerEmail != null) {
-            setPpPayerEmail(ppPayerEmail);
+        if (paymentType != null) {
+            setPaymentType(paymentType);
         }
 
         Boolean sendOrderEmail = (Boolean) attributes.get("sendOrderEmail");
@@ -815,14 +712,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public void setUserId(long userId) {
-        _columnBitmask |= USERID_COLUMN_BITMASK;
-
-        if (!_setOriginalUserId) {
-            _setOriginalUserId = true;
-
-            _originalUserId = _userId;
-        }
-
         _userId = userId;
     }
 
@@ -834,10 +723,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     @Override
     public void setUserUuid(String userUuid) {
         _userUuid = userUuid;
-    }
-
-    public long getOriginalUserId() {
-        return _originalUserId;
     }
 
     @JSON
@@ -1394,88 +1279,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @JSON
     @Override
-    public String getCcName() {
-        if (_ccName == null) {
-            return StringPool.BLANK;
-        } else {
-            return _ccName;
-        }
-    }
-
-    @Override
-    public void setCcName(String ccName) {
-        _ccName = ccName;
-    }
-
-    @JSON
-    @Override
-    public String getCcType() {
-        if (_ccType == null) {
-            return StringPool.BLANK;
-        } else {
-            return _ccType;
-        }
-    }
-
-    @Override
-    public void setCcType(String ccType) {
-        _ccType = ccType;
-    }
-
-    @JSON
-    @Override
-    public String getCcNumber() {
-        if (_ccNumber == null) {
-            return StringPool.BLANK;
-        } else {
-            return _ccNumber;
-        }
-    }
-
-    @Override
-    public void setCcNumber(String ccNumber) {
-        _ccNumber = ccNumber;
-    }
-
-    @JSON
-    @Override
-    public int getCcExpMonth() {
-        return _ccExpMonth;
-    }
-
-    @Override
-    public void setCcExpMonth(int ccExpMonth) {
-        _ccExpMonth = ccExpMonth;
-    }
-
-    @JSON
-    @Override
-    public int getCcExpYear() {
-        return _ccExpYear;
-    }
-
-    @Override
-    public void setCcExpYear(int ccExpYear) {
-        _ccExpYear = ccExpYear;
-    }
-
-    @JSON
-    @Override
-    public String getCcVerNumber() {
-        if (_ccVerNumber == null) {
-            return StringPool.BLANK;
-        } else {
-            return _ccVerNumber;
-        }
-    }
-
-    @Override
-    public void setCcVerNumber(String ccVerNumber) {
-        _ccVerNumber = ccVerNumber;
-    }
-
-    @JSON
-    @Override
     public String getComments() {
         if (_comments == null) {
             return StringPool.BLANK;
@@ -1501,98 +1304,42 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public void setExternalPaymentId(String externalPaymentId) {
+        _columnBitmask |= EXTERNALPAYMENTID_COLUMN_BITMASK;
+
+        if (_originalExternalPaymentId == null) {
+            _originalExternalPaymentId = _externalPaymentId;
+        }
+
         _externalPaymentId = externalPaymentId;
     }
 
+    public String getOriginalExternalPaymentId() {
+        return GetterUtil.getString(_originalExternalPaymentId);
+    }
+
     @JSON
     @Override
-    public String getPpTxnId() {
-        if (_ppTxnId == null) {
+    public String getPaymentType() {
+        if (_paymentType == null) {
             return StringPool.BLANK;
         } else {
-            return _ppTxnId;
+            return _paymentType;
         }
     }
 
     @Override
-    public void setPpTxnId(String ppTxnId) {
-        _columnBitmask |= PPTXNID_COLUMN_BITMASK;
+    public void setPaymentType(String paymentType) {
+        _columnBitmask |= PAYMENTTYPE_COLUMN_BITMASK;
 
-        if (_originalPpTxnId == null) {
-            _originalPpTxnId = _ppTxnId;
+        if (_originalPaymentType == null) {
+            _originalPaymentType = _paymentType;
         }
 
-        _ppTxnId = ppTxnId;
+        _paymentType = paymentType;
     }
 
-    public String getOriginalPpTxnId() {
-        return GetterUtil.getString(_originalPpTxnId);
-    }
-
-    @JSON
-    @Override
-    public String getPpPaymentStatus() {
-        if (_ppPaymentStatus == null) {
-            return StringPool.BLANK;
-        } else {
-            return _ppPaymentStatus;
-        }
-    }
-
-    @Override
-    public void setPpPaymentStatus(String ppPaymentStatus) {
-        _columnBitmask |= PPPAYMENTSTATUS_COLUMN_BITMASK;
-
-        if (_originalPpPaymentStatus == null) {
-            _originalPpPaymentStatus = _ppPaymentStatus;
-        }
-
-        _ppPaymentStatus = ppPaymentStatus;
-    }
-
-    public String getOriginalPpPaymentStatus() {
-        return GetterUtil.getString(_originalPpPaymentStatus);
-    }
-
-    @JSON
-    @Override
-    public double getPpPaymentGross() {
-        return _ppPaymentGross;
-    }
-
-    @Override
-    public void setPpPaymentGross(double ppPaymentGross) {
-        _ppPaymentGross = ppPaymentGross;
-    }
-
-    @JSON
-    @Override
-    public String getPpReceiverEmail() {
-        if (_ppReceiverEmail == null) {
-            return StringPool.BLANK;
-        } else {
-            return _ppReceiverEmail;
-        }
-    }
-
-    @Override
-    public void setPpReceiverEmail(String ppReceiverEmail) {
-        _ppReceiverEmail = ppReceiverEmail;
-    }
-
-    @JSON
-    @Override
-    public String getPpPayerEmail() {
-        if (_ppPayerEmail == null) {
-            return StringPool.BLANK;
-        } else {
-            return _ppPayerEmail;
-        }
-    }
-
-    @Override
-    public void setPpPayerEmail(String ppPayerEmail) {
-        _ppPayerEmail = ppPayerEmail;
+    public String getOriginalPaymentType() {
+        return GetterUtil.getString(_originalPaymentType);
     }
 
     @JSON
@@ -1738,19 +1485,9 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         shoppingOrderImpl.setShippingPostCode(getShippingPostCode());
         shoppingOrderImpl.setShippingCountry(getShippingCountry());
         shoppingOrderImpl.setShippingPhone(getShippingPhone());
-        shoppingOrderImpl.setCcName(getCcName());
-        shoppingOrderImpl.setCcType(getCcType());
-        shoppingOrderImpl.setCcNumber(getCcNumber());
-        shoppingOrderImpl.setCcExpMonth(getCcExpMonth());
-        shoppingOrderImpl.setCcExpYear(getCcExpYear());
-        shoppingOrderImpl.setCcVerNumber(getCcVerNumber());
         shoppingOrderImpl.setComments(getComments());
         shoppingOrderImpl.setExternalPaymentId(getExternalPaymentId());
-        shoppingOrderImpl.setPpTxnId(getPpTxnId());
-        shoppingOrderImpl.setPpPaymentStatus(getPpPaymentStatus());
-        shoppingOrderImpl.setPpPaymentGross(getPpPaymentGross());
-        shoppingOrderImpl.setPpReceiverEmail(getPpReceiverEmail());
-        shoppingOrderImpl.setPpPayerEmail(getPpPayerEmail());
+        shoppingOrderImpl.setPaymentType(getPaymentType());
         shoppingOrderImpl.setSendOrderEmail(getSendOrderEmail());
         shoppingOrderImpl.setSendShippingEmail(getSendShippingEmail());
         shoppingOrderImpl.setShippingMethodId(getShippingMethodId());
@@ -1811,17 +1548,13 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
         shoppingOrderModelImpl._setOriginalGroupId = false;
 
-        shoppingOrderModelImpl._originalUserId = shoppingOrderModelImpl._userId;
-
-        shoppingOrderModelImpl._setOriginalUserId = false;
-
         shoppingOrderModelImpl._originalStatus = shoppingOrderModelImpl._status;
 
         shoppingOrderModelImpl._originalNumber = shoppingOrderModelImpl._number;
 
-        shoppingOrderModelImpl._originalPpTxnId = shoppingOrderModelImpl._ppTxnId;
+        shoppingOrderModelImpl._originalExternalPaymentId = shoppingOrderModelImpl._externalPaymentId;
 
-        shoppingOrderModelImpl._originalPpPaymentStatus = shoppingOrderModelImpl._ppPaymentStatus;
+        shoppingOrderModelImpl._originalPaymentType = shoppingOrderModelImpl._paymentType;
 
         shoppingOrderModelImpl._originalShippingMethodId = shoppingOrderModelImpl._shippingMethodId;
 
@@ -2092,42 +1825,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             shoppingOrderCacheModel.shippingPhone = null;
         }
 
-        shoppingOrderCacheModel.ccName = getCcName();
-
-        String ccName = shoppingOrderCacheModel.ccName;
-
-        if ((ccName != null) && (ccName.length() == 0)) {
-            shoppingOrderCacheModel.ccName = null;
-        }
-
-        shoppingOrderCacheModel.ccType = getCcType();
-
-        String ccType = shoppingOrderCacheModel.ccType;
-
-        if ((ccType != null) && (ccType.length() == 0)) {
-            shoppingOrderCacheModel.ccType = null;
-        }
-
-        shoppingOrderCacheModel.ccNumber = getCcNumber();
-
-        String ccNumber = shoppingOrderCacheModel.ccNumber;
-
-        if ((ccNumber != null) && (ccNumber.length() == 0)) {
-            shoppingOrderCacheModel.ccNumber = null;
-        }
-
-        shoppingOrderCacheModel.ccExpMonth = getCcExpMonth();
-
-        shoppingOrderCacheModel.ccExpYear = getCcExpYear();
-
-        shoppingOrderCacheModel.ccVerNumber = getCcVerNumber();
-
-        String ccVerNumber = shoppingOrderCacheModel.ccVerNumber;
-
-        if ((ccVerNumber != null) && (ccVerNumber.length() == 0)) {
-            shoppingOrderCacheModel.ccVerNumber = null;
-        }
-
         shoppingOrderCacheModel.comments = getComments();
 
         String comments = shoppingOrderCacheModel.comments;
@@ -2144,38 +1841,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             shoppingOrderCacheModel.externalPaymentId = null;
         }
 
-        shoppingOrderCacheModel.ppTxnId = getPpTxnId();
+        shoppingOrderCacheModel.paymentType = getPaymentType();
 
-        String ppTxnId = shoppingOrderCacheModel.ppTxnId;
+        String paymentType = shoppingOrderCacheModel.paymentType;
 
-        if ((ppTxnId != null) && (ppTxnId.length() == 0)) {
-            shoppingOrderCacheModel.ppTxnId = null;
-        }
-
-        shoppingOrderCacheModel.ppPaymentStatus = getPpPaymentStatus();
-
-        String ppPaymentStatus = shoppingOrderCacheModel.ppPaymentStatus;
-
-        if ((ppPaymentStatus != null) && (ppPaymentStatus.length() == 0)) {
-            shoppingOrderCacheModel.ppPaymentStatus = null;
-        }
-
-        shoppingOrderCacheModel.ppPaymentGross = getPpPaymentGross();
-
-        shoppingOrderCacheModel.ppReceiverEmail = getPpReceiverEmail();
-
-        String ppReceiverEmail = shoppingOrderCacheModel.ppReceiverEmail;
-
-        if ((ppReceiverEmail != null) && (ppReceiverEmail.length() == 0)) {
-            shoppingOrderCacheModel.ppReceiverEmail = null;
-        }
-
-        shoppingOrderCacheModel.ppPayerEmail = getPpPayerEmail();
-
-        String ppPayerEmail = shoppingOrderCacheModel.ppPayerEmail;
-
-        if ((ppPayerEmail != null) && (ppPayerEmail.length() == 0)) {
-            shoppingOrderCacheModel.ppPayerEmail = null;
+        if ((paymentType != null) && (paymentType.length() == 0)) {
+            shoppingOrderCacheModel.paymentType = null;
         }
 
         shoppingOrderCacheModel.sendOrderEmail = getSendOrderEmail();
@@ -2191,7 +1862,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(117);
+        StringBundler sb = new StringBundler(97);
 
         sb.append("{shoppingOrderId=");
         sb.append(getShoppingOrderId());
@@ -2275,32 +1946,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(getShippingCountry());
         sb.append(", shippingPhone=");
         sb.append(getShippingPhone());
-        sb.append(", ccName=");
-        sb.append(getCcName());
-        sb.append(", ccType=");
-        sb.append(getCcType());
-        sb.append(", ccNumber=");
-        sb.append(getCcNumber());
-        sb.append(", ccExpMonth=");
-        sb.append(getCcExpMonth());
-        sb.append(", ccExpYear=");
-        sb.append(getCcExpYear());
-        sb.append(", ccVerNumber=");
-        sb.append(getCcVerNumber());
         sb.append(", comments=");
         sb.append(getComments());
         sb.append(", externalPaymentId=");
         sb.append(getExternalPaymentId());
-        sb.append(", ppTxnId=");
-        sb.append(getPpTxnId());
-        sb.append(", ppPaymentStatus=");
-        sb.append(getPpPaymentStatus());
-        sb.append(", ppPaymentGross=");
-        sb.append(getPpPaymentGross());
-        sb.append(", ppReceiverEmail=");
-        sb.append(getPpReceiverEmail());
-        sb.append(", ppPayerEmail=");
-        sb.append(getPpPayerEmail());
+        sb.append(", paymentType=");
+        sb.append(getPaymentType());
         sb.append(", sendOrderEmail=");
         sb.append(getSendOrderEmail());
         sb.append(", sendShippingEmail=");
@@ -2316,7 +1967,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(178);
+        StringBundler sb = new StringBundler(148);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingOrder");
@@ -2487,30 +2138,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(getShippingPhone());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>ccName</column-name><column-value><![CDATA[");
-        sb.append(getCcName());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>ccType</column-name><column-value><![CDATA[");
-        sb.append(getCcType());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>ccNumber</column-name><column-value><![CDATA[");
-        sb.append(getCcNumber());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>ccExpMonth</column-name><column-value><![CDATA[");
-        sb.append(getCcExpMonth());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>ccExpYear</column-name><column-value><![CDATA[");
-        sb.append(getCcExpYear());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>ccVerNumber</column-name><column-value><![CDATA[");
-        sb.append(getCcVerNumber());
-        sb.append("]]></column-value></column>");
-        sb.append(
             "<column><column-name>comments</column-name><column-value><![CDATA[");
         sb.append(getComments());
         sb.append("]]></column-value></column>");
@@ -2519,24 +2146,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(getExternalPaymentId());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>ppTxnId</column-name><column-value><![CDATA[");
-        sb.append(getPpTxnId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>ppPaymentStatus</column-name><column-value><![CDATA[");
-        sb.append(getPpPaymentStatus());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>ppPaymentGross</column-name><column-value><![CDATA[");
-        sb.append(getPpPaymentGross());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>ppReceiverEmail</column-name><column-value><![CDATA[");
-        sb.append(getPpReceiverEmail());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>ppPayerEmail</column-name><column-value><![CDATA[");
-        sb.append(getPpPayerEmail());
+            "<column><column-name>paymentType</column-name><column-value><![CDATA[");
+        sb.append(getPaymentType());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>sendOrderEmail</column-name><column-value><![CDATA[");

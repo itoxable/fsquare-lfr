@@ -79,19 +79,9 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
         attributes.put("shippingPostCode", getShippingPostCode());
         attributes.put("shippingCountry", getShippingCountry());
         attributes.put("shippingPhone", getShippingPhone());
-        attributes.put("ccName", getCcName());
-        attributes.put("ccType", getCcType());
-        attributes.put("ccNumber", getCcNumber());
-        attributes.put("ccExpMonth", getCcExpMonth());
-        attributes.put("ccExpYear", getCcExpYear());
-        attributes.put("ccVerNumber", getCcVerNumber());
         attributes.put("comments", getComments());
         attributes.put("externalPaymentId", getExternalPaymentId());
-        attributes.put("ppTxnId", getPpTxnId());
-        attributes.put("ppPaymentStatus", getPpPaymentStatus());
-        attributes.put("ppPaymentGross", getPpPaymentGross());
-        attributes.put("ppReceiverEmail", getPpReceiverEmail());
-        attributes.put("ppPayerEmail", getPpPayerEmail());
+        attributes.put("paymentType", getPaymentType());
         attributes.put("sendOrderEmail", getSendOrderEmail());
         attributes.put("sendShippingEmail", getSendShippingEmail());
         attributes.put("shippingMethodId", getShippingMethodId());
@@ -350,42 +340,6 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
             setShippingPhone(shippingPhone);
         }
 
-        String ccName = (String) attributes.get("ccName");
-
-        if (ccName != null) {
-            setCcName(ccName);
-        }
-
-        String ccType = (String) attributes.get("ccType");
-
-        if (ccType != null) {
-            setCcType(ccType);
-        }
-
-        String ccNumber = (String) attributes.get("ccNumber");
-
-        if (ccNumber != null) {
-            setCcNumber(ccNumber);
-        }
-
-        Integer ccExpMonth = (Integer) attributes.get("ccExpMonth");
-
-        if (ccExpMonth != null) {
-            setCcExpMonth(ccExpMonth);
-        }
-
-        Integer ccExpYear = (Integer) attributes.get("ccExpYear");
-
-        if (ccExpYear != null) {
-            setCcExpYear(ccExpYear);
-        }
-
-        String ccVerNumber = (String) attributes.get("ccVerNumber");
-
-        if (ccVerNumber != null) {
-            setCcVerNumber(ccVerNumber);
-        }
-
         String comments = (String) attributes.get("comments");
 
         if (comments != null) {
@@ -398,34 +352,10 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
             setExternalPaymentId(externalPaymentId);
         }
 
-        String ppTxnId = (String) attributes.get("ppTxnId");
+        String paymentType = (String) attributes.get("paymentType");
 
-        if (ppTxnId != null) {
-            setPpTxnId(ppTxnId);
-        }
-
-        String ppPaymentStatus = (String) attributes.get("ppPaymentStatus");
-
-        if (ppPaymentStatus != null) {
-            setPpPaymentStatus(ppPaymentStatus);
-        }
-
-        Double ppPaymentGross = (Double) attributes.get("ppPaymentGross");
-
-        if (ppPaymentGross != null) {
-            setPpPaymentGross(ppPaymentGross);
-        }
-
-        String ppReceiverEmail = (String) attributes.get("ppReceiverEmail");
-
-        if (ppReceiverEmail != null) {
-            setPpReceiverEmail(ppReceiverEmail);
-        }
-
-        String ppPayerEmail = (String) attributes.get("ppPayerEmail");
-
-        if (ppPayerEmail != null) {
-            setPpPayerEmail(ppPayerEmail);
+        if (paymentType != null) {
+            setPaymentType(paymentType);
         }
 
         Boolean sendOrderEmail = (Boolean) attributes.get("sendOrderEmail");
@@ -1347,126 +1277,6 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
     }
 
     /**
-    * Returns the cc name of this shopping order.
-    *
-    * @return the cc name of this shopping order
-    */
-    @Override
-    public java.lang.String getCcName() {
-        return _shoppingOrder.getCcName();
-    }
-
-    /**
-    * Sets the cc name of this shopping order.
-    *
-    * @param ccName the cc name of this shopping order
-    */
-    @Override
-    public void setCcName(java.lang.String ccName) {
-        _shoppingOrder.setCcName(ccName);
-    }
-
-    /**
-    * Returns the cc type of this shopping order.
-    *
-    * @return the cc type of this shopping order
-    */
-    @Override
-    public java.lang.String getCcType() {
-        return _shoppingOrder.getCcType();
-    }
-
-    /**
-    * Sets the cc type of this shopping order.
-    *
-    * @param ccType the cc type of this shopping order
-    */
-    @Override
-    public void setCcType(java.lang.String ccType) {
-        _shoppingOrder.setCcType(ccType);
-    }
-
-    /**
-    * Returns the cc number of this shopping order.
-    *
-    * @return the cc number of this shopping order
-    */
-    @Override
-    public java.lang.String getCcNumber() {
-        return _shoppingOrder.getCcNumber();
-    }
-
-    /**
-    * Sets the cc number of this shopping order.
-    *
-    * @param ccNumber the cc number of this shopping order
-    */
-    @Override
-    public void setCcNumber(java.lang.String ccNumber) {
-        _shoppingOrder.setCcNumber(ccNumber);
-    }
-
-    /**
-    * Returns the cc exp month of this shopping order.
-    *
-    * @return the cc exp month of this shopping order
-    */
-    @Override
-    public int getCcExpMonth() {
-        return _shoppingOrder.getCcExpMonth();
-    }
-
-    /**
-    * Sets the cc exp month of this shopping order.
-    *
-    * @param ccExpMonth the cc exp month of this shopping order
-    */
-    @Override
-    public void setCcExpMonth(int ccExpMonth) {
-        _shoppingOrder.setCcExpMonth(ccExpMonth);
-    }
-
-    /**
-    * Returns the cc exp year of this shopping order.
-    *
-    * @return the cc exp year of this shopping order
-    */
-    @Override
-    public int getCcExpYear() {
-        return _shoppingOrder.getCcExpYear();
-    }
-
-    /**
-    * Sets the cc exp year of this shopping order.
-    *
-    * @param ccExpYear the cc exp year of this shopping order
-    */
-    @Override
-    public void setCcExpYear(int ccExpYear) {
-        _shoppingOrder.setCcExpYear(ccExpYear);
-    }
-
-    /**
-    * Returns the cc ver number of this shopping order.
-    *
-    * @return the cc ver number of this shopping order
-    */
-    @Override
-    public java.lang.String getCcVerNumber() {
-        return _shoppingOrder.getCcVerNumber();
-    }
-
-    /**
-    * Sets the cc ver number of this shopping order.
-    *
-    * @param ccVerNumber the cc ver number of this shopping order
-    */
-    @Override
-    public void setCcVerNumber(java.lang.String ccVerNumber) {
-        _shoppingOrder.setCcVerNumber(ccVerNumber);
-    }
-
-    /**
     * Returns the comments of this shopping order.
     *
     * @return the comments of this shopping order
@@ -1507,103 +1317,23 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
     }
 
     /**
-    * Returns the pp txn ID of this shopping order.
+    * Returns the payment type of this shopping order.
     *
-    * @return the pp txn ID of this shopping order
+    * @return the payment type of this shopping order
     */
     @Override
-    public java.lang.String getPpTxnId() {
-        return _shoppingOrder.getPpTxnId();
+    public java.lang.String getPaymentType() {
+        return _shoppingOrder.getPaymentType();
     }
 
     /**
-    * Sets the pp txn ID of this shopping order.
+    * Sets the payment type of this shopping order.
     *
-    * @param ppTxnId the pp txn ID of this shopping order
+    * @param paymentType the payment type of this shopping order
     */
     @Override
-    public void setPpTxnId(java.lang.String ppTxnId) {
-        _shoppingOrder.setPpTxnId(ppTxnId);
-    }
-
-    /**
-    * Returns the pp payment status of this shopping order.
-    *
-    * @return the pp payment status of this shopping order
-    */
-    @Override
-    public java.lang.String getPpPaymentStatus() {
-        return _shoppingOrder.getPpPaymentStatus();
-    }
-
-    /**
-    * Sets the pp payment status of this shopping order.
-    *
-    * @param ppPaymentStatus the pp payment status of this shopping order
-    */
-    @Override
-    public void setPpPaymentStatus(java.lang.String ppPaymentStatus) {
-        _shoppingOrder.setPpPaymentStatus(ppPaymentStatus);
-    }
-
-    /**
-    * Returns the pp payment gross of this shopping order.
-    *
-    * @return the pp payment gross of this shopping order
-    */
-    @Override
-    public double getPpPaymentGross() {
-        return _shoppingOrder.getPpPaymentGross();
-    }
-
-    /**
-    * Sets the pp payment gross of this shopping order.
-    *
-    * @param ppPaymentGross the pp payment gross of this shopping order
-    */
-    @Override
-    public void setPpPaymentGross(double ppPaymentGross) {
-        _shoppingOrder.setPpPaymentGross(ppPaymentGross);
-    }
-
-    /**
-    * Returns the pp receiver email of this shopping order.
-    *
-    * @return the pp receiver email of this shopping order
-    */
-    @Override
-    public java.lang.String getPpReceiverEmail() {
-        return _shoppingOrder.getPpReceiverEmail();
-    }
-
-    /**
-    * Sets the pp receiver email of this shopping order.
-    *
-    * @param ppReceiverEmail the pp receiver email of this shopping order
-    */
-    @Override
-    public void setPpReceiverEmail(java.lang.String ppReceiverEmail) {
-        _shoppingOrder.setPpReceiverEmail(ppReceiverEmail);
-    }
-
-    /**
-    * Returns the pp payer email of this shopping order.
-    *
-    * @return the pp payer email of this shopping order
-    */
-    @Override
-    public java.lang.String getPpPayerEmail() {
-        return _shoppingOrder.getPpPayerEmail();
-    }
-
-    /**
-    * Sets the pp payer email of this shopping order.
-    *
-    * @param ppPayerEmail the pp payer email of this shopping order
-    */
-    @Override
-    public void setPpPayerEmail(java.lang.String ppPayerEmail) {
-        _shoppingOrder.setPpPayerEmail(ppPayerEmail);
+    public void setPaymentType(java.lang.String paymentType) {
+        _shoppingOrder.setPaymentType(paymentType);
     }
 
     /**

@@ -15,6 +15,7 @@
 --%>
 
 
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="com.liferay.portal.service.CountryServiceUtil"%>
 <%@page import="com.liferay.portal.model.Country"%>
 <%@page import="java.util.Calendar"%>
@@ -24,18 +25,29 @@
 <%@ include file="init.jsp" %>
 
 <%
-
-if(shoppingStore.getIntegrateWithStripe() && !isCartEmpty){
-
+if(!isCartEmpty){
+	if(shoppingStore.getIntegrateWithStripe()){
 %>				
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <%
+	}
+	if(shoppingStore.getIntegrateWithBraintree()){
+%>				
+	<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<%	
+	}
 }
 %>
 <c:choose>
 	<c:when test="<%= isCartEmpty %>">
 		<div class="checkout-panel" >
-			<h2>Empty Cart</h2>
+			<h2><%=LanguageUtil.get(locale, "empty-cart")%></h2>
+			<%
+			Layout productsMainPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(shoppingStore.getProductsMainPageUuid(), themeDisplay.getScopeGroupId(), false);
+			NavItem productsMainPageItem = new NavItem(request, productsMainPageLayout, null);
+			
+			%>
+			<a class="btn btn-primary" href="<%= productsMainPageItem.getURL()%>"><%= LanguageUtil.get(locale, "continue-shopping") %></a>
 		</div>
 	</c:when>
 	<c:otherwise>
@@ -46,24 +58,34 @@ if(shoppingStore.getIntegrateWithStripe() && !isCartEmpty){
 			<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_CALCULATE_SHIPPING_PRICE %>" />
 		</liferay-portlet:resourceURL>
 		
-		
-
 		<div class="row" id='<portlet:namespace />checkout-wrapper'>
 			<div class="span7" >
 				<div class="checkout-panel" id='<portlet:namespace />checkout-panel-address'>
-					<div class="checkout-panel-title"><h3>Shipping address</h3><a class="checkout-edit-button" data-step="1" >edit</a></div>
+					<div class="checkout-panel-title">
+						<h3>Shipping address</h3>
+						<a class="checkout-edit-button" data-step="1" >edit</a>
+						<div class="clearfix"></div>
+					</div>
 					<div id='<portlet:namespace />shipping-address-wrapper' class="checkout-item-wrapper">
 						<jsp:include page="address-form.jsp" />
 					</div>
 				</div>
 				
 				<div class="checkout-panel" id='<portlet:namespace />checkout-panel-shipping'>
-					<div class="checkout-panel-title"><h3>Delivery Options</h3><a class="checkout-edit-button" data-step="2">edit</a></div>
+					<div class="checkout-panel-title">
+						<h3>Delivery Options</h3>
+						<a class="checkout-edit-button" data-step="2">edit</a>
+						<div class="clearfix"></div>
+					</div>
 					<div id='<portlet:namespace />shipping-method-wrapper' class="checkout-item-wrapper"></div>
 				</div>
 				
 				<div class="checkout-panel" id='<portlet:namespace />checkout-panel-payment'>
-					<div class="checkout-panel-title"><h3>Billing</h3><a class="checkout-edit-button" data-step="3">edit</a></div>
+					<div class="checkout-panel-title">
+						<h3>Billing</h3>
+						<a class="checkout-edit-button" data-step="3">edit</a>
+						<div class="clearfix"></div>
+					</div>
 					<div id='<portlet:namespace />payment-form-wrapper' class="checkout-item-wrapper">
 					</div>
 				</div>
@@ -72,7 +94,7 @@ if(shoppingStore.getIntegrateWithStripe() && !isCartEmpty){
 			<div class="span5">
 				<div class="checkout-panel" id='<portlet:namespace />checkout-order-summary'>
 				<div class="checkout-panel-title"><h3>Summary</h3></div>
-					<jsp:include page="order_summary.jsp" />
+					<jsp:include page="order-summary.jsp" />
 				</div>
 			</div>
 		</div>
@@ -87,14 +109,19 @@ if(shoppingStore.getIntegrateWithStripe() && !isCartEmpty){
 			},'.checkout-edit-button');
 		
 			Liferay.provide(window, '<portlet:namespace />showLoading',
-					function(wrapper) {
-				
-				$(wrapper).append('<div class="checkout-loading"><div class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div></div>')	
+				function(wrapper, message) {
+					if(!wrapper){
+						wrapper = '#p_p_id<portlet:namespace />';
+					}
+					$(wrapper).append('<div class="checkout-loading"><div class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div><div class="loading-message">'+message+'</div></div>')	
 			},['aui-base,selector-css3']);
 			
 			Liferay.provide(window, '<portlet:namespace />hideLoading',
-					function(wrapper) {
-				$(wrapper).find(".checkout-loading").remove()
+				function(wrapper) {
+					if(!wrapper){
+						wrapper = '#p_p_id<portlet:namespace />';
+					}
+					$(wrapper).find(".checkout-loading").remove()
 			},['aui-base,selector-css3']);
 		
 			
@@ -152,8 +179,6 @@ if(shoppingStore.getIntegrateWithStripe() && !isCartEmpty){
 			    							$('.order-summary-shipping-description').text(shoppingShippingMethodJson.description);
 			    							$('.order-summary-shipping-price').text('<%= shoppingStore.getCurrency()%>'+shoppingShippingMethodJson.price);
 			    							$('#<portlet:namespace />order-summary-total-price').text(response.total);
-			    							
-			    							
 			    							
 				                      	}else{
 				                      		alert('Weird Shit');

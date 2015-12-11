@@ -90,7 +90,7 @@ double totalSimple = shoppingOrderProcessWrapper.getTotalSimple();
 				
 				<tr class='shipping-method-row <%= (shoppingShippingMethod != null)?"":"hide" %>'>
 					<td colspan="4" align="right">
-						<strong><span class="order-summary-shipping-description"><%= (shoppingShippingMethod != null)?(Validator.isNotNull(shoppingShippingMethod.getDescription())?shoppingShippingMethod.getDescription():shoppingShippingMethod.getName() ):"" %></span></strong>
+						<strong><span class="order-summary-shipping-description"><%= (shoppingShippingMethod != null)?shoppingShippingMethod.getName():"" %></span></strong>
 				  	</td>
 				  	<td align="right">
 						<strong><span class="order-summary-shipping-price">-<%= (shoppingShippingMethod != null)?ShoppingShippingMethodLocalServiceUtil.getShippingPrice(shoppingShippingMethod, shoppingOrderItemMap.values(), totalSimple):"" %></span></strong>

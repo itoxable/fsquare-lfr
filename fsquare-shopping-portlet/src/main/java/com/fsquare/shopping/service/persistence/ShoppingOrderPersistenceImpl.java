@@ -108,18 +108,47 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     private static final String _FINDER_COLUMN_NUMBER_NUMBER_1 = "shoppingOrder.number IS NULL";
     private static final String _FINDER_COLUMN_NUMBER_NUMBER_2 = "shoppingOrder.number = ?";
     private static final String _FINDER_COLUMN_NUMBER_NUMBER_3 = "(shoppingOrder.number IS NULL OR shoppingOrder.number = '')";
-    public static final FinderPath FINDER_PATH_FETCH_BY_PPTXNID = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_PAYMENTTYPE =
+        new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
+            ShoppingOrderImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+            "findByPaymentType",
+            new String[] {
+                String.class.getName(),
+                
+            Integer.class.getName(), Integer.class.getName(),
+                OrderByComparator.class.getName()
+            });
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PAYMENTTYPE =
+        new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
+            ShoppingOrderImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+            "findByPaymentType", new String[] { String.class.getName() },
+            ShoppingOrderModelImpl.PAYMENTTYPE_COLUMN_BITMASK |
+            ShoppingOrderModelImpl.CREATEDATE_COLUMN_BITMASK);
+    public static final FinderPath FINDER_PATH_COUNT_BY_PAYMENTTYPE = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByPaymentType",
+            new String[] { String.class.getName() });
+    private static final String _FINDER_COLUMN_PAYMENTTYPE_PAYMENTTYPE_1 = "shoppingOrder.paymentType IS NULL";
+    private static final String _FINDER_COLUMN_PAYMENTTYPE_PAYMENTTYPE_2 = "shoppingOrder.paymentType = ?";
+    private static final String _FINDER_COLUMN_PAYMENTTYPE_PAYMENTTYPE_3 = "(shoppingOrder.paymentType IS NULL OR shoppingOrder.paymentType = '')";
+    public static final FinderPath FINDER_PATH_FETCH_BY_EXTERNALPAYMENTID = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderImpl.class, FINDER_CLASS_NAME_ENTITY,
-            "fetchByPPTxnId", new String[] { String.class.getName() },
-            ShoppingOrderModelImpl.PPTXNID_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_PPTXNID = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
+            "fetchByExternalPaymentId",
+            new String[] { String.class.getName() },
+            ShoppingOrderModelImpl.EXTERNALPAYMENTID_COLUMN_BITMASK);
+    public static final FinderPath FINDER_PATH_COUNT_BY_EXTERNALPAYMENTID = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByPPTxnId",
-            new String[] { String.class.getName() });
-    private static final String _FINDER_COLUMN_PPTXNID_PPTXNID_1 = "shoppingOrder.ppTxnId IS NULL";
-    private static final String _FINDER_COLUMN_PPTXNID_PPTXNID_2 = "shoppingOrder.ppTxnId = ?";
-    private static final String _FINDER_COLUMN_PPTXNID_PPTXNID_3 = "(shoppingOrder.ppTxnId IS NULL OR shoppingOrder.ppTxnId = '')";
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+            "countByExternalPaymentId", new String[] { String.class.getName() });
+    private static final String _FINDER_COLUMN_EXTERNALPAYMENTID_EXTERNALPAYMENTID_1 =
+        "shoppingOrder.externalPaymentId IS NULL";
+    private static final String _FINDER_COLUMN_EXTERNALPAYMENTID_EXTERNALPAYMENTID_2 =
+        "shoppingOrder.externalPaymentId = ?";
+    private static final String _FINDER_COLUMN_EXTERNALPAYMENTID_EXTERNALPAYMENTID_3 =
+        "(shoppingOrder.externalPaymentId IS NULL OR shoppingOrder.externalPaymentId = '')";
     public static final FinderPath FINDER_PATH_FETCH_BY_STATUS = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByStatus",
@@ -132,42 +161,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     private static final String _FINDER_COLUMN_STATUS_STATUS_1 = "shoppingOrder.status IS NULL";
     private static final String _FINDER_COLUMN_STATUS_STATUS_2 = "shoppingOrder.status = ?";
     private static final String _FINDER_COLUMN_STATUS_STATUS_3 = "(shoppingOrder.status IS NULL OR shoppingOrder.status = '')";
-    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_U_PPPS = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
-            ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
-            ShoppingOrderImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-            "findByG_U_PPPS",
-            new String[] {
-                Long.class.getName(), Long.class.getName(),
-                String.class.getName(),
-                
-            Integer.class.getName(), Integer.class.getName(),
-                OrderByComparator.class.getName()
-            });
-    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U_PPPS =
-        new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
-            ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
-            ShoppingOrderImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-            "findByG_U_PPPS",
-            new String[] {
-                Long.class.getName(), Long.class.getName(),
-                String.class.getName()
-            },
-            ShoppingOrderModelImpl.GROUPID_COLUMN_BITMASK |
-            ShoppingOrderModelImpl.USERID_COLUMN_BITMASK |
-            ShoppingOrderModelImpl.PPPAYMENTSTATUS_COLUMN_BITMASK |
-            ShoppingOrderModelImpl.CREATEDATE_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_G_U_PPPS = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
-            ShoppingOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_U_PPPS",
-            new String[] {
-                Long.class.getName(), Long.class.getName(),
-                String.class.getName()
-            });
-    private static final String _FINDER_COLUMN_G_U_PPPS_GROUPID_2 = "shoppingOrder.groupId = ? AND ";
-    private static final String _FINDER_COLUMN_G_U_PPPS_USERID_2 = "shoppingOrder.userId = ? AND ";
-    private static final String _FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_1 = "shoppingOrder.ppPaymentStatus IS NULL";
-    private static final String _FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_2 = "shoppingOrder.ppPaymentStatus = ?";
-    private static final String _FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_3 = "(shoppingOrder.ppPaymentStatus IS NULL OR shoppingOrder.ppPaymentStatus = '')";
     public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_SHIPPINGMETHODID =
         new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
@@ -897,25 +890,514 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the shopping order where ppTxnId = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingOrderException} if it could not be found.
+     * Returns all the shopping orders where paymentType = &#63;.
      *
-     * @param ppTxnId the pp txn ID
+     * @param paymentType the payment type
+     * @return the matching shopping orders
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<ShoppingOrder> findByPaymentType(String paymentType)
+        throws SystemException {
+        return findByPaymentType(paymentType, QueryUtil.ALL_POS,
+            QueryUtil.ALL_POS, null);
+    }
+
+    /**
+     * Returns a range of all the shopping orders where paymentType = &#63;.
+     *
+     * <p>
+     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+     * </p>
+     *
+     * @param paymentType the payment type
+     * @param start the lower bound of the range of shopping orders
+     * @param end the upper bound of the range of shopping orders (not inclusive)
+     * @return the range of matching shopping orders
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<ShoppingOrder> findByPaymentType(String paymentType, int start,
+        int end) throws SystemException {
+        return findByPaymentType(paymentType, start, end, null);
+    }
+
+    /**
+     * Returns an ordered range of all the shopping orders where paymentType = &#63;.
+     *
+     * <p>
+     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+     * </p>
+     *
+     * @param paymentType the payment type
+     * @param start the lower bound of the range of shopping orders
+     * @param end the upper bound of the range of shopping orders (not inclusive)
+     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+     * @return the ordered range of matching shopping orders
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<ShoppingOrder> findByPaymentType(String paymentType, int start,
+        int end, OrderByComparator orderByComparator) throws SystemException {
+        boolean pagination = true;
+        FinderPath finderPath = null;
+        Object[] finderArgs = null;
+
+        if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+                (orderByComparator == null)) {
+            pagination = false;
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PAYMENTTYPE;
+            finderArgs = new Object[] { paymentType };
+        } else {
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_PAYMENTTYPE;
+            finderArgs = new Object[] { paymentType, start, end, orderByComparator };
+        }
+
+        List<ShoppingOrder> list = (List<ShoppingOrder>) FinderCacheUtil.getResult(finderPath,
+                finderArgs, this);
+
+        if ((list != null) && !list.isEmpty()) {
+            for (ShoppingOrder shoppingOrder : list) {
+                if (!Validator.equals(paymentType,
+                            shoppingOrder.getPaymentType())) {
+                    list = null;
+
+                    break;
+                }
+            }
+        }
+
+        if (list == null) {
+            StringBundler query = null;
+
+            if (orderByComparator != null) {
+                query = new StringBundler(3 +
+                        (orderByComparator.getOrderByFields().length * 3));
+            } else {
+                query = new StringBundler(3);
+            }
+
+            query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
+
+            boolean bindPaymentType = false;
+
+            if (paymentType == null) {
+                query.append(_FINDER_COLUMN_PAYMENTTYPE_PAYMENTTYPE_1);
+            } else if (paymentType.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_PAYMENTTYPE_PAYMENTTYPE_3);
+            } else {
+                bindPaymentType = true;
+
+                query.append(_FINDER_COLUMN_PAYMENTTYPE_PAYMENTTYPE_2);
+            }
+
+            if (orderByComparator != null) {
+                appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+                    orderByComparator);
+            } else
+             if (pagination) {
+                query.append(ShoppingOrderModelImpl.ORDER_BY_JPQL);
+            }
+
+            String sql = query.toString();
+
+            Session session = null;
+
+            try {
+                session = openSession();
+
+                Query q = session.createQuery(sql);
+
+                QueryPos qPos = QueryPos.getInstance(q);
+
+                if (bindPaymentType) {
+                    qPos.add(paymentType);
+                }
+
+                if (!pagination) {
+                    list = (List<ShoppingOrder>) QueryUtil.list(q,
+                            getDialect(), start, end, false);
+
+                    Collections.sort(list);
+
+                    list = new UnmodifiableList<ShoppingOrder>(list);
+                } else {
+                    list = (List<ShoppingOrder>) QueryUtil.list(q,
+                            getDialect(), start, end);
+                }
+
+                cacheResult(list);
+
+                FinderCacheUtil.putResult(finderPath, finderArgs, list);
+            } catch (Exception e) {
+                FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+                throw processException(e);
+            } finally {
+                closeSession(session);
+            }
+        }
+
+        return list;
+    }
+
+    /**
+     * Returns the first shopping order in the ordered set where paymentType = &#63;.
+     *
+     * @param paymentType the payment type
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the first matching shopping order
+     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrder findByPaymentType_First(String paymentType,
+        OrderByComparator orderByComparator)
+        throws NoSuchShoppingOrderException, SystemException {
+        ShoppingOrder shoppingOrder = fetchByPaymentType_First(paymentType,
+                orderByComparator);
+
+        if (shoppingOrder != null) {
+            return shoppingOrder;
+        }
+
+        StringBundler msg = new StringBundler(4);
+
+        msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+        msg.append("paymentType=");
+        msg.append(paymentType);
+
+        msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+        throw new NoSuchShoppingOrderException(msg.toString());
+    }
+
+    /**
+     * Returns the first shopping order in the ordered set where paymentType = &#63;.
+     *
+     * @param paymentType the payment type
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the first matching shopping order, or <code>null</code> if a matching shopping order could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrder fetchByPaymentType_First(String paymentType,
+        OrderByComparator orderByComparator) throws SystemException {
+        List<ShoppingOrder> list = findByPaymentType(paymentType, 0, 1,
+                orderByComparator);
+
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the last shopping order in the ordered set where paymentType = &#63;.
+     *
+     * @param paymentType the payment type
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the last matching shopping order
+     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrder findByPaymentType_Last(String paymentType,
+        OrderByComparator orderByComparator)
+        throws NoSuchShoppingOrderException, SystemException {
+        ShoppingOrder shoppingOrder = fetchByPaymentType_Last(paymentType,
+                orderByComparator);
+
+        if (shoppingOrder != null) {
+            return shoppingOrder;
+        }
+
+        StringBundler msg = new StringBundler(4);
+
+        msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+        msg.append("paymentType=");
+        msg.append(paymentType);
+
+        msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+        throw new NoSuchShoppingOrderException(msg.toString());
+    }
+
+    /**
+     * Returns the last shopping order in the ordered set where paymentType = &#63;.
+     *
+     * @param paymentType the payment type
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the last matching shopping order, or <code>null</code> if a matching shopping order could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrder fetchByPaymentType_Last(String paymentType,
+        OrderByComparator orderByComparator) throws SystemException {
+        int count = countByPaymentType(paymentType);
+
+        if (count == 0) {
+            return null;
+        }
+
+        List<ShoppingOrder> list = findByPaymentType(paymentType, count - 1,
+                count, orderByComparator);
+
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the shopping orders before and after the current shopping order in the ordered set where paymentType = &#63;.
+     *
+     * @param shoppingOrderId the primary key of the current shopping order
+     * @param paymentType the payment type
+     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+     * @return the previous, current, and next shopping order
+     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a shopping order with the primary key could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public ShoppingOrder[] findByPaymentType_PrevAndNext(long shoppingOrderId,
+        String paymentType, OrderByComparator orderByComparator)
+        throws NoSuchShoppingOrderException, SystemException {
+        ShoppingOrder shoppingOrder = findByPrimaryKey(shoppingOrderId);
+
+        Session session = null;
+
+        try {
+            session = openSession();
+
+            ShoppingOrder[] array = new ShoppingOrderImpl[3];
+
+            array[0] = getByPaymentType_PrevAndNext(session, shoppingOrder,
+                    paymentType, orderByComparator, true);
+
+            array[1] = shoppingOrder;
+
+            array[2] = getByPaymentType_PrevAndNext(session, shoppingOrder,
+                    paymentType, orderByComparator, false);
+
+            return array;
+        } catch (Exception e) {
+            throw processException(e);
+        } finally {
+            closeSession(session);
+        }
+    }
+
+    protected ShoppingOrder getByPaymentType_PrevAndNext(Session session,
+        ShoppingOrder shoppingOrder, String paymentType,
+        OrderByComparator orderByComparator, boolean previous) {
+        StringBundler query = null;
+
+        if (orderByComparator != null) {
+            query = new StringBundler(6 +
+                    (orderByComparator.getOrderByFields().length * 6));
+        } else {
+            query = new StringBundler(3);
+        }
+
+        query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
+
+        boolean bindPaymentType = false;
+
+        if (paymentType == null) {
+            query.append(_FINDER_COLUMN_PAYMENTTYPE_PAYMENTTYPE_1);
+        } else if (paymentType.equals(StringPool.BLANK)) {
+            query.append(_FINDER_COLUMN_PAYMENTTYPE_PAYMENTTYPE_3);
+        } else {
+            bindPaymentType = true;
+
+            query.append(_FINDER_COLUMN_PAYMENTTYPE_PAYMENTTYPE_2);
+        }
+
+        if (orderByComparator != null) {
+            String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+            if (orderByConditionFields.length > 0) {
+                query.append(WHERE_AND);
+            }
+
+            for (int i = 0; i < orderByConditionFields.length; i++) {
+                query.append(_ORDER_BY_ENTITY_ALIAS);
+                query.append(orderByConditionFields[i]);
+
+                if ((i + 1) < orderByConditionFields.length) {
+                    if (orderByComparator.isAscending() ^ previous) {
+                        query.append(WHERE_GREATER_THAN_HAS_NEXT);
+                    } else {
+                        query.append(WHERE_LESSER_THAN_HAS_NEXT);
+                    }
+                } else {
+                    if (orderByComparator.isAscending() ^ previous) {
+                        query.append(WHERE_GREATER_THAN);
+                    } else {
+                        query.append(WHERE_LESSER_THAN);
+                    }
+                }
+            }
+
+            query.append(ORDER_BY_CLAUSE);
+
+            String[] orderByFields = orderByComparator.getOrderByFields();
+
+            for (int i = 0; i < orderByFields.length; i++) {
+                query.append(_ORDER_BY_ENTITY_ALIAS);
+                query.append(orderByFields[i]);
+
+                if ((i + 1) < orderByFields.length) {
+                    if (orderByComparator.isAscending() ^ previous) {
+                        query.append(ORDER_BY_ASC_HAS_NEXT);
+                    } else {
+                        query.append(ORDER_BY_DESC_HAS_NEXT);
+                    }
+                } else {
+                    if (orderByComparator.isAscending() ^ previous) {
+                        query.append(ORDER_BY_ASC);
+                    } else {
+                        query.append(ORDER_BY_DESC);
+                    }
+                }
+            }
+        } else {
+            query.append(ShoppingOrderModelImpl.ORDER_BY_JPQL);
+        }
+
+        String sql = query.toString();
+
+        Query q = session.createQuery(sql);
+
+        q.setFirstResult(0);
+        q.setMaxResults(2);
+
+        QueryPos qPos = QueryPos.getInstance(q);
+
+        if (bindPaymentType) {
+            qPos.add(paymentType);
+        }
+
+        if (orderByComparator != null) {
+            Object[] values = orderByComparator.getOrderByConditionValues(shoppingOrder);
+
+            for (Object value : values) {
+                qPos.add(value);
+            }
+        }
+
+        List<ShoppingOrder> list = q.list();
+
+        if (list.size() == 2) {
+            return list.get(1);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Removes all the shopping orders where paymentType = &#63; from the database.
+     *
+     * @param paymentType the payment type
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void removeByPaymentType(String paymentType)
+        throws SystemException {
+        for (ShoppingOrder shoppingOrder : findByPaymentType(paymentType,
+                QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+            remove(shoppingOrder);
+        }
+    }
+
+    /**
+     * Returns the number of shopping orders where paymentType = &#63;.
+     *
+     * @param paymentType the payment type
+     * @return the number of matching shopping orders
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public int countByPaymentType(String paymentType) throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_PAYMENTTYPE;
+
+        Object[] finderArgs = new Object[] { paymentType };
+
+        Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
+                this);
+
+        if (count == null) {
+            StringBundler query = new StringBundler(2);
+
+            query.append(_SQL_COUNT_SHOPPINGORDER_WHERE);
+
+            boolean bindPaymentType = false;
+
+            if (paymentType == null) {
+                query.append(_FINDER_COLUMN_PAYMENTTYPE_PAYMENTTYPE_1);
+            } else if (paymentType.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_PAYMENTTYPE_PAYMENTTYPE_3);
+            } else {
+                bindPaymentType = true;
+
+                query.append(_FINDER_COLUMN_PAYMENTTYPE_PAYMENTTYPE_2);
+            }
+
+            String sql = query.toString();
+
+            Session session = null;
+
+            try {
+                session = openSession();
+
+                Query q = session.createQuery(sql);
+
+                QueryPos qPos = QueryPos.getInstance(q);
+
+                if (bindPaymentType) {
+                    qPos.add(paymentType);
+                }
+
+                count = (Long) q.uniqueResult();
+
+                FinderCacheUtil.putResult(finderPath, finderArgs, count);
+            } catch (Exception e) {
+                FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+                throw processException(e);
+            } finally {
+                closeSession(session);
+            }
+        }
+
+        return count.intValue();
+    }
+
+    /**
+     * Returns the shopping order where externalPaymentId = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingOrderException} if it could not be found.
+     *
+     * @param externalPaymentId the external payment ID
      * @return the matching shopping order
      * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder findByPPTxnId(String ppTxnId)
+    public ShoppingOrder findByExternalPaymentId(String externalPaymentId)
         throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = fetchByPPTxnId(ppTxnId);
+        ShoppingOrder shoppingOrder = fetchByExternalPaymentId(externalPaymentId);
 
         if (shoppingOrder == null) {
             StringBundler msg = new StringBundler(4);
 
             msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-            msg.append("ppTxnId=");
-            msg.append(ppTxnId);
+            msg.append("externalPaymentId=");
+            msg.append(externalPaymentId);
 
             msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -930,42 +1412,43 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the shopping order where ppTxnId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+     * Returns the shopping order where externalPaymentId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
      *
-     * @param ppTxnId the pp txn ID
+     * @param externalPaymentId the external payment ID
      * @return the matching shopping order, or <code>null</code> if a matching shopping order could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder fetchByPPTxnId(String ppTxnId)
+    public ShoppingOrder fetchByExternalPaymentId(String externalPaymentId)
         throws SystemException {
-        return fetchByPPTxnId(ppTxnId, true);
+        return fetchByExternalPaymentId(externalPaymentId, true);
     }
 
     /**
-     * Returns the shopping order where ppTxnId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+     * Returns the shopping order where externalPaymentId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
      *
-     * @param ppTxnId the pp txn ID
+     * @param externalPaymentId the external payment ID
      * @param retrieveFromCache whether to use the finder cache
      * @return the matching shopping order, or <code>null</code> if a matching shopping order could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder fetchByPPTxnId(String ppTxnId,
+    public ShoppingOrder fetchByExternalPaymentId(String externalPaymentId,
         boolean retrieveFromCache) throws SystemException {
-        Object[] finderArgs = new Object[] { ppTxnId };
+        Object[] finderArgs = new Object[] { externalPaymentId };
 
         Object result = null;
 
         if (retrieveFromCache) {
-            result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_PPTXNID,
+            result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_EXTERNALPAYMENTID,
                     finderArgs, this);
         }
 
         if (result instanceof ShoppingOrder) {
             ShoppingOrder shoppingOrder = (ShoppingOrder) result;
 
-            if (!Validator.equals(ppTxnId, shoppingOrder.getPpTxnId())) {
+            if (!Validator.equals(externalPaymentId,
+                        shoppingOrder.getExternalPaymentId())) {
                 result = null;
             }
         }
@@ -975,16 +1458,16 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
             query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
 
-            boolean bindPpTxnId = false;
+            boolean bindExternalPaymentId = false;
 
-            if (ppTxnId == null) {
-                query.append(_FINDER_COLUMN_PPTXNID_PPTXNID_1);
-            } else if (ppTxnId.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_PPTXNID_PPTXNID_3);
+            if (externalPaymentId == null) {
+                query.append(_FINDER_COLUMN_EXTERNALPAYMENTID_EXTERNALPAYMENTID_1);
+            } else if (externalPaymentId.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_EXTERNALPAYMENTID_EXTERNALPAYMENTID_3);
             } else {
-                bindPpTxnId = true;
+                bindExternalPaymentId = true;
 
-                query.append(_FINDER_COLUMN_PPTXNID_PPTXNID_2);
+                query.append(_FINDER_COLUMN_EXTERNALPAYMENTID_EXTERNALPAYMENTID_2);
             }
 
             String sql = query.toString();
@@ -998,19 +1481,19 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                if (bindPpTxnId) {
-                    qPos.add(ppTxnId);
+                if (bindExternalPaymentId) {
+                    qPos.add(externalPaymentId);
                 }
 
                 List<ShoppingOrder> list = q.list();
 
                 if (list.isEmpty()) {
-                    FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PPTXNID,
+                    FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_EXTERNALPAYMENTID,
                         finderArgs, list);
                 } else {
                     if ((list.size() > 1) && _log.isWarnEnabled()) {
                         _log.warn(
-                            "ShoppingOrderPersistenceImpl.fetchByPPTxnId(String, boolean) with parameters (" +
+                            "ShoppingOrderPersistenceImpl.fetchByExternalPaymentId(String, boolean) with parameters (" +
                             StringUtil.merge(finderArgs) +
                             ") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
                     }
@@ -1021,14 +1504,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
                     cacheResult(shoppingOrder);
 
-                    if ((shoppingOrder.getPpTxnId() == null) ||
-                            !shoppingOrder.getPpTxnId().equals(ppTxnId)) {
-                        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PPTXNID,
+                    if ((shoppingOrder.getExternalPaymentId() == null) ||
+                            !shoppingOrder.getExternalPaymentId()
+                                              .equals(externalPaymentId)) {
+                        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_EXTERNALPAYMENTID,
                             finderArgs, shoppingOrder);
                     }
                 }
             } catch (Exception e) {
-                FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PPTXNID,
+                FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_EXTERNALPAYMENTID,
                     finderArgs);
 
                 throw processException(e);
@@ -1045,32 +1529,33 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Removes the shopping order where ppTxnId = &#63; from the database.
+     * Removes the shopping order where externalPaymentId = &#63; from the database.
      *
-     * @param ppTxnId the pp txn ID
+     * @param externalPaymentId the external payment ID
      * @return the shopping order that was removed
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder removeByPPTxnId(String ppTxnId)
+    public ShoppingOrder removeByExternalPaymentId(String externalPaymentId)
         throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = findByPPTxnId(ppTxnId);
+        ShoppingOrder shoppingOrder = findByExternalPaymentId(externalPaymentId);
 
         return remove(shoppingOrder);
     }
 
     /**
-     * Returns the number of shopping orders where ppTxnId = &#63;.
+     * Returns the number of shopping orders where externalPaymentId = &#63;.
      *
-     * @param ppTxnId the pp txn ID
+     * @param externalPaymentId the external payment ID
      * @return the number of matching shopping orders
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByPPTxnId(String ppTxnId) throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_PPTXNID;
+    public int countByExternalPaymentId(String externalPaymentId)
+        throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_EXTERNALPAYMENTID;
 
-        Object[] finderArgs = new Object[] { ppTxnId };
+        Object[] finderArgs = new Object[] { externalPaymentId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -1080,16 +1565,16 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
             query.append(_SQL_COUNT_SHOPPINGORDER_WHERE);
 
-            boolean bindPpTxnId = false;
+            boolean bindExternalPaymentId = false;
 
-            if (ppTxnId == null) {
-                query.append(_FINDER_COLUMN_PPTXNID_PPTXNID_1);
-            } else if (ppTxnId.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_PPTXNID_PPTXNID_3);
+            if (externalPaymentId == null) {
+                query.append(_FINDER_COLUMN_EXTERNALPAYMENTID_EXTERNALPAYMENTID_1);
+            } else if (externalPaymentId.equals(StringPool.BLANK)) {
+                query.append(_FINDER_COLUMN_EXTERNALPAYMENTID_EXTERNALPAYMENTID_3);
             } else {
-                bindPpTxnId = true;
+                bindExternalPaymentId = true;
 
-                query.append(_FINDER_COLUMN_PPTXNID_PPTXNID_2);
+                query.append(_FINDER_COLUMN_EXTERNALPAYMENTID_EXTERNALPAYMENTID_2);
             }
 
             String sql = query.toString();
@@ -1103,8 +1588,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                if (bindPpTxnId) {
-                    qPos.add(ppTxnId);
+                if (bindExternalPaymentId) {
+                    qPos.add(externalPaymentId);
                 }
 
                 count = (Long) q.uniqueResult();
@@ -1330,563 +1815,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
                 if (bindStatus) {
                     qPos.add(status);
-                }
-
-                count = (Long) q.uniqueResult();
-
-                FinderCacheUtil.putResult(finderPath, finderArgs, count);
-            } catch (Exception e) {
-                FinderCacheUtil.removeResult(finderPath, finderArgs);
-
-                throw processException(e);
-            } finally {
-                closeSession(session);
-            }
-        }
-
-        return count.intValue();
-    }
-
-    /**
-     * Returns all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
-     *
-     * @param groupId the group ID
-     * @param userId the user ID
-     * @param ppPaymentStatus the pp payment status
-     * @return the matching shopping orders
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public List<ShoppingOrder> findByG_U_PPPS(long groupId, long userId,
-        String ppPaymentStatus) throws SystemException {
-        return findByG_U_PPPS(groupId, userId, ppPaymentStatus,
-            QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-    }
-
-    /**
-     * Returns a range of all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
-     *
-     * <p>
-     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-     * </p>
-     *
-     * @param groupId the group ID
-     * @param userId the user ID
-     * @param ppPaymentStatus the pp payment status
-     * @param start the lower bound of the range of shopping orders
-     * @param end the upper bound of the range of shopping orders (not inclusive)
-     * @return the range of matching shopping orders
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public List<ShoppingOrder> findByG_U_PPPS(long groupId, long userId,
-        String ppPaymentStatus, int start, int end) throws SystemException {
-        return findByG_U_PPPS(groupId, userId, ppPaymentStatus, start, end, null);
-    }
-
-    /**
-     * Returns an ordered range of all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
-     *
-     * <p>
-     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-     * </p>
-     *
-     * @param groupId the group ID
-     * @param userId the user ID
-     * @param ppPaymentStatus the pp payment status
-     * @param start the lower bound of the range of shopping orders
-     * @param end the upper bound of the range of shopping orders (not inclusive)
-     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-     * @return the ordered range of matching shopping orders
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public List<ShoppingOrder> findByG_U_PPPS(long groupId, long userId,
-        String ppPaymentStatus, int start, int end,
-        OrderByComparator orderByComparator) throws SystemException {
-        boolean pagination = true;
-        FinderPath finderPath = null;
-        Object[] finderArgs = null;
-
-        if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-                (orderByComparator == null)) {
-            pagination = false;
-            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U_PPPS;
-            finderArgs = new Object[] { groupId, userId, ppPaymentStatus };
-        } else {
-            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_U_PPPS;
-            finderArgs = new Object[] {
-                    groupId, userId, ppPaymentStatus,
-                    
-                    start, end, orderByComparator
-                };
-        }
-
-        List<ShoppingOrder> list = (List<ShoppingOrder>) FinderCacheUtil.getResult(finderPath,
-                finderArgs, this);
-
-        if ((list != null) && !list.isEmpty()) {
-            for (ShoppingOrder shoppingOrder : list) {
-                if ((groupId != shoppingOrder.getGroupId()) ||
-                        (userId != shoppingOrder.getUserId()) ||
-                        !Validator.equals(ppPaymentStatus,
-                            shoppingOrder.getPpPaymentStatus())) {
-                    list = null;
-
-                    break;
-                }
-            }
-        }
-
-        if (list == null) {
-            StringBundler query = null;
-
-            if (orderByComparator != null) {
-                query = new StringBundler(5 +
-                        (orderByComparator.getOrderByFields().length * 3));
-            } else {
-                query = new StringBundler(5);
-            }
-
-            query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
-
-            query.append(_FINDER_COLUMN_G_U_PPPS_GROUPID_2);
-
-            query.append(_FINDER_COLUMN_G_U_PPPS_USERID_2);
-
-            boolean bindPpPaymentStatus = false;
-
-            if (ppPaymentStatus == null) {
-                query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_1);
-            } else if (ppPaymentStatus.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_3);
-            } else {
-                bindPpPaymentStatus = true;
-
-                query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_2);
-            }
-
-            if (orderByComparator != null) {
-                appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-                    orderByComparator);
-            } else
-             if (pagination) {
-                query.append(ShoppingOrderModelImpl.ORDER_BY_JPQL);
-            }
-
-            String sql = query.toString();
-
-            Session session = null;
-
-            try {
-                session = openSession();
-
-                Query q = session.createQuery(sql);
-
-                QueryPos qPos = QueryPos.getInstance(q);
-
-                qPos.add(groupId);
-
-                qPos.add(userId);
-
-                if (bindPpPaymentStatus) {
-                    qPos.add(ppPaymentStatus);
-                }
-
-                if (!pagination) {
-                    list = (List<ShoppingOrder>) QueryUtil.list(q,
-                            getDialect(), start, end, false);
-
-                    Collections.sort(list);
-
-                    list = new UnmodifiableList<ShoppingOrder>(list);
-                } else {
-                    list = (List<ShoppingOrder>) QueryUtil.list(q,
-                            getDialect(), start, end);
-                }
-
-                cacheResult(list);
-
-                FinderCacheUtil.putResult(finderPath, finderArgs, list);
-            } catch (Exception e) {
-                FinderCacheUtil.removeResult(finderPath, finderArgs);
-
-                throw processException(e);
-            } finally {
-                closeSession(session);
-            }
-        }
-
-        return list;
-    }
-
-    /**
-     * Returns the first shopping order in the ordered set where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
-     *
-     * @param groupId the group ID
-     * @param userId the user ID
-     * @param ppPaymentStatus the pp payment status
-     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-     * @return the first matching shopping order
-     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public ShoppingOrder findByG_U_PPPS_First(long groupId, long userId,
-        String ppPaymentStatus, OrderByComparator orderByComparator)
-        throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = fetchByG_U_PPPS_First(groupId, userId,
-                ppPaymentStatus, orderByComparator);
-
-        if (shoppingOrder != null) {
-            return shoppingOrder;
-        }
-
-        StringBundler msg = new StringBundler(8);
-
-        msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-        msg.append("groupId=");
-        msg.append(groupId);
-
-        msg.append(", userId=");
-        msg.append(userId);
-
-        msg.append(", ppPaymentStatus=");
-        msg.append(ppPaymentStatus);
-
-        msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-        throw new NoSuchShoppingOrderException(msg.toString());
-    }
-
-    /**
-     * Returns the first shopping order in the ordered set where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
-     *
-     * @param groupId the group ID
-     * @param userId the user ID
-     * @param ppPaymentStatus the pp payment status
-     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-     * @return the first matching shopping order, or <code>null</code> if a matching shopping order could not be found
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public ShoppingOrder fetchByG_U_PPPS_First(long groupId, long userId,
-        String ppPaymentStatus, OrderByComparator orderByComparator)
-        throws SystemException {
-        List<ShoppingOrder> list = findByG_U_PPPS(groupId, userId,
-                ppPaymentStatus, 0, 1, orderByComparator);
-
-        if (!list.isEmpty()) {
-            return list.get(0);
-        }
-
-        return null;
-    }
-
-    /**
-     * Returns the last shopping order in the ordered set where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
-     *
-     * @param groupId the group ID
-     * @param userId the user ID
-     * @param ppPaymentStatus the pp payment status
-     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-     * @return the last matching shopping order
-     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public ShoppingOrder findByG_U_PPPS_Last(long groupId, long userId,
-        String ppPaymentStatus, OrderByComparator orderByComparator)
-        throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = fetchByG_U_PPPS_Last(groupId, userId,
-                ppPaymentStatus, orderByComparator);
-
-        if (shoppingOrder != null) {
-            return shoppingOrder;
-        }
-
-        StringBundler msg = new StringBundler(8);
-
-        msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-        msg.append("groupId=");
-        msg.append(groupId);
-
-        msg.append(", userId=");
-        msg.append(userId);
-
-        msg.append(", ppPaymentStatus=");
-        msg.append(ppPaymentStatus);
-
-        msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-        throw new NoSuchShoppingOrderException(msg.toString());
-    }
-
-    /**
-     * Returns the last shopping order in the ordered set where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
-     *
-     * @param groupId the group ID
-     * @param userId the user ID
-     * @param ppPaymentStatus the pp payment status
-     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-     * @return the last matching shopping order, or <code>null</code> if a matching shopping order could not be found
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public ShoppingOrder fetchByG_U_PPPS_Last(long groupId, long userId,
-        String ppPaymentStatus, OrderByComparator orderByComparator)
-        throws SystemException {
-        int count = countByG_U_PPPS(groupId, userId, ppPaymentStatus);
-
-        if (count == 0) {
-            return null;
-        }
-
-        List<ShoppingOrder> list = findByG_U_PPPS(groupId, userId,
-                ppPaymentStatus, count - 1, count, orderByComparator);
-
-        if (!list.isEmpty()) {
-            return list.get(0);
-        }
-
-        return null;
-    }
-
-    /**
-     * Returns the shopping orders before and after the current shopping order in the ordered set where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
-     *
-     * @param shoppingOrderId the primary key of the current shopping order
-     * @param groupId the group ID
-     * @param userId the user ID
-     * @param ppPaymentStatus the pp payment status
-     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-     * @return the previous, current, and next shopping order
-     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a shopping order with the primary key could not be found
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public ShoppingOrder[] findByG_U_PPPS_PrevAndNext(long shoppingOrderId,
-        long groupId, long userId, String ppPaymentStatus,
-        OrderByComparator orderByComparator)
-        throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = findByPrimaryKey(shoppingOrderId);
-
-        Session session = null;
-
-        try {
-            session = openSession();
-
-            ShoppingOrder[] array = new ShoppingOrderImpl[3];
-
-            array[0] = getByG_U_PPPS_PrevAndNext(session, shoppingOrder,
-                    groupId, userId, ppPaymentStatus, orderByComparator, true);
-
-            array[1] = shoppingOrder;
-
-            array[2] = getByG_U_PPPS_PrevAndNext(session, shoppingOrder,
-                    groupId, userId, ppPaymentStatus, orderByComparator, false);
-
-            return array;
-        } catch (Exception e) {
-            throw processException(e);
-        } finally {
-            closeSession(session);
-        }
-    }
-
-    protected ShoppingOrder getByG_U_PPPS_PrevAndNext(Session session,
-        ShoppingOrder shoppingOrder, long groupId, long userId,
-        String ppPaymentStatus, OrderByComparator orderByComparator,
-        boolean previous) {
-        StringBundler query = null;
-
-        if (orderByComparator != null) {
-            query = new StringBundler(6 +
-                    (orderByComparator.getOrderByFields().length * 6));
-        } else {
-            query = new StringBundler(3);
-        }
-
-        query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
-
-        query.append(_FINDER_COLUMN_G_U_PPPS_GROUPID_2);
-
-        query.append(_FINDER_COLUMN_G_U_PPPS_USERID_2);
-
-        boolean bindPpPaymentStatus = false;
-
-        if (ppPaymentStatus == null) {
-            query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_1);
-        } else if (ppPaymentStatus.equals(StringPool.BLANK)) {
-            query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_3);
-        } else {
-            bindPpPaymentStatus = true;
-
-            query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_2);
-        }
-
-        if (orderByComparator != null) {
-            String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-            if (orderByConditionFields.length > 0) {
-                query.append(WHERE_AND);
-            }
-
-            for (int i = 0; i < orderByConditionFields.length; i++) {
-                query.append(_ORDER_BY_ENTITY_ALIAS);
-                query.append(orderByConditionFields[i]);
-
-                if ((i + 1) < orderByConditionFields.length) {
-                    if (orderByComparator.isAscending() ^ previous) {
-                        query.append(WHERE_GREATER_THAN_HAS_NEXT);
-                    } else {
-                        query.append(WHERE_LESSER_THAN_HAS_NEXT);
-                    }
-                } else {
-                    if (orderByComparator.isAscending() ^ previous) {
-                        query.append(WHERE_GREATER_THAN);
-                    } else {
-                        query.append(WHERE_LESSER_THAN);
-                    }
-                }
-            }
-
-            query.append(ORDER_BY_CLAUSE);
-
-            String[] orderByFields = orderByComparator.getOrderByFields();
-
-            for (int i = 0; i < orderByFields.length; i++) {
-                query.append(_ORDER_BY_ENTITY_ALIAS);
-                query.append(orderByFields[i]);
-
-                if ((i + 1) < orderByFields.length) {
-                    if (orderByComparator.isAscending() ^ previous) {
-                        query.append(ORDER_BY_ASC_HAS_NEXT);
-                    } else {
-                        query.append(ORDER_BY_DESC_HAS_NEXT);
-                    }
-                } else {
-                    if (orderByComparator.isAscending() ^ previous) {
-                        query.append(ORDER_BY_ASC);
-                    } else {
-                        query.append(ORDER_BY_DESC);
-                    }
-                }
-            }
-        } else {
-            query.append(ShoppingOrderModelImpl.ORDER_BY_JPQL);
-        }
-
-        String sql = query.toString();
-
-        Query q = session.createQuery(sql);
-
-        q.setFirstResult(0);
-        q.setMaxResults(2);
-
-        QueryPos qPos = QueryPos.getInstance(q);
-
-        qPos.add(groupId);
-
-        qPos.add(userId);
-
-        if (bindPpPaymentStatus) {
-            qPos.add(ppPaymentStatus);
-        }
-
-        if (orderByComparator != null) {
-            Object[] values = orderByComparator.getOrderByConditionValues(shoppingOrder);
-
-            for (Object value : values) {
-                qPos.add(value);
-            }
-        }
-
-        List<ShoppingOrder> list = q.list();
-
-        if (list.size() == 2) {
-            return list.get(1);
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Removes all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63; from the database.
-     *
-     * @param groupId the group ID
-     * @param userId the user ID
-     * @param ppPaymentStatus the pp payment status
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public void removeByG_U_PPPS(long groupId, long userId,
-        String ppPaymentStatus) throws SystemException {
-        for (ShoppingOrder shoppingOrder : findByG_U_PPPS(groupId, userId,
-                ppPaymentStatus, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-            remove(shoppingOrder);
-        }
-    }
-
-    /**
-     * Returns the number of shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
-     *
-     * @param groupId the group ID
-     * @param userId the user ID
-     * @param ppPaymentStatus the pp payment status
-     * @return the number of matching shopping orders
-     * @throws SystemException if a system exception occurred
-     */
-    @Override
-    public int countByG_U_PPPS(long groupId, long userId, String ppPaymentStatus)
-        throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_G_U_PPPS;
-
-        Object[] finderArgs = new Object[] { groupId, userId, ppPaymentStatus };
-
-        Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
-                this);
-
-        if (count == null) {
-            StringBundler query = new StringBundler(4);
-
-            query.append(_SQL_COUNT_SHOPPINGORDER_WHERE);
-
-            query.append(_FINDER_COLUMN_G_U_PPPS_GROUPID_2);
-
-            query.append(_FINDER_COLUMN_G_U_PPPS_USERID_2);
-
-            boolean bindPpPaymentStatus = false;
-
-            if (ppPaymentStatus == null) {
-                query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_1);
-            } else if (ppPaymentStatus.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_3);
-            } else {
-                bindPpPaymentStatus = true;
-
-                query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_2);
-            }
-
-            String sql = query.toString();
-
-            Session session = null;
-
-            try {
-                session = openSession();
-
-                Query q = session.createQuery(sql);
-
-                QueryPos qPos = QueryPos.getInstance(q);
-
-                qPos.add(groupId);
-
-                qPos.add(userId);
-
-                if (bindPpPaymentStatus) {
-                    qPos.add(ppPaymentStatus);
                 }
 
                 count = (Long) q.uniqueResult();
@@ -2377,8 +2305,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NUMBER,
             new Object[] { shoppingOrder.getNumber() }, shoppingOrder);
 
-        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PPTXNID,
-            new Object[] { shoppingOrder.getPpTxnId() }, shoppingOrder);
+        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_EXTERNALPAYMENTID,
+            new Object[] { shoppingOrder.getExternalPaymentId() }, shoppingOrder);
 
         FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_STATUS,
             new Object[] { shoppingOrder.getStatus() }, shoppingOrder);
@@ -2464,12 +2392,12 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
             FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NUMBER, args,
                 shoppingOrder);
 
-            args = new Object[] { shoppingOrder.getPpTxnId() };
+            args = new Object[] { shoppingOrder.getExternalPaymentId() };
 
-            FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PPTXNID, args,
-                Long.valueOf(1));
-            FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PPTXNID, args,
-                shoppingOrder);
+            FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_EXTERNALPAYMENTID,
+                args, Long.valueOf(1));
+            FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_EXTERNALPAYMENTID,
+                args, shoppingOrder);
 
             args = new Object[] { shoppingOrder.getStatus() };
 
@@ -2491,13 +2419,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
             }
 
             if ((shoppingOrderModelImpl.getColumnBitmask() &
-                    FINDER_PATH_FETCH_BY_PPTXNID.getColumnBitmask()) != 0) {
-                Object[] args = new Object[] { shoppingOrder.getPpTxnId() };
+                    FINDER_PATH_FETCH_BY_EXTERNALPAYMENTID.getColumnBitmask()) != 0) {
+                Object[] args = new Object[] {
+                        shoppingOrder.getExternalPaymentId()
+                    };
 
-                FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PPTXNID, args,
-                    Long.valueOf(1));
-                FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PPTXNID, args,
-                    shoppingOrder);
+                FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_EXTERNALPAYMENTID,
+                    args, Long.valueOf(1));
+                FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_EXTERNALPAYMENTID,
+                    args, shoppingOrder);
             }
 
             if ((shoppingOrderModelImpl.getColumnBitmask() &
@@ -2528,17 +2458,23 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
             FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NUMBER, args);
         }
 
-        args = new Object[] { shoppingOrder.getPpTxnId() };
+        args = new Object[] { shoppingOrder.getExternalPaymentId() };
 
-        FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PPTXNID, args);
-        FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PPTXNID, args);
+        FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_EXTERNALPAYMENTID,
+            args);
+        FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_EXTERNALPAYMENTID,
+            args);
 
         if ((shoppingOrderModelImpl.getColumnBitmask() &
-                FINDER_PATH_FETCH_BY_PPTXNID.getColumnBitmask()) != 0) {
-            args = new Object[] { shoppingOrderModelImpl.getOriginalPpTxnId() };
+                FINDER_PATH_FETCH_BY_EXTERNALPAYMENTID.getColumnBitmask()) != 0) {
+            args = new Object[] {
+                    shoppingOrderModelImpl.getOriginalExternalPaymentId()
+                };
 
-            FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PPTXNID, args);
-            FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PPTXNID, args);
+            FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_EXTERNALPAYMENTID,
+                args);
+            FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_EXTERNALPAYMENTID,
+                args);
         }
 
         args = new Object[] { shoppingOrder.getStatus() };
@@ -2706,25 +2642,21 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
             }
 
             if ((shoppingOrderModelImpl.getColumnBitmask() &
-                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U_PPPS.getColumnBitmask()) != 0) {
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PAYMENTTYPE.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingOrderModelImpl.getOriginalGroupId(),
-                        shoppingOrderModelImpl.getOriginalUserId(),
-                        shoppingOrderModelImpl.getOriginalPpPaymentStatus()
+                        shoppingOrderModelImpl.getOriginalPaymentType()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U_PPPS, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U_PPPS,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PAYMENTTYPE,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PAYMENTTYPE,
                     args);
 
-                args = new Object[] {
-                        shoppingOrderModelImpl.getGroupId(),
-                        shoppingOrderModelImpl.getUserId(),
-                        shoppingOrderModelImpl.getPpPaymentStatus()
-                    };
+                args = new Object[] { shoppingOrderModelImpl.getPaymentType() };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U_PPPS, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U_PPPS,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PAYMENTTYPE,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PAYMENTTYPE,
                     args);
             }
 
@@ -2809,19 +2741,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         shoppingOrderImpl.setShippingPostCode(shoppingOrder.getShippingPostCode());
         shoppingOrderImpl.setShippingCountry(shoppingOrder.getShippingCountry());
         shoppingOrderImpl.setShippingPhone(shoppingOrder.getShippingPhone());
-        shoppingOrderImpl.setCcName(shoppingOrder.getCcName());
-        shoppingOrderImpl.setCcType(shoppingOrder.getCcType());
-        shoppingOrderImpl.setCcNumber(shoppingOrder.getCcNumber());
-        shoppingOrderImpl.setCcExpMonth(shoppingOrder.getCcExpMonth());
-        shoppingOrderImpl.setCcExpYear(shoppingOrder.getCcExpYear());
-        shoppingOrderImpl.setCcVerNumber(shoppingOrder.getCcVerNumber());
         shoppingOrderImpl.setComments(shoppingOrder.getComments());
         shoppingOrderImpl.setExternalPaymentId(shoppingOrder.getExternalPaymentId());
-        shoppingOrderImpl.setPpTxnId(shoppingOrder.getPpTxnId());
-        shoppingOrderImpl.setPpPaymentStatus(shoppingOrder.getPpPaymentStatus());
-        shoppingOrderImpl.setPpPaymentGross(shoppingOrder.getPpPaymentGross());
-        shoppingOrderImpl.setPpReceiverEmail(shoppingOrder.getPpReceiverEmail());
-        shoppingOrderImpl.setPpPayerEmail(shoppingOrder.getPpPayerEmail());
+        shoppingOrderImpl.setPaymentType(shoppingOrder.getPaymentType());
         shoppingOrderImpl.setSendOrderEmail(shoppingOrder.isSendOrderEmail());
         shoppingOrderImpl.setSendShippingEmail(shoppingOrder.isSendShippingEmail());
         shoppingOrderImpl.setShippingMethodId(shoppingOrder.getShippingMethodId());

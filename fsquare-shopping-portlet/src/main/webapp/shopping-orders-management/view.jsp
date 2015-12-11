@@ -24,18 +24,23 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SEND_STATUS_EMAIL %>" />
 </liferay-portlet:resourceURL>
 
+<liferay-portlet:resourceURL var="checkPaymentStatusURL" secure="false">
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_CHECK_PAYMENT_STATUS %>" />
+</liferay-portlet:resourceURL>
+
 
 <div>
 	<h3>Orders</h3>
 	<div class="orders-table-wrapper" >
-		<table class="orders-table table table-bordered table-striped" id="<portlet:namespace />orders-table" >
+		<table class="settings-table orders-table table table-bordered table-striped" id="<portlet:namespace />orders-table" >
 			<thead>
 				<tr>
 					<td>Number</td>
 					<td>Shipping</td>
 					<td>Price</td>
+					<td>Payment type</td>
+					<td>External payment Id</td>
 					<td>Status</td>
-					
 					<td></td>
 				</tr>
 			</thead>
@@ -49,13 +54,27 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 		  	%>
 				<tr id="<portlet:namespace />order-row-<%= shoppingOrderId %>">
 				
-					<td id="<%= "order-number-"+shoppingOrderId %>"><%= shoppingOrder.getNumber() %></td>
-					<td id="<%= "order-shipping-"+shoppingOrderId %>"><%= shoppingShippingMethod.getName() %> (<%= shoppingOrder.getShipping()%>)
+					<td id="<%= "order-number-"+shoppingOrderId %>">
+						<%= shoppingOrder.getNumber() %>
+					</td>
+					<td id="<%= "order-shipping-"+shoppingOrderId %>">
+						<%= shoppingShippingMethod.getName() %> (<%= shoppingOrder.getShipping()%>)
 						<a class="icon-external-link-sign order-shipping-address" data-order-id="<%= shoppingOrderId %>" title="View shipping address" href="javascript:;"></a>
 					</td>
 					
-					<td id="<%= "order-price-"+shoppingOrderId %>"><%= shoppingOrder.getTotalPrice()%>
+					<td id="<%= "order-price-"+shoppingOrderId %>">
+					<%= shoppingOrder.getTotalPrice() %>
 						<a class="icon-external-link-sign order-items" data-order-id="<%= shoppingOrderId %>" title="View Items" href="javascript:;"></a>
+					</td>
+					
+					<td id="<%= "payment-type-"+shoppingOrderId %>">
+						<%= shoppingOrder.getPaymentType() %>
+					</td>
+					
+					<td id="<%= "external-payment-id-"+shoppingOrderId %>">
+						<%= shoppingOrder.getExternalPaymentId() %>
+						<a class="icon-external-link-sign payment-status" data-payment-type="<%= shoppingOrder.getPaymentType() %>" data-external-tx-id="<%= shoppingOrder.getExternalPaymentId() %>" title="Check status Items" href="javascript:;"></a>
+						
 					</td>
 					
 					<td id="<%= "order-status-"+shoppingOrderId %>">
@@ -67,7 +86,7 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 						</select>
 					</td>
 					
-					<td>
+					<td class="settings-actions">
 						<a class="icon-external-link-sign send-order-status" data-order-id="<%= shoppingOrderId %>" title="Send Order Status" href="javascript:;"></a>
 					
 					</td>
@@ -105,6 +124,29 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 			
 	    },
 		['aui-base,selector-css3,aui-datepicker']);
+	
+	A.on('click', function(event) {
+		<portlet:namespace />checkPaymentStatus(this.getAttribute('data-external-tx-id'), this.getAttribute('data-payment-type'));
+	}, '.payment-status');
+	Liferay.provide(window, '<portlet:namespace />checkPaymentStatus',
+		function(externalTxId, paymentType) {
+			A.io.request('<%= checkPaymentStatusURL %>',{
+	              dataType: 'json',
+	              method: 'POST',
+	              data: {
+	            	  <portlet:namespace />externalTxId : externalTxId,
+	            	  <portlet:namespace />paymentType : paymentType
+	              },
+	              on: {
+	                  success: function() {
+	                  	var response = this.get('responseData');
+	                  	alert(response.orderStatus);
+	                  }
+	              }
+	        });
+	    },
+		['aui-base,selector-css3,aui-datepicker']);
+	
 	
 	A.on('click', function(event) {
 		<portlet:namespace />openShippingAddress(this.getAttribute('data-order-id'));

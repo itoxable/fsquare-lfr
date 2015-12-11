@@ -45,12 +45,17 @@ public class ShoppingStoreWrapper implements ShoppingStore,
         attributes.put("createDate", getCreateDate());
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("name", getName());
+        attributes.put("defaultEmailAddress", getDefaultEmailAddress());
+        attributes.put("productsMainPageUuid", getProductsMainPageUuid());
         attributes.put("cartPageUuid", getCartPageUuid());
         attributes.put("checkoutPageUuid", getCheckoutPageUuid());
         attributes.put("onAddToCart", getOnAddToCart());
         attributes.put("currency", getCurrency());
         attributes.put("country", getCountry());
         attributes.put("userTypes", getUserTypes());
+        attributes.put("checkoutPageFullscreen", getCheckoutPageFullscreen());
+        attributes.put("checkoutCompletePageTemplate",
+            getCheckoutCompletePageTemplate());
         attributes.put("orderCreatedEmailTemplate",
             getOrderCreatedEmailTemplate());
         attributes.put("orderShippedEmailTemplate",
@@ -65,6 +70,17 @@ public class ShoppingStoreWrapper implements ShoppingStore,
         attributes.put("stripeLiveSecretKey", getStripeLiveSecretKey());
         attributes.put("stripeLivePublishableKey", getStripeLivePublishableKey());
         attributes.put("stripeApiVersion", getStripeApiVersion());
+        attributes.put("integrateWithBraintree", getIntegrateWithBraintree());
+        attributes.put("braintreePrivateKey", getBraintreePrivateKey());
+        attributes.put("braintreePublicKey", getBraintreePublicKey());
+        attributes.put("braintreeMerchantId", getBraintreeMerchantId());
+        attributes.put("useBraintreeSandbox", getUseBraintreeSandbox());
+        attributes.put("braintreeSandboxMerchantId",
+            getBraintreeSandboxMerchantId());
+        attributes.put("braintreeSandboxPrivateKey",
+            getBraintreeSandboxPrivateKey());
+        attributes.put("braintreeSandboxPublicKey",
+            getBraintreeSandboxPublicKey());
 
         return attributes;
     }
@@ -113,6 +129,20 @@ public class ShoppingStoreWrapper implements ShoppingStore,
             setName(name);
         }
 
+        String defaultEmailAddress = (String) attributes.get(
+                "defaultEmailAddress");
+
+        if (defaultEmailAddress != null) {
+            setDefaultEmailAddress(defaultEmailAddress);
+        }
+
+        String productsMainPageUuid = (String) attributes.get(
+                "productsMainPageUuid");
+
+        if (productsMainPageUuid != null) {
+            setProductsMainPageUuid(productsMainPageUuid);
+        }
+
         String cartPageUuid = (String) attributes.get("cartPageUuid");
 
         if (cartPageUuid != null) {
@@ -147,6 +177,20 @@ public class ShoppingStoreWrapper implements ShoppingStore,
 
         if (userTypes != null) {
             setUserTypes(userTypes);
+        }
+
+        Boolean checkoutPageFullscreen = (Boolean) attributes.get(
+                "checkoutPageFullscreen");
+
+        if (checkoutPageFullscreen != null) {
+            setCheckoutPageFullscreen(checkoutPageFullscreen);
+        }
+
+        String checkoutCompletePageTemplate = (String) attributes.get(
+                "checkoutCompletePageTemplate");
+
+        if (checkoutCompletePageTemplate != null) {
+            setCheckoutCompletePageTemplate(checkoutCompletePageTemplate);
         }
 
         String orderCreatedEmailTemplate = (String) attributes.get(
@@ -222,6 +266,62 @@ public class ShoppingStoreWrapper implements ShoppingStore,
 
         if (stripeApiVersion != null) {
             setStripeApiVersion(stripeApiVersion);
+        }
+
+        Boolean integrateWithBraintree = (Boolean) attributes.get(
+                "integrateWithBraintree");
+
+        if (integrateWithBraintree != null) {
+            setIntegrateWithBraintree(integrateWithBraintree);
+        }
+
+        String braintreePrivateKey = (String) attributes.get(
+                "braintreePrivateKey");
+
+        if (braintreePrivateKey != null) {
+            setBraintreePrivateKey(braintreePrivateKey);
+        }
+
+        String braintreePublicKey = (String) attributes.get(
+                "braintreePublicKey");
+
+        if (braintreePublicKey != null) {
+            setBraintreePublicKey(braintreePublicKey);
+        }
+
+        String braintreeMerchantId = (String) attributes.get(
+                "braintreeMerchantId");
+
+        if (braintreeMerchantId != null) {
+            setBraintreeMerchantId(braintreeMerchantId);
+        }
+
+        Boolean useBraintreeSandbox = (Boolean) attributes.get(
+                "useBraintreeSandbox");
+
+        if (useBraintreeSandbox != null) {
+            setUseBraintreeSandbox(useBraintreeSandbox);
+        }
+
+        String braintreeSandboxMerchantId = (String) attributes.get(
+                "braintreeSandboxMerchantId");
+
+        if (braintreeSandboxMerchantId != null) {
+            setBraintreeSandboxMerchantId(braintreeSandboxMerchantId);
+        }
+
+        String braintreeSandboxPrivateKey = (String) attributes.get(
+                "braintreeSandboxPrivateKey");
+
+        if (braintreeSandboxPrivateKey != null) {
+            setBraintreeSandboxPrivateKey(braintreeSandboxPrivateKey);
+        }
+
+        String braintreeSandboxPublicKey = (String) attributes.get(
+                "braintreeSandboxPublicKey");
+
+        if (braintreeSandboxPublicKey != null) {
+            setBraintreeSandboxPublicKey(braintreeSandboxPublicKey);
         }
     }
 
@@ -408,6 +508,46 @@ public class ShoppingStoreWrapper implements ShoppingStore,
     }
 
     /**
+    * Returns the default email address of this shopping store.
+    *
+    * @return the default email address of this shopping store
+    */
+    @Override
+    public java.lang.String getDefaultEmailAddress() {
+        return _shoppingStore.getDefaultEmailAddress();
+    }
+
+    /**
+    * Sets the default email address of this shopping store.
+    *
+    * @param defaultEmailAddress the default email address of this shopping store
+    */
+    @Override
+    public void setDefaultEmailAddress(java.lang.String defaultEmailAddress) {
+        _shoppingStore.setDefaultEmailAddress(defaultEmailAddress);
+    }
+
+    /**
+    * Returns the products main page uuid of this shopping store.
+    *
+    * @return the products main page uuid of this shopping store
+    */
+    @Override
+    public java.lang.String getProductsMainPageUuid() {
+        return _shoppingStore.getProductsMainPageUuid();
+    }
+
+    /**
+    * Sets the products main page uuid of this shopping store.
+    *
+    * @param productsMainPageUuid the products main page uuid of this shopping store
+    */
+    @Override
+    public void setProductsMainPageUuid(java.lang.String productsMainPageUuid) {
+        _shoppingStore.setProductsMainPageUuid(productsMainPageUuid);
+    }
+
+    /**
     * Returns the cart page uuid of this shopping store.
     *
     * @return the cart page uuid of this shopping store
@@ -525,6 +665,57 @@ public class ShoppingStoreWrapper implements ShoppingStore,
     @Override
     public void setUserTypes(java.lang.String userTypes) {
         _shoppingStore.setUserTypes(userTypes);
+    }
+
+    /**
+    * Returns the checkout page fullscreen of this shopping store.
+    *
+    * @return the checkout page fullscreen of this shopping store
+    */
+    @Override
+    public boolean getCheckoutPageFullscreen() {
+        return _shoppingStore.getCheckoutPageFullscreen();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping store is checkout page fullscreen.
+    *
+    * @return <code>true</code> if this shopping store is checkout page fullscreen; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isCheckoutPageFullscreen() {
+        return _shoppingStore.isCheckoutPageFullscreen();
+    }
+
+    /**
+    * Sets whether this shopping store is checkout page fullscreen.
+    *
+    * @param checkoutPageFullscreen the checkout page fullscreen of this shopping store
+    */
+    @Override
+    public void setCheckoutPageFullscreen(boolean checkoutPageFullscreen) {
+        _shoppingStore.setCheckoutPageFullscreen(checkoutPageFullscreen);
+    }
+
+    /**
+    * Returns the checkout complete page template of this shopping store.
+    *
+    * @return the checkout complete page template of this shopping store
+    */
+    @Override
+    public java.lang.String getCheckoutCompletePageTemplate() {
+        return _shoppingStore.getCheckoutCompletePageTemplate();
+    }
+
+    /**
+    * Sets the checkout complete page template of this shopping store.
+    *
+    * @param checkoutCompletePageTemplate the checkout complete page template of this shopping store
+    */
+    @Override
+    public void setCheckoutCompletePageTemplate(
+        java.lang.String checkoutCompletePageTemplate) {
+        _shoppingStore.setCheckoutCompletePageTemplate(checkoutCompletePageTemplate);
     }
 
     /**
@@ -771,6 +962,189 @@ public class ShoppingStoreWrapper implements ShoppingStore,
     @Override
     public void setStripeApiVersion(java.lang.String stripeApiVersion) {
         _shoppingStore.setStripeApiVersion(stripeApiVersion);
+    }
+
+    /**
+    * Returns the integrate with braintree of this shopping store.
+    *
+    * @return the integrate with braintree of this shopping store
+    */
+    @Override
+    public boolean getIntegrateWithBraintree() {
+        return _shoppingStore.getIntegrateWithBraintree();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping store is integrate with braintree.
+    *
+    * @return <code>true</code> if this shopping store is integrate with braintree; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isIntegrateWithBraintree() {
+        return _shoppingStore.isIntegrateWithBraintree();
+    }
+
+    /**
+    * Sets whether this shopping store is integrate with braintree.
+    *
+    * @param integrateWithBraintree the integrate with braintree of this shopping store
+    */
+    @Override
+    public void setIntegrateWithBraintree(boolean integrateWithBraintree) {
+        _shoppingStore.setIntegrateWithBraintree(integrateWithBraintree);
+    }
+
+    /**
+    * Returns the braintree private key of this shopping store.
+    *
+    * @return the braintree private key of this shopping store
+    */
+    @Override
+    public java.lang.String getBraintreePrivateKey() {
+        return _shoppingStore.getBraintreePrivateKey();
+    }
+
+    /**
+    * Sets the braintree private key of this shopping store.
+    *
+    * @param braintreePrivateKey the braintree private key of this shopping store
+    */
+    @Override
+    public void setBraintreePrivateKey(java.lang.String braintreePrivateKey) {
+        _shoppingStore.setBraintreePrivateKey(braintreePrivateKey);
+    }
+
+    /**
+    * Returns the braintree public key of this shopping store.
+    *
+    * @return the braintree public key of this shopping store
+    */
+    @Override
+    public java.lang.String getBraintreePublicKey() {
+        return _shoppingStore.getBraintreePublicKey();
+    }
+
+    /**
+    * Sets the braintree public key of this shopping store.
+    *
+    * @param braintreePublicKey the braintree public key of this shopping store
+    */
+    @Override
+    public void setBraintreePublicKey(java.lang.String braintreePublicKey) {
+        _shoppingStore.setBraintreePublicKey(braintreePublicKey);
+    }
+
+    /**
+    * Returns the braintree merchant ID of this shopping store.
+    *
+    * @return the braintree merchant ID of this shopping store
+    */
+    @Override
+    public java.lang.String getBraintreeMerchantId() {
+        return _shoppingStore.getBraintreeMerchantId();
+    }
+
+    /**
+    * Sets the braintree merchant ID of this shopping store.
+    *
+    * @param braintreeMerchantId the braintree merchant ID of this shopping store
+    */
+    @Override
+    public void setBraintreeMerchantId(java.lang.String braintreeMerchantId) {
+        _shoppingStore.setBraintreeMerchantId(braintreeMerchantId);
+    }
+
+    /**
+    * Returns the use braintree sandbox of this shopping store.
+    *
+    * @return the use braintree sandbox of this shopping store
+    */
+    @Override
+    public boolean getUseBraintreeSandbox() {
+        return _shoppingStore.getUseBraintreeSandbox();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping store is use braintree sandbox.
+    *
+    * @return <code>true</code> if this shopping store is use braintree sandbox; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isUseBraintreeSandbox() {
+        return _shoppingStore.isUseBraintreeSandbox();
+    }
+
+    /**
+    * Sets whether this shopping store is use braintree sandbox.
+    *
+    * @param useBraintreeSandbox the use braintree sandbox of this shopping store
+    */
+    @Override
+    public void setUseBraintreeSandbox(boolean useBraintreeSandbox) {
+        _shoppingStore.setUseBraintreeSandbox(useBraintreeSandbox);
+    }
+
+    /**
+    * Returns the braintree sandbox merchant ID of this shopping store.
+    *
+    * @return the braintree sandbox merchant ID of this shopping store
+    */
+    @Override
+    public java.lang.String getBraintreeSandboxMerchantId() {
+        return _shoppingStore.getBraintreeSandboxMerchantId();
+    }
+
+    /**
+    * Sets the braintree sandbox merchant ID of this shopping store.
+    *
+    * @param braintreeSandboxMerchantId the braintree sandbox merchant ID of this shopping store
+    */
+    @Override
+    public void setBraintreeSandboxMerchantId(
+        java.lang.String braintreeSandboxMerchantId) {
+        _shoppingStore.setBraintreeSandboxMerchantId(braintreeSandboxMerchantId);
+    }
+
+    /**
+    * Returns the braintree sandbox private key of this shopping store.
+    *
+    * @return the braintree sandbox private key of this shopping store
+    */
+    @Override
+    public java.lang.String getBraintreeSandboxPrivateKey() {
+        return _shoppingStore.getBraintreeSandboxPrivateKey();
+    }
+
+    /**
+    * Sets the braintree sandbox private key of this shopping store.
+    *
+    * @param braintreeSandboxPrivateKey the braintree sandbox private key of this shopping store
+    */
+    @Override
+    public void setBraintreeSandboxPrivateKey(
+        java.lang.String braintreeSandboxPrivateKey) {
+        _shoppingStore.setBraintreeSandboxPrivateKey(braintreeSandboxPrivateKey);
+    }
+
+    /**
+    * Returns the braintree sandbox public key of this shopping store.
+    *
+    * @return the braintree sandbox public key of this shopping store
+    */
+    @Override
+    public java.lang.String getBraintreeSandboxPublicKey() {
+        return _shoppingStore.getBraintreeSandboxPublicKey();
+    }
+
+    /**
+    * Sets the braintree sandbox public key of this shopping store.
+    *
+    * @param braintreeSandboxPublicKey the braintree sandbox public key of this shopping store
+    */
+    @Override
+    public void setBraintreeSandboxPublicKey(
+        java.lang.String braintreeSandboxPublicKey) {
+        _shoppingStore.setBraintreeSandboxPublicKey(braintreeSandboxPublicKey);
     }
 
     @Override

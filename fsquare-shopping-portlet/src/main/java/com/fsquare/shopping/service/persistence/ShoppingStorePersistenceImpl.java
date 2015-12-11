@@ -338,12 +338,16 @@ public class ShoppingStorePersistenceImpl extends BasePersistenceImpl<ShoppingSt
         shoppingStoreImpl.setCreateDate(shoppingStore.getCreateDate());
         shoppingStoreImpl.setModifiedDate(shoppingStore.getModifiedDate());
         shoppingStoreImpl.setName(shoppingStore.getName());
+        shoppingStoreImpl.setDefaultEmailAddress(shoppingStore.getDefaultEmailAddress());
+        shoppingStoreImpl.setProductsMainPageUuid(shoppingStore.getProductsMainPageUuid());
         shoppingStoreImpl.setCartPageUuid(shoppingStore.getCartPageUuid());
         shoppingStoreImpl.setCheckoutPageUuid(shoppingStore.getCheckoutPageUuid());
         shoppingStoreImpl.setOnAddToCart(shoppingStore.getOnAddToCart());
         shoppingStoreImpl.setCurrency(shoppingStore.getCurrency());
         shoppingStoreImpl.setCountry(shoppingStore.getCountry());
         shoppingStoreImpl.setUserTypes(shoppingStore.getUserTypes());
+        shoppingStoreImpl.setCheckoutPageFullscreen(shoppingStore.isCheckoutPageFullscreen());
+        shoppingStoreImpl.setCheckoutCompletePageTemplate(shoppingStore.getCheckoutCompletePageTemplate());
         shoppingStoreImpl.setOrderCreatedEmailTemplate(shoppingStore.getOrderCreatedEmailTemplate());
         shoppingStoreImpl.setOrderShippedEmailTemplate(shoppingStore.getOrderShippedEmailTemplate());
         shoppingStoreImpl.setOrderCreatedEmailSubject(shoppingStore.getOrderCreatedEmailSubject());
@@ -355,6 +359,14 @@ public class ShoppingStorePersistenceImpl extends BasePersistenceImpl<ShoppingSt
         shoppingStoreImpl.setStripeLiveSecretKey(shoppingStore.getStripeLiveSecretKey());
         shoppingStoreImpl.setStripeLivePublishableKey(shoppingStore.getStripeLivePublishableKey());
         shoppingStoreImpl.setStripeApiVersion(shoppingStore.getStripeApiVersion());
+        shoppingStoreImpl.setIntegrateWithBraintree(shoppingStore.isIntegrateWithBraintree());
+        shoppingStoreImpl.setBraintreePrivateKey(shoppingStore.getBraintreePrivateKey());
+        shoppingStoreImpl.setBraintreePublicKey(shoppingStore.getBraintreePublicKey());
+        shoppingStoreImpl.setBraintreeMerchantId(shoppingStore.getBraintreeMerchantId());
+        shoppingStoreImpl.setUseBraintreeSandbox(shoppingStore.isUseBraintreeSandbox());
+        shoppingStoreImpl.setBraintreeSandboxMerchantId(shoppingStore.getBraintreeSandboxMerchantId());
+        shoppingStoreImpl.setBraintreeSandboxPrivateKey(shoppingStore.getBraintreeSandboxPrivateKey());
+        shoppingStoreImpl.setBraintreeSandboxPublicKey(shoppingStore.getBraintreeSandboxPublicKey());
 
         return shoppingStoreImpl;
     }

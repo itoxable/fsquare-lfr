@@ -103,3 +103,29 @@ Liferay.on(
 //		});
 	}
 );
+
+//function animScrollTo(id, scrollFinishFunction){
+//    
+//	var duration = 500;
+//	// easing values: swing | linear
+//	var easing='swing';
+//	var target=jQuery(id).offset().top;
+//    // animate to target and set the hash to the window.location after the animation
+//	//var scrolled = false;
+//    jQuery("html:not(:animated),body:not(:animated)").animate({ scrollTop: target }, duration, easing
+//		/*function(){ 
+//			if(!scrolled && isDefined(scrollFinishFunction)) 
+//				scrollFinishFunction(); 
+//			scrolled = true;
+//		}*/
+//	);
+//
+//}  
+//
+//function animScrollLinks(){
+//	  jQuery('a.scroll').click(function(){
+//	    var id = jQuery(this).attr('href');
+//		animScrollTo(id);
+//		return false;
+//	  });
+//	}

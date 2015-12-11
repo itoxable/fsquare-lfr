@@ -1,4 +1,4 @@
-package com.fsquare.shopping.portlet.cartview;
+package com.fsquare.shopping.portlet.shoppingcart;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,7 +43,7 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
-public class CartViewPortlet extends BaseShoppingPortlet {
+public class ShoppingCartPortlet extends BaseShoppingPortlet {
 	
 	
 	@Override
