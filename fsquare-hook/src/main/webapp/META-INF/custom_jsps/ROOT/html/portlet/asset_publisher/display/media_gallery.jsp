@@ -204,6 +204,8 @@
 			
 		</c:if>
 		
+		stroll.bind('#media-gallery-<%=portletId %>');
+		
 		/*$('#media-gallery-<%=portletId %>').sliphover({
 			caption: 'data-caption',
 			target:'.gallery-item-poster'

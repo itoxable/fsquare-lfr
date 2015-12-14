@@ -13,13 +13,10 @@
 		
 		#js("$javascript_folder/vendor/jquery-1.11.3.min.js")
 		#js("$javascript_folder/vendor/jquery-ui.js")
-<!-- 		#js("$javascript_folder/vendor/hammer.js") -->
-<!-- 		#js("$javascript_folder/vendor/jquery.hammer.js") -->
-<!-- 		#js("$javascript_folder/vendor/jquery.mousewheel.min.js") -->
 		#js("$javascript_folder/vendor/slick.js")
 		#js("$javascript_folder/vendor/isotope.pkgd.js")
 		#js("$javascript_folder/vendor/fit-columns.js")	
-<!-- 		#js("$javascript_folder/vendor/layzr.js") -->
+		#js("$javascript_folder/vendor/stroll.js")
 		#js("$javascript_folder/vendor/jquery.sliphover.js")
 		
 		#set ($js_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$javascript_folder/vendor/jquery.magnific-popup.js")))
@@ -33,7 +30,7 @@
 	<body class="$css_class">
 
 		$theme.include($body_top_include)
-		#if ($is_signed_in)
+		#if ($is_signed_in && $permissionChecker.isOmniadmin())
 			#dockbar()
 		#end
 	

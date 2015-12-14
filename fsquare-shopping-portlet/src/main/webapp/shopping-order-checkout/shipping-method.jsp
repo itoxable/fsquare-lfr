@@ -22,11 +22,15 @@ if(selectedShoppingShippingMethod != null){
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SAVE_CHECKOUT_SHIPPING_METHOD %>" />
 </liferay-portlet:resourceURL>
 <div>
-	<aui:form id='shipping-method-form' name='shipping-method-form'>
+	<aui:form name='shipping-method-form' cssClass='shipping-method-form'>
 		<%
 			for(ShoppingShippingMethod shippingMethod : availableShoppingShippingMethodList){
 		%>
-		<aui:input name="shippingMethodId" checked="<%= selectedId == shippingMethod.getShippingMethodId() %>" value="<%= shippingMethod.getShippingMethodId()%>" type="radio" label='<%= shippingMethod.getName() + StringPool.SPACE + "(" + shoppingStore.getCurrency() + shippingMethod.getPrice() + ")" %>'></aui:input>
+		<aui:input name="shippingMethodId" cssClass="" checked="<%= selectedId == shippingMethod.getShippingMethodId() %>" value="<%= shippingMethod.getShippingMethodId()%>" type="radio" label='<%= shippingMethod.getName() %>'></aui:input>
+		
+		<p class="shipping-method-price">
+			<%= shoppingStore.getCurrency() + shippingMethod.getPrice()  %>
+		</p>
 		
 		<p class="shipping-method-description">
 			<%= shippingMethod.getDescription() %>

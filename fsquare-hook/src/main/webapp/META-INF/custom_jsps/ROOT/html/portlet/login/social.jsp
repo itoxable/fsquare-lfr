@@ -21,8 +21,8 @@
 
 		<%
 		int width = 100/(PropsValues.LOGIN_FORM_NAVIGATION_PRE.length-1);
-		System.out.println("width: "+width);
-		System.out.println("size: "+(PropsValues.LOGIN_FORM_NAVIGATION_PRE.length-1));
+// 		System.out.println("width: "+width);
+// 		System.out.println("size: "+(PropsValues.LOGIN_FORM_NAVIGATION_PRE.length-1));
 		for (String section : PropsValues.LOGIN_FORM_NAVIGATION_PRE) {
 		%>
 			<div class="social-wrapper" style="width: <%= width %>%">

@@ -102,9 +102,20 @@
 			}
 			.payment-method-credit-card, .payment-method-paypal{
 				margin-top: 30px;
-				
 			}
 		
+			.exp-date{
+				select{
+					min-width: 100px;
+					margin-right: 10px;
+					width: auto;
+				}
+			}
+			.cvc{
+				input{
+					width: 80px;
+				}
+			}
 		}
 	
 		
@@ -179,12 +190,22 @@
 				}
 			}
 		}
-		
-		p.shipping-method-description{
-			margin-left: 20px;
-			font-size: 18px;
+		.shipping-method-form{
+			.control-group {
+				margin-bottom: 5px;
+			}
+			p.shipping-method-price{
+				color: purple;
+				font-weight: 500;
+				margin-left: 20px;
+				margin-bottom: 0;
+			}
+			p.shipping-method-description{
+				margin-left: 20px;
+				font-size: 18px;
+				margin-bottom: 25px;
+			}
 		}
-		
 	}
 	
 	.checkout-loading {

@@ -112,29 +112,26 @@ int thisYear = cal.get(Calendar.YEAR);
 	 			<input type="text" placeholder='<%=LanguageUtil.get(locale, "card-number") %>' id="<portlet:namespace/>cardNumber" data-braintree-name="number"/>
 			</div>
 	 		
-			<div class="control-group form-inline">
+			<div class="control-group form-inline exp-date">
 				<label class="control-label" for="<portlet:namespace/>expMonth">
-					<%=LanguageUtil.get(locale, "exp-month") %>
+					<%=LanguageUtil.get(locale, "exp-date") %>
 				</label>
 				<select id="<portlet:namespace/>expMonth" data-braintree-name="expiration_month">
+					<option value="" selected="" disabled><%=LanguageUtil.get(locale, "month") %></option>
 					<% for(int i = 1; i < 13; i++) {%>
-					<option selected="<%= i == cal.get(Calendar.MONTH) %>" value="<%= i+1 %>"><%= i+1 %></option>
+					<option selected="<%= i == cal.get(Calendar.MONTH) %>" value="<%= i %>"><%= i %></option>
 					<% } %>
 				</select>
-			</div>
 			
-			<div class="control-group form-inline">
-				<label class="control-label" for="<portlet:namespace/>expYear">
-					<%=LanguageUtil.get(locale, "exp-year") %>
-				</label>
 				<select data-braintree-name="expiration_year" id="<portlet:namespace/>expYear">
+					<option value="" selected="" disabled><%=LanguageUtil.get(locale, "year") %></option>
 					<% for(int i = thisYear; i < (thisYear+20); i++) {%>
 					<option value="<%=i%>"><%=i%></option>
 					<% } %>
 				</select>
 			</div>
 			
-			<div class="control-group form-inline">
+			<div class="control-group form-inline cvc">
 				<label class="control-label" for="<portlet:namespace/>cvc">
 					<%=LanguageUtil.get(locale, "cvc") %>
 				</label>
