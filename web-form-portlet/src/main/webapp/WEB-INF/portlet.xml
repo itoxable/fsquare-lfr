@@ -38,38 +38,89 @@
 				<name>description</name>
 				<value>Your input is valuable to us. Please send us your suggestions.</value>
 			</preference>
-			<preference>
-				<name>fieldLabel1</name>
-				<value>Name</value>
-			</preference>
-			<preference>
-				<name>fieldLabel2</name>
-				<value>Rating</value>
-			</preference>
-			<preference>
-				<name>fieldLabel3</name>
-				<value>Comments</value>
-			</preference>
-			<preference>
-				<name>fieldOptions2</name>
-				<value>Excellent,Good,Satisfactory,Poor</value>
-			</preference>
+			
 			<preference>
 				<name>fieldType1</name>
 				<value>text</value>
 			</preference>
 			<preference>
-				<name>fieldType2</name>
-				<value>options</value>
+				<name>fieldLabel1</name>
+				<value>Name</value>
 			</preference>
 			<preference>
+				<name>fieldPlaceHolder1</name>
+				<value>Name</value>
+			</preference>
+			
+			
+			<preference>
+				<name>fieldType2</name>
+				<value>email</value>
+			</preference>
+			<preference>
+				<name>fieldLabel2</name>
+				<value>Email</value>
+			</preference>
+			<preference>
+				<name>fieldPlaceHolder2</name>
+				<value>example@domain.com</value>
+			</preference>
+			<preference>
+				<name>isAckEmail2</name>
+				<value>true</value>
+			</preference>
+			
+			<preference>
 				<name>fieldType3</name>
+				<value>tel</value>
+			</preference>
+			<preference>
+				<name>fieldLabel3</name>
+				<value>Telephone</value>
+			</preference>
+			<preference>
+				<name>fieldPlaceHolder3</name>
+				<value>07xxxxxxx</value>
+			</preference>
+			<preference>
+				<name>fieldOptional2</name>
+				<value>true</value>
+			</preference>
+			
+			<preference>
+				<name>fieldType4</name>
 				<value>textarea</value>
 			</preference>
+			<preference>
+				<name>fieldLabel4</name>
+				<value>Message</value>
+			</preference>
+			<preference>
+				<name>fieldPlaceHolder4</name>
+				<value>Message</value>
+			</preference>		
+			
 			<preference>
 				<name>saveToDatabase</name>
 				<value>true</value>
 			</preference>
+			<preference>
+				<name>sendAsEmail</name>
+				<value>true</value>
+			</preference>
+			<preference>
+				<name>emailFromName</name>
+				<value>DEFAULT</value>
+			</preference>
+			<preference>
+				<name>emailFromAddress</name>
+				<value>DEFAULT</value>
+			</preference>
+			<preference>
+				<name>emailAddress</name>
+				<value>DEFAULT</value>
+			</preference>
+			
 			<preference>
 				<name>subject</name>
 				<value>Suggestions</value>
@@ -91,6 +142,7 @@
 				<value>Your suggestion is under review</value>
 			</preference>									
 		</portlet-preferences>
+		
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>

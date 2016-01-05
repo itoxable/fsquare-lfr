@@ -305,6 +305,27 @@ public interface ShoppingShippingMethodModel extends BaseModel<ShoppingShippingM
     public void setInternational(boolean international);
 
     /**
+     * Returns the disabled of this shopping shipping method.
+     *
+     * @return the disabled of this shopping shipping method
+     */
+    public boolean getDisabled();
+
+    /**
+     * Returns <code>true</code> if this shopping shipping method is disabled.
+     *
+     * @return <code>true</code> if this shopping shipping method is disabled; <code>false</code> otherwise
+     */
+    public boolean isDisabled();
+
+    /**
+     * Sets whether this shopping shipping method is disabled.
+     *
+     * @param disabled the disabled of this shopping shipping method
+     */
+    public void setDisabled(boolean disabled);
+
+    /**
      * Returns the shipping type of this shopping shipping method.
      *
      * @return the shipping type of this shopping shipping method

@@ -45,7 +45,16 @@
 								#if (!$is_signed_in)
 									<a class="sign-in-btn" data-redirect="$is_login_redirect_required" href="$sign_in_url" rel="nofollow">$sign_in_text</a>
 								#else
-									<a class="sign-in-btn" data-redirect="$is_login_redirect_required" href="$sign_out_url" rel="nofollow"><span class="icon-off" style="margin-right: 2px;"></span>$sign_out_text</a>
+									
+									<div class="user-top-menu-wrapper">
+										<a class="user-btn" href="javascrip:;">
+											<span class="icon-user" style="margin-right: 2px;"></span>$user_first_name $user_last_name
+										</a>
+										<div class="user-top-menu">
+											<a href="javascrip:;">Purchases</a>
+											<a class="sign-in-btn" data-redirect="$is_login_redirect_required" href="$sign_out_url" rel="nofollow"><span class="icon-off" style="margin-right: 2px;"></span>$sign_out_text</a>
+										</div>
+									</div>
 								#end
 								<div class="cart-place">
 									#set ($VOID = $velocityPortletPreferences.setValue('portletSetupShowBorders', 'false'))

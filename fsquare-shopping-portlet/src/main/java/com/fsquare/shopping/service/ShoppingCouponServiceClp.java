@@ -28,9 +28,9 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
 
         _methodParameterTypes1 = new String[] { "java.lang.String" };
 
-        _methodName3 = "fetchByCode";
+        _methodName3 = "fetchByCodeAndGroupId";
 
-        _methodParameterTypes3 = new String[] { "java.lang.String" };
+        _methodParameterTypes3 = new String[] { "java.lang.String", "long" };
 
         _methodName4 = "findByGroupId";
 
@@ -84,14 +84,14 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
     }
 
     @Override
-    public com.fsquare.shopping.model.ShoppingCoupon fetchByCode(
-        java.lang.String code) {
+    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
+        java.lang.String code, long groupId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName3,
                     _methodParameterTypes3,
-                    new Object[] { ClpSerializer.translateInput(code) });
+                    new Object[] { ClpSerializer.translateInput(code), groupId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

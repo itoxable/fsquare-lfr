@@ -4,6 +4,17 @@
 	<bean id="com.fsquare.shopping.service.ShoppingCouponLocalService" class="com.fsquare.shopping.service.impl.ShoppingCouponLocalServiceImpl" />
 	<bean id="com.fsquare.shopping.service.ShoppingCouponService" class="com.fsquare.shopping.service.impl.ShoppingCouponServiceImpl" />
 	<bean id="com.fsquare.shopping.service.persistence.ShoppingCouponPersistence" class="com.fsquare.shopping.service.persistence.ShoppingCouponPersistenceImpl" parent="basePersistence" />
+	<bean id="com.fsquare.shopping.service.ShoppingItemLocalService" class="com.fsquare.shopping.service.impl.ShoppingItemLocalServiceImpl" />
+	<bean id="com.fsquare.shopping.service.ShoppingItemService" class="com.fsquare.shopping.service.impl.ShoppingItemServiceImpl" />
+	<bean id="com.fsquare.shopping.service.persistence.ShoppingItemPersistence" class="com.fsquare.shopping.service.persistence.ShoppingItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.fsquare.shopping.service.ShoppingItemImageLocalService" class="com.fsquare.shopping.service.impl.ShoppingItemImageLocalServiceImpl" />
+	<bean id="com.fsquare.shopping.service.persistence.ShoppingItemImagePersistence" class="com.fsquare.shopping.service.persistence.ShoppingItemImagePersistenceImpl" parent="basePersistence" />
+	<bean id="com.fsquare.shopping.service.ShoppingItemStorageLocationLocalService" class="com.fsquare.shopping.service.impl.ShoppingItemStorageLocationLocalServiceImpl" />
+	<bean id="com.fsquare.shopping.service.ShoppingItemStorageLocationService" class="com.fsquare.shopping.service.impl.ShoppingItemStorageLocationServiceImpl" />
+	<bean id="com.fsquare.shopping.service.persistence.ShoppingItemStorageLocationPersistence" class="com.fsquare.shopping.service.persistence.ShoppingItemStorageLocationPersistenceImpl" parent="basePersistence" />
+	<bean id="com.fsquare.shopping.service.ShoppingItemTypeLocalService" class="com.fsquare.shopping.service.impl.ShoppingItemTypeLocalServiceImpl" />
+	<bean id="com.fsquare.shopping.service.ShoppingItemTypeService" class="com.fsquare.shopping.service.impl.ShoppingItemTypeServiceImpl" />
+	<bean id="com.fsquare.shopping.service.persistence.ShoppingItemTypePersistence" class="com.fsquare.shopping.service.persistence.ShoppingItemTypePersistenceImpl" parent="basePersistence" />
 	<bean id="com.fsquare.shopping.service.ShoppingOrderLocalService" class="com.fsquare.shopping.service.impl.ShoppingOrderLocalServiceImpl" />
 	<bean id="com.fsquare.shopping.service.ShoppingOrderService" class="com.fsquare.shopping.service.impl.ShoppingOrderServiceImpl" />
 	<bean id="com.fsquare.shopping.service.persistence.ShoppingOrderPersistence" class="com.fsquare.shopping.service.persistence.ShoppingOrderPersistenceImpl" parent="basePersistence" />
@@ -15,6 +26,9 @@
 	<bean id="com.fsquare.shopping.service.ShoppingShippingMethodLocalService" class="com.fsquare.shopping.service.impl.ShoppingShippingMethodLocalServiceImpl" />
 	<bean id="com.fsquare.shopping.service.ShoppingShippingMethodService" class="com.fsquare.shopping.service.impl.ShoppingShippingMethodServiceImpl" />
 	<bean id="com.fsquare.shopping.service.persistence.ShoppingShippingMethodPersistence" class="com.fsquare.shopping.service.persistence.ShoppingShippingMethodPersistenceImpl" parent="basePersistence" />
+	<bean id="com.fsquare.shopping.service.ShoppingStorageLocationLocalService" class="com.fsquare.shopping.service.impl.ShoppingStorageLocationLocalServiceImpl" />
+	<bean id="com.fsquare.shopping.service.ShoppingStorageLocationService" class="com.fsquare.shopping.service.impl.ShoppingStorageLocationServiceImpl" />
+	<bean id="com.fsquare.shopping.service.persistence.ShoppingStorageLocationPersistence" class="com.fsquare.shopping.service.persistence.ShoppingStorageLocationPersistenceImpl" parent="basePersistence" />
 	<bean id="com.fsquare.shopping.service.ShoppingStoreLocalService" class="com.fsquare.shopping.service.impl.ShoppingStoreLocalServiceImpl" />
 	<bean id="com.fsquare.shopping.service.ShoppingStoreService" class="com.fsquare.shopping.service.impl.ShoppingStoreServiceImpl" />
 	<bean id="com.fsquare.shopping.service.persistence.ShoppingStorePersistence" class="com.fsquare.shopping.service.persistence.ShoppingStorePersistenceImpl" parent="basePersistence" />

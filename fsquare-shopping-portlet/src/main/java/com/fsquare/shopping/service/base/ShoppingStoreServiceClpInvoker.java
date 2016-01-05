@@ -9,30 +9,30 @@ import java.util.Arrays;
  * @generated
  */
 public class ShoppingStoreServiceClpInvoker {
-    private String _methodName46;
-    private String[] _methodParameterTypes46;
-    private String _methodName47;
-    private String[] _methodParameterTypes47;
+    private String _methodName74;
+    private String[] _methodParameterTypes74;
+    private String _methodName75;
+    private String[] _methodParameterTypes75;
 
     public ShoppingStoreServiceClpInvoker() {
-        _methodName46 = "getBeanIdentifier";
+        _methodName74 = "getBeanIdentifier";
 
-        _methodParameterTypes46 = new String[] {  };
+        _methodParameterTypes74 = new String[] {  };
 
-        _methodName47 = "setBeanIdentifier";
+        _methodName75 = "setBeanIdentifier";
 
-        _methodParameterTypes47 = new String[] { "java.lang.String" };
+        _methodParameterTypes75 = new String[] { "java.lang.String" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
         Object[] arguments) throws Throwable {
-        if (_methodName46.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
+        if (_methodName74.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
             return ShoppingStoreServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName47.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
+        if (_methodName75.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
             ShoppingStoreServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;

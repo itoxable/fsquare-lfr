@@ -135,8 +135,8 @@ public class OrderCheckoutPortlet extends BaseShoppingPortlet {
 		PrintWriter writer = resourceResponse.getWriter();
         JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
         ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
-        
-		String nonce = ParamUtil.getString(resourceRequest, "nonce");
+
+        String nonce = ParamUtil.getString(resourceRequest, "nonce");
 		
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
 		HttpSession session = request.getSession();
@@ -486,10 +486,10 @@ public class OrderCheckoutPortlet extends BaseShoppingPortlet {
 			shoppingOrder.setShippingStreet(streetAddress1);
 			shoppingOrder.setShippingStreet2(streetAddress2);
 			shoppingOrder.setInternational(iternational);
-			
+			shoppingOrder.setUserId(themeDisplay.getUser().getUserId());
 	
 			List<ShoppingShippingMethod> availableShoppingShippingMethodList = new ArrayList<ShoppingShippingMethod>();
-			List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethodLocalServiceUtil.findByGroupId(themeDisplay.getScopeGroupId());
+			List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethodLocalServiceUtil.findByGroupIdAndEnabled(themeDisplay.getScopeGroupId());
 			
 			for(ShoppingShippingMethod shoppingShippingMethod : shoppingShippingMethodList){
 				if(iternational && shoppingShippingMethod.isInternational()){

@@ -117,7 +117,7 @@ if(integrateWithBraintree){
 
 <aui:form action="<%= saveStoreURL %>" method="post" name="store_settings_form" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveSettings();" %>'>
 	<div class="store-settings">
-		
+		<h3>Store Settings</h3>
 		<aui:input inlineLabel="left"  type="text" value="<%= name %>" name="name" />
 
 		<aui:input inlineLabel="left"  type="text" value="<%= defaultEmailAddress %>" name="defaultEmailAddress" />
@@ -202,9 +202,9 @@ if(integrateWithBraintree){
 		</aui:select>
 	
 		<aui:select inlineLabel="left"  name="usersType" >
-			<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_ALL %>' label="<%= ShoppingUtil.USER_TYPES_ALL %>" />
+			<aui:option selected='<%= ShoppingUtil.USER_TYPES_ALL.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_ALL %>' label="<%= ShoppingUtil.USER_TYPES_ALL %>" />
 			<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>' label="<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>" />
-			<aui:option selected='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>' label="<%= ShoppingUtil.USER_TYPES_GUEST_ONLY %>" />			
+			<aui:option selected='<%= ShoppingUtil.USER_TYPES_REGISTERED_ONLY.equals(usersType) %>' value='<%= ShoppingUtil.USER_TYPES_REGISTERED_ONLY %>' label="<%= ShoppingUtil.USER_TYPES_REGISTERED_ONLY %>" />			
 		</aui:select>
 		
 		<div class="settings-section-wrapper">

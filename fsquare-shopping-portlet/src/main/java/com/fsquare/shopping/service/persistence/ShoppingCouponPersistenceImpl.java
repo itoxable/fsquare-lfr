@@ -97,18 +97,21 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
             new String[] { Long.class.getName() });
     private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "shoppingCoupon.groupId = ?";
-    public static final FinderPath FINDER_PATH_FETCH_BY_CODE = new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_FETCH_BY_CODEANDGROUPID = new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingCouponModelImpl.FINDER_CACHE_ENABLED,
-            ShoppingCouponImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByCode",
-            new String[] { String.class.getName() },
-            ShoppingCouponModelImpl.CODE_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_CODE = new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingCouponImpl.class, FINDER_CLASS_NAME_ENTITY,
+            "fetchByCodeAndGroupId",
+            new String[] { String.class.getName(), Long.class.getName() },
+            ShoppingCouponModelImpl.CODE_COLUMN_BITMASK |
+            ShoppingCouponModelImpl.GROUPID_COLUMN_BITMASK);
+    public static final FinderPath FINDER_PATH_COUNT_BY_CODEANDGROUPID = new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingCouponModelImpl.FINDER_CACHE_ENABLED, Long.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCode",
-            new String[] { String.class.getName() });
-    private static final String _FINDER_COLUMN_CODE_CODE_1 = "shoppingCoupon.code IS NULL";
-    private static final String _FINDER_COLUMN_CODE_CODE_2 = "shoppingCoupon.code = ?";
-    private static final String _FINDER_COLUMN_CODE_CODE_3 = "(shoppingCoupon.code IS NULL OR shoppingCoupon.code = '')";
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCodeAndGroupId",
+            new String[] { String.class.getName(), Long.class.getName() });
+    private static final String _FINDER_COLUMN_CODEANDGROUPID_CODE_1 = "shoppingCoupon.code IS NULL AND ";
+    private static final String _FINDER_COLUMN_CODEANDGROUPID_CODE_2 = "shoppingCoupon.code = ? AND ";
+    private static final String _FINDER_COLUMN_CODEANDGROUPID_CODE_3 = "(shoppingCoupon.code IS NULL OR shoppingCoupon.code = '') AND ";
+    private static final String _FINDER_COLUMN_CODEANDGROUPID_GROUPID_2 = "shoppingCoupon.groupId = ?";
     private static final String _SQL_SELECT_SHOPPINGCOUPON = "SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon";
     private static final String _SQL_SELECT_SHOPPINGCOUPON_WHERE = "SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ";
     private static final String _SQL_COUNT_SHOPPINGCOUPON = "SELECT COUNT(shoppingCoupon) FROM ShoppingCoupon shoppingCoupon";
@@ -596,25 +599,29 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Returns the shopping coupon where code = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingCouponException} if it could not be found.
+     * Returns the shopping coupon where code = &#63; and groupId = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingCouponException} if it could not be found.
      *
      * @param code the code
+     * @param groupId the group ID
      * @return the matching shopping coupon
      * @throws com.fsquare.shopping.NoSuchShoppingCouponException if a matching shopping coupon could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon findByCode(String code)
+    public ShoppingCoupon findByCodeAndGroupId(String code, long groupId)
         throws NoSuchShoppingCouponException, SystemException {
-        ShoppingCoupon shoppingCoupon = fetchByCode(code);
+        ShoppingCoupon shoppingCoupon = fetchByCodeAndGroupId(code, groupId);
 
         if (shoppingCoupon == null) {
-            StringBundler msg = new StringBundler(4);
+            StringBundler msg = new StringBundler(6);
 
             msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
             msg.append("code=");
             msg.append(code);
+
+            msg.append(", groupId=");
+            msg.append(groupId);
 
             msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -629,61 +636,67 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Returns the shopping coupon where code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+     * Returns the shopping coupon where code = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
      *
      * @param code the code
+     * @param groupId the group ID
      * @return the matching shopping coupon, or <code>null</code> if a matching shopping coupon could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon fetchByCode(String code) throws SystemException {
-        return fetchByCode(code, true);
+    public ShoppingCoupon fetchByCodeAndGroupId(String code, long groupId)
+        throws SystemException {
+        return fetchByCodeAndGroupId(code, groupId, true);
     }
 
     /**
-     * Returns the shopping coupon where code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+     * Returns the shopping coupon where code = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
      *
      * @param code the code
+     * @param groupId the group ID
      * @param retrieveFromCache whether to use the finder cache
      * @return the matching shopping coupon, or <code>null</code> if a matching shopping coupon could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon fetchByCode(String code, boolean retrieveFromCache)
-        throws SystemException {
-        Object[] finderArgs = new Object[] { code };
+    public ShoppingCoupon fetchByCodeAndGroupId(String code, long groupId,
+        boolean retrieveFromCache) throws SystemException {
+        Object[] finderArgs = new Object[] { code, groupId };
 
         Object result = null;
 
         if (retrieveFromCache) {
-            result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CODE,
+            result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
                     finderArgs, this);
         }
 
         if (result instanceof ShoppingCoupon) {
             ShoppingCoupon shoppingCoupon = (ShoppingCoupon) result;
 
-            if (!Validator.equals(code, shoppingCoupon.getCode())) {
+            if (!Validator.equals(code, shoppingCoupon.getCode()) ||
+                    (groupId != shoppingCoupon.getGroupId())) {
                 result = null;
             }
         }
 
         if (result == null) {
-            StringBundler query = new StringBundler(3);
+            StringBundler query = new StringBundler(4);
 
             query.append(_SQL_SELECT_SHOPPINGCOUPON_WHERE);
 
             boolean bindCode = false;
 
             if (code == null) {
-                query.append(_FINDER_COLUMN_CODE_CODE_1);
+                query.append(_FINDER_COLUMN_CODEANDGROUPID_CODE_1);
             } else if (code.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_CODE_CODE_3);
+                query.append(_FINDER_COLUMN_CODEANDGROUPID_CODE_3);
             } else {
                 bindCode = true;
 
-                query.append(_FINDER_COLUMN_CODE_CODE_2);
+                query.append(_FINDER_COLUMN_CODEANDGROUPID_CODE_2);
             }
+
+            query.append(_FINDER_COLUMN_CODEANDGROUPID_GROUPID_2);
 
             String sql = query.toString();
 
@@ -700,10 +713,12 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
                     qPos.add(code);
                 }
 
+                qPos.add(groupId);
+
                 List<ShoppingCoupon> list = q.list();
 
                 if (list.isEmpty()) {
-                    FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
+                    FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
                         finderArgs, list);
                 } else {
                     ShoppingCoupon shoppingCoupon = list.get(0);
@@ -713,13 +728,14 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
                     cacheResult(shoppingCoupon);
 
                     if ((shoppingCoupon.getCode() == null) ||
-                            !shoppingCoupon.getCode().equals(code)) {
-                        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
+                            !shoppingCoupon.getCode().equals(code) ||
+                            (shoppingCoupon.getGroupId() != groupId)) {
+                        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
                             finderArgs, shoppingCoupon);
                     }
                 }
             } catch (Exception e) {
-                FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODE,
+                FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
                     finderArgs);
 
                 throw processException(e);
@@ -736,52 +752,57 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Removes the shopping coupon where code = &#63; from the database.
+     * Removes the shopping coupon where code = &#63; and groupId = &#63; from the database.
      *
      * @param code the code
+     * @param groupId the group ID
      * @return the shopping coupon that was removed
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon removeByCode(String code)
+    public ShoppingCoupon removeByCodeAndGroupId(String code, long groupId)
         throws NoSuchShoppingCouponException, SystemException {
-        ShoppingCoupon shoppingCoupon = findByCode(code);
+        ShoppingCoupon shoppingCoupon = findByCodeAndGroupId(code, groupId);
 
         return remove(shoppingCoupon);
     }
 
     /**
-     * Returns the number of shopping coupons where code = &#63;.
+     * Returns the number of shopping coupons where code = &#63; and groupId = &#63;.
      *
      * @param code the code
+     * @param groupId the group ID
      * @return the number of matching shopping coupons
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByCode(String code) throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_CODE;
+    public int countByCodeAndGroupId(String code, long groupId)
+        throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_CODEANDGROUPID;
 
-        Object[] finderArgs = new Object[] { code };
+        Object[] finderArgs = new Object[] { code, groupId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
 
         if (count == null) {
-            StringBundler query = new StringBundler(2);
+            StringBundler query = new StringBundler(3);
 
             query.append(_SQL_COUNT_SHOPPINGCOUPON_WHERE);
 
             boolean bindCode = false;
 
             if (code == null) {
-                query.append(_FINDER_COLUMN_CODE_CODE_1);
+                query.append(_FINDER_COLUMN_CODEANDGROUPID_CODE_1);
             } else if (code.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_CODE_CODE_3);
+                query.append(_FINDER_COLUMN_CODEANDGROUPID_CODE_3);
             } else {
                 bindCode = true;
 
-                query.append(_FINDER_COLUMN_CODE_CODE_2);
+                query.append(_FINDER_COLUMN_CODEANDGROUPID_CODE_2);
             }
+
+            query.append(_FINDER_COLUMN_CODEANDGROUPID_GROUPID_2);
 
             String sql = query.toString();
 
@@ -797,6 +818,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
                 if (bindCode) {
                     qPos.add(code);
                 }
+
+                qPos.add(groupId);
 
                 count = (Long) q.uniqueResult();
 
@@ -824,8 +847,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
             ShoppingCouponImpl.class, shoppingCoupon.getPrimaryKey(),
             shoppingCoupon);
 
-        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
-            new Object[] { shoppingCoupon.getCode() }, shoppingCoupon);
+        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
+            new Object[] { shoppingCoupon.getCode(), shoppingCoupon.getGroupId() },
+            shoppingCoupon);
 
         shoppingCoupon.resetOriginalValues();
     }
@@ -901,23 +925,27 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
     protected void cacheUniqueFindersCache(ShoppingCoupon shoppingCoupon) {
         if (shoppingCoupon.isNew()) {
-            Object[] args = new Object[] { shoppingCoupon.getCode() };
+            Object[] args = new Object[] {
+                    shoppingCoupon.getCode(), shoppingCoupon.getGroupId()
+                };
 
-            FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODE, args,
-                Long.valueOf(1));
-            FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE, args,
-                shoppingCoupon);
+            FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODEANDGROUPID,
+                args, Long.valueOf(1));
+            FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
+                args, shoppingCoupon);
         } else {
             ShoppingCouponModelImpl shoppingCouponModelImpl = (ShoppingCouponModelImpl) shoppingCoupon;
 
             if ((shoppingCouponModelImpl.getColumnBitmask() &
-                    FINDER_PATH_FETCH_BY_CODE.getColumnBitmask()) != 0) {
-                Object[] args = new Object[] { shoppingCoupon.getCode() };
+                    FINDER_PATH_FETCH_BY_CODEANDGROUPID.getColumnBitmask()) != 0) {
+                Object[] args = new Object[] {
+                        shoppingCoupon.getCode(), shoppingCoupon.getGroupId()
+                    };
 
-                FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODE, args,
-                    Long.valueOf(1));
-                FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE, args,
-                    shoppingCoupon);
+                FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODEANDGROUPID,
+                    args, Long.valueOf(1));
+                FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
+                    args, shoppingCoupon);
             }
         }
     }
@@ -925,17 +953,24 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     protected void clearUniqueFindersCache(ShoppingCoupon shoppingCoupon) {
         ShoppingCouponModelImpl shoppingCouponModelImpl = (ShoppingCouponModelImpl) shoppingCoupon;
 
-        Object[] args = new Object[] { shoppingCoupon.getCode() };
+        Object[] args = new Object[] {
+                shoppingCoupon.getCode(), shoppingCoupon.getGroupId()
+            };
 
-        FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CODE, args);
-        FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODE, args);
+        FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CODEANDGROUPID, args);
+        FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID, args);
 
         if ((shoppingCouponModelImpl.getColumnBitmask() &
-                FINDER_PATH_FETCH_BY_CODE.getColumnBitmask()) != 0) {
-            args = new Object[] { shoppingCouponModelImpl.getOriginalCode() };
+                FINDER_PATH_FETCH_BY_CODEANDGROUPID.getColumnBitmask()) != 0) {
+            args = new Object[] {
+                    shoppingCouponModelImpl.getOriginalCode(),
+                    shoppingCouponModelImpl.getOriginalGroupId()
+                };
 
-            FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CODE, args);
-            FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODE, args);
+            FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CODEANDGROUPID,
+                args);
+            FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
+                args);
         }
     }
 

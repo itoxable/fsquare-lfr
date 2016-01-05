@@ -161,6 +161,15 @@
 		
 	}
 
+	.inventory-management{
+		.item-image-wrap{
+			display: none;
+		}
+		.item-image-wrap-1{
+			display: block;
+		}
+	}
+	
 	
 }
 @-webkit-keyframes sk-stretchdelay {

@@ -1,4 +1,3 @@
-<%--
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
@@ -12,27 +11,30 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
---%>
 
-<%
-if (!ArrayUtil.contains(PropsValues.ASSET_PUBLISHER_DISPLAY_STYLES, displayStyle)) {
-%>
+package com.fsquare.shopping;
 
-	<%= HtmlUtil.escape(LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle)) %>
+import com.liferay.portal.NoSuchModelException;
 
-<%
-}
-else {
-	for (String curDisplayStyle : PropsValues.ASSET_PUBLISHER_DISPLAY_STYLES) {
-		if (displayStyle.equals(curDisplayStyle)) {
-			String displayStyleJsp = "/html/portlet/asset_publisher/display/" + TextFormatter.format(curDisplayStyle, TextFormatter.N) + ".jsp";
-%>
+/**
+ * @author Brian Wing Shun Chan
+ */
+public class NoSuchShoppingStorageLocationException extends NoSuchModelException {
 
-			<liferay-util:include page="<%= displayStyleJsp %>" />
-
-<%
-			break;
-		}
+	public NoSuchShoppingStorageLocationException() {
+		super();
 	}
+
+	public NoSuchShoppingStorageLocationException(String msg) {
+		super(msg);
+	}
+
+	public NoSuchShoppingStorageLocationException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public NoSuchShoppingStorageLocationException(Throwable cause) {
+		super(cause);
+	}
+
 }
-%>

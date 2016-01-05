@@ -23,6 +23,7 @@ import com.braintreegateway.Transaction;
 import com.braintreegateway.Transaction.GatewayRejectionReason;
 import com.braintreegateway.TransactionRequest;
 import com.fsquare.shopping.NoSuchShoppingStoreException;
+import com.fsquare.shopping.ShoppingUtil;
 import com.fsquare.shopping.messaging.Destinations;
 import com.fsquare.shopping.model.ShoppingCoupon;
 import com.fsquare.shopping.model.ShoppingOrder;
@@ -53,10 +54,21 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ClassName;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ClassNameLocalService;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.persistence.RoleFinderUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
@@ -91,8 +103,6 @@ public class StorePortlet extends MVCPortlet{
 				testStripePayment(resourceRequest, resourceResponse);
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_SEND_TEST_EMAIL)) {
 				sendTestEmail(resourceRequest, resourceResponse);
-			}else if (cmd.equals(ShoppingPortletUtil.CMD_STRIPE_WEBHOOK)) {
-				stripeWebhook(resourceRequest, resourceResponse);
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_OPEN_TEST_BRAINTREE_PAYPAL)) {
 				openTestBraintreePaypalForm(resourceRequest, resourceResponse);
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_GET_BRAINTREE_CLIENT_TOKEN)) {
@@ -107,6 +117,8 @@ public class StorePortlet extends MVCPortlet{
 		}
 	}
 	
+	
+
 	private BraintreePayment braintreePayment;
 	
 	private void doBraintreeTransaction(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException, SystemException {
@@ -198,13 +210,6 @@ public class StorePortlet extends MVCPortlet{
 		dispatcher.include(resourceRequest, resourceResponse);
 		
 	}
-
-
-	private void stripeWebhook(ResourceRequest resourceRequest, ResourceResponse resourceResponse) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	private void sendTestEmail(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortalException, SystemException {
 		PrintWriter writer = resourceResponse.getWriter();
@@ -370,7 +375,32 @@ public class StorePortlet extends MVCPortlet{
 			String onAddToCart = ParamUtil.getString(resourceRequest, "onAddToCart");  
 			shoppingStore.setOnAddToCart(onAddToCart);
 			String usersType = ParamUtil.getString(resourceRequest, "usersType");  
+			boolean changeInUsersType = !usersType.equals(shoppingStore.getUserTypes());
 			shoppingStore.setUserTypes(usersType);
+			
+			if(changeInUsersType){
+				Layout checkoutPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(checkoutDisplayPage, themeDisplay.getScopeGroupId(), false);
+
+				long userRoleId = RoleLocalServiceUtil.getRole(checkoutPageLayout.getCompanyId(), RoleConstants.GUEST).getRoleId();
+				String[] actionsPermited = null;
+				
+				if(ShoppingUtil.USER_TYPES_REGISTERED_ONLY.equals(usersType)){
+//					ResourcePermissionServiceUtil.setIndividualResourcePermissions(themeDisplay.getScopeGroupId(),
+//							themeDisplay.getCompanyId(), Layout.class.getName(), String.valueOf(checkoutPageLayout.getPrimaryKey()),
+//							userRoleId, new String[] {});
+					actionsPermited = new String[] {};
+				}else{
+					actionsPermited = new String[] { ActionKeys.VIEW };
+//					ResourcePermissionServiceUtil.setIndividualResourcePermissions(themeDisplay.getScopeGroupId(),
+//							themeDisplay.getCompanyId(), Layout.class.getName(), String.valueOf(checkoutPageLayout.getPrimaryKey()),
+//							userRoleId, new String[] { ActionKeys.VIEW });
+				
+				}
+				ResourcePermissionServiceUtil.setIndividualResourcePermissions(themeDisplay.getScopeGroupId(), 
+						themeDisplay.getCompanyId(), Layout.class.getName(), String.valueOf(checkoutPageLayout.getPrimaryKey()),
+						userRoleId, actionsPermited);
+
+			}
 			
 			String orderCreatedEmailTemplate = ParamUtil.getString(resourceRequest, "orderCreatedEmailTemplate");  
 			String orderShippedEmailTemplate = ParamUtil.getString(resourceRequest, "orderShippedEmailTemplate");  

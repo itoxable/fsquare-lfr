@@ -1,0 +1,38 @@
+.aui{
+	.user-shopping-orders{
+		-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+		-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+		background-color: #FFF;
+		
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+		
+		padding: 40px 30px;
+		position: relative;
+		margin-bottom: 20px;
+		
+		table.orders-table{
+			thead{
+				td{
+					font-weight: 500;
+				}
+			}
+			td{
+				padding: 5px;
+				overflow: hidden;
+			}
+			td.settings-actions{
+				width: 50px;
+				a{
+					display: inline-block;
+					text-decoration: none;
+				}
+				a:HOVER {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}

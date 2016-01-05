@@ -54,6 +54,7 @@ public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
         attributes.put("weight", getWeight());
         attributes.put("defaultShipping", getDefaultShipping());
         attributes.put("international", getInternational());
+        attributes.put("disabled", getDisabled());
         attributes.put("shippingType", getShippingType());
 
         return attributes;
@@ -149,6 +150,12 @@ public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
 
         if (international != null) {
             setInternational(international);
+        }
+
+        Boolean disabled = (Boolean) attributes.get("disabled");
+
+        if (disabled != null) {
+            setDisabled(disabled);
         }
 
         String shippingType = (String) attributes.get("shippingType");
@@ -518,6 +525,36 @@ public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
     @Override
     public void setInternational(boolean international) {
         _shoppingShippingMethod.setInternational(international);
+    }
+
+    /**
+    * Returns the disabled of this shopping shipping method.
+    *
+    * @return the disabled of this shopping shipping method
+    */
+    @Override
+    public boolean getDisabled() {
+        return _shoppingShippingMethod.getDisabled();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping shipping method is disabled.
+    *
+    * @return <code>true</code> if this shopping shipping method is disabled; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isDisabled() {
+        return _shoppingShippingMethod.isDisabled();
+    }
+
+    /**
+    * Sets whether this shopping shipping method is disabled.
+    *
+    * @param disabled the disabled of this shopping shipping method
+    */
+    @Override
+    public void setDisabled(boolean disabled) {
+        _shoppingShippingMethod.setDisabled(disabled);
     }
 
     /**

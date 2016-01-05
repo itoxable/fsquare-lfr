@@ -71,7 +71,8 @@
 	
 	String title = (String)request.getAttribute("view.jsp-title");
 	String text = StringPool.BLANK;
-	String filterType = StringPool.BLANK;
+	String price = StringPool.BLANK;
+	String author = StringPool.BLANK;
 	String imagePath = StringPool.BLANK;
 	String smallImagePath = StringPool.BLANK;
 	String secondSection = StringPool.BLANK;
@@ -118,11 +119,16 @@
 				text = fieldContent.getText();
 			}
 			
-			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Filter']/dynamic-content");
+			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Price']/dynamic-content");
 			if (fieldContent != null) {
-				filterType = fieldContent.getText();
+				price = fieldContent.getText();
 			}
-
+			
+			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Author']/dynamic-content");
+			if (fieldContent != null) {
+				author = fieldContent.getText();
+			}
+			
 		}
 
 	} catch (PortalException e2) {
@@ -177,10 +183,19 @@
 		<c:if test='<%= assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker()) %>'>
 			<%@ include file="/html/portlet/asset_publisher/display/item_actions.jspf" %>
 		</c:if>
-		<a href="<%= viewURL %>" class='gallery-item '  >
-			<span class="gallery-item-poster" style="background-image: url('<%= imagePath %>')" data-caption="<a class='media-gallery-sliphover' href='<%= PortalUtil.escapeRedirect(viewURL) %>' ><h2><%= title %></h2></a>">
-			</span>
-	 	</a>
+		<div class='gallery-item-wrap'>
+			<a href="<%= viewURL %>" class='gallery-item'>
+				<span class="gallery-item-poster" style="background-image: url('<%= imagePath %>')" data-caption="<a class='media-gallery-sliphover' href='<%= PortalUtil.escapeRedirect(viewURL) %>' ><h2><%= title %></h2></a>">
+				</span>
+				<div class="gallery-item-details">
+					<span class="gallery-item-price"><%= price %>
+						<span class="regular-price">127</span>
+					</span>
+					<span class="gallery-item-title"><%= title %></span>
+					<span class="gallery-item-author"><%= author %></span>
+				</div>
+		 	</a>
+	 	</div>
 	</div>
 	
 <c:if test='<%= assetEntryIndex == (results.size()-1) %>'>

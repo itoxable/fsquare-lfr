@@ -284,6 +284,20 @@ public class ShoppingOrderLocalServiceWrapper
     }
 
     @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndUserId(
+        long groupId, long userId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingOrderLocalService.findBygroupIdAndUserId(groupId, userId);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndEmail(
+        long groupId, java.lang.String email)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingOrderLocalService.findBygroupIdAndEmail(groupId, email);
+    }
+
+    @Override
     public double getOrderTotal(
         java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList) {
         return _shoppingOrderLocalService.getOrderTotal(shoppingOrderItemList);

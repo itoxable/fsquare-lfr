@@ -300,6 +300,13 @@ public class ShoppingShippingMethodLocalServiceWrapper
         return _shoppingShippingMethodLocalService.findByGroupId(groupId);
     }
 
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupIdAndEnabled(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingShippingMethodLocalService.findByGroupIdAndEnabled(groupId);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

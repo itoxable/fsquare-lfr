@@ -76,7 +76,7 @@ CKEDITOR.config.bodyClass = 'html-editor <%= HtmlUtil.escapeJS(cssClasses) %>';
 
 CKEDITOR.config.closeNoticeTimeout = 8000;
 
-CKEDITOR.config.contentsCss = ['<%= HtmlUtil.escapeJS(cssPath) %>/main.css', 'http://fast.fonts.net/cssapi/0d8751b3-7bd8-42b9-8348-3964a17f55ab.css', 'http://fonts.googleapis.com/css?family=Lato:300,400,700', '<%= HtmlUtil.escapeJS(cssPath) %>/editor-custom.css'];
+CKEDITOR.config.contentsCss = ['<%= HtmlUtil.escapeJS(cssPath) %>/main.css', 'http://fonts.googleapis.com/css?family=Lato:300,400,700', '<%= HtmlUtil.escapeJS(cssPath) %>/editor-custom.css'];
 
 <%
 Locale contentsLocale = LocaleUtil.fromLanguageId(contentsLanguageId);

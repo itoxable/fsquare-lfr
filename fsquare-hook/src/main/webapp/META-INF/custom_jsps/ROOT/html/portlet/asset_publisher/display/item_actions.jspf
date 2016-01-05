@@ -12,4 +12,3 @@
 	<a class="fa fa-trash asset-action-button" data-entry-id="<%= assetEntry.getEntryId() %>" href="javascript:;" onclick="<portlet:namespace />deleteAsset('<%= assetEntry.getEntryId() %>', '<%= journalArticle.getId() %>')">Delete</a>
 	
 </div>
-

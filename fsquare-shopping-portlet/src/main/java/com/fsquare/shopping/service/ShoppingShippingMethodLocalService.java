@@ -254,4 +254,8 @@ public interface ShoppingShippingMethodLocalService extends BaseLocalService,
     public java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupId(
         long groupId)
         throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupIdAndEnabled(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

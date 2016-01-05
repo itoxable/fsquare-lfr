@@ -131,7 +131,7 @@ public class CouponManagementPortlet extends MVCPortlet{
 	        Long couponId = ParamUtil.getLong(resourceRequest, "couponId");
 	        String code = ParamUtil.getString(resourceRequest, "code");
 	        
-	        ShoppingCoupon existingShoppingCoupon = ShoppingCouponLocalServiceUtil.fetchByCode(code);
+	        ShoppingCoupon existingShoppingCoupon = ShoppingCouponLocalServiceUtil.fetchByCodeAndGroupId(code, themeDisplay.getScopeGroupId());
 	        if(existingShoppingCoupon == null || (existingShoppingCoupon.getCouponId() == couponId)){
 		        String name = ParamUtil.getString(resourceRequest, "name"); 
 		        String description = ParamUtil.getString(resourceRequest, "description"); 

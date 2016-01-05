@@ -8,4 +8,21 @@
 		<implicit-parameter name="p_p_auth">0</implicit-parameter>
 		<implicit-parameter name="cmd">addToCart</implicit-parameter>
 	</route>
+	
+	
+	<route>
+		<pattern>/stripe-webhook/{data}</pattern>
+		<implicit-parameter name="p_p_lifecycle">2</implicit-parameter>
+		<implicit-parameter name="p_p_auth">0</implicit-parameter>
+		<implicit-parameter name="p_p_state">maximized</implicit-parameter>
+		<implicit-parameter name="cmd">stripeWebhook</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/braintree-webhook/{data}</pattern>
+		<implicit-parameter name="p_p_lifecycle">2</implicit-parameter>
+		<implicit-parameter name="p_p_auth">0</implicit-parameter>
+		<implicit-parameter name="p_p_state">maximized</implicit-parameter>
+		<implicit-parameter name="cmd">braintreeWebhook</implicit-parameter>
+	</route>
+	
 </routes>

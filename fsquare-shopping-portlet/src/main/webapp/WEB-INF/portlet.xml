@@ -121,6 +121,31 @@
 	</portlet>
 	
 	<portlet>
+		<portlet-name>inventory-management</portlet-name>
+		<display-name>Inventory Management</display-name>
+		<portlet-class>com.fsquare.shopping.portlet.inventorymanagement.InventoryManagementPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/inventory-management/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Inventory Management</title>
+			<short-title>Inventory Management</short-title>
+			<keywords>Inventory Management</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+	</portlet>
+	
+	<portlet>
 		<portlet-name>shopping-coupon-management</portlet-name>
 		<display-name>Shopping Coupon management</display-name>
 		<portlet-class>com.fsquare.shopping.portlet.shoppingcouponmanagement.CouponManagementPortlet</portlet-class>
@@ -192,6 +217,37 @@
 		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
+		</security-role-ref>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>user-shopping-orders</portlet-name>
+		<display-name>User Shopping orders</display-name>
+		<portlet-class>com.fsquare.shopping.portlet.usershoppingorders.UserOrdersManagementPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/user-shopping-orders/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>User Shopping orders</title>
+			<short-title>user orders</short-title>
+			<keywords>User Shopping orders</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
 	

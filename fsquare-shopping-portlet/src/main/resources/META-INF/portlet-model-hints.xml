@@ -24,6 +24,57 @@
 		<field name="discountType" type="String" />
 		<field name="maxUses" type="long" />
 	</model>
+	<model name="com.fsquare.shopping.model.ShoppingItem">
+		<field name="uuid" type="String" />
+		<field name="itemId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+		<field name="price" type="double" />
+		<field name="discountPrice" type="double" />
+		<field name="sku" type="String" />
+		<field name="itemTypeId" type="long" />
+	</model>
+	<model name="com.fsquare.shopping.model.ShoppingItemImage">
+		<field name="shoppingItemImageId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="itemId" type="long" />
+		<field name="imageId" type="long" />
+		<field name="mainImage" type="boolean" />
+		<field name="order" type="int" />
+	</model>
+	<model name="com.fsquare.shopping.model.ShoppingItemStorageLocation">
+		<field name="itemStorageLocationId" type="long" />
+		<field name="itemId" type="long" />
+		<field name="storageLocationId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
+		<field name="quantity" type="int" />
+		<field name="movementType" type="String" />
+	</model>
+	<model name="com.fsquare.shopping.model.ShoppingItemType">
+		<field name="itemTypeId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+	</model>
 	<model name="com.fsquare.shopping.model.ShoppingOrder">
 		<field name="shoppingOrderId" type="long" />
 		<field name="groupId" type="long" />
@@ -110,7 +161,18 @@
 		<field name="weight" type="double" />
 		<field name="defaultShipping" type="boolean" />
 		<field name="international" type="boolean" />
+		<field name="disabled" type="boolean" />
 		<field name="shippingType" type="String" />
+	</model>
+	<model name="com.fsquare.shopping.model.ShoppingStorageLocation">
+		<field name="storageLocationId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingStore">
 		<field name="groupId" type="long" />

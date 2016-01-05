@@ -28,7 +28,7 @@
 
 		<%
 		TemplateHandler templateHandler = TemplateHandlerRegistryUtil.getTemplateHandler(AssetEntry.class.getName());
-		%>
+		%> 
 
 		<liferay-ui:ddm-template-selector
 			classNameId="<%= PortalUtil.getClassNameId(templateHandler.getClassName()) %>"
@@ -113,15 +113,13 @@
 		<aui:option label="view-in-context" selected='<%= assetLinkBehavior.equals("viewInPortlet") %>' value="viewInPortlet" />
 	</aui:select>
 
-	<aui:select helpMessage="number-of-items-to-display-help" label="number-of-items-to-display" name="preferences--delta--">
+	<aui:select helpMessage="number-of-items-to-display-help" label="number-of-items-to-display" name="preferences--pageDelta--">
 
 		<%
-		int[] deltas = {1, 2, 3, 4, 5, 6, 7, 8, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100};
-
-		for (int currentDelta: deltas) {
+		for (int currentDelta : PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES) {
 		%>
 
-			<aui:option label="<%= currentDelta %>" selected="<%= (delta == currentDelta) %>" />
+			<aui:option label='<%= currentDelta==-1?"all":currentDelta %>' selected="<%= (pageDelta == currentDelta) %>" />
 
 		<%
 		}

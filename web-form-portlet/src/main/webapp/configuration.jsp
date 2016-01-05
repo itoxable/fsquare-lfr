@@ -59,16 +59,6 @@ String submitButtonLabel = LocalizationUtil.getLocalization(submitButtonLabelXml
 String saveButtonLabelXml = LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "saveButtonLabelXml");
 String saveButtonLabel = LocalizationUtil.getLocalization(saveButtonLabelXml, themeDisplay.getLanguageId());
 
-// boolean isWizard = GetterUtil.getBoolean(portletPreferences.getValue("isWizard", StringPool.BLANK));
-// String wizardNrSteps = portletPreferences.getValue("wizardNrSteps", StringPool.BLANK);
-// int nrSteps = 1;
-
-// if(wizardNrSteps != null && wizardNrSteps!= ""){
-// 	nrSteps = Integer.parseInt(wizardNrSteps);
-// }
-
-// boolean showSuccessTextOnly = GetterUtil.getBoolean(portletPreferences.getValue("showSuccessTextOnly", StringPool.BLANK));
-// boolean showSuccessTextReadonlyFields = GetterUtil.getBoolean(portletPreferences.getValue("showSuccessTextReadonlyFields", StringPool.BLANK));
 boolean saveTempEnable = GetterUtil.getBoolean(portletPreferences.getValue("saveTempEnable", StringPool.BLANK));
 
 String saveTempSuccessText = portletPreferences.getValue("saveTempSuccessText", StringPool.BLANK);
@@ -135,8 +125,7 @@ boolean isPostToURL = GetterUtil.getBoolean(portletPreferences.getValue("isPostT
 								<dd> Back URL </dd>
 								<dt> [$EDIT_URL$] </dt> 
 								<dd> URL to use if record changing is wanted  </dd>
-								<dt> [$POST_RESPONSE$] </dt> 
-								<dd> Post response. <b>to be used if 'Post to URL' is enable</b></dd> 
+								
 							</dl> 
 						</div>
 					</aui:field-wrapper>

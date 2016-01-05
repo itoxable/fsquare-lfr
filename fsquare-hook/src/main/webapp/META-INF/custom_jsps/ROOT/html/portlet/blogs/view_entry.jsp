@@ -48,8 +48,6 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 displayStyle = BlogsUtil.DISPLAY_STYLE_FULL_CONTENT;
 
 AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
-System.out.println("***AssetEntry: "+assetEntry);
-System.out.println("***BlogsEntry: "+entry);
 
 AssetEntryServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry.getEntryId());
 
@@ -60,7 +58,6 @@ request.setAttribute(WebKeys.LAYOUT_ASSET_ENTRY, assetEntry);
 request.setAttribute("view_entry_content.jsp-entry", entry);
 
 request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
-
 %>
 
 <a href="<%= redirect %>" class="back-link"><span class="fa fa-angle-left"></span> Back to main blog page</a>
@@ -152,7 +149,7 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 						userId="<%= entry.getUserId() %>"
 					/>
 				</liferay-ui:panel>
-			</liferay-ui:panel-container>
+			</liferay-ui:panel-container> 
 		</c:otherwise>
 	</c:choose>
 </c:if>

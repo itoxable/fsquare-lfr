@@ -1,9 +1,14 @@
 package com.fsquare.shopping.service;
 
 import com.fsquare.shopping.model.ShoppingCouponClp;
+import com.fsquare.shopping.model.ShoppingItemClp;
+import com.fsquare.shopping.model.ShoppingItemImageClp;
+import com.fsquare.shopping.model.ShoppingItemStorageLocationClp;
+import com.fsquare.shopping.model.ShoppingItemTypeClp;
 import com.fsquare.shopping.model.ShoppingOrderClp;
 import com.fsquare.shopping.model.ShoppingOrderItemClp;
 import com.fsquare.shopping.model.ShoppingShippingMethodClp;
+import com.fsquare.shopping.model.ShoppingStorageLocationClp;
 import com.fsquare.shopping.model.ShoppingStoreClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -96,6 +101,23 @@ public class ClpSerializer {
             return translateInputShoppingCoupon(oldModel);
         }
 
+        if (oldModelClassName.equals(ShoppingItemClp.class.getName())) {
+            return translateInputShoppingItem(oldModel);
+        }
+
+        if (oldModelClassName.equals(ShoppingItemImageClp.class.getName())) {
+            return translateInputShoppingItemImage(oldModel);
+        }
+
+        if (oldModelClassName.equals(
+                    ShoppingItemStorageLocationClp.class.getName())) {
+            return translateInputShoppingItemStorageLocation(oldModel);
+        }
+
+        if (oldModelClassName.equals(ShoppingItemTypeClp.class.getName())) {
+            return translateInputShoppingItemType(oldModel);
+        }
+
         if (oldModelClassName.equals(ShoppingOrderClp.class.getName())) {
             return translateInputShoppingOrder(oldModel);
         }
@@ -106,6 +128,10 @@ public class ClpSerializer {
 
         if (oldModelClassName.equals(ShoppingShippingMethodClp.class.getName())) {
             return translateInputShoppingShippingMethod(oldModel);
+        }
+
+        if (oldModelClassName.equals(ShoppingStorageLocationClp.class.getName())) {
+            return translateInputShoppingStorageLocation(oldModel);
         }
 
         if (oldModelClassName.equals(ShoppingStoreClp.class.getName())) {
@@ -131,6 +157,47 @@ public class ClpSerializer {
         ShoppingCouponClp oldClpModel = (ShoppingCouponClp) oldModel;
 
         BaseModel<?> newModel = oldClpModel.getShoppingCouponRemoteModel();
+
+        newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+        return newModel;
+    }
+
+    public static Object translateInputShoppingItem(BaseModel<?> oldModel) {
+        ShoppingItemClp oldClpModel = (ShoppingItemClp) oldModel;
+
+        BaseModel<?> newModel = oldClpModel.getShoppingItemRemoteModel();
+
+        newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+        return newModel;
+    }
+
+    public static Object translateInputShoppingItemImage(BaseModel<?> oldModel) {
+        ShoppingItemImageClp oldClpModel = (ShoppingItemImageClp) oldModel;
+
+        BaseModel<?> newModel = oldClpModel.getShoppingItemImageRemoteModel();
+
+        newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+        return newModel;
+    }
+
+    public static Object translateInputShoppingItemStorageLocation(
+        BaseModel<?> oldModel) {
+        ShoppingItemStorageLocationClp oldClpModel = (ShoppingItemStorageLocationClp) oldModel;
+
+        BaseModel<?> newModel = oldClpModel.getShoppingItemStorageLocationRemoteModel();
+
+        newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+        return newModel;
+    }
+
+    public static Object translateInputShoppingItemType(BaseModel<?> oldModel) {
+        ShoppingItemTypeClp oldClpModel = (ShoppingItemTypeClp) oldModel;
+
+        BaseModel<?> newModel = oldClpModel.getShoppingItemTypeRemoteModel();
 
         newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -168,6 +235,17 @@ public class ClpSerializer {
         return newModel;
     }
 
+    public static Object translateInputShoppingStorageLocation(
+        BaseModel<?> oldModel) {
+        ShoppingStorageLocationClp oldClpModel = (ShoppingStorageLocationClp) oldModel;
+
+        BaseModel<?> newModel = oldClpModel.getShoppingStorageLocationRemoteModel();
+
+        newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+        return newModel;
+    }
+
     public static Object translateInputShoppingStore(BaseModel<?> oldModel) {
         ShoppingStoreClp oldClpModel = (ShoppingStoreClp) oldModel;
 
@@ -196,6 +274,146 @@ public class ClpSerializer {
         if (oldModelClassName.equals(
                     "com.fsquare.shopping.model.impl.ShoppingCouponImpl")) {
             return translateOutputShoppingCoupon(oldModel);
+        } else if (oldModelClassName.endsWith("Clp")) {
+            try {
+                ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+                Method getClpSerializerClassMethod = oldModelClass.getMethod(
+                        "getClpSerializerClass");
+
+                Class<?> oldClpSerializerClass = (Class<?>) getClpSerializerClassMethod.invoke(oldModel);
+
+                Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+                Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+                        BaseModel.class);
+
+                Class<?> oldModelModelClass = oldModel.getModelClass();
+
+                Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+                        oldModelModelClass.getSimpleName() + "RemoteModel");
+
+                Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+                BaseModel<?> newModel = (BaseModel<?>) translateOutputMethod.invoke(null,
+                        oldRemoteModel);
+
+                return newModel;
+            } catch (Throwable t) {
+                if (_log.isInfoEnabled()) {
+                    _log.info("Unable to translate " + oldModelClassName, t);
+                }
+            }
+        }
+
+        if (oldModelClassName.equals(
+                    "com.fsquare.shopping.model.impl.ShoppingItemImpl")) {
+            return translateOutputShoppingItem(oldModel);
+        } else if (oldModelClassName.endsWith("Clp")) {
+            try {
+                ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+                Method getClpSerializerClassMethod = oldModelClass.getMethod(
+                        "getClpSerializerClass");
+
+                Class<?> oldClpSerializerClass = (Class<?>) getClpSerializerClassMethod.invoke(oldModel);
+
+                Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+                Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+                        BaseModel.class);
+
+                Class<?> oldModelModelClass = oldModel.getModelClass();
+
+                Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+                        oldModelModelClass.getSimpleName() + "RemoteModel");
+
+                Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+                BaseModel<?> newModel = (BaseModel<?>) translateOutputMethod.invoke(null,
+                        oldRemoteModel);
+
+                return newModel;
+            } catch (Throwable t) {
+                if (_log.isInfoEnabled()) {
+                    _log.info("Unable to translate " + oldModelClassName, t);
+                }
+            }
+        }
+
+        if (oldModelClassName.equals(
+                    "com.fsquare.shopping.model.impl.ShoppingItemImageImpl")) {
+            return translateOutputShoppingItemImage(oldModel);
+        } else if (oldModelClassName.endsWith("Clp")) {
+            try {
+                ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+                Method getClpSerializerClassMethod = oldModelClass.getMethod(
+                        "getClpSerializerClass");
+
+                Class<?> oldClpSerializerClass = (Class<?>) getClpSerializerClassMethod.invoke(oldModel);
+
+                Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+                Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+                        BaseModel.class);
+
+                Class<?> oldModelModelClass = oldModel.getModelClass();
+
+                Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+                        oldModelModelClass.getSimpleName() + "RemoteModel");
+
+                Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+                BaseModel<?> newModel = (BaseModel<?>) translateOutputMethod.invoke(null,
+                        oldRemoteModel);
+
+                return newModel;
+            } catch (Throwable t) {
+                if (_log.isInfoEnabled()) {
+                    _log.info("Unable to translate " + oldModelClassName, t);
+                }
+            }
+        }
+
+        if (oldModelClassName.equals(
+                    "com.fsquare.shopping.model.impl.ShoppingItemStorageLocationImpl")) {
+            return translateOutputShoppingItemStorageLocation(oldModel);
+        } else if (oldModelClassName.endsWith("Clp")) {
+            try {
+                ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+                Method getClpSerializerClassMethod = oldModelClass.getMethod(
+                        "getClpSerializerClass");
+
+                Class<?> oldClpSerializerClass = (Class<?>) getClpSerializerClassMethod.invoke(oldModel);
+
+                Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+                Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+                        BaseModel.class);
+
+                Class<?> oldModelModelClass = oldModel.getModelClass();
+
+                Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+                        oldModelModelClass.getSimpleName() + "RemoteModel");
+
+                Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+                BaseModel<?> newModel = (BaseModel<?>) translateOutputMethod.invoke(null,
+                        oldRemoteModel);
+
+                return newModel;
+            } catch (Throwable t) {
+                if (_log.isInfoEnabled()) {
+                    _log.info("Unable to translate " + oldModelClassName, t);
+                }
+            }
+        }
+
+        if (oldModelClassName.equals(
+                    "com.fsquare.shopping.model.impl.ShoppingItemTypeImpl")) {
+            return translateOutputShoppingItemType(oldModel);
         } else if (oldModelClassName.endsWith("Clp")) {
             try {
                 ClassLoader classLoader = ClpSerializer.class.getClassLoader();
@@ -301,6 +519,41 @@ public class ClpSerializer {
         if (oldModelClassName.equals(
                     "com.fsquare.shopping.model.impl.ShoppingShippingMethodImpl")) {
             return translateOutputShoppingShippingMethod(oldModel);
+        } else if (oldModelClassName.endsWith("Clp")) {
+            try {
+                ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+                Method getClpSerializerClassMethod = oldModelClass.getMethod(
+                        "getClpSerializerClass");
+
+                Class<?> oldClpSerializerClass = (Class<?>) getClpSerializerClassMethod.invoke(oldModel);
+
+                Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+                Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+                        BaseModel.class);
+
+                Class<?> oldModelModelClass = oldModel.getModelClass();
+
+                Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+                        oldModelModelClass.getSimpleName() + "RemoteModel");
+
+                Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+                BaseModel<?> newModel = (BaseModel<?>) translateOutputMethod.invoke(null,
+                        oldRemoteModel);
+
+                return newModel;
+            } catch (Throwable t) {
+                if (_log.isInfoEnabled()) {
+                    _log.info("Unable to translate " + oldModelClassName, t);
+                }
+            }
+        }
+
+        if (oldModelClassName.equals(
+                    "com.fsquare.shopping.model.impl.ShoppingStorageLocationImpl")) {
+            return translateOutputShoppingStorageLocation(oldModel);
         } else if (oldModelClassName.endsWith("Clp")) {
             try {
                 ClassLoader classLoader = ClpSerializer.class.getClassLoader();
@@ -601,6 +854,25 @@ public class ClpSerializer {
             return new com.fsquare.shopping.NoSuchShoppingCouponException();
         }
 
+        if (className.equals("com.fsquare.shopping.NoSuchShoppingItemException")) {
+            return new com.fsquare.shopping.NoSuchShoppingItemException();
+        }
+
+        if (className.equals(
+                    "com.fsquare.shopping.NoSuchShoppingItemImageException")) {
+            return new com.fsquare.shopping.NoSuchShoppingItemImageException();
+        }
+
+        if (className.equals(
+                    "com.fsquare.shopping.NoSuchShoppingItemStorageLocationException")) {
+            return new com.fsquare.shopping.NoSuchShoppingItemStorageLocationException();
+        }
+
+        if (className.equals(
+                    "com.fsquare.shopping.NoSuchShoppingItemTypeException")) {
+            return new com.fsquare.shopping.NoSuchShoppingItemTypeException();
+        }
+
         if (className.equals(
                     "com.fsquare.shopping.NoSuchShoppingOrderException")) {
             return new com.fsquare.shopping.NoSuchShoppingOrderException();
@@ -617,6 +889,11 @@ public class ClpSerializer {
         }
 
         if (className.equals(
+                    "com.fsquare.shopping.NoSuchShoppingStorageLocationException")) {
+            return new com.fsquare.shopping.NoSuchShoppingStorageLocationException();
+        }
+
+        if (className.equals(
                     "com.fsquare.shopping.NoSuchShoppingStoreException")) {
             return new com.fsquare.shopping.NoSuchShoppingStoreException();
         }
@@ -630,6 +907,47 @@ public class ClpSerializer {
         newModel.setModelAttributes(oldModel.getModelAttributes());
 
         newModel.setShoppingCouponRemoteModel(oldModel);
+
+        return newModel;
+    }
+
+    public static Object translateOutputShoppingItem(BaseModel<?> oldModel) {
+        ShoppingItemClp newModel = new ShoppingItemClp();
+
+        newModel.setModelAttributes(oldModel.getModelAttributes());
+
+        newModel.setShoppingItemRemoteModel(oldModel);
+
+        return newModel;
+    }
+
+    public static Object translateOutputShoppingItemImage(BaseModel<?> oldModel) {
+        ShoppingItemImageClp newModel = new ShoppingItemImageClp();
+
+        newModel.setModelAttributes(oldModel.getModelAttributes());
+
+        newModel.setShoppingItemImageRemoteModel(oldModel);
+
+        return newModel;
+    }
+
+    public static Object translateOutputShoppingItemStorageLocation(
+        BaseModel<?> oldModel) {
+        ShoppingItemStorageLocationClp newModel = new ShoppingItemStorageLocationClp();
+
+        newModel.setModelAttributes(oldModel.getModelAttributes());
+
+        newModel.setShoppingItemStorageLocationRemoteModel(oldModel);
+
+        return newModel;
+    }
+
+    public static Object translateOutputShoppingItemType(BaseModel<?> oldModel) {
+        ShoppingItemTypeClp newModel = new ShoppingItemTypeClp();
+
+        newModel.setModelAttributes(oldModel.getModelAttributes());
+
+        newModel.setShoppingItemTypeRemoteModel(oldModel);
 
         return newModel;
     }
@@ -661,6 +979,17 @@ public class ClpSerializer {
         newModel.setModelAttributes(oldModel.getModelAttributes());
 
         newModel.setShoppingShippingMethodRemoteModel(oldModel);
+
+        return newModel;
+    }
+
+    public static Object translateOutputShoppingStorageLocation(
+        BaseModel<?> oldModel) {
+        ShoppingStorageLocationClp newModel = new ShoppingStorageLocationClp();
+
+        newModel.setModelAttributes(oldModel.getModelAttributes());
+
+        newModel.setShoppingStorageLocationRemoteModel(oldModel);
 
         return newModel;
     }

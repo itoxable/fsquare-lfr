@@ -47,9 +47,9 @@ public class ShoppingCouponServiceWrapper implements ShoppingCouponService,
     }
 
     @Override
-    public com.fsquare.shopping.model.ShoppingCoupon fetchByCode(
-        java.lang.String code) {
-        return _shoppingCouponService.fetchByCode(code);
+    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
+        java.lang.String code, long groupId) {
+        return _shoppingCouponService.fetchByCodeAndGroupId(code, groupId);
     }
 
     @Override

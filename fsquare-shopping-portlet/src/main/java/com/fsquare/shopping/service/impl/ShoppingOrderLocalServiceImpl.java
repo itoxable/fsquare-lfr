@@ -36,6 +36,13 @@ public class ShoppingOrderLocalServiceImpl
 		return shoppingOrderPersistence.findByGroupId(groupId);
 	}
 	
+	public List<ShoppingOrder> findBygroupIdAndUserId(long groupId, long userId) throws SystemException{
+		return shoppingOrderPersistence.findBygroupIdAndUserId(groupId, userId);
+	}
+	
+	public List<ShoppingOrder> findBygroupIdAndEmail(long groupId, String email) throws SystemException{
+		return shoppingOrderPersistence.findBygroupIdAndEmail(groupId, email);
+	}
 	
 	public double getOrderTotal(Collection<ShoppingOrderItem> shoppingOrderItemList){
 		double total = 0;

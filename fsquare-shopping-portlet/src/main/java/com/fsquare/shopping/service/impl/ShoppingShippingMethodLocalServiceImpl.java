@@ -45,5 +45,9 @@ public class ShoppingShippingMethodLocalServiceImpl
 	public List<ShoppingShippingMethod> findByGroupId(long groupId) throws SystemException{
 		return shoppingShippingMethodPersistence.findByGroupId(groupId);
 	}
+	
+	public List<ShoppingShippingMethod> findByGroupIdAndEnabled(long groupId) throws SystemException{
+		return shoppingShippingMethodPersistence.findByGroupIdAndEnabled(groupId, false);
+	}
 }
 

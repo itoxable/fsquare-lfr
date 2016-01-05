@@ -245,6 +245,14 @@ public interface ShoppingOrderLocalService extends BaseLocalService,
         long groupId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndUserId(
+        long groupId, long userId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndEmail(
+        long groupId, java.lang.String email)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public double getOrderTotal(
         java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList);

@@ -50,10 +50,11 @@ import java.rmi.RemoteException;
 public class ShoppingCouponServiceSoap {
     private static Log _log = LogFactoryUtil.getLog(ShoppingCouponServiceSoap.class);
 
-    public static com.fsquare.shopping.model.ShoppingCouponSoap fetchByCode(
-        java.lang.String code) throws RemoteException {
+    public static com.fsquare.shopping.model.ShoppingCouponSoap fetchByCodeAndGroupId(
+        java.lang.String code, long groupId) throws RemoteException {
         try {
-            com.fsquare.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.fetchByCode(code);
+            com.fsquare.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.fetchByCodeAndGroupId(code,
+                    groupId);
 
             return com.fsquare.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
         } catch (Exception e) {

@@ -21,4 +21,7 @@ public class ShoppingUtil {
 	public static final String ORDER_STATUS_WAITING_PAYMENT = "order_status_waiting_payment";
 
 	public static final String ON_ADD_TO_CART_JUMP_TO_CART = "jumpToCart";
+	
+	public static final String SHOPPING_ITEM_RECORD = "SHOPPING_ITEM_RECORD";
+
 }

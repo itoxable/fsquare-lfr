@@ -32,9 +32,9 @@ public class ShoppingCouponLocalServiceImpl
      */
 	
 	//@Override
-	public ShoppingCoupon fetchByCode(String code){
+	public ShoppingCoupon fetchByCodeAndGroupId(String code, long groupId){
 		try {
-			return shoppingCouponPersistence.fetchByCode(code);
+			return shoppingCouponPersistence.fetchByCodeAndGroupId(code, groupId);
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}

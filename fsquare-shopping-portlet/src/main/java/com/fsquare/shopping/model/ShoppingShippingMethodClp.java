@@ -38,6 +38,7 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
     private double _weight;
     private boolean _defaultShipping;
     private boolean _international;
+    private boolean _disabled;
     private String _shippingType;
     private BaseModel<?> _shoppingShippingMethodRemoteModel;
     private Class<?> _clpSerializerClass = com.fsquare.shopping.service.ClpSerializer.class;
@@ -94,6 +95,7 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         attributes.put("weight", getWeight());
         attributes.put("defaultShipping", getDefaultShipping());
         attributes.put("international", getInternational());
+        attributes.put("disabled", getDisabled());
         attributes.put("shippingType", getShippingType());
 
         return attributes;
@@ -189,6 +191,12 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
 
         if (international != null) {
             setInternational(international);
+        }
+
+        Boolean disabled = (Boolean) attributes.get("disabled");
+
+        if (disabled != null) {
+            setDisabled(disabled);
         }
 
         String shippingType = (String) attributes.get("shippingType");
@@ -554,6 +562,33 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
     }
 
     @Override
+    public boolean getDisabled() {
+        return _disabled;
+    }
+
+    @Override
+    public boolean isDisabled() {
+        return _disabled;
+    }
+
+    @Override
+    public void setDisabled(boolean disabled) {
+        _disabled = disabled;
+
+        if (_shoppingShippingMethodRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingShippingMethodRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setDisabled", boolean.class);
+
+                method.invoke(_shoppingShippingMethodRemoteModel, disabled);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
     public String getShippingType() {
         return _shippingType;
     }
@@ -659,6 +694,7 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         clone.setWeight(getWeight());
         clone.setDefaultShipping(getDefaultShipping());
         clone.setInternational(getInternational());
+        clone.setDisabled(getDisabled());
         clone.setShippingType(getShippingType());
 
         return clone;
@@ -709,7 +745,7 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(33);
+        StringBundler sb = new StringBundler(35);
 
         sb.append("{shippingMethodId=");
         sb.append(getShippingMethodId());
@@ -741,6 +777,8 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         sb.append(getDefaultShipping());
         sb.append(", international=");
         sb.append(getInternational());
+        sb.append(", disabled=");
+        sb.append(getDisabled());
         sb.append(", shippingType=");
         sb.append(getShippingType());
         sb.append("}");
@@ -750,7 +788,7 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(52);
+        StringBundler sb = new StringBundler(55);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingShippingMethod");
@@ -815,6 +853,10 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         sb.append(
             "<column><column-name>international</column-name><column-value><![CDATA[");
         sb.append(getInternational());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>disabled</column-name><column-value><![CDATA[");
+        sb.append(getDisabled());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>shippingType</column-name><column-value><![CDATA[");

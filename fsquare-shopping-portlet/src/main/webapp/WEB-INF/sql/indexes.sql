@@ -1,8 +1,23 @@
 create unique index IX_903D52DA on FsquareShopping_ShoppingCoupon (code_);
+create unique index IX_93AEB710 on FsquareShopping_ShoppingCoupon (code_, groupId);
 create index IX_611A1742 on FsquareShopping_ShoppingCoupon (groupId);
+
+create index IX_27F5F35 on FsquareShopping_ShoppingItem (groupId);
+create index IX_BCDD3AFF on FsquareShopping_ShoppingItem (uuid_);
+create index IX_4DE843C9 on FsquareShopping_ShoppingItem (uuid_, companyId);
+create unique index IX_711288B on FsquareShopping_ShoppingItem (uuid_, groupId);
+
+create index IX_76691698 on FsquareShopping_ShoppingItemImage (groupId);
+create index IX_6764021A on FsquareShopping_ShoppingItemImage (groupId, itemId);
+create unique index IX_36734FF8 on FsquareShopping_ShoppingItemImage (groupId, itemId, mainImage);
+
+create index IX_69976F1B on FsquareShopping_ShoppingItemType (groupId);
+create unique index IX_5DAE0D7C on FsquareShopping_ShoppingItemType (name, groupId);
 
 create index IX_C41774E on FsquareShopping_ShoppingOrder (externalPaymentId);
 create index IX_E4C93792 on FsquareShopping_ShoppingOrder (groupId);
+create index IX_27DB9A0C on FsquareShopping_ShoppingOrder (groupId, shippingEmailAddress);
+create index IX_7866DDCC on FsquareShopping_ShoppingOrder (groupId, userId);
 create index IX_BFF8FA5C on FsquareShopping_ShoppingOrder (groupId, userId, ppPaymentStatus);
 create unique index IX_9F8ACACE on FsquareShopping_ShoppingOrder (number_);
 create index IX_B5CEB978 on FsquareShopping_ShoppingOrder (paymentType);
@@ -16,5 +31,8 @@ create index IX_40F32E79 on FsquareShopping_ShoppingOrderItem (shoppingOrderItem
 
 create index IX_DFCF186E on FsquareShopping_ShoppingShippingMethod (defaultShipping);
 create index IX_FAFCDB99 on FsquareShopping_ShoppingShippingMethod (groupId);
+create index IX_140D96C9 on FsquareShopping_ShoppingShippingMethod (groupId, disabled);
+
+create index IX_62662350 on FsquareShopping_ShoppingStorageLocation (groupId);
 
 create index IX_8BF11C1F on FsquareShopping_ShoppingStore (groupId);

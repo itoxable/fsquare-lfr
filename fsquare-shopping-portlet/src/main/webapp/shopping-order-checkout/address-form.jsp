@@ -1,3 +1,6 @@
+<%@page import="com.liferay.portal.model.Address"%>
+<%@page import="com.liferay.portal.model.User"%>
+<%@page import="com.fsquare.shopping.ShoppingUtil"%>
 <%@page import="com.fsquare.shopping.model.ShoppingOrder"%>
 <%@page import="java.util.List"%>
 <%@page import="com.liferay.portal.model.Country"%>
@@ -11,8 +14,47 @@
 <%@ include file="init.jsp" %>
 
 <%
+boolean showLogin = ShoppingUtil.USER_TYPES_ALL.equals(shoppingStore.getUserTypes()) && !themeDisplay.isSignedIn();
+System.out.println("user: "+user);
+String email = shoppingOrder.getShippingEmailAddress();
+String firstName = shoppingOrder.getShippingFirstName();
+String lastName = shoppingOrder.getShippingLastName();
+String streetAddress1 = shoppingOrder.getShippingStreet();
+String streetAddress2 = shoppingOrder.getShippingStreet2();
+String postCode = shoppingOrder.getShippingPostCode();
+String city = shoppingOrder.getShippingCity();
+String shippingCountry = shoppingOrder.getShippingCountry();
+String phoneNumber = shoppingOrder.getShippingPhone();
+//User user = themeDisplay.getUser();
+if(themeDisplay.isSignedIn()){
+	if(Validator.isNull(email))
+		email = user.getEmailAddress();
+	if(Validator.isNull(firstName))
+		firstName = user.getFirstName();
+	if(Validator.isNull(lastName))
+		lastName = user.getLastName();
+	
+	if(user.getAddresses() != null && !user.getAddresses().isEmpty()){
+		Address address = user.getAddresses().get(0);
+		if(Validator.isNull(streetAddress1))
+			streetAddress1 = address.getStreet1();
+		if(Validator.isNull(streetAddress2))
+			streetAddress2 = address.getStreet2();
+		if(Validator.isNull(postCode))
+			postCode = address.getZip();
+		if(Validator.isNull(city))
+			city = address.getCity();
+		if(Validator.isNull(shippingCountry))
+			shippingCountry = address.getCountry().getA2();
+	}
+	
+	if(user.getPhones() != null && !user.getPhones().isEmpty()){
+		if(Validator.isNull(phoneNumber))
+			phoneNumber = user.getPhones().get(0).getNumber();
+	}
 
-
+}
+System.out.println("shippingCountry: "+shippingCountry);
 %>
 
 <liferay-portlet:resourceURL var="saveAddressURL" secure="false">
@@ -21,24 +63,29 @@
 
 	<aui:form id='shipping-address-form' name='shipping-address-form'>
 		<aui:fieldset>
-			<aui:input name="email" showRequiredLabel="<%= false %>" required="<%= true %>"  type="email" inlineLabel="left" value="<%=shoppingOrder.getShippingEmailAddress() %>" placeholder="email"/>
+			<aui:input disabled="<%= themeDisplay.isSignedIn() %>" name="email" label='<%=showLogin?"email-as-guest":"email" %>' showRequiredLabel="<%= false %>" required="<%= true %>"  type="email" inlineLabel="left" value="<%= email %>" placeholder="email"/>
+			
+			<c:if test='<%= showLogin %>'>
+				<span><%= LanguageUtil.get(locale, "or") %></span>
+				<a href='<%= themeDisplay.getURLSignIn() %>' class='btn'><%= LanguageUtil.get(locale, "login") %></a>
+			</c:if>
 		</aui:fieldset>
 		<aui:fieldset style="margin-top: 20px">
-			<aui:input  autoSize="<%= true %>" showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="firstName" type="text" value="<%= shoppingOrder.getShippingFirstName() %>" placeholder="First Name" />
-			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="lastName" type="text" value="<%= shoppingOrder.getShippingLastName() %>" placeholder="Last Name" />
+			<aui:input  autoSize="<%= true %>" showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="firstName" type="text" value="<%= firstName %>" placeholder="First Name" />
+			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="lastName" type="text" value="<%= lastName %>" placeholder="Last Name" />
 			
-			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="streetAddress1" type="text" value="<%=shoppingOrder.getShippingStreet() %>" placeholder="Street Address 1"/>
-			<aui:input inlineLabel="left" name="streetAddress2" type="text" value="<%=shoppingOrder.getShippingStreet2() %>" placeholder="Street Address 2"/>
+			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="streetAddress1" type="text" value="<%=streetAddress1 %>" placeholder="Street Address 1"/>
+			<aui:input inlineLabel="left" name="streetAddress2" type="text" value="<%=streetAddress2%>" placeholder="Street Address 2"/>
 			
-			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="city" type="text" value="<%= shoppingOrder.getShippingCity() %>" placeholder="City"/>
-			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="postCode" type="text" value="<%= shoppingOrder.getShippingPostCode()%>" placeholder="Post Code"/>
+			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="city" type="text" value="<%= city %>" placeholder="City"/>
+			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="postCode" type="text" value="<%= postCode %>" placeholder="Post Code"/>
 			<aui:select showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="country" label="country" >
 				<% for(Country country: countries) {%>
 					<aui:option selected="<%= country.getA2().equalsIgnoreCase(shoppingOrder.getShippingCountry()!=null?shoppingOrder.getShippingCountry():shoppingStore.getCountry()) %>" value="<%= country.getA2() %>" label="<%= country.getName(locale) %>"></aui:option>
 				<% } %>
 			</aui:select>
 			
-			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="phoneNumber" type="phone" value="<%=shoppingOrder.getShippingPhone() %>" placeholder="Phone Number"/>
+			<aui:input showRequiredLabel="<%= false %>" required="<%= true %>" inlineLabel="left" name="phoneNumber" type="phone" value="<%=phoneNumber %>" placeholder="Phone Number"/>
 			
 			<div id="<portlet:namespace />shipping-address-form-error" class="error-message shipping-address-form-error">
 			</div>

@@ -15,6 +15,7 @@
 --%>
 
 
+<%@page import="com.fsquare.shopping.ShoppingUtil"%>
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="com.liferay.portal.service.CountryServiceUtil"%>
 <%@page import="com.liferay.portal.model.Country"%>
@@ -50,6 +51,7 @@ if(!isCartEmpty){
 			<a class="btn btn-primary" href="<%= productsMainPageItem.getURL()%>"><%= LanguageUtil.get(locale, "continue-shopping") %></a>
 		</div>
 	</c:when>
+	
 	<c:otherwise>
 		<liferay-portlet:resourceURL var="getCheckoutStepURL" secure="false">
 			<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_GET_CHECKOUT_STEP %>" />

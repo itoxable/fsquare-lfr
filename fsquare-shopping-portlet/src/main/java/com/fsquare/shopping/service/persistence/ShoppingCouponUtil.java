@@ -260,71 +260,77 @@ public class ShoppingCouponUtil {
     }
 
     /**
-    * Returns the shopping coupon where code = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingCouponException} if it could not be found.
+    * Returns the shopping coupon where code = &#63; and groupId = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingCouponException} if it could not be found.
     *
     * @param code the code
+    * @param groupId the group ID
     * @return the matching shopping coupon
     * @throws com.fsquare.shopping.NoSuchShoppingCouponException if a matching shopping coupon could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingCoupon findByCode(
-        java.lang.String code)
+    public static com.fsquare.shopping.model.ShoppingCoupon findByCodeAndGroupId(
+        java.lang.String code, long groupId)
         throws com.fsquare.shopping.NoSuchShoppingCouponException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByCode(code);
+        return getPersistence().findByCodeAndGroupId(code, groupId);
     }
 
     /**
-    * Returns the shopping coupon where code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+    * Returns the shopping coupon where code = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
     *
     * @param code the code
+    * @param groupId the group ID
     * @return the matching shopping coupon, or <code>null</code> if a matching shopping coupon could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingCoupon fetchByCode(
-        java.lang.String code)
+    public static com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
+        java.lang.String code, long groupId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchByCode(code);
+        return getPersistence().fetchByCodeAndGroupId(code, groupId);
     }
 
     /**
-    * Returns the shopping coupon where code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+    * Returns the shopping coupon where code = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
     *
     * @param code the code
+    * @param groupId the group ID
     * @param retrieveFromCache whether to use the finder cache
     * @return the matching shopping coupon, or <code>null</code> if a matching shopping coupon could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingCoupon fetchByCode(
-        java.lang.String code, boolean retrieveFromCache)
+    public static com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
+        java.lang.String code, long groupId, boolean retrieveFromCache)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchByCode(code, retrieveFromCache);
+        return getPersistence()
+                   .fetchByCodeAndGroupId(code, groupId, retrieveFromCache);
     }
 
     /**
-    * Removes the shopping coupon where code = &#63; from the database.
+    * Removes the shopping coupon where code = &#63; and groupId = &#63; from the database.
     *
     * @param code the code
+    * @param groupId the group ID
     * @return the shopping coupon that was removed
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingCoupon removeByCode(
-        java.lang.String code)
+    public static com.fsquare.shopping.model.ShoppingCoupon removeByCodeAndGroupId(
+        java.lang.String code, long groupId)
         throws com.fsquare.shopping.NoSuchShoppingCouponException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().removeByCode(code);
+        return getPersistence().removeByCodeAndGroupId(code, groupId);
     }
 
     /**
-    * Returns the number of shopping coupons where code = &#63;.
+    * Returns the number of shopping coupons where code = &#63; and groupId = &#63;.
     *
     * @param code the code
+    * @param groupId the group ID
     * @return the number of matching shopping coupons
     * @throws SystemException if a system exception occurred
     */
-    public static int countByCode(java.lang.String code)
+    public static int countByCodeAndGroupId(java.lang.String code, long groupId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().countByCode(code);
+        return getPersistence().countByCodeAndGroupId(code, groupId);
     }
 
     /**

@@ -41,20 +41,20 @@ public class ShoppingCouponLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName62;
-    private String[] _methodParameterTypes62;
-    private String _methodName63;
-    private String[] _methodParameterTypes63;
-    private String _methodName68;
-    private String[] _methodParameterTypes68;
-    private String _methodName69;
-    private String[] _methodParameterTypes69;
-    private String _methodName70;
-    private String[] _methodParameterTypes70;
-    private String _methodName71;
-    private String[] _methodParameterTypes71;
-    private String _methodName72;
-    private String[] _methodParameterTypes72;
+    private String _methodName90;
+    private String[] _methodParameterTypes90;
+    private String _methodName91;
+    private String[] _methodParameterTypes91;
+    private String _methodName96;
+    private String[] _methodParameterTypes96;
+    private String _methodName97;
+    private String[] _methodParameterTypes97;
+    private String _methodName98;
+    private String[] _methodParameterTypes98;
+    private String _methodName99;
+    private String[] _methodParameterTypes99;
+    private String _methodName100;
+    private String[] _methodParameterTypes100;
 
     public ShoppingCouponLocalServiceClpInvoker() {
         _methodName0 = "addShoppingCoupon";
@@ -139,37 +139,37 @@ public class ShoppingCouponLocalServiceClpInvoker {
                 "com.fsquare.shopping.model.ShoppingCoupon"
             };
 
-        _methodName62 = "getBeanIdentifier";
+        _methodName90 = "getBeanIdentifier";
 
-        _methodParameterTypes62 = new String[] {  };
+        _methodParameterTypes90 = new String[] {  };
 
-        _methodName63 = "setBeanIdentifier";
+        _methodName91 = "setBeanIdentifier";
 
-        _methodParameterTypes63 = new String[] { "java.lang.String" };
+        _methodParameterTypes91 = new String[] { "java.lang.String" };
 
-        _methodName68 = "fetchByCode";
+        _methodName96 = "fetchByCodeAndGroupId";
 
-        _methodParameterTypes68 = new String[] { "java.lang.String" };
+        _methodParameterTypes96 = new String[] { "java.lang.String", "long" };
 
-        _methodName69 = "findByGroupId";
+        _methodName97 = "findByGroupId";
 
-        _methodParameterTypes69 = new String[] { "java.lang.Long" };
+        _methodParameterTypes97 = new String[] { "java.lang.Long" };
 
-        _methodName70 = "isCouponValid";
+        _methodName98 = "isCouponValid";
 
-        _methodParameterTypes70 = new String[] {
+        _methodParameterTypes98 = new String[] {
                 "com.fsquare.shopping.model.ShoppingCoupon"
             };
 
-        _methodName71 = "getCouponStatus";
+        _methodName99 = "getCouponStatus";
 
-        _methodParameterTypes71 = new String[] {
+        _methodParameterTypes99 = new String[] {
                 "com.fsquare.shopping.model.ShoppingCoupon"
             };
 
-        _methodName72 = "applyCoupon";
+        _methodName100 = "applyCoupon";
 
-        _methodParameterTypes72 = new String[] {
+        _methodParameterTypes100 = new String[] {
                 "com.fsquare.shopping.model.ShoppingCoupon", "java.lang.Double"
             };
     }
@@ -263,40 +263,41 @@ public class ShoppingCouponLocalServiceClpInvoker {
             return ShoppingCouponLocalServiceUtil.updateShoppingCoupon((com.fsquare.shopping.model.ShoppingCoupon) arguments[0]);
         }
 
-        if (_methodName62.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+        if (_methodName90.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName63.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+        if (_methodName91.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
             ShoppingCouponLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
         }
 
-        if (_methodName68.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
-            return ShoppingCouponLocalServiceUtil.fetchByCode((java.lang.String) arguments[0]);
+        if (_methodName96.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
+            return ShoppingCouponLocalServiceUtil.fetchByCodeAndGroupId((java.lang.String) arguments[0],
+                ((Long) arguments[1]).longValue());
         }
 
-        if (_methodName69.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
+        if (_methodName97.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.findByGroupId((java.lang.Long) arguments[0]);
         }
 
-        if (_methodName70.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+        if (_methodName98.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.isCouponValid((com.fsquare.shopping.model.ShoppingCoupon) arguments[0]);
         }
 
-        if (_methodName71.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+        if (_methodName99.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.getCouponStatus((com.fsquare.shopping.model.ShoppingCoupon) arguments[0]);
         }
 
-        if (_methodName72.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+        if (_methodName100.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.applyCoupon((com.fsquare.shopping.model.ShoppingCoupon) arguments[0],
                 (java.lang.Double) arguments[1]);
         }

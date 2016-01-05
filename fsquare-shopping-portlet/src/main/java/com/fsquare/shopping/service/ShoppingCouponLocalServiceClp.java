@@ -149,9 +149,9 @@ public class ShoppingCouponLocalServiceClp implements ShoppingCouponLocalService
 
         _methodParameterTypes17 = new String[] { "java.lang.String" };
 
-        _methodName19 = "fetchByCode";
+        _methodName19 = "fetchByCodeAndGroupId";
 
-        _methodParameterTypes19 = new String[] { "java.lang.String" };
+        _methodParameterTypes19 = new String[] { "java.lang.String", "long" };
 
         _methodName20 = "findByGroupId";
 
@@ -691,14 +691,14 @@ public class ShoppingCouponLocalServiceClp implements ShoppingCouponLocalService
     }
 
     @Override
-    public com.fsquare.shopping.model.ShoppingCoupon fetchByCode(
-        java.lang.String code) {
+    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
+        java.lang.String code, long groupId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName19,
                     _methodParameterTypes19,
-                    new Object[] { ClpSerializer.translateInput(code) });
+                    new Object[] { ClpSerializer.translateInput(code), groupId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

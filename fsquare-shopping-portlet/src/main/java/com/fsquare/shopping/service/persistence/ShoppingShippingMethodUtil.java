@@ -331,6 +331,187 @@ public class ShoppingShippingMethodUtil {
     }
 
     /**
+    * Returns all the shopping shipping methods where groupId = &#63; and disabled = &#63;.
+    *
+    * @param groupId the group ID
+    * @param disabled the disabled
+    * @return the matching shopping shipping methods
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupIdAndEnabled(
+        long groupId, boolean disabled)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().findByGroupIdAndEnabled(groupId, disabled);
+    }
+
+    /**
+    * Returns a range of all the shopping shipping methods where groupId = &#63; and disabled = &#63;.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param groupId the group ID
+    * @param disabled the disabled
+    * @param start the lower bound of the range of shopping shipping methods
+    * @param end the upper bound of the range of shopping shipping methods (not inclusive)
+    * @return the range of matching shopping shipping methods
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupIdAndEnabled(
+        long groupId, boolean disabled, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .findByGroupIdAndEnabled(groupId, disabled, start, end);
+    }
+
+    /**
+    * Returns an ordered range of all the shopping shipping methods where groupId = &#63; and disabled = &#63;.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param groupId the group ID
+    * @param disabled the disabled
+    * @param start the lower bound of the range of shopping shipping methods
+    * @param end the upper bound of the range of shopping shipping methods (not inclusive)
+    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+    * @return the ordered range of matching shopping shipping methods
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupIdAndEnabled(
+        long groupId, boolean disabled, int start, int end,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .findByGroupIdAndEnabled(groupId, disabled, start, end,
+            orderByComparator);
+    }
+
+    /**
+    * Returns the first shopping shipping method in the ordered set where groupId = &#63; and disabled = &#63;.
+    *
+    * @param groupId the group ID
+    * @param disabled the disabled
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the first matching shopping shipping method
+    * @throws com.fsquare.shopping.NoSuchShoppingShippingMethodException if a matching shopping shipping method could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod findByGroupIdAndEnabled_First(
+        long groupId, boolean disabled,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.fsquare.shopping.NoSuchShoppingShippingMethodException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .findByGroupIdAndEnabled_First(groupId, disabled,
+            orderByComparator);
+    }
+
+    /**
+    * Returns the first shopping shipping method in the ordered set where groupId = &#63; and disabled = &#63;.
+    *
+    * @param groupId the group ID
+    * @param disabled the disabled
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the first matching shopping shipping method, or <code>null</code> if a matching shopping shipping method could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod fetchByGroupIdAndEnabled_First(
+        long groupId, boolean disabled,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .fetchByGroupIdAndEnabled_First(groupId, disabled,
+            orderByComparator);
+    }
+
+    /**
+    * Returns the last shopping shipping method in the ordered set where groupId = &#63; and disabled = &#63;.
+    *
+    * @param groupId the group ID
+    * @param disabled the disabled
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the last matching shopping shipping method
+    * @throws com.fsquare.shopping.NoSuchShoppingShippingMethodException if a matching shopping shipping method could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod findByGroupIdAndEnabled_Last(
+        long groupId, boolean disabled,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.fsquare.shopping.NoSuchShoppingShippingMethodException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .findByGroupIdAndEnabled_Last(groupId, disabled,
+            orderByComparator);
+    }
+
+    /**
+    * Returns the last shopping shipping method in the ordered set where groupId = &#63; and disabled = &#63;.
+    *
+    * @param groupId the group ID
+    * @param disabled the disabled
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the last matching shopping shipping method, or <code>null</code> if a matching shopping shipping method could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod fetchByGroupIdAndEnabled_Last(
+        long groupId, boolean disabled,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .fetchByGroupIdAndEnabled_Last(groupId, disabled,
+            orderByComparator);
+    }
+
+    /**
+    * Returns the shopping shipping methods before and after the current shopping shipping method in the ordered set where groupId = &#63; and disabled = &#63;.
+    *
+    * @param shippingMethodId the primary key of the current shopping shipping method
+    * @param groupId the group ID
+    * @param disabled the disabled
+    * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+    * @return the previous, current, and next shopping shipping method
+    * @throws com.fsquare.shopping.NoSuchShoppingShippingMethodException if a shopping shipping method with the primary key could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static com.fsquare.shopping.model.ShoppingShippingMethod[] findByGroupIdAndEnabled_PrevAndNext(
+        long shippingMethodId, long groupId, boolean disabled,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.fsquare.shopping.NoSuchShoppingShippingMethodException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence()
+                   .findByGroupIdAndEnabled_PrevAndNext(shippingMethodId,
+            groupId, disabled, orderByComparator);
+    }
+
+    /**
+    * Removes all the shopping shipping methods where groupId = &#63; and disabled = &#63; from the database.
+    *
+    * @param groupId the group ID
+    * @param disabled the disabled
+    * @throws SystemException if a system exception occurred
+    */
+    public static void removeByGroupIdAndEnabled(long groupId, boolean disabled)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        getPersistence().removeByGroupIdAndEnabled(groupId, disabled);
+    }
+
+    /**
+    * Returns the number of shopping shipping methods where groupId = &#63; and disabled = &#63;.
+    *
+    * @param groupId the group ID
+    * @param disabled the disabled
+    * @return the number of matching shopping shipping methods
+    * @throws SystemException if a system exception occurred
+    */
+    public static int countByGroupIdAndEnabled(long groupId, boolean disabled)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getPersistence().countByGroupIdAndEnabled(groupId, disabled);
+    }
+
+    /**
     * Caches the shopping shipping method in the entity cache if it is enabled.
     *
     * @param shoppingShippingMethod the shopping shipping method

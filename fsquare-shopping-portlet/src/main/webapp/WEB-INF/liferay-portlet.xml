@@ -9,7 +9,7 @@
 		<struts-path>minicart</struts-path>
 		<configuration-action-class>com.fsquare.shopping.portlet.minicart.action.ConfigurationActionImpl</configuration-action-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
-		<friendly-url-mapping>minicart</friendly-url-mapping>
+		<friendly-url-mapping>store</friendly-url-mapping>
 		<friendly-url-routes>com/fsquare/shopping/portlet/minicart-friendly-url-routes.xml</friendly-url-routes>
 		<preferences-company-wide>true</preferences-company-wide>
 		<instanceable>false</instanceable>
@@ -88,7 +88,7 @@
 		<css-class-wrapper>shopping-store-settings shopping-shipping-management</css-class-wrapper>
 	</portlet>
 
-<portlet>
+	<portlet>
 		<portlet-name>shopping-orders-management</portlet-name>
 		<icon>/shopping-orders-management/icon.png</icon>
 		<struts-path>shopping-orders-management</struts-path>
@@ -99,6 +99,42 @@
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>shopping-store-settings shopping-orders-management</css-class-wrapper>
 	</portlet>
+	
+	<portlet>
+		<portlet-name>user-shopping-orders</portlet-name>
+		<icon>/user-shopping-orders/icon.png</icon>
+		<struts-path>user-shopping-orders</struts-path>
+		<configuration-action-class>com.fsquare.shopping.portlet.usershoppingorders.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-company-wide>true</preferences-company-wide>
+		<instanceable>false</instanceable>		
+		<header-portlet-css>/user-shopping-orders/css/main.css</header-portlet-css> 
+		<footer-portlet-javascript>/user-shopping-orders/js/main.js</footer-portlet-javascript>
+		<css-class-wrapper>user-shopping-orders</css-class-wrapper>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>inventory-management</portlet-name>
+		<icon>/inventory-management/icon.png</icon>
+		<struts-path>inventory-management</struts-path>
+		<configuration-action-class>com.fsquare.shopping.portlet.inventorymanagement.action.ConfigurationActionImpl</configuration-action-class>
+		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
+		<friendly-url-mapping>minicart</friendly-url-mapping>
+		<friendly-url-routes>com/fsquare/shopping/portlet/inventorymanagement-friendly-url-routes.xml</friendly-url-routes>
+		<asset-renderer-factory>
+			com.fsquare.shopping.asset.ShoppingItemAssetRendererFactory 
+		</asset-renderer-factory>
+		<preferences-company-wide>true</preferences-company-wide>
+		<instanceable>false</instanceable>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		
+		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
+		<css-class-wrapper>shopping-store-settings  inventory-management</css-class-wrapper>
+		
+		<add-default-resource>true</add-default-resource>
+		
+	</portlet>
+	
 	
 	<role-mapper>
 		<role-name>administrator</role-name>

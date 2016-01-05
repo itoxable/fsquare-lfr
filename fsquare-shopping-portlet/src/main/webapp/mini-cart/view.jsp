@@ -35,55 +35,59 @@ int quantity = shoppingOrderProcessWrapper.getTotalItems();
 
 shoppingOrderProcessWrapper.getTotalNoShipping();
 
-
-Layout cartPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(shoppingStore.getCartPageUuid(), themeDisplay.getScopeGroupId(), false);
-NavItem cartPageNavItem = new NavItem(request, cartPageLayout, null);
-
-Layout checkoutPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(shoppingStore.getCheckoutPageUuid(), themeDisplay.getScopeGroupId(), false);
-NavItem checkoutPageNavItem = new NavItem(request, checkoutPageLayout, null);
-
 %>
 
+<c:if test='<%= Validator.isNotNull(shoppingStore.getCartPageUuid()) %>'>
 
-<liferay-portlet:resourceURL var="addToCartURL" secure="false">
-	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_ADD_TO_CART %>" />
-</liferay-portlet:resourceURL>
+	<%
+	Layout cartPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(shoppingStore.getCartPageUuid(), themeDisplay.getScopeGroupId(), false);
+	NavItem cartPageNavItem = new NavItem(request, cartPageLayout, null);
+	
+	Layout checkoutPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(shoppingStore.getCheckoutPageUuid(), themeDisplay.getScopeGroupId(), false);
+	NavItem checkoutPageNavItem = new NavItem(request, checkoutPageLayout, null);
+	
+	%>
 
-<a href="<%= cartPageNavItem.getURL() %>" id="<portlet:namespace />shopping-cart-link" class="shopping-cart-link" >
-	<span class="fa fa-shopping-cart cart-icon"></span>
-	<span>Cart</span>
-	<span style='<%= quantity==0?"display:none":""%>' id="<portlet:namespace />cart-size">(<%=quantity %>)</span>
-</a>
 
-<aui:script use="aui-base,selector-css3,aui-io-request">
-
-	Liferay.provide(window, 'addToShoppingCart',
-		function(articleId) {
-			console.log("adding to cart: "+articleId);
-        	A.io.request('<%= addToCartURL %>',{
-                  dataType: 'json',
-                  method: 'POST',
-                  data: {
-                	  <portlet:namespace />articleId: articleId
-                  },
-                  on: {
-                      success: function() {
-                      	var response = this.get('responseData');
-                      	if(response.success){
-                          	A.one('#<portlet:namespace />cart-size').set('text', '('+response.size+')');
-							if(response.redirect){
-								window.location.href = '<%= cartPageNavItem.getRegularURL() %>';
-							}else{
-								A.one('#<portlet:namespace />cart-size').setStyle('display', 'block');
-							}
-                      	}
-                      		
-                      }
-                  }
-            });
-			
-        },
-    	['aui-base,selector-css3']);
-  
-</aui:script>
-
+	<liferay-portlet:resourceURL var="addToCartURL" secure="false">
+		<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_ADD_TO_CART %>" />
+	</liferay-portlet:resourceURL>
+	
+	<a href="<%= cartPageNavItem.getURL() %>" id="<portlet:namespace />shopping-cart-link" class="shopping-cart-link" >
+		<span class="fa fa-shopping-cart cart-icon"></span>
+		<span>Cart</span>
+		<span style='<%= quantity==0?"display:none":""%>' id="<portlet:namespace />cart-size">(<%=quantity %>)</span>
+	</a>
+	
+	<aui:script use="aui-base,selector-css3,aui-io-request">
+	
+		Liferay.provide(window, 'addToShoppingCart',
+			function(articleId) {
+				console.log("adding to cart: "+articleId);
+	        	A.io.request('<%= addToCartURL %>',{
+	                  dataType: 'json',
+	                  method: 'POST',
+	                  data: {
+	                	  <portlet:namespace />articleId: articleId
+	                  },
+	                  on: {
+	                      success: function() {
+	                      	var response = this.get('responseData');
+	                      	if(response.success){
+	                          	A.one('#<portlet:namespace />cart-size').set('text', '('+response.size+')');
+								if(response.redirect){
+									window.location.href = '<%= cartPageNavItem.getRegularURL() %>';
+								}else{
+									A.one('#<portlet:namespace />cart-size').setStyle('display', 'block');
+								}
+	                      	}
+	                      		
+	                      }
+	                  }
+	            });
+				
+	        },
+	    	['aui-base,selector-css3']);
+	  
+	</aui:script>
+</c:if>

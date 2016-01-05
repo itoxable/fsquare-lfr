@@ -3,9 +3,14 @@ package com.fsquare.shopping.service.base;
 import com.fsquare.shopping.model.ShoppingCoupon;
 import com.fsquare.shopping.service.ShoppingCouponLocalService;
 import com.fsquare.shopping.service.persistence.ShoppingCouponPersistence;
+import com.fsquare.shopping.service.persistence.ShoppingItemImagePersistence;
+import com.fsquare.shopping.service.persistence.ShoppingItemPersistence;
+import com.fsquare.shopping.service.persistence.ShoppingItemStorageLocationPersistence;
+import com.fsquare.shopping.service.persistence.ShoppingItemTypePersistence;
 import com.fsquare.shopping.service.persistence.ShoppingOrderItemPersistence;
 import com.fsquare.shopping.service.persistence.ShoppingOrderPersistence;
 import com.fsquare.shopping.service.persistence.ShoppingShippingMethodPersistence;
+import com.fsquare.shopping.service.persistence.ShoppingStorageLocationPersistence;
 import com.fsquare.shopping.service.persistence.ShoppingStorePersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -52,6 +57,28 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
     protected com.fsquare.shopping.service.ShoppingCouponService shoppingCouponService;
     @BeanReference(type = ShoppingCouponPersistence.class)
     protected ShoppingCouponPersistence shoppingCouponPersistence;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingItemLocalService.class)
+    protected com.fsquare.shopping.service.ShoppingItemLocalService shoppingItemLocalService;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingItemService.class)
+    protected com.fsquare.shopping.service.ShoppingItemService shoppingItemService;
+    @BeanReference(type = ShoppingItemPersistence.class)
+    protected ShoppingItemPersistence shoppingItemPersistence;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingItemImageLocalService.class)
+    protected com.fsquare.shopping.service.ShoppingItemImageLocalService shoppingItemImageLocalService;
+    @BeanReference(type = ShoppingItemImagePersistence.class)
+    protected ShoppingItemImagePersistence shoppingItemImagePersistence;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingItemStorageLocationLocalService.class)
+    protected com.fsquare.shopping.service.ShoppingItemStorageLocationLocalService shoppingItemStorageLocationLocalService;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingItemStorageLocationService.class)
+    protected com.fsquare.shopping.service.ShoppingItemStorageLocationService shoppingItemStorageLocationService;
+    @BeanReference(type = ShoppingItemStorageLocationPersistence.class)
+    protected ShoppingItemStorageLocationPersistence shoppingItemStorageLocationPersistence;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingItemTypeLocalService.class)
+    protected com.fsquare.shopping.service.ShoppingItemTypeLocalService shoppingItemTypeLocalService;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingItemTypeService.class)
+    protected com.fsquare.shopping.service.ShoppingItemTypeService shoppingItemTypeService;
+    @BeanReference(type = ShoppingItemTypePersistence.class)
+    protected ShoppingItemTypePersistence shoppingItemTypePersistence;
     @BeanReference(type = com.fsquare.shopping.service.ShoppingOrderLocalService.class)
     protected com.fsquare.shopping.service.ShoppingOrderLocalService shoppingOrderLocalService;
     @BeanReference(type = com.fsquare.shopping.service.ShoppingOrderService.class)
@@ -74,6 +101,12 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
     protected com.fsquare.shopping.service.ShoppingShippingMethodService shoppingShippingMethodService;
     @BeanReference(type = ShoppingShippingMethodPersistence.class)
     protected ShoppingShippingMethodPersistence shoppingShippingMethodPersistence;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingStorageLocationLocalService.class)
+    protected com.fsquare.shopping.service.ShoppingStorageLocationLocalService shoppingStorageLocationLocalService;
+    @BeanReference(type = com.fsquare.shopping.service.ShoppingStorageLocationService.class)
+    protected com.fsquare.shopping.service.ShoppingStorageLocationService shoppingStorageLocationService;
+    @BeanReference(type = ShoppingStorageLocationPersistence.class)
+    protected ShoppingStorageLocationPersistence shoppingStorageLocationPersistence;
     @BeanReference(type = com.fsquare.shopping.service.ShoppingStoreLocalService.class)
     protected com.fsquare.shopping.service.ShoppingStoreLocalService shoppingStoreLocalService;
     @BeanReference(type = com.fsquare.shopping.service.ShoppingStoreService.class)
@@ -376,6 +409,215 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
     }
 
     /**
+     * Returns the shopping item local service.
+     *
+     * @return the shopping item local service
+     */
+    public com.fsquare.shopping.service.ShoppingItemLocalService getShoppingItemLocalService() {
+        return shoppingItemLocalService;
+    }
+
+    /**
+     * Sets the shopping item local service.
+     *
+     * @param shoppingItemLocalService the shopping item local service
+     */
+    public void setShoppingItemLocalService(
+        com.fsquare.shopping.service.ShoppingItemLocalService shoppingItemLocalService) {
+        this.shoppingItemLocalService = shoppingItemLocalService;
+    }
+
+    /**
+     * Returns the shopping item remote service.
+     *
+     * @return the shopping item remote service
+     */
+    public com.fsquare.shopping.service.ShoppingItemService getShoppingItemService() {
+        return shoppingItemService;
+    }
+
+    /**
+     * Sets the shopping item remote service.
+     *
+     * @param shoppingItemService the shopping item remote service
+     */
+    public void setShoppingItemService(
+        com.fsquare.shopping.service.ShoppingItemService shoppingItemService) {
+        this.shoppingItemService = shoppingItemService;
+    }
+
+    /**
+     * Returns the shopping item persistence.
+     *
+     * @return the shopping item persistence
+     */
+    public ShoppingItemPersistence getShoppingItemPersistence() {
+        return shoppingItemPersistence;
+    }
+
+    /**
+     * Sets the shopping item persistence.
+     *
+     * @param shoppingItemPersistence the shopping item persistence
+     */
+    public void setShoppingItemPersistence(
+        ShoppingItemPersistence shoppingItemPersistence) {
+        this.shoppingItemPersistence = shoppingItemPersistence;
+    }
+
+    /**
+     * Returns the shopping item image local service.
+     *
+     * @return the shopping item image local service
+     */
+    public com.fsquare.shopping.service.ShoppingItemImageLocalService getShoppingItemImageLocalService() {
+        return shoppingItemImageLocalService;
+    }
+
+    /**
+     * Sets the shopping item image local service.
+     *
+     * @param shoppingItemImageLocalService the shopping item image local service
+     */
+    public void setShoppingItemImageLocalService(
+        com.fsquare.shopping.service.ShoppingItemImageLocalService shoppingItemImageLocalService) {
+        this.shoppingItemImageLocalService = shoppingItemImageLocalService;
+    }
+
+    /**
+     * Returns the shopping item image persistence.
+     *
+     * @return the shopping item image persistence
+     */
+    public ShoppingItemImagePersistence getShoppingItemImagePersistence() {
+        return shoppingItemImagePersistence;
+    }
+
+    /**
+     * Sets the shopping item image persistence.
+     *
+     * @param shoppingItemImagePersistence the shopping item image persistence
+     */
+    public void setShoppingItemImagePersistence(
+        ShoppingItemImagePersistence shoppingItemImagePersistence) {
+        this.shoppingItemImagePersistence = shoppingItemImagePersistence;
+    }
+
+    /**
+     * Returns the shopping item storage location local service.
+     *
+     * @return the shopping item storage location local service
+     */
+    public com.fsquare.shopping.service.ShoppingItemStorageLocationLocalService getShoppingItemStorageLocationLocalService() {
+        return shoppingItemStorageLocationLocalService;
+    }
+
+    /**
+     * Sets the shopping item storage location local service.
+     *
+     * @param shoppingItemStorageLocationLocalService the shopping item storage location local service
+     */
+    public void setShoppingItemStorageLocationLocalService(
+        com.fsquare.shopping.service.ShoppingItemStorageLocationLocalService shoppingItemStorageLocationLocalService) {
+        this.shoppingItemStorageLocationLocalService = shoppingItemStorageLocationLocalService;
+    }
+
+    /**
+     * Returns the shopping item storage location remote service.
+     *
+     * @return the shopping item storage location remote service
+     */
+    public com.fsquare.shopping.service.ShoppingItemStorageLocationService getShoppingItemStorageLocationService() {
+        return shoppingItemStorageLocationService;
+    }
+
+    /**
+     * Sets the shopping item storage location remote service.
+     *
+     * @param shoppingItemStorageLocationService the shopping item storage location remote service
+     */
+    public void setShoppingItemStorageLocationService(
+        com.fsquare.shopping.service.ShoppingItemStorageLocationService shoppingItemStorageLocationService) {
+        this.shoppingItemStorageLocationService = shoppingItemStorageLocationService;
+    }
+
+    /**
+     * Returns the shopping item storage location persistence.
+     *
+     * @return the shopping item storage location persistence
+     */
+    public ShoppingItemStorageLocationPersistence getShoppingItemStorageLocationPersistence() {
+        return shoppingItemStorageLocationPersistence;
+    }
+
+    /**
+     * Sets the shopping item storage location persistence.
+     *
+     * @param shoppingItemStorageLocationPersistence the shopping item storage location persistence
+     */
+    public void setShoppingItemStorageLocationPersistence(
+        ShoppingItemStorageLocationPersistence shoppingItemStorageLocationPersistence) {
+        this.shoppingItemStorageLocationPersistence = shoppingItemStorageLocationPersistence;
+    }
+
+    /**
+     * Returns the shopping item type local service.
+     *
+     * @return the shopping item type local service
+     */
+    public com.fsquare.shopping.service.ShoppingItemTypeLocalService getShoppingItemTypeLocalService() {
+        return shoppingItemTypeLocalService;
+    }
+
+    /**
+     * Sets the shopping item type local service.
+     *
+     * @param shoppingItemTypeLocalService the shopping item type local service
+     */
+    public void setShoppingItemTypeLocalService(
+        com.fsquare.shopping.service.ShoppingItemTypeLocalService shoppingItemTypeLocalService) {
+        this.shoppingItemTypeLocalService = shoppingItemTypeLocalService;
+    }
+
+    /**
+     * Returns the shopping item type remote service.
+     *
+     * @return the shopping item type remote service
+     */
+    public com.fsquare.shopping.service.ShoppingItemTypeService getShoppingItemTypeService() {
+        return shoppingItemTypeService;
+    }
+
+    /**
+     * Sets the shopping item type remote service.
+     *
+     * @param shoppingItemTypeService the shopping item type remote service
+     */
+    public void setShoppingItemTypeService(
+        com.fsquare.shopping.service.ShoppingItemTypeService shoppingItemTypeService) {
+        this.shoppingItemTypeService = shoppingItemTypeService;
+    }
+
+    /**
+     * Returns the shopping item type persistence.
+     *
+     * @return the shopping item type persistence
+     */
+    public ShoppingItemTypePersistence getShoppingItemTypePersistence() {
+        return shoppingItemTypePersistence;
+    }
+
+    /**
+     * Sets the shopping item type persistence.
+     *
+     * @param shoppingItemTypePersistence the shopping item type persistence
+     */
+    public void setShoppingItemTypePersistence(
+        ShoppingItemTypePersistence shoppingItemTypePersistence) {
+        this.shoppingItemTypePersistence = shoppingItemTypePersistence;
+    }
+
+    /**
      * Returns the shopping order local service.
      *
      * @return the shopping order local service
@@ -582,6 +824,63 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
     public void setShoppingShippingMethodPersistence(
         ShoppingShippingMethodPersistence shoppingShippingMethodPersistence) {
         this.shoppingShippingMethodPersistence = shoppingShippingMethodPersistence;
+    }
+
+    /**
+     * Returns the shopping storage location local service.
+     *
+     * @return the shopping storage location local service
+     */
+    public com.fsquare.shopping.service.ShoppingStorageLocationLocalService getShoppingStorageLocationLocalService() {
+        return shoppingStorageLocationLocalService;
+    }
+
+    /**
+     * Sets the shopping storage location local service.
+     *
+     * @param shoppingStorageLocationLocalService the shopping storage location local service
+     */
+    public void setShoppingStorageLocationLocalService(
+        com.fsquare.shopping.service.ShoppingStorageLocationLocalService shoppingStorageLocationLocalService) {
+        this.shoppingStorageLocationLocalService = shoppingStorageLocationLocalService;
+    }
+
+    /**
+     * Returns the shopping storage location remote service.
+     *
+     * @return the shopping storage location remote service
+     */
+    public com.fsquare.shopping.service.ShoppingStorageLocationService getShoppingStorageLocationService() {
+        return shoppingStorageLocationService;
+    }
+
+    /**
+     * Sets the shopping storage location remote service.
+     *
+     * @param shoppingStorageLocationService the shopping storage location remote service
+     */
+    public void setShoppingStorageLocationService(
+        com.fsquare.shopping.service.ShoppingStorageLocationService shoppingStorageLocationService) {
+        this.shoppingStorageLocationService = shoppingStorageLocationService;
+    }
+
+    /**
+     * Returns the shopping storage location persistence.
+     *
+     * @return the shopping storage location persistence
+     */
+    public ShoppingStorageLocationPersistence getShoppingStorageLocationPersistence() {
+        return shoppingStorageLocationPersistence;
+    }
+
+    /**
+     * Sets the shopping storage location persistence.
+     *
+     * @param shoppingStorageLocationPersistence the shopping storage location persistence
+     */
+    public void setShoppingStorageLocationPersistence(
+        ShoppingStorageLocationPersistence shoppingStorageLocationPersistence) {
+        this.shoppingStorageLocationPersistence = shoppingStorageLocationPersistence;
     }
 
     /**

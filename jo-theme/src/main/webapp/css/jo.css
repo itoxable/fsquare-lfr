@@ -87,6 +87,60 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 			.p-event-menu{
 				display: none;
 			}
+			a:HOVER, a:FOCUS{
+				text-decoration: none;
+			}
+			.user-top-menu-wrapper{
+				border:1px solid transparent;
+				position: relative;
+				display: inline-block;
+				
+				-webkit-transition: all .15s linear;
+				-moz-transition: all .15s linear;
+				-ms-transition: all .15s linear;
+				-o-transition: all .15s linear;
+				transition: all .15s linear;
+				
+				.user-btn{
+					display: block;
+					padding: 0 5px;
+				}
+				.user-top-menu{
+					display: none;
+					position: absolute;
+					z-index: 1000;
+					min-width: 150px;
+					right: -1px;
+					text-align: right;
+					border:1px solid #CCC;
+					background-color: #FFF;
+					padding: 0 3px;
+					@include box-shadow(0 1px 3px rgba(0,0,0,0.3));
+					
+					-webkit-transition: all .15s linear;
+					-moz-transition: all .15s linear;
+					-ms-transition: all .15s linear;
+					-o-transition: all .15s linear;
+					transition: all .15s linear;
+					a{
+						padding: 5px;
+						border-bottom: 1px solid #CCC;
+						display: block;
+					}
+					a:last-child {
+						border-bottom: 0;
+					}
+				}
+				
+			}
+			.user-top-menu-wrapper:HOVER{
+				border:1px solid #CCC;
+				@include box-shadow(0 1px 3px rgba(0,0,0,0.3));
+				border-bottom: 0;
+				.user-top-menu{
+					display: block;
+				}
+			}
 		}
 		#heading{
 			padding: 20px 0;
@@ -364,48 +418,72 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 			animation: scaleUp 0.65s ease-in-out forwards;
 			animation-duration: 0.642985s;
 		}
-		.gallery-item{
+		.gallery-item-wrap:hover{
+			border: 1px solid #ccc;
 			
+		}
+		.gallery-item-wrap{
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid transparent;
 			
-/* 			opacity: 0; */
-/* 			-webkit-transition: opacity .25s linear; */
-/* 			-moz-transition: opacity .25s linear; */
-/* 			-ms-transition: opacity .25s linear; */
-/* 			-o-transition: opacity .25s linear; */
-/* 			transition: opacity .25s linear; */
+			-webkit-transition: all .15s linear;
+			-moz-transition: all .15s linear;
+			-ms-transition: all .15s linear;
+			-o-transition: all .15s linear;
+			transition: all .15s linear;
 			
-			margin-bottom: 40px;
-			display: block;
-			img{
-	/*  			@include box-shadow($defaultShadow); */
-			}
-			.gallery-item-poster{
-				position: relative;
-				height: 280px;
-				overflow: hidden;
-				-webkit-background-size: cover;
-				background-size: cover;;
-				background-position: 0;
+			.gallery-item{
 				display: block;
-			}
-			.gallery-item-details{
-				display: none;
-				position: absolute;
-				bottom: 0;
-				width: 100%;
-				background-color: rgba(255, 255, 255, 0.8);
-				max-height: 100%;
-			    box-sizing: border-box;
-	    		padding: 20px 10px;
-	    		font-size: 20px;
-				font-family: Lato;
+				img{}
+				.gallery-item-poster{
+					position: relative;
+					height: 280px;
+					overflow: hidden;
+					-webkit-background-size: cover;
+					background-size: cover;
+					background-position: 0;
+					display: block;
+				}
+				.gallery-item-details{
+					position: relative;
+					font-size: 18px;
+					margin: 5px;
+					.gallery-item-title{
+						font-weight: 600;
+						margin-right: 45px;
+					}
+					.gallery-item-price{
+						display: block;
+						float: right;
+						font-weight: 600;
+						color: purple;
+						font-size: 20px;
+						text-align: right;
+						.regular-price{
+							font-weight: 200;
+							display: block;
+							text-decoration: line-through;
+							margin-top: 2px;
+							font-size: 12px;
+							color: #222;
+						}
+					}
+					.gallery-item-author{
+						display: block;
+						float: none;
+						font-size: 13px;
+						margin-top: 5px;
+					}
+				}
 			}
 		}
 	}
 	.gallery-item:HOVER{
-		.gallery-item-details{
-			display: block;
-		}
+		text-decoration: none;
+/* 		.gallery-item-details{ */
+/* 			display: block; */
+/* 		} */
 	}
 	.gallery-filter{
 	    margin: 20px 0;
@@ -1003,6 +1081,8 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 				.sign-in-btn{
 				
 				}
+				
+				
 				a#menu-toggle:HOVER, a#menu-toggle:FOCUS  {
 					text-decoration: none;
 					color: inherit;

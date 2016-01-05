@@ -36,6 +36,7 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 			<thead>
 				<tr>
 					<td>Number</td>
+					<td>User</td>
 					<td>Shipping</td>
 					<td>Price</td>
 					<td>Payment type</td>
@@ -57,6 +58,11 @@ List<ShoppingOrder> shoppingOrderList = ShoppingOrderLocalServiceUtil.findByGrou
 					<td id="<%= "order-number-"+shoppingOrderId %>">
 						<%= shoppingOrder.getNumber() %>
 					</td>
+					
+					<td id="<%= "order-number-"+shoppingOrderId %>">
+						<%= shoppingOrder.getShippingEmailAddress() %>
+					</td>
+					
 					<td id="<%= "order-shipping-"+shoppingOrderId %>">
 						<%= shoppingShippingMethod.getName() %> (<%= shoppingOrder.getShipping()%>)
 						<a class="icon-external-link-sign order-shipping-address" data-order-id="<%= shoppingOrderId %>" title="View shipping address" href="javascript:;"></a>

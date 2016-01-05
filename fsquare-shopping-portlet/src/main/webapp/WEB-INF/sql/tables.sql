@@ -20,6 +20,61 @@ create table FsquareShopping_ShoppingCoupon (
 	maxUses LONG
 );
 
+create table FsquareShopping_ShoppingItem (
+	uuid_ VARCHAR(75) null,
+	itemId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	name VARCHAR(75) null,
+	description VARCHAR(75) null,
+	price DOUBLE,
+	discountPrice DOUBLE,
+	sku VARCHAR(75) null,
+	itemTypeId LONG
+);
+
+create table FsquareShopping_ShoppingItemImage (
+	shoppingItemImageId LONG not null primary key,
+	groupId LONG,
+	itemId LONG,
+	imageId LONG,
+	mainImage BOOLEAN,
+	order_ INTEGER
+);
+
+create table FsquareShopping_ShoppingItemStorageLocation (
+	itemStorageLocationId LONG not null primary key,
+	itemId LONG,
+	storageLocationId LONG,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	quantity INTEGER,
+	movementType VARCHAR(75) null
+);
+
+create table FsquareShopping_ShoppingItemType (
+	itemTypeId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	description VARCHAR(75) null
+);
+
 create table FsquareShopping_ShoppingOrder (
 	shoppingOrderId LONG not null primary key,
 	groupId LONG,
@@ -100,7 +155,19 @@ create table FsquareShopping_ShoppingShippingMethod (
 	weight DOUBLE,
 	defaultShipping BOOLEAN,
 	international BOOLEAN,
+	disabled BOOLEAN,
 	shippingType VARCHAR(75) null
+);
+
+create table FsquareShopping_ShoppingStorageLocation (
+	storageLocationId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null
 );
 
 create table FsquareShopping_ShoppingStore (

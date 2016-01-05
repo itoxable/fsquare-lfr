@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -54,12 +55,58 @@ public class MiniCartPortlet extends MVCPortlet {
 		try {
 			if (cmd.equals(ShoppingPortletUtil.CMD_ADD_TO_CART)) {
 				addToCart(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_STRIPE_WEBHOOK)) {
+				stripeWebhook(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_BRAINTREE_WEBHOOK)) {
+				braintreeWebhook(resourceRequest, resourceResponse);
 			}
-			
 		}
 		catch (Exception e) {
 		}
 	}
+	
+	
+	private void braintreeWebhook(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException {
+		System.out.println("BRAINTREE WEBHOOK");
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        String data = resourceRequest.getParameter("data");
+        
+        Map<String, String> dataMap = new HashMap<String, String>();
+        String[] queryString = data.split("&");
+        for(String d: queryString){
+        	String[] val = d.split("=");
+        	dataMap.put(val[0], val[1]);
+        }
+        
+        for (Map.Entry<String, String> entry : dataMap.entrySet()) {
+        	System.out.println(entry.getKey()+": "+entry.getValue());
+		}
+        
+        
+        //        request.queryParams("bt_signature"),
+//        request.queryParams("bt_payload")
+        //http://localhost:8080/web/guest/home/-/store/braintree-webhook?bt_signature=jduschdjdc&bt_payload=7663636
+        System.out.println(data);
+        jsonObject.put("braintree", "BRAINTREE WEBHOOK");
+		
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
+	}
+	
+	private void stripeWebhook(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException {
+		System.out.println("STRIPE WEBHOOK");
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        
+        jsonObject.put("stripe", "STRIPE WEBHOOK");
+		
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void addToCart(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws Exception {
 

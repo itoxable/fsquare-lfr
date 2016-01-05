@@ -51,6 +51,8 @@ public class ShoppingShippingMethodLocalServiceClp
     private String[] _methodParameterTypes20;
     private String _methodName21;
     private String[] _methodParameterTypes21;
+    private String _methodName22;
+    private String[] _methodParameterTypes22;
 
     public ShoppingShippingMethodLocalServiceClp(
         InvokableLocalService invokableLocalService) {
@@ -160,6 +162,10 @@ public class ShoppingShippingMethodLocalServiceClp
         _methodName21 = "findByGroupId";
 
         _methodParameterTypes21 = new String[] { "long" };
+
+        _methodName22 = "findByGroupIdAndEnabled";
+
+        _methodParameterTypes22 = new String[] { "long" };
     }
 
     @Override
@@ -748,6 +754,33 @@ public class ShoppingShippingMethodLocalServiceClp
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName21,
                     _methodParameterTypes21, new Object[] { groupId });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupIdAndEnabled(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName22,
+                    _methodParameterTypes22, new Object[] { groupId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

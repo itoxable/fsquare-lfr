@@ -269,6 +269,18 @@ public class ShoppingOrderLocalServiceUtil {
         return getService().findByGroupId(groupId);
     }
 
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndUserId(
+        long groupId, long userId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findBygroupIdAndUserId(groupId, userId);
+    }
+
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndEmail(
+        long groupId, java.lang.String email)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findBygroupIdAndEmail(groupId, email);
+    }
+
     public static double getOrderTotal(
         java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList) {
         return getService().getOrderTotal(shoppingOrderItemList);

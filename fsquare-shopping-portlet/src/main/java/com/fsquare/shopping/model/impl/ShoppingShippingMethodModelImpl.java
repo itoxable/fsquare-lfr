@@ -67,9 +67,10 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
             { "weight", Types.DOUBLE },
             { "defaultShipping", Types.BOOLEAN },
             { "international", Types.BOOLEAN },
+            { "disabled", Types.BOOLEAN },
             { "shippingType", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingShippingMethod (shippingMethodId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,price DOUBLE,name VARCHAR(75) null,description VARCHAR(1000) null,freeQuantity LONG,freeTotal DOUBLE,weight DOUBLE,defaultShipping BOOLEAN,international BOOLEAN,shippingType VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingShippingMethod (shippingMethodId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,price DOUBLE,name VARCHAR(75) null,description VARCHAR(1000) null,freeQuantity LONG,freeTotal DOUBLE,weight DOUBLE,defaultShipping BOOLEAN,international BOOLEAN,disabled BOOLEAN,shippingType VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingShippingMethod";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingShippingMethod.shippingMethodId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingShippingMethod.shippingMethodId ASC";
@@ -86,8 +87,9 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
                 "value.object.column.bitmask.enabled.com.fsquare.shopping.model.ShoppingShippingMethod"),
             true);
     public static long DEFAULTSHIPPING_COLUMN_BITMASK = 1L;
-    public static long GROUPID_COLUMN_BITMASK = 2L;
-    public static long SHIPPINGMETHODID_COLUMN_BITMASK = 4L;
+    public static long DISABLED_COLUMN_BITMASK = 2L;
+    public static long GROUPID_COLUMN_BITMASK = 4L;
+    public static long SHIPPINGMETHODID_COLUMN_BITMASK = 8L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.com.fsquare.shopping.model.ShoppingShippingMethod"));
     private static ClassLoader _classLoader = ShoppingShippingMethod.class.getClassLoader();
@@ -114,6 +116,9 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
     private boolean _originalDefaultShipping;
     private boolean _setOriginalDefaultShipping;
     private boolean _international;
+    private boolean _disabled;
+    private boolean _originalDisabled;
+    private boolean _setOriginalDisabled;
     private String _shippingType;
     private long _columnBitmask;
     private ShoppingShippingMethod _escapedModel;
@@ -150,6 +155,7 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         model.setWeight(soapModel.getWeight());
         model.setDefaultShipping(soapModel.getDefaultShipping());
         model.setInternational(soapModel.getInternational());
+        model.setDisabled(soapModel.getDisabled());
         model.setShippingType(soapModel.getShippingType());
 
         return model;
@@ -225,6 +231,7 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         attributes.put("weight", getWeight());
         attributes.put("defaultShipping", getDefaultShipping());
         attributes.put("international", getInternational());
+        attributes.put("disabled", getDisabled());
         attributes.put("shippingType", getShippingType());
 
         return attributes;
@@ -320,6 +327,12 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
         if (international != null) {
             setInternational(international);
+        }
+
+        Boolean disabled = (Boolean) attributes.get("disabled");
+
+        if (disabled != null) {
+            setDisabled(disabled);
         }
 
         String shippingType = (String) attributes.get("shippingType");
@@ -552,6 +565,34 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
     @JSON
     @Override
+    public boolean getDisabled() {
+        return _disabled;
+    }
+
+    @Override
+    public boolean isDisabled() {
+        return _disabled;
+    }
+
+    @Override
+    public void setDisabled(boolean disabled) {
+        _columnBitmask |= DISABLED_COLUMN_BITMASK;
+
+        if (!_setOriginalDisabled) {
+            _setOriginalDisabled = true;
+
+            _originalDisabled = _disabled;
+        }
+
+        _disabled = disabled;
+    }
+
+    public boolean getOriginalDisabled() {
+        return _originalDisabled;
+    }
+
+    @JSON
+    @Override
     public String getShippingType() {
         if (_shippingType == null) {
             return StringPool.BLANK;
@@ -611,6 +652,7 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         shoppingShippingMethodImpl.setWeight(getWeight());
         shoppingShippingMethodImpl.setDefaultShipping(getDefaultShipping());
         shoppingShippingMethodImpl.setInternational(getInternational());
+        shoppingShippingMethodImpl.setDisabled(getDisabled());
         shoppingShippingMethodImpl.setShippingType(getShippingType());
 
         shoppingShippingMethodImpl.resetOriginalValues();
@@ -668,6 +710,10 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         shoppingShippingMethodModelImpl._originalDefaultShipping = shoppingShippingMethodModelImpl._defaultShipping;
 
         shoppingShippingMethodModelImpl._setOriginalDefaultShipping = false;
+
+        shoppingShippingMethodModelImpl._originalDisabled = shoppingShippingMethodModelImpl._disabled;
+
+        shoppingShippingMethodModelImpl._setOriginalDisabled = false;
 
         shoppingShippingMethodModelImpl._columnBitmask = 0;
     }
@@ -736,6 +782,8 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
         shoppingShippingMethodCacheModel.international = getInternational();
 
+        shoppingShippingMethodCacheModel.disabled = getDisabled();
+
         shoppingShippingMethodCacheModel.shippingType = getShippingType();
 
         String shippingType = shoppingShippingMethodCacheModel.shippingType;
@@ -749,7 +797,7 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(33);
+        StringBundler sb = new StringBundler(35);
 
         sb.append("{shippingMethodId=");
         sb.append(getShippingMethodId());
@@ -781,6 +829,8 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         sb.append(getDefaultShipping());
         sb.append(", international=");
         sb.append(getInternational());
+        sb.append(", disabled=");
+        sb.append(getDisabled());
         sb.append(", shippingType=");
         sb.append(getShippingType());
         sb.append("}");
@@ -790,7 +840,7 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(52);
+        StringBundler sb = new StringBundler(55);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingShippingMethod");
@@ -855,6 +905,10 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         sb.append(
             "<column><column-name>international</column-name><column-value><![CDATA[");
         sb.append(getInternational());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>disabled</column-name><column-value><![CDATA[");
+        sb.append(getDisabled());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>shippingType</column-name><column-value><![CDATA[");

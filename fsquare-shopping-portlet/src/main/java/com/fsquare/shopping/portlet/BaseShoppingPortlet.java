@@ -43,10 +43,10 @@ public class BaseShoppingPortlet extends MVCPortlet {
 		
 		ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
 		ShoppingCoupon shoppingCoupon = shoppingOrderProcessWrapper.getShoppingCoupon();
-		
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		if(Validator.isNotNull(couponCode)){
 			if(shoppingCoupon == null || !couponCode.equals(shoppingCoupon.getCode())){
-				shoppingCoupon = ShoppingCouponLocalServiceUtil.fetchByCode(couponCode);
+				shoppingCoupon = ShoppingCouponLocalServiceUtil.fetchByCodeAndGroupId(couponCode, themeDisplay.getScopeGroupId());
 				
 				if(shoppingCoupon != null){
 					

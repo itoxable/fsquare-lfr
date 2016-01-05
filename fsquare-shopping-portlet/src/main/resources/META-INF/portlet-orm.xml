@@ -46,6 +46,97 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.fsquare.shopping.model.impl.ShoppingItemModelImpl">
+		<attributes>
+			<id name="itemId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="price" />
+			<basic name="discountPrice" />
+			<basic name="sku" />
+			<basic name="itemTypeId" />
+			<transient name="className" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.fsquare.shopping.model.impl.ShoppingItemImageModelImpl">
+		<attributes>
+			<id name="shoppingItemImageId" />
+			<basic name="groupId" />
+			<basic name="itemId" />
+			<basic name="imageId" />
+			<basic name="mainImage" />
+			<basic name="order">
+				<column name="ORDER_" />
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.fsquare.shopping.model.impl.ShoppingItemStorageLocationModelImpl">
+		<attributes>
+			<id name="itemStorageLocationId" />
+			<basic name="itemId" />
+			<basic name="storageLocationId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
+			<basic name="quantity" />
+			<basic name="movementType" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.fsquare.shopping.model.impl.ShoppingItemTypeModelImpl">
+		<attributes>
+			<id name="itemTypeId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.fsquare.shopping.model.impl.ShoppingOrderModelImpl">
 		<attributes>
 			<id name="shoppingOrderId" />
@@ -148,7 +239,28 @@
 			<basic name="weight" />
 			<basic name="defaultShipping" />
 			<basic name="international" />
+			<basic name="disabled" />
 			<basic name="shippingType" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.fsquare.shopping.model.impl.ShoppingStorageLocationModelImpl">
+		<attributes>
+			<id name="storageLocationId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -209,6 +321,22 @@
 		<table name="FsquareShopping_ShoppingCoupon" />
 		<attributes />
 	</entity>
+	<entity class="com.fsquare.shopping.model.impl.ShoppingItemImpl" name="ShoppingItem">
+		<table name="FsquareShopping_ShoppingItem" />
+		<attributes />
+	</entity>
+	<entity class="com.fsquare.shopping.model.impl.ShoppingItemImageImpl" name="ShoppingItemImage">
+		<table name="FsquareShopping_ShoppingItemImage" />
+		<attributes />
+	</entity>
+	<entity class="com.fsquare.shopping.model.impl.ShoppingItemStorageLocationImpl" name="ShoppingItemStorageLocation">
+		<table name="FsquareShopping_ShoppingItemStorageLocation" />
+		<attributes />
+	</entity>
+	<entity class="com.fsquare.shopping.model.impl.ShoppingItemTypeImpl" name="ShoppingItemType">
+		<table name="FsquareShopping_ShoppingItemType" />
+		<attributes />
+	</entity>
 	<entity class="com.fsquare.shopping.model.impl.ShoppingOrderImpl" name="ShoppingOrder">
 		<table name="FsquareShopping_ShoppingOrder" />
 		<attributes />
@@ -219,6 +347,10 @@
 	</entity>
 	<entity class="com.fsquare.shopping.model.impl.ShoppingShippingMethodImpl" name="ShoppingShippingMethod">
 		<table name="FsquareShopping_ShoppingShippingMethod" />
+		<attributes />
+	</entity>
+	<entity class="com.fsquare.shopping.model.impl.ShoppingStorageLocationImpl" name="ShoppingStorageLocation">
+		<table name="FsquareShopping_ShoppingStorageLocation" />
 		<attributes />
 	</entity>
 	<entity class="com.fsquare.shopping.model.impl.ShoppingStoreImpl" name="ShoppingStore">

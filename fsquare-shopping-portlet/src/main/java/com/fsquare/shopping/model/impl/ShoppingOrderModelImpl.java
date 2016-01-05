@@ -122,9 +122,11 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     public static long GROUPID_COLUMN_BITMASK = 2L;
     public static long NUMBER_COLUMN_BITMASK = 4L;
     public static long PAYMENTTYPE_COLUMN_BITMASK = 8L;
-    public static long SHIPPINGMETHODID_COLUMN_BITMASK = 16L;
-    public static long STATUS_COLUMN_BITMASK = 32L;
-    public static long CREATEDATE_COLUMN_BITMASK = 64L;
+    public static long SHIPPINGEMAILADDRESS_COLUMN_BITMASK = 16L;
+    public static long SHIPPINGMETHODID_COLUMN_BITMASK = 32L;
+    public static long STATUS_COLUMN_BITMASK = 64L;
+    public static long USERID_COLUMN_BITMASK = 128L;
+    public static long CREATEDATE_COLUMN_BITMASK = 256L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.com.fsquare.shopping.model.ShoppingOrder"));
     private static ClassLoader _classLoader = ShoppingOrder.class.getClassLoader();
@@ -138,6 +140,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     private long _companyId;
     private long _userId;
     private String _userUuid;
+    private long _originalUserId;
+    private boolean _setOriginalUserId;
     private String _userName;
     private Date _createDate;
     private Date _modifiedDate;
@@ -169,6 +173,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     private String _shippingFirstName;
     private String _shippingLastName;
     private String _shippingEmailAddress;
+    private String _originalShippingEmailAddress;
     private String _shippingCompany;
     private String _shippingStreet;
     private String _shippingStreet2;
@@ -712,6 +717,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public void setUserId(long userId) {
+        _columnBitmask |= USERID_COLUMN_BITMASK;
+
+        if (!_setOriginalUserId) {
+            _setOriginalUserId = true;
+
+            _originalUserId = _userId;
+        }
+
         _userId = userId;
     }
 
@@ -723,6 +736,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     @Override
     public void setUserUuid(String userUuid) {
         _userUuid = userUuid;
+    }
+
+    public long getOriginalUserId() {
+        return _originalUserId;
     }
 
     @JSON
@@ -1154,7 +1171,17 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public void setShippingEmailAddress(String shippingEmailAddress) {
+        _columnBitmask |= SHIPPINGEMAILADDRESS_COLUMN_BITMASK;
+
+        if (_originalShippingEmailAddress == null) {
+            _originalShippingEmailAddress = _shippingEmailAddress;
+        }
+
         _shippingEmailAddress = shippingEmailAddress;
+    }
+
+    public String getOriginalShippingEmailAddress() {
+        return GetterUtil.getString(_originalShippingEmailAddress);
     }
 
     @JSON
@@ -1548,9 +1575,15 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
         shoppingOrderModelImpl._setOriginalGroupId = false;
 
+        shoppingOrderModelImpl._originalUserId = shoppingOrderModelImpl._userId;
+
+        shoppingOrderModelImpl._setOriginalUserId = false;
+
         shoppingOrderModelImpl._originalStatus = shoppingOrderModelImpl._status;
 
         shoppingOrderModelImpl._originalNumber = shoppingOrderModelImpl._number;
+
+        shoppingOrderModelImpl._originalShippingEmailAddress = shoppingOrderModelImpl._shippingEmailAddress;
 
         shoppingOrderModelImpl._originalExternalPaymentId = shoppingOrderModelImpl._externalPaymentId;
 

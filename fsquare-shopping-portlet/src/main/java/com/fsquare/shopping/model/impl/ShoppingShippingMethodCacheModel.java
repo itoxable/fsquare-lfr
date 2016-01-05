@@ -37,11 +37,12 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
     public double weight;
     public boolean defaultShipping;
     public boolean international;
+    public boolean disabled;
     public String shippingType;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(33);
+        StringBundler sb = new StringBundler(35);
 
         sb.append("{shippingMethodId=");
         sb.append(shippingMethodId);
@@ -73,6 +74,8 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
         sb.append(defaultShipping);
         sb.append(", international=");
         sb.append(international);
+        sb.append(", disabled=");
+        sb.append(disabled);
         sb.append(", shippingType=");
         sb.append(shippingType);
         sb.append("}");
@@ -126,6 +129,7 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
         shoppingShippingMethodImpl.setWeight(weight);
         shoppingShippingMethodImpl.setDefaultShipping(defaultShipping);
         shoppingShippingMethodImpl.setInternational(international);
+        shoppingShippingMethodImpl.setDisabled(disabled);
 
         if (shippingType == null) {
             shoppingShippingMethodImpl.setShippingType(StringPool.BLANK);
@@ -155,6 +159,7 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
         weight = objectInput.readDouble();
         defaultShipping = objectInput.readBoolean();
         international = objectInput.readBoolean();
+        disabled = objectInput.readBoolean();
         shippingType = objectInput.readUTF();
     }
 
@@ -193,6 +198,7 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
         objectOutput.writeDouble(weight);
         objectOutput.writeBoolean(defaultShipping);
         objectOutput.writeBoolean(international);
+        objectOutput.writeBoolean(disabled);
 
         if (shippingType == null) {
             objectOutput.writeUTF(StringPool.BLANK);

@@ -41,10 +41,10 @@ public class ShoppingStoreLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName62;
-    private String[] _methodParameterTypes62;
-    private String _methodName63;
-    private String[] _methodParameterTypes63;
+    private String _methodName90;
+    private String[] _methodParameterTypes90;
+    private String _methodName91;
+    private String[] _methodParameterTypes91;
 
     public ShoppingStoreLocalServiceClpInvoker() {
         _methodName0 = "addShoppingStore";
@@ -129,13 +129,13 @@ public class ShoppingStoreLocalServiceClpInvoker {
                 "com.fsquare.shopping.model.ShoppingStore"
             };
 
-        _methodName62 = "getBeanIdentifier";
+        _methodName90 = "getBeanIdentifier";
 
-        _methodParameterTypes62 = new String[] {  };
+        _methodParameterTypes90 = new String[] {  };
 
-        _methodName63 = "setBeanIdentifier";
+        _methodName91 = "setBeanIdentifier";
 
-        _methodParameterTypes63 = new String[] { "java.lang.String" };
+        _methodParameterTypes91 = new String[] { "java.lang.String" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -227,13 +227,13 @@ public class ShoppingStoreLocalServiceClpInvoker {
             return ShoppingStoreLocalServiceUtil.updateShoppingStore((com.fsquare.shopping.model.ShoppingStore) arguments[0]);
         }
 
-        if (_methodName62.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+        if (_methodName90.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
             return ShoppingStoreLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName63.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+        if (_methodName91.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
             ShoppingStoreLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
