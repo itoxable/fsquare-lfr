@@ -9,7 +9,9 @@
 @import url(hunterswood.css);
 @import url(jquery.cookiebar.css);
 @import url(lightbox.css);
-@import url(stroll.css);
+@import url(graduate.css);
+@import url(blessed-print.css);
+/* @import url(stroll.css); */
 @import 'slick/slick';
 @import 'slick/slick-theme';
 /* @import 'magnific/main'; */
@@ -72,6 +74,63 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 /* 		background-size: 2%; */
 /* 		background-color: #F3F3F3; */
 	}
+	input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], 
+	input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], 
+	input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], select, textarea, .uneditable-input{
+		box-sizing: border-box;
+		height: 35px ;
+		margin-bottom: 0;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+	}
+	textarea{
+		height: 100px;
+	}
+	.form-search .input-append{
+		input{
+			width: 205px;
+		}
+		.btn{
+			vertical-align: middle;
+			padding: 5px 12px;
+		}
+	}
+	
+	.form-wrapper{
+		padding: 20px;
+		.form-head{
+			margin-bottom: 30px;
+		}
+		
+		
+		input, textarea{
+			width: 100%;
+			&.input-error{
+				border: 1px solid rgb(204, 0, 0);
+			}
+		}
+		textarea{
+			height: 150px;
+		}
+		.field-wrapper{
+			margin-bottom: 20px;
+			.control-group {
+				margin-bottom: 10px;
+				.control-label{
+					font-weight: 600;
+				}
+			}
+			.alert-wrapper{
+				.alert{
+					padding: 0;
+					border: 0;
+					background: none;
+					margin-bottom: 0
+				}
+			}
+		}
+	}
+	
 	header{
 		position: relative;
 		.header-links{
@@ -204,21 +263,17 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 	}
 	a.asset-action-button{
 		background-color:  rgb(255, 194, 0);
-/* 		@include box-shadow(0 3px 7px rgba(0,0,0,0.3)); */
 		padding: 5px;
 		margin: 5px;
 		text-decoration: none;
 		@include opacity(0.6);
-/* 		@include border-radius(2px); */
 	}
 	a.asset-action-button:HOVER{
 		@include opacity(1);
 	}
 	.inline-priority-set-wrapper{
 		display: inline-block;
-/* 		@include box-shadow(0 3px 7px rgba(0,0,0,0.3)); */
 		@include opacity(0.6);
-/* 		@include border-radius(2px); */
 		padding: 3px 5px;
 		line-height: normal;
 		background-color:  rgb(255, 194, 0);
@@ -272,14 +327,14 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
     			text-align: center;
     			float: none;
     			margin: 0;
-    			text-transform: uppercase;
+/*     			text-transform: uppercase; */
     			font-size: 0;
     			line-height: 0;
     		}
     		li a {
 				color: rgb(34, 34, 34);			  	
-				font-size: 14px;
-			  	font-weight: 400;
+				font-size: 20px;
+			  	font-weight: 200;
 			  	padding-bottom: 10px;
 			  	padding-top: 10px;
 			}
@@ -540,7 +595,8 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
   		text-align: center;
 	}
 	footer .social{ 
-		font-size: 20px;
+		/* font-size: 20px;  */
+		font-size: 50px;
 		a{
 			display: inline-block;
 			padding: 8px 10px 12px;
@@ -548,7 +604,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 			position: relative;
 			color: #797979;
 		}
-		a:HOVER {
+		a:HOVER, a:FOCUS {
 			text-decoration: none;
 			color: #222;
 		}
@@ -706,6 +762,12 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 			position: relative;
 			background-repeat: no-repeat;
 			background-size: 100% 100%;
+			img{
+				position: absolute;
+				z-index: -1;
+				overflow:hidden;
+				width: 100%;
+			}
 		}
 		.image-carousel-caption{
 			position: absolute;
@@ -1045,7 +1107,7 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		}
 		
 		.page-header{
-			text-align: left;
+/* 			text-align: left; */
 			padding-bottom: 0;
 			margin-bottom: 0;
 			margin-top: 0;
@@ -1063,16 +1125,12 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 			position: relative;
 			.header-links{
 				font-size: 12px;
-/* 				position: relative; */
-/* 				float: left; */
-/* 				margin-top: 10px; */
 				.cart-place{
 					margin-left: 10px;
 				}
 				#menu-toggle{
 					margin-left: 10px;
 					display: inline-block;
-/* 					z-index: 4; */
 					position: relative;
 					.fa-bars{
 						margin-left: 5px;
@@ -1081,8 +1139,6 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 				.sign-in-btn{
 				
 				}
-				
-				
 				a#menu-toggle:HOVER, a#menu-toggle:FOCUS  {
 					text-decoration: none;
 					color: inherit;
@@ -1099,7 +1155,6 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 					margin: 0;
 					width: auto;
 					float: left;
-/* 					z-index: 3; */
 					position: relative;
 					#logo{
 						font-size: 40px;
@@ -1298,12 +1353,13 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		}
 		.media-gallery-item{
 			margin-bottom: 0px;
-			.gallery-item{ 
-				margin-bottom: 0px;
-/* 				margin-bottom: auto; */
-				.gallery-item-poster{
-					height: auto;
-					padding-bottom: 100%;
+			.gallery-item-wrap{
+				.gallery-item{ 
+					margin-bottom: 0px;
+					.gallery-item-poster{
+						height: auto;
+						padding-bottom: 100%;
+					}
 				}
 			}
 		}
