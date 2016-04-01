@@ -46,6 +46,43 @@ public class ShoppingStoreServiceWrapper implements ShoppingStoreService,
             arguments);
     }
 
+    @Override
+    public java.util.Map<java.lang.String, java.lang.String[]> getSettings() {
+        return _shoppingStoreService.getSettings();
+    }
+
+    @Override
+    public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getShoppingAssetCategories(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingStoreService.getShoppingAssetCategories(groupId);
+    }
+
+    @Override
+    public com.fsquare.shopping.model.ShoppingStore getShoppingStore(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingStoreService.getShoppingStore(groupId);
+    }
+
+    @Override
+    public com.fsquare.shopping.model.ShoppingStore addShoppingStore(
+        com.fsquare.shopping.model.ShoppingStore shoppingStore)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingStoreService.addShoppingStore(shoppingStore);
+    }
+
+    @Override
+    public com.fsquare.shopping.model.ShoppingStore updateShoppingStore(
+        com.fsquare.shopping.model.ShoppingStore shoppingStore)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingStoreService.updateShoppingStore(shoppingStore);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

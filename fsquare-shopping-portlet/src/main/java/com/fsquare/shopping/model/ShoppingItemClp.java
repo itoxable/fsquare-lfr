@@ -10,6 +10,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -36,12 +37,17 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
     private Date _modifiedDate;
     private long _classNameId;
     private long _classPK;
-    private String _name;
+    private String _title;
     private String _description;
     private double _price;
     private double _discountPrice;
     private String _sku;
     private long _itemTypeId;
+    private int _status;
+    private long _statusByUserId;
+    private String _statusByUserUuid;
+    private String _statusByUserName;
+    private Date _statusDate;
     private BaseModel<?> _shoppingItemRemoteModel;
     private Class<?> _clpSerializerClass = com.fsquare.shopping.service.ClpSerializer.class;
 
@@ -92,12 +98,16 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("classNameId", getClassNameId());
         attributes.put("classPK", getClassPK());
-        attributes.put("name", getName());
+        attributes.put("title", getTitle());
         attributes.put("description", getDescription());
         attributes.put("price", getPrice());
         attributes.put("discountPrice", getDiscountPrice());
         attributes.put("sku", getSku());
         attributes.put("itemTypeId", getItemTypeId());
+        attributes.put("status", getStatus());
+        attributes.put("statusByUserId", getStatusByUserId());
+        attributes.put("statusByUserName", getStatusByUserName());
+        attributes.put("statusDate", getStatusDate());
 
         return attributes;
     }
@@ -164,10 +174,10 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
             setClassPK(classPK);
         }
 
-        String name = (String) attributes.get("name");
+        String title = (String) attributes.get("title");
 
-        if (name != null) {
-            setName(name);
+        if (title != null) {
+            setTitle(title);
         }
 
         String description = (String) attributes.get("description");
@@ -198,6 +208,30 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
 
         if (itemTypeId != null) {
             setItemTypeId(itemTypeId);
+        }
+
+        Integer status = (Integer) attributes.get("status");
+
+        if (status != null) {
+            setStatus(status);
+        }
+
+        Long statusByUserId = (Long) attributes.get("statusByUserId");
+
+        if (statusByUserId != null) {
+            setStatusByUserId(statusByUserId);
+        }
+
+        String statusByUserName = (String) attributes.get("statusByUserName");
+
+        if (statusByUserName != null) {
+            setStatusByUserName(statusByUserName);
+        }
+
+        Date statusDate = (Date) attributes.get("statusDate");
+
+        if (statusDate != null) {
+            setStatusDate(statusDate);
         }
     }
 
@@ -452,21 +486,21 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
     }
 
     @Override
-    public String getName() {
-        return _name;
+    public String getTitle() {
+        return _title;
     }
 
     @Override
-    public void setName(String name) {
-        _name = name;
+    public void setTitle(String title) {
+        _title = title;
 
         if (_shoppingItemRemoteModel != null) {
             try {
                 Class<?> clazz = _shoppingItemRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setName", String.class);
+                Method method = clazz.getMethod("setTitle", String.class);
 
-                method.invoke(_shoppingItemRemoteModel, name);
+                method.invoke(_shoppingItemRemoteModel, title);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -584,9 +618,189 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
     }
 
     @Override
+    public int getStatus() {
+        return _status;
+    }
+
+    @Override
+    public void setStatus(int status) {
+        _status = status;
+
+        if (_shoppingItemRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingItemRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setStatus", int.class);
+
+                method.invoke(_shoppingItemRemoteModel, status);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public long getStatusByUserId() {
+        return _statusByUserId;
+    }
+
+    @Override
+    public void setStatusByUserId(long statusByUserId) {
+        _statusByUserId = statusByUserId;
+
+        if (_shoppingItemRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingItemRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setStatusByUserId", long.class);
+
+                method.invoke(_shoppingItemRemoteModel, statusByUserId);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getStatusByUserUuid() throws SystemException {
+        return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+            _statusByUserUuid);
+    }
+
+    @Override
+    public void setStatusByUserUuid(String statusByUserUuid) {
+        _statusByUserUuid = statusByUserUuid;
+    }
+
+    @Override
+    public String getStatusByUserName() {
+        return _statusByUserName;
+    }
+
+    @Override
+    public void setStatusByUserName(String statusByUserName) {
+        _statusByUserName = statusByUserName;
+
+        if (_shoppingItemRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingItemRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setStatusByUserName",
+                        String.class);
+
+                method.invoke(_shoppingItemRemoteModel, statusByUserName);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public Date getStatusDate() {
+        return _statusDate;
+    }
+
+    @Override
+    public void setStatusDate(Date statusDate) {
+        _statusDate = statusDate;
+
+        if (_shoppingItemRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingItemRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setStatusDate", Date.class);
+
+                method.invoke(_shoppingItemRemoteModel, statusDate);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
     public StagedModelType getStagedModelType() {
         return new StagedModelType(PortalUtil.getClassNameId(
                 ShoppingItem.class.getName()), getClassNameId());
+    }
+
+    /**
+     * @deprecated As of 6.1.0, replaced by {@link #isApproved}
+     */
+    @Override
+    public boolean getApproved() {
+        return isApproved();
+    }
+
+    @Override
+    public boolean isApproved() {
+        if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isDenied() {
+        if (getStatus() == WorkflowConstants.STATUS_DENIED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isDraft() {
+        if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isExpired() {
+        if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isInactive() {
+        if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isIncomplete() {
+        if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isPending() {
+        if (getStatus() == WorkflowConstants.STATUS_PENDING) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isScheduled() {
+        if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public BaseModel<?> getShoppingItemRemoteModel() {
@@ -666,12 +880,16 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
         clone.setModifiedDate(getModifiedDate());
         clone.setClassNameId(getClassNameId());
         clone.setClassPK(getClassPK());
-        clone.setName(getName());
+        clone.setTitle(getTitle());
         clone.setDescription(getDescription());
         clone.setPrice(getPrice());
         clone.setDiscountPrice(getDiscountPrice());
         clone.setSku(getSku());
         clone.setItemTypeId(getItemTypeId());
+        clone.setStatus(getStatus());
+        clone.setStatusByUserId(getStatusByUserId());
+        clone.setStatusByUserName(getStatusByUserName());
+        clone.setStatusDate(getStatusDate());
 
         return clone;
     }
@@ -721,7 +939,7 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(33);
+        StringBundler sb = new StringBundler(41);
 
         sb.append("{uuid=");
         sb.append(getUuid());
@@ -743,8 +961,8 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
         sb.append(getClassNameId());
         sb.append(", classPK=");
         sb.append(getClassPK());
-        sb.append(", name=");
-        sb.append(getName());
+        sb.append(", title=");
+        sb.append(getTitle());
         sb.append(", description=");
         sb.append(getDescription());
         sb.append(", price=");
@@ -755,6 +973,14 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
         sb.append(getSku());
         sb.append(", itemTypeId=");
         sb.append(getItemTypeId());
+        sb.append(", status=");
+        sb.append(getStatus());
+        sb.append(", statusByUserId=");
+        sb.append(getStatusByUserId());
+        sb.append(", statusByUserName=");
+        sb.append(getStatusByUserName());
+        sb.append(", statusDate=");
+        sb.append(getStatusDate());
         sb.append("}");
 
         return sb.toString();
@@ -762,7 +988,7 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(52);
+        StringBundler sb = new StringBundler(64);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingItem");
@@ -809,8 +1035,8 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
         sb.append(getClassPK());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>name</column-name><column-value><![CDATA[");
-        sb.append(getName());
+            "<column><column-name>title</column-name><column-value><![CDATA[");
+        sb.append(getTitle());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>description</column-name><column-value><![CDATA[");
@@ -831,6 +1057,22 @@ public class ShoppingItemClp extends BaseModelImpl<ShoppingItem>
         sb.append(
             "<column><column-name>itemTypeId</column-name><column-value><![CDATA[");
         sb.append(getItemTypeId());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>status</column-name><column-value><![CDATA[");
+        sb.append(getStatus());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+        sb.append(getStatusByUserId());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+        sb.append(getStatusByUserName());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>statusDate</column-name><column-value><![CDATA[");
+        sb.append(getStatusDate());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

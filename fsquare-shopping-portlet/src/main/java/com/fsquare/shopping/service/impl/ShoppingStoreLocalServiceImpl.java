@@ -1,6 +1,15 @@
 package com.fsquare.shopping.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import com.fsquare.shopping.model.ShoppingStorageLocation;
 import com.fsquare.shopping.service.base.ShoppingStoreLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 /**
  * The implementation of the shopping store local service.
@@ -23,4 +32,26 @@ public class ShoppingStoreLocalServiceImpl
      *
      * Never reference this interface directly. Always use {@link com.fsquare.shopping.service.ShoppingStoreLocalServiceUtil} to access the shopping store local service.
      */
+	
+	public List<ShoppingStorageLocation> getShoppingStorageLocationsByGroup(long groupId) throws SystemException{
+		return shoppingStorageLocationPersistence.findByGroupId(groupId);
+	}
+	
+	public List<String[]> getShoppingLayouts(long groupId){
+		Locale locale = LocaleUtil.getDefault();
+		List<String[]> shoppingLayouts = new ArrayList<String[]>();
+		try {
+			List<Layout> layoutsTemp = LayoutLocalServiceUtil.getLayouts(groupId, false);
+			for(Layout lay : layoutsTemp){
+				String[] val = new String[]{lay.getUuid(), ""};
+				shoppingLayouts.add(val);
+			}
+		} catch (SystemException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return shoppingLayouts;
+	}
 }

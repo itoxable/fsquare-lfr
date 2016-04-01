@@ -119,11 +119,28 @@ public class ShoppingPortletUtil {
 	public static final String CMD_OPEN_SHOPPING_ITEM_FORM = "cmd_open_shopping_item_form";
 	public static final String CMD_OPEN_SHOPPING_ITEM_TYPE_FORM = "cmd_open_shopping_item_type_form";
 
-	public static final String CMD_SAVE_SHOPPING_ITEM_TYPE = "CMD_SAVE_SHOPPING_ITEM_TYPE";
-	public static final String CMD_SAVE_SHOPPING_ITEM = "CMD_SAVE_SHOPPING_ITEM";
+	public static final String CMD_SAVE_SHOPPING_ITEM_TYPE = "cmd_save_shopping_item_type";
+	public static final String CMD_SAVE_SHOPPING_ITEM = "cmd_save_shopping_item";
 	
-	public static final String CMD_DELETE_SHOPPING_ITEM_TYPE = "CMD_DELETE_SHOPPING_ITEM_TYPE";
-	public static final String CMD_DELETE_SHOPPING_ITEM = "CMD_DELETE_SHOPPING_ITEM";
+	public static final String CMD_DELETE_SHOPPING_ITEM_TYPE = "cmd_delete_shopping_item_type";
+	public static final String CMD_DELETE_SHOPPING_ITEM = "cmd_delete_shopping_item";
+
+	public static final String CMD_OPEN_STORAGE_LOCATION = "cmd_open_storage_location";
+	public static final String CMD_SAVE_STORAGE_LOCATION = "cmd_save_storage_location";
+	public static final String CMD_DELETE_STORAGE_LOCATION = "cmd_delete_storage_location";
+
+	public static final String ATTR_STORAGE_LOCATION = "attr_storage_location";
+
+
+	public static final String CMD_SAVE_ITEM_STORAGE_LOCATION = "cmd_save_item_storage_location";
+
+	public static final String CMD_OPEN_ITEM_STORAGE_LOCATION = "cmd_open_item_storage_location";
+	public static final String ATTR_ITEM_STORAGE_LOCATION = "attr_item_storage_location";
+
+
+	public static final String ATTR_ITEM_MOVEMENT = "attr_item_movement";
+
+	
 	
 	public static ShoppingOrderProcessWrapper getSessionShoppingOrderProcessWrapper(HttpSession session){
 		Object shoppingOrderProcessWrapperObj = session.getAttribute(ShoppingPortletUtil.SESSION_SHOPPING_ORDER_PROCESS_WRAPPER);

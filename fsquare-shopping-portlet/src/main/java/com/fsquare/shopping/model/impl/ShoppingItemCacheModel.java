@@ -32,16 +32,20 @@ public class ShoppingItemCacheModel implements CacheModel<ShoppingItem>,
     public long modifiedDate;
     public long classNameId;
     public long classPK;
-    public String name;
+    public String title;
     public String description;
     public double price;
     public double discountPrice;
     public String sku;
     public long itemTypeId;
+    public int status;
+    public long statusByUserId;
+    public String statusByUserName;
+    public long statusDate;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(33);
+        StringBundler sb = new StringBundler(41);
 
         sb.append("{uuid=");
         sb.append(uuid);
@@ -63,8 +67,8 @@ public class ShoppingItemCacheModel implements CacheModel<ShoppingItem>,
         sb.append(classNameId);
         sb.append(", classPK=");
         sb.append(classPK);
-        sb.append(", name=");
-        sb.append(name);
+        sb.append(", title=");
+        sb.append(title);
         sb.append(", description=");
         sb.append(description);
         sb.append(", price=");
@@ -75,6 +79,14 @@ public class ShoppingItemCacheModel implements CacheModel<ShoppingItem>,
         sb.append(sku);
         sb.append(", itemTypeId=");
         sb.append(itemTypeId);
+        sb.append(", status=");
+        sb.append(status);
+        sb.append(", statusByUserId=");
+        sb.append(statusByUserId);
+        sb.append(", statusByUserName=");
+        sb.append(statusByUserName);
+        sb.append(", statusDate=");
+        sb.append(statusDate);
         sb.append("}");
 
         return sb.toString();
@@ -116,10 +128,10 @@ public class ShoppingItemCacheModel implements CacheModel<ShoppingItem>,
         shoppingItemImpl.setClassNameId(classNameId);
         shoppingItemImpl.setClassPK(classPK);
 
-        if (name == null) {
-            shoppingItemImpl.setName(StringPool.BLANK);
+        if (title == null) {
+            shoppingItemImpl.setTitle(StringPool.BLANK);
         } else {
-            shoppingItemImpl.setName(name);
+            shoppingItemImpl.setTitle(title);
         }
 
         if (description == null) {
@@ -138,6 +150,20 @@ public class ShoppingItemCacheModel implements CacheModel<ShoppingItem>,
         }
 
         shoppingItemImpl.setItemTypeId(itemTypeId);
+        shoppingItemImpl.setStatus(status);
+        shoppingItemImpl.setStatusByUserId(statusByUserId);
+
+        if (statusByUserName == null) {
+            shoppingItemImpl.setStatusByUserName(StringPool.BLANK);
+        } else {
+            shoppingItemImpl.setStatusByUserName(statusByUserName);
+        }
+
+        if (statusDate == Long.MIN_VALUE) {
+            shoppingItemImpl.setStatusDate(null);
+        } else {
+            shoppingItemImpl.setStatusDate(new Date(statusDate));
+        }
 
         shoppingItemImpl.resetOriginalValues();
 
@@ -156,12 +182,16 @@ public class ShoppingItemCacheModel implements CacheModel<ShoppingItem>,
         modifiedDate = objectInput.readLong();
         classNameId = objectInput.readLong();
         classPK = objectInput.readLong();
-        name = objectInput.readUTF();
+        title = objectInput.readUTF();
         description = objectInput.readUTF();
         price = objectInput.readDouble();
         discountPrice = objectInput.readDouble();
         sku = objectInput.readUTF();
         itemTypeId = objectInput.readLong();
+        status = objectInput.readInt();
+        statusByUserId = objectInput.readLong();
+        statusByUserName = objectInput.readUTF();
+        statusDate = objectInput.readLong();
     }
 
     @Override
@@ -189,10 +219,10 @@ public class ShoppingItemCacheModel implements CacheModel<ShoppingItem>,
         objectOutput.writeLong(classNameId);
         objectOutput.writeLong(classPK);
 
-        if (name == null) {
+        if (title == null) {
             objectOutput.writeUTF(StringPool.BLANK);
         } else {
-            objectOutput.writeUTF(name);
+            objectOutput.writeUTF(title);
         }
 
         if (description == null) {
@@ -211,5 +241,15 @@ public class ShoppingItemCacheModel implements CacheModel<ShoppingItem>,
         }
 
         objectOutput.writeLong(itemTypeId);
+        objectOutput.writeInt(status);
+        objectOutput.writeLong(statusByUserId);
+
+        if (statusByUserName == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(statusByUserName);
+        }
+
+        objectOutput.writeLong(statusDate);
     }
 }

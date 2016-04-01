@@ -41,20 +41,20 @@ public class ShoppingCouponLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName90;
-    private String[] _methodParameterTypes90;
-    private String _methodName91;
-    private String[] _methodParameterTypes91;
-    private String _methodName96;
-    private String[] _methodParameterTypes96;
-    private String _methodName97;
-    private String[] _methodParameterTypes97;
-    private String _methodName98;
-    private String[] _methodParameterTypes98;
-    private String _methodName99;
-    private String[] _methodParameterTypes99;
+    private String _methodName94;
+    private String[] _methodParameterTypes94;
+    private String _methodName95;
+    private String[] _methodParameterTypes95;
     private String _methodName100;
     private String[] _methodParameterTypes100;
+    private String _methodName101;
+    private String[] _methodParameterTypes101;
+    private String _methodName102;
+    private String[] _methodParameterTypes102;
+    private String _methodName103;
+    private String[] _methodParameterTypes103;
+    private String _methodName104;
+    private String[] _methodParameterTypes104;
 
     public ShoppingCouponLocalServiceClpInvoker() {
         _methodName0 = "addShoppingCoupon";
@@ -139,37 +139,37 @@ public class ShoppingCouponLocalServiceClpInvoker {
                 "com.fsquare.shopping.model.ShoppingCoupon"
             };
 
-        _methodName90 = "getBeanIdentifier";
+        _methodName94 = "getBeanIdentifier";
 
-        _methodParameterTypes90 = new String[] {  };
+        _methodParameterTypes94 = new String[] {  };
 
-        _methodName91 = "setBeanIdentifier";
+        _methodName95 = "setBeanIdentifier";
 
-        _methodParameterTypes91 = new String[] { "java.lang.String" };
+        _methodParameterTypes95 = new String[] { "java.lang.String" };
 
-        _methodName96 = "fetchByCodeAndGroupId";
+        _methodName100 = "fetchByCodeAndGroupId";
 
-        _methodParameterTypes96 = new String[] { "java.lang.String", "long" };
+        _methodParameterTypes100 = new String[] { "java.lang.String", "long" };
 
-        _methodName97 = "findByGroupId";
+        _methodName101 = "findByGroupId";
 
-        _methodParameterTypes97 = new String[] { "java.lang.Long" };
+        _methodParameterTypes101 = new String[] { "java.lang.Long" };
 
-        _methodName98 = "isCouponValid";
+        _methodName102 = "isCouponValid";
 
-        _methodParameterTypes98 = new String[] {
+        _methodParameterTypes102 = new String[] {
                 "com.fsquare.shopping.model.ShoppingCoupon"
             };
 
-        _methodName99 = "getCouponStatus";
+        _methodName103 = "getCouponStatus";
 
-        _methodParameterTypes99 = new String[] {
+        _methodParameterTypes103 = new String[] {
                 "com.fsquare.shopping.model.ShoppingCoupon"
             };
 
-        _methodName100 = "applyCoupon";
+        _methodName104 = "applyCoupon";
 
-        _methodParameterTypes100 = new String[] {
+        _methodParameterTypes104 = new String[] {
                 "com.fsquare.shopping.model.ShoppingCoupon", "java.lang.Double"
             };
     }
@@ -263,41 +263,41 @@ public class ShoppingCouponLocalServiceClpInvoker {
             return ShoppingCouponLocalServiceUtil.updateShoppingCoupon((com.fsquare.shopping.model.ShoppingCoupon) arguments[0]);
         }
 
-        if (_methodName90.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
+        if (_methodName94.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName91.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
+        if (_methodName95.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes95, parameterTypes)) {
             ShoppingCouponLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
         }
 
-        if (_methodName96.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
+        if (_methodName100.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.fetchByCodeAndGroupId((java.lang.String) arguments[0],
                 ((Long) arguments[1]).longValue());
         }
 
-        if (_methodName97.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+        if (_methodName101.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.findByGroupId((java.lang.Long) arguments[0]);
         }
 
-        if (_methodName98.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
+        if (_methodName102.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.isCouponValid((com.fsquare.shopping.model.ShoppingCoupon) arguments[0]);
         }
 
-        if (_methodName99.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
+        if (_methodName103.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.getCouponStatus((com.fsquare.shopping.model.ShoppingCoupon) arguments[0]);
         }
 
-        if (_methodName100.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
+        if (_methodName104.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
             return ShoppingCouponLocalServiceUtil.applyCoupon((com.fsquare.shopping.model.ShoppingCoupon) arguments[0],
                 (java.lang.Double) arguments[1]);
         }

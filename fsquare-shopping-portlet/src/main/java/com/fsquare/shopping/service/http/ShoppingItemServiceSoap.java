@@ -1,5 +1,12 @@
 package com.fsquare.shopping.service.http;
 
+import com.fsquare.shopping.service.ShoppingItemServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.fsquare.shopping.service.ShoppingItemServiceUtil} service utility. The
@@ -41,4 +48,71 @@ package com.fsquare.shopping.service.http;
  * @generated
  */
 public class ShoppingItemServiceSoap {
+    private static Log _log = LogFactoryUtil.getLog(ShoppingItemServiceSoap.class);
+
+    public static boolean fixDeletedItem(long itemId, long companyId,
+        java.lang.String uid) throws RemoteException {
+        try {
+            boolean returnValue = ShoppingItemServiceUtil.fixDeletedItem(itemId,
+                    companyId, uid);
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static java.lang.Object getCompleteByGroupId(long groupId)
+        throws RemoteException {
+        try {
+            java.lang.Object returnValue = ShoppingItemServiceUtil.getCompleteByGroupId(groupId);
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingItemSoap[] findByGroupId(
+        long groupId) throws RemoteException {
+        try {
+            java.util.List<com.fsquare.shopping.model.ShoppingItem> returnValue = ShoppingItemServiceUtil.findByGroupId(groupId);
+
+            return com.fsquare.shopping.model.ShoppingItemSoap.toSoapModels(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingItemSoap[] findByGroupId(
+        java.lang.Long groupId) throws RemoteException {
+        try {
+            java.util.List<com.fsquare.shopping.model.ShoppingItem> returnValue = ShoppingItemServiceUtil.findByGroupId(groupId);
+
+            return com.fsquare.shopping.model.ShoppingItemSoap.toSoapModels(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static int countByGroupId(java.lang.Long groupId)
+        throws RemoteException {
+        try {
+            int returnValue = ShoppingItemServiceUtil.countByGroupId(groupId);
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

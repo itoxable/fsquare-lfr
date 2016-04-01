@@ -51,6 +51,38 @@ public class ShoppingItemServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static boolean fixDeletedItem(long itemId, long companyId,
+        java.lang.String uid)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().fixDeletedItem(itemId, companyId, uid);
+    }
+
+    public static java.lang.Object getCompleteByGroupId(long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getCompleteByGroupId(groupId);
+    }
+
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByGroupId(groupId);
+    }
+
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
+        java.lang.Long groupId) {
+        return getService().findByGroupId(groupId);
+    }
+
+    public static java.util.Map<java.lang.String, java.lang.Object> getPagedItems(
+        java.lang.Long groupId, int start, int end) {
+        return getService().getPagedItems(groupId, start, end);
+    }
+
+    public static int countByGroupId(java.lang.Long groupId) {
+        return getService().countByGroupId(groupId);
+    }
+
     public static void clearService() {
         _service = null;
     }

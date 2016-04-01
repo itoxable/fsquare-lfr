@@ -1,5 +1,12 @@
 package com.fsquare.shopping.service.http;
 
+import com.fsquare.shopping.service.ShoppingItemStorageLocationServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.fsquare.shopping.service.ShoppingItemStorageLocationServiceUtil} service utility. The
@@ -41,4 +48,61 @@ package com.fsquare.shopping.service.http;
  * @generated
  */
 public class ShoppingItemStorageLocationServiceSoap {
+    private static Log _log = LogFactoryUtil.getLog(ShoppingItemStorageLocationServiceSoap.class);
+
+    public static com.fsquare.shopping.model.ShoppingItemStorageLocationSoap findByItemIdAndStorageLocationId(
+        long itemId, long storageLocationId) throws RemoteException {
+        try {
+            com.fsquare.shopping.model.ShoppingItemStorageLocation returnValue = ShoppingItemStorageLocationServiceUtil.findByItemIdAndStorageLocationId(itemId,
+                    storageLocationId);
+
+            return com.fsquare.shopping.model.ShoppingItemStorageLocationSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingItemStorageLocationSoap[] findByItemId(
+        long itemId) throws RemoteException {
+        try {
+            java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> returnValue =
+                ShoppingItemStorageLocationServiceUtil.findByItemId(itemId);
+
+            return com.fsquare.shopping.model.ShoppingItemStorageLocationSoap.toSoapModels(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingItemStorageLocationSoap[] findByStorageLocationId(
+        long storageLocationId) throws RemoteException {
+        try {
+            java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> returnValue =
+                ShoppingItemStorageLocationServiceUtil.findByStorageLocationId(storageLocationId);
+
+            return com.fsquare.shopping.model.ShoppingItemStorageLocationSoap.toSoapModels(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingItemStorageLocationSoap[] findByGroupId(
+        long groupId) throws RemoteException {
+        try {
+            java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> returnValue =
+                ShoppingItemStorageLocationServiceUtil.findByGroupId(groupId);
+
+            return com.fsquare.shopping.model.ShoppingItemStorageLocationSoap.toSoapModels(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

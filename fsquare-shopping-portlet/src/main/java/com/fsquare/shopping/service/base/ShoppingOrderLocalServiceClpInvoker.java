@@ -41,20 +41,20 @@ public class ShoppingOrderLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName90;
-    private String[] _methodParameterTypes90;
-    private String _methodName91;
-    private String[] _methodParameterTypes91;
-    private String _methodName96;
-    private String[] _methodParameterTypes96;
-    private String _methodName97;
-    private String[] _methodParameterTypes97;
-    private String _methodName98;
-    private String[] _methodParameterTypes98;
-    private String _methodName99;
-    private String[] _methodParameterTypes99;
+    private String _methodName94;
+    private String[] _methodParameterTypes94;
+    private String _methodName95;
+    private String[] _methodParameterTypes95;
     private String _methodName100;
     private String[] _methodParameterTypes100;
+    private String _methodName101;
+    private String[] _methodParameterTypes101;
+    private String _methodName102;
+    private String[] _methodParameterTypes102;
+    private String _methodName103;
+    private String[] _methodParameterTypes103;
+    private String _methodName104;
+    private String[] _methodParameterTypes104;
 
     public ShoppingOrderLocalServiceClpInvoker() {
         _methodName0 = "addShoppingOrder";
@@ -139,33 +139,33 @@ public class ShoppingOrderLocalServiceClpInvoker {
                 "com.fsquare.shopping.model.ShoppingOrder"
             };
 
-        _methodName90 = "getBeanIdentifier";
+        _methodName94 = "getBeanIdentifier";
 
-        _methodParameterTypes90 = new String[] {  };
+        _methodParameterTypes94 = new String[] {  };
 
-        _methodName91 = "setBeanIdentifier";
+        _methodName95 = "setBeanIdentifier";
 
-        _methodParameterTypes91 = new String[] { "java.lang.String" };
+        _methodParameterTypes95 = new String[] { "java.lang.String" };
 
-        _methodName96 = "findByGroupId";
+        _methodName100 = "findByGroupId";
 
-        _methodParameterTypes96 = new String[] { "long" };
+        _methodParameterTypes100 = new String[] { "long" };
 
-        _methodName97 = "findBygroupIdAndUserId";
+        _methodName101 = "findBygroupIdAndUserId";
 
-        _methodParameterTypes97 = new String[] { "long", "long" };
+        _methodParameterTypes101 = new String[] { "long", "long" };
 
-        _methodName98 = "findBygroupIdAndEmail";
+        _methodName102 = "findBygroupIdAndEmail";
 
-        _methodParameterTypes98 = new String[] { "long", "java.lang.String" };
+        _methodParameterTypes102 = new String[] { "long", "java.lang.String" };
 
-        _methodName99 = "getOrderTotal";
+        _methodName103 = "getOrderTotal";
 
-        _methodParameterTypes99 = new String[] { "java.util.Collection" };
+        _methodParameterTypes103 = new String[] { "java.util.Collection" };
 
-        _methodName100 = "getOrderItemsCount";
+        _methodName104 = "getOrderItemsCount";
 
-        _methodParameterTypes100 = new String[] { "java.util.Collection" };
+        _methodParameterTypes104 = new String[] { "java.util.Collection" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -257,42 +257,42 @@ public class ShoppingOrderLocalServiceClpInvoker {
             return ShoppingOrderLocalServiceUtil.updateShoppingOrder((com.fsquare.shopping.model.ShoppingOrder) arguments[0]);
         }
 
-        if (_methodName90.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
+        if (_methodName94.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
             return ShoppingOrderLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName91.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
+        if (_methodName95.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes95, parameterTypes)) {
             ShoppingOrderLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
         }
 
-        if (_methodName96.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
+        if (_methodName100.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
             return ShoppingOrderLocalServiceUtil.findByGroupId(((Long) arguments[0]).longValue());
         }
 
-        if (_methodName97.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+        if (_methodName101.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
             return ShoppingOrderLocalServiceUtil.findBygroupIdAndUserId(((Long) arguments[0]).longValue(),
                 ((Long) arguments[1]).longValue());
         }
 
-        if (_methodName98.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
+        if (_methodName102.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
             return ShoppingOrderLocalServiceUtil.findBygroupIdAndEmail(((Long) arguments[0]).longValue(),
                 (java.lang.String) arguments[1]);
         }
 
-        if (_methodName99.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
+        if (_methodName103.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
             return ShoppingOrderLocalServiceUtil.getOrderTotal((java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem>) arguments[0]);
         }
 
-        if (_methodName100.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
+        if (_methodName104.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
             return ShoppingOrderLocalServiceUtil.getOrderItemsCount((java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem>) arguments[0]);
         }
 

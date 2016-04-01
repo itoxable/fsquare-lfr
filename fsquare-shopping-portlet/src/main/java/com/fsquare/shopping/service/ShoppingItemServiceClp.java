@@ -12,6 +12,18 @@ public class ShoppingItemServiceClp implements ShoppingItemService {
     private String[] _methodParameterTypes0;
     private String _methodName1;
     private String[] _methodParameterTypes1;
+    private String _methodName3;
+    private String[] _methodParameterTypes3;
+    private String _methodName4;
+    private String[] _methodParameterTypes4;
+    private String _methodName5;
+    private String[] _methodParameterTypes5;
+    private String _methodName6;
+    private String[] _methodParameterTypes6;
+    private String _methodName7;
+    private String[] _methodParameterTypes7;
+    private String _methodName8;
+    private String[] _methodParameterTypes8;
 
     public ShoppingItemServiceClp(InvokableService invokableService) {
         _invokableService = invokableService;
@@ -23,6 +35,30 @@ public class ShoppingItemServiceClp implements ShoppingItemService {
         _methodName1 = "setBeanIdentifier";
 
         _methodParameterTypes1 = new String[] { "java.lang.String" };
+
+        _methodName3 = "fixDeletedItem";
+
+        _methodParameterTypes3 = new String[] { "long", "long", "java.lang.String" };
+
+        _methodName4 = "getCompleteByGroupId";
+
+        _methodParameterTypes4 = new String[] { "long" };
+
+        _methodName5 = "findByGroupId";
+
+        _methodParameterTypes5 = new String[] { "long" };
+
+        _methodName6 = "findByGroupId";
+
+        _methodParameterTypes6 = new String[] { "java.lang.Long" };
+
+        _methodName7 = "getPagedItems";
+
+        _methodParameterTypes7 = new String[] { "java.lang.Long", "int", "int" };
+
+        _methodName8 = "countByGroupId";
+
+        _methodParameterTypes8 = new String[] { "java.lang.Long" };
     }
 
     @Override
@@ -69,5 +105,171 @@ public class ShoppingItemServiceClp implements ShoppingItemService {
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean fixDeletedItem(long itemId, long companyId,
+        java.lang.String uid)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableService.invokeMethod(_methodName3,
+                    _methodParameterTypes3,
+                    new Object[] {
+                        itemId,
+                        
+                    companyId,
+                        
+                    ClpSerializer.translateInput(uid)
+                    });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+                throw (com.liferay.portal.kernel.exception.PortalException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return ((Boolean) returnObj).booleanValue();
+    }
+
+    @Override
+    public java.lang.Object getCompleteByGroupId(long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableService.invokeMethod(_methodName4,
+                    _methodParameterTypes4, new Object[] { groupId });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.lang.Object) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableService.invokeMethod(_methodName5,
+                    _methodParameterTypes5, new Object[] { groupId });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<com.fsquare.shopping.model.ShoppingItem>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
+        java.lang.Long groupId) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableService.invokeMethod(_methodName6,
+                    _methodParameterTypes6,
+                    new Object[] { ClpSerializer.translateInput(groupId) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<com.fsquare.shopping.model.ShoppingItem>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.Map<java.lang.String, java.lang.Object> getPagedItems(
+        java.lang.Long groupId, int start, int end) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableService.invokeMethod(_methodName7,
+                    _methodParameterTypes7,
+                    new Object[] {
+                        ClpSerializer.translateInput(groupId),
+                        
+                    start,
+                        
+                    end
+                    });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.Map<java.lang.String, java.lang.Object>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public int countByGroupId(java.lang.Long groupId) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableService.invokeMethod(_methodName8,
+                    _methodParameterTypes8,
+                    new Object[] { ClpSerializer.translateInput(groupId) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return ((Integer) returnObj).intValue();
     }
 }

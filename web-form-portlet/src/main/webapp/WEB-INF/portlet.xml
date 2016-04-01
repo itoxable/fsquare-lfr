@@ -29,11 +29,16 @@
 		</supports>
 		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
-			<title>Contact Fom</title>
+			<title>Web Fom</title>
 			<short-title>Web Form</short-title>
-			<keywords>Contact Form</keywords>
+			<keywords>Web Form</keywords>
 		</portlet-info>
 		<portlet-preferences>
+		
+			<preference>
+				<name>title</name>
+				<value>Contact</value>
+			</preference>
 			<preference>
 				<name>description</name>
 				<value>Your input is valuable to us. Please send us your suggestions.</value>
@@ -125,10 +130,7 @@
 				<name>subject</name>
 				<value>Suggestions</value>
 			</preference>
-			<preference>
-				<name>title</name>
-				<value>Suggestions</value>
-			</preference>
+			
 			<preference>
 				<name>sendAck</name>
 				<value>true</value>

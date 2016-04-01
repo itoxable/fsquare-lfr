@@ -41,10 +41,18 @@ public class ShoppingItemStorageLocationLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName90;
-    private String[] _methodParameterTypes90;
-    private String _methodName91;
-    private String[] _methodParameterTypes91;
+    private String _methodName94;
+    private String[] _methodParameterTypes94;
+    private String _methodName95;
+    private String[] _methodParameterTypes95;
+    private String _methodName100;
+    private String[] _methodParameterTypes100;
+    private String _methodName101;
+    private String[] _methodParameterTypes101;
+    private String _methodName102;
+    private String[] _methodParameterTypes102;
+    private String _methodName103;
+    private String[] _methodParameterTypes103;
 
     public ShoppingItemStorageLocationLocalServiceClpInvoker() {
         _methodName0 = "addShoppingItemStorageLocation";
@@ -129,13 +137,29 @@ public class ShoppingItemStorageLocationLocalServiceClpInvoker {
                 "com.fsquare.shopping.model.ShoppingItemStorageLocation"
             };
 
-        _methodName90 = "getBeanIdentifier";
+        _methodName94 = "getBeanIdentifier";
 
-        _methodParameterTypes90 = new String[] {  };
+        _methodParameterTypes94 = new String[] {  };
 
-        _methodName91 = "setBeanIdentifier";
+        _methodName95 = "setBeanIdentifier";
 
-        _methodParameterTypes91 = new String[] { "java.lang.String" };
+        _methodParameterTypes95 = new String[] { "java.lang.String" };
+
+        _methodName100 = "findByItemIdAndStorageLocationId";
+
+        _methodParameterTypes100 = new String[] { "long", "long" };
+
+        _methodName101 = "findByItemId";
+
+        _methodParameterTypes101 = new String[] { "long" };
+
+        _methodName102 = "findByStorageLocationId";
+
+        _methodParameterTypes102 = new String[] { "long" };
+
+        _methodName103 = "findByGroupId";
+
+        _methodParameterTypes103 = new String[] { "long" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -227,16 +251,37 @@ public class ShoppingItemStorageLocationLocalServiceClpInvoker {
             return ShoppingItemStorageLocationLocalServiceUtil.updateShoppingItemStorageLocation((com.fsquare.shopping.model.ShoppingItemStorageLocation) arguments[0]);
         }
 
-        if (_methodName90.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
+        if (_methodName94.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
             return ShoppingItemStorageLocationLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName91.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
+        if (_methodName95.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes95, parameterTypes)) {
             ShoppingItemStorageLocationLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
+        }
+
+        if (_methodName100.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
+            return ShoppingItemStorageLocationLocalServiceUtil.findByItemIdAndStorageLocationId(((Long) arguments[0]).longValue(),
+                ((Long) arguments[1]).longValue());
+        }
+
+        if (_methodName101.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
+            return ShoppingItemStorageLocationLocalServiceUtil.findByItemId(((Long) arguments[0]).longValue());
+        }
+
+        if (_methodName102.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
+            return ShoppingItemStorageLocationLocalServiceUtil.findByStorageLocationId(((Long) arguments[0]).longValue());
+        }
+
+        if (_methodName103.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
+            return ShoppingItemStorageLocationLocalServiceUtil.findByGroupId(((Long) arguments[0]).longValue());
         }
 
         throw new UnsupportedOperationException();

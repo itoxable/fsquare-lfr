@@ -269,6 +269,35 @@ public class ShoppingItemStorageLocationLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static com.fsquare.shopping.model.ShoppingItemStorageLocation findByItemIdAndStorageLocationId(
+        long itemId, long storageLocationId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService()
+                   .findByItemIdAndStorageLocationId(itemId, storageLocationId);
+    }
+
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByItemId(
+        long itemId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByItemId(itemId);
+    }
+
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByStorageLocationId(
+        long storageLocationId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByStorageLocationId(storageLocationId);
+    }
+
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByGroupId(
+        long groupId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByGroupId(groupId);
+    }
+
     public static void clearService() {
         _service = null;
     }

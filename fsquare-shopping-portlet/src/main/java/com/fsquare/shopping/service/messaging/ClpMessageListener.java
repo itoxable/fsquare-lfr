@@ -22,6 +22,8 @@ import com.fsquare.shopping.service.ShoppingStorageLocationLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingStorageLocationServiceUtil;
 import com.fsquare.shopping.service.ShoppingStoreLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingStoreServiceUtil;
+import com.fsquare.shopping.service.SiteCommonActionsLocalServiceUtil;
+import com.fsquare.shopping.service.SiteCommonActionsServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -71,6 +73,9 @@ public class ClpMessageListener extends BaseMessageListener {
             ShoppingStoreLocalServiceUtil.clearService();
 
             ShoppingStoreServiceUtil.clearService();
+            SiteCommonActionsLocalServiceUtil.clearService();
+
+            SiteCommonActionsServiceUtil.clearService();
         }
     }
 }

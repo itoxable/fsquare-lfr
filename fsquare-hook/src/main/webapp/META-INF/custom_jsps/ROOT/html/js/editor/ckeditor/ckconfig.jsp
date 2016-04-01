@@ -76,7 +76,7 @@ CKEDITOR.config.bodyClass = 'html-editor <%= HtmlUtil.escapeJS(cssClasses) %>';
 
 CKEDITOR.config.closeNoticeTimeout = 8000;
 
-CKEDITOR.config.contentsCss = ['<%= HtmlUtil.escapeJS(cssPath) %>/main.css', 'http://fonts.googleapis.com/css?family=Lato:300,400,700', '<%= HtmlUtil.escapeJS(cssPath) %>/editor-custom.css'];
+CKEDITOR.config.contentsCss = ['<%= HtmlUtil.escapeJS(cssPath) %>/main.css', 'http://fonts.googleapis.com/css?family=Lato:300,400,700', '/fsquare-fonts-theme/css/main.css?minifierType=css' ];
 
 <%
 Locale contentsLocale = LocaleUtil.fromLanguageId(contentsLanguageId);
@@ -90,7 +90,7 @@ CKEDITOR.config.contentsLanguage = '<%= HtmlUtil.escapeJS(contentsLanguageId.rep
 
 CKEDITOR.config.entities = false;
 
-CKEDITOR.config.extraPlugins = 'ajaxsave,media,restore,scayt,wsc';
+CKEDITOR.config.extraPlugins = 'ajaxsave,media,restore,scayt,wsc,lineheight';
 
 CKEDITOR.config.height = 265;
 
@@ -114,7 +114,7 @@ CKEDITOR.config.toolbar_editInPlace = [
 ];
 
 CKEDITOR.config.toolbar_email = [
-	['FontSize', 'TextColor', 'BGColor', '-', 'Bold', 'Italic', 'Underline', 'Strike'],
+	['Font','FontSize', 'TextColor', 'BGColor', '-', 'Bold', 'Italic', 'Underline', 'Strike'],
 	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
 	['SpellChecker', 'Scayt'],
 	'/',
@@ -148,7 +148,7 @@ CKEDITOR.config.toolbar_liferay = [
 ];
 
 CKEDITOR.config.toolbar_liferayArticle = [
-	['Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
+	['Font', 'Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
 	['Bold', 'Italic', 'Underline', 'Strike'],
 	['Subscript', 'Superscript'],
 	'/',
@@ -163,13 +163,13 @@ CKEDITOR.config.toolbar_liferayArticle = [
 ];
 
 CKEDITOR.config.toolbar_phone = [
-	['Bold', 'Italic', 'Underline'],
+	['Font', 'Bold', 'Italic', 'Underline'],
 	['NumberedList', 'BulletedList'],
 	['Image', 'Link', 'Unlink']
 ];
 
 CKEDITOR.config.toolbar_simple = [
-	['Bold', 'Italic', 'Underline', 'Strike'],
+	['Font', 'Bold', 'Italic', 'Underline', 'Strike'],
 	['NumberedList', 'BulletedList'],
 	['Image', 'Link', 'Unlink', 'Table']
 ];
@@ -182,7 +182,7 @@ CKEDITOR.config.toolbar_tablet = [
 	['Font', 'Styles', 'FontSize', 'RemoveFormat']
 ];
 
-CKEDITOR.config.font_names="Roboto Condensed;Arial/Arial, Helvetica, sans-serif;Comic Sans MS/Comic Sans MS, cursive;Courier New/Courier New, Courier, monospace;Georgia/Georgia, serif;Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;Tahoma/Tahoma, Geneva, sans-serif;Times New Roman/Times New Roman, Times, serif;Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;Verdana/Verdana, Geneva, sans-serif",
+CKEDITOR.config.font_names="Lato;Roboto Condensed;Arial/Arial, Helvetica, sans-serif;Comic Sans MS/Comic Sans MS, cursive;Courier New/Courier New, Courier, monospace;Georgia/Georgia, serif;Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;Tahoma/Tahoma, Geneva, sans-serif;Times New Roman/Times New Roman, Times, serif;Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;Verdana/Verdana, Geneva, sans-serif;merloround_serif_regular';merloroundserifRgIt';merloround_thin_italic';merloround_thin';merloround_regular';merloround_medium_italic';merloround_medium';merloround_light_italic';merloround_light';merloround_regular_italic';merloround_bold_italic';merloround_bold';safina_script;safina_fancy;Stringbeans;Hunterswood;FaithAndGloryOne;FaithAndGloryTwo;GraduateScript;GraduateOrnaments;TheSecretRegular;TheSecretSwashes",
 
 CKEDITOR.on(
 	'dialogDefinition',

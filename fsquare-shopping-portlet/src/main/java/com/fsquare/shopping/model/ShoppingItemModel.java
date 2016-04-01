@@ -6,6 +6,7 @@ import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.StagedGroupedModel;
+import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -28,7 +29,7 @@ import java.util.Date;
  * @generated
  */
 public interface ShoppingItemModel extends AttachedModel, BaseModel<ShoppingItem>,
-    StagedGroupedModel {
+    StagedGroupedModel, WorkflowedModel {
     /*
      * NOTE FOR DEVELOPERS:
      *
@@ -237,19 +238,19 @@ public interface ShoppingItemModel extends AttachedModel, BaseModel<ShoppingItem
     public void setClassPK(long classPK);
 
     /**
-     * Returns the name of this shopping item.
+     * Returns the title of this shopping item.
      *
-     * @return the name of this shopping item
+     * @return the title of this shopping item
      */
     @AutoEscape
-    public String getName();
+    public String getTitle();
 
     /**
-     * Sets the name of this shopping item.
+     * Sets the title of this shopping item.
      *
-     * @param name the name of this shopping item
+     * @param title the title of this shopping item
      */
-    public void setName(String name);
+    public void setTitle(String title);
 
     /**
      * Returns the description of this shopping item.
@@ -322,6 +323,158 @@ public interface ShoppingItemModel extends AttachedModel, BaseModel<ShoppingItem
      * @param itemTypeId the item type ID of this shopping item
      */
     public void setItemTypeId(long itemTypeId);
+
+    /**
+     * Returns the status of this shopping item.
+     *
+     * @return the status of this shopping item
+     */
+    @Override
+    public int getStatus();
+
+    /**
+     * Sets the status of this shopping item.
+     *
+     * @param status the status of this shopping item
+     */
+    @Override
+    public void setStatus(int status);
+
+    /**
+     * Returns the status by user ID of this shopping item.
+     *
+     * @return the status by user ID of this shopping item
+     */
+    @Override
+    public long getStatusByUserId();
+
+    /**
+     * Sets the status by user ID of this shopping item.
+     *
+     * @param statusByUserId the status by user ID of this shopping item
+     */
+    @Override
+    public void setStatusByUserId(long statusByUserId);
+
+    /**
+     * Returns the status by user uuid of this shopping item.
+     *
+     * @return the status by user uuid of this shopping item
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public String getStatusByUserUuid() throws SystemException;
+
+    /**
+     * Sets the status by user uuid of this shopping item.
+     *
+     * @param statusByUserUuid the status by user uuid of this shopping item
+     */
+    @Override
+    public void setStatusByUserUuid(String statusByUserUuid);
+
+    /**
+     * Returns the status by user name of this shopping item.
+     *
+     * @return the status by user name of this shopping item
+     */
+    @AutoEscape
+    @Override
+    public String getStatusByUserName();
+
+    /**
+     * Sets the status by user name of this shopping item.
+     *
+     * @param statusByUserName the status by user name of this shopping item
+     */
+    @Override
+    public void setStatusByUserName(String statusByUserName);
+
+    /**
+     * Returns the status date of this shopping item.
+     *
+     * @return the status date of this shopping item
+     */
+    @Override
+    public Date getStatusDate();
+
+    /**
+     * Sets the status date of this shopping item.
+     *
+     * @param statusDate the status date of this shopping item
+     */
+    @Override
+    public void setStatusDate(Date statusDate);
+
+    /**
+     * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+     */
+    @Override
+    public boolean getApproved();
+
+    /**
+     * Returns <code>true</code> if this shopping item is approved.
+     *
+     * @return <code>true</code> if this shopping item is approved; <code>false</code> otherwise
+     */
+    @Override
+    public boolean isApproved();
+
+    /**
+     * Returns <code>true</code> if this shopping item is denied.
+     *
+     * @return <code>true</code> if this shopping item is denied; <code>false</code> otherwise
+     */
+    @Override
+    public boolean isDenied();
+
+    /**
+     * Returns <code>true</code> if this shopping item is a draft.
+     *
+     * @return <code>true</code> if this shopping item is a draft; <code>false</code> otherwise
+     */
+    @Override
+    public boolean isDraft();
+
+    /**
+     * Returns <code>true</code> if this shopping item is expired.
+     *
+     * @return <code>true</code> if this shopping item is expired; <code>false</code> otherwise
+     */
+    @Override
+    public boolean isExpired();
+
+    /**
+     * Returns <code>true</code> if this shopping item is inactive.
+     *
+     * @return <code>true</code> if this shopping item is inactive; <code>false</code> otherwise
+     */
+    @Override
+    public boolean isInactive();
+
+    /**
+     * Returns <code>true</code> if this shopping item is incomplete.
+     *
+     * @return <code>true</code> if this shopping item is incomplete; <code>false</code> otherwise
+     */
+    @Override
+    public boolean isIncomplete();
+
+    /**
+     * Returns <code>true</code> if this shopping item is pending.
+     *
+     * @return <code>true</code> if this shopping item is pending; <code>false</code> otherwise
+     */
+    @Override
+    public boolean isPending();
+
+    /**
+     * Returns <code>true</code> if this shopping item is scheduled.
+     *
+     * @return <code>true</code> if this shopping item is scheduled; <code>false</code> otherwise
+     */
+    @Override
+    public boolean isScheduled();
 
     @Override
     public boolean isNew();

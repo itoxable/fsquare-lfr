@@ -12,15 +12,16 @@
 	<properties>
 		<liferay.theme.parent>classic</liferay.theme.parent>
 		<liferay.theme.type>vm</liferay.theme.type>
-		<liferay.home>/Users/ruic/Projects/liferay-portal-6.2-ce-ga5</liferay.home>
-<!-- 		<liferay.home>/Users/ruic/Projects/jo-liferay-portal-6.2-ce-ga4</liferay.home> -->
+		<liferay.home>/Users/ruic/Projects/liferay-portal-6.2-ce-ga6</liferay.home>
 		<liferay.auto.deploy.dir>${liferay.home}/deploy</liferay.auto.deploy.dir>
-		<liferay.app.server.deploy.dir>${liferay.home}/tomcat-7.0.42/webapps</liferay.app.server.deploy.dir>
-		<liferay.app.server.lib.global.dir>${liferay.home}/tomcat-7.0.42/lib</liferay.app.server.lib.global.dir>
-		<liferay.app.server.portal.dir>${liferay.home}/tomcat-7.0.42/webapps/ROOT</liferay.app.server.portal.dir>
-		<liferay.version>6.2.4</liferay.version>
-<!-- 		<liferay.version>6.2.3</liferay.version> -->
+		<liferay.app.server.deploy.dir>${liferay.home}/tomcat-7.0.62/webapps</liferay.app.server.deploy.dir>
+		<liferay.app.server.lib.global.dir>${liferay.home}/tomcat-7.0.62/lib</liferay.app.server.lib.global.dir>
+		<liferay.app.server.portal.dir>${liferay.home}/tomcat-7.0.62/webapps/ROOT</liferay.app.server.portal.dir>
+		<liferay.version>6.2.5</liferay.version>
 		<liferay.maven.plugin.version>6.2.10.13</liferay.maven.plugin.version>
+		
+		<springframework-version>3.0.7.RELEASE</springframework-version>
+		<jackson-version>1.4.2</jackson-version>
 	</properties>
 	
     <description>FSquare's Liferay apps</description>
@@ -175,7 +176,7 @@
         <module>jo-theme</module>
         <module>jo-layout</module>
         <module>fsquare-hook</module>
-<!--         <module>web-form-portlet</module> -->
-<!--         <module>fsquare-shopping-portlet</module> -->
+        <module>web-form-portlet</module>
+        <module>fsquare-shopping-portlet</module>
     </modules>
 </project>

@@ -47,6 +47,8 @@ public class ShoppingStorageLocationWrapper implements ShoppingStorageLocation,
         attributes.put("createDate", getCreateDate());
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("name", getName());
+        attributes.put("description", getDescription());
+        attributes.put("location", getLocation());
 
         return attributes;
     }
@@ -99,6 +101,18 @@ public class ShoppingStorageLocationWrapper implements ShoppingStorageLocation,
 
         if (name != null) {
             setName(name);
+        }
+
+        String description = (String) attributes.get("description");
+
+        if (description != null) {
+            setDescription(description);
+        }
+
+        String location = (String) attributes.get("location");
+
+        if (location != null) {
+            setLocation(location);
         }
     }
 
@@ -302,6 +316,46 @@ public class ShoppingStorageLocationWrapper implements ShoppingStorageLocation,
     @Override
     public void setName(java.lang.String name) {
         _shoppingStorageLocation.setName(name);
+    }
+
+    /**
+    * Returns the description of this shopping storage location.
+    *
+    * @return the description of this shopping storage location
+    */
+    @Override
+    public java.lang.String getDescription() {
+        return _shoppingStorageLocation.getDescription();
+    }
+
+    /**
+    * Sets the description of this shopping storage location.
+    *
+    * @param description the description of this shopping storage location
+    */
+    @Override
+    public void setDescription(java.lang.String description) {
+        _shoppingStorageLocation.setDescription(description);
+    }
+
+    /**
+    * Returns the location of this shopping storage location.
+    *
+    * @return the location of this shopping storage location
+    */
+    @Override
+    public java.lang.String getLocation() {
+        return _shoppingStorageLocation.getLocation();
+    }
+
+    /**
+    * Sets the location of this shopping storage location.
+    *
+    * @param location the location of this shopping storage location
+    */
+    @Override
+    public void setLocation(java.lang.String location) {
+        _shoppingStorageLocation.setLocation(location);
     }
 
     @Override

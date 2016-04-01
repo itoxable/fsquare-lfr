@@ -2243,12 +2243,16 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
         shoppingItemImpl.setModifiedDate(shoppingItem.getModifiedDate());
         shoppingItemImpl.setClassNameId(shoppingItem.getClassNameId());
         shoppingItemImpl.setClassPK(shoppingItem.getClassPK());
-        shoppingItemImpl.setName(shoppingItem.getName());
+        shoppingItemImpl.setTitle(shoppingItem.getTitle());
         shoppingItemImpl.setDescription(shoppingItem.getDescription());
         shoppingItemImpl.setPrice(shoppingItem.getPrice());
         shoppingItemImpl.setDiscountPrice(shoppingItem.getDiscountPrice());
         shoppingItemImpl.setSku(shoppingItem.getSku());
         shoppingItemImpl.setItemTypeId(shoppingItem.getItemTypeId());
+        shoppingItemImpl.setStatus(shoppingItem.getStatus());
+        shoppingItemImpl.setStatusByUserId(shoppingItem.getStatusByUserId());
+        shoppingItemImpl.setStatusByUserName(shoppingItem.getStatusByUserName());
+        shoppingItemImpl.setStatusDate(shoppingItem.getStatusDate());
 
         return shoppingItemImpl;
     }

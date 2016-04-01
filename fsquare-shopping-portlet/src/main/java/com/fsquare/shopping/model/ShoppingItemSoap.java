@@ -24,12 +24,16 @@ public class ShoppingItemSoap implements Serializable {
     private Date _modifiedDate;
     private long _classNameId;
     private long _classPK;
-    private String _name;
+    private String _title;
     private String _description;
     private double _price;
     private double _discountPrice;
     private String _sku;
     private long _itemTypeId;
+    private int _status;
+    private long _statusByUserId;
+    private String _statusByUserName;
+    private Date _statusDate;
 
     public ShoppingItemSoap() {
     }
@@ -47,12 +51,16 @@ public class ShoppingItemSoap implements Serializable {
         soapModel.setModifiedDate(model.getModifiedDate());
         soapModel.setClassNameId(model.getClassNameId());
         soapModel.setClassPK(model.getClassPK());
-        soapModel.setName(model.getName());
+        soapModel.setTitle(model.getTitle());
         soapModel.setDescription(model.getDescription());
         soapModel.setPrice(model.getPrice());
         soapModel.setDiscountPrice(model.getDiscountPrice());
         soapModel.setSku(model.getSku());
         soapModel.setItemTypeId(model.getItemTypeId());
+        soapModel.setStatus(model.getStatus());
+        soapModel.setStatusByUserId(model.getStatusByUserId());
+        soapModel.setStatusByUserName(model.getStatusByUserName());
+        soapModel.setStatusDate(model.getStatusDate());
 
         return soapModel;
     }
@@ -181,12 +189,12 @@ public class ShoppingItemSoap implements Serializable {
         _classPK = classPK;
     }
 
-    public String getName() {
-        return _name;
+    public String getTitle() {
+        return _title;
     }
 
-    public void setName(String name) {
-        _name = name;
+    public void setTitle(String title) {
+        _title = title;
     }
 
     public String getDescription() {
@@ -227,5 +235,37 @@ public class ShoppingItemSoap implements Serializable {
 
     public void setItemTypeId(long itemTypeId) {
         _itemTypeId = itemTypeId;
+    }
+
+    public int getStatus() {
+        return _status;
+    }
+
+    public void setStatus(int status) {
+        _status = status;
+    }
+
+    public long getStatusByUserId() {
+        return _statusByUserId;
+    }
+
+    public void setStatusByUserId(long statusByUserId) {
+        _statusByUserId = statusByUserId;
+    }
+
+    public String getStatusByUserName() {
+        return _statusByUserName;
+    }
+
+    public void setStatusByUserName(String statusByUserName) {
+        _statusByUserName = statusByUserName;
+    }
+
+    public Date getStatusDate() {
+        return _statusDate;
+    }
+
+    public void setStatusDate(Date statusDate) {
+        _statusDate = statusDate;
     }
 }

@@ -12,7 +12,7 @@
 		<field name="code" type="String" />
 		<field name="name" type="String" />
 		<field name="description" type="String">
-			<hint name="max-length">1000</hint>
+			<hint name="max-length">2000</hint>
 		</field>
 		<field name="startDate" type="Date" />
 		<field name="endDate" type="Date" />
@@ -35,12 +35,18 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
-		<field name="name" type="String" />
-		<field name="description" type="String" />
+		<field name="title" type="String" />
+		<field name="description" type="String">
+			<hint name="max-length">2000</hint>
+		</field>
 		<field name="price" type="double" />
 		<field name="discountPrice" type="double" />
 		<field name="sku" type="String" />
 		<field name="itemTypeId" type="long" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingItemImage">
 		<field name="shoppingItemImageId" type="long" />
@@ -62,7 +68,6 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="name" type="String" />
 		<field name="quantity" type="int" />
-		<field name="movementType" type="String" />
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingItemType">
 		<field name="itemTypeId" type="long" />
@@ -118,7 +123,7 @@
 		<field name="shippingCountry" type="String" />
 		<field name="shippingPhone" type="String" />
 		<field name="comments" type="String">
-			<hint name="max-length">1000</hint>
+			<hint name="max-length">2000</hint>
 		</field>
 		<field name="externalPaymentId" type="String" />
 		<field name="paymentType" type="String" />
@@ -136,7 +141,7 @@
 			<hint name="max-length">200</hint>
 		</field>
 		<field name="description" type="String">
-			<hint name="max-length">1000</hint>
+			<hint name="max-length">2000</hint>
 		</field>
 		<field name="properties" type="String" />
 		<field name="price" type="double" />
@@ -154,7 +159,7 @@
 		<field name="price" type="double" />
 		<field name="name" type="String" />
 		<field name="description" type="String">
-			<hint name="max-length">1000</hint>
+			<hint name="max-length">2000</hint>
 		</field>
 		<field name="freeQuantity" type="long" />
 		<field name="freeTotal" type="double" />
@@ -173,6 +178,8 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="name" type="String" />
+		<field name="description" type="String" />
+		<field name="location" type="String" />
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingStore">
 		<field name="groupId" type="long" />
@@ -194,13 +201,13 @@
 		<field name="userTypes" type="String" />
 		<field name="checkoutPageFullscreen" type="boolean" />
 		<field name="checkoutCompletePageTemplate" type="String">
-			<hint name="max-length">10000</hint>
+			<hint name="max-length">20000</hint>
 		</field>
 		<field name="orderCreatedEmailTemplate" type="String">
-			<hint name="max-length">10000</hint>
+			<hint name="max-length">20000</hint>
 		</field>
 		<field name="orderShippedEmailTemplate" type="String">
-			<hint name="max-length">10000</hint>
+			<hint name="max-length">20000</hint>
 		</field>
 		<field name="orderCreatedEmailSubject" type="String" />
 		<field name="orderCreatedEmailFromAddress" type="String" />

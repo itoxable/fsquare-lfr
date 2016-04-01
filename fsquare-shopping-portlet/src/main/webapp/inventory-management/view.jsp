@@ -1,3 +1,5 @@
+<%@page import="com.fsquare.shopping.model.ShoppingStorageLocation"%>
+<%@page import="com.fsquare.shopping.service.ShoppingStorageLocationLocalServiceUtil"%>
 <%@page import="com.liferay.portal.webserver.WebServerServletTokenUtil"%>
 <%@page import="com.fsquare.shopping.service.ShoppingItemImageLocalServiceUtil"%>
 <%@page import="com.fsquare.shopping.model.ShoppingItemImage"%>
@@ -13,7 +15,7 @@
 
 List<ShoppingItem> shoppingItemList = ShoppingItemLocalServiceUtil.findByGroupId(themeDisplay.getScopeGroupId());
 List<ShoppingItemType> shoppingItemTypeList = ShoppingItemTypeLocalServiceUtil.getShoppingItemTypes(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
+List<ShoppingStorageLocation> shoppingStorageLocationList = ShoppingStoreLocalServiceUtil.getShoppingStorageLocationsByGroup(themeDisplay.getScopeGroupId());
 
 %>
 <liferay-portlet:resourceURL var="openShoppingItemFormURL" secure="false">
@@ -23,16 +25,31 @@ List<ShoppingItemType> shoppingItemTypeList = ShoppingItemTypeLocalServiceUtil.g
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_OPEN_SHOPPING_ITEM_TYPE_FORM %>" />
 </liferay-portlet:resourceURL>
 <liferay-portlet:resourceURL var="saveShoppingItemURL" secure="false">
-	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SAVE_SHOPPING_ITEM_TYPE %>" />
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SAVE_SHOPPING_ITEM %>" />
 </liferay-portlet:resourceURL>
 <liferay-portlet:resourceURL var="saveShoppingItemTypeURL" secure="false">
-	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SAVE_SHOPPING_ITEM %>" />
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SAVE_SHOPPING_ITEM_TYPE %>" />
 </liferay-portlet:resourceURL>
 <liferay-portlet:resourceURL var="deleteShoppingItemTypeURL" secure="false">
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_DELETE_SHOPPING_ITEM_TYPE %>" />
 </liferay-portlet:resourceURL>
 <liferay-portlet:resourceURL var="deleteShoppingItemURL" secure="false">
 	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_DELETE_SHOPPING_ITEM %>" />
+</liferay-portlet:resourceURL>
+<liferay-portlet:resourceURL var="openStorageLocationURL" secure="false">
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_OPEN_STORAGE_LOCATION %>" />
+</liferay-portlet:resourceURL>
+<liferay-portlet:resourceURL var="saveStorageLocationURL" secure="false">
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SAVE_STORAGE_LOCATION %>" />
+</liferay-portlet:resourceURL>
+<liferay-portlet:resourceURL var="deleteStorageLocationURL" secure="false">
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_DELETE_STORAGE_LOCATION %>" />
+</liferay-portlet:resourceURL>
+<liferay-portlet:resourceURL var="saveItemStorageLocationURL" secure="false">
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_SAVE_ITEM_STORAGE_LOCATION %>" />
+</liferay-portlet:resourceURL>
+<liferay-portlet:resourceURL var="openItemStorageLocationURL" secure="false">
+	<portlet:param name="<%= Constants.CMD %>" value="<%=ShoppingPortletUtil.CMD_OPEN_ITEM_STORAGE_LOCATION %>" />
 </liferay-portlet:resourceURL>
 
 <div>
@@ -91,6 +108,7 @@ List<ShoppingItemType> shoppingItemTypeList = ShoppingItemTypeLocalServiceUtil.g
 					<td>Discount Price</td>
 					<td>SKU</td>
 					<td>itemTypeId</td>
+					<td>Quantity</td>
 					<td></td>
 				</tr>
 			</thead>
@@ -106,17 +124,20 @@ List<ShoppingItemType> shoppingItemTypeList = ShoppingItemTypeLocalServiceUtil.g
 						<img alt="<liferay-ui:message key="image" />" src='<%= Validator.isNotNull(mainImage) ? themeDisplay.getPathImage()+ "/item?img_id=" + mainImage.getImageId()+ "&t=" + WebServerServletTokenUtil.getToken(mainImage.getImageId()) : "" %>' vspace="0" />
 					</td>
 					<td id="<%= "shopping-item-id-"+shoppingItemId %>"> <%= shoppingItem.getItemId() %></td>
-					<td id="<%= "shopping-item-name-"+shoppingItemId %>"> <%= shoppingItem.getName() %></td>
+					<td id="<%= "shopping-item-title-"+shoppingItemId %>"> <%= shoppingItem.getTitle() %></td>
 					<td id="<%= "shopping-item-description-"+shoppingItemId %>"><%= shoppingItem.getDescription() %></td>
 					<td id="<%= "shopping-item-price-"+shoppingItemId %>"><%= shoppingItem.getPrice()%></td>
 					<td id="<%= "shopping-item-discount-price-"+shoppingItemId %>"><%= shoppingItem.getDiscountPrice() %></td>
 					<td id="<%= "shopping-item-sku-"+shoppingItemId %>"><%= shoppingItem.getSku() %></td>
 					<td id="<%= "shopping-item-weight-"+shoppingItemId %>"><%= shoppingItem.getItemTypeId() %></td>
-					
-					<td class="settings-actions">
+					<td id="<%= "shopping-item-quantity-"+shoppingItemId %>"><%= ShoppingItemLocalServiceUtil.availableQuantity(shoppingItemId) %></td>
+					<td class="settings-actions" style="width: 100px">
 						<a class="open-shopping-item-btn fa fa-pencil-square" data-shopping-item-id="<%= shoppingItemId %>" title="edit" href="javascript:;"></a>
 						<a class="delete-shopping-item-btn fa fa-trash" data-shopping-item-id="<%= shoppingItemId %>" title="delete" href="javascript:;"></a>
 						
+						<a class="add-shopping-item-btn fa fa-plus" data-shopping-item-id="<%= shoppingItemId %>" title="add" href="javascript:;"></a>
+						<a class="remove-shopping-item-btn fa fa-minus" data-shopping-item-id="<%= shoppingItemId %>" title="remove" href="javascript:;"></a>
+						<a class="move-shopping-item-btn fa fa-arrows-h" data-shopping-item-id="<%= shoppingItemId %>" title="move" href="javascript:;"></a>
 					</td>
 				</tr>
 			<%
@@ -131,6 +152,47 @@ List<ShoppingItemType> shoppingItemTypeList = ShoppingItemTypeLocalServiceUtil.g
 		</a>
 	</div>	
 	
+	<div class="item-table-wrapper" style="margin-top: 30px">
+		<table class="settings-table item-table table table-bordered table-striped" id="<portlet:namespace />item-table" >	
+			<thead>
+			
+				<tr>
+					<td>storageLocationId</td>
+					<td>Name</td>
+					<td>Location</td>
+					<td>description</td>
+					
+					<td></td>
+				</tr>
+			</thead>
+			<tbody>
+			<%
+			  	for(ShoppingStorageLocation storageLocation: shoppingStorageLocationList){
+			  		long storageLocationId = storageLocation.getStorageLocationId();
+		  	%>
+				<tr id="<portlet:namespace />storage-location-row-<%= storageLocationId %>">
+				
+					<td id="<%= "storage-location-id-"+storageLocationId %>"> <%= storageLocationId %></td>
+					<td id="<%= "storage-location-name-"+storageLocationId %>"> <%= storageLocation.getName() %></td>
+					<td id="<%= "storage-location-location-"+storageLocationId %>"><%= storageLocation.getLocation() %></td>
+					<td id="<%= "storage-location-description-"+storageLocationId %>"><%= storageLocation.getDescription() %></td>
+					<td class="settings-actions">
+						<a class="open-storage-location-btn fa fa-pencil-square" data-storage-location-id="<%= storageLocationId %>" title="edit" href="javascript:;"></a>
+					</td>
+				</tr>
+			<%
+			  	}		  	
+			 %>
+			</tbody>
+		
+		</table>
+		
+		<a class="btn open-new-storage-location-btn" data-shopping-item-id="" href="javascript:;">
+			<span class="fa fa-pencil-square"></span><span>New storage location</span>
+		</a>
+		
+	</div>
+		
 	<div id="<portlet:namespace />items-table-error" class="error-message items-table-error"></div>
 </div>
 <aui:script use="aui-base,selector-css3,aui-io-request,array-extras,querystring-stringify,aui-datatype,aui-datepicker">
@@ -173,11 +235,11 @@ List<ShoppingItemType> shoppingItemTypeList = ShoppingItemTypeLocalServiceUtil.g
 	              on: {
 	              	success: function() {
 						var response = this.get('responseData');
-						/*if(response.success){
-							A.one('#<portlet:namespace />shipping-row-'+shippingMethodId).remove(true);
+						if(response.success){
+							A.one('#<portlet:namespace />item-row-'+itemId).remove(true);
 						}else{
-	                  		A.one("#<portlet:namespace />shipping-table-error").text(response.errorMessage);
-						}*/
+	                  		A.one("#<portlet:namespace />items-table-error").text(response.errorMessage);
+						}
 	              	}
 	              }
 	        });
@@ -253,7 +315,6 @@ List<ShoppingItemType> shoppingItemTypeList = ShoppingItemTypeLocalServiceUtil.g
 	
 	Liferay.provide(window, '<portlet:namespace />saveShoppingItem',
 		function() {
-			//A.one("#<portlet:namespace />shipping-form-error").text('');
 			
 			var shopping_item_fm = A.one("#<portlet:namespace />shopping_item_fm");
 			
@@ -267,7 +328,9 @@ List<ShoppingItemType> shoppingItemTypeList = ShoppingItemTypeLocalServiceUtil.g
                 sync: true,
                 on: {
                     complete: function(){
-                        alert("File Upload Complete!");
+                        //var response = this.get('responseData');
+                        debug(this.get('responseData'));
+                        jQuery('#<portlet:namespace />shopping_item_form').remove();
                     },
                     success: function() {
                     	alert("File Upload Success!");
@@ -275,41 +338,143 @@ List<ShoppingItemType> shoppingItemTypeList = ShoppingItemTypeLocalServiceUtil.g
                 }
 			});
 			
-			
-			/*
-			A.io.request('<%= saveShoppingItemURL %>',{
+	    },
+		['aui-base,selector-css3']);
+	
+	A.on('click', function(event) {
+		<portlet:namespace />openItemStorageLocationForm(0,this.getAttribute('data-shopping-item-id'),'<%= ShoppingUtil.SHOPPING_ITEM_MOVEMENT_ADD %>');
+	}, '.add-shopping-item-btn');
+	A.on('click', function(event) {
+		<portlet:namespace />openItemStorageLocationForm(0,this.getAttribute('data-shopping-item-id'),'<%= ShoppingUtil.SHOPPING_ITEM_MOVEMENT_REMOVE %>');
+	}, '.remove-shopping-item-btn');
+	A.on('click', function(event) {
+		<portlet:namespace />openItemStorageLocationForm(0,this.getAttribute('data-shopping-item-id'),'<%= ShoppingUtil.SHOPPING_ITEM_MOVEMENT_MOVE %>');
+	}, '.move-shopping-item-btn');
+
+	Liferay.provide(window, '<portlet:namespace />openItemStorageLocationForm',
+		function(itemStorageLocationId, itemId, movement, wrapper) {
+			if(!wrapper){
+				wrapper = '.inventory-management';
+			}
+			console.log("itemStorageLocationId: "+itemStorageLocationId);
+			A.io.request('<%= openItemStorageLocationURL %>',{
 	              dataType: 'json',
 	              method: 'POST',
 	              data: {
-	            	  <portlet:namespace />itemId : A.one('#<portlet:namespace />itemId').val(),
+	            	  <portlet:namespace />itemStorageLocationId : itemStorageLocationId,
+	            	  <portlet:namespace />itemId : itemId,
+	            	  <portlet:namespace />movement : movement
+	              },
+	              on: {
+	                  success: function() {
+	                  	var response = this.get('responseData');
+	                  	var form = A.Node.create(response);
+	                  	form.delegate();
+	                  	form.appendTo(A.one(wrapper));
+
+	                  }
+	              }
+	        });
+			
+	    },
+		['aui-base,selector-css3,aui-datepicker']);
+	
+	
+	Liferay.provide(window, '<portlet:namespace />saveShoppingItemType',
+		function() {
+			A.io.request('<%= saveShoppingItemTypeURL %>',{
+	              dataType: 'json',
+	              method: 'POST',
+	              data: {
+	            	  <portlet:namespace />itemId : A.one('#<portlet:namespace />itemTypeId').val(),
 	            	  <portlet:namespace />name : A.one('#<portlet:namespace />name').val(),
 	            	  <portlet:namespace />description : A.one('#<portlet:namespace />description').val(),
-	            	  <portlet:namespace />price : A.one('#<portlet:namespace />price').val(),
-	            	  <portlet:namespace />discountPrice : A.one('#<portlet:namespace />discountPrice').val(),
-	            	  <portlet:namespace />sku : A.one('#<portlet:namespace />sku').val(),
-	            	  <portlet:namespace />itemTypeId : A.one('#<portlet:namespace />itemTypeId').val()
 	              },
 	              on: {
 	                  success: function() {
 	                  	var response = this.get('responseData');
 	                  	if(response.success){
-	                  		
+	                  		jQuery('#<portlet:namespace />shopping_item_type_form').remove();
 	                  	}else{
-	                  		A.one("#<portlet:namespace />shipping-form-error").text(response.errorMessage);
+	                  		A.one("#<portlet:namespace />item-type-form-error").text(response.errorMessage);
 	                  	}
 	                  	
 	                  }
 	              }
-	        });*/
+	        });
 			
 	    },
 		['aui-base,selector-css3']);
-	
 		
-	Liferay.provide(window, '<portlet:namespace />saveShoppingItemType',
+	A.on('click', function(event) {
+		<portlet:namespace />openStorageLocationForm(0);
+	}, '.open-new-storage-location-btn');
+
+	A.on('click', function(event) {
+		<portlet:namespace />openStorageLocationForm(this.getAttribute('data-storage-location-id'));
+	}, '.open-storage-location-btn');
+	
+	Liferay.provide(window, '<portlet:namespace />openStorageLocationForm',
+		function(storageLocationId) {
+		
+			A.io.request('<%= openStorageLocationURL %>',{
+	              dataType: 'json',
+	              method: 'POST',
+	              data: {
+	            	  <portlet:namespace />storageLocationId : storageLocationId
+	              },
+	              on: {
+	                  success: function() {
+	                	itemImageindex = 2;
+	                  	var response = this.get('responseData');
+	                  	var form = A.Node.create(response);
+	                  	form.delegate();
+	                  	form.appendTo(A.one('.inventory-management'));
+
+	                  }
+	              }
+	        });
+			
+	    },
+		['aui-base,selector-css3,aui-datepicker']);
+	
+	
+	A.on('click', function(event) {
+		<portlet:namespace />saveItemStorageLocation();
+	}, '.save-item-storage-location-btn');
+	
+	Liferay.provide(window, '<portlet:namespace />saveItemStorageLocation',
 			function() {
-				//A.one("#<portlet:namespace />shipping-form-error").text('');
-				A.io.request('<%= saveShoppingItemTypeURL %>',{
+				
+		
+				var shoppingItemLocationFm = A.one("#<portlet:namespace />shopping_item_location_fm");
+				A.io.request('<%= saveItemStorageLocationURL %>',{
+		              dataType: 'json',
+		              method: 'POST',
+		              data: {
+		            	  <portlet:namespace />itemId : A.one('#<portlet:namespace />itemId').val(),
+		            	  <portlet:namespace />movement : A.one('#<portlet:namespace />movement').val(),
+		            	  <portlet:namespace />storageLocationId : A.one('#<portlet:namespace />storageLocationId').val(),
+		            	  <portlet:namespace />quantity : A.one('#<portlet:namespace />quantity').val(),
+		              },
+		              on: {
+		                  success: function() {
+		                  	var response = this.get('responseData');
+		                  	if(response.success){
+		                  		jQuery('#<portlet:namespace />shopping_item_location_form').remove();
+		                  	}else{
+		                  	}
+		                  	
+		                  }
+		              }
+		        });
+				
+		    },
+			['aui-base,selector-css3']);
+	
+	Liferay.provide(window, '<portlet:namespace />saveStorageLocation',
+			function() {
+				A.io.request('<%= saveStorageLocationURL %>',{
 		              dataType: 'json',
 		              method: 'POST',
 		              data: {
@@ -321,9 +486,10 @@ List<ShoppingItemType> shoppingItemTypeList = ShoppingItemTypeLocalServiceUtil.g
 		                  success: function() {
 		                  	var response = this.get('responseData');
 		                  	if(response.success){
-		                  		
+		                  		jQuery('#<portlet:namespace />storage_location_form').remove();
+
 		                  	}else{
-		                  		A.one("#<portlet:namespace />shipping-form-error").text(response.errorMessage);
+		                  		A.one("#<portlet:namespace />storage-location-form-error").text(response.errorMessage);
 		                  	}
 		                  	
 		                  }
@@ -332,4 +498,5 @@ List<ShoppingItemType> shoppingItemTypeList = ShoppingItemTypeLocalServiceUtil.g
 				
 		    },
 			['aui-base,selector-css3']);
+	
 </aui:script>

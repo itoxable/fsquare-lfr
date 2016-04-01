@@ -33,11 +33,10 @@ public class ShoppingItemStorageLocationCacheModel implements CacheModel<Shoppin
     public long modifiedDate;
     public String name;
     public int quantity;
-    public String movementType;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(25);
+        StringBundler sb = new StringBundler(23);
 
         sb.append("{itemStorageLocationId=");
         sb.append(itemStorageLocationId);
@@ -61,8 +60,6 @@ public class ShoppingItemStorageLocationCacheModel implements CacheModel<Shoppin
         sb.append(name);
         sb.append(", quantity=");
         sb.append(quantity);
-        sb.append(", movementType=");
-        sb.append(movementType);
         sb.append("}");
 
         return sb.toString();
@@ -106,12 +103,6 @@ public class ShoppingItemStorageLocationCacheModel implements CacheModel<Shoppin
 
         shoppingItemStorageLocationImpl.setQuantity(quantity);
 
-        if (movementType == null) {
-            shoppingItemStorageLocationImpl.setMovementType(StringPool.BLANK);
-        } else {
-            shoppingItemStorageLocationImpl.setMovementType(movementType);
-        }
-
         shoppingItemStorageLocationImpl.resetOriginalValues();
 
         return shoppingItemStorageLocationImpl;
@@ -130,7 +121,6 @@ public class ShoppingItemStorageLocationCacheModel implements CacheModel<Shoppin
         modifiedDate = objectInput.readLong();
         name = objectInput.readUTF();
         quantity = objectInput.readInt();
-        movementType = objectInput.readUTF();
     }
 
     @Override
@@ -159,11 +149,5 @@ public class ShoppingItemStorageLocationCacheModel implements CacheModel<Shoppin
         }
 
         objectOutput.writeInt(quantity);
-
-        if (movementType == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(movementType);
-        }
     }
 }

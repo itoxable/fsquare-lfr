@@ -362,6 +362,28 @@ public class ShoppingItemLocalServiceWrapper implements ShoppingItemLocalService
             images, serviceContext);
     }
 
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemImage> getItemImages(
+        com.fsquare.shopping.model.ShoppingItem shoppingItem)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingItemLocalService.getItemImages(shoppingItem);
+    }
+
+    @Override
+    public com.liferay.portlet.asset.model.AssetEntry getEntry(long itemId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingItemLocalService.getEntry(itemId);
+    }
+
+    @Override
+    public int availableQuantity(long itemId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingItemLocalService.availableQuantity(itemId);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

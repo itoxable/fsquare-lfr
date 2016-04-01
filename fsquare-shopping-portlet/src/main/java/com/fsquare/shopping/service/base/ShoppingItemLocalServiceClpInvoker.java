@@ -49,16 +49,24 @@ public class ShoppingItemLocalServiceClpInvoker {
     private String[] _methodParameterTypes18;
     private String _methodName19;
     private String[] _methodParameterTypes19;
-    private String _methodName100;
-    private String[] _methodParameterTypes100;
-    private String _methodName101;
-    private String[] _methodParameterTypes101;
-    private String _methodName106;
-    private String[] _methodParameterTypes106;
-    private String _methodName107;
-    private String[] _methodParameterTypes107;
-    private String _methodName108;
-    private String[] _methodParameterTypes108;
+    private String _methodName112;
+    private String[] _methodParameterTypes112;
+    private String _methodName113;
+    private String[] _methodParameterTypes113;
+    private String _methodName118;
+    private String[] _methodParameterTypes118;
+    private String _methodName119;
+    private String[] _methodParameterTypes119;
+    private String _methodName120;
+    private String[] _methodParameterTypes120;
+    private String _methodName121;
+    private String[] _methodParameterTypes121;
+    private String _methodName122;
+    private String[] _methodParameterTypes122;
+    private String _methodName123;
+    private String[] _methodParameterTypes123;
+    private String _methodName124;
+    private String[] _methodParameterTypes124;
 
     public ShoppingItemLocalServiceClpInvoker() {
         _methodName0 = "addShoppingItem";
@@ -159,30 +167,48 @@ public class ShoppingItemLocalServiceClpInvoker {
                 "com.fsquare.shopping.model.ShoppingItem"
             };
 
-        _methodName100 = "getBeanIdentifier";
+        _methodName112 = "getBeanIdentifier";
 
-        _methodParameterTypes100 = new String[] {  };
+        _methodParameterTypes112 = new String[] {  };
 
-        _methodName101 = "setBeanIdentifier";
+        _methodName113 = "setBeanIdentifier";
 
-        _methodParameterTypes101 = new String[] { "java.lang.String" };
+        _methodParameterTypes113 = new String[] { "java.lang.String" };
 
-        _methodName106 = "findByGroupId";
+        _methodName118 = "findByGroupId";
 
-        _methodParameterTypes106 = new String[] { "long" };
+        _methodParameterTypes118 = new String[] { "long" };
 
-        _methodName107 = "addShoppingItem";
+        _methodName119 = "addShoppingItem";
 
-        _methodParameterTypes107 = new String[] {
+        _methodParameterTypes119 = new String[] {
                 "com.fsquare.shopping.model.ShoppingItem", "long",
                 "java.util.List", "com.liferay.portal.service.ServiceContext"
             };
 
-        _methodName108 = "deleteShoppingItem";
+        _methodName120 = "deleteShoppingItem";
 
-        _methodParameterTypes108 = new String[] {
+        _methodParameterTypes120 = new String[] {
                 "com.fsquare.shopping.model.ShoppingItem"
             };
+
+        _methodName121 = "deleteShoppingItem";
+
+        _methodParameterTypes121 = new String[] { "long" };
+
+        _methodName122 = "getItemImages";
+
+        _methodParameterTypes122 = new String[] {
+                "com.fsquare.shopping.model.ShoppingItem"
+            };
+
+        _methodName123 = "getEntry";
+
+        _methodParameterTypes123 = new String[] { "long" };
+
+        _methodName124 = "availableQuantity";
+
+        _methodParameterTypes124 = new String[] { "long" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -298,34 +324,54 @@ public class ShoppingItemLocalServiceClpInvoker {
             return ShoppingItemLocalServiceUtil.updateShoppingItem((com.fsquare.shopping.model.ShoppingItem) arguments[0]);
         }
 
-        if (_methodName100.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
+        if (_methodName112.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes112, parameterTypes)) {
             return ShoppingItemLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName101.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
+        if (_methodName113.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes113, parameterTypes)) {
             ShoppingItemLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
         }
 
-        if (_methodName106.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes106, parameterTypes)) {
+        if (_methodName118.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes118, parameterTypes)) {
             return ShoppingItemLocalServiceUtil.findByGroupId(((Long) arguments[0]).longValue());
         }
 
-        if (_methodName107.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes107, parameterTypes)) {
+        if (_methodName119.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes119, parameterTypes)) {
             return ShoppingItemLocalServiceUtil.addShoppingItem((com.fsquare.shopping.model.ShoppingItem) arguments[0],
                 ((Long) arguments[1]).longValue(),
                 (java.util.List<byte[]>) arguments[2],
                 (com.liferay.portal.service.ServiceContext) arguments[3]);
         }
 
-        if (_methodName108.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes108, parameterTypes)) {
+        if (_methodName120.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes120, parameterTypes)) {
             return ShoppingItemLocalServiceUtil.deleteShoppingItem((com.fsquare.shopping.model.ShoppingItem) arguments[0]);
+        }
+
+        if (_methodName121.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes121, parameterTypes)) {
+            return ShoppingItemLocalServiceUtil.deleteShoppingItem(((Long) arguments[0]).longValue());
+        }
+
+        if (_methodName122.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes122, parameterTypes)) {
+            return ShoppingItemLocalServiceUtil.getItemImages((com.fsquare.shopping.model.ShoppingItem) arguments[0]);
+        }
+
+        if (_methodName123.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes123, parameterTypes)) {
+            return ShoppingItemLocalServiceUtil.getEntry(((Long) arguments[0]).longValue());
+        }
+
+        if (_methodName124.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes124, parameterTypes)) {
+            return ShoppingItemLocalServiceUtil.availableQuantity(((Long) arguments[0]).longValue());
         }
 
         throw new UnsupportedOperationException();

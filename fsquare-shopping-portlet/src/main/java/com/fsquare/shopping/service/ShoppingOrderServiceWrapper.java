@@ -46,6 +46,39 @@ public class ShoppingOrderServiceWrapper implements ShoppingOrderService,
             arguments);
     }
 
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByGroupId(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingOrderService.findByGroupId(groupId);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndUserId(
+        long groupId, long userId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingOrderService.findBygroupIdAndUserId(groupId, userId);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndEmail(
+        long groupId, java.lang.String email)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingOrderService.findBygroupIdAndEmail(groupId, email);
+    }
+
+    @Override
+    public double getOrderTotal(
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList) {
+        return _shoppingOrderService.getOrderTotal(shoppingOrderItemList);
+    }
+
+    @Override
+    public int getOrderItemsCount(
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList) {
+        return _shoppingOrderService.getOrderItemsCount(shoppingOrderItemList);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

@@ -41,10 +41,14 @@ public class ShoppingStoreLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName90;
-    private String[] _methodParameterTypes90;
-    private String _methodName91;
-    private String[] _methodParameterTypes91;
+    private String _methodName94;
+    private String[] _methodParameterTypes94;
+    private String _methodName95;
+    private String[] _methodParameterTypes95;
+    private String _methodName100;
+    private String[] _methodParameterTypes100;
+    private String _methodName101;
+    private String[] _methodParameterTypes101;
 
     public ShoppingStoreLocalServiceClpInvoker() {
         _methodName0 = "addShoppingStore";
@@ -129,13 +133,21 @@ public class ShoppingStoreLocalServiceClpInvoker {
                 "com.fsquare.shopping.model.ShoppingStore"
             };
 
-        _methodName90 = "getBeanIdentifier";
+        _methodName94 = "getBeanIdentifier";
 
-        _methodParameterTypes90 = new String[] {  };
+        _methodParameterTypes94 = new String[] {  };
 
-        _methodName91 = "setBeanIdentifier";
+        _methodName95 = "setBeanIdentifier";
 
-        _methodParameterTypes91 = new String[] { "java.lang.String" };
+        _methodParameterTypes95 = new String[] { "java.lang.String" };
+
+        _methodName100 = "getShoppingStorageLocationsByGroup";
+
+        _methodParameterTypes100 = new String[] { "long" };
+
+        _methodName101 = "getShoppingLayouts";
+
+        _methodParameterTypes101 = new String[] { "long" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -227,16 +239,26 @@ public class ShoppingStoreLocalServiceClpInvoker {
             return ShoppingStoreLocalServiceUtil.updateShoppingStore((com.fsquare.shopping.model.ShoppingStore) arguments[0]);
         }
 
-        if (_methodName90.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
+        if (_methodName94.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
             return ShoppingStoreLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName91.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
+        if (_methodName95.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes95, parameterTypes)) {
             ShoppingStoreLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
+        }
+
+        if (_methodName100.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
+            return ShoppingStoreLocalServiceUtil.getShoppingStorageLocationsByGroup(((Long) arguments[0]).longValue());
+        }
+
+        if (_methodName101.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
+            return ShoppingStoreLocalServiceUtil.getShoppingLayouts(((Long) arguments[0]).longValue());
         }
 
         throw new UnsupportedOperationException();

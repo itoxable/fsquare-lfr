@@ -9,6 +9,7 @@
 	
 		<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 	
+		#css("/fsquare-fonts-theme/css/main.css?minifierType=css")
 		$theme.include($top_head_include)
 		
 		#js("$javascript_folder/vendor/jquery-1.11.3.min.js")
@@ -22,7 +23,8 @@
 		#set ($js_file = $htmlUtil.escape($portalUtil.getStaticResourceURL($request, "$javascript_folder/vendor/jquery.magnific-popup.js")))
 		#js ("$js_file")
 		
-		<link href='//fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+<!-- 		<link href='//fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+		<link href='//fonts.googleapis.com/css?family=Quicksand:400,700,300|Pacifico|Lato:300,400,700' rel='stylesheet' type='text/css'>
 		
 <!-- UI JS file -->
 	</head>
@@ -124,6 +126,9 @@
 							</div>
 							
 						</footer>
+						#if (!$is_signed_in)
+										<a data-redirect="$is_login_redirect_required" href="$sign_in_url" rel="nofollow">$sign_in_text</a>
+									#end
 					</div>
 				</div>
 			</div>

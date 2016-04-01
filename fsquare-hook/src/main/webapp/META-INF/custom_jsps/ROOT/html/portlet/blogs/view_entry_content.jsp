@@ -164,14 +164,13 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 						<%
 						String summary = entry.getDescription();
 
-						if (Validator.isNull(summary)) {
+						if (!displayStyle.equals(BlogsUtil.DISPLAY_STYLE_FULL_CONTENT) && !strutsAction.equals("/blogs/view_entry")  && Validator.isNull(summary)) {
 							summary = entry.getContent();
 						}
 						%>
 
 						<%= StringUtil.shorten(HtmlUtil.stripHtml(summary), pageAbstractLength) %>
 					</div>
-						
  
 				</c:if>
 				<c:if test='<%= displayStyle.equals(BlogsUtil.DISPLAY_STYLE_FULL_CONTENT) || strutsAction.equals("/blogs/view_entry") %>'>

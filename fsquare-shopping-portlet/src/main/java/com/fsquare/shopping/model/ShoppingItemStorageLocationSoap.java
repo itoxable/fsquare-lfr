@@ -25,7 +25,6 @@ public class ShoppingItemStorageLocationSoap implements Serializable {
     private Date _modifiedDate;
     private String _name;
     private int _quantity;
-    private String _movementType;
 
     public ShoppingItemStorageLocationSoap() {
     }
@@ -45,7 +44,6 @@ public class ShoppingItemStorageLocationSoap implements Serializable {
         soapModel.setModifiedDate(model.getModifiedDate());
         soapModel.setName(model.getName());
         soapModel.setQuantity(model.getQuantity());
-        soapModel.setMovementType(model.getMovementType());
 
         return soapModel;
     }
@@ -183,13 +181,5 @@ public class ShoppingItemStorageLocationSoap implements Serializable {
 
     public void setQuantity(int quantity) {
         _quantity = quantity;
-    }
-
-    public String getMovementType() {
-        return _movementType;
-    }
-
-    public void setMovementType(String movementType) {
-        _movementType = movementType;
     }
 }

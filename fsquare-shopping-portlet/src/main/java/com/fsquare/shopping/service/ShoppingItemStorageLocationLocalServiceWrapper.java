@@ -278,6 +278,39 @@ public class ShoppingItemStorageLocationLocalServiceWrapper
             parameterTypes, arguments);
     }
 
+    @Override
+    public com.fsquare.shopping.model.ShoppingItemStorageLocation findByItemIdAndStorageLocationId(
+        long itemId, long storageLocationId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingItemStorageLocationLocalService.findByItemIdAndStorageLocationId(itemId,
+            storageLocationId);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByItemId(
+        long itemId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingItemStorageLocationLocalService.findByItemId(itemId);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByStorageLocationId(
+        long storageLocationId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingItemStorageLocationLocalService.findByStorageLocationId(storageLocationId);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByGroupId(
+        long groupId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingItemStorageLocationLocalService.findByGroupId(groupId);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

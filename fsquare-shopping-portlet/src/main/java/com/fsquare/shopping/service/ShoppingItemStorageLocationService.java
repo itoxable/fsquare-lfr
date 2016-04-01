@@ -51,4 +51,24 @@ public interface ShoppingItemStorageLocationService extends BaseService,
     public java.lang.Object invokeMethod(java.lang.String name,
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable;
+
+    public com.fsquare.shopping.model.ShoppingItemStorageLocation findByItemIdAndStorageLocationId(
+        long itemId, long storageLocationId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByItemId(
+        long itemId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByStorageLocationId(
+        long storageLocationId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByGroupId(
+        long groupId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException;
 }

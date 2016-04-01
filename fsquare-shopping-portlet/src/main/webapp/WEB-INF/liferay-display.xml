@@ -12,7 +12,7 @@
 		<portlet id="shopping-orders-management" />
 		<portlet id="user-shopping-orders" />
 		<portlet id="inventory-management" />
-		
+		<portlet id="portal-rest-services" />
 		
 	</category>
 </display>

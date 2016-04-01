@@ -24,11 +24,6 @@
 	<input name="recaptcha_response_field" type="hidden" value="manual_challenge" />
 </noscript>
 
-<aui:script position="inline">
-	var RecaptchaOptions = {
-		lang : '<%= locale.getLanguage() %>',
-		theme : 'white'
-	};
-</aui:script>
+<div class="g-recaptcha" data-sitekey="<%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC, PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC) %>"></div>
+<script src="<%= HttpUtil.protocolize(PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT, request.isSecure()) %>" type="text/javascript"></script>
 
-<script src="<%= HttpUtil.protocolize(PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT, request.isSecure()) %><%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC, PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC) %>" type="text/javascript"></script>

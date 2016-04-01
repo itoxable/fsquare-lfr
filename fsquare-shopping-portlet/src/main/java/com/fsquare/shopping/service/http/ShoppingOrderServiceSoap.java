@@ -1,5 +1,12 @@
 package com.fsquare.shopping.service.http;
 
+import com.fsquare.shopping.service.ShoppingOrderServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.fsquare.shopping.service.ShoppingOrderServiceUtil} service utility. The
@@ -41,4 +48,75 @@ package com.fsquare.shopping.service.http;
  * @generated
  */
 public class ShoppingOrderServiceSoap {
+    private static Log _log = LogFactoryUtil.getLog(ShoppingOrderServiceSoap.class);
+
+    public static com.fsquare.shopping.model.ShoppingOrderSoap[] findByGroupId(
+        long groupId) throws RemoteException {
+        try {
+            java.util.List<com.fsquare.shopping.model.ShoppingOrder> returnValue =
+                ShoppingOrderServiceUtil.findByGroupId(groupId);
+
+            return com.fsquare.shopping.model.ShoppingOrderSoap.toSoapModels(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingOrderSoap[] findBygroupIdAndUserId(
+        long groupId, long userId) throws RemoteException {
+        try {
+            java.util.List<com.fsquare.shopping.model.ShoppingOrder> returnValue =
+                ShoppingOrderServiceUtil.findBygroupIdAndUserId(groupId, userId);
+
+            return com.fsquare.shopping.model.ShoppingOrderSoap.toSoapModels(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingOrderSoap[] findBygroupIdAndEmail(
+        long groupId, java.lang.String email) throws RemoteException {
+        try {
+            java.util.List<com.fsquare.shopping.model.ShoppingOrder> returnValue =
+                ShoppingOrderServiceUtil.findBygroupIdAndEmail(groupId, email);
+
+            return com.fsquare.shopping.model.ShoppingOrderSoap.toSoapModels(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static double getOrderTotal(
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList)
+        throws RemoteException {
+        try {
+            double returnValue = ShoppingOrderServiceUtil.getOrderTotal(shoppingOrderItemList);
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static int getOrderItemsCount(
+        java.util.Collection<com.fsquare.shopping.model.ShoppingOrderItem> shoppingOrderItemList)
+        throws RemoteException {
+        try {
+            int returnValue = ShoppingOrderServiceUtil.getOrderItemsCount(shoppingOrderItemList);
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

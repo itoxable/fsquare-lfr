@@ -1,3 +1,5 @@
+<%@page import="com.fsquare.shopping.service.ShoppingItemStorageLocationLocalServiceUtil"%>
+<%@page import="com.fsquare.shopping.model.ShoppingItemStorageLocation"%>
 <%@page import="com.fsquare.shopping.service.ShoppingItemImageLocalServiceUtil"%>
 <%@page import="com.fsquare.shopping.model.ShoppingItemImage"%>
 <%@page import="com.liferay.portal.kernel.dao.orm.QueryUtil"%>
@@ -18,8 +20,12 @@ ShoppingItem shoppingItem = (ShoppingItem)request.getAttribute(ShoppingPortletUt
 
 List<ShoppingItemType> shoppingItemTypeList = ShoppingItemTypeLocalServiceUtil.getShoppingItemTypes(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 List<ShoppingItemImage> shoppingItemImageList = new ArrayList<ShoppingItemImage>();
+List<ShoppingItemStorageLocation> shoppingItemStorageLocationList = new ArrayList<ShoppingItemStorageLocation>();
+List<ShoppingItemStorageLocation> allShoppingItemStorageLocationList = ShoppingItemStorageLocationLocalServiceUtil.findByGroupId(themeDisplay.getScopeGroupId());
+
 if(!shoppingItem.isNew()){
-	shoppingItemImageList = ShoppingItemImageLocalServiceUtil.findByGroupIdAndItemId(themeDisplay.getScopeGroupId(), shoppingItem.getItemId());
+	shoppingItemImageList = ShoppingItemImageLocalServiceUtil.findByGroupIdAndItemId(themeDisplay.getScopeGroupId(), shoppingItem.getItemId()); 
+	shoppingItemStorageLocationList = ShoppingItemStorageLocationLocalServiceUtil.findByItemId(shoppingItem.getItemId());
 }
 %>
 		
@@ -32,7 +38,7 @@ if(!shoppingItem.isNew()){
 		<aui:form name='shopping_item_fm' enctype="multipart/form-data">
 			<div class="">	
 				<aui:input name="itemId" type="text" value="<%= shoppingItem.getItemId()  %>" disabled="true"/>
-				<aui:input name="name" type="text" value="<%= shoppingItem.getName() %>" placeholder="Name"/>
+				<aui:input name="title" type="text" value="<%= shoppingItem.getTitle() %>" placeholder="Title"/>
 				<aui:input name="description" type="textarea" inlineField="<%=true %>" cssClass="text-area" value="<%= shoppingItem.getDescription() %>" placeholder="Description" />
 				<aui:input name="price" type="text" value="<%= shoppingItem.getPrice() %>" placeholder="Price"/>
 				<aui:input name="discountPrice" type="text" value="<%= shoppingItem.getDiscountPrice() %>" placeholder="discountPrice"/>
@@ -98,6 +104,39 @@ if(!shoppingItem.isNew()){
 				</div>
 				
 				
+				<c:if test="<%= !shoppingItem.isNew() %>">
+					<div class="item-table-wrapper" >
+						<table class="settings-table item-table table table-bordered table-striped" id="<portlet:namespace />item-table" >	
+							<thead>
+							
+								<tr>
+									<td>Name</td>
+									<td>Quantity</td>
+									<td></td>
+								</tr>
+							</thead>
+							<tbody>
+							<%
+							  	for(ShoppingItemStorageLocation shoppingItemStorageLocation: shoppingItemStorageLocationList){
+							  		long shoppingItemStorageLocationId = shoppingItemStorageLocation.getItemStorageLocationId();
+						  	%>
+								<tr id="<portlet:namespace />item-storage-location-row-<%= shoppingItemStorageLocationId %>">
+								
+									<td id="<%= "item-storage-location-name-"+shoppingItemStorageLocationId %>"> <%= shoppingItemStorageLocation.getName() %></td>
+									<td id="<%= "item-storage-location-quantity-"+shoppingItemStorageLocationId %>"><%= shoppingItemStorageLocation.getQuantity() %></td>
+									<td class="settings-actions">
+										<a class="save-item-storage-location-btn fa fa-pencil-square" data-item-storage-location-id="<%= shoppingItemStorageLocationId %>" title="edit" href="javascript:;"></a>
+									</td>
+								</tr>
+							<%
+							  	}		  	
+							 %>
+							</tbody>
+						
+						</table>
+					</div>
+				</c:if>	
+				
 				
 				<div class="clearfix"></div>
 			</div>
@@ -105,6 +144,8 @@ if(!shoppingItem.isNew()){
 				
 			</div>
 		</aui:form>
+		
+		
 	</div>
 	<div class="modal-footer">
 		<button class="btn" type="button" onclick="jQuery('#<portlet:namespace />shopping_item_form').remove();" >Close</button>

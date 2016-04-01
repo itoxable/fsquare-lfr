@@ -36,6 +36,9 @@ JournalArticle journalArticle = null;
 String title = (String)request.getAttribute("view.jsp-title");
 String text = "";
 String imagePath = "";
+String imageMediumPath = "";
+String imageSmallPath = "";
+
 String secondSection = "";
 String link = "";
 double priority = assetEntry.getPriority();
@@ -44,19 +47,6 @@ if (Validator.isNull(title)) {
 }
 
 String editTitle = null;
-/*if(assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker())){
-	PortletURL portletURL = renderResponse.createRenderURL();
-	portletURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
-	portletURL.setWindowState(LiferayWindowState.POP_UP);
-	//redirect = portletURL.toString();
-	PortletURL editPortletURL = assetRenderer.getURLEdit(renderRequest, renderResponse, WindowStateFactory.getWindowState("pop_up"), portletURL);
-	if (Validator.isNotNull(editPortletURL)) {
-		editTitle = LanguageUtil.format(locale, "edit-x", title);
-		
-	}
-}
-
-*/
 
 String editURL = null;
 
@@ -84,6 +74,20 @@ try {
 		Node fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Image']/dynamic-content");
 		if (fieldContent != null) {
 			imagePath = fieldContent.getText();
+		}
+		
+		fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Image_Small']/dynamic-content");
+		if (fieldContent != null) {
+			imageSmallPath = fieldContent.getText();
+		}else{
+			imageSmallPath = imagePath;
+		}
+		
+		fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Image_Medium']/dynamic-content");
+		if (fieldContent != null) {
+			imageMediumPath = fieldContent.getText();
+		}else{
+			imageMediumPath = imagePath;
 		}
 		
 		fieldContent = document
@@ -129,8 +133,10 @@ try {
 
 
 
-<div class="image-carousel-wrapper" style="background-image: url('<%=imagePath %>')" id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>">
+<div class="image-carousel-wrapper" data-image="<%=imagePath %>" data-image-small="<%=imageSmallPath %>" data-image-medium="<%=imageMediumPath %>" data-image-large="<%=imagePath %>" id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>">
 
+<%-- 	<img alt="<%=title %>" src="<%=imagePath %>'"> --%>
+	
 	<c:if test='<%= assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker()) %>'>
 		<%@ include file="/html/portlet/asset_publisher/display/item_actions.jspf" %>
 	</c:if>

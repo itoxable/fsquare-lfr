@@ -119,7 +119,9 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 
 	<c:choose>
 		<c:when test='<%= facebookComments %>'>
-			<div class="fb-comments" data-href="<%=PortalUtil.getLayoutFullURL(themeDisplay) %>" data-version="v2.3" data-width="100%"></div>
+<%-- 			<div class="fb-comments" data-href="<%=PortalUtil.getLayoutFullURL(themeDisplay) %>" data-version="v2.3" data-width="100%"></div> --%>
+			
+			<div class="fb-comments" data-href="http://developers.facebook.com/docs/plugins/comments/" data-numposts="5"></div>
 		</c:when>
 		<c:otherwise>
 			

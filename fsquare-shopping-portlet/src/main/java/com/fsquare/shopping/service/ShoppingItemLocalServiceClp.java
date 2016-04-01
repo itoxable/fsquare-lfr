@@ -56,6 +56,12 @@ public class ShoppingItemLocalServiceClp implements ShoppingItemLocalService {
     private String[] _methodParameterTypes23;
     private String _methodName24;
     private String[] _methodParameterTypes24;
+    private String _methodName25;
+    private String[] _methodParameterTypes25;
+    private String _methodName26;
+    private String[] _methodParameterTypes26;
+    private String _methodName27;
+    private String[] _methodParameterTypes27;
 
     public ShoppingItemLocalServiceClp(
         InvokableLocalService invokableLocalService) {
@@ -177,6 +183,20 @@ public class ShoppingItemLocalServiceClp implements ShoppingItemLocalService {
                 "com.fsquare.shopping.model.ShoppingItem", "long",
                 "java.util.List", "com.liferay.portal.service.ServiceContext"
             };
+
+        _methodName25 = "getItemImages";
+
+        _methodParameterTypes25 = new String[] {
+                "com.fsquare.shopping.model.ShoppingItem"
+            };
+
+        _methodName26 = "getEntry";
+
+        _methodParameterTypes26 = new String[] { "long" };
+
+        _methodName27 = "availableQuantity";
+
+        _methodParameterTypes27 = new String[] { "long" };
     }
 
     @Override
@@ -891,5 +911,100 @@ public class ShoppingItemLocalServiceClp implements ShoppingItemLocalService {
         }
 
         return (com.fsquare.shopping.model.ShoppingItem) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemImage> getItemImages(
+        com.fsquare.shopping.model.ShoppingItem shoppingItem)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName25,
+                    _methodParameterTypes25,
+                    new Object[] { ClpSerializer.translateInput(shoppingItem) });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+                throw (com.liferay.portal.kernel.exception.PortalException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<com.fsquare.shopping.model.ShoppingItemImage>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public com.liferay.portlet.asset.model.AssetEntry getEntry(long itemId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName26,
+                    _methodParameterTypes26, new Object[] { itemId });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+                throw (com.liferay.portal.kernel.exception.PortalException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (com.liferay.portlet.asset.model.AssetEntry) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public int availableQuantity(long itemId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName27,
+                    _methodParameterTypes27, new Object[] { itemId });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+                throw (com.liferay.portal.kernel.exception.PortalException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return ((Integer) returnObj).intValue();
     }
 }

@@ -2,16 +2,22 @@ package com.fsquare.shopping.service.persistence;
 
 import com.fsquare.shopping.model.ShoppingItem;
 
+import com.liferay.portal.kernel.dao.orm.Criterion;
+import com.liferay.portal.kernel.dao.orm.Disjunction;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.ExportImportHelperUtil;
 import com.liferay.portal.kernel.lar.ManifestSummary;
 import com.liferay.portal.kernel.lar.PortletDataContext;
+import com.liferay.portal.kernel.lar.StagedModelDataHandler;
+import com.liferay.portal.kernel.lar.StagedModelDataHandlerRegistryUtil;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.lar.StagedModelType;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.util.PortalUtil;
 
 /**
@@ -53,7 +59,19 @@ public class ShoppingItemExportActionableDynamicQuery
 
     @Override
     protected void addCriteria(DynamicQuery dynamicQuery) {
-        _portletDataContext.addDateRangeCriteria(dynamicQuery, "modifiedDate");
+        Criterion modifiedDateCriterion = _portletDataContext.getDateRangeCriteria(
+                "modifiedDate");
+        Criterion statusDateCriterion = _portletDataContext.getDateRangeCriteria(
+                "statusDate");
+
+        if ((modifiedDateCriterion != null) && (statusDateCriterion != null)) {
+            Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
+
+            disjunction.add(modifiedDateCriterion);
+            disjunction.add(statusDateCriterion);
+
+            dynamicQuery.add(disjunction);
+        }
 
         if (getStagedModelType().getReferrerClassNameId() >= 0) {
             Property classNameIdProperty = PropertyFactoryUtil.forName(
@@ -61,6 +79,18 @@ public class ShoppingItemExportActionableDynamicQuery
 
             dynamicQuery.add(classNameIdProperty.eq(getStagedModelType()
                                                         .getReferrerClassNameId()));
+        }
+
+        Property workflowStatusProperty = PropertyFactoryUtil.forName("status");
+
+        if (_portletDataContext.isInitialPublication()) {
+            dynamicQuery.add(workflowStatusProperty.ne(
+                    WorkflowConstants.STATUS_IN_TRASH));
+        } else {
+            StagedModelDataHandler<?> stagedModelDataHandler = StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(ShoppingItem.class.getName());
+
+            dynamicQuery.add(workflowStatusProperty.in(
+                    stagedModelDataHandler.getExportableStatuses()));
         }
     }
 

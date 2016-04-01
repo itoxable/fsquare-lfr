@@ -191,6 +191,36 @@ public interface ShoppingStorageLocationModel extends BaseModel<ShoppingStorageL
      */
     public void setName(String name);
 
+    /**
+     * Returns the description of this shopping storage location.
+     *
+     * @return the description of this shopping storage location
+     */
+    @AutoEscape
+    public String getDescription();
+
+    /**
+     * Sets the description of this shopping storage location.
+     *
+     * @param description the description of this shopping storage location
+     */
+    public void setDescription(String description);
+
+    /**
+     * Returns the location of this shopping storage location.
+     *
+     * @return the location of this shopping storage location
+     */
+    @AutoEscape
+    public String getLocation();
+
+    /**
+     * Sets the location of this shopping storage location.
+     *
+     * @param location the location of this shopping storage location
+     */
+    public void setLocation(String location);
+
     @Override
     public boolean isNew();
 

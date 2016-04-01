@@ -59,9 +59,11 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
             { "userName", Types.VARCHAR },
             { "createDate", Types.TIMESTAMP },
             { "modifiedDate", Types.TIMESTAMP },
-            { "name", Types.VARCHAR }
+            { "name", Types.VARCHAR },
+            { "description", Types.VARCHAR },
+            { "location", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStorageLocation (storageLocationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStorageLocation (storageLocationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null,location VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingStorageLocation";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingStorageLocation.storageLocationId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingStorageLocation.storageLocationId ASC";
@@ -96,6 +98,8 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
     private Date _createDate;
     private Date _modifiedDate;
     private String _name;
+    private String _description;
+    private String _location;
     private long _columnBitmask;
     private ShoppingStorageLocation _escapedModel;
 
@@ -124,6 +128,8 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
         model.setCreateDate(soapModel.getCreateDate());
         model.setModifiedDate(soapModel.getModifiedDate());
         model.setName(soapModel.getName());
+        model.setDescription(soapModel.getDescription());
+        model.setLocation(soapModel.getLocation());
 
         return model;
     }
@@ -191,6 +197,8 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
         attributes.put("createDate", getCreateDate());
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("name", getName());
+        attributes.put("description", getDescription());
+        attributes.put("location", getLocation());
 
         return attributes;
     }
@@ -243,6 +251,18 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
 
         if (name != null) {
             setName(name);
+        }
+
+        String description = (String) attributes.get("description");
+
+        if (description != null) {
+            setDescription(description);
+        }
+
+        String location = (String) attributes.get("location");
+
+        if (location != null) {
+            setLocation(location);
         }
     }
 
@@ -364,6 +384,36 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
         _name = name;
     }
 
+    @JSON
+    @Override
+    public String getDescription() {
+        if (_description == null) {
+            return StringPool.BLANK;
+        } else {
+            return _description;
+        }
+    }
+
+    @Override
+    public void setDescription(String description) {
+        _description = description;
+    }
+
+    @JSON
+    @Override
+    public String getLocation() {
+        if (_location == null) {
+            return StringPool.BLANK;
+        } else {
+            return _location;
+        }
+    }
+
+    @Override
+    public void setLocation(String location) {
+        _location = location;
+    }
+
     public long getColumnBitmask() {
         return _columnBitmask;
     }
@@ -403,6 +453,8 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
         shoppingStorageLocationImpl.setCreateDate(getCreateDate());
         shoppingStorageLocationImpl.setModifiedDate(getModifiedDate());
         shoppingStorageLocationImpl.setName(getName());
+        shoppingStorageLocationImpl.setDescription(getDescription());
+        shoppingStorageLocationImpl.setLocation(getLocation());
 
         shoppingStorageLocationImpl.resetOriginalValues();
 
@@ -503,12 +555,28 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
             shoppingStorageLocationCacheModel.name = null;
         }
 
+        shoppingStorageLocationCacheModel.description = getDescription();
+
+        String description = shoppingStorageLocationCacheModel.description;
+
+        if ((description != null) && (description.length() == 0)) {
+            shoppingStorageLocationCacheModel.description = null;
+        }
+
+        shoppingStorageLocationCacheModel.location = getLocation();
+
+        String location = shoppingStorageLocationCacheModel.location;
+
+        if ((location != null) && (location.length() == 0)) {
+            shoppingStorageLocationCacheModel.location = null;
+        }
+
         return shoppingStorageLocationCacheModel;
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(17);
+        StringBundler sb = new StringBundler(21);
 
         sb.append("{storageLocationId=");
         sb.append(getStorageLocationId());
@@ -526,6 +594,10 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
         sb.append(getModifiedDate());
         sb.append(", name=");
         sb.append(getName());
+        sb.append(", description=");
+        sb.append(getDescription());
+        sb.append(", location=");
+        sb.append(getLocation());
         sb.append("}");
 
         return sb.toString();
@@ -533,7 +605,7 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(28);
+        StringBundler sb = new StringBundler(34);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStorageLocation");
@@ -570,6 +642,14 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
         sb.append(
             "<column><column-name>name</column-name><column-value><![CDATA[");
         sb.append(getName());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>description</column-name><column-value><![CDATA[");
+        sb.append(getDescription());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>location</column-name><column-value><![CDATA[");
+        sb.append(getLocation());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

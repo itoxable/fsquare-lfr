@@ -842,6 +842,8 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
         shoppingStorageLocationImpl.setCreateDate(shoppingStorageLocation.getCreateDate());
         shoppingStorageLocationImpl.setModifiedDate(shoppingStorageLocation.getModifiedDate());
         shoppingStorageLocationImpl.setName(shoppingStorageLocation.getName());
+        shoppingStorageLocationImpl.setDescription(shoppingStorageLocation.getDescription());
+        shoppingStorageLocationImpl.setLocation(shoppingStorageLocation.getLocation());
 
         return shoppingStorageLocationImpl;
     }

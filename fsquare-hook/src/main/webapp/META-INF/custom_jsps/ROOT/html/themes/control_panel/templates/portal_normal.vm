@@ -12,6 +12,18 @@
 	$theme.include($top_head_include)
 	
 	<link href='//fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+	
+	#css ("$css_folder/blessed-print.css")
+	#css ("$css_folder/faith-glory.css")
+	#css ("$css_folder/font-awesome.css")
+	#css ("$css_folder/graduate.css")
+	#css ("$css_folder/hunterswood.css")
+	#css ("$css_folder/merloround.css")
+	#css ("$css_folder/safina.css")
+	#css ("$css_folder/stringbeans.css")
+	
+	#css ("$css_folder/editor-custom.css")
+	
 </head>
 
 <body class="$css_class">

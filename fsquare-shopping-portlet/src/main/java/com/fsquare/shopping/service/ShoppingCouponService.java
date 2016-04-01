@@ -52,10 +52,49 @@ public interface ShoppingCouponService extends BaseService, InvokableService {
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable;
 
+    public java.util.Map<java.util.Locale, java.lang.String> testMap(
+        java.util.Map<java.util.Locale, java.lang.String> map);
+
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
         java.lang.String code, long groupId);
 
     public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
         java.lang.Long groupId);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public boolean isCouponValid(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.lang.String getCouponStatus(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon);
+
+    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupIdStartEnd(
+        java.lang.Long groupId, int start, int end);
+
+    public int countByGroupId(java.lang.Long groupId);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.Map<java.lang.String, java.lang.Object> getPagedItems(
+        java.lang.Long groupId, int start, int end);
+
+    public void updateShoppingCoupon(long couponId, long groupId,
+        java.lang.String code, java.lang.String name,
+        java.lang.String description, java.util.Date startDate,
+        java.util.Date endDate, boolean active,
+        java.lang.String limitCategories, java.lang.String limitSkus,
+        double minOrder, double discount, java.lang.String discountType,
+        long maxUses, long userid, long companyId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    public com.fsquare.shopping.model.ShoppingCoupon deleteCoupon(long couponId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    public com.fsquare.shopping.model.ShoppingCoupon updateShoppingCoupon(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
 }

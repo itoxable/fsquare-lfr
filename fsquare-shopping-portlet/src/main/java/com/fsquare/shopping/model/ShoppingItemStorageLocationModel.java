@@ -233,21 +233,6 @@ public interface ShoppingItemStorageLocationModel extends BaseModel<ShoppingItem
      */
     public void setQuantity(int quantity);
 
-    /**
-     * Returns the movement type of this shopping item storage location.
-     *
-     * @return the movement type of this shopping item storage location
-     */
-    @AutoEscape
-    public String getMovementType();
-
-    /**
-     * Sets the movement type of this shopping item storage location.
-     *
-     * @param movementType the movement type of this shopping item storage location
-     */
-    public void setMovementType(String movementType);
-
     @Override
     public boolean isNew();
 

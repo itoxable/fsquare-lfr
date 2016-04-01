@@ -51,6 +51,11 @@ public class ShoppingCouponServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static java.util.Map<java.util.Locale, java.lang.String> testMap(
+        java.util.Map<java.util.Locale, java.lang.String> map) {
+        return getService().testMap(map);
+    }
+
     public static com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
         java.lang.String code, long groupId) {
         return getService().fetchByCodeAndGroupId(code, groupId);
@@ -59,6 +64,59 @@ public class ShoppingCouponServiceUtil {
     public static java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
         java.lang.Long groupId) {
         return getService().findByGroupId(groupId);
+    }
+
+    public static boolean isCouponValid(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon) {
+        return getService().isCouponValid(shoppingCoupon);
+    }
+
+    public static java.lang.String getCouponStatus(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon) {
+        return getService().getCouponStatus(shoppingCoupon);
+    }
+
+    public static java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupIdStartEnd(
+        java.lang.Long groupId, int start, int end) {
+        return getService().findByGroupIdStartEnd(groupId, start, end);
+    }
+
+    public static int countByGroupId(java.lang.Long groupId) {
+        return getService().countByGroupId(groupId);
+    }
+
+    public static java.util.Map<java.lang.String, java.lang.Object> getPagedItems(
+        java.lang.Long groupId, int start, int end) {
+        return getService().getPagedItems(groupId, start, end);
+    }
+
+    public static void updateShoppingCoupon(long couponId, long groupId,
+        java.lang.String code, java.lang.String name,
+        java.lang.String description, java.util.Date startDate,
+        java.util.Date endDate, boolean active,
+        java.lang.String limitCategories, java.lang.String limitSkus,
+        double minOrder, double discount, java.lang.String discountType,
+        long maxUses, long userid, long companyId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        getService()
+            .updateShoppingCoupon(couponId, groupId, code, name, description,
+            startDate, endDate, active, limitCategories, limitSkus, minOrder,
+            discount, discountType, maxUses, userid, companyId);
+    }
+
+    public static com.fsquare.shopping.model.ShoppingCoupon deleteCoupon(
+        long couponId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().deleteCoupon(couponId);
+    }
+
+    public static com.fsquare.shopping.model.ShoppingCoupon updateShoppingCoupon(
+        com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().updateShoppingCoupon(shoppingCoupon);
     }
 
     public static void clearService() {

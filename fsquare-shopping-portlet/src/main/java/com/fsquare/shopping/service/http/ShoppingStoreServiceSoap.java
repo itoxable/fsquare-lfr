@@ -1,5 +1,12 @@
 package com.fsquare.shopping.service.http;
 
+import com.fsquare.shopping.service.ShoppingStoreServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.fsquare.shopping.service.ShoppingStoreServiceUtil} service utility. The
@@ -41,4 +48,62 @@ package com.fsquare.shopping.service.http;
  * @generated
  */
 public class ShoppingStoreServiceSoap {
+    private static Log _log = LogFactoryUtil.getLog(ShoppingStoreServiceSoap.class);
+
+    public static com.liferay.portlet.asset.model.AssetCategorySoap[] getShoppingAssetCategories(
+        long groupId) throws RemoteException {
+        try {
+            java.util.List<com.liferay.portlet.asset.model.AssetCategory> returnValue =
+                ShoppingStoreServiceUtil.getShoppingAssetCategories(groupId);
+
+            return com.liferay.portlet.asset.model.AssetCategorySoap.toSoapModels(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingStoreSoap getShoppingStore(
+        long groupId) throws RemoteException {
+        try {
+            com.fsquare.shopping.model.ShoppingStore returnValue = ShoppingStoreServiceUtil.getShoppingStore(groupId);
+
+            return com.fsquare.shopping.model.ShoppingStoreSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingStoreSoap addShoppingStore(
+        com.fsquare.shopping.model.ShoppingStoreSoap shoppingStore)
+        throws RemoteException {
+        try {
+            com.fsquare.shopping.model.ShoppingStore returnValue = ShoppingStoreServiceUtil.addShoppingStore(com.fsquare.shopping.model.impl.ShoppingStoreModelImpl.toModel(
+                        shoppingStore));
+
+            return com.fsquare.shopping.model.ShoppingStoreSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingStoreSoap updateShoppingStore(
+        com.fsquare.shopping.model.ShoppingStoreSoap shoppingStore)
+        throws RemoteException {
+        try {
+            com.fsquare.shopping.model.ShoppingStore returnValue = ShoppingStoreServiceUtil.updateShoppingStore(com.fsquare.shopping.model.impl.ShoppingStoreModelImpl.toModel(
+                        shoppingStore));
+
+            return com.fsquare.shopping.model.ShoppingStoreSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

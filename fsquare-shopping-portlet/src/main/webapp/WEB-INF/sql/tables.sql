@@ -8,7 +8,7 @@ create table FsquareShopping_ShoppingCoupon (
 	modifiedDate DATE null,
 	code_ VARCHAR(75) null,
 	name VARCHAR(75) null,
-	description VARCHAR(1000) null,
+	description VARCHAR(2000) null,
 	startDate DATE null,
 	endDate DATE null,
 	active_ BOOLEAN,
@@ -31,12 +31,16 @@ create table FsquareShopping_ShoppingItem (
 	modifiedDate DATE null,
 	classNameId LONG,
 	classPK LONG,
-	name VARCHAR(75) null,
-	description VARCHAR(75) null,
+	title VARCHAR(75) null,
+	description VARCHAR(2000) null,
 	price DOUBLE,
 	discountPrice DOUBLE,
 	sku VARCHAR(75) null,
-	itemTypeId LONG
+	itemTypeId LONG,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );
 
 create table FsquareShopping_ShoppingItemImage (
@@ -59,8 +63,7 @@ create table FsquareShopping_ShoppingItemStorageLocation (
 	createDate DATE null,
 	modifiedDate DATE null,
 	name VARCHAR(75) null,
-	quantity INTEGER,
-	movementType VARCHAR(75) null
+	quantity INTEGER
 );
 
 create table FsquareShopping_ShoppingItemType (
@@ -117,7 +120,7 @@ create table FsquareShopping_ShoppingOrder (
 	shippingPostCode VARCHAR(75) null,
 	shippingCountry VARCHAR(75) null,
 	shippingPhone VARCHAR(75) null,
-	comments VARCHAR(1000) null,
+	comments VARCHAR(2000) null,
 	externalPaymentId VARCHAR(75) null,
 	paymentType VARCHAR(75) null,
 	sendOrderEmail BOOLEAN,
@@ -132,7 +135,7 @@ create table FsquareShopping_ShoppingOrderItem (
 	articleId VARCHAR(75) null,
 	sku VARCHAR(75) null,
 	name VARCHAR(200) null,
-	description VARCHAR(1000) null,
+	description VARCHAR(2000) null,
 	properties VARCHAR(75) null,
 	price DOUBLE,
 	quantity INTEGER,
@@ -149,7 +152,7 @@ create table FsquareShopping_ShoppingShippingMethod (
 	modifiedDate DATE null,
 	price DOUBLE,
 	name VARCHAR(75) null,
-	description VARCHAR(1000) null,
+	description VARCHAR(2000) null,
 	freeQuantity LONG,
 	freeTotal DOUBLE,
 	weight DOUBLE,
@@ -167,7 +170,9 @@ create table FsquareShopping_ShoppingStorageLocation (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	name VARCHAR(75) null
+	name VARCHAR(75) null,
+	description VARCHAR(75) null,
+	location VARCHAR(75) null
 );
 
 create table FsquareShopping_ShoppingStore (

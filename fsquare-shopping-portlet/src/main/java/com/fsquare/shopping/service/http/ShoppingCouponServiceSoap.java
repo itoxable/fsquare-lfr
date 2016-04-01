@@ -77,4 +77,109 @@ public class ShoppingCouponServiceSoap {
             throw new RemoteException(e.getMessage());
         }
     }
+
+    public static boolean isCouponValid(
+        com.fsquare.shopping.model.ShoppingCouponSoap shoppingCoupon)
+        throws RemoteException {
+        try {
+            boolean returnValue = ShoppingCouponServiceUtil.isCouponValid(com.fsquare.shopping.model.impl.ShoppingCouponModelImpl.toModel(
+                        shoppingCoupon));
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static java.lang.String getCouponStatus(
+        com.fsquare.shopping.model.ShoppingCouponSoap shoppingCoupon)
+        throws RemoteException {
+        try {
+            java.lang.String returnValue = ShoppingCouponServiceUtil.getCouponStatus(com.fsquare.shopping.model.impl.ShoppingCouponModelImpl.toModel(
+                        shoppingCoupon));
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingCouponSoap[] findByGroupIdStartEnd(
+        java.lang.Long groupId, int start, int end) throws RemoteException {
+        try {
+            java.util.List<com.fsquare.shopping.model.ShoppingCoupon> returnValue =
+                ShoppingCouponServiceUtil.findByGroupIdStartEnd(groupId, start,
+                    end);
+
+            return com.fsquare.shopping.model.ShoppingCouponSoap.toSoapModels(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static int countByGroupId(java.lang.Long groupId)
+        throws RemoteException {
+        try {
+            int returnValue = ShoppingCouponServiceUtil.countByGroupId(groupId);
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static void updateShoppingCoupon(long couponId, long groupId,
+        java.lang.String code, java.lang.String name,
+        java.lang.String description, java.util.Date startDate,
+        java.util.Date endDate, boolean active,
+        java.lang.String limitCategories, java.lang.String limitSkus,
+        double minOrder, double discount, java.lang.String discountType,
+        long maxUses, long userid, long companyId) throws RemoteException {
+        try {
+            ShoppingCouponServiceUtil.updateShoppingCoupon(couponId, groupId,
+                code, name, description, startDate, endDate, active,
+                limitCategories, limitSkus, minOrder, discount, discountType,
+                maxUses, userid, companyId);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingCouponSoap deleteCoupon(
+        long couponId) throws RemoteException {
+        try {
+            com.fsquare.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.deleteCoupon(couponId);
+
+            return com.fsquare.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static com.fsquare.shopping.model.ShoppingCouponSoap updateShoppingCoupon(
+        com.fsquare.shopping.model.ShoppingCouponSoap shoppingCoupon)
+        throws RemoteException {
+        try {
+            com.fsquare.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.updateShoppingCoupon(com.fsquare.shopping.model.impl.ShoppingCouponModelImpl.toModel(
+                        shoppingCoupon));
+
+            return com.fsquare.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

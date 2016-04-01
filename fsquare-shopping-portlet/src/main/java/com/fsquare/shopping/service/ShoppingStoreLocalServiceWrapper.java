@@ -276,6 +276,18 @@ public class ShoppingStoreLocalServiceWrapper
             arguments);
     }
 
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingStorageLocation> getShoppingStorageLocationsByGroup(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingStoreLocalService.getShoppingStorageLocationsByGroup(groupId);
+    }
+
+    @Override
+    public java.util.List<java.lang.String[]> getShoppingLayouts(long groupId) {
+        return _shoppingStoreLocalService.getShoppingLayouts(groupId);
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

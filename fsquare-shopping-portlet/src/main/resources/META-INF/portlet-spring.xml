@@ -32,4 +32,6 @@
 	<bean id="com.fsquare.shopping.service.ShoppingStoreLocalService" class="com.fsquare.shopping.service.impl.ShoppingStoreLocalServiceImpl" />
 	<bean id="com.fsquare.shopping.service.ShoppingStoreService" class="com.fsquare.shopping.service.impl.ShoppingStoreServiceImpl" />
 	<bean id="com.fsquare.shopping.service.persistence.ShoppingStorePersistence" class="com.fsquare.shopping.service.persistence.ShoppingStorePersistenceImpl" parent="basePersistence" />
+	<bean id="com.fsquare.shopping.service.SiteCommonActionsLocalService" class="com.fsquare.shopping.service.impl.SiteCommonActionsLocalServiceImpl" />
+	<bean id="com.fsquare.shopping.service.SiteCommonActionsService" class="com.fsquare.shopping.service.impl.SiteCommonActionsServiceImpl" />
 </beans>

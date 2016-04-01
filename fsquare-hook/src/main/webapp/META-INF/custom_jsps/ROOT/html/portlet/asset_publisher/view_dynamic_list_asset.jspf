@@ -114,6 +114,43 @@ if(displayStyle.equals("carousel")) {
 	</div></div></div></div>
 	<script type="text/javascript" charset="utf-8">
 	    jQuery('.image-carousel-<%= portletId %>').slick(<%= carouselSettings %>);
+	    
+	    if(window.innerWidth < 767){
+    		$('.image-carousel-wrapper').each(function(index) {
+			  var item = $(this);
+			  item.css('background-image',"url('"+item.attr('data-image-small')+"')");
+			});
+    	}else if(window.innerWidth < 980){
+    		$('.image-carousel-wrapper').each(function(index) {
+			  var item = $(this);
+			  item.css('background-image',"url('"+item.attr('data-image-medium')+"')");
+			});
+    	}else{
+    		$('.image-carousel-wrapper').each(function(index) {
+			  var item = $(this);
+			  item.css('background-image',"url('"+item.attr('data-image')+"')");
+			});
+    	}
+	    
+	    $(window).resize(function() {
+	    	if(window.innerWidth < 767){
+	    		$('.image-carousel-wrapper').each(function(index) {
+    			  var item = $(this);
+    			  item.css('background-image',"url('"+item.attr('data-image-small')+"')");
+    			});
+	    	}else if(window.innerWidth < 980){
+	    		$('.image-carousel-wrapper').each(function(index) {
+    			  var item = $(this);
+    			  item.css('background-image',"url('"+item.attr('data-image-medium')+"')");
+    			});
+	    	}else{
+	    		$('.image-carousel-wrapper').each(function(index) {
+    			  var item = $(this);
+    			  item.css('background-image',"url('"+item.attr('data-image')+"')");
+    			});
+	    	}
+	    });
+	    
 	</script>
 <% } else if(displayStyle.equals("free-layout")) {%>
 	</div>

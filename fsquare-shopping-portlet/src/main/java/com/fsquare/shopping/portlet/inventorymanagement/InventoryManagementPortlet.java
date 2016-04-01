@@ -13,13 +13,18 @@ import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import com.fsquare.shopping.NoSuchShoppingItemStorageLocationException;
 import com.fsquare.shopping.model.ShoppingItem;
+import com.fsquare.shopping.model.ShoppingItemStorageLocation;
 import com.fsquare.shopping.model.ShoppingItemType;
 import com.fsquare.shopping.model.ShoppingShippingMethod;
+import com.fsquare.shopping.model.ShoppingStorageLocation;
 import com.fsquare.shopping.portlet.util.ShoppingPortletUtil;
 import com.fsquare.shopping.service.ShoppingItemLocalServiceUtil;
+import com.fsquare.shopping.service.ShoppingItemStorageLocationLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingItemTypeLocalServiceUtil;
 import com.fsquare.shopping.service.ShoppingShippingMethodLocalServiceUtil;
+import com.fsquare.shopping.service.ShoppingStorageLocationLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -54,21 +59,218 @@ public class InventoryManagementPortlet extends MVCPortlet{
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_OPEN_SHOPPING_ITEM_TYPE_FORM)) {
 				openShoppingItemTypeForm(resourceRequest, resourceResponse);
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_SAVE_SHOPPING_ITEM_TYPE)) {
-				saveShoppingItem(resourceRequest, resourceResponse);
-			}else if (cmd.equals(ShoppingPortletUtil.CMD_SAVE_SHOPPING_ITEM)) {
 				saveShoppingItemType(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_SAVE_SHOPPING_ITEM)) {
+				saveShoppingItem(resourceRequest, resourceResponse);
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_DELETE_SHOPPING_ITEM_TYPE)) {
 				deleteShoppingItemType(resourceRequest, resourceResponse);
 			}else if (cmd.equals(ShoppingPortletUtil.CMD_DELETE_SHOPPING_ITEM)) {
 				deleteShoppingItem(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_OPEN_STORAGE_LOCATION)) {
+				openStorageLocation(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_SAVE_STORAGE_LOCATION)) {
+				saveStorageLocation(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_DELETE_STORAGE_LOCATION)) {
+				deleteStorageLocation(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_SAVE_ITEM_STORAGE_LOCATION)) {
+				saveItemStorageLocation(resourceRequest, resourceResponse);
+			}else if (cmd.equals(ShoppingPortletUtil.CMD_OPEN_ITEM_STORAGE_LOCATION)) {
+				openItemStorageLocation(resourceRequest, resourceResponse);
 			}
-			
+		
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+	private void openItemStorageLocation(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws PortletException, IOException, PortalException, SystemException {
+		Long shoppingItemStorageLocationId = ParamUtil.getLong(resourceRequest, "shoppingItemStorageLocationId");
+		Long itemId = ParamUtil.getLong(resourceRequest, "itemId");
+		
+		String movement = ParamUtil.getString(resourceRequest, "movement");
+		resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_ITEM_MOVEMENT, movement);
+		PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
+
+		ShoppingItemStorageLocation shoppingItemStorageLocation = null;
+        if(shoppingItemStorageLocationId == null || shoppingItemStorageLocationId == 0){
+        	shoppingItemStorageLocation = ShoppingItemStorageLocationLocalServiceUtil.createShoppingItemStorageLocation(CounterLocalServiceUtil.increment(ShoppingItemStorageLocation.class.getName()));
+        }else{
+        	shoppingItemStorageLocation = ShoppingItemStorageLocationLocalServiceUtil.getShoppingItemStorageLocation(shoppingItemStorageLocationId);
+        }
+		
+		String path = "/inventory-management/inventory-item-location-form.jsp";
+		PortletRequestDispatcher dispatcher = portletContext.getRequestDispatcher(path);
+		
+		resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_ITEM_STORAGE_LOCATION, shoppingItemStorageLocation);
+		if(Validator.isNotNull(itemId)){
+			ShoppingItem shoppingItem = ShoppingItemLocalServiceUtil.getShoppingItem(itemId);
+			resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_SHOPPING_ITEM, shoppingItem);
+		}
+		dispatcher.include(resourceRequest, resourceResponse);
+		
+	}
+
+	private void saveItemStorageLocation(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException {
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        boolean success = true;
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+		try{
+			boolean isNew = false;
+	        Long itemId = ParamUtil.getLong(resourceRequest, "itemId");
+	        Long storageLocationId = ParamUtil.getLong(resourceRequest, "storageLocationId"); 
+	        String movement = ParamUtil.getString(resourceRequest, "movement"); 
+	        int quantity = ParamUtil.getInteger(resourceRequest, "quantity"); 
+	        
+	        ShoppingItemStorageLocation shoppingItemStorageLocation = null;
+	        try{
+	        	shoppingItemStorageLocation = ShoppingItemStorageLocationLocalServiceUtil.findByItemIdAndStorageLocationId(itemId, storageLocationId);
+	        }catch(NoSuchShoppingItemStorageLocationException nse){
+	        	nse.printStackTrace();
+	        }
+	        if(shoppingItemStorageLocation == null){	        	
+	        	shoppingItemStorageLocation = ShoppingItemStorageLocationLocalServiceUtil.createShoppingItemStorageLocation(CounterLocalServiceUtil.increment(ShoppingItemStorageLocation.class.getName()));       	
+	        	
+	        	shoppingItemStorageLocation.setGroupId(themeDisplay.getScopeGroupId());
+	        	shoppingItemStorageLocation.setCreateDate(new Date());
+	        	shoppingItemStorageLocation.setCompanyId(themeDisplay.getCompanyId());
+	        	shoppingItemStorageLocation.setUserId(themeDisplay.getUserId());
+				User user = UserLocalServiceUtil.getUser(themeDisplay.getUserId());
+				shoppingItemStorageLocation.setUserName(user.getLogin());
+				isNew = true;
+	        }
+	        shoppingItemStorageLocation.setItemId(itemId);
+	        shoppingItemStorageLocation.setStorageLocationId(storageLocationId);
+	        shoppingItemStorageLocation.setQuantity(quantity);
+//	        else{
+//	        	shoppingItemStorageLocation = ShoppingItemStorageLocationLocalServiceUtil.getShoppingItemStorageLocation(shoppingItemStorageLocationId);
+//	        }
+	        
+	        ShoppingItemStorageLocationLocalServiceUtil.updateShoppingItemStorageLocation(shoppingItemStorageLocation);
+	        
+	        jsonObject.put("isNew", isNew);
+	        jsonObject.put("shoppingItemStorageLocation", JSONFactoryUtil.looseSerialize(shoppingItemStorageLocation));
+	       
+		}catch(SystemException e){
+			success = false;
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-saving-shopping-item-type"));
+		}catch(PortalException e){
+			success = false;
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-saving-shopping-item-type"));
+		}catch(Exception e){
+			e.printStackTrace();
+			success = false;
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-saving-shopping-item-type"));
+		}
+        jsonObject.put("success", success);
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
+		
+		
+	}
+
+	private void deleteStorageLocation(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException {
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        boolean success = false;
+        
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+        Long storageLocationId = ParamUtil.getLong(resourceRequest, "storageLocationId");
+        try {
+			ShoppingStorageLocation shoppingStorageLocation = ShoppingStorageLocationLocalServiceUtil.deleteShoppingStorageLocation(storageLocationId);
+			success = true;
+		} catch (PortalException e) {
+			e.printStackTrace();
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-deleting-storage-location"));
+		} catch (SystemException e) {
+			e.printStackTrace();
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-deleting-storage-location"));
+		}
+        jsonObject.put("success", success);
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
+	}
+
+	private void saveStorageLocation(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException {
+		
+		PrintWriter writer = resourceResponse.getWriter();
+        JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
+        boolean success = true;
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+		try{
+			boolean isNew = false;
+	        Long storageLocationId = ParamUtil.getLong(resourceRequest, "storageLocationId");
+	        String name = ParamUtil.getString(resourceRequest, "name"); 
+	        String description = ParamUtil.getString(resourceRequest, "description"); 
+	        String location = ParamUtil.getString(resourceRequest, "location"); 
+	        
+	        ShoppingStorageLocation shoppingStorageLocation = null;
+	        if(storageLocationId == null || storageLocationId == 0){
+	        	storageLocationId = CounterLocalServiceUtil.increment(ShoppingStorageLocation.class.getName());
+	        	shoppingStorageLocation = ShoppingStorageLocationLocalServiceUtil.createShoppingStorageLocation(storageLocationId);  
+	        	shoppingStorageLocation.setGroupId(themeDisplay.getScopeGroupId());
+	        	shoppingStorageLocation.setCreateDate(new Date());
+	        	shoppingStorageLocation.setCompanyId(themeDisplay.getCompanyId());
+	        	shoppingStorageLocation.setUserId(themeDisplay.getUserId());
+				User user = UserLocalServiceUtil.getUser(themeDisplay.getUserId());
+				shoppingStorageLocation.setUserName(user.getLogin());
+				isNew = true;
+
+	        }else{
+	        	shoppingStorageLocation = ShoppingStorageLocationLocalServiceUtil.getShoppingStorageLocation(storageLocationId);
+	        }
+	        
+	        jsonObject.put("isNew", isNew);
+	        
+	        shoppingStorageLocation.setName(name);
+	        shoppingStorageLocation.setDescription(description);
+	        shoppingStorageLocation.setLocation(location);
+	        shoppingStorageLocation = ShoppingStorageLocationLocalServiceUtil.updateShoppingStorageLocation(shoppingStorageLocation);
+	        
+	        jsonObject.put("shoppingStorageLocation", JSONFactoryUtil.looseSerialize(shoppingStorageLocation));
+	       
+		}catch(SystemException e){
+			success = false;
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-saving-shopping-item-type"));
+		}catch(PortalException e){
+			success = false;
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-saving-shopping-item-type"));
+		}catch(Exception e){
+			success = false;
+			jsonObject.put("errorMessage", LanguageUtil.get(themeDisplay.getLocale(), "error-saving-shopping-item-type"));
+		}
+        jsonObject.put("success", success);
+		writer.print(jsonObject.toString());
+        writer.flush();
+        writer.close();
+		
+	}
+	
+	private void openStorageLocation(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws SystemException, PortalException, PortletException, IOException {
+		Long storageLocationId = ParamUtil.getLong(resourceRequest, "storageLocationId");
+		PortletContext portletContext = resourceRequest.getPortletSession().getPortletContext();
+
+		ShoppingStorageLocation shoppingStorageLocation = null;
+        if(storageLocationId == null || storageLocationId == 0){
+        	storageLocationId = CounterLocalServiceUtil.increment(ShoppingItem.class.getName());
+        	shoppingStorageLocation = ShoppingStorageLocationLocalServiceUtil.createShoppingStorageLocation(0);
+        }else{
+        	shoppingStorageLocation = ShoppingStorageLocationLocalServiceUtil.getShoppingStorageLocation(storageLocationId);
+        }
+		
+		String path = "/inventory-management/inventory-location-form.jsp";
+		PortletRequestDispatcher dispatcher = portletContext.getRequestDispatcher(path);
+		
+		resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_STORAGE_LOCATION, shoppingStorageLocation);
+		dispatcher.include(resourceRequest, resourceResponse);
+	}
+
 	private void saveShoppingItem(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException {
 		PrintWriter writer = resourceResponse.getWriter();
         JSONObject jsonObject =  JSONFactoryUtil.createJSONObject();
@@ -78,24 +280,24 @@ public class InventoryManagementPortlet extends MVCPortlet{
 		try{
 			boolean isNew = false;
 	        Long itemId = ParamUtil.getLong(resourceRequest, "itemId");
-	        String name = ParamUtil.getString(resourceRequest, "name"); 
+	        String title = ParamUtil.getString(resourceRequest, "title"); 
 	        String description = ParamUtil.getString(resourceRequest, "description"); 
 	        Double price = ParamUtil.getDouble(resourceRequest, "price"); 
 	        Double discountPrice = ParamUtil.getDouble(resourceRequest, "discountPrice"); 
 	        String sku = ParamUtil.getString(resourceRequest, "sku"); 
 	        long itemTypeId = ParamUtil.getLong(resourceRequest, "itemTypeId"); 
 
-	        
+	        List<byte[]> images = new ArrayList<byte[]>();
 	        UploadPortletRequest uploadrequest = PortalUtil.getUploadPortletRequest(resourceRequest);
 	        File image1 = uploadrequest.getFile("image1");
 	        //uploadrequest.get
 	        String imageURL1 = ParamUtil.getString(resourceRequest, "imageURL1");
 	        if(Validator.isNotNull(imageURL1)){
-	        	HttpUtil.URLtoByteArray(imageURL1);
+	        	images.add(HttpUtil.URLtoByteArray(imageURL1));
+	        }else{
+	        	images.add(FileUtil.getBytes(image1));
 	        }
-	        List<byte[]> images = new ArrayList<byte[]>();
-	        images.add(FileUtil.getBytes(image1));
-	        
+	        	        
 	        ServiceContext serviceContext = new ServiceContext();
 			serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
 			serviceContext.setCompanyId(themeDisplay.getCompanyId());
@@ -110,7 +312,7 @@ public class InventoryManagementPortlet extends MVCPortlet{
 	        	shoppingItem.setCreateDate(createDate);
 	        	shoppingItem.setCompanyId(themeDisplay.getCompanyId());
 	        	shoppingItem.setUserId(themeDisplay.getUserId());
-				shoppingItem.setUserName(user.getLogin());
+				shoppingItem.setUserName(user.getFullName());
 				shoppingItem.setUserUuid(PortalUUIDUtil.generate());
 				isNew = true;
 				serviceContext.setCreateDate(createDate);
@@ -118,12 +320,12 @@ public class InventoryManagementPortlet extends MVCPortlet{
 	        }else{
 	        	shoppingItem = ShoppingItemLocalServiceUtil.getShoppingItem(itemId);
 	        }
-	        
+	        serviceContext.setUserId(user.getUserId());
 	        serviceContext.setUuid(shoppingItem.getUuid());
 	        jsonObject.put("isNew", isNew);
 	        
 	        shoppingItem.setPrice(price);
-	        shoppingItem.setName(name);
+	        shoppingItem.setTitle(title);
 	        shoppingItem.setDescription(description);
 	        shoppingItem.setDiscountPrice(discountPrice);
 	        shoppingItem.setSku(sku);

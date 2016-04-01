@@ -34,7 +34,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
     private Date _modifiedDate;
     private String _name;
     private int _quantity;
-    private String _movementType;
     private BaseModel<?> _shoppingItemStorageLocationRemoteModel;
     private Class<?> _clpSerializerClass = com.fsquare.shopping.service.ClpSerializer.class;
 
@@ -86,7 +85,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("name", getName());
         attributes.put("quantity", getQuantity());
-        attributes.put("movementType", getMovementType());
 
         return attributes;
     }
@@ -158,12 +156,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
 
         if (quantity != null) {
             setQuantity(quantity);
-        }
-
-        String movementType = (String) attributes.get("movementType");
-
-        if (movementType != null) {
-            setMovementType(movementType);
         }
     }
 
@@ -425,29 +417,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
         }
     }
 
-    @Override
-    public String getMovementType() {
-        return _movementType;
-    }
-
-    @Override
-    public void setMovementType(String movementType) {
-        _movementType = movementType;
-
-        if (_shoppingItemStorageLocationRemoteModel != null) {
-            try {
-                Class<?> clazz = _shoppingItemStorageLocationRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setMovementType", String.class);
-
-                method.invoke(_shoppingItemStorageLocationRemoteModel,
-                    movementType);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
-    }
-
     public BaseModel<?> getShoppingItemStorageLocationRemoteModel() {
         return _shoppingItemStorageLocationRemoteModel;
     }
@@ -528,7 +497,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
         clone.setModifiedDate(getModifiedDate());
         clone.setName(getName());
         clone.setQuantity(getQuantity());
-        clone.setMovementType(getMovementType());
 
         return clone;
     }
@@ -579,7 +547,7 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(25);
+        StringBundler sb = new StringBundler(23);
 
         sb.append("{itemStorageLocationId=");
         sb.append(getItemStorageLocationId());
@@ -603,8 +571,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
         sb.append(getName());
         sb.append(", quantity=");
         sb.append(getQuantity());
-        sb.append(", movementType=");
-        sb.append(getMovementType());
         sb.append("}");
 
         return sb.toString();
@@ -612,7 +578,7 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(40);
+        StringBundler sb = new StringBundler(37);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingItemStorageLocation");
@@ -661,10 +627,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
         sb.append(
             "<column><column-name>quantity</column-name><column-value><![CDATA[");
         sb.append(getQuantity());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>movementType</column-name><column-value><![CDATA[");
-        sb.append(getMovementType());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

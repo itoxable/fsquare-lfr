@@ -341,6 +341,26 @@ public class ShoppingItemLocalServiceUtil {
                    .addShoppingItem(shoppingItem, userId, images, serviceContext);
     }
 
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> getItemImages(
+        com.fsquare.shopping.model.ShoppingItem shoppingItem)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().getItemImages(shoppingItem);
+    }
+
+    public static com.liferay.portlet.asset.model.AssetEntry getEntry(
+        long itemId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().getEntry(itemId);
+    }
+
+    public static int availableQuantity(long itemId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().availableQuantity(itemId);
+    }
+
     public static void clearService() {
         _service = null;
     }

@@ -64,16 +64,23 @@
 			</basic>
 			<basic name="classNameId" />
 			<basic name="classPK" />
-			<basic name="name" />
+			<basic name="title" />
 			<basic name="description" />
 			<basic name="price" />
 			<basic name="discountPrice" />
 			<basic name="sku" />
 			<basic name="itemTypeId" />
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="className" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
+			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -109,7 +116,6 @@
 			</basic>
 			<basic name="name" />
 			<basic name="quantity" />
-			<basic name="movementType" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -261,6 +267,8 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="name" />
+			<basic name="description" />
+			<basic name="location" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

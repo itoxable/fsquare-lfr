@@ -30,6 +30,17 @@ boolean sendAsEmail = GetterUtil.getBoolean(portletPreferences.getValue("sendAsE
 String emailFromName = WebFormUtil.getEmailFromName(portletPreferences, company.getCompanyId());
 String emailFromAddress = WebFormUtil.getEmailFromAddress(portletPreferences, company.getCompanyId());
 String emailAddress = portletPreferences.getValue("emailAddress", StringPool.BLANK);
+
+if("DEFAULT".equals(emailFromAddress)){
+	emailFromAddress = PortalUtil.getEmailFromAddress(portletPreferences, company.getCompanyId(), null);
+}
+if("DEFAULT".equals(emailAddress)){
+	emailAddress = PortalUtil.getEmailFromAddress(portletPreferences, company.getCompanyId(), null);
+}
+if("DEFAULT".equals(emailFromName)){
+	emailFromName = PortalUtil.getEmailFromName(portletPreferences, company.getCompanyId(), null);
+}
+
 String subject = portletPreferences.getValue("subject", StringPool.BLANK);
 String formValidationScript = portletPreferences.getValue("formValidationScript", StringPool.BLANK);
 String onFormLoadScript = portletPreferences.getValue("onFormLoadScript", StringPool.BLANK);

@@ -31,6 +31,8 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
     private Date _createDate;
     private Date _modifiedDate;
     private String _name;
+    private String _description;
+    private String _location;
     private BaseModel<?> _shoppingStorageLocationRemoteModel;
     private Class<?> _clpSerializerClass = com.fsquare.shopping.service.ClpSerializer.class;
 
@@ -79,6 +81,8 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
         attributes.put("createDate", getCreateDate());
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("name", getName());
+        attributes.put("description", getDescription());
+        attributes.put("location", getLocation());
 
         return attributes;
     }
@@ -131,6 +135,18 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
 
         if (name != null) {
             setName(name);
+        }
+
+        String description = (String) attributes.get("description");
+
+        if (description != null) {
+            setDescription(description);
+        }
+
+        String location = (String) attributes.get("location");
+
+        if (location != null) {
+            setLocation(location);
         }
     }
 
@@ -322,6 +338,50 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
         }
     }
 
+    @Override
+    public String getDescription() {
+        return _description;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        _description = description;
+
+        if (_shoppingStorageLocationRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStorageLocationRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setDescription", String.class);
+
+                method.invoke(_shoppingStorageLocationRemoteModel, description);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
+    @Override
+    public String getLocation() {
+        return _location;
+    }
+
+    @Override
+    public void setLocation(String location) {
+        _location = location;
+
+        if (_shoppingStorageLocationRemoteModel != null) {
+            try {
+                Class<?> clazz = _shoppingStorageLocationRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setLocation", String.class);
+
+                method.invoke(_shoppingStorageLocationRemoteModel, location);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
     public BaseModel<?> getShoppingStorageLocationRemoteModel() {
         return _shoppingStorageLocationRemoteModel;
     }
@@ -399,6 +459,8 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
         clone.setCreateDate(getCreateDate());
         clone.setModifiedDate(getModifiedDate());
         clone.setName(getName());
+        clone.setDescription(getDescription());
+        clone.setLocation(getLocation());
 
         return clone;
     }
@@ -448,7 +510,7 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(17);
+        StringBundler sb = new StringBundler(21);
 
         sb.append("{storageLocationId=");
         sb.append(getStorageLocationId());
@@ -466,6 +528,10 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
         sb.append(getModifiedDate());
         sb.append(", name=");
         sb.append(getName());
+        sb.append(", description=");
+        sb.append(getDescription());
+        sb.append(", location=");
+        sb.append(getLocation());
         sb.append("}");
 
         return sb.toString();
@@ -473,7 +539,7 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(28);
+        StringBundler sb = new StringBundler(34);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStorageLocation");
@@ -510,6 +576,14 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
         sb.append(
             "<column><column-name>name</column-name><column-value><![CDATA[");
         sb.append(getName());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>description</column-name><column-value><![CDATA[");
+        sb.append(getDescription());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>location</column-name><column-value><![CDATA[");
+        sb.append(getLocation());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

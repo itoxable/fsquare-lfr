@@ -51,6 +51,38 @@ public class ShoppingStoreServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static java.util.Map<java.lang.String, java.lang.String[]> getSettings() {
+        return getService().getSettings();
+    }
+
+    public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getShoppingAssetCategories(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().getShoppingAssetCategories(groupId);
+    }
+
+    public static com.fsquare.shopping.model.ShoppingStore getShoppingStore(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().getShoppingStore(groupId);
+    }
+
+    public static com.fsquare.shopping.model.ShoppingStore addShoppingStore(
+        com.fsquare.shopping.model.ShoppingStore shoppingStore)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().addShoppingStore(shoppingStore);
+    }
+
+    public static com.fsquare.shopping.model.ShoppingStore updateShoppingStore(
+        com.fsquare.shopping.model.ShoppingStore shoppingStore)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().updateShoppingStore(shoppingStore);
+    }
+
     public static void clearService() {
         _service = null;
     }

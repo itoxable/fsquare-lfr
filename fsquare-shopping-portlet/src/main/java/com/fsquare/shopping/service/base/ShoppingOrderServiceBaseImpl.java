@@ -99,6 +99,10 @@ public abstract class ShoppingOrderServiceBaseImpl extends BaseServiceImpl
     protected com.fsquare.shopping.service.ShoppingStoreService shoppingStoreService;
     @BeanReference(type = ShoppingStorePersistence.class)
     protected ShoppingStorePersistence shoppingStorePersistence;
+    @BeanReference(type = com.fsquare.shopping.service.SiteCommonActionsLocalService.class)
+    protected com.fsquare.shopping.service.SiteCommonActionsLocalService siteCommonActionsLocalService;
+    @BeanReference(type = com.fsquare.shopping.service.SiteCommonActionsService.class)
+    protected com.fsquare.shopping.service.SiteCommonActionsService siteCommonActionsService;
     @BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
     protected com.liferay.counter.service.CounterLocalService counterLocalService;
     @BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)
@@ -706,6 +710,44 @@ public abstract class ShoppingOrderServiceBaseImpl extends BaseServiceImpl
     public void setShoppingStorePersistence(
         ShoppingStorePersistence shoppingStorePersistence) {
         this.shoppingStorePersistence = shoppingStorePersistence;
+    }
+
+    /**
+     * Returns the site common actions local service.
+     *
+     * @return the site common actions local service
+     */
+    public com.fsquare.shopping.service.SiteCommonActionsLocalService getSiteCommonActionsLocalService() {
+        return siteCommonActionsLocalService;
+    }
+
+    /**
+     * Sets the site common actions local service.
+     *
+     * @param siteCommonActionsLocalService the site common actions local service
+     */
+    public void setSiteCommonActionsLocalService(
+        com.fsquare.shopping.service.SiteCommonActionsLocalService siteCommonActionsLocalService) {
+        this.siteCommonActionsLocalService = siteCommonActionsLocalService;
+    }
+
+    /**
+     * Returns the site common actions remote service.
+     *
+     * @return the site common actions remote service
+     */
+    public com.fsquare.shopping.service.SiteCommonActionsService getSiteCommonActionsService() {
+        return siteCommonActionsService;
+    }
+
+    /**
+     * Sets the site common actions remote service.
+     *
+     * @param siteCommonActionsService the site common actions remote service
+     */
+    public void setSiteCommonActionsService(
+        com.fsquare.shopping.service.SiteCommonActionsService siteCommonActionsService) {
+        this.siteCommonActionsService = siteCommonActionsService;
     }
 
     /**

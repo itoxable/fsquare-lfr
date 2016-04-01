@@ -11,6 +11,11 @@ create index IX_76691698 on FsquareShopping_ShoppingItemImage (groupId);
 create index IX_6764021A on FsquareShopping_ShoppingItemImage (groupId, itemId);
 create unique index IX_36734FF8 on FsquareShopping_ShoppingItemImage (groupId, itemId, mainImage);
 
+create index IX_42CCDAC3 on FsquareShopping_ShoppingItemStorageLocation (groupId);
+create index IX_3265F649 on FsquareShopping_ShoppingItemStorageLocation (itemId);
+create unique index IX_58F7CE92 on FsquareShopping_ShoppingItemStorageLocation (itemId, storageLocationId);
+create index IX_836CBE54 on FsquareShopping_ShoppingItemStorageLocation (storageLocationId);
+
 create index IX_69976F1B on FsquareShopping_ShoppingItemType (groupId);
 create unique index IX_5DAE0D7C on FsquareShopping_ShoppingItemType (name, groupId);
 

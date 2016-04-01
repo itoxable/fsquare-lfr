@@ -22,6 +22,8 @@ import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetLinkPersistence;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 
 import javax.sql.DataSource;
 
@@ -101,6 +103,10 @@ public abstract class ShoppingItemServiceBaseImpl extends BaseServiceImpl
     protected com.fsquare.shopping.service.ShoppingStoreService shoppingStoreService;
     @BeanReference(type = ShoppingStorePersistence.class)
     protected ShoppingStorePersistence shoppingStorePersistence;
+    @BeanReference(type = com.fsquare.shopping.service.SiteCommonActionsLocalService.class)
+    protected com.fsquare.shopping.service.SiteCommonActionsLocalService siteCommonActionsLocalService;
+    @BeanReference(type = com.fsquare.shopping.service.SiteCommonActionsService.class)
+    protected com.fsquare.shopping.service.SiteCommonActionsService siteCommonActionsService;
     @BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
     protected com.liferay.counter.service.CounterLocalService counterLocalService;
     @BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)
@@ -117,6 +123,14 @@ public abstract class ShoppingItemServiceBaseImpl extends BaseServiceImpl
     protected com.liferay.portlet.asset.service.AssetEntryService assetEntryService;
     @BeanReference(type = AssetEntryPersistence.class)
     protected AssetEntryPersistence assetEntryPersistence;
+    @BeanReference(type = com.liferay.portlet.asset.service.AssetLinkLocalService.class)
+    protected com.liferay.portlet.asset.service.AssetLinkLocalService assetLinkLocalService;
+    @BeanReference(type = AssetLinkPersistence.class)
+    protected AssetLinkPersistence assetLinkPersistence;
+    @BeanReference(type = com.liferay.portlet.ratings.service.RatingsStatsLocalService.class)
+    protected com.liferay.portlet.ratings.service.RatingsStatsLocalService ratingsStatsLocalService;
+    @BeanReference(type = RatingsStatsPersistence.class)
+    protected RatingsStatsPersistence ratingsStatsPersistence;
     private String _beanIdentifier;
     private ClassLoader _classLoader;
     private ShoppingItemServiceClpInvoker _clpInvoker = new ShoppingItemServiceClpInvoker();
@@ -717,6 +731,44 @@ public abstract class ShoppingItemServiceBaseImpl extends BaseServiceImpl
     }
 
     /**
+     * Returns the site common actions local service.
+     *
+     * @return the site common actions local service
+     */
+    public com.fsquare.shopping.service.SiteCommonActionsLocalService getSiteCommonActionsLocalService() {
+        return siteCommonActionsLocalService;
+    }
+
+    /**
+     * Sets the site common actions local service.
+     *
+     * @param siteCommonActionsLocalService the site common actions local service
+     */
+    public void setSiteCommonActionsLocalService(
+        com.fsquare.shopping.service.SiteCommonActionsLocalService siteCommonActionsLocalService) {
+        this.siteCommonActionsLocalService = siteCommonActionsLocalService;
+    }
+
+    /**
+     * Returns the site common actions remote service.
+     *
+     * @return the site common actions remote service
+     */
+    public com.fsquare.shopping.service.SiteCommonActionsService getSiteCommonActionsService() {
+        return siteCommonActionsService;
+    }
+
+    /**
+     * Sets the site common actions remote service.
+     *
+     * @param siteCommonActionsService the site common actions remote service
+     */
+    public void setSiteCommonActionsService(
+        com.fsquare.shopping.service.SiteCommonActionsService siteCommonActionsService) {
+        this.siteCommonActionsService = siteCommonActionsService;
+    }
+
+    /**
      * Returns the counter local service.
      *
      * @return the counter local service
@@ -865,6 +917,82 @@ public abstract class ShoppingItemServiceBaseImpl extends BaseServiceImpl
     public void setAssetEntryPersistence(
         AssetEntryPersistence assetEntryPersistence) {
         this.assetEntryPersistence = assetEntryPersistence;
+    }
+
+    /**
+     * Returns the asset link local service.
+     *
+     * @return the asset link local service
+     */
+    public com.liferay.portlet.asset.service.AssetLinkLocalService getAssetLinkLocalService() {
+        return assetLinkLocalService;
+    }
+
+    /**
+     * Sets the asset link local service.
+     *
+     * @param assetLinkLocalService the asset link local service
+     */
+    public void setAssetLinkLocalService(
+        com.liferay.portlet.asset.service.AssetLinkLocalService assetLinkLocalService) {
+        this.assetLinkLocalService = assetLinkLocalService;
+    }
+
+    /**
+     * Returns the asset link persistence.
+     *
+     * @return the asset link persistence
+     */
+    public AssetLinkPersistence getAssetLinkPersistence() {
+        return assetLinkPersistence;
+    }
+
+    /**
+     * Sets the asset link persistence.
+     *
+     * @param assetLinkPersistence the asset link persistence
+     */
+    public void setAssetLinkPersistence(
+        AssetLinkPersistence assetLinkPersistence) {
+        this.assetLinkPersistence = assetLinkPersistence;
+    }
+
+    /**
+     * Returns the ratings stats local service.
+     *
+     * @return the ratings stats local service
+     */
+    public com.liferay.portlet.ratings.service.RatingsStatsLocalService getRatingsStatsLocalService() {
+        return ratingsStatsLocalService;
+    }
+
+    /**
+     * Sets the ratings stats local service.
+     *
+     * @param ratingsStatsLocalService the ratings stats local service
+     */
+    public void setRatingsStatsLocalService(
+        com.liferay.portlet.ratings.service.RatingsStatsLocalService ratingsStatsLocalService) {
+        this.ratingsStatsLocalService = ratingsStatsLocalService;
+    }
+
+    /**
+     * Returns the ratings stats persistence.
+     *
+     * @return the ratings stats persistence
+     */
+    public RatingsStatsPersistence getRatingsStatsPersistence() {
+        return ratingsStatsPersistence;
+    }
+
+    /**
+     * Sets the ratings stats persistence.
+     *
+     * @param ratingsStatsPersistence the ratings stats persistence
+     */
+    public void setRatingsStatsPersistence(
+        RatingsStatsPersistence ratingsStatsPersistence) {
+        this.ratingsStatsPersistence = ratingsStatsPersistence;
     }
 
     public void afterPropertiesSet() {

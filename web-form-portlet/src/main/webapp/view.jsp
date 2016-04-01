@@ -97,7 +97,6 @@ if (WebFormUtil.getTableRowsCount(company.getCompanyId(), databaseTableName) > 0
 	databaseTableExists = true;
 }
 
-boolean isFindUPRN = false;
 boolean isFindPostcode = false;
 
 boolean saveToDatabase = GetterUtil.getBoolean(portletPreferences.getValue("saveToDatabase", StringPool.BLANK));
@@ -194,7 +193,14 @@ String saveButtonStyleClass = portletPreferences.getValue("saveButtonStyleClass"
 		
 		<aui:form action="<%= saveDataURL %>" method="post" name="fm" enctype="multipart/form-data">
 			<div class="form-wrapper">
-				
+				<div class="form-head">
+					<c:if test="<%= Validator.isNotNull(title) %>">
+						<h2 id="form-title"><%= HtmlUtil.escape(title) %></h2>
+					</c:if>
+					<c:if test="<%= Validator.isNotNull(description) %>">
+						<p class="description"><%= HtmlUtil.escape(description) %></p>
+					</c:if>
+				</div>
 				<c:if test="<%= Validator.isNotNull(rowId) %>">
 					<aui:input name="EDITING_ROW" type="hidden" value="<%= rowId %>" />
 				</c:if>
@@ -217,8 +223,6 @@ String saveButtonStyleClass = portletPreferences.getValue("saveButtonStyleClass"
 						<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_ERROR_NO_ROW %>" message="temporary-data-error-no-row" />
 						<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_ERROR_NO_TABLE %>" message="temporary-data-error-no-table" />
 						<liferay-ui:error key="<%= WebFormUtil.FORM_MESSAGE_ERROR_INVALID_ROW_ID%>" message="temporary-data-error-no-table" />
-						
-						
 						
 						<c:if test='<%= SessionMessages.contains(liferayPortletRequest, WebFormUtil.FORM_MESSAGE_TEMPORARY_DATA_SUCCESS)%>' >
 						
@@ -320,17 +324,7 @@ String saveButtonStyleClass = portletPreferences.getValue("saveButtonStyleClass"
 										%>
 
 									</c:when>
-									<c:when test='<%= fieldType.equals("uprn")  %>'>
-										<aui:input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" type="text" cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" />
-										<a href="javascript:;"  onclick="<portlet:namespace />findUPRN('<%= fieldName %>'); return false" class="btn btn-primary" type="submit">find address</a>
-										
-										<div id="<%= fieldName %>selectDropdownDiv">
-					                        <label class="control-label" for="<%= fieldName %>addressListSelect">Select an Address:</label>
-					                        <select id="<%= fieldName %>addressListSelect"></select>
-					                    </div>
-										
-										<% isFindUPRN = true; %>
-									</c:when>
+									
 									<c:when test='<%= fieldType.equals("email") %>'>
 										<aui:input data-helper='<%= fieldDataHelper %>' style="<%= fieldStyle %>" placeholder="<%= HtmlUtil.escape(fieldPlaceHolder) %>" type="email" cssClass='<%= (fieldOptional ? "optional" : StringPool.BLANK) + fieldStyleClass %>' label="<%= HtmlUtil.escape(fieldLabel) %>" name="<%= fieldName %>" value="<%= HtmlUtil.escape(fieldValue) %>" >
 											<aui:validator name="email"/>
@@ -520,11 +514,11 @@ String saveButtonStyleClass = portletPreferences.getValue("saveButtonStyleClass"
 				</aui:fieldset>
 			
 				<c:if test="<%= requireCaptcha %>">
-					<portlet:resourceURL var="captchaURL">
-						<portlet:param name="<%= Constants.CMD %>" value="captcha" />
-					</portlet:resourceURL>
-			
-					<liferay-ui:captcha url="<%= captchaURL %>" />
+				
+					<aui:fieldset style="margin-bottom: 30px;">
+						<liferay-ui:captcha url="<%= StringPool.BLANK %>" />
+					</aui:fieldset>	
+					
 				</c:if>
 			
 				<aui:button cssClass="wizard-button submit-button" onClick="" type="submit" value="<%= submitButtonLabel %>" />
@@ -549,39 +543,6 @@ String saveButtonStyleClass = portletPreferences.getValue("saveButtonStyleClass"
 		
 		<aui:script use="aui-base,selector-css3,aui-io-request">
 			
-			<c:if test="<%= isFindUPRN %>">
-			
-				window.<portlet:namespace />uprnResults = {};
-				Liferay.provide(window, '<portlet:namespace />findUPRN',
-					function(field) {
-						var input = A.one('#<portlet:namespace />'+field);
-						var val = input.val();
-			        	A.io.request('/c/portal/geoplace/data_services',{
-			                  dataType: 'json',
-			                  method: 'GET',
-			                  data: { 
-			                	  data_action: 'find',
-			                	  findBy: 'uprn',
-			                  	  q: val
-			                   },
-			                  on: {
-			                      success: function() {
-			                      	var response = this.get('responseData');
-			                      	debug(this, response);
-			                      	window.<portlet:namespace />uprnResults = response.results;
-			                      	var option = "";
-			                      	for(var i = 0; i < results.length; i++){
-			                      		var result = results[i].DPA;
-			                      	}
-			                      }
-			                  }
-			            });
-						
-			        },
-			        ['aui-base,selector-css3']
-			    );
-			</c:if>
-		
 			<c:if test="<%= isFindPostcode %>">
 				window.<portlet:namespace />postcodeResults = {};
 				Liferay.provide(window, '<portlet:namespace />findPostcode',
@@ -627,8 +588,8 @@ String saveButtonStyleClass = portletPreferences.getValue("saveButtonStyleClass"
 		</aui:script>
 		
 		<aui:script use="liferay-auto-fields,liferay-dynamic-select">
-			GeoPlaceWebForm = {};
-			GeoPlaceWebForm.Address = {
+			FSquareWebForm = {};
+			FSquareWebForm.Address = {
 				getCountries: function(callback) {
 					Liferay.Service(
 						'/country/get-countries',
@@ -648,7 +609,7 @@ String saveButtonStyleClass = portletPreferences.getValue("saveButtonStyleClass"
 					<% } %>
 					{
 						select: '<portlet:namespace /><%= fieldName %>',
-						selectData: GeoPlaceWebForm.Address.getCountries,
+						selectData: FSquareWebForm.Address.getCountries,
 						selectDesc: 'nameCurrentValue',
 						selectSort: '<%= true %>',
 						selectId: 'name',
@@ -852,6 +813,14 @@ String saveButtonStyleClass = portletPreferences.getValue("saveButtonStyleClass"
 							event.halt();
 							event.stopImmediatePropagation();
 						}
+						
+						
+						<c:if test="<%= requireCaptcha %>">
+						
+							console.log(A.one('.g-recaptcha-response').val());
+							A.one('.g-recaptcha-response').setAttribute('name', '<portlet:namespace />g-recaptcha-response');
+						
+						</c:if>
 					}
 				);
 			}

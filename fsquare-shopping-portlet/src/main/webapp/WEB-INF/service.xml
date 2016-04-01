@@ -4,6 +4,18 @@
 <service-builder package-path="com.fsquare.shopping">
 	<namespace>FsquareShopping</namespace>
 
+	<entity name="SiteCommonActions" local-service="true" remote-service="true" >
+		<reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetCategory" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />	
+		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portal" entity="PasswordTracker" />
+		<reference package-path="com.liferay.portal" entity="Company" />
+		<reference package-path="com.liferay.portal" entity="Account" />
+		<reference package-path="com.liferay.portal" entity="VirtualHost" />
+		
+	</entity>
+
 	<entity name="ShoppingItemType" local-service="true" remote-service="true" >
 		
 		<column name="itemTypeId" type="long" primary="true" />
@@ -51,13 +63,17 @@
 		
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />		
-		
-		<column name="name" type="String" />
+		<column name="title" type="String" />
+<!-- 		<column name="name" type="String" /> -->
 		<column name="description" type="String" />
 		<column name="price" type="double" />
 		<column name="discountPrice" type="double" />
 		<column name="sku" type="String" />
 		<column name="itemTypeId" type="long" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 <!-- 		<column name="itemTypeId" type="long" /> -->
 		<!-- Finder methods -->
 
@@ -65,9 +81,10 @@
 			<finder-column name="groupId" />
 		</finder>
 		
-<!-- 		<reference package-path="com.fsquare.shopping" entity="ShoppingItemImage" /> -->
-		
+		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />		
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
+		
 	</entity>
 	
 	<entity name="ShoppingItemImage" local-service="true" remote-service="false">
@@ -93,10 +110,6 @@
 			<finder-column name="groupId" />
 		</finder>
 		
-		
-<!-- 		<finder name="TempImage" return-type="Collection"> -->
-<!-- 			<finder-column name="tempImage" /> -->
-<!-- 		</finder> -->
 		<finder name="GroupIdAndItemId" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="itemId" />
@@ -129,6 +142,8 @@
 		<column name="modifiedDate" type="Date" />
 		
 		<column name="name" type="String" />
+		<column name="description" type="String" />	
+		<column name="location" type="String" />
 		<!-- Finder methods -->
 
 		<finder name="GroupId" return-type="Collection">
@@ -154,8 +169,24 @@
 		<column name="modifiedDate" type="Date" />
 		<column name="name" type="String" />
 		<column name="quantity" type="int" />
-		<column name="movementType" type="String" />
+<!-- 		<column name="movementType" type="String" /> -->
 	
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+	
+		<finder name="StorageLocationId" return-type="Collection">
+			<finder-column name="storageLocationId" />
+		</finder>
+		
+		<finder name="ItemId" return-type="Collection">
+			<finder-column name="itemId" />
+		</finder>
+		
+		<finder name="ItemIdAndStorageLocationId" return-type="ShoppingItemStorageLocation" unique="true">
+			<finder-column name="itemId" />
+			<finder-column name="storageLocationId" />
+		</finder>
 	</entity>
 	
 	

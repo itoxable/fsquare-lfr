@@ -20,8 +20,7 @@ public class ShoppingItemAssetRenderer extends BaseAssetRenderer{
 	
 	@Override
 	public String getClassName() {
-		// TODO Auto-generated method stub
-		return null;
+		return ShoppingItem.class.getName();
 	}
 
 	@Override
@@ -36,14 +35,14 @@ public class ShoppingItemAssetRenderer extends BaseAssetRenderer{
 
 	@Override
 	public String getSummary(Locale locale) {
-		StringBuilder sb = new StringBuilder(_shoppingItem.getName());
+		StringBuilder sb = new StringBuilder(_shoppingItem.getTitle());
 		sb.append(_shoppingItem.getPrice());
 		return sb.toString();
 	}
 
 	@Override
 	public String getTitle(Locale locale) {
-		return _shoppingItem.getName();
+		return _shoppingItem.getTitle();
 	}
 
 	@Override
@@ -53,8 +52,7 @@ public class ShoppingItemAssetRenderer extends BaseAssetRenderer{
 
 	@Override
 	public String getUserName() {
-		// TODO Auto-generated method stub
-		return null;
+		return _shoppingItem.getUserName();
 	}
 
 	@Override
@@ -64,11 +62,15 @@ public class ShoppingItemAssetRenderer extends BaseAssetRenderer{
 
 	@Override
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse, String template) throws Exception {
+		
+		renderRequest.setAttribute(ShoppingUtil.SHOPPING_ITEM_RECORD, _shoppingItem);
+
+		
 		if (template.equals(TEMPLATE_FULL_CONTENT)) {
-			renderRequest.setAttribute(ShoppingUtil.SHOPPING_ITEM_RECORD, _shoppingItem);
-	        return "/html/" + template + ".jsp";
+	        //return "/html/" + template + ".jsp";
+	        return "/inventory-management/" + template + ".jsp";
 		}else if(template.equals(TEMPLATE_ABSTRACT)){
-			
+			return "/inventory-management/" + template + ".jsp";
 			
 		}
 		return null;

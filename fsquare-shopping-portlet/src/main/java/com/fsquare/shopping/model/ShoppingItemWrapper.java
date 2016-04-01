@@ -49,12 +49,16 @@ public class ShoppingItemWrapper implements ShoppingItem,
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("classNameId", getClassNameId());
         attributes.put("classPK", getClassPK());
-        attributes.put("name", getName());
+        attributes.put("title", getTitle());
         attributes.put("description", getDescription());
         attributes.put("price", getPrice());
         attributes.put("discountPrice", getDiscountPrice());
         attributes.put("sku", getSku());
         attributes.put("itemTypeId", getItemTypeId());
+        attributes.put("status", getStatus());
+        attributes.put("statusByUserId", getStatusByUserId());
+        attributes.put("statusByUserName", getStatusByUserName());
+        attributes.put("statusDate", getStatusDate());
 
         return attributes;
     }
@@ -121,10 +125,10 @@ public class ShoppingItemWrapper implements ShoppingItem,
             setClassPK(classPK);
         }
 
-        String name = (String) attributes.get("name");
+        String title = (String) attributes.get("title");
 
-        if (name != null) {
-            setName(name);
+        if (title != null) {
+            setTitle(title);
         }
 
         String description = (String) attributes.get("description");
@@ -155,6 +159,30 @@ public class ShoppingItemWrapper implements ShoppingItem,
 
         if (itemTypeId != null) {
             setItemTypeId(itemTypeId);
+        }
+
+        Integer status = (Integer) attributes.get("status");
+
+        if (status != null) {
+            setStatus(status);
+        }
+
+        Long statusByUserId = (Long) attributes.get("statusByUserId");
+
+        if (statusByUserId != null) {
+            setStatusByUserId(statusByUserId);
+        }
+
+        String statusByUserName = (String) attributes.get("statusByUserName");
+
+        if (statusByUserName != null) {
+            setStatusByUserName(statusByUserName);
+        }
+
+        Date statusDate = (Date) attributes.get("statusDate");
+
+        if (statusDate != null) {
+            setStatusDate(statusDate);
         }
     }
 
@@ -416,23 +444,23 @@ public class ShoppingItemWrapper implements ShoppingItem,
     }
 
     /**
-    * Returns the name of this shopping item.
+    * Returns the title of this shopping item.
     *
-    * @return the name of this shopping item
+    * @return the title of this shopping item
     */
     @Override
-    public java.lang.String getName() {
-        return _shoppingItem.getName();
+    public java.lang.String getTitle() {
+        return _shoppingItem.getTitle();
     }
 
     /**
-    * Sets the name of this shopping item.
+    * Sets the title of this shopping item.
     *
-    * @param name the name of this shopping item
+    * @param title the title of this shopping item
     */
     @Override
-    public void setName(java.lang.String name) {
-        _shoppingItem.setName(name);
+    public void setTitle(java.lang.String title) {
+        _shoppingItem.setTitle(title);
     }
 
     /**
@@ -533,6 +561,196 @@ public class ShoppingItemWrapper implements ShoppingItem,
     @Override
     public void setItemTypeId(long itemTypeId) {
         _shoppingItem.setItemTypeId(itemTypeId);
+    }
+
+    /**
+    * Returns the status of this shopping item.
+    *
+    * @return the status of this shopping item
+    */
+    @Override
+    public int getStatus() {
+        return _shoppingItem.getStatus();
+    }
+
+    /**
+    * Sets the status of this shopping item.
+    *
+    * @param status the status of this shopping item
+    */
+    @Override
+    public void setStatus(int status) {
+        _shoppingItem.setStatus(status);
+    }
+
+    /**
+    * Returns the status by user ID of this shopping item.
+    *
+    * @return the status by user ID of this shopping item
+    */
+    @Override
+    public long getStatusByUserId() {
+        return _shoppingItem.getStatusByUserId();
+    }
+
+    /**
+    * Sets the status by user ID of this shopping item.
+    *
+    * @param statusByUserId the status by user ID of this shopping item
+    */
+    @Override
+    public void setStatusByUserId(long statusByUserId) {
+        _shoppingItem.setStatusByUserId(statusByUserId);
+    }
+
+    /**
+    * Returns the status by user uuid of this shopping item.
+    *
+    * @return the status by user uuid of this shopping item
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public java.lang.String getStatusByUserUuid()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _shoppingItem.getStatusByUserUuid();
+    }
+
+    /**
+    * Sets the status by user uuid of this shopping item.
+    *
+    * @param statusByUserUuid the status by user uuid of this shopping item
+    */
+    @Override
+    public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+        _shoppingItem.setStatusByUserUuid(statusByUserUuid);
+    }
+
+    /**
+    * Returns the status by user name of this shopping item.
+    *
+    * @return the status by user name of this shopping item
+    */
+    @Override
+    public java.lang.String getStatusByUserName() {
+        return _shoppingItem.getStatusByUserName();
+    }
+
+    /**
+    * Sets the status by user name of this shopping item.
+    *
+    * @param statusByUserName the status by user name of this shopping item
+    */
+    @Override
+    public void setStatusByUserName(java.lang.String statusByUserName) {
+        _shoppingItem.setStatusByUserName(statusByUserName);
+    }
+
+    /**
+    * Returns the status date of this shopping item.
+    *
+    * @return the status date of this shopping item
+    */
+    @Override
+    public java.util.Date getStatusDate() {
+        return _shoppingItem.getStatusDate();
+    }
+
+    /**
+    * Sets the status date of this shopping item.
+    *
+    * @param statusDate the status date of this shopping item
+    */
+    @Override
+    public void setStatusDate(java.util.Date statusDate) {
+        _shoppingItem.setStatusDate(statusDate);
+    }
+
+    /**
+    * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+    */
+    @Override
+    public boolean getApproved() {
+        return _shoppingItem.getApproved();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping item is approved.
+    *
+    * @return <code>true</code> if this shopping item is approved; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isApproved() {
+        return _shoppingItem.isApproved();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping item is denied.
+    *
+    * @return <code>true</code> if this shopping item is denied; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isDenied() {
+        return _shoppingItem.isDenied();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping item is a draft.
+    *
+    * @return <code>true</code> if this shopping item is a draft; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isDraft() {
+        return _shoppingItem.isDraft();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping item is expired.
+    *
+    * @return <code>true</code> if this shopping item is expired; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isExpired() {
+        return _shoppingItem.isExpired();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping item is inactive.
+    *
+    * @return <code>true</code> if this shopping item is inactive; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isInactive() {
+        return _shoppingItem.isInactive();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping item is incomplete.
+    *
+    * @return <code>true</code> if this shopping item is incomplete; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isIncomplete() {
+        return _shoppingItem.isIncomplete();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping item is pending.
+    *
+    * @return <code>true</code> if this shopping item is pending; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isPending() {
+        return _shoppingItem.isPending();
+    }
+
+    /**
+    * Returns <code>true</code> if this shopping item is scheduled.
+    *
+    * @return <code>true</code> if this shopping item is scheduled; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isScheduled() {
+        return _shoppingItem.isScheduled();
     }
 
     @Override

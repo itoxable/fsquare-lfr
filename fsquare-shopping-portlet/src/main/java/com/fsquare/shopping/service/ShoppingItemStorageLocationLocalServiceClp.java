@@ -45,6 +45,14 @@ public class ShoppingItemStorageLocationLocalServiceClp
     private String[] _methodParameterTypes16;
     private String _methodName17;
     private String[] _methodParameterTypes17;
+    private String _methodName19;
+    private String[] _methodParameterTypes19;
+    private String _methodName20;
+    private String[] _methodParameterTypes20;
+    private String _methodName21;
+    private String[] _methodParameterTypes21;
+    private String _methodName22;
+    private String[] _methodParameterTypes22;
 
     public ShoppingItemStorageLocationLocalServiceClp(
         InvokableLocalService invokableLocalService) {
@@ -139,6 +147,22 @@ public class ShoppingItemStorageLocationLocalServiceClp
         _methodName17 = "setBeanIdentifier";
 
         _methodParameterTypes17 = new String[] { "java.lang.String" };
+
+        _methodName19 = "findByItemIdAndStorageLocationId";
+
+        _methodParameterTypes19 = new String[] { "long", "long" };
+
+        _methodName20 = "findByItemId";
+
+        _methodParameterTypes20 = new String[] { "long" };
+
+        _methodName21 = "findByStorageLocationId";
+
+        _methodParameterTypes21 = new String[] { "long" };
+
+        _methodName22 = "findByGroupId";
+
+        _methodParameterTypes22 = new String[] { "long" };
     }
 
     @Override
@@ -666,5 +690,134 @@ public class ShoppingItemStorageLocationLocalServiceClp
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public com.fsquare.shopping.model.ShoppingItemStorageLocation findByItemIdAndStorageLocationId(
+        long itemId, long storageLocationId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName19,
+                    _methodParameterTypes19,
+                    new Object[] { itemId, storageLocationId });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.fsquare.shopping.NoSuchShoppingItemStorageLocationException) {
+                throw (com.fsquare.shopping.NoSuchShoppingItemStorageLocationException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (com.fsquare.shopping.model.ShoppingItemStorageLocation) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByItemId(
+        long itemId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName20,
+                    _methodParameterTypes20, new Object[] { itemId });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.fsquare.shopping.NoSuchShoppingItemStorageLocationException) {
+                throw (com.fsquare.shopping.NoSuchShoppingItemStorageLocationException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByStorageLocationId(
+        long storageLocationId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName21,
+                    _methodParameterTypes21, new Object[] { storageLocationId });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.fsquare.shopping.NoSuchShoppingItemStorageLocationException) {
+                throw (com.fsquare.shopping.NoSuchShoppingItemStorageLocationException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByGroupId(
+        long groupId)
+        throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
+            com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName22,
+                    _methodParameterTypes22, new Object[] { groupId });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.fsquare.shopping.NoSuchShoppingItemStorageLocationException) {
+                throw (com.fsquare.shopping.NoSuchShoppingItemStorageLocationException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation>) ClpSerializer.translateOutput(returnObj);
     }
 }

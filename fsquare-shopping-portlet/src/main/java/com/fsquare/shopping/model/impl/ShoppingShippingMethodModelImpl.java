@@ -70,7 +70,7 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
             { "disabled", Types.BOOLEAN },
             { "shippingType", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingShippingMethod (shippingMethodId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,price DOUBLE,name VARCHAR(75) null,description VARCHAR(1000) null,freeQuantity LONG,freeTotal DOUBLE,weight DOUBLE,defaultShipping BOOLEAN,international BOOLEAN,disabled BOOLEAN,shippingType VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingShippingMethod (shippingMethodId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,price DOUBLE,name VARCHAR(75) null,description VARCHAR(2000) null,freeQuantity LONG,freeTotal DOUBLE,weight DOUBLE,defaultShipping BOOLEAN,international BOOLEAN,disabled BOOLEAN,shippingType VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingShippingMethod";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingShippingMethod.shippingMethodId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingShippingMethod.shippingMethodId ASC";

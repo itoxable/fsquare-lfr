@@ -51,7 +51,6 @@ public class ShoppingItemStorageLocationWrapper
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("name", getName());
         attributes.put("quantity", getQuantity());
-        attributes.put("movementType", getMovementType());
 
         return attributes;
     }
@@ -123,12 +122,6 @@ public class ShoppingItemStorageLocationWrapper
 
         if (quantity != null) {
             setQuantity(quantity);
-        }
-
-        String movementType = (String) attributes.get("movementType");
-
-        if (movementType != null) {
-            setMovementType(movementType);
         }
     }
 
@@ -392,26 +385,6 @@ public class ShoppingItemStorageLocationWrapper
     @Override
     public void setQuantity(int quantity) {
         _shoppingItemStorageLocation.setQuantity(quantity);
-    }
-
-    /**
-    * Returns the movement type of this shopping item storage location.
-    *
-    * @return the movement type of this shopping item storage location
-    */
-    @Override
-    public java.lang.String getMovementType() {
-        return _shoppingItemStorageLocation.getMovementType();
-    }
-
-    /**
-    * Sets the movement type of this shopping item storage location.
-    *
-    * @param movementType the movement type of this shopping item storage location
-    */
-    @Override
-    public void setMovementType(java.lang.String movementType) {
-        _shoppingItemStorageLocation.setMovementType(movementType);
     }
 
     @Override

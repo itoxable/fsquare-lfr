@@ -106,7 +106,7 @@
 		}
 
 		if (Validator.isNotNull(document)) {
-			Node fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Main_Image']/dynamic-content");
+			Node fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Image']/dynamic-content");
 			if (fieldContent != null) {
 				imagePath = fieldContent.getText();
 				if(Validator.isNull(smallImagePath)){
@@ -119,10 +119,6 @@
 				text = fieldContent.getText();
 			}
 			
-			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Price']/dynamic-content");
-			if (fieldContent != null) {
-				price = fieldContent.getText();
-			}
 			
 			fieldContent = document.selectSingleNode("//*/dynamic-element[@name='Author']/dynamic-content");
 			if (fieldContent != null) {
@@ -179,21 +175,18 @@
 	<div class="row media-gallery media-gallery-<%=portletId %>" id='media-gallery-<%=portletId %>'>
 </c:if>
 
-	<div class='media-gallery-item <%= layoutColumns + " " + catFilters.toString() %> span-xs-6'  id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>" >
+	<div class='media-gallery-item <%= layoutColumns + " " + catFilters.toString() %>'  id="<portlet:namespace />_asset_<%= assetEntry.getEntryId() %>" >
 		<c:if test='<%= assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker()) %>'>
 			<%@ include file="/html/portlet/asset_publisher/display/item_actions.jspf" %>
 		</c:if>
 		<div class='gallery-item-wrap'>
-			<a href="<%= viewURL %>" class='gallery-item'>
-				<span class="gallery-item-poster" style="background-image: url('<%= imagePath %>')" data-caption="<a class='media-gallery-sliphover' href='<%= PortalUtil.escapeRedirect(viewURL) %>' ><h2><%= title %></h2></a>">
+			<a class='gallery-item' href="<%= imagePath %>" data-lightbox="<%=portletId %>" data-title="<%= title %>">
+				<span class="gallery-item-poster" style="background-image: url('<%= imagePath %>')">
 				</span>
-				<div class="gallery-item-details">
-					<span class="gallery-item-price"><%= price %>
-						<span class="regular-price">127</span>
-					</span>
-					<span class="gallery-item-title"><%= title %></span>
-					<span class="gallery-item-author"><%= author %></span>
-				</div>
+<!-- 				<div class="gallery-item-details"> -->
+<%-- 					<span class="gallery-item-title"><%= title %></span> --%>
+<%-- 					<span class="gallery-item-author"><%= author %></span> --%>
+<!-- 				</div> -->
 		 	</a>
 	 	</div>
 	</div>
@@ -221,10 +214,6 @@
 		
 		stroll.bind('#media-gallery-<%=portletId %>');
 		
-		/*$('#media-gallery-<%=portletId %>').sliphover({
-			caption: 'data-caption',
-			target:'.gallery-item-poster'
-		});*/
 		
 		$('#category-toggle-<%= portletId %>').click(function(){
 			$('#gallery-filter-wrapper-<%= portletId %>').slideToggle();

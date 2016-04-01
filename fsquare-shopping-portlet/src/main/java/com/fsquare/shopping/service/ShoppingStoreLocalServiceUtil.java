@@ -263,6 +263,17 @@ public class ShoppingStoreLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
+    public static java.util.List<com.fsquare.shopping.model.ShoppingStorageLocation> getShoppingStorageLocationsByGroup(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getShoppingStorageLocationsByGroup(groupId);
+    }
+
+    public static java.util.List<java.lang.String[]> getShoppingLayouts(
+        long groupId) {
+        return getService().getShoppingLayouts(groupId);
+    }
+
     public static void clearService() {
         _service = null;
     }

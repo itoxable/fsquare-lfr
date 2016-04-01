@@ -62,10 +62,9 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
             { "createDate", Types.TIMESTAMP },
             { "modifiedDate", Types.TIMESTAMP },
             { "name", Types.VARCHAR },
-            { "quantity", Types.INTEGER },
-            { "movementType", Types.VARCHAR }
+            { "quantity", Types.INTEGER }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingItemStorageLocation (itemStorageLocationId LONG not null primary key,itemId LONG,storageLocationId LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,quantity INTEGER,movementType VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingItemStorageLocation (itemStorageLocationId LONG not null primary key,itemId LONG,storageLocationId LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,quantity INTEGER)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingItemStorageLocation";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingItemStorageLocation.itemStorageLocationId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingItemStorageLocation.itemStorageLocationId ASC";
@@ -78,7 +77,13 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
     public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
                 "value.object.finder.cache.enabled.com.fsquare.shopping.model.ShoppingItemStorageLocation"),
             true);
-    public static final boolean COLUMN_BITMASK_ENABLED = false;
+    public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+                "value.object.column.bitmask.enabled.com.fsquare.shopping.model.ShoppingItemStorageLocation"),
+            true);
+    public static long GROUPID_COLUMN_BITMASK = 1L;
+    public static long ITEMID_COLUMN_BITMASK = 2L;
+    public static long STORAGELOCATIONID_COLUMN_BITMASK = 4L;
+    public static long ITEMSTORAGELOCATIONID_COLUMN_BITMASK = 8L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.com.fsquare.shopping.model.ShoppingItemStorageLocation"));
     private static ClassLoader _classLoader = ShoppingItemStorageLocation.class.getClassLoader();
@@ -87,8 +92,14 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         };
     private long _itemStorageLocationId;
     private long _itemId;
+    private long _originalItemId;
+    private boolean _setOriginalItemId;
     private long _storageLocationId;
+    private long _originalStorageLocationId;
+    private boolean _setOriginalStorageLocationId;
     private long _groupId;
+    private long _originalGroupId;
+    private boolean _setOriginalGroupId;
     private long _companyId;
     private long _userId;
     private String _userUuid;
@@ -97,7 +108,7 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
     private Date _modifiedDate;
     private String _name;
     private int _quantity;
-    private String _movementType;
+    private long _columnBitmask;
     private ShoppingItemStorageLocation _escapedModel;
 
     public ShoppingItemStorageLocationModelImpl() {
@@ -128,7 +139,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         model.setModifiedDate(soapModel.getModifiedDate());
         model.setName(soapModel.getName());
         model.setQuantity(soapModel.getQuantity());
-        model.setMovementType(soapModel.getMovementType());
 
         return model;
     }
@@ -199,7 +209,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         attributes.put("modifiedDate", getModifiedDate());
         attributes.put("name", getName());
         attributes.put("quantity", getQuantity());
-        attributes.put("movementType", getMovementType());
 
         return attributes;
     }
@@ -272,12 +281,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         if (quantity != null) {
             setQuantity(quantity);
         }
-
-        String movementType = (String) attributes.get("movementType");
-
-        if (movementType != null) {
-            setMovementType(movementType);
-        }
     }
 
     @JSON
@@ -299,7 +302,19 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
 
     @Override
     public void setItemId(long itemId) {
+        _columnBitmask |= ITEMID_COLUMN_BITMASK;
+
+        if (!_setOriginalItemId) {
+            _setOriginalItemId = true;
+
+            _originalItemId = _itemId;
+        }
+
         _itemId = itemId;
+    }
+
+    public long getOriginalItemId() {
+        return _originalItemId;
     }
 
     @JSON
@@ -310,7 +325,19 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
 
     @Override
     public void setStorageLocationId(long storageLocationId) {
+        _columnBitmask |= STORAGELOCATIONID_COLUMN_BITMASK;
+
+        if (!_setOriginalStorageLocationId) {
+            _setOriginalStorageLocationId = true;
+
+            _originalStorageLocationId = _storageLocationId;
+        }
+
         _storageLocationId = storageLocationId;
+    }
+
+    public long getOriginalStorageLocationId() {
+        return _originalStorageLocationId;
     }
 
     @JSON
@@ -321,7 +348,19 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
 
     @Override
     public void setGroupId(long groupId) {
+        _columnBitmask |= GROUPID_COLUMN_BITMASK;
+
+        if (!_setOriginalGroupId) {
+            _setOriginalGroupId = true;
+
+            _originalGroupId = _groupId;
+        }
+
         _groupId = groupId;
+    }
+
+    public long getOriginalGroupId() {
+        return _originalGroupId;
     }
 
     @JSON
@@ -419,19 +458,8 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         _quantity = quantity;
     }
 
-    @JSON
-    @Override
-    public String getMovementType() {
-        if (_movementType == null) {
-            return StringPool.BLANK;
-        } else {
-            return _movementType;
-        }
-    }
-
-    @Override
-    public void setMovementType(String movementType) {
-        _movementType = movementType;
+    public long getColumnBitmask() {
+        return _columnBitmask;
     }
 
     @Override
@@ -472,7 +500,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         shoppingItemStorageLocationImpl.setModifiedDate(getModifiedDate());
         shoppingItemStorageLocationImpl.setName(getName());
         shoppingItemStorageLocationImpl.setQuantity(getQuantity());
-        shoppingItemStorageLocationImpl.setMovementType(getMovementType());
 
         shoppingItemStorageLocationImpl.resetOriginalValues();
 
@@ -521,6 +548,22 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
 
     @Override
     public void resetOriginalValues() {
+        ShoppingItemStorageLocationModelImpl shoppingItemStorageLocationModelImpl =
+            this;
+
+        shoppingItemStorageLocationModelImpl._originalItemId = shoppingItemStorageLocationModelImpl._itemId;
+
+        shoppingItemStorageLocationModelImpl._setOriginalItemId = false;
+
+        shoppingItemStorageLocationModelImpl._originalStorageLocationId = shoppingItemStorageLocationModelImpl._storageLocationId;
+
+        shoppingItemStorageLocationModelImpl._setOriginalStorageLocationId = false;
+
+        shoppingItemStorageLocationModelImpl._originalGroupId = shoppingItemStorageLocationModelImpl._groupId;
+
+        shoppingItemStorageLocationModelImpl._setOriginalGroupId = false;
+
+        shoppingItemStorageLocationModelImpl._columnBitmask = 0;
     }
 
     @Override
@@ -574,20 +617,12 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
 
         shoppingItemStorageLocationCacheModel.quantity = getQuantity();
 
-        shoppingItemStorageLocationCacheModel.movementType = getMovementType();
-
-        String movementType = shoppingItemStorageLocationCacheModel.movementType;
-
-        if ((movementType != null) && (movementType.length() == 0)) {
-            shoppingItemStorageLocationCacheModel.movementType = null;
-        }
-
         return shoppingItemStorageLocationCacheModel;
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(25);
+        StringBundler sb = new StringBundler(23);
 
         sb.append("{itemStorageLocationId=");
         sb.append(getItemStorageLocationId());
@@ -611,8 +646,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         sb.append(getName());
         sb.append(", quantity=");
         sb.append(getQuantity());
-        sb.append(", movementType=");
-        sb.append(getMovementType());
         sb.append("}");
 
         return sb.toString();
@@ -620,7 +653,7 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(40);
+        StringBundler sb = new StringBundler(37);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingItemStorageLocation");
@@ -669,10 +702,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         sb.append(
             "<column><column-name>quantity</column-name><column-value><![CDATA[");
         sb.append(getQuantity());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>movementType</column-name><column-value><![CDATA[");
-        sb.append(getMovementType());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

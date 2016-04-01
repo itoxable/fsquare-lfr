@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +53,8 @@ import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
@@ -68,12 +71,15 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PrefsParamUtil;
+import com.liferay.portal.kernel.util.PrefsPropsUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.service.persistence.PortletUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
@@ -128,6 +134,10 @@ public class WebFormPortlet extends MVCPortlet {
 	public void saveData( ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(actionRequest);
+		String response = request.getParameter("g-recaptcha-response");
+		
+		
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 		String portletId = (String)actionRequest.getAttribute(WebKeys.PORTLET_ID);
@@ -196,9 +206,10 @@ public class WebFormPortlet extends MVCPortlet {
 		 
 		if (requireCaptcha) {
 			try {
-				CaptchaUtil.check(actionRequest);
+//				CaptchaUtil.check(actionRequest);
+				validateReCaptcha(actionRequest);
 			}
-			catch (CaptchaTextException cte) {
+			catch (Exception cte) {
 				SessionErrors.add(actionRequest, CaptchaTextException.class.getName());
 				return;
 			}
@@ -403,9 +414,11 @@ public class WebFormPortlet extends MVCPortlet {
 		boolean requireCaptcha = GetterUtil.getBoolean(preferences.getValue("requireCaptcha", StringPool.BLANK));
 		if (requireCaptcha) {
 			try {
-				CaptchaUtil.check(actionRequest);
+				//CaptchaUtil.check(actionRequest);
+				validateReCaptcha(actionRequest);
 			}
-			catch (CaptchaTextException cte) {
+			//catch (CaptchaTextException cte) {
+			catch (Exception cte) {
 				SessionErrors.add(actionRequest, CaptchaTextException.class.getName());
 				return;
 			}
@@ -470,6 +483,64 @@ public class WebFormPortlet extends MVCPortlet {
 		}
 	}
 	
+	private void validateReCaptcha(ActionRequest actionRequest) throws SystemException, IOException, JSONException, CaptchaTextException {
+		
+		
+//		HttpServletRequest request = PortalUtil.getHttpServletRequest(actionRequest);
+//		String response = request.getParameter("g-recaptcha-response");
+		
+		
+		String response = ParamUtil.getString(actionRequest, "g-recaptcha-response");
+//		response = ParamUtil.getString(request, "g-recaptcha-response", response);
+		
+		
+		StringBuilder postParams = new StringBuilder();
+		String key = PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE);
+		postParams.append("secret").append('=').append(key).append('&')
+		.append("response").append('=').append(response).append('&');
+		
+		URL url = new URL("https://www.google.com/recaptcha/api/siteverify");
+		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+		connection.setRequestMethod("POST");
+		
+		connection.setDoOutput(true);
+        OutputStream outputStream = connection.getOutputStream();
+        outputStream.write(postParams.toString().getBytes());
+        outputStream.flush();
+        outputStream.close();
+		
+		int responseCode = connection.getResponseCode();
+		System.out.println("POST Response Code :: " + responseCode);
+		
+		if (responseCode == HttpsURLConnection.HTTP_OK) { //success
+            BufferedReader inputBufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuffer result = new StringBuffer();
+ 
+            while ((inputLine = inputBufferedReader.readLine()) != null) {
+            	result.append(inputLine);
+            }
+            inputBufferedReader.close();
+ 
+            JSONObject jsonObj = new JSONFactoryUtil().createJSONObject(result.toString());
+            System.out.println("RESULT: "+result.toString());
+            boolean success = jsonObj.getBoolean("success");
+            if(!success){
+            	JSONArray errorArray = jsonObj.getJSONArray("error-codes");
+            	StringBuilder sb = new StringBuilder();
+            	for(int i = 0; i < errorArray.length(); i++){
+            		sb.append(errorArray.getJSONObject(i).toString()).append(";");
+            	}
+            	System.out.println("ERROR: "+sb.toString());
+            	
+            	throw new CaptchaTextException(sb.toString());
+            }
+            
+            
+        }
+		
+	}
+
 	public void modifyData(ActionRequest actionRequest, ActionResponse actionResponse)throws Exception {
 		getTempData(actionRequest, actionResponse);
 		//actionRequest.setAttribute("modifying", true);
@@ -572,10 +643,11 @@ public class WebFormPortlet extends MVCPortlet {
 		String cmd = ParamUtil.getString(resourceRequest, Constants.CMD);
 
 		try {
-			if (cmd.equals("captcha")) {
-				serveCaptcha(resourceRequest, resourceResponse);
-			}
-			else if (cmd.equals("export")) {
+//			if (cmd.equals("captcha")) {
+//				serveCaptcha(resourceRequest, resourceResponse);
+//			}
+//			else 
+			if (cmd.equals("export")) {
 				exportData(resourceRequest, resourceResponse);
 			}
 			else if (cmd.equals("get_data")) {
@@ -935,12 +1007,12 @@ public class WebFormPortlet extends MVCPortlet {
 		}
 	}
 
-	protected void serveCaptcha(
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
-		throws Exception {
-
-		CaptchaUtil.serveImage(resourceRequest, resourceResponse);
-	}
+//	protected void serveCaptcha(
+//			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+//		throws Exception {
+//
+//		CaptchaUtil.serveImage(resourceRequest, resourceResponse);
+//	}
 
 	protected Set<String> validate(
 			Map<String, String> fieldsMap, PortletPreferences preferences, File outputFile)

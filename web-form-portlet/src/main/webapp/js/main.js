@@ -13,31 +13,6 @@ function validateMultipleCheckboxes(currentFieldValue, fieldsMap, portletNamespa
 }
 
 
-//return (fieldsMap['field2'] == "Bespoke / on-site training" && (!currentFieldValue || currentFieldValue == ''));
-
-function findUPRN(uprn){
-	var osURL = "//api.ordnancesurvey.co.uk/places/v1/addresses/uprn";
-	AUI().use('aui-base','aui-modal','aui-io-request',function(A){
-		A.io.request(osURL,{
-            dataType: 'json',
-            method: 'GET',
-            data: { 
-            	'format':'json',
-            	'uprn': uprn,
-            	'dataset':'DPA',
-            	'key':'EoA4m9a9CEqKE15dtSQqT2VLTTebsP4h'
-            },
-            on: {
-                success: function() {
-                	var response = this.get('responseData');
-                	debug(response);
-                }
-            }
-      });
-	});
-}
-
-
 function findPostcode(postcode){
 	var osURL = "//api.ordnancesurvey.co.uk/places/v1/addresses/postcode";
 	AUI().use('aui-base','aui-modal','aui-io-request',function(A){
