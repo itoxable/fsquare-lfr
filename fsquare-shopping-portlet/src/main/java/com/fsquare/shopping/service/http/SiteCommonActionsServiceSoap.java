@@ -43,7 +43,7 @@ import java.util.Map;
 public class SiteCommonActionsServiceSoap {
     private static Log _log = LogFactoryUtil.getLog(SiteCommonActionsServiceSoap.class);
 
-    public static com.liferay.portal.model.Layout updateLayout(long groupId,
+    public static com.liferay.portal.model.Layout updateLayout(long companyId,
         boolean privateLayout, long layoutId, long parentLayoutId,
         java.lang.String[] localeNamesMapLanguageIds,
         java.lang.String[] localeNamesMapValues,
@@ -74,7 +74,7 @@ public class SiteCommonActionsServiceSoap {
             Map<Locale, String> friendlyURLMap = LocalizationUtil.getLocalizationMap(friendlyURLMapLanguageIds,
                     friendlyURLMapValues);
 
-            com.liferay.portal.model.Layout returnValue = SiteCommonActionsServiceUtil.updateLayout(groupId,
+            com.liferay.portal.model.Layout returnValue = SiteCommonActionsServiceUtil.updateLayout(companyId,
                     privateLayout, layoutId, parentLayoutId, localeNamesMap,
                     localeTitlesMap, descriptionMap, keywordsMap, robotsMap,
                     type, hidden, friendlyURLMap, iconImage, iconBytes,

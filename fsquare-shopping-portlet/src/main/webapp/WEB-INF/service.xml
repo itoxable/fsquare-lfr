@@ -8,11 +8,12 @@
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetCategory" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />	
-		<reference package-path="com.liferay.portal" entity="User" />
+<!-- 		<reference package-path="com.liferay.portal" entity="User" /> -->
 		<reference package-path="com.liferay.portal" entity="PasswordTracker" />
-		<reference package-path="com.liferay.portal" entity="Company" />
-		<reference package-path="com.liferay.portal" entity="Account" />
-		<reference package-path="com.liferay.portal" entity="VirtualHost" />
+<!-- 		<reference package-path="com.liferay.portal" entity="Company" /> -->
+		
+<!-- 		<reference package-path="com.liferay.portal" entity="Account" /> -->
+<!-- 		<reference package-path="com.liferay.portal" entity="VirtualHost" /> -->
 		
 	</entity>
 
@@ -20,13 +21,12 @@
 		
 		<column name="itemTypeId" type="long" primary="true" />
 
-		<!-- Group instance -->
+		<!-- Company instance -->
 
-		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -35,13 +35,13 @@
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 		
-		<finder name="NameAndGroupId" return-type="ShoppingItemType" unique="true">
+		<finder name="NameAndCompanyId" return-type="ShoppingItemType" unique="true">
 			<finder-column name="name" />
-			<finder-column name="groupId" />
+			<finder-column name="companyId" />
 		</finder>
 	</entity>
 
@@ -77,8 +77,8 @@
 <!-- 		<column name="itemTypeId" type="long" /> -->
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 		
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />		
@@ -93,9 +93,9 @@
 
 		<column name="shoppingItemImageId" type="long" primary="true" />
 
-		<!-- Group instance -->
+		<!-- Company instance -->
 
-		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
 
 		<!-- Other fields -->
 
@@ -106,17 +106,17 @@
 		
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 		
-		<finder name="GroupIdAndItemId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyIdAndItemId" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="itemId" />
 		</finder>
 		
-		<finder name="GroupIdAndItemAndMain" return-type="ShoppingItemImage" unique="true">
-			<finder-column name="groupId" />
+		<finder name="CompanyIdAndItemAndMain" return-type="ShoppingItemImage" unique="true">
+			<finder-column name="companyId" />
 			<finder-column name="itemId" />
 			<finder-column name="mainImage" />
 		</finder>
@@ -129,13 +129,12 @@
 	<entity name="ShoppingStorageLocation" local-service="true" remote-service="true">
 		<column name="storageLocationId" type="long" primary="true" />
 
-		<!-- Group instance -->
+		<!-- Company instance -->
 
-		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -146,8 +145,8 @@
 		<column name="location" type="String" />
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 	</entity>
 	
@@ -157,12 +156,11 @@
 		<column name="itemId" type="long" />
 		<column name="storageLocationId" type="long" />
 		
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-		<!-- Audit fields -->
+		<!-- Company instance -->
 
 		<column name="companyId" type="long" />
+		<!-- Audit fields -->
+
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -171,8 +169,8 @@
 		<column name="quantity" type="int" />
 <!-- 		<column name="movementType" type="String" /> -->
 	
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 	
 		<finder name="StorageLocationId" return-type="Collection">
@@ -196,13 +194,12 @@
 
 		<column name="couponId" type="long" primary="true" />
 
-		<!-- Group instance -->
+		<!-- Company instance -->
 
-		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -230,12 +227,12 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
-		<finder name="CodeAndGroupId" return-type="ShoppingCoupon" unique="true">
+		<finder name="CodeAndCompanyId" return-type="ShoppingCoupon" unique="true">
 			<finder-column name="code" />
-			<finder-column name="groupId" />
+			<finder-column name="companyId" />
 		</finder>
 	</entity>
 	
@@ -244,13 +241,12 @@
 
 		<column name="shippingMethodId" type="long" primary="true" />
 
-		<!-- Group instance -->
+		<!-- Company instance -->
 
-		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -274,12 +270,12 @@
 			<finder-column name="defaultShipping" />
 		</finder>
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 		
-		<finder name="GroupIdAndEnabled" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyIdAndEnabled" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="disabled" />
 		</finder>
 		
@@ -290,13 +286,12 @@
 
 		<column name="shoppingOrderId" type="long" primary="true" />
 
-		<!-- Group instance -->
+		<!-- Company instance -->
 
-		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -361,8 +356,8 @@
 
 		<!-- Finder methods -->
 
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 		<finder name="Number" return-type="ShoppingOrder" unique="true">
 			<finder-column name="number" />
@@ -380,13 +375,13 @@
 			<finder-column name="status" />
 		</finder>
 		
-		<finder name="groupIdAndUserId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="companyIdAndUserId" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="userId" />
 		</finder>
 		
-		<finder name="groupIdAndEmail" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="companyIdAndEmail" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="shippingEmailAddress" />
 		</finder>
 
@@ -447,13 +442,12 @@
 	
 	<entity name="ShoppingStore" local-service="true" remote-service="true">
 
-		<!-- Group instance -->
+		<!-- Company instance -->
 
-		<column name="groupId" type="long" primary="true" />
+		<column name="companyId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
-		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />

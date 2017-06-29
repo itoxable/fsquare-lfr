@@ -40,7 +40,6 @@ public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("shippingMethodId", getShippingMethodId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -66,12 +65,6 @@ public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
 
         if (shippingMethodId != null) {
             setShippingMethodId(shippingMethodId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -203,26 +196,6 @@ public class ShoppingShippingMethodWrapper implements ShoppingShippingMethod,
     @Override
     public void setShippingMethodId(long shippingMethodId) {
         _shoppingShippingMethod.setShippingMethodId(shippingMethodId);
-    }
-
-    /**
-    * Returns the group ID of this shopping shipping method.
-    *
-    * @return the group ID of this shopping shipping method
-    */
-    @Override
-    public long getGroupId() {
-        return _shoppingShippingMethod.getGroupId();
-    }
-
-    /**
-    * Sets the group ID of this shopping shipping method.
-    *
-    * @param groupId the group ID of this shopping shipping method
-    */
-    @Override
-    public void setGroupId(long groupId) {
-        _shoppingShippingMethod.setGroupId(groupId);
     }
 
     /**

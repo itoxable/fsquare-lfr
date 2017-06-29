@@ -25,7 +25,6 @@ public class ShoppingItemStorageLocationCacheModel implements CacheModel<Shoppin
     public long itemStorageLocationId;
     public long itemId;
     public long storageLocationId;
-    public long groupId;
     public long companyId;
     public long userId;
     public String userName;
@@ -36,7 +35,7 @@ public class ShoppingItemStorageLocationCacheModel implements CacheModel<Shoppin
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(23);
+        StringBundler sb = new StringBundler(21);
 
         sb.append("{itemStorageLocationId=");
         sb.append(itemStorageLocationId);
@@ -44,8 +43,6 @@ public class ShoppingItemStorageLocationCacheModel implements CacheModel<Shoppin
         sb.append(itemId);
         sb.append(", storageLocationId=");
         sb.append(storageLocationId);
-        sb.append(", groupId=");
-        sb.append(groupId);
         sb.append(", companyId=");
         sb.append(companyId);
         sb.append(", userId=");
@@ -72,7 +69,6 @@ public class ShoppingItemStorageLocationCacheModel implements CacheModel<Shoppin
         shoppingItemStorageLocationImpl.setItemStorageLocationId(itemStorageLocationId);
         shoppingItemStorageLocationImpl.setItemId(itemId);
         shoppingItemStorageLocationImpl.setStorageLocationId(storageLocationId);
-        shoppingItemStorageLocationImpl.setGroupId(groupId);
         shoppingItemStorageLocationImpl.setCompanyId(companyId);
         shoppingItemStorageLocationImpl.setUserId(userId);
 
@@ -113,7 +109,6 @@ public class ShoppingItemStorageLocationCacheModel implements CacheModel<Shoppin
         itemStorageLocationId = objectInput.readLong();
         itemId = objectInput.readLong();
         storageLocationId = objectInput.readLong();
-        groupId = objectInput.readLong();
         companyId = objectInput.readLong();
         userId = objectInput.readLong();
         userName = objectInput.readUTF();
@@ -129,7 +124,6 @@ public class ShoppingItemStorageLocationCacheModel implements CacheModel<Shoppin
         objectOutput.writeLong(itemStorageLocationId);
         objectOutput.writeLong(itemId);
         objectOutput.writeLong(storageLocationId);
-        objectOutput.writeLong(groupId);
         objectOutput.writeLong(companyId);
         objectOutput.writeLong(userId);
 

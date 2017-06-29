@@ -22,7 +22,6 @@ import java.util.Map;
 
 public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
     implements ShoppingStore {
-    private long _groupId;
     private long _companyId;
     private long _userId;
     private String _userUuid;
@@ -77,17 +76,17 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public long getPrimaryKey() {
-        return _groupId;
+        return _companyId;
     }
 
     @Override
     public void setPrimaryKey(long primaryKey) {
-        setGroupId(primaryKey);
+        setCompanyId(primaryKey);
     }
 
     @Override
     public Serializable getPrimaryKeyObj() {
-        return _groupId;
+        return _companyId;
     }
 
     @Override
@@ -99,7 +98,6 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
     public Map<String, Object> getModelAttributes() {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -148,12 +146,6 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
-        }
-
         Long companyId = (Long) attributes.get("companyId");
 
         if (companyId != null) {
@@ -383,28 +375,6 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
         if (braintreeSandboxPublicKey != null) {
             setBraintreeSandboxPublicKey(braintreeSandboxPublicKey);
-        }
-    }
-
-    @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _groupId = groupId;
-
-        if (_shoppingStoreRemoteModel != null) {
-            try {
-                Class<?> clazz = _shoppingStoreRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setGroupId", long.class);
-
-                method.invoke(_shoppingStoreRemoteModel, groupId);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
         }
     }
 
@@ -1317,7 +1287,6 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
     public Object clone() {
         ShoppingStoreClp clone = new ShoppingStoreClp();
 
-        clone.setGroupId(getGroupId());
         clone.setCompanyId(getCompanyId());
         clone.setUserId(getUserId());
         clone.setUserName(getUserName());
@@ -1402,11 +1371,9 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(73);
+        StringBundler sb = new StringBundler(71);
 
-        sb.append("{groupId=");
-        sb.append(getGroupId());
-        sb.append(", companyId=");
+        sb.append("{companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
         sb.append(getUserId());
@@ -1483,16 +1450,12 @@ public class ShoppingStoreClp extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(112);
+        StringBundler sb = new StringBundler(109);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStore");
         sb.append("</model-name>");
 
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
-        sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");
         sb.append(getCompanyId());

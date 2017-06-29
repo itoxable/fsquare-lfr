@@ -25,7 +25,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
     private long _itemStorageLocationId;
     private long _itemId;
     private long _storageLocationId;
-    private long _groupId;
     private long _companyId;
     private long _userId;
     private String _userUuid;
@@ -77,7 +76,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
         attributes.put("itemStorageLocationId", getItemStorageLocationId());
         attributes.put("itemId", getItemId());
         attributes.put("storageLocationId", getStorageLocationId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -108,12 +106,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
 
         if (storageLocationId != null) {
             setStorageLocationId(storageLocationId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -223,28 +215,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
 
                 method.invoke(_shoppingItemStorageLocationRemoteModel,
                     storageLocationId);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
-    }
-
-    @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _groupId = groupId;
-
-        if (_shoppingItemStorageLocationRemoteModel != null) {
-            try {
-                Class<?> clazz = _shoppingItemStorageLocationRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setGroupId", long.class);
-
-                method.invoke(_shoppingItemStorageLocationRemoteModel, groupId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -489,7 +459,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
         clone.setItemStorageLocationId(getItemStorageLocationId());
         clone.setItemId(getItemId());
         clone.setStorageLocationId(getStorageLocationId());
-        clone.setGroupId(getGroupId());
         clone.setCompanyId(getCompanyId());
         clone.setUserId(getUserId());
         clone.setUserName(getUserName());
@@ -547,7 +516,7 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(23);
+        StringBundler sb = new StringBundler(21);
 
         sb.append("{itemStorageLocationId=");
         sb.append(getItemStorageLocationId());
@@ -555,8 +524,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
         sb.append(getItemId());
         sb.append(", storageLocationId=");
         sb.append(getStorageLocationId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
         sb.append(", companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
@@ -578,7 +545,7 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(37);
+        StringBundler sb = new StringBundler(34);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingItemStorageLocation");
@@ -595,10 +562,6 @@ public class ShoppingItemStorageLocationClp extends BaseModelImpl<ShoppingItemSt
         sb.append(
             "<column><column-name>storageLocationId</column-name><column-value><![CDATA[");
         sb.append(getStorageLocationId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");

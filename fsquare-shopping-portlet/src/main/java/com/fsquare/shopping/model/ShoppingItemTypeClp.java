@@ -23,7 +23,6 @@ import java.util.Map;
 public class ShoppingItemTypeClp extends BaseModelImpl<ShoppingItemType>
     implements ShoppingItemType {
     private long _itemTypeId;
-    private long _groupId;
     private long _companyId;
     private long _userId;
     private String _userUuid;
@@ -73,7 +72,6 @@ public class ShoppingItemTypeClp extends BaseModelImpl<ShoppingItemType>
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("itemTypeId", getItemTypeId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -91,12 +89,6 @@ public class ShoppingItemTypeClp extends BaseModelImpl<ShoppingItemType>
 
         if (itemTypeId != null) {
             setItemTypeId(itemTypeId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -158,28 +150,6 @@ public class ShoppingItemTypeClp extends BaseModelImpl<ShoppingItemType>
                 Method method = clazz.getMethod("setItemTypeId", long.class);
 
                 method.invoke(_shoppingItemTypeRemoteModel, itemTypeId);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
-    }
-
-    @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _groupId = groupId;
-
-        if (_shoppingItemTypeRemoteModel != null) {
-            try {
-                Class<?> clazz = _shoppingItemTypeRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setGroupId", long.class);
-
-                method.invoke(_shoppingItemTypeRemoteModel, groupId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -420,7 +390,6 @@ public class ShoppingItemTypeClp extends BaseModelImpl<ShoppingItemType>
         ShoppingItemTypeClp clone = new ShoppingItemTypeClp();
 
         clone.setItemTypeId(getItemTypeId());
-        clone.setGroupId(getGroupId());
         clone.setCompanyId(getCompanyId());
         clone.setUserId(getUserId());
         clone.setUserName(getUserName());
@@ -477,12 +446,10 @@ public class ShoppingItemTypeClp extends BaseModelImpl<ShoppingItemType>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(19);
+        StringBundler sb = new StringBundler(17);
 
         sb.append("{itemTypeId=");
         sb.append(getItemTypeId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
         sb.append(", companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
@@ -504,7 +471,7 @@ public class ShoppingItemTypeClp extends BaseModelImpl<ShoppingItemType>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(31);
+        StringBundler sb = new StringBundler(28);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingItemType");
@@ -513,10 +480,6 @@ public class ShoppingItemTypeClp extends BaseModelImpl<ShoppingItemType>
         sb.append(
             "<column><column-name>itemTypeId</column-name><column-value><![CDATA[");
         sb.append(getItemTypeId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");

@@ -144,7 +144,7 @@ public class ShoppingItemImageLocalServiceClp
 
         _methodParameterTypes17 = new String[] { "java.lang.String" };
 
-        _methodName19 = "findByGroupIdAndItemId";
+        _methodName19 = "findByCompanyIdAndItemId";
 
         _methodParameterTypes19 = new String[] { "long", "long" };
 
@@ -673,14 +673,14 @@ public class ShoppingItemImageLocalServiceClp
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByGroupIdAndItemId(
-        long groupId, long itemId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByCompanyIdAndItemId(
+        long companyId, long itemId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName19,
-                    _methodParameterTypes19, new Object[] { groupId, itemId });
+                    _methodParameterTypes19, new Object[] { companyId, itemId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -701,14 +701,14 @@ public class ShoppingItemImageLocalServiceClp
 
     @Override
     public com.fsquare.shopping.model.ShoppingItemImage getItemMainImage(
-        long groupId, long itemId)
+        long companyId, long itemId)
         throws com.fsquare.shopping.NoSuchShoppingItemImageException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName20,
-                    _methodParameterTypes20, new Object[] { groupId, itemId });
+                    _methodParameterTypes20, new Object[] { companyId, itemId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

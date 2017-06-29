@@ -100,209 +100,213 @@ public class ShoppingItemImageUtil {
     }
 
     /**
-    * Returns all the shopping item images where groupId = &#63;.
+    * Returns all the shopping item images where companyId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @return the matching shopping item images
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByGroupId(
-        long groupId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByGroupId(groupId);
+        return getPersistence().findByCompanyId(companyId);
     }
 
     /**
-    * Returns a range of all the shopping item images where groupId = &#63;.
+    * Returns a range of all the shopping item images where companyId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingItemImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param start the lower bound of the range of shopping item images
     * @param end the upper bound of the range of shopping item images (not inclusive)
     * @return the range of matching shopping item images
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByGroupId(
-        long groupId, int start, int end)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByCompanyId(
+        long companyId, int start, int end)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByGroupId(groupId, start, end);
+        return getPersistence().findByCompanyId(companyId, start, end);
     }
 
     /**
-    * Returns an ordered range of all the shopping item images where groupId = &#63;.
+    * Returns an ordered range of all the shopping item images where companyId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingItemImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param start the lower bound of the range of shopping item images
     * @param end the upper bound of the range of shopping item images (not inclusive)
     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
     * @return the ordered range of matching shopping item images
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByGroupId(
-        long groupId, int start, int end,
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByCompanyId(
+        long companyId, int start, int end,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByGroupId(groupId, start, end, orderByComparator);
+                   .findByCompanyId(companyId, start, end, orderByComparator);
     }
 
     /**
-    * Returns the first shopping item image in the ordered set where groupId = &#63;.
+    * Returns the first shopping item image in the ordered set where companyId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping item image
     * @throws com.fsquare.shopping.NoSuchShoppingItemImageException if a matching shopping item image could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage findByGroupId_First(
-        long groupId,
+    public static com.fsquare.shopping.model.ShoppingItemImage findByCompanyId_First(
+        long companyId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingItemImageException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByGroupId_First(groupId, orderByComparator);
+        return getPersistence()
+                   .findByCompanyId_First(companyId, orderByComparator);
     }
 
     /**
-    * Returns the first shopping item image in the ordered set where groupId = &#63;.
+    * Returns the first shopping item image in the ordered set where companyId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping item image, or <code>null</code> if a matching shopping item image could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage fetchByGroupId_First(
-        long groupId,
+    public static com.fsquare.shopping.model.ShoppingItemImage fetchByCompanyId_First(
+        long companyId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchByGroupId_First(groupId, orderByComparator);
+        return getPersistence()
+                   .fetchByCompanyId_First(companyId, orderByComparator);
     }
 
     /**
-    * Returns the last shopping item image in the ordered set where groupId = &#63;.
+    * Returns the last shopping item image in the ordered set where companyId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping item image
     * @throws com.fsquare.shopping.NoSuchShoppingItemImageException if a matching shopping item image could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage findByGroupId_Last(
-        long groupId,
+    public static com.fsquare.shopping.model.ShoppingItemImage findByCompanyId_Last(
+        long companyId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingItemImageException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByGroupId_Last(groupId, orderByComparator);
+        return getPersistence()
+                   .findByCompanyId_Last(companyId, orderByComparator);
     }
 
     /**
-    * Returns the last shopping item image in the ordered set where groupId = &#63;.
+    * Returns the last shopping item image in the ordered set where companyId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping item image, or <code>null</code> if a matching shopping item image could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage fetchByGroupId_Last(
-        long groupId,
+    public static com.fsquare.shopping.model.ShoppingItemImage fetchByCompanyId_Last(
+        long companyId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
+        return getPersistence()
+                   .fetchByCompanyId_Last(companyId, orderByComparator);
     }
 
     /**
-    * Returns the shopping item images before and after the current shopping item image in the ordered set where groupId = &#63;.
+    * Returns the shopping item images before and after the current shopping item image in the ordered set where companyId = &#63;.
     *
     * @param shoppingItemImageId the primary key of the current shopping item image
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the previous, current, and next shopping item image
     * @throws com.fsquare.shopping.NoSuchShoppingItemImageException if a shopping item image with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage[] findByGroupId_PrevAndNext(
-        long shoppingItemImageId, long groupId,
+    public static com.fsquare.shopping.model.ShoppingItemImage[] findByCompanyId_PrevAndNext(
+        long shoppingItemImageId, long companyId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingItemImageException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByGroupId_PrevAndNext(shoppingItemImageId, groupId,
+                   .findByCompanyId_PrevAndNext(shoppingItemImageId, companyId,
             orderByComparator);
     }
 
     /**
-    * Removes all the shopping item images where groupId = &#63; from the database.
+    * Removes all the shopping item images where companyId = &#63; from the database.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @throws SystemException if a system exception occurred
     */
-    public static void removeByGroupId(long groupId)
+    public static void removeByCompanyId(long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        getPersistence().removeByGroupId(groupId);
+        getPersistence().removeByCompanyId(companyId);
     }
 
     /**
-    * Returns the number of shopping item images where groupId = &#63;.
+    * Returns the number of shopping item images where companyId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @return the number of matching shopping item images
     * @throws SystemException if a system exception occurred
     */
-    public static int countByGroupId(long groupId)
+    public static int countByCompanyId(long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().countByGroupId(groupId);
+        return getPersistence().countByCompanyId(companyId);
     }
 
     /**
-    * Returns all the shopping item images where groupId = &#63; and itemId = &#63;.
+    * Returns all the shopping item images where companyId = &#63; and itemId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @return the matching shopping item images
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByGroupIdAndItemId(
-        long groupId, long itemId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByCompanyIdAndItemId(
+        long companyId, long itemId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByGroupIdAndItemId(groupId, itemId);
+        return getPersistence().findByCompanyIdAndItemId(companyId, itemId);
     }
 
     /**
-    * Returns a range of all the shopping item images where groupId = &#63; and itemId = &#63;.
+    * Returns a range of all the shopping item images where companyId = &#63; and itemId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingItemImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @param start the lower bound of the range of shopping item images
     * @param end the upper bound of the range of shopping item images (not inclusive)
     * @return the range of matching shopping item images
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByGroupIdAndItemId(
-        long groupId, long itemId, int start, int end)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByCompanyIdAndItemId(
+        long companyId, long itemId, int start, int end)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByGroupIdAndItemId(groupId, itemId, start, end);
+                   .findByCompanyIdAndItemId(companyId, itemId, start, end);
     }
 
     /**
-    * Returns an ordered range of all the shopping item images where groupId = &#63; and itemId = &#63;.
+    * Returns an ordered range of all the shopping item images where companyId = &#63; and itemId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingItemImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @param start the lower bound of the range of shopping item images
     * @param end the upper bound of the range of shopping item images (not inclusive)
@@ -310,220 +314,221 @@ public class ShoppingItemImageUtil {
     * @return the ordered range of matching shopping item images
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByGroupIdAndItemId(
-        long groupId, long itemId, int start, int end,
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByCompanyIdAndItemId(
+        long companyId, long itemId, int start, int end,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByGroupIdAndItemId(groupId, itemId, start, end,
+                   .findByCompanyIdAndItemId(companyId, itemId, start, end,
             orderByComparator);
     }
 
     /**
-    * Returns the first shopping item image in the ordered set where groupId = &#63; and itemId = &#63;.
+    * Returns the first shopping item image in the ordered set where companyId = &#63; and itemId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping item image
     * @throws com.fsquare.shopping.NoSuchShoppingItemImageException if a matching shopping item image could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage findByGroupIdAndItemId_First(
-        long groupId, long itemId,
+    public static com.fsquare.shopping.model.ShoppingItemImage findByCompanyIdAndItemId_First(
+        long companyId, long itemId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingItemImageException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByGroupIdAndItemId_First(groupId, itemId,
+                   .findByCompanyIdAndItemId_First(companyId, itemId,
             orderByComparator);
     }
 
     /**
-    * Returns the first shopping item image in the ordered set where groupId = &#63; and itemId = &#63;.
+    * Returns the first shopping item image in the ordered set where companyId = &#63; and itemId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping item image, or <code>null</code> if a matching shopping item image could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage fetchByGroupIdAndItemId_First(
-        long groupId, long itemId,
+    public static com.fsquare.shopping.model.ShoppingItemImage fetchByCompanyIdAndItemId_First(
+        long companyId, long itemId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .fetchByGroupIdAndItemId_First(groupId, itemId,
+                   .fetchByCompanyIdAndItemId_First(companyId, itemId,
             orderByComparator);
     }
 
     /**
-    * Returns the last shopping item image in the ordered set where groupId = &#63; and itemId = &#63;.
+    * Returns the last shopping item image in the ordered set where companyId = &#63; and itemId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping item image
     * @throws com.fsquare.shopping.NoSuchShoppingItemImageException if a matching shopping item image could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage findByGroupIdAndItemId_Last(
-        long groupId, long itemId,
+    public static com.fsquare.shopping.model.ShoppingItemImage findByCompanyIdAndItemId_Last(
+        long companyId, long itemId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingItemImageException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByGroupIdAndItemId_Last(groupId, itemId,
+                   .findByCompanyIdAndItemId_Last(companyId, itemId,
             orderByComparator);
     }
 
     /**
-    * Returns the last shopping item image in the ordered set where groupId = &#63; and itemId = &#63;.
+    * Returns the last shopping item image in the ordered set where companyId = &#63; and itemId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping item image, or <code>null</code> if a matching shopping item image could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage fetchByGroupIdAndItemId_Last(
-        long groupId, long itemId,
+    public static com.fsquare.shopping.model.ShoppingItemImage fetchByCompanyIdAndItemId_Last(
+        long companyId, long itemId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .fetchByGroupIdAndItemId_Last(groupId, itemId,
+                   .fetchByCompanyIdAndItemId_Last(companyId, itemId,
             orderByComparator);
     }
 
     /**
-    * Returns the shopping item images before and after the current shopping item image in the ordered set where groupId = &#63; and itemId = &#63;.
+    * Returns the shopping item images before and after the current shopping item image in the ordered set where companyId = &#63; and itemId = &#63;.
     *
     * @param shoppingItemImageId the primary key of the current shopping item image
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the previous, current, and next shopping item image
     * @throws com.fsquare.shopping.NoSuchShoppingItemImageException if a shopping item image with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage[] findByGroupIdAndItemId_PrevAndNext(
-        long shoppingItemImageId, long groupId, long itemId,
+    public static com.fsquare.shopping.model.ShoppingItemImage[] findByCompanyIdAndItemId_PrevAndNext(
+        long shoppingItemImageId, long companyId, long itemId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingItemImageException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByGroupIdAndItemId_PrevAndNext(shoppingItemImageId,
-            groupId, itemId, orderByComparator);
+                   .findByCompanyIdAndItemId_PrevAndNext(shoppingItemImageId,
+            companyId, itemId, orderByComparator);
     }
 
     /**
-    * Removes all the shopping item images where groupId = &#63; and itemId = &#63; from the database.
+    * Removes all the shopping item images where companyId = &#63; and itemId = &#63; from the database.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @throws SystemException if a system exception occurred
     */
-    public static void removeByGroupIdAndItemId(long groupId, long itemId)
+    public static void removeByCompanyIdAndItemId(long companyId, long itemId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        getPersistence().removeByGroupIdAndItemId(groupId, itemId);
+        getPersistence().removeByCompanyIdAndItemId(companyId, itemId);
     }
 
     /**
-    * Returns the number of shopping item images where groupId = &#63; and itemId = &#63;.
+    * Returns the number of shopping item images where companyId = &#63; and itemId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @return the number of matching shopping item images
     * @throws SystemException if a system exception occurred
     */
-    public static int countByGroupIdAndItemId(long groupId, long itemId)
+    public static int countByCompanyIdAndItemId(long companyId, long itemId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().countByGroupIdAndItemId(groupId, itemId);
+        return getPersistence().countByCompanyIdAndItemId(companyId, itemId);
     }
 
     /**
-    * Returns the shopping item image where groupId = &#63; and itemId = &#63; and mainImage = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingItemImageException} if it could not be found.
+    * Returns the shopping item image where companyId = &#63; and itemId = &#63; and mainImage = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingItemImageException} if it could not be found.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @param mainImage the main image
     * @return the matching shopping item image
     * @throws com.fsquare.shopping.NoSuchShoppingItemImageException if a matching shopping item image could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage findByGroupIdAndItemAndMain(
-        long groupId, long itemId, boolean mainImage)
+    public static com.fsquare.shopping.model.ShoppingItemImage findByCompanyIdAndItemAndMain(
+        long companyId, long itemId, boolean mainImage)
         throws com.fsquare.shopping.NoSuchShoppingItemImageException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByGroupIdAndItemAndMain(groupId, itemId, mainImage);
+                   .findByCompanyIdAndItemAndMain(companyId, itemId, mainImage);
     }
 
     /**
-    * Returns the shopping item image where groupId = &#63; and itemId = &#63; and mainImage = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+    * Returns the shopping item image where companyId = &#63; and itemId = &#63; and mainImage = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @param mainImage the main image
     * @return the matching shopping item image, or <code>null</code> if a matching shopping item image could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage fetchByGroupIdAndItemAndMain(
-        long groupId, long itemId, boolean mainImage)
+    public static com.fsquare.shopping.model.ShoppingItemImage fetchByCompanyIdAndItemAndMain(
+        long companyId, long itemId, boolean mainImage)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .fetchByGroupIdAndItemAndMain(groupId, itemId, mainImage);
+                   .fetchByCompanyIdAndItemAndMain(companyId, itemId, mainImage);
     }
 
     /**
-    * Returns the shopping item image where groupId = &#63; and itemId = &#63; and mainImage = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+    * Returns the shopping item image where companyId = &#63; and itemId = &#63; and mainImage = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @param mainImage the main image
     * @param retrieveFromCache whether to use the finder cache
     * @return the matching shopping item image, or <code>null</code> if a matching shopping item image could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage fetchByGroupIdAndItemAndMain(
-        long groupId, long itemId, boolean mainImage, boolean retrieveFromCache)
+    public static com.fsquare.shopping.model.ShoppingItemImage fetchByCompanyIdAndItemAndMain(
+        long companyId, long itemId, boolean mainImage,
+        boolean retrieveFromCache)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .fetchByGroupIdAndItemAndMain(groupId, itemId, mainImage,
-            retrieveFromCache);
+                   .fetchByCompanyIdAndItemAndMain(companyId, itemId,
+            mainImage, retrieveFromCache);
     }
 
     /**
-    * Removes the shopping item image where groupId = &#63; and itemId = &#63; and mainImage = &#63; from the database.
+    * Removes the shopping item image where companyId = &#63; and itemId = &#63; and mainImage = &#63; from the database.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @param mainImage the main image
     * @return the shopping item image that was removed
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingItemImage removeByGroupIdAndItemAndMain(
-        long groupId, long itemId, boolean mainImage)
+    public static com.fsquare.shopping.model.ShoppingItemImage removeByCompanyIdAndItemAndMain(
+        long companyId, long itemId, boolean mainImage)
         throws com.fsquare.shopping.NoSuchShoppingItemImageException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .removeByGroupIdAndItemAndMain(groupId, itemId, mainImage);
+                   .removeByCompanyIdAndItemAndMain(companyId, itemId, mainImage);
     }
 
     /**
-    * Returns the number of shopping item images where groupId = &#63; and itemId = &#63; and mainImage = &#63;.
+    * Returns the number of shopping item images where companyId = &#63; and itemId = &#63; and mainImage = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param itemId the item ID
     * @param mainImage the main image
     * @return the number of matching shopping item images
     * @throws SystemException if a system exception occurred
     */
-    public static int countByGroupIdAndItemAndMain(long groupId, long itemId,
-        boolean mainImage)
+    public static int countByCompanyIdAndItemAndMain(long companyId,
+        long itemId, boolean mainImage)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .countByGroupIdAndItemAndMain(groupId, itemId, mainImage);
+                   .countByCompanyIdAndItemAndMain(companyId, itemId, mainImage);
     }
 
     /**

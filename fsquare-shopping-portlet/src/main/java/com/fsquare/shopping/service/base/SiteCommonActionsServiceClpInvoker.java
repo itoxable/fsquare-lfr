@@ -9,45 +9,45 @@ import java.util.Arrays;
  * @generated
  */
 public class SiteCommonActionsServiceClpInvoker {
-    private String _methodName116;
-    private String[] _methodParameterTypes116;
-    private String _methodName117;
-    private String[] _methodParameterTypes117;
-    private String _methodName120;
-    private String[] _methodParameterTypes120;
-    private String _methodName121;
-    private String[] _methodParameterTypes121;
-    private String _methodName122;
-    private String[] _methodParameterTypes122;
-    private String _methodName123;
-    private String[] _methodParameterTypes123;
-    private String _methodName124;
-    private String[] _methodParameterTypes124;
-    private String _methodName125;
-    private String[] _methodParameterTypes125;
-    private String _methodName127;
-    private String[] _methodParameterTypes127;
-    private String _methodName128;
-    private String[] _methodParameterTypes128;
-    private String _methodName129;
-    private String[] _methodParameterTypes129;
-    private String _methodName130;
-    private String[] _methodParameterTypes130;
-    private String _methodName131;
-    private String[] _methodParameterTypes131;
+    private String _methodName100;
+    private String[] _methodParameterTypes100;
+    private String _methodName101;
+    private String[] _methodParameterTypes101;
+    private String _methodName104;
+    private String[] _methodParameterTypes104;
+    private String _methodName105;
+    private String[] _methodParameterTypes105;
+    private String _methodName106;
+    private String[] _methodParameterTypes106;
+    private String _methodName107;
+    private String[] _methodParameterTypes107;
+    private String _methodName108;
+    private String[] _methodParameterTypes108;
+    private String _methodName109;
+    private String[] _methodParameterTypes109;
+    private String _methodName111;
+    private String[] _methodParameterTypes111;
+    private String _methodName112;
+    private String[] _methodParameterTypes112;
+    private String _methodName113;
+    private String[] _methodParameterTypes113;
+    private String _methodName114;
+    private String[] _methodParameterTypes114;
+    private String _methodName115;
+    private String[] _methodParameterTypes115;
 
     public SiteCommonActionsServiceClpInvoker() {
-        _methodName116 = "getBeanIdentifier";
+        _methodName100 = "getBeanIdentifier";
 
-        _methodParameterTypes116 = new String[] {  };
+        _methodParameterTypes100 = new String[] {  };
 
-        _methodName117 = "setBeanIdentifier";
+        _methodName101 = "setBeanIdentifier";
 
-        _methodParameterTypes117 = new String[] { "java.lang.String" };
+        _methodParameterTypes101 = new String[] { "java.lang.String" };
 
-        _methodName120 = "updateLayout";
+        _methodName104 = "updateLayout";
 
-        _methodParameterTypes120 = new String[] {
+        _methodParameterTypes104 = new String[] {
                 "long", "boolean", "long", "long", "java.util.Map",
                 "java.util.Map", "java.util.Map", "java.util.Map",
                 "java.util.Map", "java.lang.String", "boolean", "java.util.Map",
@@ -55,70 +55,70 @@ public class SiteCommonActionsServiceClpInvoker {
                 "com.liferay.portal.service.ServiceContext"
             };
 
-        _methodName121 = "updateGroup";
+        _methodName105 = "updateGroup";
 
-        _methodParameterTypes121 = new String[] {
+        _methodParameterTypes105 = new String[] {
                 "long", "long", "java.lang.String", "java.lang.String", "int",
                 "boolean", "int", "java.lang.String", "boolean",
                 "com.liferay.portal.service.ServiceContext"
             };
 
-        _methodName122 = "updatePassword";
+        _methodName106 = "updatePassword";
 
-        _methodParameterTypes122 = new String[] {
+        _methodParameterTypes106 = new String[] {
                 "long", "java.lang.String", "java.lang.String",
                 "java.lang.String"
             };
 
-        _methodName123 = "getUserPortraitUrl";
+        _methodName107 = "getUserPortraitUrl";
 
-        _methodParameterTypes123 = new String[] { "boolean", "long" };
+        _methodParameterTypes107 = new String[] { "boolean", "long" };
 
-        _methodName124 = "getAccountsPaged";
+        _methodName108 = "getAccountsPaged";
 
-        _methodParameterTypes124 = new String[] { "int", "int" };
+        _methodParameterTypes108 = new String[] { "int", "int" };
 
-        _methodName125 = "getAccounts";
+        _methodName109 = "getAccounts";
 
-        _methodParameterTypes125 = new String[] {  };
+        _methodParameterTypes109 = new String[] {  };
 
-        _methodName127 = "getAccount";
+        _methodName111 = "getAccount";
 
-        _methodParameterTypes127 = new String[] { "long" };
+        _methodParameterTypes111 = new String[] { "long" };
 
-        _methodName128 = "getCompanies";
+        _methodName112 = "getCompanies";
 
-        _methodParameterTypes128 = new String[] {  };
+        _methodParameterTypes112 = new String[] {  };
 
-        _methodName129 = "testFileUpload";
+        _methodName113 = "testFileUpload";
 
-        _methodParameterTypes129 = new String[] { "java.io.File" };
+        _methodParameterTypes113 = new String[] { "java.io.File" };
 
-        _methodName130 = "testFilesUpload";
+        _methodName114 = "testFilesUpload";
 
-        _methodParameterTypes130 = new String[] { "java.util.List" };
+        _methodParameterTypes114 = new String[] { "java.util.List" };
 
-        _methodName131 = "testFilesUploadArr";
+        _methodName115 = "testFilesUploadArr";
 
-        _methodParameterTypes131 = new String[] { "java.io.File[][]" };
+        _methodParameterTypes115 = new String[] { "java.io.File[][]" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
         Object[] arguments) throws Throwable {
-        if (_methodName116.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes116, parameterTypes)) {
+        if (_methodName100.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
             return SiteCommonActionsServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName117.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes117, parameterTypes)) {
+        if (_methodName101.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
             SiteCommonActionsServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
         }
 
-        if (_methodName120.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes120, parameterTypes)) {
+        if (_methodName104.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
             return SiteCommonActionsServiceUtil.updateLayout(((Long) arguments[0]).longValue(),
                 ((Boolean) arguments[1]).booleanValue(),
                 ((Long) arguments[2]).longValue(),
@@ -135,8 +135,8 @@ public class SiteCommonActionsServiceClpInvoker {
                 (com.liferay.portal.service.ServiceContext) arguments[14]);
         }
 
-        if (_methodName121.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes121, parameterTypes)) {
+        if (_methodName105.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes105, parameterTypes)) {
             return SiteCommonActionsServiceUtil.updateGroup(((Long) arguments[0]).longValue(),
                 ((Long) arguments[1]).longValue(),
                 (java.lang.String) arguments[2],
@@ -149,56 +149,56 @@ public class SiteCommonActionsServiceClpInvoker {
                 (com.liferay.portal.service.ServiceContext) arguments[9]);
         }
 
-        if (_methodName122.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes122, parameterTypes)) {
+        if (_methodName106.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes106, parameterTypes)) {
             return SiteCommonActionsServiceUtil.updatePassword(((Long) arguments[0]).longValue(),
                 (java.lang.String) arguments[1],
                 (java.lang.String) arguments[2], (java.lang.String) arguments[3]);
         }
 
-        if (_methodName123.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes123, parameterTypes)) {
+        if (_methodName107.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes107, parameterTypes)) {
             return SiteCommonActionsServiceUtil.getUserPortraitUrl(((Boolean) arguments[0]).booleanValue(),
                 ((Long) arguments[1]).longValue());
         }
 
-        if (_methodName124.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes124, parameterTypes)) {
+        if (_methodName108.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes108, parameterTypes)) {
             return SiteCommonActionsServiceUtil.getAccountsPaged(((Integer) arguments[0]).intValue(),
                 ((Integer) arguments[1]).intValue());
         }
 
-        if (_methodName125.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes125, parameterTypes)) {
+        if (_methodName109.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes109, parameterTypes)) {
             return SiteCommonActionsServiceUtil.getAccounts();
         }
 
-        if (_methodName127.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes127, parameterTypes)) {
+        if (_methodName111.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes111, parameterTypes)) {
             return SiteCommonActionsServiceUtil.getAccount(((Long) arguments[0]).longValue());
         }
 
-        if (_methodName128.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes128, parameterTypes)) {
+        if (_methodName112.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes112, parameterTypes)) {
             return SiteCommonActionsServiceUtil.getCompanies();
         }
 
-        if (_methodName129.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes129, parameterTypes)) {
+        if (_methodName113.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes113, parameterTypes)) {
             SiteCommonActionsServiceUtil.testFileUpload((java.io.File) arguments[0]);
 
             return null;
         }
 
-        if (_methodName130.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes130, parameterTypes)) {
+        if (_methodName114.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes114, parameterTypes)) {
             SiteCommonActionsServiceUtil.testFilesUpload((java.util.List<java.io.File>) arguments[0]);
 
             return null;
         }
 
-        if (_methodName131.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes131, parameterTypes)) {
+        if (_methodName115.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes115, parameterTypes)) {
             SiteCommonActionsServiceUtil.testFilesUploadArr((java.io.File[]) arguments[0]);
 
             return null;

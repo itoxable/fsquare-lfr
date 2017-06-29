@@ -46,7 +46,7 @@ public class BaseShoppingPortlet extends MVCPortlet {
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		if(Validator.isNotNull(couponCode)){
 			if(shoppingCoupon == null || !couponCode.equals(shoppingCoupon.getCode())){
-				shoppingCoupon = ShoppingCouponLocalServiceUtil.fetchByCodeAndGroupId(couponCode, themeDisplay.getScopeGroupId());
+				shoppingCoupon = ShoppingCouponLocalServiceUtil.fetchByCodeAndCompanyId(couponCode, themeDisplay.getCompanyId());
 				
 				if(shoppingCoupon != null){
 					
@@ -101,7 +101,7 @@ public class BaseShoppingPortlet extends MVCPortlet {
 				sb.append("<table class='cart-table'><tbody><tr class='table-header'><td></td><td></td><td>PRODUCT</td><td align='center'>QTY</td><td align='right'>PRICE</td></tr>");
 			  	for(Map.Entry<String, ShoppingOrderItem> entry: shoppingOrderItemMap.entrySet()){
 			  		ShoppingOrderItem orderItem = entry.getValue();
-			  		JournalArticle journalArticle = JournalArticleServiceUtil.getArticle(themeDisplay.getScopeGroupId(), orderItem.getArticleId());
+			  		JournalArticle journalArticle = JournalArticleServiceUtil.getArticle(themeDisplay.getCompanyId(), orderItem.getArticleId());
 			  		sb.append("<tr class='cart-row-").append(orderItem.getArticleId()).append("'><td>a href='javascript:;' data-article-id='")
 			  		.append(orderItem.getArticleId()).append("' class='fa fa-times-circle remove-from-shopping-cart-button' title='remove'></a></td><td><img src='")
 			  		.append(ShoppingPortletUtil.getMainImageURL(journalArticle)).append("' alt='' class=''cart-item-img'></td><td><strong>")

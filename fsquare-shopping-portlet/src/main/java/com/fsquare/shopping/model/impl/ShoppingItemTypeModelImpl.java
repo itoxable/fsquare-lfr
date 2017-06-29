@@ -53,7 +53,6 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
     public static final String TABLE_NAME = "FsquareShopping_ShoppingItemType";
     public static final Object[][] TABLE_COLUMNS = {
             { "itemTypeId", Types.BIGINT },
-            { "groupId", Types.BIGINT },
             { "companyId", Types.BIGINT },
             { "userId", Types.BIGINT },
             { "userName", Types.VARCHAR },
@@ -62,7 +61,7 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
             { "name", Types.VARCHAR },
             { "description", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingItemType (itemTypeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingItemType (itemTypeId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingItemType";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingItemType.itemTypeId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingItemType.itemTypeId ASC";
@@ -78,7 +77,7 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
     public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
                 "value.object.column.bitmask.enabled.com.fsquare.shopping.model.ShoppingItemType"),
             true);
-    public static long GROUPID_COLUMN_BITMASK = 1L;
+    public static long COMPANYID_COLUMN_BITMASK = 1L;
     public static long NAME_COLUMN_BITMASK = 2L;
     public static long ITEMTYPEID_COLUMN_BITMASK = 4L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
@@ -88,10 +87,9 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
             ShoppingItemType.class
         };
     private long _itemTypeId;
-    private long _groupId;
-    private long _originalGroupId;
-    private boolean _setOriginalGroupId;
     private long _companyId;
+    private long _originalCompanyId;
+    private boolean _setOriginalCompanyId;
     private long _userId;
     private String _userUuid;
     private String _userName;
@@ -120,7 +118,6 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
         ShoppingItemType model = new ShoppingItemTypeImpl();
 
         model.setItemTypeId(soapModel.getItemTypeId());
-        model.setGroupId(soapModel.getGroupId());
         model.setCompanyId(soapModel.getCompanyId());
         model.setUserId(soapModel.getUserId());
         model.setUserName(soapModel.getUserName());
@@ -188,7 +185,6 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("itemTypeId", getItemTypeId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -206,12 +202,6 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
 
         if (itemTypeId != null) {
             setItemTypeId(itemTypeId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -270,36 +260,25 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
 
     @JSON
     @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-        if (!_setOriginalGroupId) {
-            _setOriginalGroupId = true;
-
-            _originalGroupId = _groupId;
-        }
-
-        _groupId = groupId;
-    }
-
-    public long getOriginalGroupId() {
-        return _originalGroupId;
-    }
-
-    @JSON
-    @Override
     public long getCompanyId() {
         return _companyId;
     }
 
     @Override
     public void setCompanyId(long companyId) {
+        _columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+        if (!_setOriginalCompanyId) {
+            _setOriginalCompanyId = true;
+
+            _originalCompanyId = _companyId;
+        }
+
         _companyId = companyId;
+    }
+
+    public long getOriginalCompanyId() {
+        return _originalCompanyId;
     }
 
     @JSON
@@ -432,7 +411,6 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
         ShoppingItemTypeImpl shoppingItemTypeImpl = new ShoppingItemTypeImpl();
 
         shoppingItemTypeImpl.setItemTypeId(getItemTypeId());
-        shoppingItemTypeImpl.setGroupId(getGroupId());
         shoppingItemTypeImpl.setCompanyId(getCompanyId());
         shoppingItemTypeImpl.setUserId(getUserId());
         shoppingItemTypeImpl.setUserName(getUserName());
@@ -489,9 +467,9 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
     public void resetOriginalValues() {
         ShoppingItemTypeModelImpl shoppingItemTypeModelImpl = this;
 
-        shoppingItemTypeModelImpl._originalGroupId = shoppingItemTypeModelImpl._groupId;
+        shoppingItemTypeModelImpl._originalCompanyId = shoppingItemTypeModelImpl._companyId;
 
-        shoppingItemTypeModelImpl._setOriginalGroupId = false;
+        shoppingItemTypeModelImpl._setOriginalCompanyId = false;
 
         shoppingItemTypeModelImpl._originalName = shoppingItemTypeModelImpl._name;
 
@@ -503,8 +481,6 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
         ShoppingItemTypeCacheModel shoppingItemTypeCacheModel = new ShoppingItemTypeCacheModel();
 
         shoppingItemTypeCacheModel.itemTypeId = getItemTypeId();
-
-        shoppingItemTypeCacheModel.groupId = getGroupId();
 
         shoppingItemTypeCacheModel.companyId = getCompanyId();
 
@@ -555,12 +531,10 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(19);
+        StringBundler sb = new StringBundler(17);
 
         sb.append("{itemTypeId=");
         sb.append(getItemTypeId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
         sb.append(", companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
@@ -582,7 +556,7 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(31);
+        StringBundler sb = new StringBundler(28);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingItemType");
@@ -591,10 +565,6 @@ public class ShoppingItemTypeModelImpl extends BaseModelImpl<ShoppingItemType>
         sb.append(
             "<column><column-name>itemTypeId</column-name><column-value><![CDATA[");
         sb.append(getItemTypeId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");

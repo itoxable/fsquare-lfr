@@ -263,22 +263,22 @@ public class ShoppingOrderLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByGroupId(
-        long groupId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().findByGroupId(groupId);
+        return getService().findByCompanyId(companyId);
     }
 
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndUserId(
-        long groupId, long userId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByCompanyIdAndUserId(
+        long companyId, long userId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().findBygroupIdAndUserId(groupId, userId);
+        return getService().findByCompanyIdAndUserId(companyId, userId);
     }
 
     public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndEmail(
-        long groupId, java.lang.String email)
+        long companyId, java.lang.String email)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().findBygroupIdAndEmail(groupId, email);
+        return getService().findBygroupIdAndEmail(companyId, email);
     }
 
     public static double getOrderTotal(

@@ -52,7 +52,7 @@ public interface SiteCommonActionsService extends BaseService, InvokableService 
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable;
 
-    public com.liferay.portal.model.Layout updateLayout(long groupId,
+    public com.liferay.portal.model.Layout updateLayout(long companyId,
         boolean privateLayout, long layoutId, long parentLayoutId,
         java.util.Map<java.util.Locale, java.lang.String> localeNamesMap,
         java.util.Map<java.util.Locale, java.lang.String> localeTitlesMap,

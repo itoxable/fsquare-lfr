@@ -73,11 +73,11 @@ public class ShoppingItemStorageLocationServiceUtil {
         return getService().findByStorageLocationId(storageLocationId);
     }
 
-    public static java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByGroupId(
-        long groupId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByCompanyId(
+        long companyId)
         throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getService().findByGroupId(groupId);
+        return getService().findByCompanyId(companyId);
     }
 
     public static void clearService() {

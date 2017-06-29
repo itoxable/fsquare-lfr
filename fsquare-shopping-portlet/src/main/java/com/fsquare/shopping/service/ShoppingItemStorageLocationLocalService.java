@@ -256,8 +256,8 @@ public interface ShoppingItemStorageLocationLocalService
         throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
             com.liferay.portal.kernel.exception.SystemException;
 
-    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByGroupId(
-        long groupId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByCompanyId(
+        long companyId)
         throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
             com.liferay.portal.kernel.exception.SystemException;
 }

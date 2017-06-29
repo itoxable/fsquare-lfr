@@ -156,27 +156,27 @@ public abstract class ShoppingStoreLocalServiceBaseImpl
     /**
      * Creates a new shopping store with the primary key. Does not add the shopping store to the database.
      *
-     * @param groupId the primary key for the new shopping store
+     * @param companyId the primary key for the new shopping store
      * @return the new shopping store
      */
     @Override
-    public ShoppingStore createShoppingStore(long groupId) {
-        return shoppingStorePersistence.create(groupId);
+    public ShoppingStore createShoppingStore(long companyId) {
+        return shoppingStorePersistence.create(companyId);
     }
 
     /**
      * Deletes the shopping store with the primary key from the database. Also notifies the appropriate model listeners.
      *
-     * @param groupId the primary key of the shopping store
+     * @param companyId the primary key of the shopping store
      * @return the shopping store that was removed
      * @throws PortalException if a shopping store with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Indexable(type = IndexableType.DELETE)
     @Override
-    public ShoppingStore deleteShoppingStore(long groupId)
+    public ShoppingStore deleteShoppingStore(long companyId)
         throws PortalException, SystemException {
-        return shoppingStorePersistence.remove(groupId);
+        return shoppingStorePersistence.remove(companyId);
     }
 
     /**
@@ -287,23 +287,23 @@ public abstract class ShoppingStoreLocalServiceBaseImpl
     }
 
     @Override
-    public ShoppingStore fetchShoppingStore(long groupId)
+    public ShoppingStore fetchShoppingStore(long companyId)
         throws SystemException {
-        return shoppingStorePersistence.fetchByPrimaryKey(groupId);
+        return shoppingStorePersistence.fetchByPrimaryKey(companyId);
     }
 
     /**
      * Returns the shopping store with the primary key.
      *
-     * @param groupId the primary key of the shopping store
+     * @param companyId the primary key of the shopping store
      * @return the shopping store
      * @throws PortalException if a shopping store with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingStore getShoppingStore(long groupId)
+    public ShoppingStore getShoppingStore(long companyId)
         throws PortalException, SystemException {
-        return shoppingStorePersistence.findByPrimaryKey(groupId);
+        return shoppingStorePersistence.findByPrimaryKey(companyId);
     }
 
     @Override

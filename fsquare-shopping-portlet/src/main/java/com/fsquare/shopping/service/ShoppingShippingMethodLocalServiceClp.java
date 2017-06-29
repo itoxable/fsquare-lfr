@@ -159,11 +159,11 @@ public class ShoppingShippingMethodLocalServiceClp
 
         _methodParameterTypes20 = new String[] {  };
 
-        _methodName21 = "findByGroupId";
+        _methodName21 = "findByCompanyId";
 
         _methodParameterTypes21 = new String[] { "long" };
 
-        _methodName22 = "findByGroupIdAndEnabled";
+        _methodName22 = "findByCompanyIdAndEnabled";
 
         _methodParameterTypes22 = new String[] { "long" };
     }
@@ -746,14 +746,14 @@ public class ShoppingShippingMethodLocalServiceClp
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupId(
-        long groupId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName21,
-                    _methodParameterTypes21, new Object[] { groupId });
+                    _methodParameterTypes21, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -773,14 +773,14 @@ public class ShoppingShippingMethodLocalServiceClp
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupIdAndEnabled(
-        long groupId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByCompanyIdAndEnabled(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName22,
-                    _methodParameterTypes22, new Object[] { groupId });
+                    _methodParameterTypes22, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

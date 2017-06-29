@@ -263,14 +263,14 @@ public class ShoppingCouponLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
-    public static com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
-        java.lang.String code, long groupId) {
-        return getService().fetchByCodeAndGroupId(code, groupId);
+    public static com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndCompanyId(
+        java.lang.String code, long companyId) {
+        return getService().fetchByCodeAndCompanyId(code, companyId);
     }
 
-    public static java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
-        java.lang.Long groupId) {
-        return getService().findByGroupId(groupId);
+    public static java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByCompanyId(
+        java.lang.Long companyId) {
+        return getService().findByCompanyId(companyId);
     }
 
     public static boolean isCouponValid(

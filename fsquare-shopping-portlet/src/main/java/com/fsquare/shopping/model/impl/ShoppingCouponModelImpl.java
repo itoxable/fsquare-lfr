@@ -54,7 +54,6 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
     public static final String TABLE_NAME = "FsquareShopping_ShoppingCoupon";
     public static final Object[][] TABLE_COLUMNS = {
             { "couponId", Types.BIGINT },
-            { "groupId", Types.BIGINT },
             { "companyId", Types.BIGINT },
             { "userId", Types.BIGINT },
             { "userName", Types.VARCHAR },
@@ -73,7 +72,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
             { "discountType", Types.VARCHAR },
             { "maxUses", Types.BIGINT }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingCoupon (couponId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(2000) null,startDate DATE null,endDate DATE null,active_ BOOLEAN,limitCategories VARCHAR(75) null,limitSkus VARCHAR(75) null,minOrder DOUBLE,discount DOUBLE,discountType VARCHAR(75) null,maxUses LONG)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingCoupon (couponId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(2000) null,startDate DATE null,endDate DATE null,active_ BOOLEAN,limitCategories VARCHAR(75) null,limitSkus VARCHAR(75) null,minOrder DOUBLE,discount DOUBLE,discountType VARCHAR(75) null,maxUses LONG)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingCoupon";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingCoupon.createDate ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingCoupon.createDate ASC";
@@ -90,7 +89,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
                 "value.object.column.bitmask.enabled.com.fsquare.shopping.model.ShoppingCoupon"),
             true);
     public static long CODE_COLUMN_BITMASK = 1L;
-    public static long GROUPID_COLUMN_BITMASK = 2L;
+    public static long COMPANYID_COLUMN_BITMASK = 2L;
     public static long CREATEDATE_COLUMN_BITMASK = 4L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.com.fsquare.shopping.model.ShoppingCoupon"));
@@ -99,10 +98,9 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
             ShoppingCoupon.class
         };
     private long _couponId;
-    private long _groupId;
-    private long _originalGroupId;
-    private boolean _setOriginalGroupId;
     private long _companyId;
+    private long _originalCompanyId;
+    private boolean _setOriginalCompanyId;
     private long _userId;
     private String _userUuid;
     private String _userName;
@@ -141,7 +139,6 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
         ShoppingCoupon model = new ShoppingCouponImpl();
 
         model.setCouponId(soapModel.getCouponId());
-        model.setGroupId(soapModel.getGroupId());
         model.setCompanyId(soapModel.getCompanyId());
         model.setUserId(soapModel.getUserId());
         model.setUserName(soapModel.getUserName());
@@ -218,7 +215,6 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("couponId", getCouponId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -246,12 +242,6 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 
         if (couponId != null) {
             setCouponId(couponId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -370,36 +360,25 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 
     @JSON
     @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-        if (!_setOriginalGroupId) {
-            _setOriginalGroupId = true;
-
-            _originalGroupId = _groupId;
-        }
-
-        _groupId = groupId;
-    }
-
-    public long getOriginalGroupId() {
-        return _originalGroupId;
-    }
-
-    @JSON
-    @Override
     public long getCompanyId() {
         return _companyId;
     }
 
     @Override
     public void setCompanyId(long companyId) {
+        _columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+        if (!_setOriginalCompanyId) {
+            _setOriginalCompanyId = true;
+
+            _originalCompanyId = _companyId;
+        }
+
         _companyId = companyId;
+    }
+
+    public long getOriginalCompanyId() {
+        return _originalCompanyId;
     }
 
     @JSON
@@ -665,7 +644,6 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
         ShoppingCouponImpl shoppingCouponImpl = new ShoppingCouponImpl();
 
         shoppingCouponImpl.setCouponId(getCouponId());
-        shoppingCouponImpl.setGroupId(getGroupId());
         shoppingCouponImpl.setCompanyId(getCompanyId());
         shoppingCouponImpl.setUserId(getUserId());
         shoppingCouponImpl.setUserName(getUserName());
@@ -733,9 +711,9 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
     public void resetOriginalValues() {
         ShoppingCouponModelImpl shoppingCouponModelImpl = this;
 
-        shoppingCouponModelImpl._originalGroupId = shoppingCouponModelImpl._groupId;
+        shoppingCouponModelImpl._originalCompanyId = shoppingCouponModelImpl._companyId;
 
-        shoppingCouponModelImpl._setOriginalGroupId = false;
+        shoppingCouponModelImpl._setOriginalCompanyId = false;
 
         shoppingCouponModelImpl._originalCode = shoppingCouponModelImpl._code;
 
@@ -747,8 +725,6 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
         ShoppingCouponCacheModel shoppingCouponCacheModel = new ShoppingCouponCacheModel();
 
         shoppingCouponCacheModel.couponId = getCouponId();
-
-        shoppingCouponCacheModel.groupId = getGroupId();
 
         shoppingCouponCacheModel.companyId = getCompanyId();
 
@@ -855,12 +831,10 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(39);
+        StringBundler sb = new StringBundler(37);
 
         sb.append("{couponId=");
         sb.append(getCouponId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
         sb.append(", companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
@@ -902,7 +876,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(61);
+        StringBundler sb = new StringBundler(58);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingCoupon");
@@ -911,10 +885,6 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
         sb.append(
             "<column><column-name>couponId</column-name><column-value><![CDATA[");
         sb.append(getCouponId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");

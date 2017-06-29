@@ -324,10 +324,10 @@ public class ShoppingItemLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
-    public static java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
-        long groupId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItem> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().findByGroupId(groupId);
+        return getService().findByCompanyId(companyId);
     }
 
     public static com.fsquare.shopping.model.ShoppingItem addShoppingItem(

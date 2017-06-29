@@ -47,7 +47,7 @@ public class SiteCommonActionsServiceWrapper implements SiteCommonActionsService
     }
 
     @Override
-    public com.liferay.portal.model.Layout updateLayout(long groupId,
+    public com.liferay.portal.model.Layout updateLayout(long companyId,
         boolean privateLayout, long layoutId, long parentLayoutId,
         java.util.Map<java.util.Locale, java.lang.String> localeNamesMap,
         java.util.Map<java.util.Locale, java.lang.String> localeTitlesMap,
@@ -60,7 +60,7 @@ public class SiteCommonActionsServiceWrapper implements SiteCommonActionsService
         com.liferay.portal.service.ServiceContext serviceContext)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return _siteCommonActionsService.updateLayout(groupId, privateLayout,
+        return _siteCommonActionsService.updateLayout(companyId, privateLayout,
             layoutId, parentLayoutId, localeNamesMap, localeTitlesMap,
             descriptionMap, keywordsMap, robotsMap, type, hidden,
             friendlyURLMap, iconImage, iconBytes, serviceContext);

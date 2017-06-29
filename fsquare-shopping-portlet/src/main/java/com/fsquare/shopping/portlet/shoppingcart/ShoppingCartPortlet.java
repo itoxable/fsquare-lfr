@@ -107,7 +107,7 @@ public class ShoppingCartPortlet extends BaseShoppingPortlet {
 //		Long shoppingOrderId = CounterLocalServiceUtil.increment(ShoppingOrder.class.getName());
 		ShoppingStore shoppingStore = null;
 		try{
-			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 			
 //			ShoppingOrder shoppingOrder = ShoppingOrderLocalServiceUtil.createShoppingOrder(shoppingOrderId);
 			
@@ -118,10 +118,10 @@ public class ShoppingCartPortlet extends BaseShoppingPortlet {
 //			session.setAttribute(ShoppingPortletUtil.SESSION_ORDER_OBJECT, shoppingOrder);
 			
 		}catch(NoSuchShoppingStoreException e){
-			shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
+			shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getCompanyId());
 		}
 		
-		Layout checkoutPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(shoppingStore.getCheckoutPageUuid(), themeDisplay.getScopeGroupId(), false);
+		Layout checkoutPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndCompanyId(shoppingStore.getCheckoutPageUuid(), themeDisplay.getCompanyId());
 		NavItem checkoutPageNavItem = new NavItem(request, checkoutPageLayout, null);
 		String redirect = checkoutPageNavItem.getRegularURL();
 		redirect = PortalUtil.escapeRedirect(redirect);

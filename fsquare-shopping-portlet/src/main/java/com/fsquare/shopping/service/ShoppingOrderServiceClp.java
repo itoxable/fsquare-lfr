@@ -34,11 +34,11 @@ public class ShoppingOrderServiceClp implements ShoppingOrderService {
 
         _methodParameterTypes1 = new String[] { "java.lang.String" };
 
-        _methodName3 = "findByGroupId";
+        _methodName3 = "findByCompanyId";
 
         _methodParameterTypes3 = new String[] { "long" };
 
-        _methodName4 = "findBygroupIdAndUserId";
+        _methodName4 = "findByCompanyIdAndUserId";
 
         _methodParameterTypes4 = new String[] { "long", "long" };
 
@@ -102,14 +102,14 @@ public class ShoppingOrderServiceClp implements ShoppingOrderService {
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByGroupId(
-        long groupId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName3,
-                    _methodParameterTypes3, new Object[] { groupId });
+                    _methodParameterTypes3, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -129,14 +129,14 @@ public class ShoppingOrderServiceClp implements ShoppingOrderService {
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndUserId(
-        long groupId, long userId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByCompanyIdAndUserId(
+        long companyId, long userId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName4,
-                    _methodParameterTypes4, new Object[] { groupId, userId });
+                    _methodParameterTypes4, new Object[] { companyId, userId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -157,14 +157,15 @@ public class ShoppingOrderServiceClp implements ShoppingOrderService {
 
     @Override
     public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndEmail(
-        long groupId, java.lang.String email)
+        long companyId, java.lang.String email)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName5,
                     _methodParameterTypes5,
-                    new Object[] { groupId, ClpSerializer.translateInput(email) });
+                    new Object[] { companyId, ClpSerializer.translateInput(
+                            email) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

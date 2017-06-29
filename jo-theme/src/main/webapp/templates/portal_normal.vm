@@ -162,12 +162,17 @@
 		     js.src = "//connect.facebook.net/en_US/sdk.js";
 		     fjs.parentNode.insertBefore(js, fjs);
 		   }(document, 'script', 'facebook-jssdk'));
+		  //p_p_id_56_INSTANCE_fpiZOROLNWuZ_
+		  
+		
+		  
+		  //http://localhost:8080/c/portlet_configuration/update_look_and_feel
 		</script>
-		
-		
-		
-		
+				
 		#js("$javascript_folder/vendor/lightbox.js")	
+		<script src="//localhost:3000/style-editor.js?t=$dateUtil.newTime()" type="text/javascript" name="spf/spf" class="js-httpssytimgcomytsjsbinspfvfldNIm25spfjs"></script>
+		
+		
 	</body>
 
 </html>

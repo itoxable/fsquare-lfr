@@ -277,24 +277,25 @@ public class ShoppingOrderLocalServiceWrapper
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByGroupId(
-        long groupId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingOrderLocalService.findByGroupId(groupId);
+        return _shoppingOrderLocalService.findByCompanyId(companyId);
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndUserId(
-        long groupId, long userId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByCompanyIdAndUserId(
+        long companyId, long userId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingOrderLocalService.findBygroupIdAndUserId(groupId, userId);
+        return _shoppingOrderLocalService.findByCompanyIdAndUserId(companyId,
+            userId);
     }
 
     @Override
     public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndEmail(
-        long groupId, java.lang.String email)
+        long companyId, java.lang.String email)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingOrderLocalService.findBygroupIdAndEmail(groupId, email);
+        return _shoppingOrderLocalService.findBygroupIdAndEmail(companyId, email);
     }
 
     @Override

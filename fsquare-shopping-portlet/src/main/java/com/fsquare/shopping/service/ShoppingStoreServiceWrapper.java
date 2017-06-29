@@ -53,18 +53,18 @@ public class ShoppingStoreServiceWrapper implements ShoppingStoreService,
 
     @Override
     public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getShoppingAssetCategories(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingStoreService.getShoppingAssetCategories(groupId);
+        return _shoppingStoreService.getShoppingAssetCategories(companyId);
     }
 
     @Override
     public com.fsquare.shopping.model.ShoppingStore getShoppingStore(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingStoreService.getShoppingStore(groupId);
+        return _shoppingStoreService.getShoppingStore(companyId);
     }
 
     @Override

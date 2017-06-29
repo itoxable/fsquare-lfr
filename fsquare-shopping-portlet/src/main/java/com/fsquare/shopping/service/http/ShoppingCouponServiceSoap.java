@@ -50,11 +50,11 @@ import java.rmi.RemoteException;
 public class ShoppingCouponServiceSoap {
     private static Log _log = LogFactoryUtil.getLog(ShoppingCouponServiceSoap.class);
 
-    public static com.fsquare.shopping.model.ShoppingCouponSoap fetchByCodeAndGroupId(
-        java.lang.String code, long groupId) throws RemoteException {
+    public static com.fsquare.shopping.model.ShoppingCouponSoap fetchByCodeAndCompanyId(
+        java.lang.String code, long companyId) throws RemoteException {
         try {
-            com.fsquare.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.fetchByCodeAndGroupId(code,
-                    groupId);
+            com.fsquare.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.fetchByCodeAndCompanyId(code,
+                    companyId);
 
             return com.fsquare.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
         } catch (Exception e) {
@@ -64,11 +64,11 @@ public class ShoppingCouponServiceSoap {
         }
     }
 
-    public static com.fsquare.shopping.model.ShoppingCouponSoap[] findByGroupId(
-        java.lang.Long groupId) throws RemoteException {
+    public static com.fsquare.shopping.model.ShoppingCouponSoap[] findByCompanyId(
+        java.lang.Long companyId) throws RemoteException {
         try {
             java.util.List<com.fsquare.shopping.model.ShoppingCoupon> returnValue =
-                ShoppingCouponServiceUtil.findByGroupId(groupId);
+                ShoppingCouponServiceUtil.findByCompanyId(companyId);
 
             return com.fsquare.shopping.model.ShoppingCouponSoap.toSoapModels(returnValue);
         } catch (Exception e) {
@@ -108,12 +108,12 @@ public class ShoppingCouponServiceSoap {
         }
     }
 
-    public static com.fsquare.shopping.model.ShoppingCouponSoap[] findByGroupIdStartEnd(
-        java.lang.Long groupId, int start, int end) throws RemoteException {
+    public static com.fsquare.shopping.model.ShoppingCouponSoap[] findByCompanyIdStartEnd(
+        java.lang.Long companyId, int start, int end) throws RemoteException {
         try {
             java.util.List<com.fsquare.shopping.model.ShoppingCoupon> returnValue =
-                ShoppingCouponServiceUtil.findByGroupIdStartEnd(groupId, start,
-                    end);
+                ShoppingCouponServiceUtil.findByCompanyIdStartEnd(companyId,
+                    start, end);
 
             return com.fsquare.shopping.model.ShoppingCouponSoap.toSoapModels(returnValue);
         } catch (Exception e) {
@@ -123,10 +123,10 @@ public class ShoppingCouponServiceSoap {
         }
     }
 
-    public static int countByGroupId(java.lang.Long groupId)
+    public static int countByCompanyId(java.lang.Long companyId)
         throws RemoteException {
         try {
-            int returnValue = ShoppingCouponServiceUtil.countByGroupId(groupId);
+            int returnValue = ShoppingCouponServiceUtil.countByCompanyId(companyId);
 
             return returnValue;
         } catch (Exception e) {
@@ -136,18 +136,18 @@ public class ShoppingCouponServiceSoap {
         }
     }
 
-    public static void updateShoppingCoupon(long couponId, long groupId,
+    public static void updateShoppingCoupon(long couponId, long companyId,
         java.lang.String code, java.lang.String name,
         java.lang.String description, java.util.Date startDate,
         java.util.Date endDate, boolean active,
         java.lang.String limitCategories, java.lang.String limitSkus,
         double minOrder, double discount, java.lang.String discountType,
-        long maxUses, long userid, long companyId) throws RemoteException {
+        long maxUses, long userid) throws RemoteException {
         try {
-            ShoppingCouponServiceUtil.updateShoppingCoupon(couponId, groupId,
+            ShoppingCouponServiceUtil.updateShoppingCoupon(couponId, companyId,
                 code, name, description, startDate, endDate, active,
                 limitCategories, limitSkus, minOrder, discount, discountType,
-                maxUses, userid, companyId);
+                maxUses, userid);
         } catch (Exception e) {
             _log.error(e, e);
 

@@ -51,7 +51,7 @@ public class SiteCommonActionsServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
-    public static com.liferay.portal.model.Layout updateLayout(long groupId,
+    public static com.liferay.portal.model.Layout updateLayout(long companyId,
         boolean privateLayout, long layoutId, long parentLayoutId,
         java.util.Map<java.util.Locale, java.lang.String> localeNamesMap,
         java.util.Map<java.util.Locale, java.lang.String> localeTitlesMap,
@@ -65,7 +65,7 @@ public class SiteCommonActionsServiceUtil {
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         return getService()
-                   .updateLayout(groupId, privateLayout, layoutId,
+                   .updateLayout(companyId, privateLayout, layoutId,
             parentLayoutId, localeNamesMap, localeTitlesMap, descriptionMap,
             keywordsMap, robotsMap, type, hidden, friendlyURLMap, iconImage,
             iconBytes, serviceContext);

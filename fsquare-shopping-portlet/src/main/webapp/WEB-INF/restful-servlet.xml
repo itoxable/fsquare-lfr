@@ -16,6 +16,7 @@
 	<mvc:annotation-driven />
 	<mvc:interceptors>
 		<mvc:interceptor >
+				<mvc:mapping path="/company/*"/>
 				<mvc:mapping path="/store"/>
 				<mvc:mapping path="/store/groupId/*"/>
 				<bean class="com.fsquare.rest.servlet.interceptor.SecureRequestHandlerInterceptor"></bean>

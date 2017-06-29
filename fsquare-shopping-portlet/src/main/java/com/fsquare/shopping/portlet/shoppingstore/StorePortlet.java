@@ -145,7 +145,7 @@ public class StorePortlet extends MVCPortlet{
 		if(braintreePayment == null){
 			System.out.println("--- BraintreePayment ---");
 			ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 			braintreePayment = new BraintreePayment(shoppingStore);
 		}
 		return braintreePayment;
@@ -157,7 +157,7 @@ public class StorePortlet extends MVCPortlet{
         boolean success = false;
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-		ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+		ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 
         String clientToken = getBraintreeGateway(resourceRequest).getBraintreeClientToken("");
         jsonObject.put("braintreeClientToken", clientToken);
@@ -177,7 +177,7 @@ public class StorePortlet extends MVCPortlet{
 
 		ShoppingStore shoppingStore = null;
 		try{
-			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 			resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_SHOPPING_STORE, shoppingStore);
 			ClassName journalArticleClassName =  ClassNameLocalServiceUtil.getClassName(JournalArticle.class.getName());
 			List<DDMStructure> structureList = DDMStructureLocalServiceUtil.getClassStructures(themeDisplay.getCompanyId(), journalArticleClassName.getClassNameId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -189,7 +189,7 @@ public class StorePortlet extends MVCPortlet{
 				}
 			}
 			if(ddmStructure != null){
-				List<JournalArticle> artilceList = JournalArticleServiceUtil.getArticlesByStructureId(themeDisplay.getScopeGroupId(), ddmStructure.getStructureKey(), 0, 1, (OrderByComparator)null);
+				List<JournalArticle> artilceList = JournalArticleServiceUtil.getArticlesByStructureId(themeDisplay.getCompanyId(), ddmStructure.getStructureKey(), 0, 1, (OrderByComparator)null);
 				JournalArticle journalArticle = artilceList.get(0);
 				if(journalArticle != null){
 					ShoppingOrderItem shoppingOrderItem = new ShoppingOrderItemImpl();
@@ -217,7 +217,7 @@ public class StorePortlet extends MVCPortlet{
         boolean success = false;
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-        ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+        ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
         ShoppingOrder shoppingOrder = new ShoppingOrderImpl();
         
         shoppingOrder.setShippingEmailAddress(themeDisplay.getUser().getDisplayEmailAddress());
@@ -247,7 +247,7 @@ public class StorePortlet extends MVCPortlet{
 
 		ShoppingStore shoppingStore = null;
 		try{
-			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 			resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_SHOPPING_STORE, shoppingStore);
 		
 			Long amount = ParamUtil.getLong(resourceRequest, "amount");
@@ -317,7 +317,7 @@ public class StorePortlet extends MVCPortlet{
 
 		ShoppingStore shoppingStore = null;
 		try{
-			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 			resourceRequest.setAttribute(ShoppingPortletUtil.ATTR_SHOPPING_STORE, shoppingStore);
 		}catch(NoSuchShoppingStoreException e){}
 		
@@ -336,9 +336,9 @@ public class StorePortlet extends MVCPortlet{
 
 		ShoppingStore shoppingStore = null;
 		try{
-			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 		}catch(NoSuchShoppingStoreException e){
-			shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
+			shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getCompanyId());
 			
 			shoppingStore.setCreateDate(new Date());
 			shoppingStore.setCompanyId(themeDisplay.getCompanyId());
@@ -379,24 +379,24 @@ public class StorePortlet extends MVCPortlet{
 			shoppingStore.setUserTypes(usersType);
 			
 			if(changeInUsersType){
-				Layout checkoutPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(checkoutDisplayPage, themeDisplay.getScopeGroupId(), false);
+				Layout checkoutPageLayout = LayoutLocalServiceUtil.getLayoutByUuidAndCompanyId(checkoutDisplayPage, themeDisplay.getCompanyId());
 
 				long userRoleId = RoleLocalServiceUtil.getRole(checkoutPageLayout.getCompanyId(), RoleConstants.GUEST).getRoleId();
 				String[] actionsPermited = null;
 				
 				if(ShoppingUtil.USER_TYPES_REGISTERED_ONLY.equals(usersType)){
-//					ResourcePermissionServiceUtil.setIndividualResourcePermissions(themeDisplay.getScopeGroupId(),
+//					ResourcePermissionServiceUtil.setIndividualResourcePermissions(themeDisplay.getCompanyId(),
 //							themeDisplay.getCompanyId(), Layout.class.getName(), String.valueOf(checkoutPageLayout.getPrimaryKey()),
 //							userRoleId, new String[] {});
 					actionsPermited = new String[] {};
 				}else{
 					actionsPermited = new String[] { ActionKeys.VIEW };
-//					ResourcePermissionServiceUtil.setIndividualResourcePermissions(themeDisplay.getScopeGroupId(),
+//					ResourcePermissionServiceUtil.setIndividualResourcePermissions(themeDisplay.getCompanyId(),
 //							themeDisplay.getCompanyId(), Layout.class.getName(), String.valueOf(checkoutPageLayout.getPrimaryKey()),
 //							userRoleId, new String[] { ActionKeys.VIEW });
 				
 				}
-				ResourcePermissionServiceUtil.setIndividualResourcePermissions(themeDisplay.getScopeGroupId(), 
+				ResourcePermissionServiceUtil.setIndividualResourcePermissions(themeDisplay.getCompanyId(), 
 						themeDisplay.getCompanyId(), Layout.class.getName(), String.valueOf(checkoutPageLayout.getPrimaryKey()),
 						userRoleId, actionsPermited);
 

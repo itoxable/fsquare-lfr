@@ -46,23 +46,21 @@ public class ShoppingItemLocalServiceImpl
      * Never reference this interface directly. Always use {@link com.fsquare.shopping.service.ShoppingItemLocalServiceUtil} to access the shopping item local service.
      */
 	
-	public List<ShoppingItem> findByGroupId(long groupId) throws SystemException{
-		return shoppingItemPersistence.findByGroupId(groupId);
+	public List<ShoppingItem> findByCompanyId(long companyId) throws SystemException{
+		return shoppingItemPersistence.findByCompanyId(companyId);
 	}
 	
 	@Override
     public ShoppingItem addShoppingItem(ShoppingItem shoppingItem, long userId, List<byte[]> images, ServiceContext serviceContext) throws SystemException, PortalException, IOException {
         shoppingItem.setNew(true);
         
-        long groupId = shoppingItem.getGroupId();
         long companyId = shoppingItem.getCompanyId();
         shoppingItem = shoppingItemPersistence.update(shoppingItem);
-        resourceLocalService.addResources(companyId, groupId, userId, ShoppingItem.class.getName(), shoppingItem.getItemId(), false,true, true);
+        resourceLocalService.addResources(companyId, companyId, userId, ShoppingItem.class.getName(), shoppingItem.getItemId(), false,true, true);
         
         AssetEntry assetEntry = assetEntryLocalService.createAssetEntry(counterLocalService.increment());
         
         assetEntry.setUserId(userId);
-        assetEntry.setGroupId(groupId);
         assetEntry.setCompanyId(companyId);
         assetEntry.setClassName(ShoppingItem.class.getName());
         assetEntry.setClassUuid(shoppingItem.getUuid());
@@ -90,7 +88,7 @@ public class ShoppingItemLocalServiceImpl
         		shoppingItemImage.setMainImage(true);
         	}
         	shoppingItemImage.setOrder(i);
-        	shoppingItemImage.setGroupId(shoppingItem.getGroupId());
+        	shoppingItemImage.setCompanyId(shoppingItem.getCompanyId());
         	shoppingItemImage.setItemId(shoppingItem.getItemId());
         	shoppingItemImage.setImageId(image.getImageId());
         	
@@ -111,7 +109,7 @@ public class ShoppingItemLocalServiceImpl
 	    Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(ShoppingItem.class);
 	    indexer.delete(shoppingItem);
 
-	    List<ShoppingItemImage> shoppingItemImageList = shoppingItemImagePersistence.findByGroupIdAndItemId(shoppingItem.getGroupId(), shoppingItem.getItemId());
+	    List<ShoppingItemImage> shoppingItemImageList = shoppingItemImagePersistence.findByCompanyIdAndItemId(shoppingItem.getCompanyId(), shoppingItem.getItemId());
 	    for(ShoppingItemImage shoppingItemImage : shoppingItemImageList){
 	    	ImageLocalServiceUtil.deleteImage(shoppingItemImage.getImageId());
 		    ShoppingItemImageLocalServiceUtil.deleteShoppingItemImage(shoppingItemImage);
@@ -134,7 +132,7 @@ public class ShoppingItemLocalServiceImpl
     
     @Override
     public List<ShoppingItemImage> getItemImages(ShoppingItem shoppingItem) throws SystemException, PortalException {
-    	List<ShoppingItemImage> shoppingItemImageList = shoppingItemImagePersistence.findByGroupIdAndItemId(shoppingItem.getGroupId(), shoppingItem.getItemId());
+    	List<ShoppingItemImage> shoppingItemImageList = shoppingItemImagePersistence.findByCompanyIdAndItemId(shoppingItem.getCompanyId(), shoppingItem.getItemId());
 	    return shoppingItemImageList;
 	}
     

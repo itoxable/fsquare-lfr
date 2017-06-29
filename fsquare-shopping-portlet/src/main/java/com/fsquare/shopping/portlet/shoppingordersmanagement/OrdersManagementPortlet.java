@@ -85,7 +85,7 @@ public class OrdersManagementPortlet extends MVCPortlet {
 				transactionStatus = getBraintreeGateway(resourceRequest).getBraintreeTransactionStatus(externalTxId);
 			}else if(StripePaymet.PAYMENT_METHOD_CREDIT_CARD.equals(paymentType)){
 				ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
-				ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+				ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 				
 				Stripe.apiKey = shoppingStore.isStripeTesting()?shoppingStore.getStripeTestSecretKey():shoppingStore.getStripeLiveSecretKey();
 				Stripe.apiVersion = shoppingStore.getStripeApiVersion();
@@ -123,7 +123,7 @@ public class OrdersManagementPortlet extends MVCPortlet {
 		if(braintreePayment == null){
 			System.out.println("--- BraintreePayment ---");
 			ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 			braintreePayment = new BraintreePayment(shoppingStore);
 		}
 		return braintreePayment;
@@ -142,7 +142,7 @@ public class OrdersManagementPortlet extends MVCPortlet {
 			System.out.println("BEFORE");
 			ShoppingOrder shoppingOrder = ShoppingOrderLocalServiceUtil.fetchShoppingOrder(shoppingOrderId);
 			Message message = new Message();
-			ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 			message.put("shoppingOrder", shoppingOrder);
 			message.put("shoppingStore", shoppingStore);
 			MessageBusUtil.sendMessage(Destinations.SHOPPING_SUCCESS_ORDER_MAIL, message);

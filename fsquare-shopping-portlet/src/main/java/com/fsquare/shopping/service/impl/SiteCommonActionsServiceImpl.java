@@ -4,17 +4,24 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
-import com.fsquare.shopping.service.SiteCommonActionsLocalServiceUtil;
 import com.fsquare.shopping.service.base.SiteCommonActionsServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.Criterion;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
+//import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
@@ -25,14 +32,19 @@ import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.security.membershippolicy.SiteMembershipPolicyUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.AccountLocalServiceUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
+import com.liferay.portal.service.VirtualHostLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.model.DDMContent;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 /**
@@ -59,7 +71,7 @@ public class SiteCommonActionsServiceImpl
 	
 	@Override
 	public Layout updateLayout(
-			long groupId, boolean privateLayout, long layoutId,
+			long companyId, boolean privateLayout, long layoutId,
 			long parentLayoutId, Map<Locale, String> localeNamesMap,
 			Map<Locale, String> localeTitlesMap,
 			Map<Locale, String> descriptionMap, Map<Locale, String> keywordsMap,
@@ -69,7 +81,7 @@ public class SiteCommonActionsServiceImpl
 		throws PortalException, SystemException {
 
 		LayoutPermissionUtil.check(
-			getPermissionChecker(), groupId, privateLayout, layoutId,
+			getPermissionChecker(), companyId, privateLayout, layoutId,
 			ActionKeys.UPDATE);
 
 		for(Map.Entry<Locale, String> entry: friendlyURLMap.entrySet()){
@@ -79,7 +91,7 @@ public class SiteCommonActionsServiceImpl
 		}
 		
 		return LayoutLocalServiceUtil.updateLayout(
-			groupId, privateLayout, layoutId, parentLayoutId, localeNamesMap,
+			companyId, privateLayout, layoutId, parentLayoutId, localeNamesMap,
 			localeTitlesMap, descriptionMap, keywordsMap, robotsMap, type,
 			hidden, friendlyURLMap, iconImage, iconBytes, serviceContext);
 	}
@@ -146,15 +158,15 @@ public class SiteCommonActionsServiceImpl
 	}
 	
 	public User updatePassword(long userId, String oldPassword, String password1, String password2) throws PortalException, SystemException{
-		return SiteCommonActionsLocalServiceUtil.updatePassword(userId, oldPassword, password1, password2);
+		return siteCommonActionsLocalService.updatePassword(userId, oldPassword, password1, password2);
 	}
 	
 	public String getUserPortraitUrl(boolean male, long portraitId){
-		return SiteCommonActionsLocalServiceUtil.getUserPortraitUrl(male, portraitId);
+		return siteCommonActionsLocalService.getUserPortraitUrl(male, portraitId);
 	}
 	
 	public List<Map> getAccountsPaged(int start, int end) throws SystemException, PortalException{
-		List<Account> accounts =  accountLocalService.getAccounts(start, end);
+		List<Account> accounts =  AccountLocalServiceUtil.getAccounts(start, end);
 		List<Map> list = new ArrayList<Map>();
 		for(Account account: accounts){
 			list.add(buildAccount(account));
@@ -162,7 +174,7 @@ public class SiteCommonActionsServiceImpl
 		return list;
 	}
 	public List<Map> getAccounts() throws SystemException, PortalException{
-		List<Account> accounts =  accountLocalService.getAccounts(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		List<Account> accounts =  AccountLocalServiceUtil.getAccounts(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		List<Map> list = new ArrayList<Map>();
 		for(Account account: accounts){
 			list.add(buildAccount(account));
@@ -171,7 +183,7 @@ public class SiteCommonActionsServiceImpl
 	}
 	
 	private Map buildAccount(Account account) throws PortalException, SystemException{
-		VirtualHost virtualHost = virtualHostLocalService.getVirtualHost(account.getCompanyId(), 0);
+		VirtualHost virtualHost = VirtualHostLocalServiceUtil.getVirtualHost(account.getCompanyId(), 0);
 		Map<String, PersistedModel> map = new HashMap<String, PersistedModel>();
 		map.put("account", account);
 		map.put("virtualHost", virtualHost);
@@ -183,17 +195,15 @@ public class SiteCommonActionsServiceImpl
 //		return account;
 //	}
 	public Map getAccount(long accountId) throws SystemException, PortalException{
-		Account account =  accountLocalService.getAccount(accountId);
+		Account account =  AccountLocalServiceUtil.getAccount(accountId);
 		return buildAccount(account);
 	}
 	
 	
-	
-	
 	public List<Company> getCompanies() throws SystemException{
-		List<Company> companies =  companyLocalService.getCompanies(false);
-		return companies;
-		
+		List<Company> list = siteCommonActionsLocalService.getCompanies();
+		System.out.println("list: "+list.size());
+		return list;
 	}
 	
 	@AccessControlled(guestAccessEnabled = true)

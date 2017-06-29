@@ -92,11 +92,11 @@ public class ShoppingItemStorageLocationServiceSoap {
         }
     }
 
-    public static com.fsquare.shopping.model.ShoppingItemStorageLocationSoap[] findByGroupId(
-        long groupId) throws RemoteException {
+    public static com.fsquare.shopping.model.ShoppingItemStorageLocationSoap[] findByCompanyId(
+        long companyId) throws RemoteException {
         try {
             java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> returnValue =
-                ShoppingItemStorageLocationServiceUtil.findByGroupId(groupId);
+                ShoppingItemStorageLocationServiceUtil.findByCompanyId(companyId);
 
             return com.fsquare.shopping.model.ShoppingItemStorageLocationSoap.toSoapModels(returnValue);
         } catch (Exception e) {

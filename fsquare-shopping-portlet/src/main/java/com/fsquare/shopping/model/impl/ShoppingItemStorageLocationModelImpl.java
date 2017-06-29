@@ -55,7 +55,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
             { "itemStorageLocationId", Types.BIGINT },
             { "itemId", Types.BIGINT },
             { "storageLocationId", Types.BIGINT },
-            { "groupId", Types.BIGINT },
             { "companyId", Types.BIGINT },
             { "userId", Types.BIGINT },
             { "userName", Types.VARCHAR },
@@ -64,7 +63,7 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
             { "name", Types.VARCHAR },
             { "quantity", Types.INTEGER }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingItemStorageLocation (itemStorageLocationId LONG not null primary key,itemId LONG,storageLocationId LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,quantity INTEGER)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingItemStorageLocation (itemStorageLocationId LONG not null primary key,itemId LONG,storageLocationId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,quantity INTEGER)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingItemStorageLocation";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingItemStorageLocation.itemStorageLocationId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingItemStorageLocation.itemStorageLocationId ASC";
@@ -80,7 +79,7 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
     public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
                 "value.object.column.bitmask.enabled.com.fsquare.shopping.model.ShoppingItemStorageLocation"),
             true);
-    public static long GROUPID_COLUMN_BITMASK = 1L;
+    public static long COMPANYID_COLUMN_BITMASK = 1L;
     public static long ITEMID_COLUMN_BITMASK = 2L;
     public static long STORAGELOCATIONID_COLUMN_BITMASK = 4L;
     public static long ITEMSTORAGELOCATIONID_COLUMN_BITMASK = 8L;
@@ -97,10 +96,9 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
     private long _storageLocationId;
     private long _originalStorageLocationId;
     private boolean _setOriginalStorageLocationId;
-    private long _groupId;
-    private long _originalGroupId;
-    private boolean _setOriginalGroupId;
     private long _companyId;
+    private long _originalCompanyId;
+    private boolean _setOriginalCompanyId;
     private long _userId;
     private String _userUuid;
     private String _userName;
@@ -131,7 +129,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         model.setItemStorageLocationId(soapModel.getItemStorageLocationId());
         model.setItemId(soapModel.getItemId());
         model.setStorageLocationId(soapModel.getStorageLocationId());
-        model.setGroupId(soapModel.getGroupId());
         model.setCompanyId(soapModel.getCompanyId());
         model.setUserId(soapModel.getUserId());
         model.setUserName(soapModel.getUserName());
@@ -201,7 +198,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         attributes.put("itemStorageLocationId", getItemStorageLocationId());
         attributes.put("itemId", getItemId());
         attributes.put("storageLocationId", getStorageLocationId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -232,12 +228,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
 
         if (storageLocationId != null) {
             setStorageLocationId(storageLocationId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -342,36 +332,25 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
 
     @JSON
     @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-        if (!_setOriginalGroupId) {
-            _setOriginalGroupId = true;
-
-            _originalGroupId = _groupId;
-        }
-
-        _groupId = groupId;
-    }
-
-    public long getOriginalGroupId() {
-        return _originalGroupId;
-    }
-
-    @JSON
-    @Override
     public long getCompanyId() {
         return _companyId;
     }
 
     @Override
     public void setCompanyId(long companyId) {
+        _columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+        if (!_setOriginalCompanyId) {
+            _setOriginalCompanyId = true;
+
+            _originalCompanyId = _companyId;
+        }
+
         _companyId = companyId;
+    }
+
+    public long getOriginalCompanyId() {
+        return _originalCompanyId;
     }
 
     @JSON
@@ -492,7 +471,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         shoppingItemStorageLocationImpl.setItemStorageLocationId(getItemStorageLocationId());
         shoppingItemStorageLocationImpl.setItemId(getItemId());
         shoppingItemStorageLocationImpl.setStorageLocationId(getStorageLocationId());
-        shoppingItemStorageLocationImpl.setGroupId(getGroupId());
         shoppingItemStorageLocationImpl.setCompanyId(getCompanyId());
         shoppingItemStorageLocationImpl.setUserId(getUserId());
         shoppingItemStorageLocationImpl.setUserName(getUserName());
@@ -559,9 +537,9 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
 
         shoppingItemStorageLocationModelImpl._setOriginalStorageLocationId = false;
 
-        shoppingItemStorageLocationModelImpl._originalGroupId = shoppingItemStorageLocationModelImpl._groupId;
+        shoppingItemStorageLocationModelImpl._originalCompanyId = shoppingItemStorageLocationModelImpl._companyId;
 
-        shoppingItemStorageLocationModelImpl._setOriginalGroupId = false;
+        shoppingItemStorageLocationModelImpl._setOriginalCompanyId = false;
 
         shoppingItemStorageLocationModelImpl._columnBitmask = 0;
     }
@@ -576,8 +554,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         shoppingItemStorageLocationCacheModel.itemId = getItemId();
 
         shoppingItemStorageLocationCacheModel.storageLocationId = getStorageLocationId();
-
-        shoppingItemStorageLocationCacheModel.groupId = getGroupId();
 
         shoppingItemStorageLocationCacheModel.companyId = getCompanyId();
 
@@ -622,7 +598,7 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(23);
+        StringBundler sb = new StringBundler(21);
 
         sb.append("{itemStorageLocationId=");
         sb.append(getItemStorageLocationId());
@@ -630,8 +606,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         sb.append(getItemId());
         sb.append(", storageLocationId=");
         sb.append(getStorageLocationId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
         sb.append(", companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
@@ -653,7 +627,7 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(37);
+        StringBundler sb = new StringBundler(34);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingItemStorageLocation");
@@ -670,10 +644,6 @@ public class ShoppingItemStorageLocationModelImpl extends BaseModelImpl<Shopping
         sb.append(
             "<column><column-name>storageLocationId</column-name><column-value><![CDATA[");
         sb.append(getStorageLocationId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");

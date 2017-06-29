@@ -20,7 +20,7 @@ import java.io.ObjectOutput;
 public class ShoppingItemImageCacheModel implements CacheModel<ShoppingItemImage>,
     Externalizable {
     public long shoppingItemImageId;
-    public long groupId;
+    public long companyId;
     public long itemId;
     public long imageId;
     public boolean mainImage;
@@ -32,8 +32,8 @@ public class ShoppingItemImageCacheModel implements CacheModel<ShoppingItemImage
 
         sb.append("{shoppingItemImageId=");
         sb.append(shoppingItemImageId);
-        sb.append(", groupId=");
-        sb.append(groupId);
+        sb.append(", companyId=");
+        sb.append(companyId);
         sb.append(", itemId=");
         sb.append(itemId);
         sb.append(", imageId=");
@@ -52,7 +52,7 @@ public class ShoppingItemImageCacheModel implements CacheModel<ShoppingItemImage
         ShoppingItemImageImpl shoppingItemImageImpl = new ShoppingItemImageImpl();
 
         shoppingItemImageImpl.setShoppingItemImageId(shoppingItemImageId);
-        shoppingItemImageImpl.setGroupId(groupId);
+        shoppingItemImageImpl.setCompanyId(companyId);
         shoppingItemImageImpl.setItemId(itemId);
         shoppingItemImageImpl.setImageId(imageId);
         shoppingItemImageImpl.setMainImage(mainImage);
@@ -66,7 +66,7 @@ public class ShoppingItemImageCacheModel implements CacheModel<ShoppingItemImage
     @Override
     public void readExternal(ObjectInput objectInput) throws IOException {
         shoppingItemImageId = objectInput.readLong();
-        groupId = objectInput.readLong();
+        companyId = objectInput.readLong();
         itemId = objectInput.readLong();
         imageId = objectInput.readLong();
         mainImage = objectInput.readBoolean();
@@ -77,7 +77,7 @@ public class ShoppingItemImageCacheModel implements CacheModel<ShoppingItemImage
     public void writeExternal(ObjectOutput objectOutput)
         throws IOException {
         objectOutput.writeLong(shoppingItemImageId);
-        objectOutput.writeLong(groupId);
+        objectOutput.writeLong(companyId);
         objectOutput.writeLong(itemId);
         objectOutput.writeLong(imageId);
         objectOutput.writeBoolean(mainImage);

@@ -53,7 +53,6 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
     public static final String TABLE_NAME = "FsquareShopping_ShoppingShippingMethod";
     public static final Object[][] TABLE_COLUMNS = {
             { "shippingMethodId", Types.BIGINT },
-            { "groupId", Types.BIGINT },
             { "companyId", Types.BIGINT },
             { "userId", Types.BIGINT },
             { "userName", Types.VARCHAR },
@@ -70,7 +69,7 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
             { "disabled", Types.BOOLEAN },
             { "shippingType", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingShippingMethod (shippingMethodId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,price DOUBLE,name VARCHAR(75) null,description VARCHAR(2000) null,freeQuantity LONG,freeTotal DOUBLE,weight DOUBLE,defaultShipping BOOLEAN,international BOOLEAN,disabled BOOLEAN,shippingType VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingShippingMethod (shippingMethodId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,price DOUBLE,name VARCHAR(75) null,description VARCHAR(2000) null,freeQuantity LONG,freeTotal DOUBLE,weight DOUBLE,defaultShipping BOOLEAN,international BOOLEAN,disabled BOOLEAN,shippingType VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingShippingMethod";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingShippingMethod.shippingMethodId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingShippingMethod.shippingMethodId ASC";
@@ -86,9 +85,9 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
     public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
                 "value.object.column.bitmask.enabled.com.fsquare.shopping.model.ShoppingShippingMethod"),
             true);
-    public static long DEFAULTSHIPPING_COLUMN_BITMASK = 1L;
-    public static long DISABLED_COLUMN_BITMASK = 2L;
-    public static long GROUPID_COLUMN_BITMASK = 4L;
+    public static long COMPANYID_COLUMN_BITMASK = 1L;
+    public static long DEFAULTSHIPPING_COLUMN_BITMASK = 2L;
+    public static long DISABLED_COLUMN_BITMASK = 4L;
     public static long SHIPPINGMETHODID_COLUMN_BITMASK = 8L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.com.fsquare.shopping.model.ShoppingShippingMethod"));
@@ -97,10 +96,9 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
             ShoppingShippingMethod.class
         };
     private long _shippingMethodId;
-    private long _groupId;
-    private long _originalGroupId;
-    private boolean _setOriginalGroupId;
     private long _companyId;
+    private long _originalCompanyId;
+    private boolean _setOriginalCompanyId;
     private long _userId;
     private String _userUuid;
     private String _userName;
@@ -141,7 +139,6 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         ShoppingShippingMethod model = new ShoppingShippingMethodImpl();
 
         model.setShippingMethodId(soapModel.getShippingMethodId());
-        model.setGroupId(soapModel.getGroupId());
         model.setCompanyId(soapModel.getCompanyId());
         model.setUserId(soapModel.getUserId());
         model.setUserName(soapModel.getUserName());
@@ -217,7 +214,6 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("shippingMethodId", getShippingMethodId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -243,12 +239,6 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
         if (shippingMethodId != null) {
             setShippingMethodId(shippingMethodId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -355,36 +345,25 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
     @JSON
     @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-        if (!_setOriginalGroupId) {
-            _setOriginalGroupId = true;
-
-            _originalGroupId = _groupId;
-        }
-
-        _groupId = groupId;
-    }
-
-    public long getOriginalGroupId() {
-        return _originalGroupId;
-    }
-
-    @JSON
-    @Override
     public long getCompanyId() {
         return _companyId;
     }
 
     @Override
     public void setCompanyId(long companyId) {
+        _columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+        if (!_setOriginalCompanyId) {
+            _setOriginalCompanyId = true;
+
+            _originalCompanyId = _companyId;
+        }
+
         _companyId = companyId;
+    }
+
+    public long getOriginalCompanyId() {
+        return _originalCompanyId;
     }
 
     @JSON
@@ -638,7 +617,6 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         ShoppingShippingMethodImpl shoppingShippingMethodImpl = new ShoppingShippingMethodImpl();
 
         shoppingShippingMethodImpl.setShippingMethodId(getShippingMethodId());
-        shoppingShippingMethodImpl.setGroupId(getGroupId());
         shoppingShippingMethodImpl.setCompanyId(getCompanyId());
         shoppingShippingMethodImpl.setUserId(getUserId());
         shoppingShippingMethodImpl.setUserName(getUserName());
@@ -703,9 +681,9 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
     public void resetOriginalValues() {
         ShoppingShippingMethodModelImpl shoppingShippingMethodModelImpl = this;
 
-        shoppingShippingMethodModelImpl._originalGroupId = shoppingShippingMethodModelImpl._groupId;
+        shoppingShippingMethodModelImpl._originalCompanyId = shoppingShippingMethodModelImpl._companyId;
 
-        shoppingShippingMethodModelImpl._setOriginalGroupId = false;
+        shoppingShippingMethodModelImpl._setOriginalCompanyId = false;
 
         shoppingShippingMethodModelImpl._originalDefaultShipping = shoppingShippingMethodModelImpl._defaultShipping;
 
@@ -723,8 +701,6 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         ShoppingShippingMethodCacheModel shoppingShippingMethodCacheModel = new ShoppingShippingMethodCacheModel();
 
         shoppingShippingMethodCacheModel.shippingMethodId = getShippingMethodId();
-
-        shoppingShippingMethodCacheModel.groupId = getGroupId();
 
         shoppingShippingMethodCacheModel.companyId = getCompanyId();
 
@@ -797,12 +773,10 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(35);
+        StringBundler sb = new StringBundler(33);
 
         sb.append("{shippingMethodId=");
         sb.append(getShippingMethodId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
         sb.append(", companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
@@ -840,7 +814,7 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(55);
+        StringBundler sb = new StringBundler(52);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingShippingMethod");
@@ -849,10 +823,6 @@ public class ShoppingShippingMethodModelImpl extends BaseModelImpl<ShoppingShipp
         sb.append(
             "<column><column-name>shippingMethodId</column-name><column-value><![CDATA[");
         sb.append(getShippingMethodId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");

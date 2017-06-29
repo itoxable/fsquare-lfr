@@ -242,11 +242,11 @@ public interface ShoppingCouponLocalService extends BaseLocalService,
         throws java.lang.Throwable;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
-        java.lang.String code, long groupId);
+    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndCompanyId(
+        java.lang.String code, long companyId);
 
-    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
-        java.lang.Long groupId);
+    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByCompanyId(
+        java.lang.Long companyId);
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public boolean isCouponValid(

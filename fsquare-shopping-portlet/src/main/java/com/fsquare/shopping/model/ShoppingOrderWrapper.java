@@ -39,7 +39,6 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("shoppingOrderId", getShoppingOrderId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -96,12 +95,6 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
 
         if (shoppingOrderId != null) {
             setShoppingOrderId(shoppingOrderId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -422,26 +415,6 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
     @Override
     public void setShoppingOrderId(long shoppingOrderId) {
         _shoppingOrder.setShoppingOrderId(shoppingOrderId);
-    }
-
-    /**
-    * Returns the group ID of this shopping order.
-    *
-    * @return the group ID of this shopping order
-    */
-    @Override
-    public long getGroupId() {
-        return _shoppingOrder.getGroupId();
-    }
-
-    /**
-    * Sets the group ID of this shopping order.
-    *
-    * @param groupId the group ID of this shopping order
-    */
-    @Override
-    public void setGroupId(long groupId) {
-        _shoppingOrder.setGroupId(groupId);
     }
 
     /**

@@ -131,7 +131,7 @@ public class CouponManagementPortlet extends MVCPortlet{
 	        Long couponId = ParamUtil.getLong(resourceRequest, "couponId");
 	        String code = ParamUtil.getString(resourceRequest, "code");
 	        
-	        ShoppingCoupon existingShoppingCoupon = ShoppingCouponLocalServiceUtil.fetchByCodeAndGroupId(code, themeDisplay.getScopeGroupId());
+	        ShoppingCoupon existingShoppingCoupon = ShoppingCouponLocalServiceUtil.fetchByCodeAndCompanyId(code, themeDisplay.getCompanyId());
 	        if(existingShoppingCoupon == null || (existingShoppingCoupon.getCouponId() == couponId)){
 		        String name = ParamUtil.getString(resourceRequest, "name"); 
 		        String description = ParamUtil.getString(resourceRequest, "description"); 
@@ -148,7 +148,7 @@ public class CouponManagementPortlet extends MVCPortlet{
 		        if(couponId == null || couponId == 0){
 			        couponId = CounterLocalServiceUtil.increment(ShoppingCoupon.class.getName());
 			        shoppingCoupon = ShoppingCouponLocalServiceUtil.createShoppingCoupon(couponId);	        
-					shoppingCoupon.setGroupId(themeDisplay.getScopeGroupId());
+					shoppingCoupon.setCompanyId(themeDisplay.getCompanyId());
 					shoppingCoupon.setCreateDate(new Date());
 					shoppingCoupon.setCompanyId(themeDisplay.getCompanyId());
 					shoppingCoupon.setUserId(themeDisplay.getUserId());

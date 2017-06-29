@@ -32,18 +32,18 @@ public class ShoppingCouponLocalServiceImpl
      */
 	
 	//@Override
-	public ShoppingCoupon fetchByCodeAndGroupId(String code, long groupId){
+	public ShoppingCoupon fetchByCodeAndCompanyId(String code, long companyId){
 		try {
-			return shoppingCouponPersistence.fetchByCodeAndGroupId(code, groupId);
+			return shoppingCouponPersistence.fetchByCodeAndCompanyId(code, companyId);
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public List<ShoppingCoupon> findByGroupId(Long groupId){
+	public List<ShoppingCoupon> findByCompanyId(Long companyId){
 		try {
-			return shoppingCouponPersistence.findByGroupId(groupId);
+			return shoppingCouponPersistence.findByCompanyId(companyId);
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}

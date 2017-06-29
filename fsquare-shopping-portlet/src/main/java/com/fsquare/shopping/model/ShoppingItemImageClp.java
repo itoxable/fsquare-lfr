@@ -21,7 +21,7 @@ import java.util.Map;
 public class ShoppingItemImageClp extends BaseModelImpl<ShoppingItemImage>
     implements ShoppingItemImage {
     private long _shoppingItemImageId;
-    private long _groupId;
+    private long _companyId;
     private long _itemId;
     private long _imageId;
     private boolean _mainImage;
@@ -67,7 +67,7 @@ public class ShoppingItemImageClp extends BaseModelImpl<ShoppingItemImage>
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("shoppingItemImageId", getShoppingItemImageId());
-        attributes.put("groupId", getGroupId());
+        attributes.put("companyId", getCompanyId());
         attributes.put("itemId", getItemId());
         attributes.put("imageId", getImageId());
         attributes.put("mainImage", getMainImage());
@@ -84,10 +84,10 @@ public class ShoppingItemImageClp extends BaseModelImpl<ShoppingItemImage>
             setShoppingItemImageId(shoppingItemImageId);
         }
 
-        Long groupId = (Long) attributes.get("groupId");
+        Long companyId = (Long) attributes.get("companyId");
 
-        if (groupId != null) {
-            setGroupId(groupId);
+        if (companyId != null) {
+            setCompanyId(companyId);
         }
 
         Long itemId = (Long) attributes.get("itemId");
@@ -139,21 +139,21 @@ public class ShoppingItemImageClp extends BaseModelImpl<ShoppingItemImage>
     }
 
     @Override
-    public long getGroupId() {
-        return _groupId;
+    public long getCompanyId() {
+        return _companyId;
     }
 
     @Override
-    public void setGroupId(long groupId) {
-        _groupId = groupId;
+    public void setCompanyId(long companyId) {
+        _companyId = companyId;
 
         if (_shoppingItemImageRemoteModel != null) {
             try {
                 Class<?> clazz = _shoppingItemImageRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setGroupId", long.class);
+                Method method = clazz.getMethod("setCompanyId", long.class);
 
-                method.invoke(_shoppingItemImageRemoteModel, groupId);
+                method.invoke(_shoppingItemImageRemoteModel, companyId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -323,7 +323,7 @@ public class ShoppingItemImageClp extends BaseModelImpl<ShoppingItemImage>
         ShoppingItemImageClp clone = new ShoppingItemImageClp();
 
         clone.setShoppingItemImageId(getShoppingItemImageId());
-        clone.setGroupId(getGroupId());
+        clone.setCompanyId(getCompanyId());
         clone.setItemId(getItemId());
         clone.setImageId(getImageId());
         clone.setMainImage(getMainImage());
@@ -381,8 +381,8 @@ public class ShoppingItemImageClp extends BaseModelImpl<ShoppingItemImage>
 
         sb.append("{shoppingItemImageId=");
         sb.append(getShoppingItemImageId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
+        sb.append(", companyId=");
+        sb.append(getCompanyId());
         sb.append(", itemId=");
         sb.append(getItemId());
         sb.append(", imageId=");
@@ -409,8 +409,8 @@ public class ShoppingItemImageClp extends BaseModelImpl<ShoppingItemImage>
         sb.append(getShoppingItemImageId());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
+            "<column><column-name>companyId</column-name><column-value><![CDATA[");
+        sb.append(getCompanyId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>itemId</column-name><column-value><![CDATA[");

@@ -41,15 +41,15 @@ public class ShoppingItemServiceClpInvoker {
                 "long", "long", "java.lang.String"
             };
 
-        _methodName99 = "getCompleteByGroupId";
+        _methodName99 = "getCompleteByCompanyId";
 
         _methodParameterTypes99 = new String[] { "long" };
 
-        _methodName100 = "findByGroupId";
+        _methodName100 = "findByCompanyId";
 
         _methodParameterTypes100 = new String[] { "long" };
 
-        _methodName101 = "findByGroupId";
+        _methodName101 = "findByCompanyId";
 
         _methodParameterTypes101 = new String[] { "java.lang.Long" };
 
@@ -57,7 +57,7 @@ public class ShoppingItemServiceClpInvoker {
 
         _methodParameterTypes102 = new String[] { "java.lang.Long", "int", "int" };
 
-        _methodName103 = "countByGroupId";
+        _methodName103 = "countByCompanyId";
 
         _methodParameterTypes103 = new String[] { "java.lang.Long" };
     }
@@ -85,17 +85,17 @@ public class ShoppingItemServiceClpInvoker {
 
         if (_methodName99.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
-            return ShoppingItemServiceUtil.getCompleteByGroupId(((Long) arguments[0]).longValue());
+            return ShoppingItemServiceUtil.getCompleteByCompanyId(((Long) arguments[0]).longValue());
         }
 
         if (_methodName100.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
-            return ShoppingItemServiceUtil.findByGroupId(((Long) arguments[0]).longValue());
+            return ShoppingItemServiceUtil.findByCompanyId(((Long) arguments[0]).longValue());
         }
 
         if (_methodName101.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
-            return ShoppingItemServiceUtil.findByGroupId((java.lang.Long) arguments[0]);
+            return ShoppingItemServiceUtil.findByCompanyId((java.lang.Long) arguments[0]);
         }
 
         if (_methodName102.equals(name) &&
@@ -107,7 +107,7 @@ public class ShoppingItemServiceClpInvoker {
 
         if (_methodName103.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
-            return ShoppingItemServiceUtil.countByGroupId((java.lang.Long) arguments[0]);
+            return ShoppingItemServiceUtil.countByCompanyId((java.lang.Long) arguments[0]);
         }
 
         throw new UnsupportedOperationException();

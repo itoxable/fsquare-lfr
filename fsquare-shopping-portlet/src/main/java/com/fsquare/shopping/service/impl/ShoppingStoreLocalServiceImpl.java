@@ -33,15 +33,15 @@ public class ShoppingStoreLocalServiceImpl
      * Never reference this interface directly. Always use {@link com.fsquare.shopping.service.ShoppingStoreLocalServiceUtil} to access the shopping store local service.
      */
 	
-	public List<ShoppingStorageLocation> getShoppingStorageLocationsByGroup(long groupId) throws SystemException{
-		return shoppingStorageLocationPersistence.findByGroupId(groupId);
+	public List<ShoppingStorageLocation> getShoppingStorageLocationsByGroup(long companyId) throws SystemException{
+		return shoppingStorageLocationPersistence.findByCompanyId(companyId);
 	}
 	
-	public List<String[]> getShoppingLayouts(long groupId){
+	public List<String[]> getShoppingLayouts(long companyId){
 		Locale locale = LocaleUtil.getDefault();
 		List<String[]> shoppingLayouts = new ArrayList<String[]>();
 		try {
-			List<Layout> layoutsTemp = LayoutLocalServiceUtil.getLayouts(groupId, false);
+			List<Layout> layoutsTemp = LayoutLocalServiceUtil.getLayouts(companyId, false);
 			for(Layout lay : layoutsTemp){
 				String[] val = new String[]{lay.getUuid(), ""};
 				shoppingLayouts.add(val);

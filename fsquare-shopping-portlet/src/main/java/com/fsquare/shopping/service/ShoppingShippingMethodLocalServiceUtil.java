@@ -277,16 +277,16 @@ public class ShoppingShippingMethodLocalServiceUtil {
         return getService().fetchDefaultShipping();
     }
 
-    public static java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupId(
-        long groupId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().findByGroupId(groupId);
+        return getService().findByCompanyId(companyId);
     }
 
-    public static java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByGroupIdAndEnabled(
-        long groupId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingShippingMethod> findByCompanyIdAndEnabled(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().findByGroupIdAndEnabled(groupId);
+        return getService().findByCompanyIdAndEnabled(companyId);
     }
 
     public static void clearService() {

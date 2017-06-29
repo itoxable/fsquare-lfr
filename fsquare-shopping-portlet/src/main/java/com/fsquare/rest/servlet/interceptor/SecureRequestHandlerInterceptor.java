@@ -44,7 +44,7 @@ import com.liferay.util.EncryptorException;
 
 public class SecureRequestHandlerInterceptor extends HandlerInterceptorAdapter {
 
-public final static List<String> METHODS_TO_CHECK = Collections.unmodifiableList(Arrays.asList("POST", "PUT", "DELETE"));
+public final static List<String> METHODS_TO_CHECK = Collections.unmodifiableList(Arrays.asList("POST","GET", "PUT", "DELETE"));
 	
 	//protected boolean preHandle(PortletRequest request, PortletResponse response, Object handler) throws Exception {
 	@Override

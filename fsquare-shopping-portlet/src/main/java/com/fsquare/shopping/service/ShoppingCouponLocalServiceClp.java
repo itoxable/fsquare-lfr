@@ -149,11 +149,11 @@ public class ShoppingCouponLocalServiceClp implements ShoppingCouponLocalService
 
         _methodParameterTypes17 = new String[] { "java.lang.String" };
 
-        _methodName19 = "fetchByCodeAndGroupId";
+        _methodName19 = "fetchByCodeAndCompanyId";
 
         _methodParameterTypes19 = new String[] { "java.lang.String", "long" };
 
-        _methodName20 = "findByGroupId";
+        _methodName20 = "findByCompanyId";
 
         _methodParameterTypes20 = new String[] { "java.lang.Long" };
 
@@ -691,14 +691,14 @@ public class ShoppingCouponLocalServiceClp implements ShoppingCouponLocalService
     }
 
     @Override
-    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
-        java.lang.String code, long groupId) {
+    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndCompanyId(
+        java.lang.String code, long companyId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName19,
                     _methodParameterTypes19,
-                    new Object[] { ClpSerializer.translateInput(code), groupId });
+                    new Object[] { ClpSerializer.translateInput(code), companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -714,14 +714,14 @@ public class ShoppingCouponLocalServiceClp implements ShoppingCouponLocalService
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
-        java.lang.Long groupId) {
+    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByCompanyId(
+        java.lang.Long companyId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName20,
                     _methodParameterTypes20,
-                    new Object[] { ClpSerializer.translateInput(groupId) });
+                    new Object[] { ClpSerializer.translateInput(companyId) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

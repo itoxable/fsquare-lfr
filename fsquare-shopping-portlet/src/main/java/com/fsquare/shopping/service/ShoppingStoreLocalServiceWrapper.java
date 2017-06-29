@@ -36,29 +36,29 @@ public class ShoppingStoreLocalServiceWrapper
     /**
     * Creates a new shopping store with the primary key. Does not add the shopping store to the database.
     *
-    * @param groupId the primary key for the new shopping store
+    * @param companyId the primary key for the new shopping store
     * @return the new shopping store
     */
     @Override
     public com.fsquare.shopping.model.ShoppingStore createShoppingStore(
-        long groupId) {
-        return _shoppingStoreLocalService.createShoppingStore(groupId);
+        long companyId) {
+        return _shoppingStoreLocalService.createShoppingStore(companyId);
     }
 
     /**
     * Deletes the shopping store with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param groupId the primary key of the shopping store
+    * @param companyId the primary key of the shopping store
     * @return the shopping store that was removed
     * @throws PortalException if a shopping store with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @Override
     public com.fsquare.shopping.model.ShoppingStore deleteShoppingStore(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingStoreLocalService.deleteShoppingStore(groupId);
+        return _shoppingStoreLocalService.deleteShoppingStore(companyId);
     }
 
     /**
@@ -174,25 +174,25 @@ public class ShoppingStoreLocalServiceWrapper
 
     @Override
     public com.fsquare.shopping.model.ShoppingStore fetchShoppingStore(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingStoreLocalService.fetchShoppingStore(groupId);
+        return _shoppingStoreLocalService.fetchShoppingStore(companyId);
     }
 
     /**
     * Returns the shopping store with the primary key.
     *
-    * @param groupId the primary key of the shopping store
+    * @param companyId the primary key of the shopping store
     * @return the shopping store
     * @throws PortalException if a shopping store with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @Override
     public com.fsquare.shopping.model.ShoppingStore getShoppingStore(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingStoreLocalService.getShoppingStore(groupId);
+        return _shoppingStoreLocalService.getShoppingStore(companyId);
     }
 
     @Override
@@ -278,14 +278,14 @@ public class ShoppingStoreLocalServiceWrapper
 
     @Override
     public java.util.List<com.fsquare.shopping.model.ShoppingStorageLocation> getShoppingStorageLocationsByGroup(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingStoreLocalService.getShoppingStorageLocationsByGroup(groupId);
+        return _shoppingStoreLocalService.getShoppingStorageLocationsByGroup(companyId);
     }
 
     @Override
-    public java.util.List<java.lang.String[]> getShoppingLayouts(long groupId) {
-        return _shoppingStoreLocalService.getShoppingLayouts(groupId);
+    public java.util.List<java.lang.String[]> getShoppingLayouts(long companyId) {
+        return _shoppingStoreLocalService.getShoppingLayouts(companyId);
     }
 
     /**

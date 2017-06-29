@@ -82,55 +82,57 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
             "countBydefaultShipping", new String[] { Boolean.class.getName() });
     private static final String _FINDER_COLUMN_DEFAULTSHIPPING_DEFAULTSHIPPING_2 =
         "shoppingShippingMethod.defaultShipping = ?";
-    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(ShoppingShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
+        new FinderPath(ShoppingShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingShippingMethodModelImpl.FINDER_CACHE_ENABLED,
             ShoppingShippingMethodImpl.class,
-            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyId",
             new String[] {
                 Long.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
             });
-    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
         new FinderPath(ShoppingShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingShippingMethodModelImpl.FINDER_CACHE_ENABLED,
             ShoppingShippingMethodImpl.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
             new String[] { Long.class.getName() },
-            ShoppingShippingMethodModelImpl.GROUPID_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(ShoppingShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingShippingMethodModelImpl.COMPANYID_COLUMN_BITMASK);
+    public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(ShoppingShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingShippingMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
             new String[] { Long.class.getName() });
-    private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "shoppingShippingMethod.groupId = ?";
-    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPIDANDENABLED =
+    private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "shoppingShippingMethod.companyId = ?";
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYIDANDENABLED =
         new FinderPath(ShoppingShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingShippingMethodModelImpl.FINDER_CACHE_ENABLED,
             ShoppingShippingMethodImpl.class,
-            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupIdAndEnabled",
+            FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+            "findByCompanyIdAndEnabled",
             new String[] {
                 Long.class.getName(), Boolean.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
             });
-    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDENABLED =
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDENABLED =
         new FinderPath(ShoppingShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingShippingMethodModelImpl.FINDER_CACHE_ENABLED,
             ShoppingShippingMethodImpl.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-            "findByGroupIdAndEnabled",
+            "findByCompanyIdAndEnabled",
             new String[] { Long.class.getName(), Boolean.class.getName() },
-            ShoppingShippingMethodModelImpl.GROUPID_COLUMN_BITMASK |
+            ShoppingShippingMethodModelImpl.COMPANYID_COLUMN_BITMASK |
             ShoppingShippingMethodModelImpl.DISABLED_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_GROUPIDANDENABLED = new FinderPath(ShoppingShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYIDANDENABLED = new FinderPath(ShoppingShippingMethodModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingShippingMethodModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-            "countByGroupIdAndEnabled",
+            "countByCompanyIdAndEnabled",
             new String[] { Long.class.getName(), Boolean.class.getName() });
-    private static final String _FINDER_COLUMN_GROUPIDANDENABLED_GROUPID_2 = "shoppingShippingMethod.groupId = ? AND ";
-    private static final String _FINDER_COLUMN_GROUPIDANDENABLED_DISABLED_2 = "shoppingShippingMethod.disabled = ?";
+    private static final String _FINDER_COLUMN_COMPANYIDANDENABLED_COMPANYID_2 = "shoppingShippingMethod.companyId = ? AND ";
+    private static final String _FINDER_COLUMN_COMPANYIDANDENABLED_DISABLED_2 = "shoppingShippingMethod.disabled = ?";
     private static final String _SQL_SELECT_SHOPPINGSHIPPINGMETHOD = "SELECT shoppingShippingMethod FROM ShoppingShippingMethod shoppingShippingMethod";
     private static final String _SQL_SELECT_SHOPPINGSHIPPINGMETHOD_WHERE = "SELECT shoppingShippingMethod FROM ShoppingShippingMethod shoppingShippingMethod WHERE ";
     private static final String _SQL_COUNT_SHOPPINGSHIPPINGMETHOD = "SELECT COUNT(shoppingShippingMethod) FROM ShoppingShippingMethod shoppingShippingMethod";
@@ -370,45 +372,46 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Returns all the shopping shipping methods where groupId = &#63;.
+     * Returns all the shopping shipping methods where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the matching shopping shipping methods
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingShippingMethod> findByGroupId(long groupId)
+    public List<ShoppingShippingMethod> findByCompanyId(long companyId)
         throws SystemException {
-        return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+        return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+            null);
     }
 
     /**
-     * Returns a range of all the shopping shipping methods where groupId = &#63;.
+     * Returns a range of all the shopping shipping methods where companyId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param start the lower bound of the range of shopping shipping methods
      * @param end the upper bound of the range of shopping shipping methods (not inclusive)
      * @return the range of matching shopping shipping methods
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingShippingMethod> findByGroupId(long groupId, int start,
-        int end) throws SystemException {
-        return findByGroupId(groupId, start, end, null);
+    public List<ShoppingShippingMethod> findByCompanyId(long companyId,
+        int start, int end) throws SystemException {
+        return findByCompanyId(companyId, start, end, null);
     }
 
     /**
-     * Returns an ordered range of all the shopping shipping methods where groupId = &#63;.
+     * Returns an ordered range of all the shopping shipping methods where companyId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param start the lower bound of the range of shopping shipping methods
      * @param end the upper bound of the range of shopping shipping methods (not inclusive)
      * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -416,8 +419,9 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingShippingMethod> findByGroupId(long groupId, int start,
-        int end, OrderByComparator orderByComparator) throws SystemException {
+    public List<ShoppingShippingMethod> findByCompanyId(long companyId,
+        int start, int end, OrderByComparator orderByComparator)
+        throws SystemException {
         boolean pagination = true;
         FinderPath finderPath = null;
         Object[] finderArgs = null;
@@ -425,11 +429,11 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
         if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
                 (orderByComparator == null)) {
             pagination = false;
-            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-            finderArgs = new Object[] { groupId };
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
+            finderArgs = new Object[] { companyId };
         } else {
-            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-            finderArgs = new Object[] { groupId, start, end, orderByComparator };
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
+            finderArgs = new Object[] { companyId, start, end, orderByComparator };
         }
 
         List<ShoppingShippingMethod> list = (List<ShoppingShippingMethod>) FinderCacheUtil.getResult(finderPath,
@@ -437,7 +441,7 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
         if ((list != null) && !list.isEmpty()) {
             for (ShoppingShippingMethod shoppingShippingMethod : list) {
-                if ((groupId != shoppingShippingMethod.getGroupId())) {
+                if ((companyId != shoppingShippingMethod.getCompanyId())) {
                     list = null;
 
                     break;
@@ -457,7 +461,7 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
             query.append(_SQL_SELECT_SHOPPINGSHIPPINGMETHOD_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
             if (orderByComparator != null) {
                 appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -478,7 +482,7 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 if (!pagination) {
                     list = (List<ShoppingShippingMethod>) QueryUtil.list(q,
@@ -508,19 +512,19 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Returns the first shopping shipping method in the ordered set where groupId = &#63;.
+     * Returns the first shopping shipping method in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping shipping method
      * @throws com.fsquare.shopping.NoSuchShoppingShippingMethodException if a matching shopping shipping method could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingShippingMethod findByGroupId_First(long groupId,
+    public ShoppingShippingMethod findByCompanyId_First(long companyId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingShippingMethodException, SystemException {
-        ShoppingShippingMethod shoppingShippingMethod = fetchByGroupId_First(groupId,
+        ShoppingShippingMethod shoppingShippingMethod = fetchByCompanyId_First(companyId,
                 orderByComparator);
 
         if (shoppingShippingMethod != null) {
@@ -531,8 +535,8 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -540,17 +544,17 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Returns the first shopping shipping method in the ordered set where groupId = &#63;.
+     * Returns the first shopping shipping method in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping shipping method, or <code>null</code> if a matching shopping shipping method could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingShippingMethod fetchByGroupId_First(long groupId,
+    public ShoppingShippingMethod fetchByCompanyId_First(long companyId,
         OrderByComparator orderByComparator) throws SystemException {
-        List<ShoppingShippingMethod> list = findByGroupId(groupId, 0, 1,
+        List<ShoppingShippingMethod> list = findByCompanyId(companyId, 0, 1,
                 orderByComparator);
 
         if (!list.isEmpty()) {
@@ -561,19 +565,19 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Returns the last shopping shipping method in the ordered set where groupId = &#63;.
+     * Returns the last shopping shipping method in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping shipping method
      * @throws com.fsquare.shopping.NoSuchShoppingShippingMethodException if a matching shopping shipping method could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingShippingMethod findByGroupId_Last(long groupId,
+    public ShoppingShippingMethod findByCompanyId_Last(long companyId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingShippingMethodException, SystemException {
-        ShoppingShippingMethod shoppingShippingMethod = fetchByGroupId_Last(groupId,
+        ShoppingShippingMethod shoppingShippingMethod = fetchByCompanyId_Last(companyId,
                 orderByComparator);
 
         if (shoppingShippingMethod != null) {
@@ -584,8 +588,8 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -593,24 +597,24 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Returns the last shopping shipping method in the ordered set where groupId = &#63;.
+     * Returns the last shopping shipping method in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping shipping method, or <code>null</code> if a matching shopping shipping method could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingShippingMethod fetchByGroupId_Last(long groupId,
+    public ShoppingShippingMethod fetchByCompanyId_Last(long companyId,
         OrderByComparator orderByComparator) throws SystemException {
-        int count = countByGroupId(groupId);
+        int count = countByCompanyId(companyId);
 
         if (count == 0) {
             return null;
         }
 
-        List<ShoppingShippingMethod> list = findByGroupId(groupId, count - 1,
-                count, orderByComparator);
+        List<ShoppingShippingMethod> list = findByCompanyId(companyId,
+                count - 1, count, orderByComparator);
 
         if (!list.isEmpty()) {
             return list.get(0);
@@ -620,18 +624,19 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Returns the shopping shipping methods before and after the current shopping shipping method in the ordered set where groupId = &#63;.
+     * Returns the shopping shipping methods before and after the current shopping shipping method in the ordered set where companyId = &#63;.
      *
      * @param shippingMethodId the primary key of the current shopping shipping method
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next shopping shipping method
      * @throws com.fsquare.shopping.NoSuchShoppingShippingMethodException if a shopping shipping method with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingShippingMethod[] findByGroupId_PrevAndNext(
-        long shippingMethodId, long groupId, OrderByComparator orderByComparator)
+    public ShoppingShippingMethod[] findByCompanyId_PrevAndNext(
+        long shippingMethodId, long companyId,
+        OrderByComparator orderByComparator)
         throws NoSuchShoppingShippingMethodException, SystemException {
         ShoppingShippingMethod shoppingShippingMethod = findByPrimaryKey(shippingMethodId);
 
@@ -642,13 +647,13 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
             ShoppingShippingMethod[] array = new ShoppingShippingMethodImpl[3];
 
-            array[0] = getByGroupId_PrevAndNext(session,
-                    shoppingShippingMethod, groupId, orderByComparator, true);
+            array[0] = getByCompanyId_PrevAndNext(session,
+                    shoppingShippingMethod, companyId, orderByComparator, true);
 
             array[1] = shoppingShippingMethod;
 
-            array[2] = getByGroupId_PrevAndNext(session,
-                    shoppingShippingMethod, groupId, orderByComparator, false);
+            array[2] = getByCompanyId_PrevAndNext(session,
+                    shoppingShippingMethod, companyId, orderByComparator, false);
 
             return array;
         } catch (Exception e) {
@@ -658,9 +663,9 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
         }
     }
 
-    protected ShoppingShippingMethod getByGroupId_PrevAndNext(Session session,
-        ShoppingShippingMethod shoppingShippingMethod, long groupId,
-        OrderByComparator orderByComparator, boolean previous) {
+    protected ShoppingShippingMethod getByCompanyId_PrevAndNext(
+        Session session, ShoppingShippingMethod shoppingShippingMethod,
+        long companyId, OrderByComparator orderByComparator, boolean previous) {
         StringBundler query = null;
 
         if (orderByComparator != null) {
@@ -672,7 +677,7 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
         query.append(_SQL_SELECT_SHOPPINGSHIPPINGMETHOD_WHERE);
 
-        query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+        query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
         if (orderByComparator != null) {
             String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -735,7 +740,7 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
         QueryPos qPos = QueryPos.getInstance(q);
 
-        qPos.add(groupId);
+        qPos.add(companyId);
 
         if (orderByComparator != null) {
             Object[] values = orderByComparator.getOrderByConditionValues(shoppingShippingMethod);
@@ -755,31 +760,31 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Removes all the shopping shipping methods where groupId = &#63; from the database.
+     * Removes all the shopping shipping methods where companyId = &#63; from the database.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeByGroupId(long groupId) throws SystemException {
-        for (ShoppingShippingMethod shoppingShippingMethod : findByGroupId(
-                groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+    public void removeByCompanyId(long companyId) throws SystemException {
+        for (ShoppingShippingMethod shoppingShippingMethod : findByCompanyId(
+                companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
             remove(shoppingShippingMethod);
         }
     }
 
     /**
-     * Returns the number of shopping shipping methods where groupId = &#63;.
+     * Returns the number of shopping shipping methods where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the number of matching shopping shipping methods
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByGroupId(long groupId) throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+    public int countByCompanyId(long companyId) throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
-        Object[] finderArgs = new Object[] { groupId };
+        Object[] finderArgs = new Object[] { companyId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -789,7 +794,7 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
             query.append(_SQL_COUNT_SHOPPINGSHIPPINGMETHOD_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
             String sql = query.toString();
 
@@ -802,7 +807,7 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 count = (Long) q.uniqueResult();
 
@@ -820,28 +825,28 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Returns all the shopping shipping methods where groupId = &#63; and disabled = &#63;.
+     * Returns all the shopping shipping methods where companyId = &#63; and disabled = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param disabled the disabled
      * @return the matching shopping shipping methods
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingShippingMethod> findByGroupIdAndEnabled(long groupId,
-        boolean disabled) throws SystemException {
-        return findByGroupIdAndEnabled(groupId, disabled, QueryUtil.ALL_POS,
-            QueryUtil.ALL_POS, null);
+    public List<ShoppingShippingMethod> findByCompanyIdAndEnabled(
+        long companyId, boolean disabled) throws SystemException {
+        return findByCompanyIdAndEnabled(companyId, disabled,
+            QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
     }
 
     /**
-     * Returns a range of all the shopping shipping methods where groupId = &#63; and disabled = &#63;.
+     * Returns a range of all the shopping shipping methods where companyId = &#63; and disabled = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param disabled the disabled
      * @param start the lower bound of the range of shopping shipping methods
      * @param end the upper bound of the range of shopping shipping methods (not inclusive)
@@ -849,19 +854,20 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingShippingMethod> findByGroupIdAndEnabled(long groupId,
-        boolean disabled, int start, int end) throws SystemException {
-        return findByGroupIdAndEnabled(groupId, disabled, start, end, null);
+    public List<ShoppingShippingMethod> findByCompanyIdAndEnabled(
+        long companyId, boolean disabled, int start, int end)
+        throws SystemException {
+        return findByCompanyIdAndEnabled(companyId, disabled, start, end, null);
     }
 
     /**
-     * Returns an ordered range of all the shopping shipping methods where groupId = &#63; and disabled = &#63;.
+     * Returns an ordered range of all the shopping shipping methods where companyId = &#63; and disabled = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingShippingMethodModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param disabled the disabled
      * @param start the lower bound of the range of shopping shipping methods
      * @param end the upper bound of the range of shopping shipping methods (not inclusive)
@@ -870,8 +876,8 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingShippingMethod> findByGroupIdAndEnabled(long groupId,
-        boolean disabled, int start, int end,
+    public List<ShoppingShippingMethod> findByCompanyIdAndEnabled(
+        long companyId, boolean disabled, int start, int end,
         OrderByComparator orderByComparator) throws SystemException {
         boolean pagination = true;
         FinderPath finderPath = null;
@@ -880,12 +886,12 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
         if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
                 (orderByComparator == null)) {
             pagination = false;
-            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDENABLED;
-            finderArgs = new Object[] { groupId, disabled };
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDENABLED;
+            finderArgs = new Object[] { companyId, disabled };
         } else {
-            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPIDANDENABLED;
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYIDANDENABLED;
             finderArgs = new Object[] {
-                    groupId, disabled,
+                    companyId, disabled,
                     
                     start, end, orderByComparator
                 };
@@ -896,7 +902,7 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
         if ((list != null) && !list.isEmpty()) {
             for (ShoppingShippingMethod shoppingShippingMethod : list) {
-                if ((groupId != shoppingShippingMethod.getGroupId()) ||
+                if ((companyId != shoppingShippingMethod.getCompanyId()) ||
                         (disabled != shoppingShippingMethod.getDisabled())) {
                     list = null;
 
@@ -917,9 +923,9 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
             query.append(_SQL_SELECT_SHOPPINGSHIPPINGMETHOD_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDENABLED_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDENABLED_COMPANYID_2);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDENABLED_DISABLED_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDENABLED_DISABLED_2);
 
             if (orderByComparator != null) {
                 appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -940,7 +946,7 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 qPos.add(disabled);
 
@@ -972,9 +978,9 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Returns the first shopping shipping method in the ordered set where groupId = &#63; and disabled = &#63;.
+     * Returns the first shopping shipping method in the ordered set where companyId = &#63; and disabled = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param disabled the disabled
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping shipping method
@@ -982,10 +988,10 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingShippingMethod findByGroupIdAndEnabled_First(long groupId,
-        boolean disabled, OrderByComparator orderByComparator)
+    public ShoppingShippingMethod findByCompanyIdAndEnabled_First(
+        long companyId, boolean disabled, OrderByComparator orderByComparator)
         throws NoSuchShoppingShippingMethodException, SystemException {
-        ShoppingShippingMethod shoppingShippingMethod = fetchByGroupIdAndEnabled_First(groupId,
+        ShoppingShippingMethod shoppingShippingMethod = fetchByCompanyIdAndEnabled_First(companyId,
                 disabled, orderByComparator);
 
         if (shoppingShippingMethod != null) {
@@ -996,8 +1002,8 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(", disabled=");
         msg.append(disabled);
@@ -1008,19 +1014,19 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Returns the first shopping shipping method in the ordered set where groupId = &#63; and disabled = &#63;.
+     * Returns the first shopping shipping method in the ordered set where companyId = &#63; and disabled = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param disabled the disabled
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping shipping method, or <code>null</code> if a matching shopping shipping method could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingShippingMethod fetchByGroupIdAndEnabled_First(long groupId,
-        boolean disabled, OrderByComparator orderByComparator)
+    public ShoppingShippingMethod fetchByCompanyIdAndEnabled_First(
+        long companyId, boolean disabled, OrderByComparator orderByComparator)
         throws SystemException {
-        List<ShoppingShippingMethod> list = findByGroupIdAndEnabled(groupId,
+        List<ShoppingShippingMethod> list = findByCompanyIdAndEnabled(companyId,
                 disabled, 0, 1, orderByComparator);
 
         if (!list.isEmpty()) {
@@ -1031,9 +1037,9 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Returns the last shopping shipping method in the ordered set where groupId = &#63; and disabled = &#63;.
+     * Returns the last shopping shipping method in the ordered set where companyId = &#63; and disabled = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param disabled the disabled
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping shipping method
@@ -1041,10 +1047,10 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingShippingMethod findByGroupIdAndEnabled_Last(long groupId,
-        boolean disabled, OrderByComparator orderByComparator)
+    public ShoppingShippingMethod findByCompanyIdAndEnabled_Last(
+        long companyId, boolean disabled, OrderByComparator orderByComparator)
         throws NoSuchShoppingShippingMethodException, SystemException {
-        ShoppingShippingMethod shoppingShippingMethod = fetchByGroupIdAndEnabled_Last(groupId,
+        ShoppingShippingMethod shoppingShippingMethod = fetchByCompanyIdAndEnabled_Last(companyId,
                 disabled, orderByComparator);
 
         if (shoppingShippingMethod != null) {
@@ -1055,8 +1061,8 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(", disabled=");
         msg.append(disabled);
@@ -1067,25 +1073,25 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Returns the last shopping shipping method in the ordered set where groupId = &#63; and disabled = &#63;.
+     * Returns the last shopping shipping method in the ordered set where companyId = &#63; and disabled = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param disabled the disabled
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping shipping method, or <code>null</code> if a matching shopping shipping method could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingShippingMethod fetchByGroupIdAndEnabled_Last(long groupId,
-        boolean disabled, OrderByComparator orderByComparator)
+    public ShoppingShippingMethod fetchByCompanyIdAndEnabled_Last(
+        long companyId, boolean disabled, OrderByComparator orderByComparator)
         throws SystemException {
-        int count = countByGroupIdAndEnabled(groupId, disabled);
+        int count = countByCompanyIdAndEnabled(companyId, disabled);
 
         if (count == 0) {
             return null;
         }
 
-        List<ShoppingShippingMethod> list = findByGroupIdAndEnabled(groupId,
+        List<ShoppingShippingMethod> list = findByCompanyIdAndEnabled(companyId,
                 disabled, count - 1, count, orderByComparator);
 
         if (!list.isEmpty()) {
@@ -1096,10 +1102,10 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Returns the shopping shipping methods before and after the current shopping shipping method in the ordered set where groupId = &#63; and disabled = &#63;.
+     * Returns the shopping shipping methods before and after the current shopping shipping method in the ordered set where companyId = &#63; and disabled = &#63;.
      *
      * @param shippingMethodId the primary key of the current shopping shipping method
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param disabled the disabled
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next shopping shipping method
@@ -1107,8 +1113,8 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingShippingMethod[] findByGroupIdAndEnabled_PrevAndNext(
-        long shippingMethodId, long groupId, boolean disabled,
+    public ShoppingShippingMethod[] findByCompanyIdAndEnabled_PrevAndNext(
+        long shippingMethodId, long companyId, boolean disabled,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingShippingMethodException, SystemException {
         ShoppingShippingMethod shoppingShippingMethod = findByPrimaryKey(shippingMethodId);
@@ -1120,14 +1126,14 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
             ShoppingShippingMethod[] array = new ShoppingShippingMethodImpl[3];
 
-            array[0] = getByGroupIdAndEnabled_PrevAndNext(session,
-                    shoppingShippingMethod, groupId, disabled,
+            array[0] = getByCompanyIdAndEnabled_PrevAndNext(session,
+                    shoppingShippingMethod, companyId, disabled,
                     orderByComparator, true);
 
             array[1] = shoppingShippingMethod;
 
-            array[2] = getByGroupIdAndEnabled_PrevAndNext(session,
-                    shoppingShippingMethod, groupId, disabled,
+            array[2] = getByCompanyIdAndEnabled_PrevAndNext(session,
+                    shoppingShippingMethod, companyId, disabled,
                     orderByComparator, false);
 
             return array;
@@ -1138,9 +1144,9 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
         }
     }
 
-    protected ShoppingShippingMethod getByGroupIdAndEnabled_PrevAndNext(
+    protected ShoppingShippingMethod getByCompanyIdAndEnabled_PrevAndNext(
         Session session, ShoppingShippingMethod shoppingShippingMethod,
-        long groupId, boolean disabled, OrderByComparator orderByComparator,
+        long companyId, boolean disabled, OrderByComparator orderByComparator,
         boolean previous) {
         StringBundler query = null;
 
@@ -1153,9 +1159,9 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
         query.append(_SQL_SELECT_SHOPPINGSHIPPINGMETHOD_WHERE);
 
-        query.append(_FINDER_COLUMN_GROUPIDANDENABLED_GROUPID_2);
+        query.append(_FINDER_COLUMN_COMPANYIDANDENABLED_COMPANYID_2);
 
-        query.append(_FINDER_COLUMN_GROUPIDANDENABLED_DISABLED_2);
+        query.append(_FINDER_COLUMN_COMPANYIDANDENABLED_DISABLED_2);
 
         if (orderByComparator != null) {
             String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1218,7 +1224,7 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
         QueryPos qPos = QueryPos.getInstance(q);
 
-        qPos.add(groupId);
+        qPos.add(companyId);
 
         qPos.add(disabled);
 
@@ -1240,35 +1246,35 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
     }
 
     /**
-     * Removes all the shopping shipping methods where groupId = &#63; and disabled = &#63; from the database.
+     * Removes all the shopping shipping methods where companyId = &#63; and disabled = &#63; from the database.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param disabled the disabled
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeByGroupIdAndEnabled(long groupId, boolean disabled)
+    public void removeByCompanyIdAndEnabled(long companyId, boolean disabled)
         throws SystemException {
-        for (ShoppingShippingMethod shoppingShippingMethod : findByGroupIdAndEnabled(
-                groupId, disabled, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+        for (ShoppingShippingMethod shoppingShippingMethod : findByCompanyIdAndEnabled(
+                companyId, disabled, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
             remove(shoppingShippingMethod);
         }
     }
 
     /**
-     * Returns the number of shopping shipping methods where groupId = &#63; and disabled = &#63;.
+     * Returns the number of shopping shipping methods where companyId = &#63; and disabled = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param disabled the disabled
      * @return the number of matching shopping shipping methods
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByGroupIdAndEnabled(long groupId, boolean disabled)
+    public int countByCompanyIdAndEnabled(long companyId, boolean disabled)
         throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPIDANDENABLED;
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYIDANDENABLED;
 
-        Object[] finderArgs = new Object[] { groupId, disabled };
+        Object[] finderArgs = new Object[] { companyId, disabled };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -1278,9 +1284,9 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
             query.append(_SQL_COUNT_SHOPPINGSHIPPINGMETHOD_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDENABLED_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDENABLED_COMPANYID_2);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDENABLED_DISABLED_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDENABLED_DISABLED_2);
 
             String sql = query.toString();
 
@@ -1293,7 +1299,7 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 qPos.add(disabled);
 
@@ -1588,42 +1594,46 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
         }
         else {
             if ((shoppingShippingMethodModelImpl.getColumnBitmask() &
-                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingShippingMethodModelImpl.getOriginalGroupId()
+                        shoppingShippingMethodModelImpl.getOriginalCompanyId()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
                     args);
 
-                args = new Object[] { shoppingShippingMethodModelImpl.getGroupId() };
+                args = new Object[] {
+                        shoppingShippingMethodModelImpl.getCompanyId()
+                    };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
                     args);
             }
 
             if ((shoppingShippingMethodModelImpl.getColumnBitmask() &
-                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDENABLED.getColumnBitmask()) != 0) {
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDENABLED.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingShippingMethodModelImpl.getOriginalGroupId(),
+                        shoppingShippingMethodModelImpl.getOriginalCompanyId(),
                         shoppingShippingMethodModelImpl.getOriginalDisabled()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDENABLED,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYIDANDENABLED,
                     args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDENABLED,
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDENABLED,
                     args);
 
                 args = new Object[] {
-                        shoppingShippingMethodModelImpl.getGroupId(),
+                        shoppingShippingMethodModelImpl.getCompanyId(),
                         shoppingShippingMethodModelImpl.getDisabled()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDENABLED,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYIDANDENABLED,
                     args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDENABLED,
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDENABLED,
                     args);
             }
         }
@@ -1650,7 +1660,6 @@ public class ShoppingShippingMethodPersistenceImpl extends BasePersistenceImpl<S
         shoppingShippingMethodImpl.setPrimaryKey(shoppingShippingMethod.getPrimaryKey());
 
         shoppingShippingMethodImpl.setShippingMethodId(shoppingShippingMethod.getShippingMethodId());
-        shoppingShippingMethodImpl.setGroupId(shoppingShippingMethod.getGroupId());
         shoppingShippingMethodImpl.setCompanyId(shoppingShippingMethod.getCompanyId());
         shoppingShippingMethodImpl.setUserId(shoppingShippingMethod.getUserId());
         shoppingShippingMethodImpl.setUserName(shoppingShippingMethod.getUserName());

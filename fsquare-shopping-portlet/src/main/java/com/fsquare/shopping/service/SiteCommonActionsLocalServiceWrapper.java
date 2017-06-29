@@ -63,6 +63,12 @@ public class SiteCommonActionsLocalServiceWrapper
             portraitId);
     }
 
+    @Override
+    public java.util.List<com.liferay.portal.model.Company> getCompanies()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _siteCommonActionsLocalService.getCompanies();
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

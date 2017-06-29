@@ -74,28 +74,29 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
+        new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-            "findByGroupId",
+            "findByCompanyId",
             new String[] {
                 Long.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
             });
-    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
         new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-            "findByGroupId", new String[] { Long.class.getName() },
-            ShoppingOrderModelImpl.GROUPID_COLUMN_BITMASK |
+            "findByCompanyId", new String[] { Long.class.getName() },
+            ShoppingOrderModelImpl.COMPANYID_COLUMN_BITMASK |
             ShoppingOrderModelImpl.CREATEDATE_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
             new String[] { Long.class.getName() });
-    private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "shoppingOrder.groupId = ?";
+    private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "shoppingOrder.companyId = ?";
     public static final FinderPath FINDER_PATH_FETCH_BY_NUMBER = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByNumber",
@@ -161,64 +162,64 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     private static final String _FINDER_COLUMN_STATUS_STATUS_1 = "shoppingOrder.status IS NULL";
     private static final String _FINDER_COLUMN_STATUS_STATUS_2 = "shoppingOrder.status = ?";
     private static final String _FINDER_COLUMN_STATUS_STATUS_3 = "(shoppingOrder.status IS NULL OR shoppingOrder.status = '')";
-    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPIDANDUSERID =
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYIDANDUSERID =
         new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-            "findBygroupIdAndUserId",
+            "findBycompanyIdAndUserId",
             new String[] {
                 Long.class.getName(), Long.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
             });
-    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDUSERID =
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDUSERID =
         new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-            "findBygroupIdAndUserId",
+            "findBycompanyIdAndUserId",
             new String[] { Long.class.getName(), Long.class.getName() },
-            ShoppingOrderModelImpl.GROUPID_COLUMN_BITMASK |
+            ShoppingOrderModelImpl.COMPANYID_COLUMN_BITMASK |
             ShoppingOrderModelImpl.USERID_COLUMN_BITMASK |
             ShoppingOrderModelImpl.CREATEDATE_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_GROUPIDANDUSERID = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYIDANDUSERID = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-            "countBygroupIdAndUserId",
+            "countBycompanyIdAndUserId",
             new String[] { Long.class.getName(), Long.class.getName() });
-    private static final String _FINDER_COLUMN_GROUPIDANDUSERID_GROUPID_2 = "shoppingOrder.groupId = ? AND ";
-    private static final String _FINDER_COLUMN_GROUPIDANDUSERID_USERID_2 = "shoppingOrder.userId = ?";
-    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPIDANDEMAIL =
+    private static final String _FINDER_COLUMN_COMPANYIDANDUSERID_COMPANYID_2 = "shoppingOrder.companyId = ? AND ";
+    private static final String _FINDER_COLUMN_COMPANYIDANDUSERID_USERID_2 = "shoppingOrder.userId = ?";
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYIDANDEMAIL =
         new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-            "findBygroupIdAndEmail",
+            "findBycompanyIdAndEmail",
             new String[] {
                 Long.class.getName(), String.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
             });
-    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDEMAIL =
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDEMAIL =
         new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
             ShoppingOrderImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-            "findBygroupIdAndEmail",
+            "findBycompanyIdAndEmail",
             new String[] { Long.class.getName(), String.class.getName() },
-            ShoppingOrderModelImpl.GROUPID_COLUMN_BITMASK |
+            ShoppingOrderModelImpl.COMPANYID_COLUMN_BITMASK |
             ShoppingOrderModelImpl.SHIPPINGEMAILADDRESS_COLUMN_BITMASK |
             ShoppingOrderModelImpl.CREATEDATE_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_GROUPIDANDEMAIL = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYIDANDEMAIL = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-            "countBygroupIdAndEmail",
+            "countBycompanyIdAndEmail",
             new String[] { Long.class.getName(), String.class.getName() });
-    private static final String _FINDER_COLUMN_GROUPIDANDEMAIL_GROUPID_2 = "shoppingOrder.groupId = ? AND ";
-    private static final String _FINDER_COLUMN_GROUPIDANDEMAIL_SHIPPINGEMAILADDRESS_1 =
+    private static final String _FINDER_COLUMN_COMPANYIDANDEMAIL_COMPANYID_2 = "shoppingOrder.companyId = ? AND ";
+    private static final String _FINDER_COLUMN_COMPANYIDANDEMAIL_SHIPPINGEMAILADDRESS_1 =
         "shoppingOrder.shippingEmailAddress IS NULL";
-    private static final String _FINDER_COLUMN_GROUPIDANDEMAIL_SHIPPINGEMAILADDRESS_2 =
+    private static final String _FINDER_COLUMN_COMPANYIDANDEMAIL_SHIPPINGEMAILADDRESS_2 =
         "shoppingOrder.shippingEmailAddress = ?";
-    private static final String _FINDER_COLUMN_GROUPIDANDEMAIL_SHIPPINGEMAILADDRESS_3 =
+    private static final String _FINDER_COLUMN_COMPANYIDANDEMAIL_SHIPPINGEMAILADDRESS_3 =
         "(shoppingOrder.shippingEmailAddress IS NULL OR shoppingOrder.shippingEmailAddress = '')";
     public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_SHIPPINGMETHODID =
         new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
@@ -281,45 +282,46 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns all the shopping orders where groupId = &#63;.
+     * Returns all the shopping orders where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the matching shopping orders
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrder> findByGroupId(long groupId)
+    public List<ShoppingOrder> findByCompanyId(long companyId)
         throws SystemException {
-        return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+        return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+            null);
     }
 
     /**
-     * Returns a range of all the shopping orders where groupId = &#63;.
+     * Returns a range of all the shopping orders where companyId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param start the lower bound of the range of shopping orders
      * @param end the upper bound of the range of shopping orders (not inclusive)
      * @return the range of matching shopping orders
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrder> findByGroupId(long groupId, int start, int end)
-        throws SystemException {
-        return findByGroupId(groupId, start, end, null);
+    public List<ShoppingOrder> findByCompanyId(long companyId, int start,
+        int end) throws SystemException {
+        return findByCompanyId(companyId, start, end, null);
     }
 
     /**
-     * Returns an ordered range of all the shopping orders where groupId = &#63;.
+     * Returns an ordered range of all the shopping orders where companyId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param start the lower bound of the range of shopping orders
      * @param end the upper bound of the range of shopping orders (not inclusive)
      * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -327,8 +329,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrder> findByGroupId(long groupId, int start, int end,
-        OrderByComparator orderByComparator) throws SystemException {
+    public List<ShoppingOrder> findByCompanyId(long companyId, int start,
+        int end, OrderByComparator orderByComparator) throws SystemException {
         boolean pagination = true;
         FinderPath finderPath = null;
         Object[] finderArgs = null;
@@ -336,11 +338,11 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
                 (orderByComparator == null)) {
             pagination = false;
-            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-            finderArgs = new Object[] { groupId };
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
+            finderArgs = new Object[] { companyId };
         } else {
-            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-            finderArgs = new Object[] { groupId, start, end, orderByComparator };
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
+            finderArgs = new Object[] { companyId, start, end, orderByComparator };
         }
 
         List<ShoppingOrder> list = (List<ShoppingOrder>) FinderCacheUtil.getResult(finderPath,
@@ -348,7 +350,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         if ((list != null) && !list.isEmpty()) {
             for (ShoppingOrder shoppingOrder : list) {
-                if ((groupId != shoppingOrder.getGroupId())) {
+                if ((companyId != shoppingOrder.getCompanyId())) {
                     list = null;
 
                     break;
@@ -368,7 +370,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
             query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
             if (orderByComparator != null) {
                 appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -389,7 +391,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 if (!pagination) {
                     list = (List<ShoppingOrder>) QueryUtil.list(q,
@@ -419,19 +421,19 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the first shopping order in the ordered set where groupId = &#63;.
+     * Returns the first shopping order in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping order
      * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder findByGroupId_First(long groupId,
+    public ShoppingOrder findByCompanyId_First(long companyId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = fetchByGroupId_First(groupId,
+        ShoppingOrder shoppingOrder = fetchByCompanyId_First(companyId,
                 orderByComparator);
 
         if (shoppingOrder != null) {
@@ -442,8 +444,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -451,17 +453,17 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the first shopping order in the ordered set where groupId = &#63;.
+     * Returns the first shopping order in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping order, or <code>null</code> if a matching shopping order could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder fetchByGroupId_First(long groupId,
+    public ShoppingOrder fetchByCompanyId_First(long companyId,
         OrderByComparator orderByComparator) throws SystemException {
-        List<ShoppingOrder> list = findByGroupId(groupId, 0, 1,
+        List<ShoppingOrder> list = findByCompanyId(companyId, 0, 1,
                 orderByComparator);
 
         if (!list.isEmpty()) {
@@ -472,19 +474,19 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the last shopping order in the ordered set where groupId = &#63;.
+     * Returns the last shopping order in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping order
      * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder findByGroupId_Last(long groupId,
+    public ShoppingOrder findByCompanyId_Last(long companyId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = fetchByGroupId_Last(groupId,
+        ShoppingOrder shoppingOrder = fetchByCompanyId_Last(companyId,
                 orderByComparator);
 
         if (shoppingOrder != null) {
@@ -495,8 +497,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -504,23 +506,23 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the last shopping order in the ordered set where groupId = &#63;.
+     * Returns the last shopping order in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping order, or <code>null</code> if a matching shopping order could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder fetchByGroupId_Last(long groupId,
+    public ShoppingOrder fetchByCompanyId_Last(long companyId,
         OrderByComparator orderByComparator) throws SystemException {
-        int count = countByGroupId(groupId);
+        int count = countByCompanyId(companyId);
 
         if (count == 0) {
             return null;
         }
 
-        List<ShoppingOrder> list = findByGroupId(groupId, count - 1, count,
+        List<ShoppingOrder> list = findByCompanyId(companyId, count - 1, count,
                 orderByComparator);
 
         if (!list.isEmpty()) {
@@ -531,18 +533,18 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the shopping orders before and after the current shopping order in the ordered set where groupId = &#63;.
+     * Returns the shopping orders before and after the current shopping order in the ordered set where companyId = &#63;.
      *
      * @param shoppingOrderId the primary key of the current shopping order
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next shopping order
      * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a shopping order with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder[] findByGroupId_PrevAndNext(long shoppingOrderId,
-        long groupId, OrderByComparator orderByComparator)
+    public ShoppingOrder[] findByCompanyId_PrevAndNext(long shoppingOrderId,
+        long companyId, OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderException, SystemException {
         ShoppingOrder shoppingOrder = findByPrimaryKey(shoppingOrderId);
 
@@ -553,13 +555,13 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
             ShoppingOrder[] array = new ShoppingOrderImpl[3];
 
-            array[0] = getByGroupId_PrevAndNext(session, shoppingOrder,
-                    groupId, orderByComparator, true);
+            array[0] = getByCompanyId_PrevAndNext(session, shoppingOrder,
+                    companyId, orderByComparator, true);
 
             array[1] = shoppingOrder;
 
-            array[2] = getByGroupId_PrevAndNext(session, shoppingOrder,
-                    groupId, orderByComparator, false);
+            array[2] = getByCompanyId_PrevAndNext(session, shoppingOrder,
+                    companyId, orderByComparator, false);
 
             return array;
         } catch (Exception e) {
@@ -569,8 +571,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         }
     }
 
-    protected ShoppingOrder getByGroupId_PrevAndNext(Session session,
-        ShoppingOrder shoppingOrder, long groupId,
+    protected ShoppingOrder getByCompanyId_PrevAndNext(Session session,
+        ShoppingOrder shoppingOrder, long companyId,
         OrderByComparator orderByComparator, boolean previous) {
         StringBundler query = null;
 
@@ -583,7 +585,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
 
-        query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+        query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
         if (orderByComparator != null) {
             String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -646,7 +648,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         QueryPos qPos = QueryPos.getInstance(q);
 
-        qPos.add(groupId);
+        qPos.add(companyId);
 
         if (orderByComparator != null) {
             Object[] values = orderByComparator.getOrderByConditionValues(shoppingOrder);
@@ -666,31 +668,31 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Removes all the shopping orders where groupId = &#63; from the database.
+     * Removes all the shopping orders where companyId = &#63; from the database.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeByGroupId(long groupId) throws SystemException {
-        for (ShoppingOrder shoppingOrder : findByGroupId(groupId,
+    public void removeByCompanyId(long companyId) throws SystemException {
+        for (ShoppingOrder shoppingOrder : findByCompanyId(companyId,
                 QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
             remove(shoppingOrder);
         }
     }
 
     /**
-     * Returns the number of shopping orders where groupId = &#63;.
+     * Returns the number of shopping orders where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the number of matching shopping orders
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByGroupId(long groupId) throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+    public int countByCompanyId(long companyId) throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
-        Object[] finderArgs = new Object[] { groupId };
+        Object[] finderArgs = new Object[] { companyId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -700,7 +702,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
             query.append(_SQL_COUNT_SHOPPINGORDER_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
             String sql = query.toString();
 
@@ -713,7 +715,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 count = (Long) q.uniqueResult();
 
@@ -1892,28 +1894,28 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns all the shopping orders where groupId = &#63; and userId = &#63;.
+     * Returns all the shopping orders where companyId = &#63; and userId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param userId the user ID
      * @return the matching shopping orders
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrder> findBygroupIdAndUserId(long groupId, long userId)
-        throws SystemException {
-        return findBygroupIdAndUserId(groupId, userId, QueryUtil.ALL_POS,
+    public List<ShoppingOrder> findBycompanyIdAndUserId(long companyId,
+        long userId) throws SystemException {
+        return findBycompanyIdAndUserId(companyId, userId, QueryUtil.ALL_POS,
             QueryUtil.ALL_POS, null);
     }
 
     /**
-     * Returns a range of all the shopping orders where groupId = &#63; and userId = &#63;.
+     * Returns a range of all the shopping orders where companyId = &#63; and userId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param userId the user ID
      * @param start the lower bound of the range of shopping orders
      * @param end the upper bound of the range of shopping orders (not inclusive)
@@ -1921,19 +1923,19 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrder> findBygroupIdAndUserId(long groupId,
+    public List<ShoppingOrder> findBycompanyIdAndUserId(long companyId,
         long userId, int start, int end) throws SystemException {
-        return findBygroupIdAndUserId(groupId, userId, start, end, null);
+        return findBycompanyIdAndUserId(companyId, userId, start, end, null);
     }
 
     /**
-     * Returns an ordered range of all the shopping orders where groupId = &#63; and userId = &#63;.
+     * Returns an ordered range of all the shopping orders where companyId = &#63; and userId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param userId the user ID
      * @param start the lower bound of the range of shopping orders
      * @param end the upper bound of the range of shopping orders (not inclusive)
@@ -1942,7 +1944,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrder> findBygroupIdAndUserId(long groupId,
+    public List<ShoppingOrder> findBycompanyIdAndUserId(long companyId,
         long userId, int start, int end, OrderByComparator orderByComparator)
         throws SystemException {
         boolean pagination = true;
@@ -1952,12 +1954,12 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
                 (orderByComparator == null)) {
             pagination = false;
-            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDUSERID;
-            finderArgs = new Object[] { groupId, userId };
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDUSERID;
+            finderArgs = new Object[] { companyId, userId };
         } else {
-            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPIDANDUSERID;
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYIDANDUSERID;
             finderArgs = new Object[] {
-                    groupId, userId,
+                    companyId, userId,
                     
                     start, end, orderByComparator
                 };
@@ -1968,7 +1970,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         if ((list != null) && !list.isEmpty()) {
             for (ShoppingOrder shoppingOrder : list) {
-                if ((groupId != shoppingOrder.getGroupId()) ||
+                if ((companyId != shoppingOrder.getCompanyId()) ||
                         (userId != shoppingOrder.getUserId())) {
                     list = null;
 
@@ -1989,9 +1991,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
             query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDUSERID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDUSERID_COMPANYID_2);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDUSERID_USERID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDUSERID_USERID_2);
 
             if (orderByComparator != null) {
                 appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -2012,7 +2014,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 qPos.add(userId);
 
@@ -2044,9 +2046,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the first shopping order in the ordered set where groupId = &#63; and userId = &#63;.
+     * Returns the first shopping order in the ordered set where companyId = &#63; and userId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param userId the user ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping order
@@ -2054,10 +2056,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder findBygroupIdAndUserId_First(long groupId,
+    public ShoppingOrder findBycompanyIdAndUserId_First(long companyId,
         long userId, OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = fetchBygroupIdAndUserId_First(groupId,
+        ShoppingOrder shoppingOrder = fetchBycompanyIdAndUserId_First(companyId,
                 userId, orderByComparator);
 
         if (shoppingOrder != null) {
@@ -2068,8 +2070,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(", userId=");
         msg.append(userId);
@@ -2080,20 +2082,20 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the first shopping order in the ordered set where groupId = &#63; and userId = &#63;.
+     * Returns the first shopping order in the ordered set where companyId = &#63; and userId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param userId the user ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping order, or <code>null</code> if a matching shopping order could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder fetchBygroupIdAndUserId_First(long groupId,
+    public ShoppingOrder fetchBycompanyIdAndUserId_First(long companyId,
         long userId, OrderByComparator orderByComparator)
         throws SystemException {
-        List<ShoppingOrder> list = findBygroupIdAndUserId(groupId, userId, 0,
-                1, orderByComparator);
+        List<ShoppingOrder> list = findBycompanyIdAndUserId(companyId, userId,
+                0, 1, orderByComparator);
 
         if (!list.isEmpty()) {
             return list.get(0);
@@ -2103,9 +2105,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the last shopping order in the ordered set where groupId = &#63; and userId = &#63;.
+     * Returns the last shopping order in the ordered set where companyId = &#63; and userId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param userId the user ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping order
@@ -2113,10 +2115,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder findBygroupIdAndUserId_Last(long groupId, long userId,
-        OrderByComparator orderByComparator)
+    public ShoppingOrder findBycompanyIdAndUserId_Last(long companyId,
+        long userId, OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = fetchBygroupIdAndUserId_Last(groupId,
+        ShoppingOrder shoppingOrder = fetchBycompanyIdAndUserId_Last(companyId,
                 userId, orderByComparator);
 
         if (shoppingOrder != null) {
@@ -2127,8 +2129,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(", userId=");
         msg.append(userId);
@@ -2139,25 +2141,25 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the last shopping order in the ordered set where groupId = &#63; and userId = &#63;.
+     * Returns the last shopping order in the ordered set where companyId = &#63; and userId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param userId the user ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping order, or <code>null</code> if a matching shopping order could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder fetchBygroupIdAndUserId_Last(long groupId,
+    public ShoppingOrder fetchBycompanyIdAndUserId_Last(long companyId,
         long userId, OrderByComparator orderByComparator)
         throws SystemException {
-        int count = countBygroupIdAndUserId(groupId, userId);
+        int count = countBycompanyIdAndUserId(companyId, userId);
 
         if (count == 0) {
             return null;
         }
 
-        List<ShoppingOrder> list = findBygroupIdAndUserId(groupId, userId,
+        List<ShoppingOrder> list = findBycompanyIdAndUserId(companyId, userId,
                 count - 1, count, orderByComparator);
 
         if (!list.isEmpty()) {
@@ -2168,10 +2170,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the shopping orders before and after the current shopping order in the ordered set where groupId = &#63; and userId = &#63;.
+     * Returns the shopping orders before and after the current shopping order in the ordered set where companyId = &#63; and userId = &#63;.
      *
      * @param shoppingOrderId the primary key of the current shopping order
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param userId the user ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next shopping order
@@ -2179,8 +2181,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder[] findBygroupIdAndUserId_PrevAndNext(
-        long shoppingOrderId, long groupId, long userId,
+    public ShoppingOrder[] findBycompanyIdAndUserId_PrevAndNext(
+        long shoppingOrderId, long companyId, long userId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderException, SystemException {
         ShoppingOrder shoppingOrder = findByPrimaryKey(shoppingOrderId);
@@ -2192,13 +2194,13 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
             ShoppingOrder[] array = new ShoppingOrderImpl[3];
 
-            array[0] = getBygroupIdAndUserId_PrevAndNext(session,
-                    shoppingOrder, groupId, userId, orderByComparator, true);
+            array[0] = getBycompanyIdAndUserId_PrevAndNext(session,
+                    shoppingOrder, companyId, userId, orderByComparator, true);
 
             array[1] = shoppingOrder;
 
-            array[2] = getBygroupIdAndUserId_PrevAndNext(session,
-                    shoppingOrder, groupId, userId, orderByComparator, false);
+            array[2] = getBycompanyIdAndUserId_PrevAndNext(session,
+                    shoppingOrder, companyId, userId, orderByComparator, false);
 
             return array;
         } catch (Exception e) {
@@ -2208,9 +2210,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         }
     }
 
-    protected ShoppingOrder getBygroupIdAndUserId_PrevAndNext(Session session,
-        ShoppingOrder shoppingOrder, long groupId, long userId,
-        OrderByComparator orderByComparator, boolean previous) {
+    protected ShoppingOrder getBycompanyIdAndUserId_PrevAndNext(
+        Session session, ShoppingOrder shoppingOrder, long companyId,
+        long userId, OrderByComparator orderByComparator, boolean previous) {
         StringBundler query = null;
 
         if (orderByComparator != null) {
@@ -2222,9 +2224,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
 
-        query.append(_FINDER_COLUMN_GROUPIDANDUSERID_GROUPID_2);
+        query.append(_FINDER_COLUMN_COMPANYIDANDUSERID_COMPANYID_2);
 
-        query.append(_FINDER_COLUMN_GROUPIDANDUSERID_USERID_2);
+        query.append(_FINDER_COLUMN_COMPANYIDANDUSERID_USERID_2);
 
         if (orderByComparator != null) {
             String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -2287,7 +2289,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         QueryPos qPos = QueryPos.getInstance(q);
 
-        qPos.add(groupId);
+        qPos.add(companyId);
 
         qPos.add(userId);
 
@@ -2309,35 +2311,35 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Removes all the shopping orders where groupId = &#63; and userId = &#63; from the database.
+     * Removes all the shopping orders where companyId = &#63; and userId = &#63; from the database.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param userId the user ID
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeBygroupIdAndUserId(long groupId, long userId)
+    public void removeBycompanyIdAndUserId(long companyId, long userId)
         throws SystemException {
-        for (ShoppingOrder shoppingOrder : findBygroupIdAndUserId(groupId,
+        for (ShoppingOrder shoppingOrder : findBycompanyIdAndUserId(companyId,
                 userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
             remove(shoppingOrder);
         }
     }
 
     /**
-     * Returns the number of shopping orders where groupId = &#63; and userId = &#63;.
+     * Returns the number of shopping orders where companyId = &#63; and userId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param userId the user ID
      * @return the number of matching shopping orders
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countBygroupIdAndUserId(long groupId, long userId)
+    public int countBycompanyIdAndUserId(long companyId, long userId)
         throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPIDANDUSERID;
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYIDANDUSERID;
 
-        Object[] finderArgs = new Object[] { groupId, userId };
+        Object[] finderArgs = new Object[] { companyId, userId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -2347,9 +2349,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
             query.append(_SQL_COUNT_SHOPPINGORDER_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDUSERID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDUSERID_COMPANYID_2);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDUSERID_USERID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDUSERID_USERID_2);
 
             String sql = query.toString();
 
@@ -2362,7 +2364,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 qPos.add(userId);
 
@@ -2382,28 +2384,28 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns all the shopping orders where groupId = &#63; and shippingEmailAddress = &#63;.
+     * Returns all the shopping orders where companyId = &#63; and shippingEmailAddress = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param shippingEmailAddress the shipping email address
      * @return the matching shopping orders
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrder> findBygroupIdAndEmail(long groupId,
+    public List<ShoppingOrder> findBycompanyIdAndEmail(long companyId,
         String shippingEmailAddress) throws SystemException {
-        return findBygroupIdAndEmail(groupId, shippingEmailAddress,
+        return findBycompanyIdAndEmail(companyId, shippingEmailAddress,
             QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
     }
 
     /**
-     * Returns a range of all the shopping orders where groupId = &#63; and shippingEmailAddress = &#63;.
+     * Returns a range of all the shopping orders where companyId = &#63; and shippingEmailAddress = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param shippingEmailAddress the shipping email address
      * @param start the lower bound of the range of shopping orders
      * @param end the upper bound of the range of shopping orders (not inclusive)
@@ -2411,21 +2413,21 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrder> findBygroupIdAndEmail(long groupId,
+    public List<ShoppingOrder> findBycompanyIdAndEmail(long companyId,
         String shippingEmailAddress, int start, int end)
         throws SystemException {
-        return findBygroupIdAndEmail(groupId, shippingEmailAddress, start, end,
-            null);
+        return findBycompanyIdAndEmail(companyId, shippingEmailAddress, start,
+            end, null);
     }
 
     /**
-     * Returns an ordered range of all the shopping orders where groupId = &#63; and shippingEmailAddress = &#63;.
+     * Returns an ordered range of all the shopping orders where companyId = &#63; and shippingEmailAddress = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param shippingEmailAddress the shipping email address
      * @param start the lower bound of the range of shopping orders
      * @param end the upper bound of the range of shopping orders (not inclusive)
@@ -2434,7 +2436,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingOrder> findBygroupIdAndEmail(long groupId,
+    public List<ShoppingOrder> findBycompanyIdAndEmail(long companyId,
         String shippingEmailAddress, int start, int end,
         OrderByComparator orderByComparator) throws SystemException {
         boolean pagination = true;
@@ -2444,12 +2446,12 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
                 (orderByComparator == null)) {
             pagination = false;
-            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDEMAIL;
-            finderArgs = new Object[] { groupId, shippingEmailAddress };
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDEMAIL;
+            finderArgs = new Object[] { companyId, shippingEmailAddress };
         } else {
-            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPIDANDEMAIL;
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYIDANDEMAIL;
             finderArgs = new Object[] {
-                    groupId, shippingEmailAddress,
+                    companyId, shippingEmailAddress,
                     
                     start, end, orderByComparator
                 };
@@ -2460,7 +2462,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         if ((list != null) && !list.isEmpty()) {
             for (ShoppingOrder shoppingOrder : list) {
-                if ((groupId != shoppingOrder.getGroupId()) ||
+                if ((companyId != shoppingOrder.getCompanyId()) ||
                         !Validator.equals(shippingEmailAddress,
                             shoppingOrder.getShippingEmailAddress())) {
                     list = null;
@@ -2482,18 +2484,18 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
             query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDEMAIL_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDEMAIL_COMPANYID_2);
 
             boolean bindShippingEmailAddress = false;
 
             if (shippingEmailAddress == null) {
-                query.append(_FINDER_COLUMN_GROUPIDANDEMAIL_SHIPPINGEMAILADDRESS_1);
+                query.append(_FINDER_COLUMN_COMPANYIDANDEMAIL_SHIPPINGEMAILADDRESS_1);
             } else if (shippingEmailAddress.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_GROUPIDANDEMAIL_SHIPPINGEMAILADDRESS_3);
+                query.append(_FINDER_COLUMN_COMPANYIDANDEMAIL_SHIPPINGEMAILADDRESS_3);
             } else {
                 bindShippingEmailAddress = true;
 
-                query.append(_FINDER_COLUMN_GROUPIDANDEMAIL_SHIPPINGEMAILADDRESS_2);
+                query.append(_FINDER_COLUMN_COMPANYIDANDEMAIL_SHIPPINGEMAILADDRESS_2);
             }
 
             if (orderByComparator != null) {
@@ -2515,7 +2517,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 if (bindShippingEmailAddress) {
                     qPos.add(shippingEmailAddress);
@@ -2549,9 +2551,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the first shopping order in the ordered set where groupId = &#63; and shippingEmailAddress = &#63;.
+     * Returns the first shopping order in the ordered set where companyId = &#63; and shippingEmailAddress = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param shippingEmailAddress the shipping email address
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping order
@@ -2559,10 +2561,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder findBygroupIdAndEmail_First(long groupId,
+    public ShoppingOrder findBycompanyIdAndEmail_First(long companyId,
         String shippingEmailAddress, OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = fetchBygroupIdAndEmail_First(groupId,
+        ShoppingOrder shoppingOrder = fetchBycompanyIdAndEmail_First(companyId,
                 shippingEmailAddress, orderByComparator);
 
         if (shoppingOrder != null) {
@@ -2573,8 +2575,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(", shippingEmailAddress=");
         msg.append(shippingEmailAddress);
@@ -2585,19 +2587,19 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the first shopping order in the ordered set where groupId = &#63; and shippingEmailAddress = &#63;.
+     * Returns the first shopping order in the ordered set where companyId = &#63; and shippingEmailAddress = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param shippingEmailAddress the shipping email address
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping order, or <code>null</code> if a matching shopping order could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder fetchBygroupIdAndEmail_First(long groupId,
+    public ShoppingOrder fetchBycompanyIdAndEmail_First(long companyId,
         String shippingEmailAddress, OrderByComparator orderByComparator)
         throws SystemException {
-        List<ShoppingOrder> list = findBygroupIdAndEmail(groupId,
+        List<ShoppingOrder> list = findBycompanyIdAndEmail(companyId,
                 shippingEmailAddress, 0, 1, orderByComparator);
 
         if (!list.isEmpty()) {
@@ -2608,9 +2610,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the last shopping order in the ordered set where groupId = &#63; and shippingEmailAddress = &#63;.
+     * Returns the last shopping order in the ordered set where companyId = &#63; and shippingEmailAddress = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param shippingEmailAddress the shipping email address
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping order
@@ -2618,10 +2620,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder findBygroupIdAndEmail_Last(long groupId,
+    public ShoppingOrder findBycompanyIdAndEmail_Last(long companyId,
         String shippingEmailAddress, OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderException, SystemException {
-        ShoppingOrder shoppingOrder = fetchBygroupIdAndEmail_Last(groupId,
+        ShoppingOrder shoppingOrder = fetchBycompanyIdAndEmail_Last(companyId,
                 shippingEmailAddress, orderByComparator);
 
         if (shoppingOrder != null) {
@@ -2632,8 +2634,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(", shippingEmailAddress=");
         msg.append(shippingEmailAddress);
@@ -2644,25 +2646,25 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the last shopping order in the ordered set where groupId = &#63; and shippingEmailAddress = &#63;.
+     * Returns the last shopping order in the ordered set where companyId = &#63; and shippingEmailAddress = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param shippingEmailAddress the shipping email address
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping order, or <code>null</code> if a matching shopping order could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder fetchBygroupIdAndEmail_Last(long groupId,
+    public ShoppingOrder fetchBycompanyIdAndEmail_Last(long companyId,
         String shippingEmailAddress, OrderByComparator orderByComparator)
         throws SystemException {
-        int count = countBygroupIdAndEmail(groupId, shippingEmailAddress);
+        int count = countBycompanyIdAndEmail(companyId, shippingEmailAddress);
 
         if (count == 0) {
             return null;
         }
 
-        List<ShoppingOrder> list = findBygroupIdAndEmail(groupId,
+        List<ShoppingOrder> list = findBycompanyIdAndEmail(companyId,
                 shippingEmailAddress, count - 1, count, orderByComparator);
 
         if (!list.isEmpty()) {
@@ -2673,10 +2675,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Returns the shopping orders before and after the current shopping order in the ordered set where groupId = &#63; and shippingEmailAddress = &#63;.
+     * Returns the shopping orders before and after the current shopping order in the ordered set where companyId = &#63; and shippingEmailAddress = &#63;.
      *
      * @param shoppingOrderId the primary key of the current shopping order
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param shippingEmailAddress the shipping email address
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next shopping order
@@ -2684,8 +2686,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingOrder[] findBygroupIdAndEmail_PrevAndNext(
-        long shoppingOrderId, long groupId, String shippingEmailAddress,
+    public ShoppingOrder[] findBycompanyIdAndEmail_PrevAndNext(
+        long shoppingOrderId, long companyId, String shippingEmailAddress,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingOrderException, SystemException {
         ShoppingOrder shoppingOrder = findByPrimaryKey(shoppingOrderId);
@@ -2697,13 +2699,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
             ShoppingOrder[] array = new ShoppingOrderImpl[3];
 
-            array[0] = getBygroupIdAndEmail_PrevAndNext(session, shoppingOrder,
-                    groupId, shippingEmailAddress, orderByComparator, true);
+            array[0] = getBycompanyIdAndEmail_PrevAndNext(session,
+                    shoppingOrder, companyId, shippingEmailAddress,
+                    orderByComparator, true);
 
             array[1] = shoppingOrder;
 
-            array[2] = getBygroupIdAndEmail_PrevAndNext(session, shoppingOrder,
-                    groupId, shippingEmailAddress, orderByComparator, false);
+            array[2] = getBycompanyIdAndEmail_PrevAndNext(session,
+                    shoppingOrder, companyId, shippingEmailAddress,
+                    orderByComparator, false);
 
             return array;
         } catch (Exception e) {
@@ -2713,9 +2717,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         }
     }
 
-    protected ShoppingOrder getBygroupIdAndEmail_PrevAndNext(Session session,
-        ShoppingOrder shoppingOrder, long groupId, String shippingEmailAddress,
-        OrderByComparator orderByComparator, boolean previous) {
+    protected ShoppingOrder getBycompanyIdAndEmail_PrevAndNext(
+        Session session, ShoppingOrder shoppingOrder, long companyId,
+        String shippingEmailAddress, OrderByComparator orderByComparator,
+        boolean previous) {
         StringBundler query = null;
 
         if (orderByComparator != null) {
@@ -2727,18 +2732,18 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
 
-        query.append(_FINDER_COLUMN_GROUPIDANDEMAIL_GROUPID_2);
+        query.append(_FINDER_COLUMN_COMPANYIDANDEMAIL_COMPANYID_2);
 
         boolean bindShippingEmailAddress = false;
 
         if (shippingEmailAddress == null) {
-            query.append(_FINDER_COLUMN_GROUPIDANDEMAIL_SHIPPINGEMAILADDRESS_1);
+            query.append(_FINDER_COLUMN_COMPANYIDANDEMAIL_SHIPPINGEMAILADDRESS_1);
         } else if (shippingEmailAddress.equals(StringPool.BLANK)) {
-            query.append(_FINDER_COLUMN_GROUPIDANDEMAIL_SHIPPINGEMAILADDRESS_3);
+            query.append(_FINDER_COLUMN_COMPANYIDANDEMAIL_SHIPPINGEMAILADDRESS_3);
         } else {
             bindShippingEmailAddress = true;
 
-            query.append(_FINDER_COLUMN_GROUPIDANDEMAIL_SHIPPINGEMAILADDRESS_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDEMAIL_SHIPPINGEMAILADDRESS_2);
         }
 
         if (orderByComparator != null) {
@@ -2802,7 +2807,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
         QueryPos qPos = QueryPos.getInstance(q);
 
-        qPos.add(groupId);
+        qPos.add(companyId);
 
         if (bindShippingEmailAddress) {
             qPos.add(shippingEmailAddress);
@@ -2826,35 +2831,35 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
     }
 
     /**
-     * Removes all the shopping orders where groupId = &#63; and shippingEmailAddress = &#63; from the database.
+     * Removes all the shopping orders where companyId = &#63; and shippingEmailAddress = &#63; from the database.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param shippingEmailAddress the shipping email address
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeBygroupIdAndEmail(long groupId,
+    public void removeBycompanyIdAndEmail(long companyId,
         String shippingEmailAddress) throws SystemException {
-        for (ShoppingOrder shoppingOrder : findBygroupIdAndEmail(groupId,
+        for (ShoppingOrder shoppingOrder : findBycompanyIdAndEmail(companyId,
                 shippingEmailAddress, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
             remove(shoppingOrder);
         }
     }
 
     /**
-     * Returns the number of shopping orders where groupId = &#63; and shippingEmailAddress = &#63;.
+     * Returns the number of shopping orders where companyId = &#63; and shippingEmailAddress = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param shippingEmailAddress the shipping email address
      * @return the number of matching shopping orders
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countBygroupIdAndEmail(long groupId, String shippingEmailAddress)
-        throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPIDANDEMAIL;
+    public int countBycompanyIdAndEmail(long companyId,
+        String shippingEmailAddress) throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYIDANDEMAIL;
 
-        Object[] finderArgs = new Object[] { groupId, shippingEmailAddress };
+        Object[] finderArgs = new Object[] { companyId, shippingEmailAddress };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -2864,18 +2869,18 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
             query.append(_SQL_COUNT_SHOPPINGORDER_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDEMAIL_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDEMAIL_COMPANYID_2);
 
             boolean bindShippingEmailAddress = false;
 
             if (shippingEmailAddress == null) {
-                query.append(_FINDER_COLUMN_GROUPIDANDEMAIL_SHIPPINGEMAILADDRESS_1);
+                query.append(_FINDER_COLUMN_COMPANYIDANDEMAIL_SHIPPINGEMAILADDRESS_1);
             } else if (shippingEmailAddress.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_GROUPIDANDEMAIL_SHIPPINGEMAILADDRESS_3);
+                query.append(_FINDER_COLUMN_COMPANYIDANDEMAIL_SHIPPINGEMAILADDRESS_3);
             } else {
                 bindShippingEmailAddress = true;
 
-                query.append(_FINDER_COLUMN_GROUPIDANDEMAIL_SHIPPINGEMAILADDRESS_2);
+                query.append(_FINDER_COLUMN_COMPANYIDANDEMAIL_SHIPPINGEMAILADDRESS_2);
             }
 
             String sql = query.toString();
@@ -2889,7 +2894,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 if (bindShippingEmailAddress) {
                     qPos.add(shippingEmailAddress);
@@ -3703,19 +3708,21 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         }
         else {
             if ((shoppingOrderModelImpl.getColumnBitmask() &
-                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingOrderModelImpl.getOriginalGroupId()
+                        shoppingOrderModelImpl.getOriginalCompanyId()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
                     args);
 
-                args = new Object[] { shoppingOrderModelImpl.getGroupId() };
+                args = new Object[] { shoppingOrderModelImpl.getCompanyId() };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
                     args);
             }
 
@@ -3739,48 +3746,48 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
             }
 
             if ((shoppingOrderModelImpl.getColumnBitmask() &
-                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDUSERID.getColumnBitmask()) != 0) {
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDUSERID.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingOrderModelImpl.getOriginalGroupId(),
+                        shoppingOrderModelImpl.getOriginalCompanyId(),
                         shoppingOrderModelImpl.getOriginalUserId()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDUSERID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYIDANDUSERID,
                     args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDUSERID,
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDUSERID,
                     args);
 
                 args = new Object[] {
-                        shoppingOrderModelImpl.getGroupId(),
+                        shoppingOrderModelImpl.getCompanyId(),
                         shoppingOrderModelImpl.getUserId()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDUSERID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYIDANDUSERID,
                     args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDUSERID,
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDUSERID,
                     args);
             }
 
             if ((shoppingOrderModelImpl.getColumnBitmask() &
-                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDEMAIL.getColumnBitmask()) != 0) {
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDEMAIL.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingOrderModelImpl.getOriginalGroupId(),
+                        shoppingOrderModelImpl.getOriginalCompanyId(),
                         shoppingOrderModelImpl.getOriginalShippingEmailAddress()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDEMAIL,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYIDANDEMAIL,
                     args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDEMAIL,
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDEMAIL,
                     args);
 
                 args = new Object[] {
-                        shoppingOrderModelImpl.getGroupId(),
+                        shoppingOrderModelImpl.getCompanyId(),
                         shoppingOrderModelImpl.getShippingEmailAddress()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDEMAIL,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYIDANDEMAIL,
                     args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDEMAIL,
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDEMAIL,
                     args);
             }
 
@@ -3825,7 +3832,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
         shoppingOrderImpl.setPrimaryKey(shoppingOrder.getPrimaryKey());
 
         shoppingOrderImpl.setShoppingOrderId(shoppingOrder.getShoppingOrderId());
-        shoppingOrderImpl.setGroupId(shoppingOrder.getGroupId());
         shoppingOrderImpl.setCompanyId(shoppingOrder.getCompanyId());
         shoppingOrderImpl.setUserId(shoppingOrder.getUserId());
         shoppingOrderImpl.setUserName(shoppingOrder.getUserName());

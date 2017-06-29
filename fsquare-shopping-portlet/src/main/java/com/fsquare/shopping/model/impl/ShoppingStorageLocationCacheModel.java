@@ -23,7 +23,6 @@ import java.util.Date;
 public class ShoppingStorageLocationCacheModel implements CacheModel<ShoppingStorageLocation>,
     Externalizable {
     public long storageLocationId;
-    public long groupId;
     public long companyId;
     public long userId;
     public String userName;
@@ -35,12 +34,10 @@ public class ShoppingStorageLocationCacheModel implements CacheModel<ShoppingSto
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(21);
+        StringBundler sb = new StringBundler(19);
 
         sb.append("{storageLocationId=");
         sb.append(storageLocationId);
-        sb.append(", groupId=");
-        sb.append(groupId);
         sb.append(", companyId=");
         sb.append(companyId);
         sb.append(", userId=");
@@ -67,7 +64,6 @@ public class ShoppingStorageLocationCacheModel implements CacheModel<ShoppingSto
         ShoppingStorageLocationImpl shoppingStorageLocationImpl = new ShoppingStorageLocationImpl();
 
         shoppingStorageLocationImpl.setStorageLocationId(storageLocationId);
-        shoppingStorageLocationImpl.setGroupId(groupId);
         shoppingStorageLocationImpl.setCompanyId(companyId);
         shoppingStorageLocationImpl.setUserId(userId);
 
@@ -115,7 +111,6 @@ public class ShoppingStorageLocationCacheModel implements CacheModel<ShoppingSto
     @Override
     public void readExternal(ObjectInput objectInput) throws IOException {
         storageLocationId = objectInput.readLong();
-        groupId = objectInput.readLong();
         companyId = objectInput.readLong();
         userId = objectInput.readLong();
         userName = objectInput.readUTF();
@@ -130,7 +125,6 @@ public class ShoppingStorageLocationCacheModel implements CacheModel<ShoppingSto
     public void writeExternal(ObjectOutput objectOutput)
         throws IOException {
         objectOutput.writeLong(storageLocationId);
-        objectOutput.writeLong(groupId);
         objectOutput.writeLong(companyId);
         objectOutput.writeLong(userId);
 

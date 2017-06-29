@@ -56,11 +56,11 @@ public interface ShoppingCouponService extends BaseService, InvokableService {
         java.util.Map<java.util.Locale, java.lang.String> map);
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
-        java.lang.String code, long groupId);
+    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndCompanyId(
+        java.lang.String code, long companyId);
 
-    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
-        java.lang.Long groupId);
+    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByCompanyId(
+        java.lang.Long companyId);
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public boolean isCouponValid(
@@ -70,22 +70,22 @@ public interface ShoppingCouponService extends BaseService, InvokableService {
     public java.lang.String getCouponStatus(
         com.fsquare.shopping.model.ShoppingCoupon shoppingCoupon);
 
-    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupIdStartEnd(
-        java.lang.Long groupId, int start, int end);
+    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByCompanyIdStartEnd(
+        java.lang.Long companyId, int start, int end);
 
-    public int countByGroupId(java.lang.Long groupId);
+    public int countByCompanyId(java.lang.Long companyId);
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public java.util.Map<java.lang.String, java.lang.Object> getPagedItems(
-        java.lang.Long groupId, int start, int end);
+        java.lang.Long companyId, int start, int end);
 
-    public void updateShoppingCoupon(long couponId, long groupId,
+    public void updateShoppingCoupon(long couponId, long companyId,
         java.lang.String code, java.lang.String name,
         java.lang.String description, java.util.Date startDate,
         java.util.Date endDate, boolean active,
         java.lang.String limitCategories, java.lang.String limitSkus,
         double minOrder, double discount, java.lang.String discountType,
-        long maxUses, long userid, long companyId)
+        long maxUses, long userid)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 

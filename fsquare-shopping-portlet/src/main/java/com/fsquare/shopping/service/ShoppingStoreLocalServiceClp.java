@@ -182,12 +182,12 @@ public class ShoppingStoreLocalServiceClp implements ShoppingStoreLocalService {
 
     @Override
     public com.fsquare.shopping.model.ShoppingStore createShoppingStore(
-        long groupId) {
+        long companyId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName1,
-                    _methodParameterTypes1, new Object[] { groupId });
+                    _methodParameterTypes1, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -204,14 +204,14 @@ public class ShoppingStoreLocalServiceClp implements ShoppingStoreLocalService {
 
     @Override
     public com.fsquare.shopping.model.ShoppingStore deleteShoppingStore(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName2,
-                    _methodParameterTypes2, new Object[] { groupId });
+                    _methodParameterTypes2, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -449,13 +449,13 @@ public class ShoppingStoreLocalServiceClp implements ShoppingStoreLocalService {
 
     @Override
     public com.fsquare.shopping.model.ShoppingStore fetchShoppingStore(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName10,
-                    _methodParameterTypes10, new Object[] { groupId });
+                    _methodParameterTypes10, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -476,14 +476,14 @@ public class ShoppingStoreLocalServiceClp implements ShoppingStoreLocalService {
 
     @Override
     public com.fsquare.shopping.model.ShoppingStore getShoppingStore(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName11,
-                    _methodParameterTypes11, new Object[] { groupId });
+                    _methodParameterTypes11, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -668,13 +668,13 @@ public class ShoppingStoreLocalServiceClp implements ShoppingStoreLocalService {
 
     @Override
     public java.util.List<com.fsquare.shopping.model.ShoppingStorageLocation> getShoppingStorageLocationsByGroup(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName19,
-                    _methodParameterTypes19, new Object[] { groupId });
+                    _methodParameterTypes19, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -694,12 +694,12 @@ public class ShoppingStoreLocalServiceClp implements ShoppingStoreLocalService {
     }
 
     @Override
-    public java.util.List<java.lang.String[]> getShoppingLayouts(long groupId) {
+    public java.util.List<java.lang.String[]> getShoppingLayouts(long companyId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName20,
-                    _methodParameterTypes20, new Object[] { groupId });
+                    _methodParameterTypes20, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

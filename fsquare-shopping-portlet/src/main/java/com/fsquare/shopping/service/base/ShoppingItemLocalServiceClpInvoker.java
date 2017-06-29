@@ -175,7 +175,7 @@ public class ShoppingItemLocalServiceClpInvoker {
 
         _methodParameterTypes113 = new String[] { "java.lang.String" };
 
-        _methodName118 = "findByGroupId";
+        _methodName118 = "findByCompanyId";
 
         _methodParameterTypes118 = new String[] { "long" };
 
@@ -338,7 +338,7 @@ public class ShoppingItemLocalServiceClpInvoker {
 
         if (_methodName118.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes118, parameterTypes)) {
-            return ShoppingItemLocalServiceUtil.findByGroupId(((Long) arguments[0]).longValue());
+            return ShoppingItemLocalServiceUtil.findByCompanyId(((Long) arguments[0]).longValue());
         }
 
         if (_methodName119.equals(name) &&

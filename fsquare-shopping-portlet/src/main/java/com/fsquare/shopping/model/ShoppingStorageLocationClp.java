@@ -23,7 +23,6 @@ import java.util.Map;
 public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLocation>
     implements ShoppingStorageLocation {
     private long _storageLocationId;
-    private long _groupId;
     private long _companyId;
     private long _userId;
     private String _userUuid;
@@ -74,7 +73,6 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("storageLocationId", getStorageLocationId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -93,12 +91,6 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
 
         if (storageLocationId != null) {
             setStorageLocationId(storageLocationId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -168,28 +160,6 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
 
                 method.invoke(_shoppingStorageLocationRemoteModel,
                     storageLocationId);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
-    }
-
-    @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _groupId = groupId;
-
-        if (_shoppingStorageLocationRemoteModel != null) {
-            try {
-                Class<?> clazz = _shoppingStorageLocationRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setGroupId", long.class);
-
-                method.invoke(_shoppingStorageLocationRemoteModel, groupId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -452,7 +422,6 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
         ShoppingStorageLocationClp clone = new ShoppingStorageLocationClp();
 
         clone.setStorageLocationId(getStorageLocationId());
-        clone.setGroupId(getGroupId());
         clone.setCompanyId(getCompanyId());
         clone.setUserId(getUserId());
         clone.setUserName(getUserName());
@@ -510,12 +479,10 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(21);
+        StringBundler sb = new StringBundler(19);
 
         sb.append("{storageLocationId=");
         sb.append(getStorageLocationId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
         sb.append(", companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
@@ -539,7 +506,7 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(34);
+        StringBundler sb = new StringBundler(31);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStorageLocation");
@@ -548,10 +515,6 @@ public class ShoppingStorageLocationClp extends BaseModelImpl<ShoppingStorageLoc
         sb.append(
             "<column><column-name>storageLocationId</column-name><column-value><![CDATA[");
         sb.append(getStorageLocationId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");

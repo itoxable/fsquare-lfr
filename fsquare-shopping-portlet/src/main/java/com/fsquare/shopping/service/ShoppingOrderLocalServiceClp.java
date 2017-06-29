@@ -149,11 +149,11 @@ public class ShoppingOrderLocalServiceClp implements ShoppingOrderLocalService {
 
         _methodParameterTypes17 = new String[] { "java.lang.String" };
 
-        _methodName19 = "findByGroupId";
+        _methodName19 = "findByCompanyId";
 
         _methodParameterTypes19 = new String[] { "long" };
 
-        _methodName20 = "findBygroupIdAndUserId";
+        _methodName20 = "findByCompanyIdAndUserId";
 
         _methodParameterTypes20 = new String[] { "long", "long" };
 
@@ -685,14 +685,14 @@ public class ShoppingOrderLocalServiceClp implements ShoppingOrderLocalService {
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByGroupId(
-        long groupId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName19,
-                    _methodParameterTypes19, new Object[] { groupId });
+                    _methodParameterTypes19, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -712,14 +712,14 @@ public class ShoppingOrderLocalServiceClp implements ShoppingOrderLocalService {
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndUserId(
-        long groupId, long userId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByCompanyIdAndUserId(
+        long companyId, long userId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName20,
-                    _methodParameterTypes20, new Object[] { groupId, userId });
+                    _methodParameterTypes20, new Object[] { companyId, userId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -740,14 +740,15 @@ public class ShoppingOrderLocalServiceClp implements ShoppingOrderLocalService {
 
     @Override
     public java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndEmail(
-        long groupId, java.lang.String email)
+        long companyId, java.lang.String email)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName21,
                     _methodParameterTypes21,
-                    new Object[] { groupId, ClpSerializer.translateInput(email) });
+                    new Object[] { companyId, ClpSerializer.translateInput(
+                            email) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

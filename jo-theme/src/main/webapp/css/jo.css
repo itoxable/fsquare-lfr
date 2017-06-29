@@ -4,6 +4,7 @@
 @import 'slick/slick';
 @import 'slick/slick-theme';
 
+@import './jquery-ui.css';
 
 $darkerGray: #bbbcbc;
 $lightGray: #e6e6e6;
@@ -1062,6 +1063,80 @@ $defaultShadow: 0 0 15px rgba(0, 0, 0, 0.5);
 		color: #FFF;
 	}.media-gallery-sliphover:HOVER, .media-gallery-sliphover:FOCUS{
 		color: #FFF;
+	}
+}
+.controls-visible{
+	.ui-resizable, ui-draggable{
+		border: 1px dashed rgba(0,0,0,0.1);
+		.ui-resizable-handle{
+			display: block;
+		}
+	}
+}
+.ui-resizable{
+	&.ui-resizable-resizing{
+		border: 1px dashed rgba(0,0,0,1);
+	}
+	.ui-resizable-handle{
+		display: none;
+		&[class*="ui-resizable-"], [class^="ui-resizable-"]{
+			height: 10px;
+			width: 10px;
+			@include border-radius(5px);
+			background-color: rgba(64, 138, 183, 0.74);
+		}
+		&.ui-resizable-n{
+			left: 50%;
+			top: -5px
+		}
+		&.ui-resizable-s{
+			left: 50%;
+		}
+		&.ui-resizable-w{
+			top: 50%;
+			margin-top: -5px;
+		}
+		&.ui-resizable-e{
+			top: 50%;
+			margin-top: -5px;
+		}
+		&.ui-resizable-se{
+			right: -5px;
+			bottom: -5px;
+		}
+	}
+}
+.ui-draggable{
+	&.ui-draggable-handle{
+		cursor:move;
+	}
+	&.ui-draggable-dragging{
+		border: 1px dashed rgba(0,0,0,1);
+		@include box-shadow(0px 1px 8px 0px rgba(0, 0, 0, 0.5));
+		z-index: 9999999;
+	}
+}
+
+.all-animation{
+	transition: all 200ms;
+}
+
+.ui-interactions{
+	position: absolute;
+	height: 20px;
+	line-height: 20px;
+	top: -35px;
+	left: 10px;
+	@include box-shadow(0px 1px 8px 0px rgba(0, 0, 0, 0.5));
+	color: #FFF;
+	background-color: #303030;
+	padding: 4px;
+	@include border-radius(2px);
+	.interaction-label{
+		margin: 0 5px;
+	}
+	.interaction-value{
+	
 	}
 }
 

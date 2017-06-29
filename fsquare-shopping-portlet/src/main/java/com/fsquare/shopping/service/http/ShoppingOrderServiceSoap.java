@@ -50,11 +50,11 @@ import java.rmi.RemoteException;
 public class ShoppingOrderServiceSoap {
     private static Log _log = LogFactoryUtil.getLog(ShoppingOrderServiceSoap.class);
 
-    public static com.fsquare.shopping.model.ShoppingOrderSoap[] findByGroupId(
-        long groupId) throws RemoteException {
+    public static com.fsquare.shopping.model.ShoppingOrderSoap[] findByCompanyId(
+        long companyId) throws RemoteException {
         try {
             java.util.List<com.fsquare.shopping.model.ShoppingOrder> returnValue =
-                ShoppingOrderServiceUtil.findByGroupId(groupId);
+                ShoppingOrderServiceUtil.findByCompanyId(companyId);
 
             return com.fsquare.shopping.model.ShoppingOrderSoap.toSoapModels(returnValue);
         } catch (Exception e) {
@@ -64,11 +64,12 @@ public class ShoppingOrderServiceSoap {
         }
     }
 
-    public static com.fsquare.shopping.model.ShoppingOrderSoap[] findBygroupIdAndUserId(
-        long groupId, long userId) throws RemoteException {
+    public static com.fsquare.shopping.model.ShoppingOrderSoap[] findByCompanyIdAndUserId(
+        long companyId, long userId) throws RemoteException {
         try {
             java.util.List<com.fsquare.shopping.model.ShoppingOrder> returnValue =
-                ShoppingOrderServiceUtil.findBygroupIdAndUserId(groupId, userId);
+                ShoppingOrderServiceUtil.findByCompanyIdAndUserId(companyId,
+                    userId);
 
             return com.fsquare.shopping.model.ShoppingOrderSoap.toSoapModels(returnValue);
         } catch (Exception e) {
@@ -79,10 +80,10 @@ public class ShoppingOrderServiceSoap {
     }
 
     public static com.fsquare.shopping.model.ShoppingOrderSoap[] findBygroupIdAndEmail(
-        long groupId, java.lang.String email) throws RemoteException {
+        long companyId, java.lang.String email) throws RemoteException {
         try {
             java.util.List<com.fsquare.shopping.model.ShoppingOrder> returnValue =
-                ShoppingOrderServiceUtil.findBygroupIdAndEmail(groupId, email);
+                ShoppingOrderServiceUtil.findBygroupIdAndEmail(companyId, email);
 
             return com.fsquare.shopping.model.ShoppingOrderSoap.toSoapModels(returnValue);
         } catch (Exception e) {

@@ -40,7 +40,6 @@ public class ShoppingStorageLocationWrapper implements ShoppingStorageLocation,
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("storageLocationId", getStorageLocationId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -59,12 +58,6 @@ public class ShoppingStorageLocationWrapper implements ShoppingStorageLocation,
 
         if (storageLocationId != null) {
             setStorageLocationId(storageLocationId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -154,26 +147,6 @@ public class ShoppingStorageLocationWrapper implements ShoppingStorageLocation,
     @Override
     public void setStorageLocationId(long storageLocationId) {
         _shoppingStorageLocation.setStorageLocationId(storageLocationId);
-    }
-
-    /**
-    * Returns the group ID of this shopping storage location.
-    *
-    * @return the group ID of this shopping storage location
-    */
-    @Override
-    public long getGroupId() {
-        return _shoppingStorageLocation.getGroupId();
-    }
-
-    /**
-    * Sets the group ID of this shopping storage location.
-    *
-    * @param groupId the group ID of this shopping storage location
-    */
-    @Override
-    public void setGroupId(long groupId) {
-        _shoppingStorageLocation.setGroupId(groupId);
     }
 
     /**

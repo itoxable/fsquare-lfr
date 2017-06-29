@@ -33,17 +33,120 @@
 		</responseFlow>
 	</transport>
 	<service name="Plugin_FsquareShopping_ShoppingCouponService" provider="java:RPC" style="rpc" use="encoded">
+		<arrayMapping xmlns:ns="urn:http.service.shopping.fsquare.com" xmlns:cmp-ns="http://model.shopping.fsquare.com" qname="ns:ArrayOf_tns2_ShoppingCouponSoap" type="java:com.fsquare.shopping.model.ShoppingCouponSoap[]" innerType="cmp-ns:ShoppingCouponSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.shopping.fsquare.com" qname="ns:ShoppingCouponSoap" type="java:com.fsquare.shopping.model.ShoppingCouponSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
-		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://model.shopping.fsquare.com" name="fetchByCode" qname="operNS:fetchByCode" returnQName="fetchByCodeReturn" returnType="rtns:ShoppingCouponSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="code" type="tns:string"></parameter>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="countByGroupId" qname="operNS:countByGroupId" returnQName="countByGroupIdReturn" returnType="rtns:int" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="fetchByCode" />
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://model.shopping.fsquare.com" name="deleteCoupon" qname="operNS:deleteCoupon" returnQName="deleteCouponReturn" returnType="rtns:ShoppingCouponSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="couponId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://model.shopping.fsquare.com" name="fetchByCodeAndGroupId" qname="operNS:fetchByCodeAndGroupId" returnQName="fetchByCodeAndGroupIdReturn" returnType="rtns:ShoppingCouponSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="code" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://model.shopping.fsquare.com" name="findByGroupIdStartEnd" qname="operNS:findByGroupIdStartEnd" returnQName="findByGroupIdStartEndReturn" returnType="rtns:ArrayOf_tns2_ShoppingCouponSoap" returnItemType="tns2:ShoppingCouponSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="start" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://model.shopping.fsquare.com" name="findByGroupId" qname="operNS:findByGroupId" returnQName="findByGroupIdReturn" returnType="rtns:ArrayOf_tns2_ShoppingCouponSoap" returnItemType="tns2:ShoppingCouponSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getCouponStatus" qname="operNS:getCouponStatus" returnQName="getCouponStatusReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://model.shopping.fsquare.com" qname="shoppingCoupon" type="tns:ShoppingCouponSoap"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="isCouponValid" qname="operNS:isCouponValid" returnQName="isCouponValidReturn" returnType="rtns:boolean" soapAction="">
+			<parameter xmlns:tns="http://model.shopping.fsquare.com" qname="shoppingCoupon" type="tns:ShoppingCouponSoap"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://model.shopping.fsquare.com" name="updateShoppingCoupon" qname="operNS:updateShoppingCoupon" returnQName="updateShoppingCouponReturn" returnType="rtns:ShoppingCouponSoap" soapAction="">
+			<parameter xmlns:tns="http://model.shopping.fsquare.com" qname="shoppingCoupon" type="tns:ShoppingCouponSoap"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" name="updateShoppingCoupon" qname="operNS:updateShoppingCoupon" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="couponId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="code" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startDate" type="tns:dateTime"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endDate" type="tns:dateTime"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="limitCategories" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="limitSkus" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="minOrder" type="tns:double"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="discount" type="tns:double"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="discountType" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="maxUses" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userid" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="countByGroupId deleteCoupon fetchByCodeAndGroupId findByGroupId findByGroupIdStartEnd getCouponStatus isCouponValid updateShoppingCoupon" />
 		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingCouponServiceSoap" />
-		<parameter name="schemaUnqualified" value="http://model.shopping.fsquare.com" />
+		<parameter name="schemaUnqualified" value="http://model.shopping.fsquare.com,urn:http.service.shopping.fsquare.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="ShoppingCouponServiceSoap" />
 		<parameter name="wsdlServiceElement" value="ShoppingCouponServiceSoapService" />
 		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingCouponService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
+	</service>
+	<service name="Plugin_FsquareShopping_ShoppingItemService" provider="java:RPC" style="rpc" use="encoded">
+		<arrayMapping xmlns:ns="urn:http.service.shopping.fsquare.com" xmlns:cmp-ns="http://model.shopping.fsquare.com" qname="ns:ArrayOf_tns2_ShoppingItemSoap" type="java:com.fsquare.shopping.model.ShoppingItemSoap[]" innerType="cmp-ns:ShoppingItemSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.shopping.fsquare.com" qname="ns:ShoppingItemSoap" type="java:com.fsquare.shopping.model.ShoppingItemSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="countByGroupId" qname="operNS:countByGroupId" returnQName="countByGroupIdReturn" returnType="rtns:int" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://model.shopping.fsquare.com" name="findByGroupId" qname="operNS:findByGroupId" returnQName="findByGroupIdReturn" returnType="rtns:ArrayOf_tns2_ShoppingItemSoap" returnItemType="tns2:ShoppingItemSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="fixDeletedItem" qname="operNS:fixDeletedItem" returnQName="fixDeletedItemReturn" returnType="rtns:boolean" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="itemId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="uid" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getCompleteByGroupId" qname="operNS:getCompleteByGroupId" returnQName="getCompleteByGroupIdReturn" returnType="rtns:anyType" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="countByGroupId findByGroupId fixDeletedItem getCompleteByGroupId" />
+		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingItemServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.shopping.fsquare.com,urn:http.service.shopping.fsquare.com" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ShoppingItemServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ShoppingItemServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingItemService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
+	</service>
+	<service name="Plugin_FsquareShopping_ShoppingItemStorageLocationService" provider="java:RPC" style="rpc" use="encoded">
+		<arrayMapping xmlns:ns="urn:http.service.shopping.fsquare.com" xmlns:cmp-ns="http://model.shopping.fsquare.com" qname="ns:ArrayOf_tns2_ShoppingItemStorageLocationSoap" type="java:com.fsquare.shopping.model.ShoppingItemStorageLocationSoap[]" innerType="cmp-ns:ShoppingItemStorageLocationSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.shopping.fsquare.com" qname="ns:ShoppingItemStorageLocationSoap" type="java:com.fsquare.shopping.model.ShoppingItemStorageLocationSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://model.shopping.fsquare.com" name="findByGroupId" qname="operNS:findByGroupId" returnQName="findByGroupIdReturn" returnType="rtns:ArrayOf_tns2_ShoppingItemStorageLocationSoap" returnItemType="tns2:ShoppingItemStorageLocationSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://model.shopping.fsquare.com" name="findByItemIdAndStorageLocationId" qname="operNS:findByItemIdAndStorageLocationId" returnQName="findByItemIdAndStorageLocationIdReturn" returnType="rtns:ShoppingItemStorageLocationSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="itemId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="storageLocationId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://model.shopping.fsquare.com" name="findByItemId" qname="operNS:findByItemId" returnQName="findByItemIdReturn" returnType="rtns:ArrayOf_tns2_ShoppingItemStorageLocationSoap" returnItemType="tns2:ShoppingItemStorageLocationSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="itemId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://model.shopping.fsquare.com" name="findByStorageLocationId" qname="operNS:findByStorageLocationId" returnQName="findByStorageLocationIdReturn" returnType="rtns:ArrayOf_tns2_ShoppingItemStorageLocationSoap" returnItemType="tns2:ShoppingItemStorageLocationSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="storageLocationId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="findByGroupId findByItemId findByItemIdAndStorageLocationId findByStorageLocationId" />
+		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingItemStorageLocationServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.shopping.fsquare.com,urn:http.service.shopping.fsquare.com" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ShoppingItemStorageLocationServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ShoppingItemStorageLocationServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingItemStorageLocationService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
+	</service>
+	<service name="Plugin_FsquareShopping_ShoppingItemTypeService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingItemTypeServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ShoppingItemTypeServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ShoppingItemTypeServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingItemTypeService" />
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
 	</service>
 	<service name="Plugin_FsquareShopping_ShoppingOrderItemService" provider="java:RPC" style="rpc" use="encoded">
@@ -56,12 +159,42 @@
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
 	</service>
 	<service name="Plugin_FsquareShopping_ShoppingOrderService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="allowedMethods" value="*" />
+		<arrayMapping xmlns:ns="urn:http.service.shopping.fsquare.com" xmlns:cmp-ns="http://model.shopping.fsquare.com" qname="ns:ArrayOf_tns2_ShoppingOrderSoap" type="java:com.fsquare.shopping.model.ShoppingOrderSoap[]" innerType="cmp-ns:ShoppingOrderSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<arrayMapping xmlns:ns="urn:http.service.shopping.fsquare.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.shopping.fsquare.com" qname="ns:ShoppingOrderSoap" type="java:com.fsquare.shopping.model.ShoppingOrderSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://model.shopping.fsquare.com" name="findByGroupId" qname="operNS:findByGroupId" returnQName="findByGroupIdReturn" returnType="rtns:ArrayOf_tns2_ShoppingOrderSoap" returnItemType="tns2:ShoppingOrderSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://model.shopping.fsquare.com" name="findBygroupIdAndEmail" qname="operNS:findBygroupIdAndEmail" returnQName="findBygroupIdAndEmailReturn" returnType="rtns:ArrayOf_tns2_ShoppingOrderSoap" returnItemType="tns2:ShoppingOrderSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="email" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://model.shopping.fsquare.com" name="findBygroupIdAndUserId" qname="operNS:findBygroupIdAndUserId" returnQName="findBygroupIdAndUserIdReturn" returnType="rtns:ArrayOf_tns2_ShoppingOrderSoap" returnItemType="tns2:ShoppingOrderSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getOrderItemsCount" qname="operNS:getOrderItemsCount" returnQName="getOrderItemsCountReturn" returnType="rtns:int" soapAction="">
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="shoppingOrderItemList" type="tns:ArrayOf_xsd_anyType"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getOrderTotal" qname="operNS:getOrderTotal" returnQName="getOrderTotalReturn" returnType="rtns:double" soapAction="">
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="shoppingOrderItemList" type="tns:ArrayOf_xsd_anyType"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="findByGroupId findBygroupIdAndEmail findBygroupIdAndUserId getOrderItemsCount getOrderTotal" />
 		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingOrderServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.shopping.fsquare.com,http://xml.apache.org/xml-soap,urn:http.service.shopping.fsquare.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="ShoppingOrderServiceSoap" />
 		<parameter name="wsdlServiceElement" value="ShoppingOrderServiceSoapService" />
 		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingOrderService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
+	</service>
+	<service name="Plugin_FsquareShopping_ShoppingPaymentService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingPaymentServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ShoppingPaymentServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ShoppingPaymentServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingPaymentService" />
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
 	</service>
 	<service name="Plugin_FsquareShopping_ShoppingShippingMethodService" provider="java:RPC" style="rpc" use="encoded">
@@ -73,13 +206,112 @@
 		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingShippingMethodService" />
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
 	</service>
-	<service name="Plugin_FsquareShopping_ShoppingStoreService" provider="java:RPC" style="rpc" use="encoded">
+	<service name="Plugin_FsquareShopping_ShoppingStorageLocationService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingStorageLocationServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ShoppingStorageLocationServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ShoppingStorageLocationServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingStorageLocationService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
+	</service>
+	<service name="Plugin_FsquareShopping_ShoppingStoreService" provider="java:RPC" style="rpc" use="encoded">
+		<arrayMapping xmlns:ns="urn:http.service.shopping.fsquare.com" xmlns:cmp-ns="http://model.asset.portlet.liferay.com" qname="ns:ArrayOf_tns2_AssetCategorySoap" type="java:com.liferay.portlet.asset.model.AssetCategorySoap[]" innerType="cmp-ns:AssetCategorySoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.asset.portlet.liferay.com" qname="ns:AssetCategorySoap" type="java:com.liferay.portlet.asset.model.AssetCategorySoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://model.shopping.fsquare.com" qname="ns:ShoppingStoreSoap" type="java:com.fsquare.shopping.model.ShoppingStoreSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://model.shopping.fsquare.com" name="addShoppingStore" qname="operNS:addShoppingStore" returnQName="addShoppingStoreReturn" returnType="rtns:ShoppingStoreSoap" soapAction="">
+			<parameter xmlns:tns="http://model.shopping.fsquare.com" qname="shoppingStore" type="tns:ShoppingStoreSoap"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://model.asset.portlet.liferay.com" name="getShoppingAssetCategories" qname="operNS:getShoppingAssetCategories" returnQName="getShoppingAssetCategoriesReturn" returnType="rtns:ArrayOf_tns2_AssetCategorySoap" returnItemType="tns2:AssetCategorySoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://model.shopping.fsquare.com" name="getShoppingStore" qname="operNS:getShoppingStore" returnQName="getShoppingStoreReturn" returnType="rtns:ShoppingStoreSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://model.shopping.fsquare.com" name="updateShoppingStore" qname="operNS:updateShoppingStore" returnQName="updateShoppingStoreReturn" returnType="rtns:ShoppingStoreSoap" soapAction="">
+			<parameter xmlns:tns="http://model.shopping.fsquare.com" qname="shoppingStore" type="tns:ShoppingStoreSoap"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="addShoppingStore getShoppingAssetCategories getShoppingStore updateShoppingStore" />
 		<parameter name="className" value="com.fsquare.shopping.service.http.ShoppingStoreServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.asset.portlet.liferay.com,http://model.shopping.fsquare.com,urn:http.service.shopping.fsquare.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="ShoppingStoreServiceSoap" />
 		<parameter name="wsdlServiceElement" value="ShoppingStoreServiceSoapService" />
 		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_ShoppingStoreService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
+	</service>
+	<service name="Plugin_FsquareShopping_SiteCommonActionsService" provider="java:RPC" style="rpc" use="encoded">
+		<arrayMapping xmlns:ns="urn:http.service.shopping.fsquare.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<arrayMapping xmlns:ns="urn:http.service.shopping.fsquare.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<arrayMapping xmlns:ns="urn:http.service.shopping.fsquare.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<arrayMapping xmlns:ns="urn:http.service.shopping.fsquare.com" xmlns:cmp-ns="http://xml.apache.org/xml-soap" qname="ns:ArrayOf_apachesoap_Map" type="java:java.util.HashMap[]" innerType="cmp-ns:Map" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://service.portal.liferay.com" qname="ns:ServiceContext" type="java:com.liferay.portal.service.ServiceContext" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://theme.portal.liferay.com" qname="ns:PortletDisplay" type="java:com.liferay.portal.theme.PortletDisplay" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://theme.portal.liferay.com" qname="ns:ThemeDisplay" type="java:com.liferay.portal.theme.ThemeDisplay" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://util.kernel.portal.liferay.com" qname="ns:StringBundler" type="java:com.liferay.portal.kernel.util.StringBundler" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://xml.apache.org/xml-soap" qname="ns:mapItem" type="java:org.apache.xml.xml_soap.MapItem" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://xml.apache.org/xml-soap" name="getAccountsPaged" qname="operNS:getAccountsPaged" returnQName="getAccountsPagedReturn" returnType="rtns:ArrayOf_apachesoap_Map" returnItemType="tns2:Map" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="start" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://xml.apache.org/xml-soap" name="getAccounts" qname="operNS:getAccounts" returnQName="getAccountsReturn" returnType="rtns:ArrayOf_apachesoap_Map" returnItemType="tns2:Map" soapAction=""> </operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="urn:http.service.shopping.fsquare.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getCompanies" qname="operNS:getCompanies" returnQName="getCompaniesReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemType="tns2:anyType" soapAction=""> </operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getUserPortraitUrl" qname="operNS:getUserPortraitUrl" returnQName="getUserPortraitUrlReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="male" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="portraitId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" name="testFilesUpload" qname="operNS:testFilesUpload" soapAction="">
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="files" type="tns:ArrayOf_xsd_anyType"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updateGroup" qname="operNS:updateGroup" returnQName="updateGroupReturn" returnType="rtns:anyType" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentGroupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="type" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="manualMembership" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="membershipRestriction" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="friendlyURL" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updateLayout" qname="operNS:updateLayout" returnQName="updateLayoutReturn" returnType="rtns:anyType" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="privateLayout" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="layoutId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentLayoutId" type="tns:long"></parameter>
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="localeNamesMapLanguageIds" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="localeNamesMapValues" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="localeTitlesMapLanguageIds" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="localeTitlesMapValues" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="descriptionMapLanguageIds" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="descriptionMapValues" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="keywordsMapLanguageIds" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="keywordsMapValues" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="robotsMapLanguageIds" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="robotsMapValues" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="type" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="hidden" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="friendlyURLMapLanguageIds" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.shopping.fsquare.com" qname="friendlyURLMapValues" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="iconImage" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="iconBytes" type="tns:base64Binary"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.shopping.fsquare.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updatePassword" qname="operNS:updatePassword" returnQName="updatePasswordReturn" returnType="rtns:anyType" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="oldPassword" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password1" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="password2" type="tns:string"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="getAccounts getAccountsPaged getCompanies getUserPortraitUrl testFilesUpload updateGroup updateLayout updatePassword" />
+		<parameter name="className" value="com.fsquare.shopping.service.http.SiteCommonActionsServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com,http://service.portal.liferay.com,http://theme.portal.liferay.com,http://util.kernel.portal.liferay.com,http://xml.apache.org/xml-soap,urn:http.service.shopping.fsquare.com" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="SiteCommonActionsServiceSoap" />
+		<parameter name="wsdlServiceElement" value="SiteCommonActionsServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_FsquareShopping_SiteCommonActionsService" />
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.fsquare.com" />
 	</service>
 </deployment>

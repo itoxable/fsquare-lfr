@@ -58,4 +58,8 @@ public interface SiteCommonActionsLocalService extends BaseLocalService,
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public java.lang.String getUserPortraitUrl(boolean male, long portraitId);
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<com.liferay.portal.model.Company> getCompanies()
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

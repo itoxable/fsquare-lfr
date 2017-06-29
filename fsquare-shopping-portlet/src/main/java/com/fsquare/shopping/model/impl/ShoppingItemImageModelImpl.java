@@ -44,13 +44,13 @@ public class ShoppingItemImageModelImpl extends BaseModelImpl<ShoppingItemImage>
     public static final String TABLE_NAME = "FsquareShopping_ShoppingItemImage";
     public static final Object[][] TABLE_COLUMNS = {
             { "shoppingItemImageId", Types.BIGINT },
-            { "groupId", Types.BIGINT },
+            { "companyId", Types.BIGINT },
             { "itemId", Types.BIGINT },
             { "imageId", Types.BIGINT },
             { "mainImage", Types.BOOLEAN },
             { "order_", Types.INTEGER }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingItemImage (shoppingItemImageId LONG not null primary key,groupId LONG,itemId LONG,imageId LONG,mainImage BOOLEAN,order_ INTEGER)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingItemImage (shoppingItemImageId LONG not null primary key,companyId LONG,itemId LONG,imageId LONG,mainImage BOOLEAN,order_ INTEGER)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingItemImage";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingItemImage.shoppingItemImageId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingItemImage.shoppingItemImageId ASC";
@@ -66,7 +66,7 @@ public class ShoppingItemImageModelImpl extends BaseModelImpl<ShoppingItemImage>
     public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
                 "value.object.column.bitmask.enabled.com.fsquare.shopping.model.ShoppingItemImage"),
             true);
-    public static long GROUPID_COLUMN_BITMASK = 1L;
+    public static long COMPANYID_COLUMN_BITMASK = 1L;
     public static long ITEMID_COLUMN_BITMASK = 2L;
     public static long MAINIMAGE_COLUMN_BITMASK = 4L;
     public static long SHOPPINGITEMIMAGEID_COLUMN_BITMASK = 8L;
@@ -77,9 +77,9 @@ public class ShoppingItemImageModelImpl extends BaseModelImpl<ShoppingItemImage>
             ShoppingItemImage.class
         };
     private long _shoppingItemImageId;
-    private long _groupId;
-    private long _originalGroupId;
-    private boolean _setOriginalGroupId;
+    private long _companyId;
+    private long _originalCompanyId;
+    private boolean _setOriginalCompanyId;
     private long _itemId;
     private long _originalItemId;
     private boolean _setOriginalItemId;
@@ -129,7 +129,7 @@ public class ShoppingItemImageModelImpl extends BaseModelImpl<ShoppingItemImage>
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("shoppingItemImageId", getShoppingItemImageId());
-        attributes.put("groupId", getGroupId());
+        attributes.put("companyId", getCompanyId());
         attributes.put("itemId", getItemId());
         attributes.put("imageId", getImageId());
         attributes.put("mainImage", getMainImage());
@@ -146,10 +146,10 @@ public class ShoppingItemImageModelImpl extends BaseModelImpl<ShoppingItemImage>
             setShoppingItemImageId(shoppingItemImageId);
         }
 
-        Long groupId = (Long) attributes.get("groupId");
+        Long companyId = (Long) attributes.get("companyId");
 
-        if (groupId != null) {
-            setGroupId(groupId);
+        if (companyId != null) {
+            setCompanyId(companyId);
         }
 
         Long itemId = (Long) attributes.get("itemId");
@@ -188,25 +188,25 @@ public class ShoppingItemImageModelImpl extends BaseModelImpl<ShoppingItemImage>
     }
 
     @Override
-    public long getGroupId() {
-        return _groupId;
+    public long getCompanyId() {
+        return _companyId;
     }
 
     @Override
-    public void setGroupId(long groupId) {
-        _columnBitmask |= GROUPID_COLUMN_BITMASK;
+    public void setCompanyId(long companyId) {
+        _columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
-        if (!_setOriginalGroupId) {
-            _setOriginalGroupId = true;
+        if (!_setOriginalCompanyId) {
+            _setOriginalCompanyId = true;
 
-            _originalGroupId = _groupId;
+            _originalCompanyId = _companyId;
         }
 
-        _groupId = groupId;
+        _companyId = companyId;
     }
 
-    public long getOriginalGroupId() {
-        return _originalGroupId;
+    public long getOriginalCompanyId() {
+        return _originalCompanyId;
     }
 
     @Override
@@ -284,7 +284,7 @@ public class ShoppingItemImageModelImpl extends BaseModelImpl<ShoppingItemImage>
 
     @Override
     public ExpandoBridge getExpandoBridge() {
-        return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+        return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
             ShoppingItemImage.class.getName(), getPrimaryKey());
     }
 
@@ -310,7 +310,7 @@ public class ShoppingItemImageModelImpl extends BaseModelImpl<ShoppingItemImage>
         ShoppingItemImageImpl shoppingItemImageImpl = new ShoppingItemImageImpl();
 
         shoppingItemImageImpl.setShoppingItemImageId(getShoppingItemImageId());
-        shoppingItemImageImpl.setGroupId(getGroupId());
+        shoppingItemImageImpl.setCompanyId(getCompanyId());
         shoppingItemImageImpl.setItemId(getItemId());
         shoppingItemImageImpl.setImageId(getImageId());
         shoppingItemImageImpl.setMainImage(getMainImage());
@@ -364,9 +364,9 @@ public class ShoppingItemImageModelImpl extends BaseModelImpl<ShoppingItemImage>
     public void resetOriginalValues() {
         ShoppingItemImageModelImpl shoppingItemImageModelImpl = this;
 
-        shoppingItemImageModelImpl._originalGroupId = shoppingItemImageModelImpl._groupId;
+        shoppingItemImageModelImpl._originalCompanyId = shoppingItemImageModelImpl._companyId;
 
-        shoppingItemImageModelImpl._setOriginalGroupId = false;
+        shoppingItemImageModelImpl._setOriginalCompanyId = false;
 
         shoppingItemImageModelImpl._originalItemId = shoppingItemImageModelImpl._itemId;
 
@@ -385,7 +385,7 @@ public class ShoppingItemImageModelImpl extends BaseModelImpl<ShoppingItemImage>
 
         shoppingItemImageCacheModel.shoppingItemImageId = getShoppingItemImageId();
 
-        shoppingItemImageCacheModel.groupId = getGroupId();
+        shoppingItemImageCacheModel.companyId = getCompanyId();
 
         shoppingItemImageCacheModel.itemId = getItemId();
 
@@ -404,8 +404,8 @@ public class ShoppingItemImageModelImpl extends BaseModelImpl<ShoppingItemImage>
 
         sb.append("{shoppingItemImageId=");
         sb.append(getShoppingItemImageId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
+        sb.append(", companyId=");
+        sb.append(getCompanyId());
         sb.append(", itemId=");
         sb.append(getItemId());
         sb.append(", imageId=");
@@ -432,8 +432,8 @@ public class ShoppingItemImageModelImpl extends BaseModelImpl<ShoppingItemImage>
         sb.append(getShoppingItemImageId());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
+            "<column><column-name>companyId</column-name><column-value><![CDATA[");
+        sb.append(getCompanyId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>itemId</column-name><column-value><![CDATA[");

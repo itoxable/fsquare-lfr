@@ -14,7 +14,6 @@ import java.util.List;
  * @generated
  */
 public class ShoppingStoreSoap implements Serializable {
-    private long _groupId;
     private long _companyId;
     private long _userId;
     private String _userName;
@@ -57,7 +56,6 @@ public class ShoppingStoreSoap implements Serializable {
     public static ShoppingStoreSoap toSoapModel(ShoppingStore model) {
         ShoppingStoreSoap soapModel = new ShoppingStoreSoap();
 
-        soapModel.setGroupId(model.getGroupId());
         soapModel.setCompanyId(model.getCompanyId());
         soapModel.setUserId(model.getUserId());
         soapModel.setUserName(model.getUserName());
@@ -134,19 +132,11 @@ public class ShoppingStoreSoap implements Serializable {
     }
 
     public long getPrimaryKey() {
-        return _groupId;
+        return _companyId;
     }
 
     public void setPrimaryKey(long pk) {
-        setGroupId(pk);
-    }
-
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    public void setGroupId(long groupId) {
-        _groupId = groupId;
+        setCompanyId(pk);
     }
 
     public long getCompanyId() {

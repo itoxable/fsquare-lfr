@@ -38,7 +38,7 @@ public class ShoppingItemImageWrapper implements ShoppingItemImage,
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("shoppingItemImageId", getShoppingItemImageId());
-        attributes.put("groupId", getGroupId());
+        attributes.put("companyId", getCompanyId());
         attributes.put("itemId", getItemId());
         attributes.put("imageId", getImageId());
         attributes.put("mainImage", getMainImage());
@@ -55,10 +55,10 @@ public class ShoppingItemImageWrapper implements ShoppingItemImage,
             setShoppingItemImageId(shoppingItemImageId);
         }
 
-        Long groupId = (Long) attributes.get("groupId");
+        Long companyId = (Long) attributes.get("companyId");
 
-        if (groupId != null) {
-            setGroupId(groupId);
+        if (companyId != null) {
+            setCompanyId(companyId);
         }
 
         Long itemId = (Long) attributes.get("itemId");
@@ -127,23 +127,23 @@ public class ShoppingItemImageWrapper implements ShoppingItemImage,
     }
 
     /**
-    * Returns the group ID of this shopping item image.
+    * Returns the company ID of this shopping item image.
     *
-    * @return the group ID of this shopping item image
+    * @return the company ID of this shopping item image
     */
     @Override
-    public long getGroupId() {
-        return _shoppingItemImage.getGroupId();
+    public long getCompanyId() {
+        return _shoppingItemImage.getCompanyId();
     }
 
     /**
-    * Sets the group ID of this shopping item image.
+    * Sets the company ID of this shopping item image.
     *
-    * @param groupId the group ID of this shopping item image
+    * @param companyId the company ID of this shopping item image
     */
     @Override
-    public void setGroupId(long groupId) {
-        _shoppingItemImage.setGroupId(groupId);
+    public void setCompanyId(long companyId) {
+        _shoppingItemImage.setCompanyId(companyId);
     }
 
     /**

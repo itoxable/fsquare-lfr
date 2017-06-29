@@ -19,12 +19,9 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.service.BaseLocalServiceImpl;
-import com.liferay.portal.service.persistence.AccountPersistence;
-import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.PasswordTrackerPersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
-import com.liferay.portal.service.persistence.VirtualHostPersistence;
 
 import com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
@@ -114,18 +111,6 @@ public abstract class SiteCommonActionsLocalServiceBaseImpl
     protected com.fsquare.shopping.service.SiteCommonActionsService siteCommonActionsService;
     @BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
     protected com.liferay.counter.service.CounterLocalService counterLocalService;
-    @BeanReference(type = com.liferay.portal.service.AccountLocalService.class)
-    protected com.liferay.portal.service.AccountLocalService accountLocalService;
-    @BeanReference(type = com.liferay.portal.service.AccountService.class)
-    protected com.liferay.portal.service.AccountService accountService;
-    @BeanReference(type = AccountPersistence.class)
-    protected AccountPersistence accountPersistence;
-    @BeanReference(type = com.liferay.portal.service.CompanyLocalService.class)
-    protected com.liferay.portal.service.CompanyLocalService companyLocalService;
-    @BeanReference(type = com.liferay.portal.service.CompanyService.class)
-    protected com.liferay.portal.service.CompanyService companyService;
-    @BeanReference(type = CompanyPersistence.class)
-    protected CompanyPersistence companyPersistence;
     @BeanReference(type = com.liferay.portal.service.GroupLocalService.class)
     protected com.liferay.portal.service.GroupLocalService groupLocalService;
     @BeanReference(type = com.liferay.portal.service.GroupService.class)
@@ -144,10 +129,6 @@ public abstract class SiteCommonActionsLocalServiceBaseImpl
     protected com.liferay.portal.service.UserService userService;
     @BeanReference(type = UserPersistence.class)
     protected UserPersistence userPersistence;
-    @BeanReference(type = com.liferay.portal.service.VirtualHostLocalService.class)
-    protected com.liferay.portal.service.VirtualHostLocalService virtualHostLocalService;
-    @BeanReference(type = VirtualHostPersistence.class)
-    protected VirtualHostPersistence virtualHostPersistence;
     @BeanReference(type = com.liferay.portlet.asset.service.AssetCategoryLocalService.class)
     protected com.liferay.portlet.asset.service.AssetCategoryLocalService assetCategoryLocalService;
     @BeanReference(type = com.liferay.portlet.asset.service.AssetCategoryService.class)
@@ -817,118 +798,6 @@ public abstract class SiteCommonActionsLocalServiceBaseImpl
     }
 
     /**
-     * Returns the account local service.
-     *
-     * @return the account local service
-     */
-    public com.liferay.portal.service.AccountLocalService getAccountLocalService() {
-        return accountLocalService;
-    }
-
-    /**
-     * Sets the account local service.
-     *
-     * @param accountLocalService the account local service
-     */
-    public void setAccountLocalService(
-        com.liferay.portal.service.AccountLocalService accountLocalService) {
-        this.accountLocalService = accountLocalService;
-    }
-
-    /**
-     * Returns the account remote service.
-     *
-     * @return the account remote service
-     */
-    public com.liferay.portal.service.AccountService getAccountService() {
-        return accountService;
-    }
-
-    /**
-     * Sets the account remote service.
-     *
-     * @param accountService the account remote service
-     */
-    public void setAccountService(
-        com.liferay.portal.service.AccountService accountService) {
-        this.accountService = accountService;
-    }
-
-    /**
-     * Returns the account persistence.
-     *
-     * @return the account persistence
-     */
-    public AccountPersistence getAccountPersistence() {
-        return accountPersistence;
-    }
-
-    /**
-     * Sets the account persistence.
-     *
-     * @param accountPersistence the account persistence
-     */
-    public void setAccountPersistence(AccountPersistence accountPersistence) {
-        this.accountPersistence = accountPersistence;
-    }
-
-    /**
-     * Returns the company local service.
-     *
-     * @return the company local service
-     */
-    public com.liferay.portal.service.CompanyLocalService getCompanyLocalService() {
-        return companyLocalService;
-    }
-
-    /**
-     * Sets the company local service.
-     *
-     * @param companyLocalService the company local service
-     */
-    public void setCompanyLocalService(
-        com.liferay.portal.service.CompanyLocalService companyLocalService) {
-        this.companyLocalService = companyLocalService;
-    }
-
-    /**
-     * Returns the company remote service.
-     *
-     * @return the company remote service
-     */
-    public com.liferay.portal.service.CompanyService getCompanyService() {
-        return companyService;
-    }
-
-    /**
-     * Sets the company remote service.
-     *
-     * @param companyService the company remote service
-     */
-    public void setCompanyService(
-        com.liferay.portal.service.CompanyService companyService) {
-        this.companyService = companyService;
-    }
-
-    /**
-     * Returns the company persistence.
-     *
-     * @return the company persistence
-     */
-    public CompanyPersistence getCompanyPersistence() {
-        return companyPersistence;
-    }
-
-    /**
-     * Sets the company persistence.
-     *
-     * @param companyPersistence the company persistence
-     */
-    public void setCompanyPersistence(CompanyPersistence companyPersistence) {
-        this.companyPersistence = companyPersistence;
-    }
-
-    /**
      * Returns the group local service.
      *
      * @return the group local service
@@ -1095,44 +964,6 @@ public abstract class SiteCommonActionsLocalServiceBaseImpl
      */
     public void setUserPersistence(UserPersistence userPersistence) {
         this.userPersistence = userPersistence;
-    }
-
-    /**
-     * Returns the virtual host local service.
-     *
-     * @return the virtual host local service
-     */
-    public com.liferay.portal.service.VirtualHostLocalService getVirtualHostLocalService() {
-        return virtualHostLocalService;
-    }
-
-    /**
-     * Sets the virtual host local service.
-     *
-     * @param virtualHostLocalService the virtual host local service
-     */
-    public void setVirtualHostLocalService(
-        com.liferay.portal.service.VirtualHostLocalService virtualHostLocalService) {
-        this.virtualHostLocalService = virtualHostLocalService;
-    }
-
-    /**
-     * Returns the virtual host persistence.
-     *
-     * @return the virtual host persistence
-     */
-    public VirtualHostPersistence getVirtualHostPersistence() {
-        return virtualHostPersistence;
-    }
-
-    /**
-     * Sets the virtual host persistence.
-     *
-     * @param virtualHostPersistence the virtual host persistence
-     */
-    public void setVirtualHostPersistence(
-        VirtualHostPersistence virtualHostPersistence) {
-        this.virtualHostPersistence = virtualHostPersistence;
     }
 
     /**

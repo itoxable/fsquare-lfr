@@ -1,6 +1,5 @@
 create table FsquareShopping_ShoppingCoupon (
 	couponId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -45,7 +44,7 @@ create table FsquareShopping_ShoppingItem (
 
 create table FsquareShopping_ShoppingItemImage (
 	shoppingItemImageId LONG not null primary key,
-	groupId LONG,
+	companyId LONG,
 	itemId LONG,
 	imageId LONG,
 	mainImage BOOLEAN,
@@ -56,7 +55,6 @@ create table FsquareShopping_ShoppingItemStorageLocation (
 	itemStorageLocationId LONG not null primary key,
 	itemId LONG,
 	storageLocationId LONG,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -68,7 +66,6 @@ create table FsquareShopping_ShoppingItemStorageLocation (
 
 create table FsquareShopping_ShoppingItemType (
 	itemTypeId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -80,7 +77,6 @@ create table FsquareShopping_ShoppingItemType (
 
 create table FsquareShopping_ShoppingOrder (
 	shoppingOrderId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -144,7 +140,6 @@ create table FsquareShopping_ShoppingOrderItem (
 
 create table FsquareShopping_ShoppingShippingMethod (
 	shippingMethodId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -164,7 +159,6 @@ create table FsquareShopping_ShoppingShippingMethod (
 
 create table FsquareShopping_ShoppingStorageLocation (
 	storageLocationId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -176,8 +170,7 @@ create table FsquareShopping_ShoppingStorageLocation (
 );
 
 create table FsquareShopping_ShoppingStore (
-	groupId LONG not null primary key,
-	companyId LONG,
+	companyId LONG not null primary key,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,

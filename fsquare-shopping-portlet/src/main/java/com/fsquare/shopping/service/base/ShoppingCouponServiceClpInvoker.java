@@ -49,11 +49,11 @@ public class ShoppingCouponServiceClpInvoker {
 
         _methodParameterTypes84 = new String[] { "java.util.Map" };
 
-        _methodName85 = "fetchByCodeAndGroupId";
+        _methodName85 = "fetchByCodeAndCompanyId";
 
         _methodParameterTypes85 = new String[] { "java.lang.String", "long" };
 
-        _methodName86 = "findByGroupId";
+        _methodName86 = "findByCompanyId";
 
         _methodParameterTypes86 = new String[] { "java.lang.Long" };
 
@@ -69,11 +69,11 @@ public class ShoppingCouponServiceClpInvoker {
                 "com.fsquare.shopping.model.ShoppingCoupon"
             };
 
-        _methodName89 = "findByGroupIdStartEnd";
+        _methodName89 = "findByCompanyIdStartEnd";
 
         _methodParameterTypes89 = new String[] { "java.lang.Long", "int", "int" };
 
-        _methodName90 = "countByGroupId";
+        _methodName90 = "countByCompanyId";
 
         _methodParameterTypes90 = new String[] { "java.lang.Long" };
 
@@ -87,7 +87,7 @@ public class ShoppingCouponServiceClpInvoker {
                 "long", "long", "java.lang.String", "java.lang.String",
                 "java.lang.String", "java.util.Date", "java.util.Date",
                 "boolean", "java.lang.String", "java.lang.String", "double",
-                "double", "java.lang.String", "long", "long", "long"
+                "double", "java.lang.String", "long", "long"
             };
 
         _methodName93 = "deleteCoupon";
@@ -122,13 +122,13 @@ public class ShoppingCouponServiceClpInvoker {
 
         if (_methodName85.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
-            return ShoppingCouponServiceUtil.fetchByCodeAndGroupId((java.lang.String) arguments[0],
+            return ShoppingCouponServiceUtil.fetchByCodeAndCompanyId((java.lang.String) arguments[0],
                 ((Long) arguments[1]).longValue());
         }
 
         if (_methodName86.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
-            return ShoppingCouponServiceUtil.findByGroupId((java.lang.Long) arguments[0]);
+            return ShoppingCouponServiceUtil.findByCompanyId((java.lang.Long) arguments[0]);
         }
 
         if (_methodName87.equals(name) &&
@@ -143,14 +143,14 @@ public class ShoppingCouponServiceClpInvoker {
 
         if (_methodName89.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
-            return ShoppingCouponServiceUtil.findByGroupIdStartEnd((java.lang.Long) arguments[0],
+            return ShoppingCouponServiceUtil.findByCompanyIdStartEnd((java.lang.Long) arguments[0],
                 ((Integer) arguments[1]).intValue(),
                 ((Integer) arguments[2]).intValue());
         }
 
         if (_methodName90.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
-            return ShoppingCouponServiceUtil.countByGroupId((java.lang.Long) arguments[0]);
+            return ShoppingCouponServiceUtil.countByCompanyId((java.lang.Long) arguments[0]);
         }
 
         if (_methodName91.equals(name) &&
@@ -175,8 +175,7 @@ public class ShoppingCouponServiceClpInvoker {
                 ((Double) arguments[11]).doubleValue(),
                 (java.lang.String) arguments[12],
                 ((Long) arguments[13]).longValue(),
-                ((Long) arguments[14]).longValue(),
-                ((Long) arguments[15]).longValue());
+                ((Long) arguments[14]).longValue());
 
             return null;
         }

@@ -23,7 +23,6 @@ import java.util.Date;
 public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShippingMethod>,
     Externalizable {
     public long shippingMethodId;
-    public long groupId;
     public long companyId;
     public long userId;
     public String userName;
@@ -42,12 +41,10 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(35);
+        StringBundler sb = new StringBundler(33);
 
         sb.append("{shippingMethodId=");
         sb.append(shippingMethodId);
-        sb.append(", groupId=");
-        sb.append(groupId);
         sb.append(", companyId=");
         sb.append(companyId);
         sb.append(", userId=");
@@ -88,7 +85,6 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
         ShoppingShippingMethodImpl shoppingShippingMethodImpl = new ShoppingShippingMethodImpl();
 
         shoppingShippingMethodImpl.setShippingMethodId(shippingMethodId);
-        shoppingShippingMethodImpl.setGroupId(groupId);
         shoppingShippingMethodImpl.setCompanyId(companyId);
         shoppingShippingMethodImpl.setUserId(userId);
 
@@ -145,7 +141,6 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
     @Override
     public void readExternal(ObjectInput objectInput) throws IOException {
         shippingMethodId = objectInput.readLong();
-        groupId = objectInput.readLong();
         companyId = objectInput.readLong();
         userId = objectInput.readLong();
         userName = objectInput.readUTF();
@@ -167,7 +162,6 @@ public class ShoppingShippingMethodCacheModel implements CacheModel<ShoppingShip
     public void writeExternal(ObjectOutput objectOutput)
         throws IOException {
         objectOutput.writeLong(shippingMethodId);
-        objectOutput.writeLong(groupId);
         objectOutput.writeLong(companyId);
         objectOutput.writeLong(userId);
 

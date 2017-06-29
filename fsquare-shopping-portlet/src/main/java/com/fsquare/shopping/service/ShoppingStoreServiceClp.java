@@ -128,14 +128,14 @@ public class ShoppingStoreServiceClp implements ShoppingStoreService {
 
     @Override
     public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getShoppingAssetCategories(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName4,
-                    _methodParameterTypes4, new Object[] { groupId });
+                    _methodParameterTypes4, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -160,14 +160,14 @@ public class ShoppingStoreServiceClp implements ShoppingStoreService {
 
     @Override
     public com.fsquare.shopping.model.ShoppingStore getShoppingStore(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName5,
-                    _methodParameterTypes5, new Object[] { groupId });
+                    _methodParameterTypes5, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

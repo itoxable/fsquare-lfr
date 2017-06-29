@@ -64,10 +64,10 @@ public class ShoppingItemServiceSoap {
         }
     }
 
-    public static java.lang.Object getCompleteByGroupId(long groupId)
+    public static java.lang.Object getCompleteByCompanyId(long companyId)
         throws RemoteException {
         try {
-            java.lang.Object returnValue = ShoppingItemServiceUtil.getCompleteByGroupId(groupId);
+            java.lang.Object returnValue = ShoppingItemServiceUtil.getCompleteByCompanyId(companyId);
 
             return returnValue;
         } catch (Exception e) {
@@ -77,10 +77,10 @@ public class ShoppingItemServiceSoap {
         }
     }
 
-    public static com.fsquare.shopping.model.ShoppingItemSoap[] findByGroupId(
-        long groupId) throws RemoteException {
+    public static com.fsquare.shopping.model.ShoppingItemSoap[] findByCompanyId(
+        long companyId) throws RemoteException {
         try {
-            java.util.List<com.fsquare.shopping.model.ShoppingItem> returnValue = ShoppingItemServiceUtil.findByGroupId(groupId);
+            java.util.List<com.fsquare.shopping.model.ShoppingItem> returnValue = ShoppingItemServiceUtil.findByCompanyId(companyId);
 
             return com.fsquare.shopping.model.ShoppingItemSoap.toSoapModels(returnValue);
         } catch (Exception e) {
@@ -90,10 +90,10 @@ public class ShoppingItemServiceSoap {
         }
     }
 
-    public static com.fsquare.shopping.model.ShoppingItemSoap[] findByGroupId(
-        java.lang.Long groupId) throws RemoteException {
+    public static com.fsquare.shopping.model.ShoppingItemSoap[] findByCompanyId(
+        java.lang.Long companyId) throws RemoteException {
         try {
-            java.util.List<com.fsquare.shopping.model.ShoppingItem> returnValue = ShoppingItemServiceUtil.findByGroupId(groupId);
+            java.util.List<com.fsquare.shopping.model.ShoppingItem> returnValue = ShoppingItemServiceUtil.findByCompanyId(companyId);
 
             return com.fsquare.shopping.model.ShoppingItemSoap.toSoapModels(returnValue);
         } catch (Exception e) {
@@ -103,10 +103,10 @@ public class ShoppingItemServiceSoap {
         }
     }
 
-    public static int countByGroupId(java.lang.Long groupId)
+    public static int countByCompanyId(java.lang.Long companyId)
         throws RemoteException {
         try {
-            int returnValue = ShoppingItemServiceUtil.countByGroupId(groupId);
+            int returnValue = ShoppingItemServiceUtil.countByCompanyId(companyId);
 
             return returnValue;
         } catch (Exception e) {

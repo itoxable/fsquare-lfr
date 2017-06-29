@@ -2,9 +2,9 @@ package com.fsquare.shopping.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -26,8 +26,8 @@ import java.util.Date;
  * @see com.fsquare.shopping.model.impl.ShoppingShippingMethodModelImpl
  * @generated
  */
-public interface ShoppingShippingMethodModel extends BaseModel<ShoppingShippingMethod>,
-    GroupedModel {
+public interface ShoppingShippingMethodModel extends AuditedModel,
+    BaseModel<ShoppingShippingMethod> {
     /*
      * NOTE FOR DEVELOPERS:
      *
@@ -61,22 +61,6 @@ public interface ShoppingShippingMethodModel extends BaseModel<ShoppingShippingM
      * @param shippingMethodId the shipping method ID of this shopping shipping method
      */
     public void setShippingMethodId(long shippingMethodId);
-
-    /**
-     * Returns the group ID of this shopping shipping method.
-     *
-     * @return the group ID of this shopping shipping method
-     */
-    @Override
-    public long getGroupId();
-
-    /**
-     * Sets the group ID of this shopping shipping method.
-     *
-     * @param groupId the group ID of this shopping shipping method
-     */
-    @Override
-    public void setGroupId(long groupId);
 
     /**
      * Returns the company ID of this shopping shipping method.

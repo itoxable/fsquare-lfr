@@ -74,44 +74,46 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingCouponModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
+        new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingCouponModelImpl.FINDER_CACHE_ENABLED,
             ShoppingCouponImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-            "findByGroupId",
+            "findByCompanyId",
             new String[] {
                 Long.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
             });
-    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
         new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingCouponModelImpl.FINDER_CACHE_ENABLED,
             ShoppingCouponImpl.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
             new String[] { Long.class.getName() },
-            ShoppingCouponModelImpl.GROUPID_COLUMN_BITMASK |
+            ShoppingCouponModelImpl.COMPANYID_COLUMN_BITMASK |
             ShoppingCouponModelImpl.CREATEDATE_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingCouponModelImpl.FINDER_CACHE_ENABLED, Long.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
             new String[] { Long.class.getName() });
-    private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "shoppingCoupon.groupId = ?";
-    public static final FinderPath FINDER_PATH_FETCH_BY_CODEANDGROUPID = new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
+    private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "shoppingCoupon.companyId = ?";
+    public static final FinderPath FINDER_PATH_FETCH_BY_CODEANDCOMPANYID = new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingCouponModelImpl.FINDER_CACHE_ENABLED,
             ShoppingCouponImpl.class, FINDER_CLASS_NAME_ENTITY,
-            "fetchByCodeAndGroupId",
+            "fetchByCodeAndCompanyId",
             new String[] { String.class.getName(), Long.class.getName() },
             ShoppingCouponModelImpl.CODE_COLUMN_BITMASK |
-            ShoppingCouponModelImpl.GROUPID_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_CODEANDGROUPID = new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingCouponModelImpl.COMPANYID_COLUMN_BITMASK);
+    public static final FinderPath FINDER_PATH_COUNT_BY_CODEANDCOMPANYID = new FinderPath(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingCouponModelImpl.FINDER_CACHE_ENABLED, Long.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCodeAndGroupId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+            "countByCodeAndCompanyId",
             new String[] { String.class.getName(), Long.class.getName() });
-    private static final String _FINDER_COLUMN_CODEANDGROUPID_CODE_1 = "shoppingCoupon.code IS NULL AND ";
-    private static final String _FINDER_COLUMN_CODEANDGROUPID_CODE_2 = "shoppingCoupon.code = ? AND ";
-    private static final String _FINDER_COLUMN_CODEANDGROUPID_CODE_3 = "(shoppingCoupon.code IS NULL OR shoppingCoupon.code = '') AND ";
-    private static final String _FINDER_COLUMN_CODEANDGROUPID_GROUPID_2 = "shoppingCoupon.groupId = ?";
+    private static final String _FINDER_COLUMN_CODEANDCOMPANYID_CODE_1 = "shoppingCoupon.code IS NULL AND ";
+    private static final String _FINDER_COLUMN_CODEANDCOMPANYID_CODE_2 = "shoppingCoupon.code = ? AND ";
+    private static final String _FINDER_COLUMN_CODEANDCOMPANYID_CODE_3 = "(shoppingCoupon.code IS NULL OR shoppingCoupon.code = '') AND ";
+    private static final String _FINDER_COLUMN_CODEANDCOMPANYID_COMPANYID_2 = "shoppingCoupon.companyId = ?";
     private static final String _SQL_SELECT_SHOPPINGCOUPON = "SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon";
     private static final String _SQL_SELECT_SHOPPINGCOUPON_WHERE = "SELECT shoppingCoupon FROM ShoppingCoupon shoppingCoupon WHERE ";
     private static final String _SQL_COUNT_SHOPPINGCOUPON = "SELECT COUNT(shoppingCoupon) FROM ShoppingCoupon shoppingCoupon";
@@ -149,45 +151,46 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Returns all the shopping coupons where groupId = &#63;.
+     * Returns all the shopping coupons where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the matching shopping coupons
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingCoupon> findByGroupId(long groupId)
+    public List<ShoppingCoupon> findByCompanyId(long companyId)
         throws SystemException {
-        return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+        return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+            null);
     }
 
     /**
-     * Returns a range of all the shopping coupons where groupId = &#63;.
+     * Returns a range of all the shopping coupons where companyId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingCouponModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param start the lower bound of the range of shopping coupons
      * @param end the upper bound of the range of shopping coupons (not inclusive)
      * @return the range of matching shopping coupons
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingCoupon> findByGroupId(long groupId, int start, int end)
-        throws SystemException {
-        return findByGroupId(groupId, start, end, null);
+    public List<ShoppingCoupon> findByCompanyId(long companyId, int start,
+        int end) throws SystemException {
+        return findByCompanyId(companyId, start, end, null);
     }
 
     /**
-     * Returns an ordered range of all the shopping coupons where groupId = &#63;.
+     * Returns an ordered range of all the shopping coupons where companyId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingCouponModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param start the lower bound of the range of shopping coupons
      * @param end the upper bound of the range of shopping coupons (not inclusive)
      * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -195,8 +198,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingCoupon> findByGroupId(long groupId, int start, int end,
-        OrderByComparator orderByComparator) throws SystemException {
+    public List<ShoppingCoupon> findByCompanyId(long companyId, int start,
+        int end, OrderByComparator orderByComparator) throws SystemException {
         boolean pagination = true;
         FinderPath finderPath = null;
         Object[] finderArgs = null;
@@ -204,11 +207,11 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
         if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
                 (orderByComparator == null)) {
             pagination = false;
-            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-            finderArgs = new Object[] { groupId };
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
+            finderArgs = new Object[] { companyId };
         } else {
-            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-            finderArgs = new Object[] { groupId, start, end, orderByComparator };
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
+            finderArgs = new Object[] { companyId, start, end, orderByComparator };
         }
 
         List<ShoppingCoupon> list = (List<ShoppingCoupon>) FinderCacheUtil.getResult(finderPath,
@@ -216,7 +219,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
         if ((list != null) && !list.isEmpty()) {
             for (ShoppingCoupon shoppingCoupon : list) {
-                if ((groupId != shoppingCoupon.getGroupId())) {
+                if ((companyId != shoppingCoupon.getCompanyId())) {
                     list = null;
 
                     break;
@@ -236,7 +239,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
             query.append(_SQL_SELECT_SHOPPINGCOUPON_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
             if (orderByComparator != null) {
                 appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -257,7 +260,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 if (!pagination) {
                     list = (List<ShoppingCoupon>) QueryUtil.list(q,
@@ -287,19 +290,19 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Returns the first shopping coupon in the ordered set where groupId = &#63;.
+     * Returns the first shopping coupon in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping coupon
      * @throws com.fsquare.shopping.NoSuchShoppingCouponException if a matching shopping coupon could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon findByGroupId_First(long groupId,
+    public ShoppingCoupon findByCompanyId_First(long companyId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingCouponException, SystemException {
-        ShoppingCoupon shoppingCoupon = fetchByGroupId_First(groupId,
+        ShoppingCoupon shoppingCoupon = fetchByCompanyId_First(companyId,
                 orderByComparator);
 
         if (shoppingCoupon != null) {
@@ -310,8 +313,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -319,17 +322,17 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Returns the first shopping coupon in the ordered set where groupId = &#63;.
+     * Returns the first shopping coupon in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping coupon, or <code>null</code> if a matching shopping coupon could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon fetchByGroupId_First(long groupId,
+    public ShoppingCoupon fetchByCompanyId_First(long companyId,
         OrderByComparator orderByComparator) throws SystemException {
-        List<ShoppingCoupon> list = findByGroupId(groupId, 0, 1,
+        List<ShoppingCoupon> list = findByCompanyId(companyId, 0, 1,
                 orderByComparator);
 
         if (!list.isEmpty()) {
@@ -340,19 +343,19 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Returns the last shopping coupon in the ordered set where groupId = &#63;.
+     * Returns the last shopping coupon in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping coupon
      * @throws com.fsquare.shopping.NoSuchShoppingCouponException if a matching shopping coupon could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon findByGroupId_Last(long groupId,
+    public ShoppingCoupon findByCompanyId_Last(long companyId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingCouponException, SystemException {
-        ShoppingCoupon shoppingCoupon = fetchByGroupId_Last(groupId,
+        ShoppingCoupon shoppingCoupon = fetchByCompanyId_Last(companyId,
                 orderByComparator);
 
         if (shoppingCoupon != null) {
@@ -363,8 +366,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -372,24 +375,24 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Returns the last shopping coupon in the ordered set where groupId = &#63;.
+     * Returns the last shopping coupon in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping coupon, or <code>null</code> if a matching shopping coupon could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon fetchByGroupId_Last(long groupId,
+    public ShoppingCoupon fetchByCompanyId_Last(long companyId,
         OrderByComparator orderByComparator) throws SystemException {
-        int count = countByGroupId(groupId);
+        int count = countByCompanyId(companyId);
 
         if (count == 0) {
             return null;
         }
 
-        List<ShoppingCoupon> list = findByGroupId(groupId, count - 1, count,
-                orderByComparator);
+        List<ShoppingCoupon> list = findByCompanyId(companyId, count - 1,
+                count, orderByComparator);
 
         if (!list.isEmpty()) {
             return list.get(0);
@@ -399,18 +402,18 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Returns the shopping coupons before and after the current shopping coupon in the ordered set where groupId = &#63;.
+     * Returns the shopping coupons before and after the current shopping coupon in the ordered set where companyId = &#63;.
      *
      * @param couponId the primary key of the current shopping coupon
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next shopping coupon
      * @throws com.fsquare.shopping.NoSuchShoppingCouponException if a shopping coupon with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon[] findByGroupId_PrevAndNext(long couponId,
-        long groupId, OrderByComparator orderByComparator)
+    public ShoppingCoupon[] findByCompanyId_PrevAndNext(long couponId,
+        long companyId, OrderByComparator orderByComparator)
         throws NoSuchShoppingCouponException, SystemException {
         ShoppingCoupon shoppingCoupon = findByPrimaryKey(couponId);
 
@@ -421,13 +424,13 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
             ShoppingCoupon[] array = new ShoppingCouponImpl[3];
 
-            array[0] = getByGroupId_PrevAndNext(session, shoppingCoupon,
-                    groupId, orderByComparator, true);
+            array[0] = getByCompanyId_PrevAndNext(session, shoppingCoupon,
+                    companyId, orderByComparator, true);
 
             array[1] = shoppingCoupon;
 
-            array[2] = getByGroupId_PrevAndNext(session, shoppingCoupon,
-                    groupId, orderByComparator, false);
+            array[2] = getByCompanyId_PrevAndNext(session, shoppingCoupon,
+                    companyId, orderByComparator, false);
 
             return array;
         } catch (Exception e) {
@@ -437,8 +440,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
         }
     }
 
-    protected ShoppingCoupon getByGroupId_PrevAndNext(Session session,
-        ShoppingCoupon shoppingCoupon, long groupId,
+    protected ShoppingCoupon getByCompanyId_PrevAndNext(Session session,
+        ShoppingCoupon shoppingCoupon, long companyId,
         OrderByComparator orderByComparator, boolean previous) {
         StringBundler query = null;
 
@@ -451,7 +454,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
         query.append(_SQL_SELECT_SHOPPINGCOUPON_WHERE);
 
-        query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+        query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
         if (orderByComparator != null) {
             String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -514,7 +517,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
         QueryPos qPos = QueryPos.getInstance(q);
 
-        qPos.add(groupId);
+        qPos.add(companyId);
 
         if (orderByComparator != null) {
             Object[] values = orderByComparator.getOrderByConditionValues(shoppingCoupon);
@@ -534,31 +537,31 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Removes all the shopping coupons where groupId = &#63; from the database.
+     * Removes all the shopping coupons where companyId = &#63; from the database.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeByGroupId(long groupId) throws SystemException {
-        for (ShoppingCoupon shoppingCoupon : findByGroupId(groupId,
+    public void removeByCompanyId(long companyId) throws SystemException {
+        for (ShoppingCoupon shoppingCoupon : findByCompanyId(companyId,
                 QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
             remove(shoppingCoupon);
         }
     }
 
     /**
-     * Returns the number of shopping coupons where groupId = &#63;.
+     * Returns the number of shopping coupons where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the number of matching shopping coupons
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByGroupId(long groupId) throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+    public int countByCompanyId(long companyId) throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
-        Object[] finderArgs = new Object[] { groupId };
+        Object[] finderArgs = new Object[] { companyId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -568,7 +571,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
             query.append(_SQL_COUNT_SHOPPINGCOUPON_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
             String sql = query.toString();
 
@@ -581,7 +584,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 count = (Long) q.uniqueResult();
 
@@ -599,18 +602,18 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Returns the shopping coupon where code = &#63; and groupId = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingCouponException} if it could not be found.
+     * Returns the shopping coupon where code = &#63; and companyId = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingCouponException} if it could not be found.
      *
      * @param code the code
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the matching shopping coupon
      * @throws com.fsquare.shopping.NoSuchShoppingCouponException if a matching shopping coupon could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon findByCodeAndGroupId(String code, long groupId)
+    public ShoppingCoupon findByCodeAndCompanyId(String code, long companyId)
         throws NoSuchShoppingCouponException, SystemException {
-        ShoppingCoupon shoppingCoupon = fetchByCodeAndGroupId(code, groupId);
+        ShoppingCoupon shoppingCoupon = fetchByCodeAndCompanyId(code, companyId);
 
         if (shoppingCoupon == null) {
             StringBundler msg = new StringBundler(6);
@@ -620,8 +623,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
             msg.append("code=");
             msg.append(code);
 
-            msg.append(", groupId=");
-            msg.append(groupId);
+            msg.append(", companyId=");
+            msg.append(companyId);
 
             msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -636,37 +639,37 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Returns the shopping coupon where code = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+     * Returns the shopping coupon where code = &#63; and companyId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
      *
      * @param code the code
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the matching shopping coupon, or <code>null</code> if a matching shopping coupon could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon fetchByCodeAndGroupId(String code, long groupId)
+    public ShoppingCoupon fetchByCodeAndCompanyId(String code, long companyId)
         throws SystemException {
-        return fetchByCodeAndGroupId(code, groupId, true);
+        return fetchByCodeAndCompanyId(code, companyId, true);
     }
 
     /**
-     * Returns the shopping coupon where code = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+     * Returns the shopping coupon where code = &#63; and companyId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
      *
      * @param code the code
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param retrieveFromCache whether to use the finder cache
      * @return the matching shopping coupon, or <code>null</code> if a matching shopping coupon could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon fetchByCodeAndGroupId(String code, long groupId,
+    public ShoppingCoupon fetchByCodeAndCompanyId(String code, long companyId,
         boolean retrieveFromCache) throws SystemException {
-        Object[] finderArgs = new Object[] { code, groupId };
+        Object[] finderArgs = new Object[] { code, companyId };
 
         Object result = null;
 
         if (retrieveFromCache) {
-            result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
+            result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CODEANDCOMPANYID,
                     finderArgs, this);
         }
 
@@ -674,7 +677,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
             ShoppingCoupon shoppingCoupon = (ShoppingCoupon) result;
 
             if (!Validator.equals(code, shoppingCoupon.getCode()) ||
-                    (groupId != shoppingCoupon.getGroupId())) {
+                    (companyId != shoppingCoupon.getCompanyId())) {
                 result = null;
             }
         }
@@ -687,16 +690,16 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
             boolean bindCode = false;
 
             if (code == null) {
-                query.append(_FINDER_COLUMN_CODEANDGROUPID_CODE_1);
+                query.append(_FINDER_COLUMN_CODEANDCOMPANYID_CODE_1);
             } else if (code.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_CODEANDGROUPID_CODE_3);
+                query.append(_FINDER_COLUMN_CODEANDCOMPANYID_CODE_3);
             } else {
                 bindCode = true;
 
-                query.append(_FINDER_COLUMN_CODEANDGROUPID_CODE_2);
+                query.append(_FINDER_COLUMN_CODEANDCOMPANYID_CODE_2);
             }
 
-            query.append(_FINDER_COLUMN_CODEANDGROUPID_GROUPID_2);
+            query.append(_FINDER_COLUMN_CODEANDCOMPANYID_COMPANYID_2);
 
             String sql = query.toString();
 
@@ -713,12 +716,12 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
                     qPos.add(code);
                 }
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 List<ShoppingCoupon> list = q.list();
 
                 if (list.isEmpty()) {
-                    FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
+                    FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDCOMPANYID,
                         finderArgs, list);
                 } else {
                     ShoppingCoupon shoppingCoupon = list.get(0);
@@ -729,13 +732,13 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
                     if ((shoppingCoupon.getCode() == null) ||
                             !shoppingCoupon.getCode().equals(code) ||
-                            (shoppingCoupon.getGroupId() != groupId)) {
-                        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
+                            (shoppingCoupon.getCompanyId() != companyId)) {
+                        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDCOMPANYID,
                             finderArgs, shoppingCoupon);
                     }
                 }
             } catch (Exception e) {
-                FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
+                FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODEANDCOMPANYID,
                     finderArgs);
 
                 throw processException(e);
@@ -752,35 +755,35 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     }
 
     /**
-     * Removes the shopping coupon where code = &#63; and groupId = &#63; from the database.
+     * Removes the shopping coupon where code = &#63; and companyId = &#63; from the database.
      *
      * @param code the code
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the shopping coupon that was removed
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingCoupon removeByCodeAndGroupId(String code, long groupId)
+    public ShoppingCoupon removeByCodeAndCompanyId(String code, long companyId)
         throws NoSuchShoppingCouponException, SystemException {
-        ShoppingCoupon shoppingCoupon = findByCodeAndGroupId(code, groupId);
+        ShoppingCoupon shoppingCoupon = findByCodeAndCompanyId(code, companyId);
 
         return remove(shoppingCoupon);
     }
 
     /**
-     * Returns the number of shopping coupons where code = &#63; and groupId = &#63;.
+     * Returns the number of shopping coupons where code = &#63; and companyId = &#63;.
      *
      * @param code the code
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the number of matching shopping coupons
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByCodeAndGroupId(String code, long groupId)
+    public int countByCodeAndCompanyId(String code, long companyId)
         throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_CODEANDGROUPID;
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_CODEANDCOMPANYID;
 
-        Object[] finderArgs = new Object[] { code, groupId };
+        Object[] finderArgs = new Object[] { code, companyId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -793,16 +796,16 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
             boolean bindCode = false;
 
             if (code == null) {
-                query.append(_FINDER_COLUMN_CODEANDGROUPID_CODE_1);
+                query.append(_FINDER_COLUMN_CODEANDCOMPANYID_CODE_1);
             } else if (code.equals(StringPool.BLANK)) {
-                query.append(_FINDER_COLUMN_CODEANDGROUPID_CODE_3);
+                query.append(_FINDER_COLUMN_CODEANDCOMPANYID_CODE_3);
             } else {
                 bindCode = true;
 
-                query.append(_FINDER_COLUMN_CODEANDGROUPID_CODE_2);
+                query.append(_FINDER_COLUMN_CODEANDCOMPANYID_CODE_2);
             }
 
-            query.append(_FINDER_COLUMN_CODEANDGROUPID_GROUPID_2);
+            query.append(_FINDER_COLUMN_CODEANDCOMPANYID_COMPANYID_2);
 
             String sql = query.toString();
 
@@ -819,7 +822,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
                     qPos.add(code);
                 }
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 count = (Long) q.uniqueResult();
 
@@ -847,8 +850,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
             ShoppingCouponImpl.class, shoppingCoupon.getPrimaryKey(),
             shoppingCoupon);
 
-        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
-            new Object[] { shoppingCoupon.getCode(), shoppingCoupon.getGroupId() },
+        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDCOMPANYID,
+            new Object[] { shoppingCoupon.getCode(), shoppingCoupon.getCompanyId() },
             shoppingCoupon);
 
         shoppingCoupon.resetOriginalValues();
@@ -926,25 +929,25 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
     protected void cacheUniqueFindersCache(ShoppingCoupon shoppingCoupon) {
         if (shoppingCoupon.isNew()) {
             Object[] args = new Object[] {
-                    shoppingCoupon.getCode(), shoppingCoupon.getGroupId()
+                    shoppingCoupon.getCode(), shoppingCoupon.getCompanyId()
                 };
 
-            FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODEANDGROUPID,
+            FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODEANDCOMPANYID,
                 args, Long.valueOf(1));
-            FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
+            FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDCOMPANYID,
                 args, shoppingCoupon);
         } else {
             ShoppingCouponModelImpl shoppingCouponModelImpl = (ShoppingCouponModelImpl) shoppingCoupon;
 
             if ((shoppingCouponModelImpl.getColumnBitmask() &
-                    FINDER_PATH_FETCH_BY_CODEANDGROUPID.getColumnBitmask()) != 0) {
+                    FINDER_PATH_FETCH_BY_CODEANDCOMPANYID.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingCoupon.getCode(), shoppingCoupon.getGroupId()
+                        shoppingCoupon.getCode(), shoppingCoupon.getCompanyId()
                     };
 
-                FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODEANDGROUPID,
+                FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODEANDCOMPANYID,
                     args, Long.valueOf(1));
-                FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
+                FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODEANDCOMPANYID,
                     args, shoppingCoupon);
             }
         }
@@ -954,22 +957,22 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
         ShoppingCouponModelImpl shoppingCouponModelImpl = (ShoppingCouponModelImpl) shoppingCoupon;
 
         Object[] args = new Object[] {
-                shoppingCoupon.getCode(), shoppingCoupon.getGroupId()
+                shoppingCoupon.getCode(), shoppingCoupon.getCompanyId()
             };
 
-        FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CODEANDGROUPID, args);
-        FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID, args);
+        FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CODEANDCOMPANYID, args);
+        FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODEANDCOMPANYID, args);
 
         if ((shoppingCouponModelImpl.getColumnBitmask() &
-                FINDER_PATH_FETCH_BY_CODEANDGROUPID.getColumnBitmask()) != 0) {
+                FINDER_PATH_FETCH_BY_CODEANDCOMPANYID.getColumnBitmask()) != 0) {
             args = new Object[] {
                     shoppingCouponModelImpl.getOriginalCode(),
-                    shoppingCouponModelImpl.getOriginalGroupId()
+                    shoppingCouponModelImpl.getOriginalCompanyId()
                 };
 
-            FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CODEANDGROUPID,
+            FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CODEANDCOMPANYID,
                 args);
-            FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODEANDGROUPID,
+            FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODEANDCOMPANYID,
                 args);
         }
     }
@@ -1108,19 +1111,21 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
         }
         else {
             if ((shoppingCouponModelImpl.getColumnBitmask() &
-                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingCouponModelImpl.getOriginalGroupId()
+                        shoppingCouponModelImpl.getOriginalCompanyId()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
                     args);
 
-                args = new Object[] { shoppingCouponModelImpl.getGroupId() };
+                args = new Object[] { shoppingCouponModelImpl.getCompanyId() };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
                     args);
             }
         }
@@ -1146,7 +1151,6 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
         shoppingCouponImpl.setPrimaryKey(shoppingCoupon.getPrimaryKey());
 
         shoppingCouponImpl.setCouponId(shoppingCoupon.getCouponId());
-        shoppingCouponImpl.setGroupId(shoppingCoupon.getGroupId());
         shoppingCouponImpl.setCompanyId(shoppingCoupon.getCompanyId());
         shoppingCouponImpl.setUserId(shoppingCoupon.getUserId());
         shoppingCouponImpl.setUserName(shoppingCoupon.getUserName());

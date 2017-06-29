@@ -145,14 +145,14 @@ public class OrderCheckoutPortlet extends BaseShoppingPortlet {
 		Double amount = shoppingOrderProcessWrapper.getAbsoluteTotal();
 				
 		Result<Transaction> result = getBraintreeGateway(resourceRequest).doBraintreeTransaction(nonce, amount.toString());
-		ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+		ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 		ShoppingOrder shoppingOrder = shoppingOrderProcessWrapper.getShoppingOrder();
 		
 		if(result.isSuccess()){
 		
 			try {
 				shoppingOrder.setTotalPrice(amount);
-				shoppingOrder.setGroupId(themeDisplay.getScopeGroupId());
+				shoppingOrder.setCompanyId(themeDisplay.getCompanyId());
 				shoppingOrder.setShoppingOrderId(CounterLocalServiceUtil.increment(ShoppingOrder.class.getName()));
 				shoppingOrder.setCouponCodes(shoppingOrderProcessWrapper.getShoppingCoupon()!=null?shoppingOrderProcessWrapper.getShoppingCoupon().getCode():"");
 				shoppingOrder.setShippingMethodId(shoppingOrderProcessWrapper.getShoppingShippingMethod().getShippingMethodId());
@@ -211,7 +211,7 @@ public class OrderCheckoutPortlet extends BaseShoppingPortlet {
 		if(braintreePayment == null){
 			System.out.println("--- BraintreePayment ---");
 			ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+			ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 			braintreePayment = new BraintreePayment(shoppingStore);
 		}
 		return braintreePayment;
@@ -317,7 +317,7 @@ public class OrderCheckoutPortlet extends BaseShoppingPortlet {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
 		HttpSession session = request.getSession();
 		
-		ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+		ShoppingStore shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 		
 		ShoppingOrderProcessWrapper shoppingOrderProcessWrapper = ShoppingPortletUtil.getSessionShoppingOrderProcessWrapper(session);
 		
@@ -352,7 +352,7 @@ public class OrderCheckoutPortlet extends BaseShoppingPortlet {
 		
 		try {
 			shoppingOrder.setTotalPrice(total);
-			shoppingOrder.setGroupId(themeDisplay.getScopeGroupId());
+			shoppingOrder.setCompanyId(themeDisplay.getCompanyId());
 			shoppingOrder.setShoppingOrderId(CounterLocalServiceUtil.increment(ShoppingOrder.class.getName()));
 			shoppingOrder.setCouponCodes(shoppingOrderProcessWrapper.getShoppingCoupon()!=null?shoppingOrderProcessWrapper.getShoppingCoupon().getCode():"");
 			shoppingOrder.setShippingMethodId(shoppingOrderProcessWrapper.getShoppingShippingMethod().getShippingMethodId());
@@ -459,9 +459,9 @@ public class OrderCheckoutPortlet extends BaseShoppingPortlet {
 			
 			ShoppingStore shoppingStore = null;
 			try{
-				shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+				shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 			}catch(NoSuchShoppingStoreException e){
-				shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
+				shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getCompanyId());
 			}
 			
 			String streetAddress2 = ParamUtil.getString(resourceRequest, "streetAddress2");
@@ -489,7 +489,7 @@ public class OrderCheckoutPortlet extends BaseShoppingPortlet {
 			shoppingOrder.setUserId(themeDisplay.getUser().getUserId());
 	
 			List<ShoppingShippingMethod> availableShoppingShippingMethodList = new ArrayList<ShoppingShippingMethod>();
-			List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethodLocalServiceUtil.findByGroupIdAndEnabled(themeDisplay.getScopeGroupId());
+			List<ShoppingShippingMethod> shoppingShippingMethodList = ShoppingShippingMethodLocalServiceUtil.findByCompanyIdAndEnabled(themeDisplay.getCompanyId());
 			
 			for(ShoppingShippingMethod shoppingShippingMethod : shoppingShippingMethodList){
 				if(iternational && shoppingShippingMethod.isInternational()){

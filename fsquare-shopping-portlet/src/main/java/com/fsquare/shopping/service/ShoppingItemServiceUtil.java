@@ -58,29 +58,29 @@ public class ShoppingItemServiceUtil {
         return getService().fixDeletedItem(itemId, companyId, uid);
     }
 
-    public static java.lang.Object getCompleteByGroupId(long groupId)
+    public static java.lang.Object getCompleteByCompanyId(long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().getCompleteByGroupId(groupId);
+        return getService().getCompleteByCompanyId(companyId);
     }
 
-    public static java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
-        long groupId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItem> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().findByGroupId(groupId);
+        return getService().findByCompanyId(companyId);
     }
 
-    public static java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
-        java.lang.Long groupId) {
-        return getService().findByGroupId(groupId);
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItem> findByCompanyId(
+        java.lang.Long companyId) {
+        return getService().findByCompanyId(companyId);
     }
 
     public static java.util.Map<java.lang.String, java.lang.Object> getPagedItems(
-        java.lang.Long groupId, int start, int end) {
-        return getService().getPagedItems(groupId, start, end);
+        java.lang.Long companyId, int start, int end) {
+        return getService().getPagedItems(companyId, start, end);
     }
 
-    public static int countByGroupId(java.lang.Long groupId) {
-        return getService().countByGroupId(groupId);
+    public static int countByCompanyId(java.lang.Long companyId) {
+        return getService().countByCompanyId(companyId);
     }
 
     public static void clearService() {

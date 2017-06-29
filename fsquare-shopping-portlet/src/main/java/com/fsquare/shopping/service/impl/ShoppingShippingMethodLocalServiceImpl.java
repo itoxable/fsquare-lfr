@@ -42,12 +42,12 @@ public class ShoppingShippingMethodLocalServiceImpl
 		return shoppingShippingMethodPersistence.fetchBydefaultShipping(true);
 	}
 	
-	public List<ShoppingShippingMethod> findByGroupId(long groupId) throws SystemException{
-		return shoppingShippingMethodPersistence.findByGroupId(groupId);
+	public List<ShoppingShippingMethod> findByCompanyId(long companyId) throws SystemException{
+		return shoppingShippingMethodPersistence.findByCompanyId(companyId);
 	}
 	
-	public List<ShoppingShippingMethod> findByGroupIdAndEnabled(long groupId) throws SystemException{
-		return shoppingShippingMethodPersistence.findByGroupIdAndEnabled(groupId, false);
+	public List<ShoppingShippingMethod> findByCompanyIdAndEnabled(long companyId) throws SystemException{
+		return shoppingShippingMethodPersistence.findByCompanyIdAndEnabled(companyId, false);
 	}
 }
 

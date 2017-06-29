@@ -163,7 +163,7 @@ public class ShippingManagementPortlet extends MVCPortlet{
 	        if(shippingMethodId == null || shippingMethodId == 0){
 	        	shippingMethodId = CounterLocalServiceUtil.increment(ShoppingShippingMethod.class.getName());
 	        	shoppingShippingMethod = ShoppingShippingMethodLocalServiceUtil.createShoppingShippingMethod(shippingMethodId);  
-	        	shoppingShippingMethod.setGroupId(themeDisplay.getScopeGroupId());
+	        	shoppingShippingMethod.setCompanyId(themeDisplay.getCompanyId());
 	        	shoppingShippingMethod.setCreateDate(new Date());
 	        	shoppingShippingMethod.setCompanyId(themeDisplay.getCompanyId());
 	        	shoppingShippingMethod.setUserId(themeDisplay.getUserId());

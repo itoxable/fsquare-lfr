@@ -53,33 +53,33 @@ public class ShoppingItemServiceWrapper implements ShoppingItemService,
     }
 
     @Override
-    public java.lang.Object getCompleteByGroupId(long groupId)
+    public java.lang.Object getCompleteByCompanyId(long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingItemService.getCompleteByGroupId(groupId);
+        return _shoppingItemService.getCompleteByCompanyId(companyId);
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
-        long groupId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingItemService.findByGroupId(groupId);
+        return _shoppingItemService.findByCompanyId(companyId);
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
-        java.lang.Long groupId) {
-        return _shoppingItemService.findByGroupId(groupId);
+    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByCompanyId(
+        java.lang.Long companyId) {
+        return _shoppingItemService.findByCompanyId(companyId);
     }
 
     @Override
     public java.util.Map<java.lang.String, java.lang.Object> getPagedItems(
-        java.lang.Long groupId, int start, int end) {
-        return _shoppingItemService.getPagedItems(groupId, start, end);
+        java.lang.Long companyId, int start, int end) {
+        return _shoppingItemService.getPagedItems(companyId, start, end);
     }
 
     @Override
-    public int countByGroupId(java.lang.Long groupId) {
-        return _shoppingItemService.countByGroupId(groupId);
+    public int countByCompanyId(java.lang.Long companyId) {
+        return _shoppingItemService.countByCompanyId(companyId);
     }
 
     /**

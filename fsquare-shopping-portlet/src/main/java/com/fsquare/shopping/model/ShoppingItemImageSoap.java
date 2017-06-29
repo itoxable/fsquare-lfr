@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class ShoppingItemImageSoap implements Serializable {
     private long _shoppingItemImageId;
-    private long _groupId;
+    private long _companyId;
     private long _itemId;
     private long _imageId;
     private boolean _mainImage;
@@ -26,7 +26,7 @@ public class ShoppingItemImageSoap implements Serializable {
         ShoppingItemImageSoap soapModel = new ShoppingItemImageSoap();
 
         soapModel.setShoppingItemImageId(model.getShoppingItemImageId());
-        soapModel.setGroupId(model.getGroupId());
+        soapModel.setCompanyId(model.getCompanyId());
         soapModel.setItemId(model.getItemId());
         soapModel.setImageId(model.getImageId());
         soapModel.setMainImage(model.getMainImage());
@@ -90,12 +90,12 @@ public class ShoppingItemImageSoap implements Serializable {
         _shoppingItemImageId = shoppingItemImageId;
     }
 
-    public long getGroupId() {
-        return _groupId;
+    public long getCompanyId() {
+        return _companyId;
     }
 
-    public void setGroupId(long groupId) {
-        _groupId = groupId;
+    public void setCompanyId(long companyId) {
+        _companyId = companyId;
     }
 
     public long getItemId() {

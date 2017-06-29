@@ -46,7 +46,7 @@ public class ShoppingItemStorageLocationServiceClp
 
         _methodParameterTypes5 = new String[] { "long" };
 
-        _methodName6 = "findByGroupId";
+        _methodName6 = "findByCompanyId";
 
         _methodParameterTypes6 = new String[] { "long" };
     }
@@ -195,15 +195,15 @@ public class ShoppingItemStorageLocationServiceClp
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByGroupId(
-        long groupId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemStorageLocation> findByCompanyId(
+        long companyId)
         throws com.fsquare.shopping.NoSuchShoppingItemStorageLocationException,
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName6,
-                    _methodParameterTypes6, new Object[] { groupId });
+                    _methodParameterTypes6, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

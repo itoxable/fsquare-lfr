@@ -241,13 +241,13 @@ public interface ShoppingItemImageLocalService extends BaseLocalService,
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable;
 
-    public java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByGroupIdAndItemId(
-        long groupId, long itemId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByCompanyIdAndItemId(
+        long companyId, long itemId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public com.fsquare.shopping.model.ShoppingItemImage getItemMainImage(
-        long groupId, long itemId)
+        long companyId, long itemId)
         throws com.fsquare.shopping.NoSuchShoppingItemImageException,
             com.liferay.portal.kernel.exception.SystemException;
 }

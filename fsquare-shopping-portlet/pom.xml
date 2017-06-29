@@ -17,6 +17,21 @@
  	<!-- <properties>		
 		<liferay.home>/Users/ruic/Projects/Geoplace liferay-portal-6.2-ce-ga2</liferay.home>
 	</properties> -->
+	
+	<properties>
+<!-- 		<liferay.theme.parent>classic</liferay.theme.parent> -->
+<!-- 		<liferay.theme.type>vm</liferay.theme.type> -->
+<!-- 		<liferay.home>/Users/ruic/Projects/liferay-portal-6.2-ce-ga6</liferay.home> -->
+<!-- 		<liferay.auto.deploy.dir>${liferay.home}/deploy</liferay.auto.deploy.dir> -->
+<!-- 		<liferay.app.server.deploy.dir>${liferay.home}/tomcat-7.0.62/webapps</liferay.app.server.deploy.dir> -->
+<!-- 		<liferay.app.server.lib.global.dir>${liferay.home}/tomcat-7.0.62/lib</liferay.app.server.lib.global.dir> -->
+<!-- 		<liferay.app.server.portal.dir>${liferay.home}/tomcat-7.0.62/webapps/ROOT</liferay.app.server.portal.dir> -->
+<!-- 		<liferay.version>6.2.5</liferay.version> -->
+<!-- 		<liferay.maven.plugin.version>6.2.10.13</liferay.maven.plugin.version> -->
+		
+<!-- 		<springframework-version>4.0.9.RELEASE</springframework-version> -->
+<!-- 		<jackson-version>1.4.2</jackson-version>
+ -->	</properties>
 	<build>
 		<plugins>
 			<plugin>

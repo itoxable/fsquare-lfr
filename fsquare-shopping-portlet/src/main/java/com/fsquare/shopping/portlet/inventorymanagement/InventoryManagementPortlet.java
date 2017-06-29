@@ -133,7 +133,7 @@ public class InventoryManagementPortlet extends MVCPortlet{
 	        if(shoppingItemStorageLocation == null){	        	
 	        	shoppingItemStorageLocation = ShoppingItemStorageLocationLocalServiceUtil.createShoppingItemStorageLocation(CounterLocalServiceUtil.increment(ShoppingItemStorageLocation.class.getName()));       	
 	        	
-	        	shoppingItemStorageLocation.setGroupId(themeDisplay.getScopeGroupId());
+	        	shoppingItemStorageLocation.setCompanyId(themeDisplay.getCompanyId());
 	        	shoppingItemStorageLocation.setCreateDate(new Date());
 	        	shoppingItemStorageLocation.setCompanyId(themeDisplay.getCompanyId());
 	        	shoppingItemStorageLocation.setUserId(themeDisplay.getUserId());
@@ -214,7 +214,7 @@ public class InventoryManagementPortlet extends MVCPortlet{
 	        if(storageLocationId == null || storageLocationId == 0){
 	        	storageLocationId = CounterLocalServiceUtil.increment(ShoppingStorageLocation.class.getName());
 	        	shoppingStorageLocation = ShoppingStorageLocationLocalServiceUtil.createShoppingStorageLocation(storageLocationId);  
-	        	shoppingStorageLocation.setGroupId(themeDisplay.getScopeGroupId());
+	        	shoppingStorageLocation.setCompanyId(themeDisplay.getCompanyId());
 	        	shoppingStorageLocation.setCreateDate(new Date());
 	        	shoppingStorageLocation.setCompanyId(themeDisplay.getCompanyId());
 	        	shoppingStorageLocation.setUserId(themeDisplay.getUserId());
@@ -308,7 +308,7 @@ public class InventoryManagementPortlet extends MVCPortlet{
 	        	Date createDate = new Date();
 	        	itemId = CounterLocalServiceUtil.increment(ShoppingItem.class.getName());
 	        	shoppingItem = ShoppingItemLocalServiceUtil.createShoppingItem(itemId);  
-	        	shoppingItem.setGroupId(themeDisplay.getScopeGroupId());
+	        	shoppingItem.setCompanyId(themeDisplay.getCompanyId());
 	        	shoppingItem.setCreateDate(createDate);
 	        	shoppingItem.setCompanyId(themeDisplay.getCompanyId());
 	        	shoppingItem.setUserId(themeDisplay.getUserId());
@@ -375,7 +375,7 @@ public class InventoryManagementPortlet extends MVCPortlet{
 	        if(itemTypeId == null || itemTypeId == 0){
 	        	itemTypeId = CounterLocalServiceUtil.increment(ShoppingItem.class.getName());
 	        	shoppingItemType = ShoppingItemTypeLocalServiceUtil.createShoppingItemType(itemTypeId);  
-	        	shoppingItemType.setGroupId(themeDisplay.getScopeGroupId());
+	        	shoppingItemType.setCompanyId(themeDisplay.getCompanyId());
 	        	shoppingItemType.setCreateDate(new Date());
 	        	shoppingItemType.setCompanyId(themeDisplay.getCompanyId());
 	        	shoppingItemType.setUserId(themeDisplay.getUserId());

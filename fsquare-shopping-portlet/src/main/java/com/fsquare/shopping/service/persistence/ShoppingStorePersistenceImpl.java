@@ -186,15 +186,15 @@ public class ShoppingStorePersistenceImpl extends BasePersistenceImpl<ShoppingSt
     /**
      * Creates a new shopping store with the primary key. Does not add the shopping store to the database.
      *
-     * @param groupId the primary key for the new shopping store
+     * @param companyId the primary key for the new shopping store
      * @return the new shopping store
      */
     @Override
-    public ShoppingStore create(long groupId) {
+    public ShoppingStore create(long companyId) {
         ShoppingStore shoppingStore = new ShoppingStoreImpl();
 
         shoppingStore.setNew(true);
-        shoppingStore.setPrimaryKey(groupId);
+        shoppingStore.setPrimaryKey(companyId);
 
         return shoppingStore;
     }
@@ -202,15 +202,15 @@ public class ShoppingStorePersistenceImpl extends BasePersistenceImpl<ShoppingSt
     /**
      * Removes the shopping store with the primary key from the database. Also notifies the appropriate model listeners.
      *
-     * @param groupId the primary key of the shopping store
+     * @param companyId the primary key of the shopping store
      * @return the shopping store that was removed
      * @throws com.fsquare.shopping.NoSuchShoppingStoreException if a shopping store with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingStore remove(long groupId)
+    public ShoppingStore remove(long companyId)
         throws NoSuchShoppingStoreException, SystemException {
-        return remove((Serializable) groupId);
+        return remove((Serializable) companyId);
     }
 
     /**
@@ -331,7 +331,6 @@ public class ShoppingStorePersistenceImpl extends BasePersistenceImpl<ShoppingSt
         shoppingStoreImpl.setNew(shoppingStore.isNew());
         shoppingStoreImpl.setPrimaryKey(shoppingStore.getPrimaryKey());
 
-        shoppingStoreImpl.setGroupId(shoppingStore.getGroupId());
         shoppingStoreImpl.setCompanyId(shoppingStore.getCompanyId());
         shoppingStoreImpl.setUserId(shoppingStore.getUserId());
         shoppingStoreImpl.setUserName(shoppingStore.getUserName());
@@ -399,15 +398,15 @@ public class ShoppingStorePersistenceImpl extends BasePersistenceImpl<ShoppingSt
     /**
      * Returns the shopping store with the primary key or throws a {@link com.fsquare.shopping.NoSuchShoppingStoreException} if it could not be found.
      *
-     * @param groupId the primary key of the shopping store
+     * @param companyId the primary key of the shopping store
      * @return the shopping store
      * @throws com.fsquare.shopping.NoSuchShoppingStoreException if a shopping store with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingStore findByPrimaryKey(long groupId)
+    public ShoppingStore findByPrimaryKey(long companyId)
         throws NoSuchShoppingStoreException, SystemException {
-        return findByPrimaryKey((Serializable) groupId);
+        return findByPrimaryKey((Serializable) companyId);
     }
 
     /**
@@ -458,14 +457,14 @@ public class ShoppingStorePersistenceImpl extends BasePersistenceImpl<ShoppingSt
     /**
      * Returns the shopping store with the primary key or returns <code>null</code> if it could not be found.
      *
-     * @param groupId the primary key of the shopping store
+     * @param companyId the primary key of the shopping store
      * @return the shopping store, or <code>null</code> if a shopping store with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingStore fetchByPrimaryKey(long groupId)
+    public ShoppingStore fetchByPrimaryKey(long companyId)
         throws SystemException {
-        return fetchByPrimaryKey((Serializable) groupId);
+        return fetchByPrimaryKey((Serializable) companyId);
     }
 
     /**

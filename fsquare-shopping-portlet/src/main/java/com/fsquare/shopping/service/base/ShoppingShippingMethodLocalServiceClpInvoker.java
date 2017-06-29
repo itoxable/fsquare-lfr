@@ -156,11 +156,11 @@ public class ShoppingShippingMethodLocalServiceClpInvoker {
 
         _methodParameterTypes101 = new String[] {  };
 
-        _methodName102 = "findByGroupId";
+        _methodName102 = "findByCompanyId";
 
         _methodParameterTypes102 = new String[] { "long" };
 
-        _methodName103 = "findByGroupIdAndEnabled";
+        _methodName103 = "findByCompanyIdAndEnabled";
 
         _methodParameterTypes103 = new String[] { "long" };
     }
@@ -280,12 +280,12 @@ public class ShoppingShippingMethodLocalServiceClpInvoker {
 
         if (_methodName102.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
-            return ShoppingShippingMethodLocalServiceUtil.findByGroupId(((Long) arguments[0]).longValue());
+            return ShoppingShippingMethodLocalServiceUtil.findByCompanyId(((Long) arguments[0]).longValue());
         }
 
         if (_methodName103.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
-            return ShoppingShippingMethodLocalServiceUtil.findByGroupIdAndEnabled(((Long) arguments[0]).longValue());
+            return ShoppingShippingMethodLocalServiceUtil.findByCompanyIdAndEnabled(((Long) arguments[0]).longValue());
         }
 
         throw new UnsupportedOperationException();

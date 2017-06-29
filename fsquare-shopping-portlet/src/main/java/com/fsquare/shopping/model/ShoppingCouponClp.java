@@ -24,7 +24,6 @@ import java.util.Map;
 public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
     implements ShoppingCoupon {
     private long _couponId;
-    private long _groupId;
     private long _companyId;
     private long _userId;
     private String _userUuid;
@@ -84,7 +83,6 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("couponId", getCouponId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -112,12 +110,6 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
 
         if (couponId != null) {
             setCouponId(couponId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -239,28 +231,6 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
                 Method method = clazz.getMethod("setCouponId", long.class);
 
                 method.invoke(_shoppingCouponRemoteModel, couponId);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
-    }
-
-    @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _groupId = groupId;
-
-        if (_shoppingCouponRemoteModel != null) {
-            try {
-                Class<?> clazz = _shoppingCouponRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setGroupId", long.class);
-
-                method.invoke(_shoppingCouponRemoteModel, groupId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -727,7 +697,6 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
         ShoppingCouponClp clone = new ShoppingCouponClp();
 
         clone.setCouponId(getCouponId());
-        clone.setGroupId(getGroupId());
         clone.setCompanyId(getCompanyId());
         clone.setUserId(getUserId());
         clone.setUserName(getUserName());
@@ -795,12 +764,10 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(39);
+        StringBundler sb = new StringBundler(37);
 
         sb.append("{couponId=");
         sb.append(getCouponId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
         sb.append(", companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
@@ -842,7 +809,7 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(61);
+        StringBundler sb = new StringBundler(58);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingCoupon");
@@ -851,10 +818,6 @@ public class ShoppingCouponClp extends BaseModelImpl<ShoppingCoupon>
         sb.append(
             "<column><column-name>couponId</column-name><column-value><![CDATA[");
         sb.append(getCouponId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");

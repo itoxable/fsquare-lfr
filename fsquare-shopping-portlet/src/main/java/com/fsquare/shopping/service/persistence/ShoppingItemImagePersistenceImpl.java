@@ -73,77 +73,79 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingItemImageModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
+        new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingItemImageModelImpl.FINDER_CACHE_ENABLED,
             ShoppingItemImageImpl.class,
-            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyId",
             new String[] {
                 Long.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
             });
-    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
         new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingItemImageModelImpl.FINDER_CACHE_ENABLED,
             ShoppingItemImageImpl.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
             new String[] { Long.class.getName() },
-            ShoppingItemImageModelImpl.GROUPID_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingItemImageModelImpl.COMPANYID_COLUMN_BITMASK);
+    public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingItemImageModelImpl.FINDER_CACHE_ENABLED, Long.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
             new String[] { Long.class.getName() });
-    private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "shoppingItemImage.groupId = ?";
-    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPIDANDITEMID =
+    private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "shoppingItemImage.companyId = ?";
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYIDANDITEMID =
         new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingItemImageModelImpl.FINDER_CACHE_ENABLED,
             ShoppingItemImageImpl.class,
-            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupIdAndItemId",
+            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyIdAndItemId",
             new String[] {
                 Long.class.getName(), Long.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
             });
-    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDITEMID =
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDITEMID =
         new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingItemImageModelImpl.FINDER_CACHE_ENABLED,
             ShoppingItemImageImpl.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-            "findByGroupIdAndItemId",
+            "findByCompanyIdAndItemId",
             new String[] { Long.class.getName(), Long.class.getName() },
-            ShoppingItemImageModelImpl.GROUPID_COLUMN_BITMASK |
+            ShoppingItemImageModelImpl.COMPANYID_COLUMN_BITMASK |
             ShoppingItemImageModelImpl.ITEMID_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_GROUPIDANDITEMID = new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYIDANDITEMID = new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingItemImageModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-            "countByGroupIdAndItemId",
+            "countByCompanyIdAndItemId",
             new String[] { Long.class.getName(), Long.class.getName() });
-    private static final String _FINDER_COLUMN_GROUPIDANDITEMID_GROUPID_2 = "shoppingItemImage.groupId = ? AND ";
-    private static final String _FINDER_COLUMN_GROUPIDANDITEMID_ITEMID_2 = "shoppingItemImage.itemId = ?";
-    public static final FinderPath FINDER_PATH_FETCH_BY_GROUPIDANDITEMANDMAIN = new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
+    private static final String _FINDER_COLUMN_COMPANYIDANDITEMID_COMPANYID_2 = "shoppingItemImage.companyId = ? AND ";
+    private static final String _FINDER_COLUMN_COMPANYIDANDITEMID_ITEMID_2 = "shoppingItemImage.itemId = ?";
+    public static final FinderPath FINDER_PATH_FETCH_BY_COMPANYIDANDITEMANDMAIN = new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingItemImageModelImpl.FINDER_CACHE_ENABLED,
             ShoppingItemImageImpl.class, FINDER_CLASS_NAME_ENTITY,
-            "fetchByGroupIdAndItemAndMain",
+            "fetchByCompanyIdAndItemAndMain",
             new String[] {
                 Long.class.getName(), Long.class.getName(),
                 Boolean.class.getName()
             },
-            ShoppingItemImageModelImpl.GROUPID_COLUMN_BITMASK |
+            ShoppingItemImageModelImpl.COMPANYID_COLUMN_BITMASK |
             ShoppingItemImageModelImpl.ITEMID_COLUMN_BITMASK |
             ShoppingItemImageModelImpl.MAINIMAGE_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_GROUPIDANDITEMANDMAIN = new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYIDANDITEMANDMAIN = new FinderPath(ShoppingItemImageModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingItemImageModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-            "countByGroupIdAndItemAndMain",
+            "countByCompanyIdAndItemAndMain",
             new String[] {
                 Long.class.getName(), Long.class.getName(),
                 Boolean.class.getName()
             });
-    private static final String _FINDER_COLUMN_GROUPIDANDITEMANDMAIN_GROUPID_2 = "shoppingItemImage.groupId = ? AND ";
-    private static final String _FINDER_COLUMN_GROUPIDANDITEMANDMAIN_ITEMID_2 = "shoppingItemImage.itemId = ? AND ";
-    private static final String _FINDER_COLUMN_GROUPIDANDITEMANDMAIN_MAINIMAGE_2 =
+    private static final String _FINDER_COLUMN_COMPANYIDANDITEMANDMAIN_COMPANYID_2 =
+        "shoppingItemImage.companyId = ? AND ";
+    private static final String _FINDER_COLUMN_COMPANYIDANDITEMANDMAIN_ITEMID_2 = "shoppingItemImage.itemId = ? AND ";
+    private static final String _FINDER_COLUMN_COMPANYIDANDITEMANDMAIN_MAINIMAGE_2 =
         "shoppingItemImage.mainImage = ?";
     private static final String _SQL_SELECT_SHOPPINGITEMIMAGE = "SELECT shoppingItemImage FROM ShoppingItemImage shoppingItemImage";
     private static final String _SQL_SELECT_SHOPPINGITEMIMAGE_WHERE = "SELECT shoppingItemImage FROM ShoppingItemImage shoppingItemImage WHERE ";
@@ -183,45 +185,46 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns all the shopping item images where groupId = &#63;.
+     * Returns all the shopping item images where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the matching shopping item images
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingItemImage> findByGroupId(long groupId)
+    public List<ShoppingItemImage> findByCompanyId(long companyId)
         throws SystemException {
-        return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+        return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+            null);
     }
 
     /**
-     * Returns a range of all the shopping item images where groupId = &#63;.
+     * Returns a range of all the shopping item images where companyId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingItemImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param start the lower bound of the range of shopping item images
      * @param end the upper bound of the range of shopping item images (not inclusive)
      * @return the range of matching shopping item images
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingItemImage> findByGroupId(long groupId, int start,
+    public List<ShoppingItemImage> findByCompanyId(long companyId, int start,
         int end) throws SystemException {
-        return findByGroupId(groupId, start, end, null);
+        return findByCompanyId(companyId, start, end, null);
     }
 
     /**
-     * Returns an ordered range of all the shopping item images where groupId = &#63;.
+     * Returns an ordered range of all the shopping item images where companyId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingItemImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param start the lower bound of the range of shopping item images
      * @param end the upper bound of the range of shopping item images (not inclusive)
      * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -229,7 +232,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingItemImage> findByGroupId(long groupId, int start,
+    public List<ShoppingItemImage> findByCompanyId(long companyId, int start,
         int end, OrderByComparator orderByComparator) throws SystemException {
         boolean pagination = true;
         FinderPath finderPath = null;
@@ -238,11 +241,11 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
         if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
                 (orderByComparator == null)) {
             pagination = false;
-            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-            finderArgs = new Object[] { groupId };
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
+            finderArgs = new Object[] { companyId };
         } else {
-            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-            finderArgs = new Object[] { groupId, start, end, orderByComparator };
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
+            finderArgs = new Object[] { companyId, start, end, orderByComparator };
         }
 
         List<ShoppingItemImage> list = (List<ShoppingItemImage>) FinderCacheUtil.getResult(finderPath,
@@ -250,7 +253,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
         if ((list != null) && !list.isEmpty()) {
             for (ShoppingItemImage shoppingItemImage : list) {
-                if ((groupId != shoppingItemImage.getGroupId())) {
+                if ((companyId != shoppingItemImage.getCompanyId())) {
                     list = null;
 
                     break;
@@ -270,7 +273,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
             query.append(_SQL_SELECT_SHOPPINGITEMIMAGE_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
             if (orderByComparator != null) {
                 appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -291,7 +294,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 if (!pagination) {
                     list = (List<ShoppingItemImage>) QueryUtil.list(q,
@@ -321,19 +324,19 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the first shopping item image in the ordered set where groupId = &#63;.
+     * Returns the first shopping item image in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping item image
      * @throws com.fsquare.shopping.NoSuchShoppingItemImageException if a matching shopping item image could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage findByGroupId_First(long groupId,
+    public ShoppingItemImage findByCompanyId_First(long companyId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingItemImageException, SystemException {
-        ShoppingItemImage shoppingItemImage = fetchByGroupId_First(groupId,
+        ShoppingItemImage shoppingItemImage = fetchByCompanyId_First(companyId,
                 orderByComparator);
 
         if (shoppingItemImage != null) {
@@ -344,8 +347,8 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -353,17 +356,17 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the first shopping item image in the ordered set where groupId = &#63;.
+     * Returns the first shopping item image in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping item image, or <code>null</code> if a matching shopping item image could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage fetchByGroupId_First(long groupId,
+    public ShoppingItemImage fetchByCompanyId_First(long companyId,
         OrderByComparator orderByComparator) throws SystemException {
-        List<ShoppingItemImage> list = findByGroupId(groupId, 0, 1,
+        List<ShoppingItemImage> list = findByCompanyId(companyId, 0, 1,
                 orderByComparator);
 
         if (!list.isEmpty()) {
@@ -374,19 +377,19 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the last shopping item image in the ordered set where groupId = &#63;.
+     * Returns the last shopping item image in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping item image
      * @throws com.fsquare.shopping.NoSuchShoppingItemImageException if a matching shopping item image could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage findByGroupId_Last(long groupId,
+    public ShoppingItemImage findByCompanyId_Last(long companyId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingItemImageException, SystemException {
-        ShoppingItemImage shoppingItemImage = fetchByGroupId_Last(groupId,
+        ShoppingItemImage shoppingItemImage = fetchByCompanyId_Last(companyId,
                 orderByComparator);
 
         if (shoppingItemImage != null) {
@@ -397,8 +400,8 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -406,24 +409,24 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the last shopping item image in the ordered set where groupId = &#63;.
+     * Returns the last shopping item image in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping item image, or <code>null</code> if a matching shopping item image could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage fetchByGroupId_Last(long groupId,
+    public ShoppingItemImage fetchByCompanyId_Last(long companyId,
         OrderByComparator orderByComparator) throws SystemException {
-        int count = countByGroupId(groupId);
+        int count = countByCompanyId(companyId);
 
         if (count == 0) {
             return null;
         }
 
-        List<ShoppingItemImage> list = findByGroupId(groupId, count - 1, count,
-                orderByComparator);
+        List<ShoppingItemImage> list = findByCompanyId(companyId, count - 1,
+                count, orderByComparator);
 
         if (!list.isEmpty()) {
             return list.get(0);
@@ -433,18 +436,18 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the shopping item images before and after the current shopping item image in the ordered set where groupId = &#63;.
+     * Returns the shopping item images before and after the current shopping item image in the ordered set where companyId = &#63;.
      *
      * @param shoppingItemImageId the primary key of the current shopping item image
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next shopping item image
      * @throws com.fsquare.shopping.NoSuchShoppingItemImageException if a shopping item image with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage[] findByGroupId_PrevAndNext(
-        long shoppingItemImageId, long groupId,
+    public ShoppingItemImage[] findByCompanyId_PrevAndNext(
+        long shoppingItemImageId, long companyId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingItemImageException, SystemException {
         ShoppingItemImage shoppingItemImage = findByPrimaryKey(shoppingItemImageId);
@@ -456,13 +459,13 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
             ShoppingItemImage[] array = new ShoppingItemImageImpl[3];
 
-            array[0] = getByGroupId_PrevAndNext(session, shoppingItemImage,
-                    groupId, orderByComparator, true);
+            array[0] = getByCompanyId_PrevAndNext(session, shoppingItemImage,
+                    companyId, orderByComparator, true);
 
             array[1] = shoppingItemImage;
 
-            array[2] = getByGroupId_PrevAndNext(session, shoppingItemImage,
-                    groupId, orderByComparator, false);
+            array[2] = getByCompanyId_PrevAndNext(session, shoppingItemImage,
+                    companyId, orderByComparator, false);
 
             return array;
         } catch (Exception e) {
@@ -472,8 +475,8 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
         }
     }
 
-    protected ShoppingItemImage getByGroupId_PrevAndNext(Session session,
-        ShoppingItemImage shoppingItemImage, long groupId,
+    protected ShoppingItemImage getByCompanyId_PrevAndNext(Session session,
+        ShoppingItemImage shoppingItemImage, long companyId,
         OrderByComparator orderByComparator, boolean previous) {
         StringBundler query = null;
 
@@ -486,7 +489,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
         query.append(_SQL_SELECT_SHOPPINGITEMIMAGE_WHERE);
 
-        query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+        query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
         if (orderByComparator != null) {
             String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -549,7 +552,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
         QueryPos qPos = QueryPos.getInstance(q);
 
-        qPos.add(groupId);
+        qPos.add(companyId);
 
         if (orderByComparator != null) {
             Object[] values = orderByComparator.getOrderByConditionValues(shoppingItemImage);
@@ -569,31 +572,31 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Removes all the shopping item images where groupId = &#63; from the database.
+     * Removes all the shopping item images where companyId = &#63; from the database.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeByGroupId(long groupId) throws SystemException {
-        for (ShoppingItemImage shoppingItemImage : findByGroupId(groupId,
+    public void removeByCompanyId(long companyId) throws SystemException {
+        for (ShoppingItemImage shoppingItemImage : findByCompanyId(companyId,
                 QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
             remove(shoppingItemImage);
         }
     }
 
     /**
-     * Returns the number of shopping item images where groupId = &#63;.
+     * Returns the number of shopping item images where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the number of matching shopping item images
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByGroupId(long groupId) throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+    public int countByCompanyId(long companyId) throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
-        Object[] finderArgs = new Object[] { groupId };
+        Object[] finderArgs = new Object[] { companyId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -603,7 +606,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
             query.append(_SQL_COUNT_SHOPPINGITEMIMAGE_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
             String sql = query.toString();
 
@@ -616,7 +619,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 count = (Long) q.uniqueResult();
 
@@ -634,28 +637,28 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns all the shopping item images where groupId = &#63; and itemId = &#63;.
+     * Returns all the shopping item images where companyId = &#63; and itemId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @return the matching shopping item images
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingItemImage> findByGroupIdAndItemId(long groupId,
+    public List<ShoppingItemImage> findByCompanyIdAndItemId(long companyId,
         long itemId) throws SystemException {
-        return findByGroupIdAndItemId(groupId, itemId, QueryUtil.ALL_POS,
+        return findByCompanyIdAndItemId(companyId, itemId, QueryUtil.ALL_POS,
             QueryUtil.ALL_POS, null);
     }
 
     /**
-     * Returns a range of all the shopping item images where groupId = &#63; and itemId = &#63;.
+     * Returns a range of all the shopping item images where companyId = &#63; and itemId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingItemImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @param start the lower bound of the range of shopping item images
      * @param end the upper bound of the range of shopping item images (not inclusive)
@@ -663,19 +666,19 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingItemImage> findByGroupIdAndItemId(long groupId,
+    public List<ShoppingItemImage> findByCompanyIdAndItemId(long companyId,
         long itemId, int start, int end) throws SystemException {
-        return findByGroupIdAndItemId(groupId, itemId, start, end, null);
+        return findByCompanyIdAndItemId(companyId, itemId, start, end, null);
     }
 
     /**
-     * Returns an ordered range of all the shopping item images where groupId = &#63; and itemId = &#63;.
+     * Returns an ordered range of all the shopping item images where companyId = &#63; and itemId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingItemImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @param start the lower bound of the range of shopping item images
      * @param end the upper bound of the range of shopping item images (not inclusive)
@@ -684,7 +687,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingItemImage> findByGroupIdAndItemId(long groupId,
+    public List<ShoppingItemImage> findByCompanyIdAndItemId(long companyId,
         long itemId, int start, int end, OrderByComparator orderByComparator)
         throws SystemException {
         boolean pagination = true;
@@ -694,12 +697,12 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
         if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
                 (orderByComparator == null)) {
             pagination = false;
-            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDITEMID;
-            finderArgs = new Object[] { groupId, itemId };
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDITEMID;
+            finderArgs = new Object[] { companyId, itemId };
         } else {
-            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPIDANDITEMID;
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYIDANDITEMID;
             finderArgs = new Object[] {
-                    groupId, itemId,
+                    companyId, itemId,
                     
                     start, end, orderByComparator
                 };
@@ -710,7 +713,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
         if ((list != null) && !list.isEmpty()) {
             for (ShoppingItemImage shoppingItemImage : list) {
-                if ((groupId != shoppingItemImage.getGroupId()) ||
+                if ((companyId != shoppingItemImage.getCompanyId()) ||
                         (itemId != shoppingItemImage.getItemId())) {
                     list = null;
 
@@ -731,9 +734,9 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
             query.append(_SQL_SELECT_SHOPPINGITEMIMAGE_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDITEMID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDITEMID_COMPANYID_2);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDITEMID_ITEMID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDITEMID_ITEMID_2);
 
             if (orderByComparator != null) {
                 appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -754,7 +757,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 qPos.add(itemId);
 
@@ -786,9 +789,9 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the first shopping item image in the ordered set where groupId = &#63; and itemId = &#63;.
+     * Returns the first shopping item image in the ordered set where companyId = &#63; and itemId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping item image
@@ -796,10 +799,10 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage findByGroupIdAndItemId_First(long groupId,
+    public ShoppingItemImage findByCompanyIdAndItemId_First(long companyId,
         long itemId, OrderByComparator orderByComparator)
         throws NoSuchShoppingItemImageException, SystemException {
-        ShoppingItemImage shoppingItemImage = fetchByGroupIdAndItemId_First(groupId,
+        ShoppingItemImage shoppingItemImage = fetchByCompanyIdAndItemId_First(companyId,
                 itemId, orderByComparator);
 
         if (shoppingItemImage != null) {
@@ -810,8 +813,8 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(", itemId=");
         msg.append(itemId);
@@ -822,20 +825,20 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the first shopping item image in the ordered set where groupId = &#63; and itemId = &#63;.
+     * Returns the first shopping item image in the ordered set where companyId = &#63; and itemId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping item image, or <code>null</code> if a matching shopping item image could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage fetchByGroupIdAndItemId_First(long groupId,
+    public ShoppingItemImage fetchByCompanyIdAndItemId_First(long companyId,
         long itemId, OrderByComparator orderByComparator)
         throws SystemException {
-        List<ShoppingItemImage> list = findByGroupIdAndItemId(groupId, itemId,
-                0, 1, orderByComparator);
+        List<ShoppingItemImage> list = findByCompanyIdAndItemId(companyId,
+                itemId, 0, 1, orderByComparator);
 
         if (!list.isEmpty()) {
             return list.get(0);
@@ -845,9 +848,9 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the last shopping item image in the ordered set where groupId = &#63; and itemId = &#63;.
+     * Returns the last shopping item image in the ordered set where companyId = &#63; and itemId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping item image
@@ -855,10 +858,10 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage findByGroupIdAndItemId_Last(long groupId,
+    public ShoppingItemImage findByCompanyIdAndItemId_Last(long companyId,
         long itemId, OrderByComparator orderByComparator)
         throws NoSuchShoppingItemImageException, SystemException {
-        ShoppingItemImage shoppingItemImage = fetchByGroupIdAndItemId_Last(groupId,
+        ShoppingItemImage shoppingItemImage = fetchByCompanyIdAndItemId_Last(companyId,
                 itemId, orderByComparator);
 
         if (shoppingItemImage != null) {
@@ -869,8 +872,8 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(", itemId=");
         msg.append(itemId);
@@ -881,26 +884,26 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the last shopping item image in the ordered set where groupId = &#63; and itemId = &#63;.
+     * Returns the last shopping item image in the ordered set where companyId = &#63; and itemId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping item image, or <code>null</code> if a matching shopping item image could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage fetchByGroupIdAndItemId_Last(long groupId,
+    public ShoppingItemImage fetchByCompanyIdAndItemId_Last(long companyId,
         long itemId, OrderByComparator orderByComparator)
         throws SystemException {
-        int count = countByGroupIdAndItemId(groupId, itemId);
+        int count = countByCompanyIdAndItemId(companyId, itemId);
 
         if (count == 0) {
             return null;
         }
 
-        List<ShoppingItemImage> list = findByGroupIdAndItemId(groupId, itemId,
-                count - 1, count, orderByComparator);
+        List<ShoppingItemImage> list = findByCompanyIdAndItemId(companyId,
+                itemId, count - 1, count, orderByComparator);
 
         if (!list.isEmpty()) {
             return list.get(0);
@@ -910,10 +913,10 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the shopping item images before and after the current shopping item image in the ordered set where groupId = &#63; and itemId = &#63;.
+     * Returns the shopping item images before and after the current shopping item image in the ordered set where companyId = &#63; and itemId = &#63;.
      *
      * @param shoppingItemImageId the primary key of the current shopping item image
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next shopping item image
@@ -921,8 +924,8 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage[] findByGroupIdAndItemId_PrevAndNext(
-        long shoppingItemImageId, long groupId, long itemId,
+    public ShoppingItemImage[] findByCompanyIdAndItemId_PrevAndNext(
+        long shoppingItemImageId, long companyId, long itemId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingItemImageException, SystemException {
         ShoppingItemImage shoppingItemImage = findByPrimaryKey(shoppingItemImageId);
@@ -934,13 +937,15 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
             ShoppingItemImage[] array = new ShoppingItemImageImpl[3];
 
-            array[0] = getByGroupIdAndItemId_PrevAndNext(session,
-                    shoppingItemImage, groupId, itemId, orderByComparator, true);
+            array[0] = getByCompanyIdAndItemId_PrevAndNext(session,
+                    shoppingItemImage, companyId, itemId, orderByComparator,
+                    true);
 
             array[1] = shoppingItemImage;
 
-            array[2] = getByGroupIdAndItemId_PrevAndNext(session,
-                    shoppingItemImage, groupId, itemId, orderByComparator, false);
+            array[2] = getByCompanyIdAndItemId_PrevAndNext(session,
+                    shoppingItemImage, companyId, itemId, orderByComparator,
+                    false);
 
             return array;
         } catch (Exception e) {
@@ -950,8 +955,8 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
         }
     }
 
-    protected ShoppingItemImage getByGroupIdAndItemId_PrevAndNext(
-        Session session, ShoppingItemImage shoppingItemImage, long groupId,
+    protected ShoppingItemImage getByCompanyIdAndItemId_PrevAndNext(
+        Session session, ShoppingItemImage shoppingItemImage, long companyId,
         long itemId, OrderByComparator orderByComparator, boolean previous) {
         StringBundler query = null;
 
@@ -964,9 +969,9 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
         query.append(_SQL_SELECT_SHOPPINGITEMIMAGE_WHERE);
 
-        query.append(_FINDER_COLUMN_GROUPIDANDITEMID_GROUPID_2);
+        query.append(_FINDER_COLUMN_COMPANYIDANDITEMID_COMPANYID_2);
 
-        query.append(_FINDER_COLUMN_GROUPIDANDITEMID_ITEMID_2);
+        query.append(_FINDER_COLUMN_COMPANYIDANDITEMID_ITEMID_2);
 
         if (orderByComparator != null) {
             String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1029,7 +1034,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
         QueryPos qPos = QueryPos.getInstance(q);
 
-        qPos.add(groupId);
+        qPos.add(companyId);
 
         qPos.add(itemId);
 
@@ -1051,35 +1056,35 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Removes all the shopping item images where groupId = &#63; and itemId = &#63; from the database.
+     * Removes all the shopping item images where companyId = &#63; and itemId = &#63; from the database.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeByGroupIdAndItemId(long groupId, long itemId)
+    public void removeByCompanyIdAndItemId(long companyId, long itemId)
         throws SystemException {
-        for (ShoppingItemImage shoppingItemImage : findByGroupIdAndItemId(
-                groupId, itemId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+        for (ShoppingItemImage shoppingItemImage : findByCompanyIdAndItemId(
+                companyId, itemId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
             remove(shoppingItemImage);
         }
     }
 
     /**
-     * Returns the number of shopping item images where groupId = &#63; and itemId = &#63;.
+     * Returns the number of shopping item images where companyId = &#63; and itemId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @return the number of matching shopping item images
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByGroupIdAndItemId(long groupId, long itemId)
+    public int countByCompanyIdAndItemId(long companyId, long itemId)
         throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPIDANDITEMID;
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYIDANDITEMID;
 
-        Object[] finderArgs = new Object[] { groupId, itemId };
+        Object[] finderArgs = new Object[] { companyId, itemId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -1089,9 +1094,9 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
             query.append(_SQL_COUNT_SHOPPINGITEMIMAGE_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDITEMID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDITEMID_COMPANYID_2);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDITEMID_ITEMID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDITEMID_ITEMID_2);
 
             String sql = query.toString();
 
@@ -1104,7 +1109,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 qPos.add(itemId);
 
@@ -1124,9 +1129,9 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the shopping item image where groupId = &#63; and itemId = &#63; and mainImage = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingItemImageException} if it could not be found.
+     * Returns the shopping item image where companyId = &#63; and itemId = &#63; and mainImage = &#63; or throws a {@link com.fsquare.shopping.NoSuchShoppingItemImageException} if it could not be found.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @param mainImage the main image
      * @return the matching shopping item image
@@ -1134,10 +1139,10 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage findByGroupIdAndItemAndMain(long groupId,
+    public ShoppingItemImage findByCompanyIdAndItemAndMain(long companyId,
         long itemId, boolean mainImage)
         throws NoSuchShoppingItemImageException, SystemException {
-        ShoppingItemImage shoppingItemImage = fetchByGroupIdAndItemAndMain(groupId,
+        ShoppingItemImage shoppingItemImage = fetchByCompanyIdAndItemAndMain(companyId,
                 itemId, mainImage);
 
         if (shoppingItemImage == null) {
@@ -1145,8 +1150,8 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
             msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-            msg.append("groupId=");
-            msg.append(groupId);
+            msg.append("companyId=");
+            msg.append(companyId);
 
             msg.append(", itemId=");
             msg.append(itemId);
@@ -1167,24 +1172,24 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Returns the shopping item image where groupId = &#63; and itemId = &#63; and mainImage = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+     * Returns the shopping item image where companyId = &#63; and itemId = &#63; and mainImage = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @param mainImage the main image
      * @return the matching shopping item image, or <code>null</code> if a matching shopping item image could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage fetchByGroupIdAndItemAndMain(long groupId,
+    public ShoppingItemImage fetchByCompanyIdAndItemAndMain(long companyId,
         long itemId, boolean mainImage) throws SystemException {
-        return fetchByGroupIdAndItemAndMain(groupId, itemId, mainImage, true);
+        return fetchByCompanyIdAndItemAndMain(companyId, itemId, mainImage, true);
     }
 
     /**
-     * Returns the shopping item image where groupId = &#63; and itemId = &#63; and mainImage = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+     * Returns the shopping item image where companyId = &#63; and itemId = &#63; and mainImage = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @param mainImage the main image
      * @param retrieveFromCache whether to use the finder cache
@@ -1192,22 +1197,22 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage fetchByGroupIdAndItemAndMain(long groupId,
+    public ShoppingItemImage fetchByCompanyIdAndItemAndMain(long companyId,
         long itemId, boolean mainImage, boolean retrieveFromCache)
         throws SystemException {
-        Object[] finderArgs = new Object[] { groupId, itemId, mainImage };
+        Object[] finderArgs = new Object[] { companyId, itemId, mainImage };
 
         Object result = null;
 
         if (retrieveFromCache) {
-            result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_GROUPIDANDITEMANDMAIN,
+            result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_COMPANYIDANDITEMANDMAIN,
                     finderArgs, this);
         }
 
         if (result instanceof ShoppingItemImage) {
             ShoppingItemImage shoppingItemImage = (ShoppingItemImage) result;
 
-            if ((groupId != shoppingItemImage.getGroupId()) ||
+            if ((companyId != shoppingItemImage.getCompanyId()) ||
                     (itemId != shoppingItemImage.getItemId()) ||
                     (mainImage != shoppingItemImage.getMainImage())) {
                 result = null;
@@ -1219,11 +1224,11 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
             query.append(_SQL_SELECT_SHOPPINGITEMIMAGE_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDITEMANDMAIN_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDITEMANDMAIN_COMPANYID_2);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDITEMANDMAIN_ITEMID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDITEMANDMAIN_ITEMID_2);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDITEMANDMAIN_MAINIMAGE_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDITEMANDMAIN_MAINIMAGE_2);
 
             String sql = query.toString();
 
@@ -1236,7 +1241,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 qPos.add(itemId);
 
@@ -1245,7 +1250,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
                 List<ShoppingItemImage> list = q.list();
 
                 if (list.isEmpty()) {
-                    FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_GROUPIDANDITEMANDMAIN,
+                    FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_COMPANYIDANDITEMANDMAIN,
                         finderArgs, list);
                 } else {
                     ShoppingItemImage shoppingItemImage = list.get(0);
@@ -1254,15 +1259,15 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
                     cacheResult(shoppingItemImage);
 
-                    if ((shoppingItemImage.getGroupId() != groupId) ||
+                    if ((shoppingItemImage.getCompanyId() != companyId) ||
                             (shoppingItemImage.getItemId() != itemId) ||
                             (shoppingItemImage.getMainImage() != mainImage)) {
-                        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_GROUPIDANDITEMANDMAIN,
+                        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_COMPANYIDANDITEMANDMAIN,
                             finderArgs, shoppingItemImage);
                     }
                 }
             } catch (Exception e) {
-                FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_GROUPIDANDITEMANDMAIN,
+                FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_COMPANYIDANDITEMANDMAIN,
                     finderArgs);
 
                 throw processException(e);
@@ -1279,39 +1284,39 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     }
 
     /**
-     * Removes the shopping item image where groupId = &#63; and itemId = &#63; and mainImage = &#63; from the database.
+     * Removes the shopping item image where companyId = &#63; and itemId = &#63; and mainImage = &#63; from the database.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @param mainImage the main image
      * @return the shopping item image that was removed
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingItemImage removeByGroupIdAndItemAndMain(long groupId,
+    public ShoppingItemImage removeByCompanyIdAndItemAndMain(long companyId,
         long itemId, boolean mainImage)
         throws NoSuchShoppingItemImageException, SystemException {
-        ShoppingItemImage shoppingItemImage = findByGroupIdAndItemAndMain(groupId,
+        ShoppingItemImage shoppingItemImage = findByCompanyIdAndItemAndMain(companyId,
                 itemId, mainImage);
 
         return remove(shoppingItemImage);
     }
 
     /**
-     * Returns the number of shopping item images where groupId = &#63; and itemId = &#63; and mainImage = &#63;.
+     * Returns the number of shopping item images where companyId = &#63; and itemId = &#63; and mainImage = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param itemId the item ID
      * @param mainImage the main image
      * @return the number of matching shopping item images
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByGroupIdAndItemAndMain(long groupId, long itemId,
+    public int countByCompanyIdAndItemAndMain(long companyId, long itemId,
         boolean mainImage) throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPIDANDITEMANDMAIN;
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYIDANDITEMANDMAIN;
 
-        Object[] finderArgs = new Object[] { groupId, itemId, mainImage };
+        Object[] finderArgs = new Object[] { companyId, itemId, mainImage };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -1321,11 +1326,11 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
             query.append(_SQL_COUNT_SHOPPINGITEMIMAGE_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDITEMANDMAIN_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDITEMANDMAIN_COMPANYID_2);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDITEMANDMAIN_ITEMID_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDITEMANDMAIN_ITEMID_2);
 
-            query.append(_FINDER_COLUMN_GROUPIDANDITEMANDMAIN_MAINIMAGE_2);
+            query.append(_FINDER_COLUMN_COMPANYIDANDITEMANDMAIN_MAINIMAGE_2);
 
             String sql = query.toString();
 
@@ -1338,7 +1343,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 qPos.add(itemId);
 
@@ -1370,9 +1375,9 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
             ShoppingItemImageImpl.class, shoppingItemImage.getPrimaryKey(),
             shoppingItemImage);
 
-        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_GROUPIDANDITEMANDMAIN,
+        FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_COMPANYIDANDITEMANDMAIN,
             new Object[] {
-                shoppingItemImage.getGroupId(), shoppingItemImage.getItemId(),
+                shoppingItemImage.getCompanyId(), shoppingItemImage.getItemId(),
                 shoppingItemImage.getMainImage()
             }, shoppingItemImage);
 
@@ -1452,29 +1457,29 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
     protected void cacheUniqueFindersCache(ShoppingItemImage shoppingItemImage) {
         if (shoppingItemImage.isNew()) {
             Object[] args = new Object[] {
-                    shoppingItemImage.getGroupId(),
+                    shoppingItemImage.getCompanyId(),
                     shoppingItemImage.getItemId(),
                     shoppingItemImage.getMainImage()
                 };
 
-            FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPIDANDITEMANDMAIN,
+            FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYIDANDITEMANDMAIN,
                 args, Long.valueOf(1));
-            FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_GROUPIDANDITEMANDMAIN,
+            FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_COMPANYIDANDITEMANDMAIN,
                 args, shoppingItemImage);
         } else {
             ShoppingItemImageModelImpl shoppingItemImageModelImpl = (ShoppingItemImageModelImpl) shoppingItemImage;
 
             if ((shoppingItemImageModelImpl.getColumnBitmask() &
-                    FINDER_PATH_FETCH_BY_GROUPIDANDITEMANDMAIN.getColumnBitmask()) != 0) {
+                    FINDER_PATH_FETCH_BY_COMPANYIDANDITEMANDMAIN.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingItemImage.getGroupId(),
+                        shoppingItemImage.getCompanyId(),
                         shoppingItemImage.getItemId(),
                         shoppingItemImage.getMainImage()
                     };
 
-                FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPIDANDITEMANDMAIN,
+                FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYIDANDITEMANDMAIN,
                     args, Long.valueOf(1));
-                FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_GROUPIDANDITEMANDMAIN,
+                FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_COMPANYIDANDITEMANDMAIN,
                     args, shoppingItemImage);
             }
         }
@@ -1484,26 +1489,26 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
         ShoppingItemImageModelImpl shoppingItemImageModelImpl = (ShoppingItemImageModelImpl) shoppingItemImage;
 
         Object[] args = new Object[] {
-                shoppingItemImage.getGroupId(), shoppingItemImage.getItemId(),
+                shoppingItemImage.getCompanyId(), shoppingItemImage.getItemId(),
                 shoppingItemImage.getMainImage()
             };
 
-        FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDITEMANDMAIN,
+        FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYIDANDITEMANDMAIN,
             args);
-        FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_GROUPIDANDITEMANDMAIN,
+        FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_COMPANYIDANDITEMANDMAIN,
             args);
 
         if ((shoppingItemImageModelImpl.getColumnBitmask() &
-                FINDER_PATH_FETCH_BY_GROUPIDANDITEMANDMAIN.getColumnBitmask()) != 0) {
+                FINDER_PATH_FETCH_BY_COMPANYIDANDITEMANDMAIN.getColumnBitmask()) != 0) {
             args = new Object[] {
-                    shoppingItemImageModelImpl.getOriginalGroupId(),
+                    shoppingItemImageModelImpl.getOriginalCompanyId(),
                     shoppingItemImageModelImpl.getOriginalItemId(),
                     shoppingItemImageModelImpl.getOriginalMainImage()
                 };
 
-            FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDITEMANDMAIN,
+            FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYIDANDITEMANDMAIN,
                 args);
-            FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_GROUPIDANDITEMANDMAIN,
+            FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_COMPANYIDANDITEMANDMAIN,
                 args);
         }
     }
@@ -1642,42 +1647,44 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
         }
         else {
             if ((shoppingItemImageModelImpl.getColumnBitmask() &
-                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingItemImageModelImpl.getOriginalGroupId()
+                        shoppingItemImageModelImpl.getOriginalCompanyId()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
                     args);
 
-                args = new Object[] { shoppingItemImageModelImpl.getGroupId() };
+                args = new Object[] { shoppingItemImageModelImpl.getCompanyId() };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
                     args);
             }
 
             if ((shoppingItemImageModelImpl.getColumnBitmask() &
-                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDITEMID.getColumnBitmask()) != 0) {
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDITEMID.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingItemImageModelImpl.getOriginalGroupId(),
+                        shoppingItemImageModelImpl.getOriginalCompanyId(),
                         shoppingItemImageModelImpl.getOriginalItemId()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDITEMID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYIDANDITEMID,
                     args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDITEMID,
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDITEMID,
                     args);
 
                 args = new Object[] {
-                        shoppingItemImageModelImpl.getGroupId(),
+                        shoppingItemImageModelImpl.getCompanyId(),
                         shoppingItemImageModelImpl.getItemId()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDITEMID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYIDANDITEMID,
                     args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDITEMID,
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYIDANDITEMID,
                     args);
             }
         }
@@ -1704,7 +1711,7 @@ public class ShoppingItemImagePersistenceImpl extends BasePersistenceImpl<Shoppi
         shoppingItemImageImpl.setPrimaryKey(shoppingItemImage.getPrimaryKey());
 
         shoppingItemImageImpl.setShoppingItemImageId(shoppingItemImage.getShoppingItemImageId());
-        shoppingItemImageImpl.setGroupId(shoppingItemImage.getGroupId());
+        shoppingItemImageImpl.setCompanyId(shoppingItemImage.getCompanyId());
         shoppingItemImageImpl.setItemId(shoppingItemImage.getItemId());
         shoppingItemImageImpl.setImageId(shoppingItemImage.getImageId());
         shoppingItemImageImpl.setMainImage(shoppingItemImage.isMainImage());

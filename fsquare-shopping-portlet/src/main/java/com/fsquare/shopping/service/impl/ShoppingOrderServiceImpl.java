@@ -29,16 +29,16 @@ public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
      * Never reference this interface directly. Always use {@link com.fsquare.shopping.service.ShoppingOrderServiceUtil} to access the shopping order remote service.
      */
 	
-	public List<ShoppingOrder> findByGroupId(long groupId) throws SystemException{
-		return shoppingOrderPersistence.findByGroupId(groupId);
+	public List<ShoppingOrder> findByCompanyId(long companyId) throws SystemException{
+		return shoppingOrderPersistence.findByCompanyId(companyId);
 	}
 	
-	public List<ShoppingOrder> findBygroupIdAndUserId(long groupId, long userId) throws SystemException{
-		return shoppingOrderPersistence.findBygroupIdAndUserId(groupId, userId);
+	public List<ShoppingOrder> findByCompanyIdAndUserId(long companyId, long userId) throws SystemException{
+		return shoppingOrderPersistence.findBycompanyIdAndUserId(companyId, userId);
 	}
 	
-	public List<ShoppingOrder> findBygroupIdAndEmail(long groupId, String email) throws SystemException{
-		return shoppingOrderPersistence.findBygroupIdAndEmail(groupId, email);
+	public List<ShoppingOrder> findBygroupIdAndEmail(long companyId, String email) throws SystemException{
+		return shoppingOrderPersistence.findBycompanyIdAndEmail(companyId, email);
 	}
 	
 	public double getOrderTotal(Collection<ShoppingOrderItem> shoppingOrderItemList){

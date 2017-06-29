@@ -43,7 +43,6 @@ public class ShoppingItemStorageLocationWrapper
         attributes.put("itemStorageLocationId", getItemStorageLocationId());
         attributes.put("itemId", getItemId());
         attributes.put("storageLocationId", getStorageLocationId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -74,12 +73,6 @@ public class ShoppingItemStorageLocationWrapper
 
         if (storageLocationId != null) {
             setStorageLocationId(storageLocationId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -203,26 +196,6 @@ public class ShoppingItemStorageLocationWrapper
     @Override
     public void setStorageLocationId(long storageLocationId) {
         _shoppingItemStorageLocation.setStorageLocationId(storageLocationId);
-    }
-
-    /**
-    * Returns the group ID of this shopping item storage location.
-    *
-    * @return the group ID of this shopping item storage location
-    */
-    @Override
-    public long getGroupId() {
-        return _shoppingItemStorageLocation.getGroupId();
-    }
-
-    /**
-    * Sets the group ID of this shopping item storage location.
-    *
-    * @param groupId the group ID of this shopping item storage location
-    */
-    @Override
-    public void setGroupId(long groupId) {
-        _shoppingItemStorageLocation.setGroupId(groupId);
     }
 
     /**

@@ -51,10 +51,10 @@ public class ShoppingStoreServiceSoap {
     private static Log _log = LogFactoryUtil.getLog(ShoppingStoreServiceSoap.class);
 
     public static com.liferay.portlet.asset.model.AssetCategorySoap[] getShoppingAssetCategories(
-        long groupId) throws RemoteException {
+        long companyId) throws RemoteException {
         try {
             java.util.List<com.liferay.portlet.asset.model.AssetCategory> returnValue =
-                ShoppingStoreServiceUtil.getShoppingAssetCategories(groupId);
+                ShoppingStoreServiceUtil.getShoppingAssetCategories(companyId);
 
             return com.liferay.portlet.asset.model.AssetCategorySoap.toSoapModels(returnValue);
         } catch (Exception e) {
@@ -65,9 +65,9 @@ public class ShoppingStoreServiceSoap {
     }
 
     public static com.fsquare.shopping.model.ShoppingStoreSoap getShoppingStore(
-        long groupId) throws RemoteException {
+        long companyId) throws RemoteException {
         try {
-            com.fsquare.shopping.model.ShoppingStore returnValue = ShoppingStoreServiceUtil.getShoppingStore(groupId);
+            com.fsquare.shopping.model.ShoppingStore returnValue = ShoppingStoreServiceUtil.getShoppingStore(companyId);
 
             return com.fsquare.shopping.model.ShoppingStoreSoap.toSoapModel(returnValue);
         } catch (Exception e) {

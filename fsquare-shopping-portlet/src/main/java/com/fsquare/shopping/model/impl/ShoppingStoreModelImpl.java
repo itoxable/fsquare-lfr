@@ -52,7 +52,6 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
      */
     public static final String TABLE_NAME = "FsquareShopping_ShoppingStore";
     public static final Object[][] TABLE_COLUMNS = {
-            { "groupId", Types.BIGINT },
             { "companyId", Types.BIGINT },
             { "userId", Types.BIGINT },
             { "userName", Types.VARCHAR },
@@ -89,10 +88,10 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
             { "braintreeSandboxPrivateKey", Types.VARCHAR },
             { "braintreeSandboxPublicKey", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStore (groupId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(200) null,defaultEmailAddress VARCHAR(75) null,productsMainPageUuid VARCHAR(75) null,cartPageUuid VARCHAR(75) null,checkoutPageUuid VARCHAR(75) null,onAddToCart VARCHAR(75) null,currency_ VARCHAR(75) null,country VARCHAR(75) null,userTypes VARCHAR(75) null,checkoutPageFullscreen BOOLEAN,checkoutCompletePageTemplate TEXT null,orderCreatedEmailTemplate TEXT null,orderShippedEmailTemplate TEXT null,orderCreatedEmailSubject VARCHAR(75) null,orderCreatedEmailFromAddress VARCHAR(75) null,integrateWithStripe BOOLEAN,stripeTestSecretKey VARCHAR(75) null,stripeTestPublishableKey VARCHAR(75) null,stripeTesting BOOLEAN,stripeLiveSecretKey VARCHAR(75) null,stripeLivePublishableKey VARCHAR(75) null,stripeApiVersion VARCHAR(75) null,integrateWithBraintree BOOLEAN,braintreePrivateKey VARCHAR(75) null,braintreePublicKey VARCHAR(75) null,braintreeMerchantId VARCHAR(75) null,useBraintreeSandbox BOOLEAN,braintreeSandboxMerchantId VARCHAR(75) null,braintreeSandboxPrivateKey VARCHAR(75) null,braintreeSandboxPublicKey VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStore (companyId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(200) null,defaultEmailAddress VARCHAR(75) null,productsMainPageUuid VARCHAR(75) null,cartPageUuid VARCHAR(75) null,checkoutPageUuid VARCHAR(75) null,onAddToCart VARCHAR(75) null,currency_ VARCHAR(75) null,country VARCHAR(75) null,userTypes VARCHAR(75) null,checkoutPageFullscreen BOOLEAN,checkoutCompletePageTemplate TEXT null,orderCreatedEmailTemplate TEXT null,orderShippedEmailTemplate TEXT null,orderCreatedEmailSubject VARCHAR(75) null,orderCreatedEmailFromAddress VARCHAR(75) null,integrateWithStripe BOOLEAN,stripeTestSecretKey VARCHAR(75) null,stripeTestPublishableKey VARCHAR(75) null,stripeTesting BOOLEAN,stripeLiveSecretKey VARCHAR(75) null,stripeLivePublishableKey VARCHAR(75) null,stripeApiVersion VARCHAR(75) null,integrateWithBraintree BOOLEAN,braintreePrivateKey VARCHAR(75) null,braintreePublicKey VARCHAR(75) null,braintreeMerchantId VARCHAR(75) null,useBraintreeSandbox BOOLEAN,braintreeSandboxMerchantId VARCHAR(75) null,braintreeSandboxPrivateKey VARCHAR(75) null,braintreeSandboxPublicKey VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingStore";
-    public static final String ORDER_BY_JPQL = " ORDER BY shoppingStore.groupId ASC";
-    public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingStore.groupId ASC";
+    public static final String ORDER_BY_JPQL = " ORDER BY shoppingStore.companyId ASC";
+    public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingStore.companyId ASC";
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";
     public static final String TX_MANAGER = "liferayTransactionManager";
@@ -109,7 +108,6 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
     private static Class<?>[] _escapedModelInterfaces = new Class[] {
             ShoppingStore.class
         };
-    private long _groupId;
     private long _companyId;
     private long _userId;
     private String _userUuid;
@@ -164,7 +162,6 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
         ShoppingStore model = new ShoppingStoreImpl();
 
-        model.setGroupId(soapModel.getGroupId());
         model.setCompanyId(soapModel.getCompanyId());
         model.setUserId(soapModel.getUserId());
         model.setUserName(soapModel.getUserName());
@@ -226,17 +223,17 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @Override
     public long getPrimaryKey() {
-        return _groupId;
+        return _companyId;
     }
 
     @Override
     public void setPrimaryKey(long primaryKey) {
-        setGroupId(primaryKey);
+        setCompanyId(primaryKey);
     }
 
     @Override
     public Serializable getPrimaryKeyObj() {
-        return _groupId;
+        return _companyId;
     }
 
     @Override
@@ -258,7 +255,6 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
     public Map<String, Object> getModelAttributes() {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -307,12 +303,6 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
-        }
-
         Long companyId = (Long) attributes.get("companyId");
 
         if (companyId != null) {
@@ -543,17 +533,6 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
         if (braintreeSandboxPublicKey != null) {
             setBraintreeSandboxPublicKey(braintreeSandboxPublicKey);
         }
-    }
-
-    @JSON
-    @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _groupId = groupId;
     }
 
     @JSON
@@ -1109,7 +1088,6 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
     public Object clone() {
         ShoppingStoreImpl shoppingStoreImpl = new ShoppingStoreImpl();
 
-        shoppingStoreImpl.setGroupId(getGroupId());
         shoppingStoreImpl.setCompanyId(getCompanyId());
         shoppingStoreImpl.setUserId(getUserId());
         shoppingStoreImpl.setUserName(getUserName());
@@ -1197,8 +1175,6 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
     @Override
     public CacheModel<ShoppingStore> toCacheModel() {
         ShoppingStoreCacheModel shoppingStoreCacheModel = new ShoppingStoreCacheModel();
-
-        shoppingStoreCacheModel.groupId = getGroupId();
 
         shoppingStoreCacheModel.companyId = getCompanyId();
 
@@ -1459,11 +1435,9 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(73);
+        StringBundler sb = new StringBundler(71);
 
-        sb.append("{groupId=");
-        sb.append(getGroupId());
-        sb.append(", companyId=");
+        sb.append("{companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
         sb.append(getUserId());
@@ -1540,16 +1514,12 @@ public class ShoppingStoreModelImpl extends BaseModelImpl<ShoppingStore>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(112);
+        StringBundler sb = new StringBundler(109);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStore");
         sb.append("</model-name>");
 
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
-        sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");
         sb.append(getCompanyId());

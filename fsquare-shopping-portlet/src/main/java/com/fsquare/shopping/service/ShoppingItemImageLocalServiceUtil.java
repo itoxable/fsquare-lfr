@@ -263,17 +263,17 @@ public class ShoppingItemImageLocalServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
-    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByGroupIdAndItemId(
-        long groupId, long itemId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByCompanyIdAndItemId(
+        long companyId, long itemId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().findByGroupIdAndItemId(groupId, itemId);
+        return getService().findByCompanyIdAndItemId(companyId, itemId);
     }
 
     public static com.fsquare.shopping.model.ShoppingItemImage getItemMainImage(
-        long groupId, long itemId)
+        long companyId, long itemId)
         throws com.fsquare.shopping.NoSuchShoppingItemImageException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getService().getItemMainImage(groupId, itemId);
+        return getService().getItemMainImage(companyId, itemId);
     }
 
     public static void clearService() {

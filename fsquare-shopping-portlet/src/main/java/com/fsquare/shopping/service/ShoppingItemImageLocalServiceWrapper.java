@@ -278,19 +278,19 @@ public class ShoppingItemImageLocalServiceWrapper
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByGroupIdAndItemId(
-        long groupId, long itemId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingItemImage> findByCompanyIdAndItemId(
+        long companyId, long itemId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingItemImageLocalService.findByGroupIdAndItemId(groupId,
+        return _shoppingItemImageLocalService.findByCompanyIdAndItemId(companyId,
             itemId);
     }
 
     @Override
     public com.fsquare.shopping.model.ShoppingItemImage getItemMainImage(
-        long groupId, long itemId)
+        long companyId, long itemId)
         throws com.fsquare.shopping.NoSuchShoppingItemImageException,
             com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingItemImageLocalService.getItemMainImage(groupId, itemId);
+        return _shoppingItemImageLocalService.getItemMainImage(companyId, itemId);
     }
 
     /**

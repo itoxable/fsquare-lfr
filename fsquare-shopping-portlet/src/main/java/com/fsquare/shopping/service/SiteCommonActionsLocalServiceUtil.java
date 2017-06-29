@@ -65,6 +65,11 @@ public class SiteCommonActionsLocalServiceUtil {
         return getService().getUserPortraitUrl(male, portraitId);
     }
 
+    public static java.util.List<com.liferay.portal.model.Company> getCompanies()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getCompanies();
+    }
+
     public static void clearService() {
         _service = null;
     }

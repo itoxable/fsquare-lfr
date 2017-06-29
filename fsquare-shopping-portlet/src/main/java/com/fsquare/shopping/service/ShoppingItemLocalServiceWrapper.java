@@ -344,10 +344,10 @@ public class ShoppingItemLocalServiceWrapper implements ShoppingItemLocalService
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
-        long groupId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return _shoppingItemLocalService.findByGroupId(groupId);
+        return _shoppingItemLocalService.findByCompanyId(companyId);
     }
 
     @Override

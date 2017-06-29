@@ -53,15 +53,15 @@ public class ShoppingCouponServiceWrapper implements ShoppingCouponService,
     }
 
     @Override
-    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
-        java.lang.String code, long groupId) {
-        return _shoppingCouponService.fetchByCodeAndGroupId(code, groupId);
+    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndCompanyId(
+        java.lang.String code, long companyId) {
+        return _shoppingCouponService.fetchByCodeAndCompanyId(code, companyId);
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
-        java.lang.Long groupId) {
-        return _shoppingCouponService.findByGroupId(groupId);
+    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByCompanyId(
+        java.lang.Long companyId) {
+        return _shoppingCouponService.findByCompanyId(companyId);
     }
 
     @Override
@@ -77,36 +77,36 @@ public class ShoppingCouponServiceWrapper implements ShoppingCouponService,
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupIdStartEnd(
-        java.lang.Long groupId, int start, int end) {
-        return _shoppingCouponService.findByGroupIdStartEnd(groupId, start, end);
+    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByCompanyIdStartEnd(
+        java.lang.Long companyId, int start, int end) {
+        return _shoppingCouponService.findByCompanyIdStartEnd(companyId, start,
+            end);
     }
 
     @Override
-    public int countByGroupId(java.lang.Long groupId) {
-        return _shoppingCouponService.countByGroupId(groupId);
+    public int countByCompanyId(java.lang.Long companyId) {
+        return _shoppingCouponService.countByCompanyId(companyId);
     }
 
     @Override
     public java.util.Map<java.lang.String, java.lang.Object> getPagedItems(
-        java.lang.Long groupId, int start, int end) {
-        return _shoppingCouponService.getPagedItems(groupId, start, end);
+        java.lang.Long companyId, int start, int end) {
+        return _shoppingCouponService.getPagedItems(companyId, start, end);
     }
 
     @Override
-    public void updateShoppingCoupon(long couponId, long groupId,
+    public void updateShoppingCoupon(long couponId, long companyId,
         java.lang.String code, java.lang.String name,
         java.lang.String description, java.util.Date startDate,
         java.util.Date endDate, boolean active,
         java.lang.String limitCategories, java.lang.String limitSkus,
         double minOrder, double discount, java.lang.String discountType,
-        long maxUses, long userid, long companyId)
+        long maxUses, long userid)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        _shoppingCouponService.updateShoppingCoupon(couponId, groupId, code,
+        _shoppingCouponService.updateShoppingCoupon(couponId, companyId, code,
             name, description, startDate, endDate, active, limitCategories,
-            limitSkus, minOrder, discount, discountType, maxUses, userid,
-            companyId);
+            limitSkus, minOrder, discount, discountType, maxUses, userid);
     }
 
     @Override

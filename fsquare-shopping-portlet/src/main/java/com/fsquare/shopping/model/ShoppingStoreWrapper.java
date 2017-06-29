@@ -38,7 +38,6 @@ public class ShoppingStoreWrapper implements ShoppingStore,
     public Map<String, Object> getModelAttributes() {
         Map<String, Object> attributes = new HashMap<String, Object>();
 
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -87,12 +86,6 @@ public class ShoppingStoreWrapper implements ShoppingStore,
 
     @Override
     public void setModelAttributes(Map<String, Object> attributes) {
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
-        }
-
         Long companyId = (Long) attributes.get("companyId");
 
         if (companyId != null) {
@@ -343,26 +336,6 @@ public class ShoppingStoreWrapper implements ShoppingStore,
     @Override
     public void setPrimaryKey(long primaryKey) {
         _shoppingStore.setPrimaryKey(primaryKey);
-    }
-
-    /**
-    * Returns the group ID of this shopping store.
-    *
-    * @return the group ID of this shopping store
-    */
-    @Override
-    public long getGroupId() {
-        return _shoppingStore.getGroupId();
-    }
-
-    /**
-    * Sets the group ID of this shopping store.
-    *
-    * @param groupId the group ID of this shopping store
-    */
-    @Override
-    public void setGroupId(long groupId) {
-        _shoppingStore.setGroupId(groupId);
     }
 
     /**

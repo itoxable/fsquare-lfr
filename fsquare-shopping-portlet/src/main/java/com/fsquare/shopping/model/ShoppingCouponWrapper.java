@@ -39,7 +39,6 @@ public class ShoppingCouponWrapper implements ShoppingCoupon,
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("couponId", getCouponId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -67,12 +66,6 @@ public class ShoppingCouponWrapper implements ShoppingCoupon,
 
         if (couponId != null) {
             setCouponId(couponId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -216,26 +209,6 @@ public class ShoppingCouponWrapper implements ShoppingCoupon,
     @Override
     public void setCouponId(long couponId) {
         _shoppingCoupon.setCouponId(couponId);
-    }
-
-    /**
-    * Returns the group ID of this shopping coupon.
-    *
-    * @return the group ID of this shopping coupon
-    */
-    @Override
-    public long getGroupId() {
-        return _shoppingCoupon.getGroupId();
-    }
-
-    /**
-    * Sets the group ID of this shopping coupon.
-    *
-    * @param groupId the group ID of this shopping coupon
-    */
-    @Override
-    public void setGroupId(long groupId) {
-        _shoppingCoupon.setGroupId(groupId);
     }
 
     /**

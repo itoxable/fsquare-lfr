@@ -52,22 +52,22 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 	    return true;
 	}
 
-	public Object getCompleteByGroupId(long groupId) throws SystemException{
+	public Object getCompleteByCompanyId(long companyId) throws SystemException{
 		List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
-		List<ShoppingItem> items = shoppingItemPersistence.findByGroupId(groupId);
+		List<ShoppingItem> items = shoppingItemPersistence.findByCompanyId(companyId);
 		for(ShoppingItem item: items){
 			Map<String, Object> detailMap = new HashMap<String, Object>();
 			detailMap.put("item", item);
 	  		ShoppingItemImage mainImage = null;
 			try {
-				mainImage = shoppingItemImagePersistence.findByGroupIdAndItemAndMain(item.getGroupId(), item.getItemId(), true);
+				mainImage = shoppingItemImagePersistence.findByCompanyIdAndItemAndMain(item.getCompanyId(), item.getItemId(), true);
 			} catch (NoSuchShoppingItemImageException e) {
 				e.printStackTrace();
 			}
 			
 			detailMap.put("mainImage", mainImage);
 			
-			List<ShoppingItemImage> images = shoppingItemImagePersistence.findByGroupIdAndItemId(item.getGroupId(), item.getItemId());
+			List<ShoppingItemImage> images = shoppingItemImagePersistence.findByCompanyIdAndItemId(item.getCompanyId(), item.getItemId());
 			
 			detailMap.put("images", images);
 			result.add(detailMap);
@@ -76,13 +76,13 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 		return result;
 	}
 	
-	public List<ShoppingItem> findByGroupId(long groupId) throws SystemException{
-		return shoppingItemPersistence.findByGroupId(groupId);
+	public List<ShoppingItem> findByCompanyId(long companyId) throws SystemException{
+		return shoppingItemPersistence.findByCompanyId(companyId);
 	}
 	
-	public List<ShoppingItem> findByGroupId(Long groupId){
+	public List<ShoppingItem> findByCompanyId(Long companyId){
 		try {
-			return shoppingItemPersistence.findByGroupId(groupId);
+			return shoppingItemPersistence.findByCompanyId(companyId);
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
@@ -90,11 +90,11 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 	
 	}
 	
-	public Map<String, Object> getPagedItems(Long groupId, int start, int end){
+	public Map<String, Object> getPagedItems(Long companyId, int start, int end){
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			Integer total = shoppingItemPersistence.countByGroupId(groupId);
-			List<ShoppingItem> items = shoppingItemPersistence.findByGroupId(groupId, start, end);
+			Integer total = shoppingItemPersistence.countByCompanyId(companyId);
+			List<ShoppingItem> items = shoppingItemPersistence.findByCompanyId(companyId, start, end);
 			result.put("total", total.toString());
 			result.put("items", items);
 			result.put("quant", items.size());
@@ -107,9 +107,9 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 	}
 	
 		
-	public int countByGroupId(Long groupId){
+	public int countByCompanyId(Long companyId){
 		try {
-			return shoppingItemPersistence.countByGroupId(groupId);
+			return shoppingItemPersistence.countByCompanyId(companyId);
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}

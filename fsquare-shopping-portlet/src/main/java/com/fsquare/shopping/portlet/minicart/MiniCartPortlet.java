@@ -160,9 +160,9 @@ public class MiniCartPortlet extends MVCPortlet {
 			
 			ShoppingStore shoppingStore = null;
 			try{
-				shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getScopeGroupId());
+				shoppingStore = ShoppingStoreLocalServiceUtil.getShoppingStore(themeDisplay.getCompanyId());
 			}catch(NoSuchShoppingStoreException e){
-				shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getScopeGroupId());
+				shoppingStore = ShoppingStoreLocalServiceUtil.createShoppingStore(themeDisplay.getCompanyId());
 			}
 			
 			jsonObject.put("redirect", ShoppingUtil.ON_ADD_TO_CART_JUMP_TO_CART.equals(shoppingStore.getOnAddToCart()));
@@ -181,7 +181,7 @@ public class MiniCartPortlet extends MVCPortlet {
 	private JournalArticle findAssetEntry(String articleId, ThemeDisplay themeDisplay) throws PortalException, SystemException{
 		JournalArticle journalArticle = null;
 			
-		journalArticle = JournalArticleServiceUtil.getArticle(themeDisplay.getScopeGroupId(), articleId);
+		journalArticle = JournalArticleServiceUtil.getArticle(themeDisplay.getCompanyId(), articleId);
 		
 		return journalArticle;
 	}

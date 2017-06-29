@@ -151,7 +151,7 @@ public class SiteCommonActionsServiceClp implements SiteCommonActionsService {
     }
 
     @Override
-    public com.liferay.portal.model.Layout updateLayout(long groupId,
+    public com.liferay.portal.model.Layout updateLayout(long companyId,
         boolean privateLayout, long layoutId, long parentLayoutId,
         java.util.Map<java.util.Locale, java.lang.String> localeNamesMap,
         java.util.Map<java.util.Locale, java.lang.String> localeTitlesMap,
@@ -170,7 +170,7 @@ public class SiteCommonActionsServiceClp implements SiteCommonActionsService {
             returnObj = _invokableService.invokeMethod(_methodName3,
                     _methodParameterTypes3,
                     new Object[] {
-                        groupId,
+                        companyId,
                         
                     privateLayout,
                         

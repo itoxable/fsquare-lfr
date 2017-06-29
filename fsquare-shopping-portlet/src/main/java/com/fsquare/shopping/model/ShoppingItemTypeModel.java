@@ -2,9 +2,9 @@ package com.fsquare.shopping.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -26,8 +26,8 @@ import java.util.Date;
  * @see com.fsquare.shopping.model.impl.ShoppingItemTypeModelImpl
  * @generated
  */
-public interface ShoppingItemTypeModel extends BaseModel<ShoppingItemType>,
-    GroupedModel {
+public interface ShoppingItemTypeModel extends AuditedModel,
+    BaseModel<ShoppingItemType> {
     /*
      * NOTE FOR DEVELOPERS:
      *
@@ -61,22 +61,6 @@ public interface ShoppingItemTypeModel extends BaseModel<ShoppingItemType>,
      * @param itemTypeId the item type ID of this shopping item type
      */
     public void setItemTypeId(long itemTypeId);
-
-    /**
-     * Returns the group ID of this shopping item type.
-     *
-     * @return the group ID of this shopping item type
-     */
-    @Override
-    public long getGroupId();
-
-    /**
-     * Sets the group ID of this shopping item type.
-     *
-     * @param groupId the group ID of this shopping item type
-     */
-    @Override
-    public void setGroupId(long groupId);
 
     /**
      * Returns the company ID of this shopping item type.

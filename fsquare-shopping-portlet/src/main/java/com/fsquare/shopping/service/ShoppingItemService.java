@@ -58,19 +58,19 @@ public interface ShoppingItemService extends BaseService, InvokableService {
             com.liferay.portal.kernel.exception.SystemException;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public java.lang.Object getCompleteByGroupId(long groupId)
+    public java.lang.Object getCompleteByCompanyId(long companyId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
-    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
-        long groupId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
-    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
-        java.lang.Long groupId);
+    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByCompanyId(
+        java.lang.Long companyId);
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public java.util.Map<java.lang.String, java.lang.Object> getPagedItems(
-        java.lang.Long groupId, int start, int end);
+        java.lang.Long companyId, int start, int end);
 
-    public int countByGroupId(java.lang.Long groupId);
+    public int countByCompanyId(java.lang.Long companyId);
 }

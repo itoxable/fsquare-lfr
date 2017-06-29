@@ -57,18 +57,18 @@ public interface ShoppingItemImageModel extends BaseModel<ShoppingItemImage> {
     public void setShoppingItemImageId(long shoppingItemImageId);
 
     /**
-     * Returns the group ID of this shopping item image.
+     * Returns the company ID of this shopping item image.
      *
-     * @return the group ID of this shopping item image
+     * @return the company ID of this shopping item image
      */
-    public long getGroupId();
+    public long getCompanyId();
 
     /**
-     * Sets the group ID of this shopping item image.
+     * Sets the company ID of this shopping item image.
      *
-     * @param groupId the group ID of this shopping item image
+     * @param companyId the company ID of this shopping item image
      */
-    public void setGroupId(long groupId);
+    public void setCompanyId(long companyId);
 
     /**
      * Returns the item ID of this shopping item image.

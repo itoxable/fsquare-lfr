@@ -23,7 +23,6 @@ import java.util.Date;
 public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
     Externalizable {
     public long shoppingOrderId;
-    public long groupId;
     public long companyId;
     public long userId;
     public String userName;
@@ -73,12 +72,10 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(97);
+        StringBundler sb = new StringBundler(95);
 
         sb.append("{shoppingOrderId=");
         sb.append(shoppingOrderId);
-        sb.append(", groupId=");
-        sb.append(groupId);
         sb.append(", companyId=");
         sb.append(companyId);
         sb.append(", userId=");
@@ -181,7 +178,6 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
         ShoppingOrderImpl shoppingOrderImpl = new ShoppingOrderImpl();
 
         shoppingOrderImpl.setShoppingOrderId(shoppingOrderId);
-        shoppingOrderImpl.setGroupId(groupId);
         shoppingOrderImpl.setCompanyId(companyId);
         shoppingOrderImpl.setUserId(userId);
 
@@ -402,7 +398,6 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
     @Override
     public void readExternal(ObjectInput objectInput) throws IOException {
         shoppingOrderId = objectInput.readLong();
-        groupId = objectInput.readLong();
         companyId = objectInput.readLong();
         userId = objectInput.readLong();
         userName = objectInput.readUTF();
@@ -455,7 +450,6 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
     public void writeExternal(ObjectOutput objectOutput)
         throws IOException {
         objectOutput.writeLong(shoppingOrderId);
-        objectOutput.writeLong(groupId);
         objectOutput.writeLong(companyId);
         objectOutput.writeLong(userId);
 

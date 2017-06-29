@@ -44,7 +44,7 @@ public class ShoppingItemStorageLocationServiceImpl
 	}
 	
 	@Override
-	public List<ShoppingItemStorageLocation> findByGroupId(long groupId) throws NoSuchShoppingItemStorageLocationException, SystemException{
-		return shoppingItemStorageLocationPersistence.findByGroupId(groupId);
+	public List<ShoppingItemStorageLocation> findByCompanyId(long companyId) throws NoSuchShoppingItemStorageLocationException, SystemException{
+		return shoppingItemStorageLocationPersistence.findByCompanyId(companyId);
 	}
 }

@@ -49,20 +49,6 @@ public interface ShoppingStoreModel extends AuditedModel,
     public void setPrimaryKey(long primaryKey);
 
     /**
-     * Returns the group ID of this shopping store.
-     *
-     * @return the group ID of this shopping store
-     */
-    public long getGroupId();
-
-    /**
-     * Sets the group ID of this shopping store.
-     *
-     * @param groupId the group ID of this shopping store
-     */
-    public void setGroupId(long groupId);
-
-    /**
      * Returns the company ID of this shopping store.
      *
      * @return the company ID of this shopping store

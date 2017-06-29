@@ -23,7 +23,6 @@ import java.util.Map;
 public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMethod>
     implements ShoppingShippingMethod {
     private long _shippingMethodId;
-    private long _groupId;
     private long _companyId;
     private long _userId;
     private String _userUuid;
@@ -81,7 +80,6 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("shippingMethodId", getShippingMethodId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -107,12 +105,6 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
 
         if (shippingMethodId != null) {
             setShippingMethodId(shippingMethodId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -224,28 +216,6 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
 
                 method.invoke(_shoppingShippingMethodRemoteModel,
                     shippingMethodId);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
-    }
-
-    @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _groupId = groupId;
-
-        if (_shoppingShippingMethodRemoteModel != null) {
-            try {
-                Class<?> clazz = _shoppingShippingMethodRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setGroupId", long.class);
-
-                method.invoke(_shoppingShippingMethodRemoteModel, groupId);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -680,7 +650,6 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         ShoppingShippingMethodClp clone = new ShoppingShippingMethodClp();
 
         clone.setShippingMethodId(getShippingMethodId());
-        clone.setGroupId(getGroupId());
         clone.setCompanyId(getCompanyId());
         clone.setUserId(getUserId());
         clone.setUserName(getUserName());
@@ -745,12 +714,10 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(35);
+        StringBundler sb = new StringBundler(33);
 
         sb.append("{shippingMethodId=");
         sb.append(getShippingMethodId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
         sb.append(", companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
@@ -788,7 +755,7 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(55);
+        StringBundler sb = new StringBundler(52);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingShippingMethod");
@@ -797,10 +764,6 @@ public class ShoppingShippingMethodClp extends BaseModelImpl<ShoppingShippingMet
         sb.append(
             "<column><column-name>shippingMethodId</column-name><column-value><![CDATA[");
         sb.append(getShippingMethodId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");

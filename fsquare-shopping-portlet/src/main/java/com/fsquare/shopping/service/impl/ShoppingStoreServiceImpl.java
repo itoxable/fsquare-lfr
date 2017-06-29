@@ -54,14 +54,14 @@ public class ShoppingStoreServiceImpl extends ShoppingStoreServiceBaseImpl {
 		return settings;
 	}
 	
-	public List<AssetCategory> getShoppingAssetCategories(long groupId) throws PortalException, SystemException{
-		AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getGroupVocabulary(groupId, "Shopping");
+	public List<AssetCategory> getShoppingAssetCategories(long companyId) throws PortalException, SystemException{
+		AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getGroupVocabulary(companyId, "Shopping");
 		List<AssetCategory> categories = AssetCategoryLocalServiceUtil.getVocabularyCategories(assetVocabulary.getVocabularyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 		return categories;
 	}
 	
-	public ShoppingStore getShoppingStore(long groupId) throws PortalException, SystemException{
-		return shoppingStoreLocalService.getShoppingStore(groupId);
+	public ShoppingStore getShoppingStore(long companyId) throws PortalException, SystemException{
+		return shoppingStoreLocalService.getShoppingStore(companyId);
 	}
 	
 	public ShoppingStore addShoppingStore(ShoppingStore shoppingStore) throws PortalException, SystemException{

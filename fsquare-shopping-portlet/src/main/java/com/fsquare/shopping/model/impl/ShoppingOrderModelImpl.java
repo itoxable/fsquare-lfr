@@ -54,7 +54,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     public static final String TABLE_NAME = "FsquareShopping_ShoppingOrder";
     public static final Object[][] TABLE_COLUMNS = {
             { "shoppingOrderId", Types.BIGINT },
-            { "groupId", Types.BIGINT },
             { "companyId", Types.BIGINT },
             { "userId", Types.BIGINT },
             { "userName", Types.VARCHAR },
@@ -102,7 +101,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             { "shippingMethodId", Types.BIGINT },
             { "international", Types.BOOLEAN }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingOrder (shoppingOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status VARCHAR(75) null,number_ VARCHAR(75) null,tax DOUBLE,shipping DOUBLE,totalPrice DOUBLE,altShipping VARCHAR(75) null,requiresShipping BOOLEAN,insure BOOLEAN,insurance DOUBLE,couponCodes VARCHAR(75) null,couponDiscount DOUBLE,paymentStatus VARCHAR(75) null,billingFirstName VARCHAR(75) null,billingLastName VARCHAR(75) null,billingEmailAddress VARCHAR(75) null,billingCompany VARCHAR(75) null,billingStreet VARCHAR(75) null,billingCity VARCHAR(75) null,billingState VARCHAR(75) null,billingZip VARCHAR(75) null,billingCountry VARCHAR(75) null,billingPhone VARCHAR(75) null,shipToBilling BOOLEAN,shippingFirstName VARCHAR(75) null,shippingLastName VARCHAR(75) null,shippingEmailAddress VARCHAR(75) null,shippingCompany VARCHAR(75) null,shippingStreet VARCHAR(75) null,shippingStreet2 VARCHAR(75) null,shippingCity VARCHAR(75) null,shippingState VARCHAR(75) null,shippingPostCode VARCHAR(75) null,shippingCountry VARCHAR(75) null,shippingPhone VARCHAR(75) null,comments VARCHAR(2000) null,externalPaymentId VARCHAR(75) null,paymentType VARCHAR(75) null,sendOrderEmail BOOLEAN,sendShippingEmail BOOLEAN,shippingMethodId LONG,international BOOLEAN)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingOrder (shoppingOrderId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status VARCHAR(75) null,number_ VARCHAR(75) null,tax DOUBLE,shipping DOUBLE,totalPrice DOUBLE,altShipping VARCHAR(75) null,requiresShipping BOOLEAN,insure BOOLEAN,insurance DOUBLE,couponCodes VARCHAR(75) null,couponDiscount DOUBLE,paymentStatus VARCHAR(75) null,billingFirstName VARCHAR(75) null,billingLastName VARCHAR(75) null,billingEmailAddress VARCHAR(75) null,billingCompany VARCHAR(75) null,billingStreet VARCHAR(75) null,billingCity VARCHAR(75) null,billingState VARCHAR(75) null,billingZip VARCHAR(75) null,billingCountry VARCHAR(75) null,billingPhone VARCHAR(75) null,shipToBilling BOOLEAN,shippingFirstName VARCHAR(75) null,shippingLastName VARCHAR(75) null,shippingEmailAddress VARCHAR(75) null,shippingCompany VARCHAR(75) null,shippingStreet VARCHAR(75) null,shippingStreet2 VARCHAR(75) null,shippingCity VARCHAR(75) null,shippingState VARCHAR(75) null,shippingPostCode VARCHAR(75) null,shippingCountry VARCHAR(75) null,shippingPhone VARCHAR(75) null,comments VARCHAR(2000) null,externalPaymentId VARCHAR(75) null,paymentType VARCHAR(75) null,sendOrderEmail BOOLEAN,sendShippingEmail BOOLEAN,shippingMethodId LONG,international BOOLEAN)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingOrder";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingOrder.createDate DESC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingOrder.createDate DESC";
@@ -118,8 +117,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
                 "value.object.column.bitmask.enabled.com.fsquare.shopping.model.ShoppingOrder"),
             true);
-    public static long EXTERNALPAYMENTID_COLUMN_BITMASK = 1L;
-    public static long GROUPID_COLUMN_BITMASK = 2L;
+    public static long COMPANYID_COLUMN_BITMASK = 1L;
+    public static long EXTERNALPAYMENTID_COLUMN_BITMASK = 2L;
     public static long NUMBER_COLUMN_BITMASK = 4L;
     public static long PAYMENTTYPE_COLUMN_BITMASK = 8L;
     public static long SHIPPINGEMAILADDRESS_COLUMN_BITMASK = 16L;
@@ -134,10 +133,9 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
             ShoppingOrder.class
         };
     private long _shoppingOrderId;
-    private long _groupId;
-    private long _originalGroupId;
-    private boolean _setOriginalGroupId;
     private long _companyId;
+    private long _originalCompanyId;
+    private boolean _setOriginalCompanyId;
     private long _userId;
     private String _userUuid;
     private long _originalUserId;
@@ -213,7 +211,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         ShoppingOrder model = new ShoppingOrderImpl();
 
         model.setShoppingOrderId(soapModel.getShoppingOrderId());
-        model.setGroupId(soapModel.getGroupId());
         model.setCompanyId(soapModel.getCompanyId());
         model.setUserId(soapModel.getUserId());
         model.setUserName(soapModel.getUserName());
@@ -319,7 +316,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("shoppingOrderId", getShoppingOrderId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -376,12 +372,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
         if (shoppingOrderId != null) {
             setShoppingOrderId(shoppingOrderId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -677,36 +667,25 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @JSON
     @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-        if (!_setOriginalGroupId) {
-            _setOriginalGroupId = true;
-
-            _originalGroupId = _groupId;
-        }
-
-        _groupId = groupId;
-    }
-
-    public long getOriginalGroupId() {
-        return _originalGroupId;
-    }
-
-    @JSON
-    @Override
     public long getCompanyId() {
         return _companyId;
     }
 
     @Override
     public void setCompanyId(long companyId) {
+        _columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+        if (!_setOriginalCompanyId) {
+            _setOriginalCompanyId = true;
+
+            _originalCompanyId = _companyId;
+        }
+
         _companyId = companyId;
+    }
+
+    public long getOriginalCompanyId() {
+        return _originalCompanyId;
     }
 
     @JSON
@@ -1472,7 +1451,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         ShoppingOrderImpl shoppingOrderImpl = new ShoppingOrderImpl();
 
         shoppingOrderImpl.setShoppingOrderId(getShoppingOrderId());
-        shoppingOrderImpl.setGroupId(getGroupId());
         shoppingOrderImpl.setCompanyId(getCompanyId());
         shoppingOrderImpl.setUserId(getUserId());
         shoppingOrderImpl.setUserName(getUserName());
@@ -1571,9 +1549,9 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
     public void resetOriginalValues() {
         ShoppingOrderModelImpl shoppingOrderModelImpl = this;
 
-        shoppingOrderModelImpl._originalGroupId = shoppingOrderModelImpl._groupId;
+        shoppingOrderModelImpl._originalCompanyId = shoppingOrderModelImpl._companyId;
 
-        shoppingOrderModelImpl._setOriginalGroupId = false;
+        shoppingOrderModelImpl._setOriginalCompanyId = false;
 
         shoppingOrderModelImpl._originalUserId = shoppingOrderModelImpl._userId;
 
@@ -1601,8 +1579,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         ShoppingOrderCacheModel shoppingOrderCacheModel = new ShoppingOrderCacheModel();
 
         shoppingOrderCacheModel.shoppingOrderId = getShoppingOrderId();
-
-        shoppingOrderCacheModel.groupId = getGroupId();
 
         shoppingOrderCacheModel.companyId = getCompanyId();
 
@@ -1895,12 +1871,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(97);
+        StringBundler sb = new StringBundler(95);
 
         sb.append("{shoppingOrderId=");
         sb.append(getShoppingOrderId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
         sb.append(", companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
@@ -2000,7 +1974,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(148);
+        StringBundler sb = new StringBundler(145);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingOrder");
@@ -2009,10 +1983,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
         sb.append(
             "<column><column-name>shoppingOrderId</column-name><column-value><![CDATA[");
         sb.append(getShoppingOrderId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");

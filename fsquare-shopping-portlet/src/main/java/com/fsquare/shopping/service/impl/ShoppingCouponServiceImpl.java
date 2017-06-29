@@ -46,9 +46,9 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 		return map;
 	}
 	
-	public ShoppingCoupon fetchByCodeAndGroupId(String code, long groupId){
+	public ShoppingCoupon fetchByCodeAndCompanyId(String code, long companyId){
 		try {
-			return shoppingCouponPersistence.fetchByCodeAndGroupId(code, groupId);
+			return shoppingCouponPersistence.fetchByCodeAndCompanyId(code, companyId);
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
@@ -56,9 +56,9 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 	}
 	
 	@Override
-	public List<ShoppingCoupon> findByGroupId(Long groupId){
+	public List<ShoppingCoupon> findByCompanyId(Long companyId){
 		try {
-			return shoppingCouponPersistence.findByGroupId(groupId);
+			return shoppingCouponPersistence.findByCompanyId(companyId);
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
@@ -76,9 +76,9 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 	}
 	
 	@Override
-	public List<ShoppingCoupon> findByGroupIdStartEnd(Long groupId, int start, int end){
+	public List<ShoppingCoupon> findByCompanyIdStartEnd(Long companyId, int start, int end){
 		try {
-			return shoppingCouponPersistence.findByGroupId(groupId, start, end);
+			return shoppingCouponPersistence.findByCompanyId(companyId, start, end);
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
@@ -86,20 +86,20 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 	}
 	
 	@Override
-	public int countByGroupId(Long groupId){
+	public int countByCompanyId(Long companyId){
 		try {
-			return shoppingCouponPersistence.countByGroupId(groupId);
+			return shoppingCouponPersistence.countByCompanyId(companyId);
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
 		return 0;
 	}
 	
-	public Map<String, Object> getPagedItems(Long groupId, int start, int end){
+	public Map<String, Object> getPagedItems(Long companyId, int start, int end){
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			Integer total = shoppingCouponPersistence.countByGroupId(groupId);
-			List<ShoppingCoupon> items = shoppingCouponPersistence.findByGroupId(groupId, start, end);
+			Integer total = shoppingCouponPersistence.countByCompanyId(companyId);
+			List<ShoppingCoupon> items = shoppingCouponPersistence.findByCompanyId(companyId, start, end);
 			result.put("total", total.toString());
 			result.put("items", items);
 			result.put("quant", items.size());
@@ -112,9 +112,9 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 	}
 	
 	@Override
-	public void updateShoppingCoupon(long couponId, long groupId, String code, String name, 
+	public void updateShoppingCoupon(long couponId, long companyId, String code, String name, 
 			String description, Date startDate, Date endDate, boolean active, String limitCategories, String limitSkus, 
-			double minOrder, double discount, String discountType, long maxUses, long userid, long companyId) throws SystemException, PortalException{
+			double minOrder, double discount, String discountType, long maxUses, long userid) throws SystemException, PortalException{
 		
 		Date date = new Date();
 		ShoppingCoupon shoppingCoupon = null;
@@ -123,7 +123,6 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 		}else{
 			couponId = CounterLocalServiceUtil.increment(ShoppingCoupon.class.getName());
 			shoppingCoupon = shoppingCouponLocalService.createShoppingCoupon(couponId);	        
-			shoppingCoupon.setGroupId(groupId);
 			shoppingCoupon.setCreateDate(date);
 			shoppingCoupon.setCompanyId(companyId);
 			shoppingCoupon.setUserId(userid);

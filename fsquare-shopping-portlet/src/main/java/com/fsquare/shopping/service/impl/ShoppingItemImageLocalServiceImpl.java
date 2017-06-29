@@ -30,12 +30,12 @@ public class ShoppingItemImageLocalServiceImpl
      */
 	
 	@Override
-	public List<ShoppingItemImage> findByGroupIdAndItemId(long groupId, long itemId) throws SystemException{
-		return shoppingItemImagePersistence.findByGroupIdAndItemId(groupId, itemId);
+	public List<ShoppingItemImage> findByCompanyIdAndItemId(long companyId, long itemId) throws SystemException{
+		return shoppingItemImagePersistence.findByCompanyIdAndItemId(companyId, itemId);
 	}
 	
 	@Override
-	public ShoppingItemImage getItemMainImage(long groupId, long itemId) throws SystemException, NoSuchShoppingItemImageException{
-		return shoppingItemImagePersistence.findByGroupIdAndItemAndMain(groupId, itemId, true);
+	public ShoppingItemImage getItemMainImage(long companyId, long itemId) throws SystemException, NoSuchShoppingItemImageException{
+		return shoppingItemImagePersistence.findByCompanyIdAndItemAndMain(companyId, itemId, true);
 	}
 }

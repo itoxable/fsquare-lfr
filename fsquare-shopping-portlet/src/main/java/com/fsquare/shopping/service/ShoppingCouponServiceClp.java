@@ -50,11 +50,11 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
 
         _methodParameterTypes3 = new String[] { "java.util.Map" };
 
-        _methodName4 = "fetchByCodeAndGroupId";
+        _methodName4 = "fetchByCodeAndCompanyId";
 
         _methodParameterTypes4 = new String[] { "java.lang.String", "long" };
 
-        _methodName5 = "findByGroupId";
+        _methodName5 = "findByCompanyId";
 
         _methodParameterTypes5 = new String[] { "java.lang.Long" };
 
@@ -70,11 +70,11 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
                 "com.fsquare.shopping.model.ShoppingCoupon"
             };
 
-        _methodName8 = "findByGroupIdStartEnd";
+        _methodName8 = "findByCompanyIdStartEnd";
 
         _methodParameterTypes8 = new String[] { "java.lang.Long", "int", "int" };
 
-        _methodName9 = "countByGroupId";
+        _methodName9 = "countByCompanyId";
 
         _methodParameterTypes9 = new String[] { "java.lang.Long" };
 
@@ -88,7 +88,7 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
                 "long", "long", "java.lang.String", "java.lang.String",
                 "java.lang.String", "java.util.Date", "java.util.Date",
                 "boolean", "java.lang.String", "java.lang.String", "double",
-                "double", "java.lang.String", "long", "long", "long"
+                "double", "java.lang.String", "long", "long"
             };
 
         _methodName12 = "deleteCoupon";
@@ -172,14 +172,14 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
     }
 
     @Override
-    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndGroupId(
-        java.lang.String code, long groupId) {
+    public com.fsquare.shopping.model.ShoppingCoupon fetchByCodeAndCompanyId(
+        java.lang.String code, long companyId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName4,
                     _methodParameterTypes4,
-                    new Object[] { ClpSerializer.translateInput(code), groupId });
+                    new Object[] { ClpSerializer.translateInput(code), companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -195,14 +195,14 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupId(
-        java.lang.Long groupId) {
+    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByCompanyId(
+        java.lang.Long companyId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName5,
                     _methodParameterTypes5,
-                    new Object[] { ClpSerializer.translateInput(groupId) });
+                    new Object[] { ClpSerializer.translateInput(companyId) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -264,15 +264,15 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByGroupIdStartEnd(
-        java.lang.Long groupId, int start, int end) {
+    public java.util.List<com.fsquare.shopping.model.ShoppingCoupon> findByCompanyIdStartEnd(
+        java.lang.Long companyId, int start, int end) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName8,
                     _methodParameterTypes8,
                     new Object[] {
-                        ClpSerializer.translateInput(groupId),
+                        ClpSerializer.translateInput(companyId),
                         
                     start,
                         
@@ -293,13 +293,13 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
     }
 
     @Override
-    public int countByGroupId(java.lang.Long groupId) {
+    public int countByCompanyId(java.lang.Long companyId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName9,
                     _methodParameterTypes9,
-                    new Object[] { ClpSerializer.translateInput(groupId) });
+                    new Object[] { ClpSerializer.translateInput(companyId) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -316,14 +316,14 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
 
     @Override
     public java.util.Map<java.lang.String, java.lang.Object> getPagedItems(
-        java.lang.Long groupId, int start, int end) {
+        java.lang.Long companyId, int start, int end) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName10,
                     _methodParameterTypes10,
                     new Object[] {
-                        ClpSerializer.translateInput(groupId),
+                        ClpSerializer.translateInput(companyId),
                         
                     start,
                         
@@ -344,13 +344,13 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
     }
 
     @Override
-    public void updateShoppingCoupon(long couponId, long groupId,
+    public void updateShoppingCoupon(long couponId, long companyId,
         java.lang.String code, java.lang.String name,
         java.lang.String description, java.util.Date startDate,
         java.util.Date endDate, boolean active,
         java.lang.String limitCategories, java.lang.String limitSkus,
         double minOrder, double discount, java.lang.String discountType,
-        long maxUses, long userid, long companyId)
+        long maxUses, long userid)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         try {
@@ -359,7 +359,7 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
                 new Object[] {
                     couponId,
                     
-                groupId,
+                companyId,
                     
                 ClpSerializer.translateInput(code),
                     
@@ -385,9 +385,7 @@ public class ShoppingCouponServiceClp implements ShoppingCouponService {
                     
                 maxUses,
                     
-                userid,
-                    
-                companyId
+                userid
                 });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);

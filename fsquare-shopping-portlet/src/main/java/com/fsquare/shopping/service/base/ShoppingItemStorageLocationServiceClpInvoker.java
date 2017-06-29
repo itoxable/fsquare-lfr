@@ -43,7 +43,7 @@ public class ShoppingItemStorageLocationServiceClpInvoker {
 
         _methodParameterTypes86 = new String[] { "long" };
 
-        _methodName87 = "findByGroupId";
+        _methodName87 = "findByCompanyId";
 
         _methodParameterTypes87 = new String[] { "long" };
     }
@@ -80,7 +80,7 @@ public class ShoppingItemStorageLocationServiceClpInvoker {
 
         if (_methodName87.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
-            return ShoppingItemStorageLocationServiceUtil.findByGroupId(((Long) arguments[0]).longValue());
+            return ShoppingItemStorageLocationServiceUtil.findByCompanyId(((Long) arguments[0]).longValue());
         }
 
         throw new UnsupportedOperationException();

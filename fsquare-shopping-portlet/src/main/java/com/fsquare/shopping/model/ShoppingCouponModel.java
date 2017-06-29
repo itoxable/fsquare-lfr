@@ -2,9 +2,9 @@ package com.fsquare.shopping.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -26,8 +26,8 @@ import java.util.Date;
  * @see com.fsquare.shopping.model.impl.ShoppingCouponModelImpl
  * @generated
  */
-public interface ShoppingCouponModel extends BaseModel<ShoppingCoupon>,
-    GroupedModel {
+public interface ShoppingCouponModel extends AuditedModel,
+    BaseModel<ShoppingCoupon> {
     /*
      * NOTE FOR DEVELOPERS:
      *
@@ -61,22 +61,6 @@ public interface ShoppingCouponModel extends BaseModel<ShoppingCoupon>,
      * @param couponId the coupon ID of this shopping coupon
      */
     public void setCouponId(long couponId);
-
-    /**
-     * Returns the group ID of this shopping coupon.
-     *
-     * @return the group ID of this shopping coupon
-     */
-    @Override
-    public long getGroupId();
-
-    /**
-     * Sets the group ID of this shopping coupon.
-     *
-     * @param groupId the group ID of this shopping coupon
-     */
-    @Override
-    public void setGroupId(long groupId);
 
     /**
      * Returns the company ID of this shopping coupon.

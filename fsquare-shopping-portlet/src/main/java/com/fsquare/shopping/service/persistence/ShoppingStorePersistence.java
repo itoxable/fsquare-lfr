@@ -42,20 +42,20 @@ public interface ShoppingStorePersistence extends BasePersistence<ShoppingStore>
     /**
     * Creates a new shopping store with the primary key. Does not add the shopping store to the database.
     *
-    * @param groupId the primary key for the new shopping store
+    * @param companyId the primary key for the new shopping store
     * @return the new shopping store
     */
-    public com.fsquare.shopping.model.ShoppingStore create(long groupId);
+    public com.fsquare.shopping.model.ShoppingStore create(long companyId);
 
     /**
     * Removes the shopping store with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param groupId the primary key of the shopping store
+    * @param companyId the primary key of the shopping store
     * @return the shopping store that was removed
     * @throws com.fsquare.shopping.NoSuchShoppingStoreException if a shopping store with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public com.fsquare.shopping.model.ShoppingStore remove(long groupId)
+    public com.fsquare.shopping.model.ShoppingStore remove(long companyId)
         throws com.fsquare.shopping.NoSuchShoppingStoreException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -66,25 +66,25 @@ public interface ShoppingStorePersistence extends BasePersistence<ShoppingStore>
     /**
     * Returns the shopping store with the primary key or throws a {@link com.fsquare.shopping.NoSuchShoppingStoreException} if it could not be found.
     *
-    * @param groupId the primary key of the shopping store
+    * @param companyId the primary key of the shopping store
     * @return the shopping store
     * @throws com.fsquare.shopping.NoSuchShoppingStoreException if a shopping store with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public com.fsquare.shopping.model.ShoppingStore findByPrimaryKey(
-        long groupId)
+        long companyId)
         throws com.fsquare.shopping.NoSuchShoppingStoreException,
             com.liferay.portal.kernel.exception.SystemException;
 
     /**
     * Returns the shopping store with the primary key or returns <code>null</code> if it could not be found.
     *
-    * @param groupId the primary key of the shopping store
+    * @param companyId the primary key of the shopping store
     * @return the shopping store, or <code>null</code> if a shopping store with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     public com.fsquare.shopping.model.ShoppingStore fetchByPrimaryKey(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**

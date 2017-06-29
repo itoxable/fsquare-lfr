@@ -40,15 +40,15 @@ public class ShoppingItemServiceClp implements ShoppingItemService {
 
         _methodParameterTypes3 = new String[] { "long", "long", "java.lang.String" };
 
-        _methodName4 = "getCompleteByGroupId";
+        _methodName4 = "getCompleteByCompanyId";
 
         _methodParameterTypes4 = new String[] { "long" };
 
-        _methodName5 = "findByGroupId";
+        _methodName5 = "findByCompanyId";
 
         _methodParameterTypes5 = new String[] { "long" };
 
-        _methodName6 = "findByGroupId";
+        _methodName6 = "findByCompanyId";
 
         _methodParameterTypes6 = new String[] { "java.lang.Long" };
 
@@ -56,7 +56,7 @@ public class ShoppingItemServiceClp implements ShoppingItemService {
 
         _methodParameterTypes7 = new String[] { "java.lang.Long", "int", "int" };
 
-        _methodName8 = "countByGroupId";
+        _methodName8 = "countByCompanyId";
 
         _methodParameterTypes8 = new String[] { "java.lang.Long" };
     }
@@ -147,13 +147,13 @@ public class ShoppingItemServiceClp implements ShoppingItemService {
     }
 
     @Override
-    public java.lang.Object getCompleteByGroupId(long groupId)
+    public java.lang.Object getCompleteByCompanyId(long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName4,
-                    _methodParameterTypes4, new Object[] { groupId });
+                    _methodParameterTypes4, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -173,14 +173,14 @@ public class ShoppingItemServiceClp implements ShoppingItemService {
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
-        long groupId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName5,
-                    _methodParameterTypes5, new Object[] { groupId });
+                    _methodParameterTypes5, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -200,14 +200,14 @@ public class ShoppingItemServiceClp implements ShoppingItemService {
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
-        java.lang.Long groupId) {
+    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByCompanyId(
+        java.lang.Long companyId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName6,
                     _methodParameterTypes6,
-                    new Object[] { ClpSerializer.translateInput(groupId) });
+                    new Object[] { ClpSerializer.translateInput(companyId) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -224,14 +224,14 @@ public class ShoppingItemServiceClp implements ShoppingItemService {
 
     @Override
     public java.util.Map<java.lang.String, java.lang.Object> getPagedItems(
-        java.lang.Long groupId, int start, int end) {
+        java.lang.Long companyId, int start, int end) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName7,
                     _methodParameterTypes7,
                     new Object[] {
-                        ClpSerializer.translateInput(groupId),
+                        ClpSerializer.translateInput(companyId),
                         
                     start,
                         
@@ -252,13 +252,13 @@ public class ShoppingItemServiceClp implements ShoppingItemService {
     }
 
     @Override
-    public int countByGroupId(java.lang.Long groupId) {
+    public int countByCompanyId(java.lang.Long companyId) {
         Object returnObj = null;
 
         try {
             returnObj = _invokableService.invokeMethod(_methodName8,
                     _methodParameterTypes8,
-                    new Object[] { ClpSerializer.translateInput(groupId) });
+                    new Object[] { ClpSerializer.translateInput(companyId) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

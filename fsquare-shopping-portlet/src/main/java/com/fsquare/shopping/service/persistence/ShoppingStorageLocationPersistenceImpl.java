@@ -71,28 +71,29 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
     public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ShoppingStorageLocationModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingStorageLocationModelImpl.FINDER_CACHE_ENABLED, Long.class,
             FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(ShoppingStorageLocationModelImpl.ENTITY_CACHE_ENABLED,
+    public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID =
+        new FinderPath(ShoppingStorageLocationModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingStorageLocationModelImpl.FINDER_CACHE_ENABLED,
             ShoppingStorageLocationImpl.class,
-            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
+            FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyId",
             new String[] {
                 Long.class.getName(),
                 
             Integer.class.getName(), Integer.class.getName(),
                 OrderByComparator.class.getName()
             });
-    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
+    public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID =
         new FinderPath(ShoppingStorageLocationModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingStorageLocationModelImpl.FINDER_CACHE_ENABLED,
             ShoppingStorageLocationImpl.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCompanyId",
             new String[] { Long.class.getName() },
-            ShoppingStorageLocationModelImpl.GROUPID_COLUMN_BITMASK);
-    public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(ShoppingStorageLocationModelImpl.ENTITY_CACHE_ENABLED,
+            ShoppingStorageLocationModelImpl.COMPANYID_COLUMN_BITMASK);
+    public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(ShoppingStorageLocationModelImpl.ENTITY_CACHE_ENABLED,
             ShoppingStorageLocationModelImpl.FINDER_CACHE_ENABLED, Long.class,
-            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+            FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
             new String[] { Long.class.getName() });
-    private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "shoppingStorageLocation.groupId = ?";
+    private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "shoppingStorageLocation.companyId = ?";
     private static final String _SQL_SELECT_SHOPPINGSTORAGELOCATION = "SELECT shoppingStorageLocation FROM ShoppingStorageLocation shoppingStorageLocation";
     private static final String _SQL_SELECT_SHOPPINGSTORAGELOCATION_WHERE = "SELECT shoppingStorageLocation FROM ShoppingStorageLocation shoppingStorageLocation WHERE ";
     private static final String _SQL_COUNT_SHOPPINGSTORAGELOCATION = "SELECT COUNT(shoppingStorageLocation) FROM ShoppingStorageLocation shoppingStorageLocation";
@@ -128,45 +129,46 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
     }
 
     /**
-     * Returns all the shopping storage locations where groupId = &#63;.
+     * Returns all the shopping storage locations where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the matching shopping storage locations
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingStorageLocation> findByGroupId(long groupId)
+    public List<ShoppingStorageLocation> findByCompanyId(long companyId)
         throws SystemException {
-        return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+        return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+            null);
     }
 
     /**
-     * Returns a range of all the shopping storage locations where groupId = &#63;.
+     * Returns a range of all the shopping storage locations where companyId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingStorageLocationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param start the lower bound of the range of shopping storage locations
      * @param end the upper bound of the range of shopping storage locations (not inclusive)
      * @return the range of matching shopping storage locations
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingStorageLocation> findByGroupId(long groupId, int start,
-        int end) throws SystemException {
-        return findByGroupId(groupId, start, end, null);
+    public List<ShoppingStorageLocation> findByCompanyId(long companyId,
+        int start, int end) throws SystemException {
+        return findByCompanyId(companyId, start, end, null);
     }
 
     /**
-     * Returns an ordered range of all the shopping storage locations where groupId = &#63;.
+     * Returns an ordered range of all the shopping storage locations where companyId = &#63;.
      *
      * <p>
      * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingStorageLocationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
      * </p>
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param start the lower bound of the range of shopping storage locations
      * @param end the upper bound of the range of shopping storage locations (not inclusive)
      * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -174,8 +176,9 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public List<ShoppingStorageLocation> findByGroupId(long groupId, int start,
-        int end, OrderByComparator orderByComparator) throws SystemException {
+    public List<ShoppingStorageLocation> findByCompanyId(long companyId,
+        int start, int end, OrderByComparator orderByComparator)
+        throws SystemException {
         boolean pagination = true;
         FinderPath finderPath = null;
         Object[] finderArgs = null;
@@ -183,11 +186,11 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
         if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
                 (orderByComparator == null)) {
             pagination = false;
-            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
-            finderArgs = new Object[] { groupId };
+            finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID;
+            finderArgs = new Object[] { companyId };
         } else {
-            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
-            finderArgs = new Object[] { groupId, start, end, orderByComparator };
+            finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID;
+            finderArgs = new Object[] { companyId, start, end, orderByComparator };
         }
 
         List<ShoppingStorageLocation> list = (List<ShoppingStorageLocation>) FinderCacheUtil.getResult(finderPath,
@@ -195,7 +198,7 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
 
         if ((list != null) && !list.isEmpty()) {
             for (ShoppingStorageLocation shoppingStorageLocation : list) {
-                if ((groupId != shoppingStorageLocation.getGroupId())) {
+                if ((companyId != shoppingStorageLocation.getCompanyId())) {
                     list = null;
 
                     break;
@@ -215,7 +218,7 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
 
             query.append(_SQL_SELECT_SHOPPINGSTORAGELOCATION_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
             if (orderByComparator != null) {
                 appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -236,7 +239,7 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 if (!pagination) {
                     list = (List<ShoppingStorageLocation>) QueryUtil.list(q,
@@ -266,19 +269,19 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
     }
 
     /**
-     * Returns the first shopping storage location in the ordered set where groupId = &#63;.
+     * Returns the first shopping storage location in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping storage location
      * @throws com.fsquare.shopping.NoSuchShoppingStorageLocationException if a matching shopping storage location could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingStorageLocation findByGroupId_First(long groupId,
+    public ShoppingStorageLocation findByCompanyId_First(long companyId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingStorageLocationException, SystemException {
-        ShoppingStorageLocation shoppingStorageLocation = fetchByGroupId_First(groupId,
+        ShoppingStorageLocation shoppingStorageLocation = fetchByCompanyId_First(companyId,
                 orderByComparator);
 
         if (shoppingStorageLocation != null) {
@@ -289,8 +292,8 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -298,17 +301,17 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
     }
 
     /**
-     * Returns the first shopping storage location in the ordered set where groupId = &#63;.
+     * Returns the first shopping storage location in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the first matching shopping storage location, or <code>null</code> if a matching shopping storage location could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingStorageLocation fetchByGroupId_First(long groupId,
+    public ShoppingStorageLocation fetchByCompanyId_First(long companyId,
         OrderByComparator orderByComparator) throws SystemException {
-        List<ShoppingStorageLocation> list = findByGroupId(groupId, 0, 1,
+        List<ShoppingStorageLocation> list = findByCompanyId(companyId, 0, 1,
                 orderByComparator);
 
         if (!list.isEmpty()) {
@@ -319,19 +322,19 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
     }
 
     /**
-     * Returns the last shopping storage location in the ordered set where groupId = &#63;.
+     * Returns the last shopping storage location in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping storage location
      * @throws com.fsquare.shopping.NoSuchShoppingStorageLocationException if a matching shopping storage location could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingStorageLocation findByGroupId_Last(long groupId,
+    public ShoppingStorageLocation findByCompanyId_Last(long companyId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingStorageLocationException, SystemException {
-        ShoppingStorageLocation shoppingStorageLocation = fetchByGroupId_Last(groupId,
+        ShoppingStorageLocation shoppingStorageLocation = fetchByCompanyId_Last(companyId,
                 orderByComparator);
 
         if (shoppingStorageLocation != null) {
@@ -342,8 +345,8 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
 
         msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-        msg.append("groupId=");
-        msg.append(groupId);
+        msg.append("companyId=");
+        msg.append(companyId);
 
         msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -351,24 +354,24 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
     }
 
     /**
-     * Returns the last shopping storage location in the ordered set where groupId = &#63;.
+     * Returns the last shopping storage location in the ordered set where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the last matching shopping storage location, or <code>null</code> if a matching shopping storage location could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingStorageLocation fetchByGroupId_Last(long groupId,
+    public ShoppingStorageLocation fetchByCompanyId_Last(long companyId,
         OrderByComparator orderByComparator) throws SystemException {
-        int count = countByGroupId(groupId);
+        int count = countByCompanyId(companyId);
 
         if (count == 0) {
             return null;
         }
 
-        List<ShoppingStorageLocation> list = findByGroupId(groupId, count - 1,
-                count, orderByComparator);
+        List<ShoppingStorageLocation> list = findByCompanyId(companyId,
+                count - 1, count, orderByComparator);
 
         if (!list.isEmpty()) {
             return list.get(0);
@@ -378,18 +381,18 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
     }
 
     /**
-     * Returns the shopping storage locations before and after the current shopping storage location in the ordered set where groupId = &#63;.
+     * Returns the shopping storage locations before and after the current shopping storage location in the ordered set where companyId = &#63;.
      *
      * @param storageLocationId the primary key of the current shopping storage location
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
      * @return the previous, current, and next shopping storage location
      * @throws com.fsquare.shopping.NoSuchShoppingStorageLocationException if a shopping storage location with the primary key could not be found
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public ShoppingStorageLocation[] findByGroupId_PrevAndNext(
-        long storageLocationId, long groupId,
+    public ShoppingStorageLocation[] findByCompanyId_PrevAndNext(
+        long storageLocationId, long companyId,
         OrderByComparator orderByComparator)
         throws NoSuchShoppingStorageLocationException, SystemException {
         ShoppingStorageLocation shoppingStorageLocation = findByPrimaryKey(storageLocationId);
@@ -401,13 +404,13 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
 
             ShoppingStorageLocation[] array = new ShoppingStorageLocationImpl[3];
 
-            array[0] = getByGroupId_PrevAndNext(session,
-                    shoppingStorageLocation, groupId, orderByComparator, true);
+            array[0] = getByCompanyId_PrevAndNext(session,
+                    shoppingStorageLocation, companyId, orderByComparator, true);
 
             array[1] = shoppingStorageLocation;
 
-            array[2] = getByGroupId_PrevAndNext(session,
-                    shoppingStorageLocation, groupId, orderByComparator, false);
+            array[2] = getByCompanyId_PrevAndNext(session,
+                    shoppingStorageLocation, companyId, orderByComparator, false);
 
             return array;
         } catch (Exception e) {
@@ -417,9 +420,9 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
         }
     }
 
-    protected ShoppingStorageLocation getByGroupId_PrevAndNext(
+    protected ShoppingStorageLocation getByCompanyId_PrevAndNext(
         Session session, ShoppingStorageLocation shoppingStorageLocation,
-        long groupId, OrderByComparator orderByComparator, boolean previous) {
+        long companyId, OrderByComparator orderByComparator, boolean previous) {
         StringBundler query = null;
 
         if (orderByComparator != null) {
@@ -431,7 +434,7 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
 
         query.append(_SQL_SELECT_SHOPPINGSTORAGELOCATION_WHERE);
 
-        query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+        query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
         if (orderByComparator != null) {
             String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -494,7 +497,7 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
 
         QueryPos qPos = QueryPos.getInstance(q);
 
-        qPos.add(groupId);
+        qPos.add(companyId);
 
         if (orderByComparator != null) {
             Object[] values = orderByComparator.getOrderByConditionValues(shoppingStorageLocation);
@@ -514,31 +517,31 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
     }
 
     /**
-     * Removes all the shopping storage locations where groupId = &#63; from the database.
+     * Removes all the shopping storage locations where companyId = &#63; from the database.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public void removeByGroupId(long groupId) throws SystemException {
-        for (ShoppingStorageLocation shoppingStorageLocation : findByGroupId(
-                groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+    public void removeByCompanyId(long companyId) throws SystemException {
+        for (ShoppingStorageLocation shoppingStorageLocation : findByCompanyId(
+                companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
             remove(shoppingStorageLocation);
         }
     }
 
     /**
-     * Returns the number of shopping storage locations where groupId = &#63;.
+     * Returns the number of shopping storage locations where companyId = &#63;.
      *
-     * @param groupId the group ID
+     * @param companyId the company ID
      * @return the number of matching shopping storage locations
      * @throws SystemException if a system exception occurred
      */
     @Override
-    public int countByGroupId(long groupId) throws SystemException {
-        FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
+    public int countByCompanyId(long companyId) throws SystemException {
+        FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
-        Object[] finderArgs = new Object[] { groupId };
+        Object[] finderArgs = new Object[] { companyId };
 
         Long count = (Long) FinderCacheUtil.getResult(finderPath, finderArgs,
                 this);
@@ -548,7 +551,7 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
 
             query.append(_SQL_COUNT_SHOPPINGSTORAGELOCATION_WHERE);
 
-            query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+            query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
             String sql = query.toString();
 
@@ -561,7 +564,7 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
 
                 QueryPos qPos = QueryPos.getInstance(q);
 
-                qPos.add(groupId);
+                qPos.add(companyId);
 
                 count = (Long) q.uniqueResult();
 
@@ -797,21 +800,23 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
         }
         else {
             if ((shoppingStorageLocationModelImpl.getColumnBitmask() &
-                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
+                    FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID.getColumnBitmask()) != 0) {
                 Object[] args = new Object[] {
-                        shoppingStorageLocationModelImpl.getOriginalGroupId()
+                        shoppingStorageLocationModelImpl.getOriginalCompanyId()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
                     args);
 
                 args = new Object[] {
-                        shoppingStorageLocationModelImpl.getGroupId()
+                        shoppingStorageLocationModelImpl.getCompanyId()
                     };
 
-                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
-                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+                FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
+                    args);
+                FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
                     args);
             }
         }
@@ -835,7 +840,6 @@ public class ShoppingStorageLocationPersistenceImpl extends BasePersistenceImpl<
         shoppingStorageLocationImpl.setPrimaryKey(shoppingStorageLocation.getPrimaryKey());
 
         shoppingStorageLocationImpl.setStorageLocationId(shoppingStorageLocation.getStorageLocationId());
-        shoppingStorageLocationImpl.setGroupId(shoppingStorageLocation.getGroupId());
         shoppingStorageLocationImpl.setCompanyId(shoppingStorageLocation.getCompanyId());
         shoppingStorageLocationImpl.setUserId(shoppingStorageLocation.getUserId());
         shoppingStorageLocationImpl.setUserName(shoppingStorageLocation.getUserName());

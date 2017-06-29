@@ -17,7 +17,6 @@ public class ShoppingItemStorageLocationSoap implements Serializable {
     private long _itemStorageLocationId;
     private long _itemId;
     private long _storageLocationId;
-    private long _groupId;
     private long _companyId;
     private long _userId;
     private String _userName;
@@ -36,7 +35,6 @@ public class ShoppingItemStorageLocationSoap implements Serializable {
         soapModel.setItemStorageLocationId(model.getItemStorageLocationId());
         soapModel.setItemId(model.getItemId());
         soapModel.setStorageLocationId(model.getStorageLocationId());
-        soapModel.setGroupId(model.getGroupId());
         soapModel.setCompanyId(model.getCompanyId());
         soapModel.setUserId(model.getUserId());
         soapModel.setUserName(model.getUserName());
@@ -117,14 +115,6 @@ public class ShoppingItemStorageLocationSoap implements Serializable {
 
     public void setStorageLocationId(long storageLocationId) {
         _storageLocationId = storageLocationId;
-    }
-
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    public void setGroupId(long groupId) {
-        _groupId = groupId;
     }
 
     public long getCompanyId() {

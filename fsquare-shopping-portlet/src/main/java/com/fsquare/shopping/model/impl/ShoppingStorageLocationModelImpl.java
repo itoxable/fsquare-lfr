@@ -53,7 +53,6 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
     public static final String TABLE_NAME = "FsquareShopping_ShoppingStorageLocation";
     public static final Object[][] TABLE_COLUMNS = {
             { "storageLocationId", Types.BIGINT },
-            { "groupId", Types.BIGINT },
             { "companyId", Types.BIGINT },
             { "userId", Types.BIGINT },
             { "userName", Types.VARCHAR },
@@ -63,7 +62,7 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
             { "description", Types.VARCHAR },
             { "location", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStorageLocation (storageLocationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null,location VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table FsquareShopping_ShoppingStorageLocation (storageLocationId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null,location VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table FsquareShopping_ShoppingStorageLocation";
     public static final String ORDER_BY_JPQL = " ORDER BY shoppingStorageLocation.storageLocationId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY FsquareShopping_ShoppingStorageLocation.storageLocationId ASC";
@@ -79,7 +78,7 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
     public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
                 "value.object.column.bitmask.enabled.com.fsquare.shopping.model.ShoppingStorageLocation"),
             true);
-    public static long GROUPID_COLUMN_BITMASK = 1L;
+    public static long COMPANYID_COLUMN_BITMASK = 1L;
     public static long STORAGELOCATIONID_COLUMN_BITMASK = 2L;
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.com.fsquare.shopping.model.ShoppingStorageLocation"));
@@ -88,10 +87,9 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
             ShoppingStorageLocation.class
         };
     private long _storageLocationId;
-    private long _groupId;
-    private long _originalGroupId;
-    private boolean _setOriginalGroupId;
     private long _companyId;
+    private long _originalCompanyId;
+    private boolean _setOriginalCompanyId;
     private long _userId;
     private String _userUuid;
     private String _userName;
@@ -121,7 +119,6 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
         ShoppingStorageLocation model = new ShoppingStorageLocationImpl();
 
         model.setStorageLocationId(soapModel.getStorageLocationId());
-        model.setGroupId(soapModel.getGroupId());
         model.setCompanyId(soapModel.getCompanyId());
         model.setUserId(soapModel.getUserId());
         model.setUserName(soapModel.getUserName());
@@ -190,7 +187,6 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("storageLocationId", getStorageLocationId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -209,12 +205,6 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
 
         if (storageLocationId != null) {
             setStorageLocationId(storageLocationId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -279,36 +269,25 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
 
     @JSON
     @Override
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    @Override
-    public void setGroupId(long groupId) {
-        _columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-        if (!_setOriginalGroupId) {
-            _setOriginalGroupId = true;
-
-            _originalGroupId = _groupId;
-        }
-
-        _groupId = groupId;
-    }
-
-    public long getOriginalGroupId() {
-        return _originalGroupId;
-    }
-
-    @JSON
-    @Override
     public long getCompanyId() {
         return _companyId;
     }
 
     @Override
     public void setCompanyId(long companyId) {
+        _columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+        if (!_setOriginalCompanyId) {
+            _setOriginalCompanyId = true;
+
+            _originalCompanyId = _companyId;
+        }
+
         _companyId = companyId;
+    }
+
+    public long getOriginalCompanyId() {
+        return _originalCompanyId;
     }
 
     @JSON
@@ -446,7 +425,6 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
         ShoppingStorageLocationImpl shoppingStorageLocationImpl = new ShoppingStorageLocationImpl();
 
         shoppingStorageLocationImpl.setStorageLocationId(getStorageLocationId());
-        shoppingStorageLocationImpl.setGroupId(getGroupId());
         shoppingStorageLocationImpl.setCompanyId(getCompanyId());
         shoppingStorageLocationImpl.setUserId(getUserId());
         shoppingStorageLocationImpl.setUserName(getUserName());
@@ -504,9 +482,9 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
     public void resetOriginalValues() {
         ShoppingStorageLocationModelImpl shoppingStorageLocationModelImpl = this;
 
-        shoppingStorageLocationModelImpl._originalGroupId = shoppingStorageLocationModelImpl._groupId;
+        shoppingStorageLocationModelImpl._originalCompanyId = shoppingStorageLocationModelImpl._companyId;
 
-        shoppingStorageLocationModelImpl._setOriginalGroupId = false;
+        shoppingStorageLocationModelImpl._setOriginalCompanyId = false;
 
         shoppingStorageLocationModelImpl._columnBitmask = 0;
     }
@@ -516,8 +494,6 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
         ShoppingStorageLocationCacheModel shoppingStorageLocationCacheModel = new ShoppingStorageLocationCacheModel();
 
         shoppingStorageLocationCacheModel.storageLocationId = getStorageLocationId();
-
-        shoppingStorageLocationCacheModel.groupId = getGroupId();
 
         shoppingStorageLocationCacheModel.companyId = getCompanyId();
 
@@ -576,12 +552,10 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(21);
+        StringBundler sb = new StringBundler(19);
 
         sb.append("{storageLocationId=");
         sb.append(getStorageLocationId());
-        sb.append(", groupId=");
-        sb.append(getGroupId());
         sb.append(", companyId=");
         sb.append(getCompanyId());
         sb.append(", userId=");
@@ -605,7 +579,7 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(34);
+        StringBundler sb = new StringBundler(31);
 
         sb.append("<model><model-name>");
         sb.append("com.fsquare.shopping.model.ShoppingStorageLocation");
@@ -614,10 +588,6 @@ public class ShoppingStorageLocationModelImpl extends BaseModelImpl<ShoppingStor
         sb.append(
             "<column><column-name>storageLocationId</column-name><column-value><![CDATA[");
         sb.append(getStorageLocationId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>groupId</column-name><column-value><![CDATA[");
-        sb.append(getGroupId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>companyId</column-name><column-value><![CDATA[");

@@ -33,11 +33,11 @@ public class ShoppingOrderServiceClpInvoker {
 
         _methodParameterTypes79 = new String[] { "java.lang.String" };
 
-        _methodName84 = "findByGroupId";
+        _methodName84 = "findByCompanyId";
 
         _methodParameterTypes84 = new String[] { "long" };
 
-        _methodName85 = "findBygroupIdAndUserId";
+        _methodName85 = "findByCompanyIdAndUserId";
 
         _methodParameterTypes85 = new String[] { "long", "long" };
 
@@ -70,12 +70,12 @@ public class ShoppingOrderServiceClpInvoker {
 
         if (_methodName84.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
-            return ShoppingOrderServiceUtil.findByGroupId(((Long) arguments[0]).longValue());
+            return ShoppingOrderServiceUtil.findByCompanyId(((Long) arguments[0]).longValue());
         }
 
         if (_methodName85.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
-            return ShoppingOrderServiceUtil.findBygroupIdAndUserId(((Long) arguments[0]).longValue(),
+            return ShoppingOrderServiceUtil.findByCompanyIdAndUserId(((Long) arguments[0]).longValue(),
                 ((Long) arguments[1]).longValue());
         }
 

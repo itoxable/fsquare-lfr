@@ -39,7 +39,6 @@ public class ShoppingItemTypeWrapper implements ShoppingItemType,
         Map<String, Object> attributes = new HashMap<String, Object>();
 
         attributes.put("itemTypeId", getItemTypeId());
-        attributes.put("groupId", getGroupId());
         attributes.put("companyId", getCompanyId());
         attributes.put("userId", getUserId());
         attributes.put("userName", getUserName());
@@ -57,12 +56,6 @@ public class ShoppingItemTypeWrapper implements ShoppingItemType,
 
         if (itemTypeId != null) {
             setItemTypeId(itemTypeId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
         }
 
         Long companyId = (Long) attributes.get("companyId");
@@ -146,26 +139,6 @@ public class ShoppingItemTypeWrapper implements ShoppingItemType,
     @Override
     public void setItemTypeId(long itemTypeId) {
         _shoppingItemType.setItemTypeId(itemTypeId);
-    }
-
-    /**
-    * Returns the group ID of this shopping item type.
-    *
-    * @return the group ID of this shopping item type
-    */
-    @Override
-    public long getGroupId() {
-        return _shoppingItemType.getGroupId();
-    }
-
-    /**
-    * Sets the group ID of this shopping item type.
-    *
-    * @param groupId the group ID of this shopping item type
-    */
-    @Override
-    public void setGroupId(long groupId) {
-        _shoppingItemType.setGroupId(groupId);
     }
 
     /**

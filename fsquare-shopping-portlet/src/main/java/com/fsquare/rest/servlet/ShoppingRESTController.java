@@ -25,14 +25,19 @@ import com.fsquare.shopping.model.ShoppingStoreSoap;
 import com.fsquare.shopping.model.impl.ShoppingStoreModelImpl;
 import com.fsquare.shopping.service.ShoppingStoreLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.ORMException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanySoap;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 @Controller
-public class ShoppingRESTFullController {
+public class ShoppingRESTController{
 
 	
 	@RequestMapping(value = "/store/groupId/{groupId}", method=RequestMethod.GET)
@@ -50,7 +55,6 @@ public class ShoppingRESTFullController {
 	public @ResponseBody List<KeyValuePair> shoppingLayouts(@PathVariable("groupId") Long groupId, HttpServletRequest request) throws SystemException {
 		
 		Locale locale = LocaleUtil.getDefault();
-//		List<String[]> shoppingLayouts = new ArrayList<String[]>();
 		List<KeyValuePair> layoutsKeyValuePair = new ArrayList<KeyValuePair>();
 
 		try {
@@ -88,7 +92,7 @@ public class ShoppingRESTFullController {
 		ShoppingStore createdObject = ShoppingStoreLocalServiceUtil.addShoppingStore(shoppingStore);
 		return createdObject;
 	}
-
+	
 	@ResponseStatus(HttpStatus.CONFLICT)  
 	@ExceptionHandler(SystemException.class)
 	public void handleConflict(SystemException se) {

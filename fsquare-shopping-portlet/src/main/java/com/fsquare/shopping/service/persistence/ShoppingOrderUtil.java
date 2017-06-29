@@ -99,164 +99,168 @@ public class ShoppingOrderUtil {
     }
 
     /**
-    * Returns all the shopping orders where groupId = &#63;.
+    * Returns all the shopping orders where companyId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @return the matching shopping orders
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByGroupId(
-        long groupId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByGroupId(groupId);
+        return getPersistence().findByCompanyId(companyId);
     }
 
     /**
-    * Returns a range of all the shopping orders where groupId = &#63;.
+    * Returns a range of all the shopping orders where companyId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param start the lower bound of the range of shopping orders
     * @param end the upper bound of the range of shopping orders (not inclusive)
     * @return the range of matching shopping orders
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByGroupId(
-        long groupId, int start, int end)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByCompanyId(
+        long companyId, int start, int end)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByGroupId(groupId, start, end);
+        return getPersistence().findByCompanyId(companyId, start, end);
     }
 
     /**
-    * Returns an ordered range of all the shopping orders where groupId = &#63;.
+    * Returns an ordered range of all the shopping orders where companyId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param start the lower bound of the range of shopping orders
     * @param end the upper bound of the range of shopping orders (not inclusive)
     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
     * @return the ordered range of matching shopping orders
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByGroupId(
-        long groupId, int start, int end,
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findByCompanyId(
+        long companyId, int start, int end,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByGroupId(groupId, start, end, orderByComparator);
+                   .findByCompanyId(companyId, start, end, orderByComparator);
     }
 
     /**
-    * Returns the first shopping order in the ordered set where groupId = &#63;.
+    * Returns the first shopping order in the ordered set where companyId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping order
     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder findByGroupId_First(
-        long groupId,
+    public static com.fsquare.shopping.model.ShoppingOrder findByCompanyId_First(
+        long companyId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByGroupId_First(groupId, orderByComparator);
+        return getPersistence()
+                   .findByCompanyId_First(companyId, orderByComparator);
     }
 
     /**
-    * Returns the first shopping order in the ordered set where groupId = &#63;.
+    * Returns the first shopping order in the ordered set where companyId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping order, or <code>null</code> if a matching shopping order could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder fetchByGroupId_First(
-        long groupId,
+    public static com.fsquare.shopping.model.ShoppingOrder fetchByCompanyId_First(
+        long companyId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchByGroupId_First(groupId, orderByComparator);
+        return getPersistence()
+                   .fetchByCompanyId_First(companyId, orderByComparator);
     }
 
     /**
-    * Returns the last shopping order in the ordered set where groupId = &#63;.
+    * Returns the last shopping order in the ordered set where companyId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping order
     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder findByGroupId_Last(
-        long groupId,
+    public static com.fsquare.shopping.model.ShoppingOrder findByCompanyId_Last(
+        long companyId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findByGroupId_Last(groupId, orderByComparator);
+        return getPersistence()
+                   .findByCompanyId_Last(companyId, orderByComparator);
     }
 
     /**
-    * Returns the last shopping order in the ordered set where groupId = &#63;.
+    * Returns the last shopping order in the ordered set where companyId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping order, or <code>null</code> if a matching shopping order could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder fetchByGroupId_Last(
-        long groupId,
+    public static com.fsquare.shopping.model.ShoppingOrder fetchByCompanyId_Last(
+        long companyId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
+        return getPersistence()
+                   .fetchByCompanyId_Last(companyId, orderByComparator);
     }
 
     /**
-    * Returns the shopping orders before and after the current shopping order in the ordered set where groupId = &#63;.
+    * Returns the shopping orders before and after the current shopping order in the ordered set where companyId = &#63;.
     *
     * @param shoppingOrderId the primary key of the current shopping order
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the previous, current, and next shopping order
     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a shopping order with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder[] findByGroupId_PrevAndNext(
-        long shoppingOrderId, long groupId,
+    public static com.fsquare.shopping.model.ShoppingOrder[] findByCompanyId_PrevAndNext(
+        long shoppingOrderId, long companyId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findByGroupId_PrevAndNext(shoppingOrderId, groupId,
+                   .findByCompanyId_PrevAndNext(shoppingOrderId, companyId,
             orderByComparator);
     }
 
     /**
-    * Removes all the shopping orders where groupId = &#63; from the database.
+    * Removes all the shopping orders where companyId = &#63; from the database.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @throws SystemException if a system exception occurred
     */
-    public static void removeByGroupId(long groupId)
+    public static void removeByCompanyId(long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        getPersistence().removeByGroupId(groupId);
+        getPersistence().removeByCompanyId(companyId);
     }
 
     /**
-    * Returns the number of shopping orders where groupId = &#63;.
+    * Returns the number of shopping orders where companyId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @return the number of matching shopping orders
     * @throws SystemException if a system exception occurred
     */
-    public static int countByGroupId(long groupId)
+    public static int countByCompanyId(long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().countByGroupId(groupId);
+        return getPersistence().countByCompanyId(companyId);
     }
 
     /**
@@ -632,48 +636,48 @@ public class ShoppingOrderUtil {
     }
 
     /**
-    * Returns all the shopping orders where groupId = &#63; and userId = &#63;.
+    * Returns all the shopping orders where companyId = &#63; and userId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param userId the user ID
     * @return the matching shopping orders
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndUserId(
-        long groupId, long userId)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBycompanyIdAndUserId(
+        long companyId, long userId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().findBygroupIdAndUserId(groupId, userId);
+        return getPersistence().findBycompanyIdAndUserId(companyId, userId);
     }
 
     /**
-    * Returns a range of all the shopping orders where groupId = &#63; and userId = &#63;.
+    * Returns a range of all the shopping orders where companyId = &#63; and userId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param userId the user ID
     * @param start the lower bound of the range of shopping orders
     * @param end the upper bound of the range of shopping orders (not inclusive)
     * @return the range of matching shopping orders
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndUserId(
-        long groupId, long userId, int start, int end)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBycompanyIdAndUserId(
+        long companyId, long userId, int start, int end)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findBygroupIdAndUserId(groupId, userId, start, end);
+                   .findBycompanyIdAndUserId(companyId, userId, start, end);
     }
 
     /**
-    * Returns an ordered range of all the shopping orders where groupId = &#63; and userId = &#63;.
+    * Returns an ordered range of all the shopping orders where companyId = &#63; and userId = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param userId the user ID
     * @param start the lower bound of the range of shopping orders
     * @param end the upper bound of the range of shopping orders (not inclusive)
@@ -681,182 +685,182 @@ public class ShoppingOrderUtil {
     * @return the ordered range of matching shopping orders
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndUserId(
-        long groupId, long userId, int start, int end,
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBycompanyIdAndUserId(
+        long companyId, long userId, int start, int end,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findBygroupIdAndUserId(groupId, userId, start, end,
+                   .findBycompanyIdAndUserId(companyId, userId, start, end,
             orderByComparator);
     }
 
     /**
-    * Returns the first shopping order in the ordered set where groupId = &#63; and userId = &#63;.
+    * Returns the first shopping order in the ordered set where companyId = &#63; and userId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param userId the user ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping order
     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder findBygroupIdAndUserId_First(
-        long groupId, long userId,
+    public static com.fsquare.shopping.model.ShoppingOrder findBycompanyIdAndUserId_First(
+        long companyId, long userId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findBygroupIdAndUserId_First(groupId, userId,
+                   .findBycompanyIdAndUserId_First(companyId, userId,
             orderByComparator);
     }
 
     /**
-    * Returns the first shopping order in the ordered set where groupId = &#63; and userId = &#63;.
+    * Returns the first shopping order in the ordered set where companyId = &#63; and userId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param userId the user ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping order, or <code>null</code> if a matching shopping order could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder fetchBygroupIdAndUserId_First(
-        long groupId, long userId,
+    public static com.fsquare.shopping.model.ShoppingOrder fetchBycompanyIdAndUserId_First(
+        long companyId, long userId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .fetchBygroupIdAndUserId_First(groupId, userId,
+                   .fetchBycompanyIdAndUserId_First(companyId, userId,
             orderByComparator);
     }
 
     /**
-    * Returns the last shopping order in the ordered set where groupId = &#63; and userId = &#63;.
+    * Returns the last shopping order in the ordered set where companyId = &#63; and userId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param userId the user ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping order
     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder findBygroupIdAndUserId_Last(
-        long groupId, long userId,
+    public static com.fsquare.shopping.model.ShoppingOrder findBycompanyIdAndUserId_Last(
+        long companyId, long userId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findBygroupIdAndUserId_Last(groupId, userId,
+                   .findBycompanyIdAndUserId_Last(companyId, userId,
             orderByComparator);
     }
 
     /**
-    * Returns the last shopping order in the ordered set where groupId = &#63; and userId = &#63;.
+    * Returns the last shopping order in the ordered set where companyId = &#63; and userId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param userId the user ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping order, or <code>null</code> if a matching shopping order could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder fetchBygroupIdAndUserId_Last(
-        long groupId, long userId,
+    public static com.fsquare.shopping.model.ShoppingOrder fetchBycompanyIdAndUserId_Last(
+        long companyId, long userId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .fetchBygroupIdAndUserId_Last(groupId, userId,
+                   .fetchBycompanyIdAndUserId_Last(companyId, userId,
             orderByComparator);
     }
 
     /**
-    * Returns the shopping orders before and after the current shopping order in the ordered set where groupId = &#63; and userId = &#63;.
+    * Returns the shopping orders before and after the current shopping order in the ordered set where companyId = &#63; and userId = &#63;.
     *
     * @param shoppingOrderId the primary key of the current shopping order
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param userId the user ID
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the previous, current, and next shopping order
     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a shopping order with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder[] findBygroupIdAndUserId_PrevAndNext(
-        long shoppingOrderId, long groupId, long userId,
+    public static com.fsquare.shopping.model.ShoppingOrder[] findBycompanyIdAndUserId_PrevAndNext(
+        long shoppingOrderId, long companyId, long userId,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findBygroupIdAndUserId_PrevAndNext(shoppingOrderId,
-            groupId, userId, orderByComparator);
+                   .findBycompanyIdAndUserId_PrevAndNext(shoppingOrderId,
+            companyId, userId, orderByComparator);
     }
 
     /**
-    * Removes all the shopping orders where groupId = &#63; and userId = &#63; from the database.
+    * Removes all the shopping orders where companyId = &#63; and userId = &#63; from the database.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param userId the user ID
     * @throws SystemException if a system exception occurred
     */
-    public static void removeBygroupIdAndUserId(long groupId, long userId)
+    public static void removeBycompanyIdAndUserId(long companyId, long userId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        getPersistence().removeBygroupIdAndUserId(groupId, userId);
+        getPersistence().removeBycompanyIdAndUserId(companyId, userId);
     }
 
     /**
-    * Returns the number of shopping orders where groupId = &#63; and userId = &#63;.
+    * Returns the number of shopping orders where companyId = &#63; and userId = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param userId the user ID
     * @return the number of matching shopping orders
     * @throws SystemException if a system exception occurred
     */
-    public static int countBygroupIdAndUserId(long groupId, long userId)
+    public static int countBycompanyIdAndUserId(long companyId, long userId)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getPersistence().countBygroupIdAndUserId(groupId, userId);
+        return getPersistence().countBycompanyIdAndUserId(companyId, userId);
     }
 
     /**
-    * Returns all the shopping orders where groupId = &#63; and shippingEmailAddress = &#63;.
+    * Returns all the shopping orders where companyId = &#63; and shippingEmailAddress = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param shippingEmailAddress the shipping email address
     * @return the matching shopping orders
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndEmail(
-        long groupId, java.lang.String shippingEmailAddress)
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBycompanyIdAndEmail(
+        long companyId, java.lang.String shippingEmailAddress)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findBygroupIdAndEmail(groupId, shippingEmailAddress);
+                   .findBycompanyIdAndEmail(companyId, shippingEmailAddress);
     }
 
     /**
-    * Returns a range of all the shopping orders where groupId = &#63; and shippingEmailAddress = &#63;.
+    * Returns a range of all the shopping orders where companyId = &#63; and shippingEmailAddress = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param shippingEmailAddress the shipping email address
     * @param start the lower bound of the range of shopping orders
     * @param end the upper bound of the range of shopping orders (not inclusive)
     * @return the range of matching shopping orders
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndEmail(
-        long groupId, java.lang.String shippingEmailAddress, int start, int end)
-        throws com.liferay.portal.kernel.exception.SystemException {
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBycompanyIdAndEmail(
+        long companyId, java.lang.String shippingEmailAddress, int start,
+        int end) throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findBygroupIdAndEmail(groupId, shippingEmailAddress, start,
-            end);
+                   .findBycompanyIdAndEmail(companyId, shippingEmailAddress,
+            start, end);
     }
 
     /**
-    * Returns an ordered range of all the shopping orders where groupId = &#63; and shippingEmailAddress = &#63;.
+    * Returns an ordered range of all the shopping orders where companyId = &#63; and shippingEmailAddress = &#63;.
     *
     * <p>
     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.fsquare.shopping.model.impl.ShoppingOrderModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param shippingEmailAddress the shipping email address
     * @param start the lower bound of the range of shopping orders
     * @param end the upper bound of the range of shopping orders (not inclusive)
@@ -864,140 +868,141 @@ public class ShoppingOrderUtil {
     * @return the ordered range of matching shopping orders
     * @throws SystemException if a system exception occurred
     */
-    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBygroupIdAndEmail(
-        long groupId, java.lang.String shippingEmailAddress, int start,
+    public static java.util.List<com.fsquare.shopping.model.ShoppingOrder> findBycompanyIdAndEmail(
+        long companyId, java.lang.String shippingEmailAddress, int start,
         int end,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findBygroupIdAndEmail(groupId, shippingEmailAddress, start,
-            end, orderByComparator);
+                   .findBycompanyIdAndEmail(companyId, shippingEmailAddress,
+            start, end, orderByComparator);
     }
 
     /**
-    * Returns the first shopping order in the ordered set where groupId = &#63; and shippingEmailAddress = &#63;.
+    * Returns the first shopping order in the ordered set where companyId = &#63; and shippingEmailAddress = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param shippingEmailAddress the shipping email address
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping order
     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder findBygroupIdAndEmail_First(
-        long groupId, java.lang.String shippingEmailAddress,
+    public static com.fsquare.shopping.model.ShoppingOrder findBycompanyIdAndEmail_First(
+        long companyId, java.lang.String shippingEmailAddress,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findBygroupIdAndEmail_First(groupId, shippingEmailAddress,
-            orderByComparator);
+                   .findBycompanyIdAndEmail_First(companyId,
+            shippingEmailAddress, orderByComparator);
     }
 
     /**
-    * Returns the first shopping order in the ordered set where groupId = &#63; and shippingEmailAddress = &#63;.
+    * Returns the first shopping order in the ordered set where companyId = &#63; and shippingEmailAddress = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param shippingEmailAddress the shipping email address
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the first matching shopping order, or <code>null</code> if a matching shopping order could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder fetchBygroupIdAndEmail_First(
-        long groupId, java.lang.String shippingEmailAddress,
+    public static com.fsquare.shopping.model.ShoppingOrder fetchBycompanyIdAndEmail_First(
+        long companyId, java.lang.String shippingEmailAddress,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .fetchBygroupIdAndEmail_First(groupId, shippingEmailAddress,
-            orderByComparator);
+                   .fetchBycompanyIdAndEmail_First(companyId,
+            shippingEmailAddress, orderByComparator);
     }
 
     /**
-    * Returns the last shopping order in the ordered set where groupId = &#63; and shippingEmailAddress = &#63;.
+    * Returns the last shopping order in the ordered set where companyId = &#63; and shippingEmailAddress = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param shippingEmailAddress the shipping email address
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping order
     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a matching shopping order could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder findBygroupIdAndEmail_Last(
-        long groupId, java.lang.String shippingEmailAddress,
+    public static com.fsquare.shopping.model.ShoppingOrder findBycompanyIdAndEmail_Last(
+        long companyId, java.lang.String shippingEmailAddress,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findBygroupIdAndEmail_Last(groupId, shippingEmailAddress,
-            orderByComparator);
+                   .findBycompanyIdAndEmail_Last(companyId,
+            shippingEmailAddress, orderByComparator);
     }
 
     /**
-    * Returns the last shopping order in the ordered set where groupId = &#63; and shippingEmailAddress = &#63;.
+    * Returns the last shopping order in the ordered set where companyId = &#63; and shippingEmailAddress = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param shippingEmailAddress the shipping email address
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the last matching shopping order, or <code>null</code> if a matching shopping order could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder fetchBygroupIdAndEmail_Last(
-        long groupId, java.lang.String shippingEmailAddress,
+    public static com.fsquare.shopping.model.ShoppingOrder fetchBycompanyIdAndEmail_Last(
+        long companyId, java.lang.String shippingEmailAddress,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .fetchBygroupIdAndEmail_Last(groupId, shippingEmailAddress,
-            orderByComparator);
+                   .fetchBycompanyIdAndEmail_Last(companyId,
+            shippingEmailAddress, orderByComparator);
     }
 
     /**
-    * Returns the shopping orders before and after the current shopping order in the ordered set where groupId = &#63; and shippingEmailAddress = &#63;.
+    * Returns the shopping orders before and after the current shopping order in the ordered set where companyId = &#63; and shippingEmailAddress = &#63;.
     *
     * @param shoppingOrderId the primary key of the current shopping order
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param shippingEmailAddress the shipping email address
     * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
     * @return the previous, current, and next shopping order
     * @throws com.fsquare.shopping.NoSuchShoppingOrderException if a shopping order with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static com.fsquare.shopping.model.ShoppingOrder[] findBygroupIdAndEmail_PrevAndNext(
-        long shoppingOrderId, long groupId,
+    public static com.fsquare.shopping.model.ShoppingOrder[] findBycompanyIdAndEmail_PrevAndNext(
+        long shoppingOrderId, long companyId,
         java.lang.String shippingEmailAddress,
         com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
         throws com.fsquare.shopping.NoSuchShoppingOrderException,
             com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .findBygroupIdAndEmail_PrevAndNext(shoppingOrderId, groupId,
-            shippingEmailAddress, orderByComparator);
+                   .findBycompanyIdAndEmail_PrevAndNext(shoppingOrderId,
+            companyId, shippingEmailAddress, orderByComparator);
     }
 
     /**
-    * Removes all the shopping orders where groupId = &#63; and shippingEmailAddress = &#63; from the database.
+    * Removes all the shopping orders where companyId = &#63; and shippingEmailAddress = &#63; from the database.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param shippingEmailAddress the shipping email address
     * @throws SystemException if a system exception occurred
     */
-    public static void removeBygroupIdAndEmail(long groupId,
+    public static void removeBycompanyIdAndEmail(long companyId,
         java.lang.String shippingEmailAddress)
         throws com.liferay.portal.kernel.exception.SystemException {
-        getPersistence().removeBygroupIdAndEmail(groupId, shippingEmailAddress);
+        getPersistence()
+            .removeBycompanyIdAndEmail(companyId, shippingEmailAddress);
     }
 
     /**
-    * Returns the number of shopping orders where groupId = &#63; and shippingEmailAddress = &#63;.
+    * Returns the number of shopping orders where companyId = &#63; and shippingEmailAddress = &#63;.
     *
-    * @param groupId the group ID
+    * @param companyId the company ID
     * @param shippingEmailAddress the shipping email address
     * @return the number of matching shopping orders
     * @throws SystemException if a system exception occurred
     */
-    public static int countBygroupIdAndEmail(long groupId,
+    public static int countBycompanyIdAndEmail(long companyId,
         java.lang.String shippingEmailAddress)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getPersistence()
-                   .countBygroupIdAndEmail(groupId, shippingEmailAddress);
+                   .countBycompanyIdAndEmail(companyId, shippingEmailAddress);
     }
 
     /**

@@ -147,11 +147,11 @@ public class ShoppingCouponLocalServiceClpInvoker {
 
         _methodParameterTypes95 = new String[] { "java.lang.String" };
 
-        _methodName100 = "fetchByCodeAndGroupId";
+        _methodName100 = "fetchByCodeAndCompanyId";
 
         _methodParameterTypes100 = new String[] { "java.lang.String", "long" };
 
-        _methodName101 = "findByGroupId";
+        _methodName101 = "findByCompanyId";
 
         _methodParameterTypes101 = new String[] { "java.lang.Long" };
 
@@ -277,13 +277,13 @@ public class ShoppingCouponLocalServiceClpInvoker {
 
         if (_methodName100.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
-            return ShoppingCouponLocalServiceUtil.fetchByCodeAndGroupId((java.lang.String) arguments[0],
+            return ShoppingCouponLocalServiceUtil.fetchByCodeAndCompanyId((java.lang.String) arguments[0],
                 ((Long) arguments[1]).longValue());
         }
 
         if (_methodName101.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
-            return ShoppingCouponLocalServiceUtil.findByGroupId((java.lang.Long) arguments[0]);
+            return ShoppingCouponLocalServiceUtil.findByCompanyId((java.lang.Long) arguments[0]);
         }
 
         if (_methodName102.equals(name) &&

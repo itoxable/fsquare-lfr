@@ -3,7 +3,6 @@
 <model-hints>
 	<model name="com.fsquare.shopping.model.ShoppingCoupon">
 		<field name="couponId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -50,7 +49,7 @@
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingItemImage">
 		<field name="shoppingItemImageId" type="long" />
-		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="itemId" type="long" />
 		<field name="imageId" type="long" />
 		<field name="mainImage" type="boolean" />
@@ -60,7 +59,6 @@
 		<field name="itemStorageLocationId" type="long" />
 		<field name="itemId" type="long" />
 		<field name="storageLocationId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -71,7 +69,6 @@
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingItemType">
 		<field name="itemTypeId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -82,7 +79,6 @@
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingOrder">
 		<field name="shoppingOrderId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -150,7 +146,6 @@
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingShippingMethod">
 		<field name="shippingMethodId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -171,7 +166,6 @@
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingStorageLocation">
 		<field name="storageLocationId" type="long" />
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -182,7 +176,6 @@
 		<field name="location" type="String" />
 	</model>
 	<model name="com.fsquare.shopping.model.ShoppingStore">
-		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />

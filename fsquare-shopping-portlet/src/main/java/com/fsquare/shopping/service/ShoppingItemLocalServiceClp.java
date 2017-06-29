@@ -173,7 +173,7 @@ public class ShoppingItemLocalServiceClp implements ShoppingItemLocalService {
 
         _methodParameterTypes21 = new String[] { "java.lang.String" };
 
-        _methodName23 = "findByGroupId";
+        _methodName23 = "findByCompanyId";
 
         _methodParameterTypes23 = new String[] { "long" };
 
@@ -839,14 +839,14 @@ public class ShoppingItemLocalServiceClp implements ShoppingItemLocalService {
     }
 
     @Override
-    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByGroupId(
-        long groupId)
+    public java.util.List<com.fsquare.shopping.model.ShoppingItem> findByCompanyId(
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName23,
-                    _methodParameterTypes23, new Object[] { groupId });
+                    _methodParameterTypes23, new Object[] { companyId });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

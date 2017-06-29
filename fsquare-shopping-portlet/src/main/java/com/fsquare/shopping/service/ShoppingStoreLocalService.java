@@ -48,23 +48,23 @@ public interface ShoppingStoreLocalService extends BaseLocalService,
     /**
     * Creates a new shopping store with the primary key. Does not add the shopping store to the database.
     *
-    * @param groupId the primary key for the new shopping store
+    * @param companyId the primary key for the new shopping store
     * @return the new shopping store
     */
     public com.fsquare.shopping.model.ShoppingStore createShoppingStore(
-        long groupId);
+        long companyId);
 
     /**
     * Deletes the shopping store with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param groupId the primary key of the shopping store
+    * @param companyId the primary key of the shopping store
     * @return the shopping store that was removed
     * @throws PortalException if a shopping store with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
     public com.fsquare.shopping.model.ShoppingStore deleteShoppingStore(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -159,20 +159,20 @@ public interface ShoppingStoreLocalService extends BaseLocalService,
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public com.fsquare.shopping.model.ShoppingStore fetchShoppingStore(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
     * Returns the shopping store with the primary key.
     *
-    * @param groupId the primary key of the shopping store
+    * @param companyId the primary key of the shopping store
     * @return the shopping store
     * @throws PortalException if a shopping store with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public com.fsquare.shopping.model.ShoppingStore getShoppingStore(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -243,9 +243,9 @@ public interface ShoppingStoreLocalService extends BaseLocalService,
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public java.util.List<com.fsquare.shopping.model.ShoppingStorageLocation> getShoppingStorageLocationsByGroup(
-        long groupId)
+        long companyId)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public java.util.List<java.lang.String[]> getShoppingLayouts(long groupId);
+    public java.util.List<java.lang.String[]> getShoppingLayouts(long companyId);
 }

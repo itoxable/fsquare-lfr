@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class ShoppingStorageLocationSoap implements Serializable {
     private long _storageLocationId;
-    private long _groupId;
     private long _companyId;
     private long _userId;
     private String _userName;
@@ -33,7 +32,6 @@ public class ShoppingStorageLocationSoap implements Serializable {
         ShoppingStorageLocationSoap soapModel = new ShoppingStorageLocationSoap();
 
         soapModel.setStorageLocationId(model.getStorageLocationId());
-        soapModel.setGroupId(model.getGroupId());
         soapModel.setCompanyId(model.getCompanyId());
         soapModel.setUserId(model.getUserId());
         soapModel.setUserName(model.getUserName());
@@ -99,14 +97,6 @@ public class ShoppingStorageLocationSoap implements Serializable {
 
     public void setStorageLocationId(long storageLocationId) {
         _storageLocationId = storageLocationId;
-    }
-
-    public long getGroupId() {
-        return _groupId;
-    }
-
-    public void setGroupId(long groupId) {
-        _groupId = groupId;
     }
 
     public long getCompanyId() {
